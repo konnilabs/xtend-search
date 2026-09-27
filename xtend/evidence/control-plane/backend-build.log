@@ -1,0 +1,58 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  76.95MB
+Step 1/17 : ARG PYTHON_IMAGE=python:3.12-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
+Step 2/17 : FROM ${PYTHON_IMAGE}
+ ---> febd0be41adb
+Step 3/17 : WORKDIR /app
+ ---> Using cache
+ ---> 801055eec855
+Step 4/17 : RUN apt-get update && apt-get install -y --no-install-recommends tini ca-certificates && rm -rf /var/lib/apt/lists/*  && groupadd --gid 10001 searx && useradd --uid 10001 --gid 10001 --no-create-home searx  && mkdir -p /var/lib/xtend-backend && chown 10001:10001 /var/lib/xtend-backend
+ ---> Using cache
+ ---> 92bc4e7ece2a
+Step 5/17 : COPY xtend/requirements.lock.txt /app/xtend/requirements.lock.txt
+ ---> Using cache
+ ---> 6904e40c4a1e
+Step 6/17 : RUN pip install --no-cache-dir -r /app/xtend/requirements.lock.txt
+ ---> Using cache
+ ---> 7bcc3463936a
+Step 7/17 : COPY searx /app/searx
+ ---> 9ee5f9e99611
+Step 8/17 : COPY xtend/server/backend.py xtend/server/backend-start.py /app/xtend/server/
+ ---> acfd30b248c8
+Step 9/17 : COPY xtend/config/settings.control.yml xtend/config/settings.control.fixture.yml /app/xtend/config/
+ ---> 0c5defab85b4
+Step 10/17 : COPY LICENSE /app/LICENSE
+ ---> 81fef3871054
+Step 11/17 : RUN python -c 'from pathlib import Path; Path("searx/version_frozen.py").write_text("VERSION_STRING = \"2026.9.19+e831fc2a1+xtend-backend.0.3.0\"\nVERSION_TAG = \"2026.9.19+e831fc2a1\"\nDOCKER_TAG = \"xtend-search-backend-0.3.0\"\nGIT_URL = \"https://github.com/searxng/searxng\"\nGIT_BRANCH = \"xtend-search\"\n")'
+ ---> Running in 35c9c0dac25a
+ ---> Removed intermediate container 35c9c0dac25a
+ ---> c86f28587971
+Step 12/17 : ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.control.yml
+ ---> Running in ff9cde0e08f1
+ ---> Removed intermediate container ff9cde0e08f1
+ ---> 2c6364fc380f
+Step 13/17 : USER 10001:10001
+ ---> Running in 6f0733853095
+ ---> Removed intermediate container 6f0733853095
+ ---> 738a746c2ed1
+Step 14/17 : EXPOSE 8082
+ ---> Running in 66f4c2554c45
+ ---> Removed intermediate container 66f4c2554c45
+ ---> 54fe342962bd
+Step 15/17 : HEALTHCHECK --interval=30s --timeout=5s --start-period=60s CMD python -c 'import urllib.request; urllib.request.urlopen("http://127.0.0.1:8082/healthz",timeout=3)'
+ ---> Running in c1e142c04645
+ ---> Removed intermediate container c1e142c04645
+ ---> 806a71117cc6
+Step 16/17 : ENTRYPOINT ["/usr/bin/tini","--"]
+ ---> Running in 67e479baf1c4
+ ---> Removed intermediate container 67e479baf1c4
+ ---> c1bd1e9e70bb
+Step 17/17 : CMD ["python","xtend/server/backend-start.py"]
+ ---> Running in f082ab78966c
+ ---> Removed intermediate container f082ab78966c
+ ---> 0a642d389dcb
+Successfully built 0a642d389dcb
+Successfully tagged xtend-search-searxng:0.3.0

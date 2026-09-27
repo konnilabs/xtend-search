@@ -1,0 +1,56 @@
+compose.control.yml: OK
+setup.mjs: OK
+prepare.sh: OK
+INSTALLATION.md: OK
+RELEASE-NOTES.md: OK
+ENGINEERING.md: OK
+ACCEPTANCE.md: OK
+LICENSE: OK
+IMAGE-IDS.txt: OK
+XTend-search-Docker-Images-0.3.0-linux-amd64.tar.gz: OK
+xtend-search-0.3.0-source.tar.gz: OK
+xtend-search-0.3.0-verification.tar.gz: OK
+Loaded image: xtend-search:0.3.0
+Loaded image: xtend-search-searxng:0.3.0
+.env.control vorhanden; unverändert beibehalten.
+Anschließend .env.control bearbeiten und Compose gemäß INSTALLATION.md starten.
+ Network xtend-cp-install-smoke_retrieval Creating 
+ Network xtend-cp-install-smoke_retrieval Creating 
+ Volume xtend-cp-install-smoke_control-data Creating 
+ Volume xtend-cp-install-smoke_control-data Creating 
+ Volume xtend-cp-install-smoke_backend-data Creating 
+ Volume xtend-cp-install-smoke_backend-data Creating 
+ Volume xtend-cp-install-smoke_control-data Created 
+ Volume xtend-cp-install-smoke_control-data Created 
+ Volume xtend-cp-install-smoke_backend-data Created 
+ Volume xtend-cp-install-smoke_backend-data Created 
+ Network xtend-cp-install-smoke_retrieval Created 
+ Network xtend-cp-install-smoke_retrieval Created 
+ Container xtend-cp-install-smoke-searxng-1 Creating 
+ Container xtend-cp-install-smoke-searxng-1 Created 
+ Container xtend-cp-install-smoke-search-1 Creating 
+ Container xtend-cp-install-smoke-search-1 Created 
+ Container xtend-cp-install-smoke-searxng-1 Starting 
+ Container xtend-cp-install-smoke-searxng-1 Started 
+ Container xtend-cp-install-smoke-searxng-1 Waiting 
+ Container xtend-cp-install-smoke-searxng-1 Healthy 
+ Container xtend-cp-install-smoke-search-1 Starting 
+ Container xtend-cp-install-smoke-search-1 Started 
+ Container xtend-cp-install-smoke-searxng-1 Waiting 
+ Container xtend-cp-install-smoke-search-1 Waiting 
+ Container xtend-cp-install-smoke-searxng-1 Healthy 
+ Container xtend-cp-install-smoke-search-1 Healthy 
+ Container xtend-cp-install-smoke-search-1 Stopping 
+ Container xtend-cp-install-smoke-search-1 Stopped 
+ Container xtend-cp-install-smoke-search-1 Removing 
+ Container xtend-cp-install-smoke-search-1 Removed 
+ Container xtend-cp-install-smoke-searxng-1 Stopping 
+ Container xtend-cp-install-smoke-searxng-1 Stopped 
+ Container xtend-cp-install-smoke-searxng-1 Removing 
+ Container xtend-cp-install-smoke-searxng-1 Removed 
+ Volume xtend-cp-install-smoke_backend-data Removing 
+ Volume xtend-cp-install-smoke_control-data Removing 
+ Network xtend-cp-install-smoke_retrieval Removing 
+ Volume xtend-cp-install-smoke_backend-data Removed 
+ Volume xtend-cp-install-smoke_control-data Removed 
+ Network xtend-cp-install-smoke_retrieval Removed 

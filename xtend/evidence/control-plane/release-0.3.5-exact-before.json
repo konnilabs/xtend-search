@@ -1,0 +1,378 @@
+[
+  {
+    "mode": "SSR",
+    "data": {
+      "q": "GNU/ Linux",
+      "language": "en",
+      "safeSearch": "0",
+      "timeRange": "",
+      "status": "3 von 3 Quellen abgeschlossen",
+      "count": 42,
+      "sources": {
+        "google cse": 20,
+        "bing": 8,
+        "brave": 14
+      },
+      "results": [
+        {
+          "url": "http://www.gnu.org/gnu/linux-and-gnu.en.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.reddit.com/r/linuxquestions/comments/1dcvvrx/eli5_what_exactly_gnulinux_and_whats_the/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Linux",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.debian.org/releases/forky/amd64/ch01s02.en.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://blog.thelifeofkenneth.com/2007/04/what-is-gnulinux.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/GNU/Linux_naming_controversy",
+          "source": "google cse"
+        },
+        {
+          "url": "https://news.ycombinator.com/item?id=6277943",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/gnu-linux-faq.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.linux.org/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.getgnulinux.org/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.gnu.org/home.en.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://opensource.stackexchange.com/questions/1025/why-do-some-people-refer-to-linux-as-gnu-linux",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.pcmag.com/how-to/what-is-gnulinux",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.youtube.com/shorts/GUsFrtllXs8",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=D4hNLgJmshg",
+          "source": "google cse"
+        },
+        {
+          "url": "https://medium.com/thenixadmins/whats-gnu-linux-6041662c5732",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=RNeKYjWx-s4",
+          "source": "google cse"
+        },
+        {
+          "url": "https://forum.endeavouros.com/t/linux-or-gnu-linux/37239",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.quora.com/What-is-your-opinion-of-GNU-Linux-versus-Ubuntu-Why-do-some-people-insist-on-using-GNU-Linux-instead-of-Ubuntu-etc",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.kernel.org/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/linux-and-gnu.html",
+          "source": "bing"
+        },
+        {
+          "url": "https://de.wikipedia.org/wiki/Linux",
+          "source": "bing"
+        },
+        {
+          "url": "https://www.gnu.org/",
+          "source": "bing"
+        },
+        {
+          "url": "https://de.wikipedia.org/wiki/GNU",
+          "source": "bing"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/GNU",
+          "source": "bing"
+        },
+        {
+          "url": "https://gnulinux.ch/",
+          "source": "bing"
+        },
+        {
+          "url": "https://www.lifewire.com/what-is-linux-2201940",
+          "source": "bing"
+        },
+        {
+          "url": "https://www.linux.org/pages/download/",
+          "source": "bing"
+        },
+        {
+          "url": "https://www.techtarget.com/searchdatacenter/definition/GNU-Linux",
+          "source": "brave"
+        },
+        {
+          "url": "https://xtom.com/blog/what-is-gnu-open-source-software-and-linux/",
+          "source": "brave"
+        },
+        {
+          "url": "https://linuxiac.com/what-is-gnu-linux/",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/linux-and-gnu.en.html",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/gnu-linux-faq.en.html",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/why-gnu-linux.en.html",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org.ua/",
+          "source": "brave"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/GNU/Linux",
+          "source": "brave"
+        },
+        {
+          "url": "https://parrotsec.org/docs/introduction/gnu-linux-basics/",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.incredibuild.com/glossary/gnu-os",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.youtube.com/shorts/8a7ZcYK0Mno",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=To-sVWZQGfM",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=sQDvkd2wtxU",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=4ZYg5u5AgTs",
+          "source": "brave"
+        }
+      ],
+      "warnings": [],
+      "error": ""
+    }
+  },
+  {
+    "mode": "stream",
+    "data": {
+      "q": "GNU/ Linux",
+      "language": "en",
+      "safeSearch": "0",
+      "timeRange": "",
+      "status": "3 von 3 Quellen abgeschlossen",
+      "count": 42,
+      "sources": {
+        "google cse": 20,
+        "brave": 16,
+        "bing": 6
+      },
+      "results": [
+        {
+          "url": "http://www.gnu.org/gnu/linux-and-gnu.en.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.reddit.com/r/linuxquestions/comments/1dcvvrx/eli5_what_exactly_gnulinux_and_whats_the/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/GNU/Linux_naming_controversy",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.debian.org/releases/forky/amd64/ch01s02.en.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://blog.thelifeofkenneth.com/2007/04/what-is-gnulinux.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Linux",
+          "source": "google cse"
+        },
+        {
+          "url": "https://news.ycombinator.com/item?id=6277943",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.gnu.org/software/software.en.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.linux.org/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.getgnulinux.org/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.gnu.org/home.en.html",
+          "source": "google cse"
+        },
+        {
+          "url": "https://opensource.stackexchange.com/questions/1025/why-do-some-people-refer-to-linux-as-gnu-linux",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=D4hNLgJmshg",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.pcmag.com/how-to/what-is-gnulinux",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.youtube.com/shorts/GUsFrtllXs8",
+          "source": "google cse"
+        },
+        {
+          "url": "https://medium.com/thenixadmins/whats-gnu-linux-6041662c5732",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=RNeKYjWx-s4",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.quora.com/What-is-your-opinion-of-GNU-Linux-versus-Ubuntu-Why-do-some-people-insist-on-using-GNU-Linux-instead-of-Ubuntu-etc",
+          "source": "google cse"
+        },
+        {
+          "url": "https://stallman-copypasta.github.io/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://www.kernel.org/",
+          "source": "google cse"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/GNU",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.techtarget.com/searchdatacenter/definition/GNU-Linux",
+          "source": "brave"
+        },
+        {
+          "url": "https://xtom.com/blog/what-is-gnu-open-source-software-and-linux/",
+          "source": "brave"
+        },
+        {
+          "url": "https://linuxiac.com/what-is-gnu-linux/",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/linux-and-gnu.en.html",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/gnu-linux-faq.en.html",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/why-gnu-linux.en.html",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org/",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org.ua/",
+          "source": "brave"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/GNU/Linux",
+          "source": "brave"
+        },
+        {
+          "url": "https://parrotsec.org/docs/introduction/gnu-linux-basics/",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.incredibuild.com/glossary/gnu-os",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.youtube.com/shorts/8a7ZcYK0Mno",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=To-sVWZQGfM",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=sQDvkd2wtxU",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=4ZYg5u5AgTs",
+          "source": "brave"
+        },
+        {
+          "url": "https://www.gnu.org/gnu/linux-and-gnu.html",
+          "source": "bing"
+        },
+        {
+          "url": "https://de.wikipedia.org/wiki/Linux",
+          "source": "bing"
+        },
+        {
+          "url": "https://de.wikipedia.org/wiki/GNU",
+          "source": "bing"
+        },
+        {
+          "url": "https://gnulinux.ch/",
+          "source": "bing"
+        },
+        {
+          "url": "https://www.lifewire.com/what-is-linux-2201940",
+          "source": "bing"
+        },
+        {
+          "url": "https://www.linux.org/pages/download/",
+          "source": "bing"
+        }
+      ],
+      "warnings": [],
+      "error": ""
+    }
+  }
+]

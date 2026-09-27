@@ -1,0 +1,121 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"RMT viewTemplate repeat conditional portal selector server_prerender_resume signed_manifest\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "RMT viewTemplate repeat conditional portal selector server_prerender_resume signed_manifest",
+      "locale": "en",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 5,
+      "domains": [],
+      "hitCount": 5,
+      "hits": [
+        {
+          "uri": "xtend://docs/en/rmt-reference-surfaces-lanes-lifecycle",
+          "id": "en:rmt-reference-surfaces-lanes-lifecycle:6",
+          "scope": "docs",
+          "kind": "reference",
+          "locale": "en",
+          "title": "Surfaces, Lanes and Lifecycle",
+          "heading": "Examples",
+          "score": 32,
+          "excerpt": "## Examples\n\n```rmt\ntemplate reference.lifecycle {\n  state app.ready type boolean initial true\n  state app.status type object preserve {\n    initial {\n      text \"Ready\"\n    }\n  }\n  selector app.header from state app.status {\n    output HeaderView\n  }\n  selector app.cardView from state app.status {\n    output CardView\n  }\n  resource app.stream kind stream owner surface.shell\n  resource app.pool kind object-url owner surface.shell\n  portal app.root root \"#app\" layer surface\n\n  surface shell kind page component x-section {\n    portal app.root\n    bounds x 0 y 0 width 640 height 400\n    preserve on minimize\n    destroy releases resource app.stream\n    lane visible weight 90 {\n      mount shell.card from endpoint app.card when app.ready == true {\n        slot header {\n          hydrate header.view from selector app.header\n        }\n        on click \".save\" -> action app.save {\n          payload id from target.dataset.id\n          preventDefault true\n        }\n      }\n      hydrate shell.card from selector app.cardView {\n        hydration mode server_prerender_resume\n        resumability mode server_prerender_resume\n        resumability snapshot surface_state\n        resumability event replay intent_queue\n        resumability integrity signed_manifest\n      }\n      suspend shell.card\n      resume shell.card {\n        resumability mode server_prerender_resume\n        resumability sna…",
+          "sourceHash": "f92625732be38b7927572780799199a9d03139cfc5c77c61f1dfdcb3870b4088",
+          "sourcePath": "docs/en/rmt-reference-surfaces-lanes-lifecycle.md"
+        },
+        {
+          "uri": "xtend://docs/en/hydration-policies",
+          "id": "en:hydration-policies:6",
+          "scope": "docs",
+          "kind": "operations",
+          "locale": "en",
+          "title": "Hydration Policies",
+          "heading": "SSR hydration and resume",
+          "score": 29,
+          "excerpt": "## SSR hydration and resume\n\n`server_prerender_hydrate` delivers markup and a hydration envelope. The client then performs a normal binding session. `server_prerender_resume` goes further: snapshot, event replay strategy, and integrity evidence compile into a separate resumability contract.\n\n```rmt\ntemplate docs.hydrationResume {\n  state docs.hydrationStatus type object preserve {\n    initial {\n      text \"Ready\"\n    }\n  }\n\n  selector docs.hydrationStatus from state docs.hydrationStatus {\n    output HydrationStatus\n  }\n\n  surface docs.hydrationShell kind page component x-section {\n    source selector docs.hydrationStatus\n    lane visible weight 80 {\n      hydrate hydration-shell from selector docs.hydrationStatus {\n        hydration mode server_prerender_resume\n        resumability mode server_prerender_resume\n        resumability snapshot surface_state\n        resumability event replay intent_queue\n        resumability integrity signed_manifest\n      }\n      resume hydration-shell {\n        resumability mode server_prerender_resume\n        resumability snapshot surface_state\n        resumability event replay intent_queue\n        resumability integrity signed_manifest\n      }\n    }\n  }\n}\n```\n\nChoose this path only when the server creates the snapshot, the client understands its schema, and integrity verification succeeds before resume. Resume tokens belong in telemetry only aft…",
+          "sourceHash": "4d6edc4eb7cb69dc432d9fcd831579e0e5d1143ad367b00f8ce0157a1ebda584",
+          "sourcePath": "docs/en/hydration-policies.md"
+        },
+        {
+          "uri": "xtend://rmt/kit/reference/operator%3Aportal",
+          "id": "operator:portal",
+          "scope": "rmt-kit",
+          "kind": "operator",
+          "locale": "en",
+          "title": "portal",
+          "heading": "portal",
+          "score": 20,
+          "excerpt": "operator:portal\noperator\nportal\nBinds surfaces to host roots without manual shell code.\nportal app.root root \"#app\" layer surface\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\nportal app.root root \"#app\" layer surface\nportal app.root document.querySelector(\"#app\")\nDOM calls are host adapter work, not RMT source.\ntemplate",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+          "sourcePath": "docs/de/rmt-reference-primitives.md"
+        },
+        {
+          "uri": "xtend://docs/en/rmt-vnext-authoring",
+          "id": "en:rmt-vnext-authoring:6",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "en",
+          "title": "RMT Authoring Guide",
+          "heading": "Orchestration Primitives",
+          "score": 19,
+          "excerpt": "## Orchestration Primitives\n\nRMT vNext can now describe the full app orchestration that Maraca materializes into a loaderless bundle. In addition to `state`, `selector`, `action`, `resource`, `event`, `surface`, `portal` and `overlay`, `validation`, `animation` and `transition` are native authoring blocks. The compiler lowers them into `xtend.rmt.app-orchestration.v1`, `xtend.rmt.form-validation.v1`, `xtend.rmt.surface-transitions.v1` and `xtend.rmt.animation-engine.v1`, then emits scheduler targets, patch plans, source maps and redacted diagnostics.\n\n```rmt\nvalidation product.service.contact {\n  mode blocking\n  target action product.service.nextContact\n  field product.service.email required email message \"Enter a valid email address.\"\n}\n\ntransition product.service.contactToIssue {\n  trigger action product.service.nextContact\n  from surfaces [product.service.email product.service.nextContact]\n  to surfaces [product.service.subject product.service.nextIssue]\n  effect crossfade\n  durationMs 240\n  easing \"ease-out\"\n  lane transition\n}\n```\n\nStrict builds expect complete payload contracts, resource ownership, hydration policies, known component capabilities, messages for every validation field and resolvable transition surfaces. Maraca turns this into kernel, hydration, validation and transition runtimes; host code stays adapter logic.\n\nThe [Hydration Policies](./hydration-policies.…",
+          "sourceHash": "9f686f33e5edbb43eb0dc1a1a2d3612e3e7dd49606435acc8d13069d195d2f34",
+          "sourcePath": "docs/en/rmt-vnext-authoring.md"
+        },
+        {
+          "uri": "xtend://docs/en/rmt-kernel-feature-adoption-evaluation",
+          "id": "en:rmt-kernel-feature-adoption-evaluation:7",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "RMT Kernel Feature Adoption Evaluation",
+          "heading": "Server Prerender Runtime",
+          "score": 17,
+          "excerpt": "## Server Prerender Runtime\n\n**Usefulness:** Yes, but not as a replacement for SSR adapters.\n\nThe server transport APIs are valuable as a shared envelope between client runtime and Node/PHP SSR adapters. XTend already has `rmt-node-ssr-adapter.js`, `rmt-php-ssr-adapter.php` and Docs App SSR paths using `server_prerender_hydrate`.\n\nHooks:\n\n- SSR adapters: validate responses against `RmtTemplatePrerenderResponseEnvelope` and `hydrateResponse()` compatibility.\n- Docs PHP SSR: report existing `server_prerender_hydrate` evidence with the kernel transport adapter.\n- Maraca report: `serverPrerender.supported`, `adapterKind`, `hydrateResponseCompatible`.\n\nPriority: P2 because worker, artifacts and telemetry provide direct framework value sooner.",
+          "sourceHash": "34a2e55496a3c46a19dd369267d3b0988e66f47a904feb917ed30efc771e90dd",
+          "sourcePath": "docs/en/rmt-kernel-feature-adoption-evaluation.md"
+        }
+      ],
+      "maxChars": 12000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: RMT viewTemplate repeat conditional portal selector server_prerender_resume signed_manifest\nLocales: en\nScopes: docs, rmt-kit\n\n[K1] Surfaces, Lanes and Lifecycle — Examples\nResource: xtend://docs/en/rmt-reference-surfaces-lanes-lifecycle\nSource: docs/en/rmt-reference-surfaces-lanes-lifecycle.md#sha256:f92625732be38b7927572780799199a9d03139cfc5c77c61f1dfdcb3870b4088\n## Examples\n\n```rmt\ntemplate reference.lifecycle {\n  state app.ready type boolean initial true\n  state app.status type object preserve {\n    initial {\n      text \"Ready\"\n    }\n  }\n  selector app.header from state app.status {\n    output HeaderView\n  }\n  selector app.cardView from state app.status {\n    output CardView\n  }\n  resource app.stream kind stream owner surface.shell\n  resource app.pool kind object-url owner surface.shell\n  portal app.root root \"#app\" layer surface\n\n  surface shell kind page component x-section {\n    portal app.root\n    bounds x 0 y 0 width 640 height 400\n    preserve on minimize\n    destroy releases resource app.stream\n    lane visible weight 90 {\n      mount shell.card from endpoint app.card when app.ready == true {\n        slot header {\n          hydrate header.view from selector app.header\n        }\n        on click \".save\" -> action app.save {\n          payload id from target.dataset.id\n          preventDefault true\n        }\n      }\n      hydrate shell.card from selector app.cardView {\n        hydration mode server_prerender_resume\n        resumability mode server_prerender_resume\n        resumability snapshot surface_state\n        resumability event replay intent_queue\n        resumability integrity signed_manifest\n      }\n      suspend shell.card\n      resume shell.card {\n        resumability mode server_prerender_resume\n        resumability sna…\n\n[K2] Hydration Policies — SSR hydration and resume\nResource: xtend://docs/en/hydration-policies\nSource: docs/en/hydration-policies.md#sha256:4d6edc4eb7cb69dc432d9fcd831579e0e5d1143ad367b00f8ce0157a1ebda584\n## SSR hydration and resume\n\n`server_prerender_hydrate` delivers markup and a hydration envelope. The client then performs a normal binding session. `server_prerender_resume` goes further: snapshot, event replay strategy, and integrity evidence compile into a separate resumability contract.\n\n```rmt\ntemplate docs.hydrationResume {\n  state docs.hydrationStatus type object preserve {\n    initial {\n      text \"Ready\"\n    }\n  }\n\n  selector docs.hydrationStatus from state docs.hydrationStatus {\n    output HydrationStatus\n  }\n\n  surface docs.hydrationShell kind page component x-section {\n    source selector docs.hydrationStatus\n    lane visible weight 80 {\n      hydrate hydration-shell from selector docs.hydrationStatus {\n        hydration mode server_prerender_resume\n        resumability mode server_prerender_resume\n        resumability snapshot surface_state\n        resumability event replay intent_queue\n        resumability integrity signed_manifest\n      }\n      resume hydration-shell {\n        resumability mode server_prerender_resume\n        resumability snapshot surface_state\n        resumability event replay intent_queue\n        resumability integrity signed_manifest\n      }\n    }\n  }\n}\n```\n\nChoose this path only when the server creates the snapshot, the client understands its schema, and integrity verification succeeds before resume. Resume tokens belong in telemetry only aft…\n\n[K3] portal\nResource: xtend://rmt/kit/reference/operator%3Aportal\nSource: docs/de/rmt-reference-primitives.md#sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\noperator:portal\noperator\nportal\nBinds surfaces to host roots without manual shell code.\nportal app.root root \"#app\" layer surface\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\nportal app.root root \"#app\" layer surface\nportal app.root document.querySelector(\"#app\")\nDOM calls are host adapter work, not RMT source.\ntemplate\n\n[K4] RMT Authoring Guide — Orchestration Primitives\nResource: xtend://docs/en/rmt-vnext-authoring\nSource: docs/en/rmt-vnext-authoring.md#sha256:9f686f33e5edbb43eb0dc1a1a2d3612e3e7dd49606435acc8d13069d195d2f34\n## Orchestration Primitives\n\nRMT vNext can now describe the full app orchestration that Maraca materializes into a loaderless bundle. In addition to `state`, `selector`, `action`, `resource`, `event`, `surface`, `portal` and `overlay`, `validation`, `animation` and `transition` are native authoring blocks. The compiler lowers them into `xtend.rmt.app-orchestration.v1`, `xtend.rmt.form-validation.v1`, `xtend.rmt.surface-transitions.v1` and `xtend.rmt.animation-engine.v1`, then emits scheduler targets, patch plans, source maps and redacted diagnostics.\n\n```rmt\nvalidation product.service.contact {\n  mode blocking\n  target action product.service.nextContact\n  field product.service.email required email message \"Enter a valid email address.\"\n}\n\ntransition product.service.contactToIssue {\n  trigger action product.service.nextContact\n  from surfaces [product.service.email product.service.nextContact]\n  to surfaces [product.service.subject product.service.nextIssue]\n  effect crossfade\n  durationMs 240\n  easing \"ease-out\"\n  lane transition\n}\n```\n\nStrict builds expect complete payload contracts, resource ownership, hydration policies, known component capabilities, messages for every validation field and resolvable transition surfaces. Maraca turns this into kernel, hydration, validation and transition runtimes; host code stays adapter logic.\n\nThe [Hydration Policies](./hydration-policies.…\n\n[K5] RMT Kernel Feature Adoption Evaluation — Server Prerender Runtime\nResource: xtend://docs/en/rmt-kernel-feature-adoption-evaluation\nSource: docs/en/rmt-kernel-feature-adoption-evaluation.md#sha256:34a2e55496a3c46a19dd369267d3b0988e66f47a904feb917ed30efc771e90dd\n## Server Prerender Runtime\n\n**Usefulness:** Yes, but not as a replacement for SSR adapters.\n\nThe server transport APIs are valuable as a shared envelope between client runtime and Node/PHP SSR adapters. XTend already has `rmt-node-ssr-adapter.js`, `rmt-php-ssr-adapter.php` and Docs App SSR paths using `server_prerender_hydrate`.\n\nHooks:\n\n- SSR adapters: validate responses against `RmtTemplatePrerenderResponseEnvelope` and `hydrateResponse()` compatibility.\n- Docs PHP SSR: report existing `server_prerender_hydrate` evidence with the kernel transport adapter.\n- Maraca report: `serverPrerender.supported`, `adapterKind`, `hydrateResponseCompatible`.\n\nPriority: P2 because worker, artifacts and telemetry provide direct framework value sooner.\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/en/rmt-reference-surfaces-lanes-lifecycle",
+        "sourceHash": "f92625732be38b7927572780799199a9d03139cfc5c77c61f1dfdcb3870b4088",
+        "sourcePath": "docs/en/rmt-reference-surfaces-lanes-lifecycle.md"
+      },
+      {
+        "uri": "xtend://docs/en/hydration-policies",
+        "sourceHash": "4d6edc4eb7cb69dc432d9fcd831579e0e5d1143ad367b00f8ce0157a1ebda584",
+        "sourcePath": "docs/en/hydration-policies.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/operator%3Aportal",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/de/rmt-reference-primitives.md"
+      },
+      {
+        "uri": "xtend://docs/en/rmt-vnext-authoring",
+        "sourceHash": "9f686f33e5edbb43eb0dc1a1a2d3612e3e7dd49606435acc8d13069d195d2f34",
+        "sourcePath": "docs/en/rmt-vnext-authoring.md"
+      },
+      {
+        "uri": "xtend://docs/en/rmt-kernel-feature-adoption-evaluation",
+        "sourceHash": "34a2e55496a3c46a19dd369267d3b0988e66f47a904feb917ed30efc771e90dd",
+        "sourcePath": "docs/en/rmt-kernel-feature-adoption-evaluation.md"
+      }
+    ]
+  }
+}

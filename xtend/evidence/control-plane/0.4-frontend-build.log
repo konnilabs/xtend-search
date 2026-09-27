@@ -1,0 +1,96 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  77.46MB
+Step 1/24 : ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+Step 2/24 : FROM ${NODE_IMAGE} AS build
+ ---> 622f209f6c16
+Step 3/24 : WORKDIR /app/xtend
+ ---> Using cache
+ ---> 338f5444acec
+Step 4/24 : COPY xtend/package.json xtend/package-lock.json ./
+ ---> Using cache
+ ---> 539a1049f751
+Step 5/24 : COPY xtend/vendor-inputs ./vendor-inputs
+ ---> Using cache
+ ---> 4bb066c50be4
+Step 6/24 : RUN npm install -g npm@11.17.0 && npm ci --ignore-scripts
+ ---> Using cache
+ ---> 60412f379021
+Step 7/24 : WORKDIR /app
+ ---> Using cache
+ ---> 21ee4020628f
+Step 8/24 : COPY . .
+ ---> 439dd3e27db1
+Step 9/24 : RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.tar.gz .
+ ---> Running in 966077b75705
+ ---> Removed intermediate container 966077b75705
+ ---> bb08d69edea0
+Step 10/24 : WORKDIR /app/xtend
+ ---> Running in 584044d8b12d
+ ---> Removed intermediate container 584044d8b12d
+ ---> a3c1e8e2bead
+Step 11/24 : RUN node scripts/build-control.cjs && npm prune --omit=dev --ignore-scripts
+ ---> Running in 5bb525566036
+{"ok":true,"summaries":[{"folder":"standalone","version":"78023c81a11afbea63cbfb3b74b78f91b5e8d9f80e2bfcecabe29b65d1f3e3b2","sourceSha256":"105b205f697743d15c3b72960356ff427ddab5e5f4ed64aeb2a56e1ac3fb1083","services":"planned"},{"folder":"admin","version":"957b1895bbefccf715051498cc05ea947dd38dd3c8830b2a29ba9ad5b314611b","sourceSha256":"b850fbdb49e00d16a9ebde1d28dc73fd7cf32dbdd8fe09e635503ea6505632e7","services":"planned"}]}
+
+removed 19 packages, and audited 2 packages in 6s
+
+found 0 vulnerabilities
+ ---> Removed intermediate container 5bb525566036
+ ---> 0dc010da3147
+Step 12/24 : FROM ${NODE_IMAGE}
+ ---> 622f209f6c16
+Step 13/24 : LABEL org.opencontainers.image.title="XTend.search" org.opencontainers.image.version="0.4.0"
+ ---> Using cache
+ ---> 521452ae166b
+Step 14/24 : RUN apt-get update && apt-get install -y --no-install-recommends tini util-linux ca-certificates && rm -rf /var/lib/apt/lists/*  && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend  && mkdir -p /var/lib/xtend-search /var/lib/xtend-evidence && chown 10001:10001 /var/lib/xtend-search /var/lib/xtend-evidence
+ ---> Using cache
+ ---> a8556d69822c
+Step 15/24 : WORKDIR /app
+ ---> Using cache
+ ---> 7da070b7c9ca
+Step 16/24 : COPY --from=build /app/xtend /app/xtend
+ ---> 952e65e4a010
+Step 17/24 : COPY --from=build /source.tar.gz /app/source.tar.gz
+ ---> 12307f13652b
+Step 18/24 : COPY LICENSE /app/LICENSE
+ ---> 03a0415470fa
+Step 19/24 : ENV BIND_HOST=0.0.0.0 PORT=8080 XTEND_SECRET_DIR=/var/lib/xtend-search/resume XTEND_DATA_DIR=/var/lib/xtend-search/control XTEND_EVIDENCE_DIR=/var/lib/xtend-evidence WEB_CONCURRENCY=1 XTEND_REPLICAS=1
+ ---> Running in d48afd761b7f
+ ---> Removed intermediate container d48afd761b7f
+ ---> 7b8de3efc2f7
+Step 20/24 : USER 10001:10001
+ ---> Running in 24fdcea83b22
+ ---> Removed intermediate container 24fdcea83b22
+ ---> b61b6d92d79d
+Step 21/24 : EXPOSE 8080
+ ---> Running in 87cafbbc3cb0
+ ---> Removed intermediate container 87cafbbc3cb0
+ ---> 4d7805f08998
+Step 22/24 : HEALTHCHECK --interval=30s --timeout=5s --start-period=30s CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+ ---> Running in bc9be9a25012
+ ---> Removed intermediate container bc9be9a25012
+ ---> 2ce03131d343
+Step 23/24 : ENTRYPOINT ["/usr/bin/tini","--"]
+ ---> Running in 782cbe300dbf
+ ---> Removed intermediate container 782cbe300dbf
+ ---> 0cbf46cfc9ad
+Step 24/24 : CMD ["sh","-c","flock -n /var/lib/xtend-search/owner.lock sh -c 'node xtend/scripts/keys.mjs && exec node xtend/server/standalone.mjs'"]
+ ---> Running in 73bf80324ddf
+ ---> Removed intermediate container 73bf80324ddf
+ ---> 32fbd3fd8429
+Successfully built 32fbd3fd8429
+Successfully tagged xtend-search:0.4.0
+71b7bdc
+Step 23/24 : ENTRYPOINT ["/usr/bin/tini","--"]
+ ---> Running in a26d8203d509
+ ---> Removed intermediate container a26d8203d509
+ ---> 4fe2cc80e07a
+Step 24/24 : CMD ["sh","-c","flock -n /var/lib/xtend-search/owner.lock sh -c 'node xtend/scripts/keys.mjs && exec node xtend/server/standalone.mjs'"]
+ ---> Running in 44628c036c3d
+ ---> Removed intermediate container 44628c036c3d
+ ---> bcc4e69db1e3
+Successfully built bcc4e69db1e3
+Successfully tagged xtend-search:0.4.0

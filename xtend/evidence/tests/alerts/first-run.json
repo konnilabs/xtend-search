@@ -1,0 +1,69 @@
+{
+  "timestamp": "2026-09-19T21:13:14.281Z",
+  "base": "http://127.0.0.1:8090",
+  "note": "Explicit offline Python fixture; media alerts returns 101 results, error raises the fixture engine failure. Image responses use synthetic SVGs. Container assets without overrides.",
+  "results": [
+    {
+      "name": "chromium: real Classic XAlert, no autofocus, no timer, keyboard dismissal and focus",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: dismissed hint stays hidden through preview, full-screen carousel and filter edits",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: new response, same-query submit and history restore notices",
+      "status": "failed",
+      "error": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('x-alert.search-warning').getByRole('button', { name: 'Schliessen', exact: true }) to be visible\u001b[22m\n\n    at /home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:38:72\n    at async check (/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:6:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:36:2"
+    },
+    {
+      "name": "chromium: engine warning can close while failure guidance remains",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: dark/light and narrow layout",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'rgb(23, 46, 59)'\n- 'rgb(237, 246, 250)'\n         ^\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:47:213\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:6:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:45:2"
+    },
+    {
+      "name": "chromium: unavailable optional module leaves readable warnings and usable search",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:50:328\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:6:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:49:2"
+    },
+    {
+      "name": "chromium: no-JS SSR keeps both kinds readable without false close controls",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: real Classic XAlert, no autofocus, no timer, keyboard dismissal and focus",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: dismissed hint stays hidden through preview, full-screen carousel and filter edits",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: new response, same-query submit and history restore notices",
+      "status": "failed",
+      "error": "locator.waitFor: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('x-alert.search-warning').getByRole('button', { name: 'Schliessen', exact: true }) to be visible\u001b[22m\n\n    at /home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:38:72\n    at async check (/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:6:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:36:2"
+    },
+    {
+      "name": "firefox: engine warning can close while failure guidance remains",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: dark/light and narrow layout",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ 'rgb(23, 46, 59)'\n- 'rgb(237, 246, 250)'\n         ^\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:47:213\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:6:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:45:2"
+    },
+    {
+      "name": "firefox: unavailable optional module leaves readable warnings and usable search",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:50:328\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:6:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:49:2"
+    },
+    {
+      "name": "firefox: no-JS SSR keeps both kinds readable without false close controls",
+      "status": "passed"
+    }
+  ]
+}

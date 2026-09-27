@@ -1,0 +1,102 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"XDialog x-dialog modal open show close events focus trap dialog-close styling RMT\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "XDialog x-dialog modal open show close events focus trap dialog-close styling RMT",
+      "locale": "all",
+      "scopes": [
+        "docs"
+      ],
+      "limit": 4,
+      "domains": [],
+      "hitCount": 4,
+      "hits": [
+        {
+          "uri": "xtend://docs/en/components-xdialog",
+          "id": "en:components-xdialog:8",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "en",
+          "title": "x-dialog",
+          "heading": "Integration notes",
+          "score": 34,
+          "excerpt": "## Integration notes\n\n- UX profile: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State key: `dialog-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.idle.hydrate`, `overlay.stack.open`, `overlay.stack.close`, `overlay.focus.trap`, `overlay.inert.apply`.\n\nRMT Hosts should treat the component as a Custom Element boundary: pass attributes as component props, bind DOM events to commands and keep scheduling metadata outside the component. Plain HTML hosts can use the same attributes and events without an RMT compiler.\n\nTheming should flow through XTend design tokens first. CSS parts are intended for targeted skinning of exposed controls, while CSS custom properties are better for broader color, spacing, radius and motion changes. Accessibility hooks such as labels, live regions and focus handling should be preserved when composing the component.\n\nTab navigation includes controls in assigned slots and open shadow roots. Hidden, inert and disabled controls are excluded; Tab and Shift-Tab stay within the open modal surface.",
+          "sourceHash": "a4d809ec0ba3c82c1431dcfb6ec5c63c3b9bd5d69ae1f12000d739fa333a6cf6",
+          "sourcePath": "docs/en/components/xdialog.md"
+        },
+        {
+          "uri": "xtend://docs/de/components-xdialog",
+          "id": "de:components-xdialog:8",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "de",
+          "title": "x-dialog",
+          "heading": "Integrationshinweise",
+          "score": 31,
+          "excerpt": "## Integrationshinweise\n\n- UX-Profil: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State-Key: `dialog-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.idle.hydrate`, `overlay.stack.open`, `overlay.stack.close`, `overlay.focus.trap`, `overlay.inert.apply`.\n\nRMT Hosts sollten die Komponente als Custom-Element-Grenze behandeln: Attribute werden als Component Props gesetzt, DOM-Events werden an Commands gebunden, und Scheduling-Metadaten bleiben außerhalb der Komponente. Reine HTML-Hosts verwenden dieselben Attribute und Events ohne RMT Compiler.\n\nTheming sollte zuerst über XTend Design Tokens laufen. CSS Parts sind für gezieltes Skinning freigegebener Controls gedacht, während CSS Custom Properties breitere Anpassungen an Farbe, Abstand, Radius und Bewegung abdecken. Accessibility-Hooks wie Labels, Live-Regionen und Fokusverhalten sollten beim Komponieren erhalten bleiben.\n\nDie Tab-Reihenfolge umfasst Controls in zugewiesenen Slots und offenen Shadow Roots. Versteckte, inaktive und deaktivierte Controls werden ausgelassen; Tab und Shift-Tab bleiben innerhalb der geöffneten modalen Oberfläche.",
+          "sourceHash": "85c4fc9cec408b98c20d25fe1efb37745c6cdf831ec138354fc6b54590c5e290",
+          "sourcePath": "docs/de/components/xdialog.md"
+        },
+        {
+          "uri": "xtend://docs/de/components-xmodal",
+          "id": "de:components-xmodal:8",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "de",
+          "title": "x-modal",
+          "heading": "Integrationshinweise",
+          "score": 23,
+          "excerpt": "## Integrationshinweise\n\n- UX-Profil: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State-Key: `modal-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.idle.hydrate`, `overlay.stack.open`, `overlay.stack.close`, `overlay.focus.trap`, `overlay.inert.apply`.\n\nRMT Hosts sollten die Komponente als Custom-Element-Grenze behandeln: Attribute werden als Component Props gesetzt, DOM-Events werden an Commands gebunden, und Scheduling-Metadaten bleiben außerhalb der Komponente. Reine HTML-Hosts verwenden dieselben Attribute und Events ohne RMT Compiler.\n\nTheming sollte zuerst über XTend Design Tokens laufen. CSS Parts sind für gezieltes Skinning freigegebener Controls gedacht, während CSS Custom Properties breitere Anpassungen an Farbe, Abstand, Radius und Bewegung abdecken. Accessibility-Hooks wie Labels, Live-Regionen und Fokusverhalten sollten beim Komponieren erhalten bleiben.",
+          "sourceHash": "0317b70672f006854908bf98b9c177c46d4305b0482b37c40dcdc09ac0eb949b",
+          "sourcePath": "docs/de/components/xmodal.md"
+        },
+        {
+          "uri": "xtend://docs/en/components-xmodal",
+          "id": "en:components-xmodal:8",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "en",
+          "title": "x-modal",
+          "heading": "Integration notes",
+          "score": 23,
+          "excerpt": "## Integration notes\n\n- UX profile: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State key: `modal-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.idle.hydrate`, `overlay.stack.open`, `overlay.stack.close`, `overlay.focus.trap`, `overlay.inert.apply`.\n\nRMT Hosts should treat the component as a Custom Element boundary: pass attributes as component props, bind DOM events to commands and keep scheduling metadata outside the component. Plain HTML hosts can use the same attributes and events without an RMT compiler.\n\nTheming should flow through XTend design tokens first. CSS parts are intended for targeted skinning of exposed controls, while CSS custom properties are better for broader color, spacing, radius and motion changes. Accessibility hooks such as labels, live regions and focus handling should be preserved when composing the component.",
+          "sourceHash": "48089d5c03138f8e7572ba73e5ffa406d2e20bc31697a4afe3096adfa6b24db7",
+          "sourcePath": "docs/en/components/xmodal.md"
+        }
+      ],
+      "maxChars": 11000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: XDialog x-dialog modal open show close events focus trap dialog-close styling RMT\nLocales: all\nScopes: docs\n\n[K1] x-dialog — Integration notes\nResource: xtend://docs/en/components-xdialog\nSource: docs/en/components/xdialog.md#sha256:a4d809ec0ba3c82c1431dcfb6ec5c63c3b9bd5d69ae1f12000d739fa333a6cf6\n## Integration notes\n\n- UX profile: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State key: `dialog-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.idle.hydrate`, `overlay.stack.open`, `overlay.stack.close`, `overlay.focus.trap`, `overlay.inert.apply`.\n\nRMT Hosts should treat the component as a Custom Element boundary: pass attributes as component props, bind DOM events to commands and keep scheduling metadata outside the component. Plain HTML hosts can use the same attributes and events without an RMT compiler.\n\nTheming should flow through XTend design tokens first. CSS parts are intended for targeted skinning of exposed controls, while CSS custom properties are better for broader color, spacing, radius and motion changes. Accessibility hooks such as labels, live regions and focus handling should be preserved when composing the component.\n\nTab navigation includes controls in assigned slots and open shadow roots. Hidden, inert and disabled controls are excluded; Tab and Shift-Tab stay within the open modal surface.\n\n[K2] x-dialog — Integrationshinweise\nResource: xtend://docs/de/components-xdialog\nSource: docs/de/components/xdialog.md#sha256:85c4fc9cec408b98c20d25fe1efb37745c6cdf831ec138354fc6b54590c5e290\n## Integrationshinweise\n\n- UX-Profil: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State-Key: `dialog-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.idle.hydrate`, `overlay.stack.open`, `overlay.stack.close`, `overlay.focus.trap`, `overlay.inert.apply`.\n\nRMT Hosts sollten die Komponente als Custom-Element-Grenze behandeln: Attribute werden als Component Props gesetzt, DOM-Events werden an Commands gebunden, und Scheduling-Metadaten bleiben außerhalb der Komponente. Reine HTML-Hosts verwenden dieselben Attribute und Events ohne RMT Compiler.\n\nTheming sollte zuerst über XTend Design Tokens laufen. CSS Parts sind für gezieltes Skinning freigegebener Controls gedacht, während CSS Custom Properties breitere Anpassungen an Farbe, Abstand, Radius und Bewegung abdecken. Accessibility-Hooks wie Labels, Live-Regionen und Fokusverhalten sollten beim Komponieren erhalten bleiben.\n\nDie Tab-Reihenfolge umfasst Controls in zugewiesenen Slots und offenen Shadow Roots. Versteckte, inaktive und deaktivierte Controls werden ausgelassen; Tab und Shift-Tab bleiben innerhalb der geöffneten modalen Oberfläche.\n\n[K3] x-modal — Integrationshinweise\nResource: xtend://docs/de/components-xmodal\nSource: docs/de/components/xmodal.md#sha256:0317b70672f006854908bf98b9c177c46d4305b0482b37c40dcdc09ac0eb949b\n## Integrationshinweise\n\n- UX-Profil: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State-Key: `modal-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.idle.hydrate`, `overlay.stack.open`, `overlay.stack.close`, `overlay.focus.trap`, `overlay.inert.apply`.\n\nRMT Hosts sollten die Komponente als Custom-Element-Grenze behandeln: Attribute werden als Component Props gesetzt, DOM-Events werden an Commands gebunden, und Scheduling-Metadaten bleiben außerhalb der Komponente. Reine HTML-Hosts verwenden dieselben Attribute und Events ohne RMT Compiler.\n\nTheming sollte zuerst über XTend Design Tokens laufen. CSS Parts sind für gezieltes Skinning freigegebener Controls gedacht, während CSS Custom Properties breitere Anpassungen an Farbe, Abstand, Radius und Bewegung abdecken. Accessibility-Hooks wie Labels, Live-Regionen und Fokusverhalten sollten beim Komponieren erhalten bleiben.\n\n[K4] x-modal — Integration notes\nResource: xtend://docs/en/components-xmodal\nSource: docs/en/components/xmodal.md#sha256:48089d5c03138f8e7572ba73e5ffa406d2e20bc31697a4afe3096adfa6b24db7\n## Integration notes\n\n- UX profile: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State key: `modal-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.idle.hydrate`, `overlay.stack.open`, `overlay.stack.close`, `overlay.focus.trap`, `overlay.inert.apply`.\n\nRMT Hosts should treat the component as a Custom Element boundary: pass attributes as component props, bind DOM events to commands and keep scheduling metadata outside the component. Plain HTML hosts can use the same attributes and events without an RMT compiler.\n\nTheming should flow through XTend design tokens first. CSS parts are intended for targeted skinning of exposed controls, while CSS custom properties are better for broader color, spacing, radius and motion changes. Accessibility hooks such as labels, live regions and focus handling should be preserved when composing the component.\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/en/components-xdialog",
+        "sourceHash": "a4d809ec0ba3c82c1431dcfb6ec5c63c3b9bd5d69ae1f12000d739fa333a6cf6",
+        "sourcePath": "docs/en/components/xdialog.md"
+      },
+      {
+        "uri": "xtend://docs/de/components-xdialog",
+        "sourceHash": "85c4fc9cec408b98c20d25fe1efb37745c6cdf831ec138354fc6b54590c5e290",
+        "sourcePath": "docs/de/components/xdialog.md"
+      },
+      {
+        "uri": "xtend://docs/de/components-xmodal",
+        "sourceHash": "0317b70672f006854908bf98b9c177c46d4305b0482b37c40dcdc09ac0eb949b",
+        "sourcePath": "docs/de/components/xmodal.md"
+      },
+      {
+        "uri": "xtend://docs/en/components-xmodal",
+        "sourceHash": "48089d5c03138f8e7572ba73e5ffa406d2e20bc31697a4afe3096adfa6b24db7",
+        "sourcePath": "docs/en/components/xmodal.md"
+      }
+    ]
+  }
+}

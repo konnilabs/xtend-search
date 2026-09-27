@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-09-19T20:57:40.123Z",
+  "base": "http://127.0.0.1:8090",
+  "cssOverride": "frontend/search.css",
+  "results": [
+    {
+      "name": "chromium: genuine lazy XLightbox, current selection, full-page carousel, sidebar sync",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: modal focus, scroll lock, close button, reopen and Escape layers",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: failed originals, thumbnail fallback, failed media can be skipped",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: pending lazy import and active modal cannot survive navigation",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: unavailable optional module preserves sidebar",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: narrow viewport, swipe and no overflow",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: genuine lazy XLightbox, current selection, full-page carousel, sidebar sync",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: modal focus, scroll lock, close button, reopen and Escape layers",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: failed originals, thumbnail fallback, failed media can be skipped",
+      "status": "failed",
+      "error": "page.waitForFunction: Timeout 8000ms exceeded.\n    at /home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/lightbox.mjs:43:165\n    at async check (/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/lightbox.mjs:5:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/lightbox.mjs:40:2"
+    },
+    {
+      "name": "firefox: pending lazy import and active modal cannot survive navigation",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: unavailable optional module preserves sidebar",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: narrow viewport, swipe and no overflow",
+      "status": "passed"
+    }
+  ]
+}

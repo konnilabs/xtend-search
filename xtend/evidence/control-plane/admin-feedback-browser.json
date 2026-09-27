@@ -1,0 +1,55 @@
+{
+  "ok": true,
+  "checks": [
+    "Release 0.3.2 is identifiable through health, response header and footer; authenticated CSS is not cached; no-JS SSR fills the viewport.",
+    "The upgraded XSection, header and main fill the viewport from 320 to 3840px without horizontal overflow.",
+    "An approval produces one genuine XToast after the confirmed save, keeps focus in the form, expires, and is not resurrected by unrelated renders.",
+    "Source blocking and repeated approval show fresh action-specific notices; close returns keyboard focus to the initiating control without scrolling.",
+    "Rejected changes produce a persistent accessible error toast and no success message; feedback stays inside the mobile viewport and is dismissible.",
+    "Reduced-motion preference is respected by the native component; the test source is disabled again."
+  ],
+  "widths": [
+    {
+      "viewport": 320,
+      "header": 320,
+      "main": 320,
+      "overflow": false
+    },
+    {
+      "viewport": 390,
+      "header": 390,
+      "main": 390,
+      "overflow": false
+    },
+    {
+      "viewport": 720,
+      "header": 720,
+      "main": 720,
+      "overflow": false
+    },
+    {
+      "viewport": 1440,
+      "header": 1440,
+      "main": 1440,
+      "overflow": false
+    },
+    {
+      "viewport": 1920,
+      "header": 1920,
+      "main": 1920,
+      "overflow": false
+    },
+    {
+      "viewport": 2560,
+      "header": 2560,
+      "main": 2560,
+      "overflow": false
+    },
+    {
+      "viewport": 3840,
+      "header": 3840,
+      "main": 3840,
+      "overflow": false
+    }
+  ]
+}

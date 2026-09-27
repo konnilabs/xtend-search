@@ -1,0 +1,52 @@
+{
+  "reports": [
+    {
+      "language": "all",
+      "timeRange": "",
+      "data": {
+        "label": "48 Ergebnisse",
+        "status": "3 von 3 Quellen abgeschlossen",
+        "results": 48,
+        "sources": {
+          "bing": 10,
+          "brave": 23,
+          "google cse": 15
+        },
+        "warnings": [],
+        "error": ""
+      }
+    },
+    {
+      "language": "de",
+      "timeRange": "",
+      "data": {
+        "label": "43 Ergebnisse",
+        "status": "3 von 3 Quellen abgeschlossen",
+        "results": 43,
+        "sources": {
+          "bing": 10,
+          "google cse": 16,
+          "brave": 17
+        },
+        "warnings": [],
+        "error": ""
+      }
+    },
+    {
+      "language": "de",
+      "timeRange": "week",
+      "data": {
+        "label": "40 Ergebnisse",
+        "status": "2 von 2 Quellen abgeschlossen",
+        "results": 40,
+        "sources": {
+          "google cse": 20,
+          "brave": 20
+        },
+        "warnings": [],
+        "error": ""
+      }
+    }
+  ],
+  "errors": []
+}

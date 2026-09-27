@@ -1,0 +1,29 @@
+{
+  "scope": "All packaged browser JavaScript and CSS, including lazy modules, excluding server assets. Sum of individual gzip sizes, not initial network traffic.",
+  "versions": {
+    "0.3.5": {
+      "standalone": {
+        "raw": 2672706,
+        "gzip": 502005,
+        "count": 33
+      },
+      "admin": {
+        "raw": 2619642,
+        "gzip": 484538,
+        "count": 25
+      }
+    },
+    "0.4.0": {
+      "standalone": {
+        "raw": 2698379,
+        "gzip": 512134,
+        "count": 37
+      },
+      "admin": {
+        "raw": 3089556,
+        "gzip": 600623,
+        "count": 33
+      }
+    }
+  }
+}

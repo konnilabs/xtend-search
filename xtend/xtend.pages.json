@@ -1,0 +1,13 @@
+{
+  "schema": "xtend.page-build.v1",
+  "target": "node",
+  "assets": {"entry": "/assets/xtend/page.mjs", "css": ["/assets/xtend/search.css"]},
+  "assetRoot": "public",
+  "pages": {
+    "Search": {
+      "source": "frontend/search.rmt",
+      "inputs": ["search.data", "search.query"],
+      "maraca": {"entry": "/assets/xtend/maraca/xtend.maraca.mjs"}
+    }
+  }
+}

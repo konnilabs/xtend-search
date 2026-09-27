@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-09-20T00:53:07.062146+00:00",
+  "image": "sha256:87436f07ef27149b002017c7533336ee9503a125afe0f698ad18fe7230b01e6c",
+  "health": "healthy",
+  "sourceImageTag": "xtend-search:0.2.0",
+  "user": "10001:10001",
+  "readOnlyRoot": true,
+  "capDrop": [
+    "ALL"
+  ],
+  "ports": {
+    "8080/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "8080"
+      }
+    ]
+  },
+  "volumes": [
+    {
+      "name": "xtend-search_search-secrets",
+      "type": "volume",
+      "destination": "/var/lib/xtend-search"
+    }
+  ],
+  "checks": {
+    "/health/ready": {
+      "status": 200,
+      "contentType": "application/json"
+    },
+    "/info/de/about": {
+      "status": 200,
+      "contentType": "text/html; charset=utf-8"
+    },
+    "/search?q=test&format=json": {
+      "status": 403
+    },
+    "/source.tar.gz": {
+      "status": 200,
+      "contentType": "application/gzip"
+    }
+  }
+}

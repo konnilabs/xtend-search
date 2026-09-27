@@ -1,0 +1,34 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "XTendRMT compile check completed with status compiled."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.rmt-compile-check.v1",
+      "sourceHash": "2e28de72f6e114131c1224cd2b2f335958996273b2a5552913eb3b4752ccb26b",
+      "path": "frontend/standalone.rmt",
+      "ok": true,
+      "status": "compiled",
+      "diagnostics": [],
+      "summary": {
+        "schema": "xtend.rmt.vnext-compiler.v1",
+        "mode": null,
+        "recordCount": null,
+        "outputCount": null
+      }
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "workspace://frontend/standalone.rmt",
+        "kind": "compile-check",
+        "sourceHash": "2e28de72f6e114131c1224cd2b2f335958996273b2a5552913eb3b4752ccb26b"
+      }
+    ]
+  }
+}

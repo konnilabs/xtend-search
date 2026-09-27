@@ -1,0 +1,12 @@
+import {chromium} from 'playwright';
+import fs from 'node:fs/promises';import assert from 'node:assert/strict';import os from 'node:os';
+const browser=await chromium.launch(),runs=[];
+try{for(const [version,base]of [['0.3.5','http://localhost:8099'],['0.4.0','http://localhost:8093']])for(let i=0;i<3;i++){
+ const context=await browser.newContext({viewport:{width:1440,height:1000}}),page=await context.newPage();
+ await page.addInitScript(()=>{window.measure={first:null,complete:null,cls:0};new PerformanceObserver(entries=>{for(const e of entries.getEntries())if(!e.hadRecentInput)window.measure.cls+=e.value;}).observe({type:'layout-shift',buffered:true});window.addEventListener('xtend-search:stream',e=>{if(document.querySelector('article.result'))window.measure.first??=performance.now();if(e.detail.status==='complete')window.measure.complete=performance.now();});});
+ await page.goto(base+'/');await page.waitForFunction(()=>window.XTendPage);await page.locator('#search-input').fill('release comparison '+i);
+ await page.evaluate(()=>{window.measure.start=performance.now();window.measure.cls=0;});await page.getByRole('button',{name:'Suchen',exact:true}).click();await page.waitForFunction(()=>window.measure.complete!==null);
+ const values=await page.evaluate(()=>({firstMs:window.measure.first-window.measure.start,completeMs:window.measure.complete-window.measure.start,cls:window.measure.cls,resources:performance.getEntriesByType('resource').filter(e=>/\.(mjs|js)(\?|$)/.test(e.name)).map(e=>({url:new URL(e.name).pathname,gzip:e.encodedBodySize,decoded:e.decodedBodySize}))}));const results=await page.locator('article.result').count();assert.equal(results,10);runs.push({version,run:i+1,results,...values,publicLoadedAdmin:values.resources.some(r=>r.url.includes('/admin/'))});await context.close();
+ }
+ const report={ok:true,date:new Date().toISOString(),browser:browser.version(),cpu:os.cpus()[0].model,scope:'Same local offline SearXNG backend (100/700/2500ms), equal source approvals, separate control stores, equal flushing gzip proxies; three cold browser contexts each. Favicon cache warm after earlier correctness checks; resolver isolation separately measured at four seconds. No production speed claim.',runs};await fs.writeFile(new URL('../../evidence/control-plane/0.4-performance-comparison.json',import.meta.url),JSON.stringify(report,null,2));console.log(JSON.stringify(report));
+}finally{await browser.close();}

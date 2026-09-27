@@ -1,0 +1,66 @@
+{
+  "name": "xtend-search",
+  "networks": {
+    "default": {
+      "name": "xtend-search_default",
+      "ipam": {}
+    }
+  },
+  "services": {
+    "search": {
+      "build": {
+        "context": "/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search",
+        "dockerfile": "Dockerfile.xtend"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "command": null,
+      "entrypoint": null,
+      "environment": {
+        "FRONTEND_MODE": "xtend",
+        "PUBLIC_BASE_URL": "http://localhost:8090",
+        "SEARXNG_URL": "http://localhost:8090/",
+        "TRUSTED_PROXY_IPS": "",
+        "XTEND_TEST_FIXTURE": "0"
+      },
+      "image": "xtend-search:0.1.0",
+      "mem_limit": "1610612736",
+      "networks": {
+        "default": null
+      },
+      "pids_limit": 256,
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 8080,
+          "published": "8090",
+          "protocol": "tcp"
+        }
+      ],
+      "read_only": true,
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "stop_grace_period": "15s",
+      "tmpfs": [
+        "/tmp:rw,noexec,nosuid,size=128m"
+      ],
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "search-secrets",
+          "target": "/var/lib/xtend-search",
+          "volume": {}
+        }
+      ]
+    }
+  },
+  "volumes": {
+    "search-secrets": {
+      "name": "xtend-search_search-secrets"
+    }
+  }
+}

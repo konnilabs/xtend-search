@@ -1,0 +1,26 @@
+[
+  {
+    "file": "xtend/frontend/lightbox.mjs",
+    "sha256": "240c38ca3a7fd52e8099fc95f6b3c247ce1b475a3112b2ab8137971d2d7031f2"
+  },
+  {
+    "file": "xtend/frontend/preview.mjs",
+    "sha256": "ab89c90b3025c92572b9f915cf6b8767dbed937dafa57c1e478e0f8c3ff0491e"
+  },
+  {
+    "file": "xtend/frontend/search.rmt",
+    "sha256": "7085cf4f8bf1efb0601286888089b78c3075966457a7ca66f688395e629d5ea7"
+  },
+  {
+    "file": "xtend/frontend/search.css",
+    "sha256": "193fedab7dd9bd41bee660a6e21e5f908ad8a5b7119adfdb7ae17a6eb3598bab"
+  },
+  {
+    "file": "xtend/scripts/build.cjs",
+    "sha256": "c37f5211ba3631e9c8fee461f487d596daa5f8e7e0d594663c402f142b7e5bc5"
+  },
+  {
+    "file": "xtend/patches/xlightbox-controls.cjs",
+    "sha256": "89a6bdb4415d5d4cd4571607cba74d3171170924c17719fbe925736a72f887ba"
+  }
+]

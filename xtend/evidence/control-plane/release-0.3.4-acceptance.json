@@ -1,0 +1,73 @@
+{
+  "ok": true,
+  "version": "0.3.4",
+  "image": "sha256:adcf461c4a8c007bea6bf8337a59a67196a6f4fcc9b44fdf539ada2c4a0339a6",
+  "unitTests": 51,
+  "localBrowser": {
+    "ok": true,
+    "reports": [
+      {
+        "mode": "SSR",
+        "category": "images",
+        "status": "2 von 2 Quellen abgeschlossen",
+        "count": "52 Ergebnisse",
+        "results": 52,
+        "sources": [
+          "bing images",
+          "google cse images"
+        ],
+        "warnings": []
+      },
+      {
+        "mode": "XScaler",
+        "category": "images",
+        "status": "2 von 2 Quellen abgeschlossen",
+        "count": "52 Ergebnisse",
+        "results": 52,
+        "sources": [
+          "bing images",
+          "google cse images"
+        ],
+        "warnings": [],
+        "phase": "complete"
+      },
+      {
+        "mode": "no-JS",
+        "results": 52,
+        "sources": [
+          "bing images",
+          "google cse images"
+        ]
+      }
+    ],
+    "errors": [],
+    "health": {
+      "ok": true,
+      "version": "0.3.4",
+      "storage": "ready",
+      "retrieval": "compatible"
+    }
+  },
+  "policyRepair": {
+    "ok": true,
+    "updatedFingerprints": [
+      "bing",
+      "bing images",
+      "bing news",
+      "bing videos",
+      "brave",
+      "duckduckgo",
+      "duckduckgo images",
+      "duckduckgo news",
+      "duckduckgo videos"
+    ],
+    "guardsUnchanged": true,
+    "allOtherPolicyFieldsUnchanged": true,
+    "revision": 36
+  },
+  "composeValidation": true,
+  "archiveChecksumVerified": true,
+  "archiveLoadVerified": true,
+  "archiveBytes": 261273530,
+  "backend": "xtend-search-searxng:0.3.0"
+}

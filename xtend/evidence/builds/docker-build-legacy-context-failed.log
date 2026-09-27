@@ -1,0 +1,136 @@
+time="2026-09-19T21:53:32+02:00" level=warning msg="Docker Compose requires buildx plugin to be installed"
+ Image xtend-search:0.1.0 Building 
+ Image xtend-search:0.1.0 Building 
+Sending build context to Docker daemon  524.4kBSending build context to Docker daemon  1.573MBSending build context to Docker daemon  3.146MBSending build context to Docker daemon  4.195MBSending build context to Docker daemon  5.244MBSending build context to Docker daemon  6.293MBSending build context to Docker daemon  6.523MB
+Step 1/27 : ARG NODE_IMAGE=node:24.19.0-bookworm-slim
+Step 2/27 : ARG PYTHON_IMAGE=python:3.12-slim-bookworm
+Step 3/27 : FROM ${NODE_IMAGE} AS frontend
+24.19.0-bookworm-slim: Pulling from library/node
+
+[1A[2Ka8ac7f6c67ab: Pulling fs layer [1B
+[1A[2K990581063f5c: Pulling fs layer [1B
+[1A[2K4996e33358ab: Pulling fs layer [1B
+[1A[2Kf95897c2a1fb: Pulling fs layer [1B
+[1A[2Kc35748eaa5ec: Pulling fs layer [1B[2A[2Kf95897c2a1fb: Waiting [2B[1A[2Kc35748eaa5ec: Waiting [1B[4A[2K990581063f5c: Downloading [==================================================>]  3.323kB/3.323kB[4B[4A[2K990581063f5c: Verifying Checksum [4B[4A[2K990581063f5c: Download complete [4B[5A[2Ka8ac7f6c67ab: Downloading [>                                                  ]  294.3kB/28.23MB[5B[3A[2K4996e33358ab: Downloading [>                                                  ]  507.3kB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=>                                                 ]  884.2kB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=>                                                 ]  1.523MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [===>                                               ]  2.064MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [====>                                              ]  2.654MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [==>                                                ]  2.539MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [======>                                            ]  3.538MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [===>                                               ]  3.047MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=======>                                           ]  4.423MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [====>                                              ]  4.063MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=========>                                         ]  5.308MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [====>                                              ]  4.571MB/50.5MB[3B[2A[2Kf95897c2a1fb: Downloading [>                                                  ]   32.2kB/1.713MB[2B[5A[2Ka8ac7f6c67ab: Downloading [==========>                                        ]  6.193MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=====>                                             ]  5.586MB/50.5MB[3B[2A[2Kf95897c2a1fb: Downloading [=====>                                             ]    196kB/1.713MB[2B[3A[2K4996e33358ab: Downloading [======>                                            ]  6.094MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [============>                                      ]  6.782MB/28.23MB[5B[2A[2Kf95897c2a1fb: Downloading [=========>                                         ]  327.1kB/1.713MB[2B[3A[2K4996e33358ab: Downloading [======>                                            ]  6.602MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=============>                                     ]  7.372MB/28.23MB[5B[2A[2Kf95897c2a1fb: Downloading [=================>                                 ]  589.3kB/1.713MB[2B[5A[2Ka8ac7f6c67ab: Downloading [=============>                                     ]  7.667MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=======>                                           ]   7.11MB/50.5MB[3B[2A[2Kf95897c2a1fb: Downloading [=================================>                 ]  1.146MB/1.713MB[2B[5A[2Ka8ac7f6c67ab: Downloading [===============>                                   ]  8.552MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [========>                                          ]  8.126MB/50.5MB[3B[2A[2Kf95897c2a1fb: Verifying Checksum [2B[2A[2Kf95897c2a1fb: Download complete [2B[5A[2Ka8ac7f6c67ab: Downloading [================>                                  ]  9.142MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=========>                                         ]  9.142MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=================>                                 ]  9.732MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [==========>                                        ]  10.16MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [==================>                                ]  10.32MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [===================>                               ]  10.91MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [===========>                                       ]  11.17MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [====================>                              ]   11.5MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [============>                                      ]  12.19MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=====================>                             ]  12.09MB/28.23MB[5B[1A[2Kc35748eaa5ec: Downloading [==================================================>]     450B/450B[1B[1A[2Kc35748eaa5ec: Verifying Checksum [1B[1A[2Kc35748eaa5ec: Download complete [1B[5A[2Ka8ac7f6c67ab: Downloading [======================>                            ]  12.68MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=============>                                     ]   13.2MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=======================>                           ]  13.27MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [==============>                                    ]  14.22MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [========================>                          ]  13.86MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [=========================>                         ]  14.45MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [===============>                                   ]  15.24MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [==========================>                        ]  15.04MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [================>                                  ]  16.25MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [===========================>                       ]  15.63MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [============================>                      ]  16.22MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=================>                                 ]  17.27MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=============================>                     ]  16.81MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [==================>                                ]  18.28MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [==============================>                    ]   17.4MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [===================>                               ]   19.3MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [===============================>                   ]  17.99MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [================================>                  ]  18.58MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [====================>                              ]  20.32MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=================================>                 ]  19.17MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=====================>                             ]  21.33MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [==================================>                ]  19.76MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [====================================>              ]  20.35MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [======================>                            ]  22.35MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=====================================>             ]  20.94MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=======================>                           ]  23.36MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [======================================>            ]  21.53MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [=======================================>           ]  22.12MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [========================>                          ]  24.38MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [========================================>          ]  22.71MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=========================>                         ]  25.39MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=========================================>         ]  23.59MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [==========================>                        ]  26.41MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [==========================================>        ]  24.18MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [===========================>                       ]  27.43MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [===========================================>       ]  24.77MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [============================================>      ]  25.36MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [============================>                      ]  28.44MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=============================================>     ]  25.95MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=============================>                     ]  29.46MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [===============================================>   ]  26.54MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Downloading [================================================>  ]  27.13MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [==============================>                    ]  30.47MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Downloading [=================================================> ]  27.72MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [===============================>                   ]  31.49MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Verifying Checksum [5B[5A[2Ka8ac7f6c67ab: Download complete [5B[5A[2Ka8ac7f6c67ab: Extracting [>                                                  ]  294.9kB/28.23MB[5B[3A[2K4996e33358ab: Downloading [================================>                  ]  32.51MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Extracting [==========>                                        ]  6.193MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Extracting [===================>                               ]  11.21MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=================================>                 ]  33.52MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Extracting [==================================>                ]  19.76MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [==================================>                ]  34.54MB/50.5MB[3B[3A[2K4996e33358ab: Downloading [===================================>               ]  35.55MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Extracting [==========================================>        ]  23.89MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [====================================>              ]  37.08MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Extracting [================================================>  ]  27.13MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [======================================>            ]   38.6MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Extracting [================================================>  ]  27.43MB/28.23MB[5B[5A[2Ka8ac7f6c67ab: Extracting [==================================================>]  28.23MB/28.23MB[5B[3A[2K4996e33358ab: Downloading [=======================================>           ]  40.12MB/50.5MB[3B[5A[2Ka8ac7f6c67ab: Pull complete [5B[4A[2K990581063f5c: Extracting [==================================================>]  3.323kB/3.323kB[4B[4A[2K990581063f5c: Extracting [==================================================>]  3.323kB/3.323kB[4B[4A[2K990581063f5c: Pull complete [4B[3A[2K4996e33358ab: Downloading [=========================================>         ]  41.65MB/50.5MB[3B[3A[2K4996e33358ab: Downloading [==========================================>        ]  43.17MB/50.5MB[3B[3A[2K4996e33358ab: Downloading [============================================>      ]  44.69MB/50.5MB[3B[3A[2K4996e33358ab: Downloading [=============================================>     ]  46.22MB/50.5MB[3B[3A[2K4996e33358ab: Downloading [===============================================>   ]  47.74MB/50.5MB[3B[3A[2K4996e33358ab: Downloading [================================================>  ]  49.27MB/50.5MB[3B[3A[2K4996e33358ab: Downloading [==================================================>]   50.5MB/50.5MB[3B[3A[2K4996e33358ab: Download complete [3B[3A[2K4996e33358ab: Extracting [>                                                  ]  524.3kB/50.5MB[3B[3A[2K4996e33358ab: Extracting [==========>                                        ]  10.49MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [===================>                               ]  19.92MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [=========================>                         ]  26.21MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [==================================>                ]   34.6MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [=========================================>         ]  41.94MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [==============================================>    ]  46.66MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [===============================================>   ]  47.71MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [================================================>  ]  48.76MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [=================================================> ]  49.81MB/50.5MB[3B[3A[2K4996e33358ab: Extracting [==================================================>]   50.5MB/50.5MB[3B[3A[2K4996e33358ab: Pull complete [3B[2A[2Kf95897c2a1fb: Extracting [>                                                  ]  32.77kB/1.713MB[2B[2A[2Kf95897c2a1fb: Extracting [==================================================>]  1.713MB/1.713MB[2B[2A[2Kf95897c2a1fb: Pull complete [2B[1A[2Kc35748eaa5ec: Extracting [==================================================>]     450B/450B[1B[1A[2Kc35748eaa5ec: Extracting [==================================================>]     450B/450B[1B[1A[2Kc35748eaa5ec: Pull complete [1BDigest: sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+Status: Downloaded newer image for node:24.19.0-bookworm-slim
+ ---> 622f209f6c16
+Step 4/27 : WORKDIR /build
+ ---> Running in e6e66c1c3384
+ ---> Removed intermediate container e6e66c1c3384
+ ---> 05b6393957c5
+Step 5/27 : COPY . .
+ ---> 25ef1b67ef97
+Step 6/27 : RUN tar --exclude=./source.tar.gz -czf /source.tar.gz .
+ ---> Running in dcd3b8a64c49
+ ---> Removed intermediate container dcd3b8a64c49
+ ---> ec481806b7e6
+Step 7/27 : WORKDIR /build/xtend
+ ---> Running in e45ae7d51695
+ ---> Removed intermediate container e45ae7d51695
+ ---> 95fbceb3db37
+Step 8/27 : RUN npm install --global npm@11.17.0 && npm ci --ignore-scripts
+ ---> Running in 122571f1e09d
+
+changed 10 packages in 9s
+
+15 packages are looking for funding
+  run `npm fund` for details
+[91mnpm error code EUSAGE
+[0m[91mnpm error
+npm error The `npm ci` command can only install with an existing package-lock.json or
+npm error npm-shrinkwrap.json with lockfileVersion >= 1. Run an install with npm@5 or
+npm error later to generate a package-lock.json file, then try again.
+npm error
+npm error Clean install a project
+npm error
+npm error Usage:
+npm error npm ci
+npm error
+npm error Options:
+npm error [--install-strategy <hoisted|nested|shallow|linked>] [--legacy-bundling]
+npm error [--global-style] [--omit <dev|optional|peer> [--omit <dev|optional|peer> ...]]
+npm error [--include <prod|dev|optional|peer> [--include <prod|dev|optional|peer> ...]]
+npm error [--strict-peer-deps] [--foreground-scripts] [--ignore-scripts]
+npm error [--allow-directory <all|none|root>] [--allow-file <all|none|root>]
+npm error [--allow-git <all|none|root>] [--allow-remote <all|none|root>]
+npm error [--allow-scripts <package-list> [--allow-scripts <package-list> ...]]
+npm error [--strict-allow-scripts] [--dangerously-allow-all-scripts] [--no-audit]
+npm error [--no-bin-links] [--no-fund] [--dry-run]
+npm error [-w|--workspace <workspace-name> [-w|--workspace <workspace-name> ...]]
+npm error [--workspaces] [--include-workspace-root] [--install-links]
+npm error
+npm error   --install-strategy
+npm error     Sets the strategy for installing packages in node_modules.
+npm error
+npm error   --legacy-bundling
+npm error     Instead of hoisting package installs in `node_modules`, install packages
+npm error
+npm error   --global-style
+npm error     Only install direct dependencies in the top level `node_modules`,
+npm error
+npm error   --omit
+npm error     Dependency types to omit from the installation tree on disk.
+npm error
+npm error   --include
+npm error     Option that allows for defining which types of dependencies to install.
+npm error
+npm error   --strict-peer-deps
+npm error     If set to `true`, and `--legacy-peer-deps` is not set, then _any_
+npm error
+npm error   --foreground-scripts
+npm error     Run all build scripts (ie, `preinstall`, `install`, and
+npm error
+npm error   --ignore-scripts
+npm error     If true, npm does not run scripts specified in package.json files.
+npm error
+npm error   --allow-directory
+npm error     Limits the ability for npm to install dependencies from directories.
+npm error
+npm error   --allow-file
+npm error     Limits the ability for npm to install dependencies from tarball files.
+npm error
+npm error   --allow-git
+npm error     Limits the ability for npm to fetch dependencies from git references.
+npm error
+npm error   --allow-remote
+npm error     Limits the ability for npm to fetch dependencies from urls.
+npm error
+npm error   --allow-scripts
+npm error     Comma-separated list of packages whose install-time lifecycle scripts
+npm error
+npm error   --strict-allow-scripts
+npm error     If `true`, turn the install-script policy from a warning into a hard
+npm error
+npm error   --dangerously-allow-all-scripts
+npm error     If `true`, bypass the `allowScripts` policy entirely and run every
+npm error
+npm error   --audit
+npm error     When "true" submit audit reports alongside the current npm command to the
+npm error
+npm error   --bin-links
+npm error     Tells npm to create symlinks (or `.cmd` shims on Windows) for package
+npm error
+npm error   --fund
+npm error     When "true" displays the message at the end of each `npm install`
+npm error
+npm error   --dry-run
+npm error     Indicates that you don't want npm to make any changes and that it should
+npm error
+npm error   -w|--workspace
+npm error     Enable running a command in the context of the configured workspaces of the
+npm error
+npm error   --workspaces
+npm error     Set to true to run the command in the context of **all** configured
+npm error
+npm error   --include-workspace-root
+npm error     Include the workspace root when workspaces are enabled for a command.
+npm error
+npm error   --install-links
+npm error     When set file: protocol dependencies will be packed and installed as
+npm error
+npm error
+npm error aliases: clean-install, ic, install-clean, isntall-clean
+npm error
+npm error Run "npm help ci" for more info
+[0m[91mnpm error A complete log of this run can be found in: /root/.npm/_logs/2026-09-19T19_53_56_925Z-debug-0.log
+[0mThe command '/bin/sh -c npm install --global npm@11.17.0 && npm ci --ignore-scripts' returned a non-zero code: 1

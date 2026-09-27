@@ -1,0 +1,73 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "XTendRMT compile check completed with status syntax_error."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.rmt-compile-check.v1",
+      "sourceHash": "ae4f0a008702ffc92437109fd86b8659f097294ec7c771dcb23211f08cd2a214",
+      "path": "frontend/standalone.rmt",
+      "ok": false,
+      "status": "syntax_error",
+      "diagnostics": [
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after initial value.",
+          "range": {
+            "start": {
+              "line": 10,
+              "character": 71
+            },
+            "end": {
+              "line": 10,
+              "character": 80
+            },
+            "startOffset": 611,
+            "endOffset": 620
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after initial value.",
+          "range": {
+            "start": {
+              "line": 11,
+              "character": 71
+            },
+            "end": {
+              "line": 11,
+              "character": 75
+            },
+            "startOffset": 714,
+            "endOffset": 718
+          }
+        }
+      ],
+      "summary": {
+        "schema": "xtend.rmt.vnext-compiler.v1",
+        "mode": null,
+        "recordCount": null,
+        "outputCount": null
+      }
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "workspace://frontend/standalone.rmt",
+        "kind": "compile-check",
+        "sourceHash": "ae4f0a008702ffc92437109fd86b8659f097294ec7c771dcb23211f08cd2a214"
+      }
+    ]
+  }
+}

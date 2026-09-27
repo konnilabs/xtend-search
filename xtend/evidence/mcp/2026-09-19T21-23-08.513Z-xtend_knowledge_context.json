@@ -1,0 +1,85 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"RMT viewTemplate element key conditional image error state reconciliation\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "RMT viewTemplate element key conditional image error state reconciliation",
+      "locale": "all",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 3,
+      "domains": [],
+      "hitCount": 3,
+      "hits": [
+        {
+          "uri": "xtend://docs/de/rmt-action-effect-runtime",
+          "id": "de:rmt-action-effect-runtime:3",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "de",
+          "title": "RMT Action Effect Runtime",
+          "heading": "State- und Resource-Actions",
+          "score": 18,
+          "excerpt": "## State- und Resource-Actions\n\nState Updates sollten Target und typisierte Payload-Quelle benennen. Resource Queries sollten die Resource benennen und eine Owner Policy verlangen.\n\n```json\n{\n  \"actions\": [\n    {\n      \"id\": \"action.orders.refresh\",\n      \"kind\": \"resource-query\",\n      \"resource\": \"resource.orders\",\n      \"policy\": \"resource-owner-required\"\n    },\n    {\n      \"id\": \"action.orders.select\",\n      \"kind\": \"state-update\",\n      \"target\": \"state.orders.selection\",\n      \"payload\": \"$event.key\"\n    }\n  ]\n}\n```\n\nResources tragen eigene Loading- und Error-States. Templates können daher Loading-, Empty- und Error-Flächen rendern, ohne hostseitige Conditionals einzuführen.",
+          "sourceHash": "525d7ac17ebedd203150dcc3a511e5a6d4f9d1723136348d3eec6eff65575f3c",
+          "sourcePath": "docs/de/rmt-action-effect-runtime.md"
+        },
+        {
+          "uri": "xtend://docs/en/rmt-action-effect-runtime",
+          "id": "en:rmt-action-effect-runtime:3",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "RMT Action Effect Runtime",
+          "heading": "State And Resource Actions",
+          "score": 18,
+          "excerpt": "## State And Resource Actions\n\nState updates should name a target and a typed payload source. Resource queries should name the resource and require an owner policy.\n\n```json\n{\n  \"actions\": [\n    {\n      \"id\": \"action.orders.refresh\",\n      \"kind\": \"resource-query\",\n      \"resource\": \"resource.orders\",\n      \"policy\": \"resource-owner-required\"\n    },\n    {\n      \"id\": \"action.orders.select\",\n      \"kind\": \"state-update\",\n      \"target\": \"state.orders.selection\",\n      \"payload\": \"$event.key\"\n    }\n  ]\n}\n```\n\nResources carry their own loading and error state, so templates can render loading, empty and error surfaces without host-side conditionals.",
+          "sourceHash": "357c76898f880c1e9138a3313f154a46e73ce5a952a19508d748b267c9195e1d",
+          "sourcePath": "docs/en/rmt-action-effect-runtime.md"
+        },
+        {
+          "uri": "xtend://docs/de/learn-rmt-state-selectors",
+          "id": "de:learn-rmt-state-selectors:2",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "de",
+          "title": "State und Selectors",
+          "heading": "State Explizit Halten",
+          "score": 17,
+          "excerpt": "## State Explizit Halten\n\nNutze `state` für dauerhafte Template-Daten und `selector` für die Form, die eine Komponente konsumieren soll. Dadurch bleiben Renderverträge lesbar und Compiler-Diagnosen hilfreicher. Die vNext-Normalisierung in `tools/rmt-language/vnext-compiler.js` hält State- und Selector-Referenzen im Core-Dokument zusammen.\n\n```rmt\ntemplate learn.rmt.stateflow {\n  state dashboard.summary type object preserve {\n    initial {\n      id \"summary\"\n      title \"Orders\"\n      status \"ready\"\n    }\n  }\n\n  selector dashboard.summary from state dashboard.summary {\n    output DashboardSummary\n  }\n\n  surface dashboard.card kind card component x-status {\n    source selector dashboard.summary\n    key summary.id\n\n    lane visible weight 80 {\n      hydrate dashboard-card from selector dashboard.summary\n    }\n  }\n}\n```",
+          "sourceHash": "128889c9c1746a4d0c304ef101dddf5f6815bec974a14d70e9c9b76b4127ea30",
+          "sourcePath": "docs/de/learn-rmt-state-selectors.md"
+        }
+      ],
+      "maxChars": 7000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: RMT viewTemplate element key conditional image error state reconciliation\nLocales: all\nScopes: docs, rmt-kit\n\n[K1] RMT Action Effect Runtime — State- und Resource-Actions\nResource: xtend://docs/de/rmt-action-effect-runtime\nSource: docs/de/rmt-action-effect-runtime.md#sha256:525d7ac17ebedd203150dcc3a511e5a6d4f9d1723136348d3eec6eff65575f3c\n## State- und Resource-Actions\n\nState Updates sollten Target und typisierte Payload-Quelle benennen. Resource Queries sollten die Resource benennen und eine Owner Policy verlangen.\n\n```json\n{\n  \"actions\": [\n    {\n      \"id\": \"action.orders.refresh\",\n      \"kind\": \"resource-query\",\n      \"resource\": \"resource.orders\",\n      \"policy\": \"resource-owner-required\"\n    },\n    {\n      \"id\": \"action.orders.select\",\n      \"kind\": \"state-update\",\n      \"target\": \"state.orders.selection\",\n      \"payload\": \"$event.key\"\n    }\n  ]\n}\n```\n\nResources tragen eigene Loading- und Error-States. Templates können daher Loading-, Empty- und Error-Flächen rendern, ohne hostseitige Conditionals einzuführen.\n\n[K2] RMT Action Effect Runtime — State And Resource Actions\nResource: xtend://docs/en/rmt-action-effect-runtime\nSource: docs/en/rmt-action-effect-runtime.md#sha256:357c76898f880c1e9138a3313f154a46e73ce5a952a19508d748b267c9195e1d\n## State And Resource Actions\n\nState updates should name a target and a typed payload source. Resource queries should name the resource and require an owner policy.\n\n```json\n{\n  \"actions\": [\n    {\n      \"id\": \"action.orders.refresh\",\n      \"kind\": \"resource-query\",\n      \"resource\": \"resource.orders\",\n      \"policy\": \"resource-owner-required\"\n    },\n    {\n      \"id\": \"action.orders.select\",\n      \"kind\": \"state-update\",\n      \"target\": \"state.orders.selection\",\n      \"payload\": \"$event.key\"\n    }\n  ]\n}\n```\n\nResources carry their own loading and error state, so templates can render loading, empty and error surfaces without host-side conditionals.\n\n[K3] State und Selectors — State Explizit Halten\nResource: xtend://docs/de/learn-rmt-state-selectors\nSource: docs/de/learn-rmt-state-selectors.md#sha256:128889c9c1746a4d0c304ef101dddf5f6815bec974a14d70e9c9b76b4127ea30\n## State Explizit Halten\n\nNutze `state` für dauerhafte Template-Daten und `selector` für die Form, die eine Komponente konsumieren soll. Dadurch bleiben Renderverträge lesbar und Compiler-Diagnosen hilfreicher. Die vNext-Normalisierung in `tools/rmt-language/vnext-compiler.js` hält State- und Selector-Referenzen im Core-Dokument zusammen.\n\n```rmt\ntemplate learn.rmt.stateflow {\n  state dashboard.summary type object preserve {\n    initial {\n      id \"summary\"\n      title \"Orders\"\n      status \"ready\"\n    }\n  }\n\n  selector dashboard.summary from state dashboard.summary {\n    output DashboardSummary\n  }\n\n  surface dashboard.card kind card component x-status {\n    source selector dashboard.summary\n    key summary.id\n\n    lane visible weight 80 {\n      hydrate dashboard-card from selector dashboard.summary\n    }\n  }\n}\n```\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/de/rmt-action-effect-runtime",
+        "sourceHash": "525d7ac17ebedd203150dcc3a511e5a6d4f9d1723136348d3eec6eff65575f3c",
+        "sourcePath": "docs/de/rmt-action-effect-runtime.md"
+      },
+      {
+        "uri": "xtend://docs/en/rmt-action-effect-runtime",
+        "sourceHash": "357c76898f880c1e9138a3313f154a46e73ce5a952a19508d748b267c9195e1d",
+        "sourcePath": "docs/en/rmt-action-effect-runtime.md"
+      },
+      {
+        "uri": "xtend://docs/de/learn-rmt-state-selectors",
+        "sourceHash": "128889c9c1746a4d0c304ef101dddf5f6815bec974a14d70e9c9b76b4127ea30",
+        "sourcePath": "docs/de/learn-rmt-state-selectors.md"
+      }
+    ]
+  }
+}

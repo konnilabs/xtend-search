@@ -1,0 +1,8 @@
+# Replace the domain, run on the Linux host, keep the container bound to loopback.
+search.example.com {
+    reverse_proxy 127.0.0.1:8080
+    encode zstd gzip
+    # No access log is enabled: search terms appear in GET URLs.
+    # This MVP is private by default. Add authentication and a rate-limit policy
+    # before inviting untrusted users; configure the core limiter/Valkey if public.
+}

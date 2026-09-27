@@ -1,0 +1,6 @@
+{"target":"upstream","concurrency":1,"requests":30,"duration":2166.0392850000003,"requestsPerSecond":13.850164310385532,"p95":78.35505400000011,"errors":0}
+{"target":"upstream","concurrency":5,"requests":30,"duration":856.0341429999999,"requestsPerSecond":35.04533112997574,"p95":220.81120199999987,"errors":0}
+{"target":"upstream","concurrency":20,"requests":30,"duration":859.92695,"requestsPerSecond":34.88668427009992,"p95":546.3281420000003,"errors":0}
+{"target":"xtend","concurrency":1,"requests":30,"duration":3966.1068160000004,"requestsPerSecond":7.564092797242503,"p95":142.24734499999977,"errors":0}
+{"target":"xtend","concurrency":5,"requests":30,"duration":2422.937025,"requestsPerSecond":12.381667245354839,"p95":554.4083489999994,"errors":0}
+{"target":"xtend","concurrency":20,"requests":30,"duration":1957.4497570000003,"requestsPerSecond":15.32606387097168,"p95":1276.1585640000012,"errors":0}

@@ -1,0 +1,13 @@
+{
+  "meta": [
+    {
+      "id": 1,
+      "revision": 36,
+      "mode": "conservative"
+    }
+  ],
+  "policyCount": 14,
+  "policyHash": "af2dff78a12f3c8a0ed76174a976bfde1790236a66099ad5e3e7488d965bbe0f",
+  "guardCount": 22,
+  "guardHash": "901e5511a5219ae9993032e97a44ebaaec5f6d342f71937c8bad5c2aafe77e95"
+}

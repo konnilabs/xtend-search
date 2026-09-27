@@ -1,0 +1,37 @@
+{
+  "ok": true,
+  "version": "0.3.3",
+  "image": "sha256:6816700ba420ee04509e82a7a22d8efc4e40c2822505d7a86e3cad694c6395e1",
+  "unitTests": 48,
+  "mcpCompile": {
+    "search": "compiled"
+  },
+  "browser": {
+    "ok": true,
+    "checks": [
+      "Existing SVG and PNG favicons load. Settings is removed. A genuine lazy XDialog opens from both About links without changing the document, URL or query draft. Tab/Shift+Tab stay inside; Escape and backdrop return focus and scroll.",
+      "320/390/720px layouts, light/dark colors, internal scrolling and reduced motion work; the About link stays visible on mobile.",
+      "Direct German/English About pages retain favicon and readable sections. No-JS links and a failed lazy import fall back to the standalone page.",
+      "Login and authenticated Observatory retain both favicons. Search streaming continues behind the modal, then leaves all results available; dialog toggles preserve the resumed document and result set."
+    ]
+  },
+  "local": {
+    "ok": true,
+    "health": {
+      "ok": true,
+      "version": "0.3.3",
+      "storage": "ready",
+      "retrieval": "compatible"
+    },
+    "header": "0.3.3",
+    "faviconCount": 2,
+    "dialog": true
+  },
+  "existingPoliciesUnchanged": true,
+  "composeValidation": true,
+  "archiveBytes": 261248704,
+  "backend": "xtend-search-searxng:0.3.0",
+  "liveProviderTest": false,
+  "archiveChecksumVerified": true,
+  "archiveLoadVerified": true
+}

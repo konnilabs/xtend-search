@@ -1,0 +1,30 @@
+{
+  "timestamp": "2026-09-19T20:08:55.321Z",
+  "base": "http://127.0.0.1:8080",
+  "query": "open web standards",
+  "state": {
+    "fixture": false,
+    "count": 37,
+    "warnings": [
+      {
+        "id": "engine-0",
+        "message": "Eine Suchquelle antwortet derzeit nicht: duckduckgo"
+      },
+      {
+        "id": "engine-1",
+        "message": "Eine Suchquelle antwortet derzeit nicht: wikidata"
+      }
+    ],
+    "sameDocument": true,
+    "status": "resumed"
+  },
+  "images": {
+    "count": 96,
+    "thumbnails": 96,
+    "proxied": true
+  },
+  "errors": [],
+  "externalBrowserRequests": 0,
+  "health": 200,
+  "sourceDownload": 200
+}

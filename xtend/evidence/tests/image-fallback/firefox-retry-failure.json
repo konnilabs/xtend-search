@@ -1,0 +1,465 @@
+{
+  "attempt": 0,
+  "requests": [
+    "http://127.0.0.1:8093/search?q=media&categories=images",
+    "http://127.0.0.1:8093/assets/xtend/search.css",
+    "http://127.0.0.1:8093/assets/xtend/page.mjs",
+    "http://127.0.0.1:8093/assets/xtend/mark.svg",
+    "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-0.png&h=3682683fbe666a6df60df2ee1810df40a5fbaffdb8ea52c2f43c8b4898061ce8",
+    "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-1.png&h=b60f333930204e80f293ee16e952a56b71b302ac7898d4c954b1ec1ee4140cc8",
+    "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-2.png&h=d455530ad7aa9eda3a8e619cc2bcbeaa48b8d997cb36bf2709268bdc7d214ef7",
+    "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-3.png&h=60fcd7a59ad532e6759607c9f450f3c6bf44e271b751560b1b4c613f4350ee67",
+    "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-4.png&h=194847ef7a6e8cc8b1069414bf4cfa810b48d915bf23f2b9160cd1d8f9506b36",
+    "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-5.png&h=77044897b5b33199c82d90ecd23be46391dfa9b17778c2a3cfd2651ef566de91",
+    "http://127.0.0.1:8093/assets/xtend/chunks/chunk-HDGUSJ7J.mjs",
+    "http://127.0.0.1:8093/assets/xtend/chunks/chunk-6GSD2375.mjs",
+    "http://127.0.0.1:8093/assets/xtend/chunks/chunk-X7CY6JUH.mjs",
+    "http://127.0.0.1:8093/assets/xtend/resume-key.mjs",
+    "http://127.0.0.1:8093/assets/xtend/chunks/page-client-OWOAGYRG.mjs",
+    "http://127.0.0.1:8093/assets/xtend/mark.svg",
+    "http://127.0.0.1:8093/assets/xtend/maraca/xtend.maraca.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/xtendrmt-kernel-orchestration-controller.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/xtendrmt-runtime.esm.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/xtend-maraca-plan-runtime.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/xtend-maraca-browser-composition-runtime.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/rmt-kernel-scheduler.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/browser-host-adapter.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/abort-boundary.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/fastpass.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/fastpass-contract.js",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/rmt-resume-runtime.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/rmt-resume-protocol.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/rmt-resume-capture-adapter.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/rmt-resume-host-adapter.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/rmt-resume-command-adapter.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/runtime/rmt-resume-command-controller.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/xtend.maraca.css",
+    "http://127.0.0.1:8093/assets/xtend/maraca/chunks/x-alert-BpyFLeVW.mjs",
+    "http://127.0.0.1:8093/assets/xtend/maraca/chunks/x-section-XRXdoACj.mjs",
+    "http://127.0.0.1:8093/assets/xtend/image-placeholder.svg",
+    "http://127.0.0.1:8093/search?q=media&categories=images&language=all&time_range=&safesearch=1",
+    "http://127.0.0.1:8093/assets/xtend/search-remote-adapter.mjs?xscaler-session=search%3A13a5ce9f-549d-4eff-b955-c6f634da1038",
+    "http://127.0.0.1:8093/api/xtend/services/search.results",
+    "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-1.png&h=b60f333930204e80f293ee16e952a56b71b302ac7898d4c954b1ec1ee4140cc8"
+  ],
+  "errors": [],
+  "state": {
+    "data": {
+      "q": "media",
+      "category": "images",
+      "language": "all",
+      "timeRange": "",
+      "safeSearch": "1",
+      "page": 1,
+      "skeleton": false,
+      "stream": {
+        "id": "13a5ce9f-549d-4eff-b955-c6f634da1038",
+        "url": "/search?q=media&categories=images&language=all&time_range=&safesearch=1",
+        "phase": "complete"
+      },
+      "view": "results",
+      "isSearch": true,
+      "results": [
+        {
+          "id": "39c78fe3720ffce185b5e496",
+          "url": "https://example.org/gallery/0",
+          "title": "Landschaft 1 — offene Bildsammlung",
+          "displayUrl": "example.org/gallery/0",
+          "snippetText": "Ein reproduzierbares Testmotiv für die Bildvorschau.",
+          "initial": "E",
+          "sourceLabel": "xtend fixture",
+          "thumbnail": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-0.png&h=3682683fbe666a6df60df2ee1810df40a5fbaffdb8ea52c2f43c8b4898061ce8",
+          "thumbnailKey": "549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-0.png&h=3682683fbe666a6df60df2ee1810df40a5fbaffdb8ea52c2f43c8b4898061ce8",
+          "thumbnailAlt": "Landschaft 1 — offene Bildsammlung",
+          "thumbnailFailed": false,
+          "imageUrl": "https://images.example.test/original-0.png",
+          "previewSrc": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Foriginal-0.png&h=80d7a9d591b3922491e66be52e1f36ba1b3c8f1da42a9c3d4ffd60a9833ea82a",
+          "previewId": "39c78fe3720ffce185b5e496",
+          "previewHref": "https://images.example.test/original-0.png",
+          "previewLabel": "Bildvorschau: Landschaft 1 — offene Bildsammlung",
+          "metadata": [
+            {
+              "id": "0",
+              "label": "Auflösung",
+              "value": "1600 × 1000"
+            },
+            {
+              "id": "1",
+              "label": "Format",
+              "value": "PNG"
+            },
+            {
+              "id": "2",
+              "label": "Dateigröße",
+              "value": "240 KB"
+            },
+            {
+              "id": "3",
+              "label": "Urheber",
+              "value": "XTend Testsammlung"
+            },
+            {
+              "id": "4",
+              "label": "Suchquellen",
+              "value": "xtend fixture"
+            }
+          ],
+          "formats": [
+            {
+              "id": "0",
+              "url": "https://images.example.test/original-0.webp",
+              "label": "WebP"
+            }
+          ],
+          "resolution": "1600 × 1000"
+        },
+        {
+          "id": "e66b98c34a2d2f02d0da8d69",
+          "url": "https://example.org/gallery/0",
+          "title": "Landschaft 2 — offene Bildsammlung",
+          "displayUrl": "example.org/gallery/0",
+          "snippetText": "Ein reproduzierbares Testmotiv für die Bildvorschau.",
+          "initial": "E",
+          "sourceLabel": "xtend fixture",
+          "thumbnail": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-1.png&h=b60f333930204e80f293ee16e952a56b71b302ac7898d4c954b1ec1ee4140cc8",
+          "thumbnailKey": "549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-1.png&h=b60f333930204e80f293ee16e952a56b71b302ac7898d4c954b1ec1ee4140cc8",
+          "thumbnailAlt": "Landschaft 2 — offene Bildsammlung",
+          "thumbnailFailed": false,
+          "imageUrl": "https://images.example.test/original-1.png",
+          "previewSrc": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Foriginal-1.png&h=b111de08911c8c658f4031ba12da5f3388b99dacfe7428f8cfb7ff5922bbbaf8",
+          "previewId": "e66b98c34a2d2f02d0da8d69",
+          "previewHref": "https://images.example.test/original-1.png",
+          "previewLabel": "Bildvorschau: Landschaft 2 — offene Bildsammlung",
+          "metadata": [
+            {
+              "id": "0",
+              "label": "Auflösung",
+              "value": "1600 × 1000"
+            },
+            {
+              "id": "1",
+              "label": "Format",
+              "value": "PNG"
+            },
+            {
+              "id": "2",
+              "label": "Dateigröße",
+              "value": "240 KB"
+            },
+            {
+              "id": "3",
+              "label": "Urheber",
+              "value": "XTend Testsammlung"
+            },
+            {
+              "id": "4",
+              "label": "Suchquellen",
+              "value": "xtend fixture"
+            }
+          ],
+          "formats": [
+            {
+              "id": "0",
+              "url": "https://images.example.test/original-1.webp",
+              "label": "WebP"
+            }
+          ],
+          "resolution": "1600 × 1000"
+        },
+        {
+          "id": "14eb4ec09ae3d05aa9b676f8",
+          "url": "https://example.org/gallery/1",
+          "title": "Landschaft 3 — offene Bildsammlung",
+          "displayUrl": "example.org/gallery/1",
+          "snippetText": "Ein reproduzierbares Testmotiv für die Bildvorschau.",
+          "initial": "E",
+          "sourceLabel": "xtend fixture",
+          "thumbnail": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-2.png&h=d455530ad7aa9eda3a8e619cc2bcbeaa48b8d997cb36bf2709268bdc7d214ef7",
+          "thumbnailKey": "549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-2.png&h=d455530ad7aa9eda3a8e619cc2bcbeaa48b8d997cb36bf2709268bdc7d214ef7",
+          "thumbnailAlt": "Landschaft 3 — offene Bildsammlung",
+          "thumbnailFailed": false,
+          "imageUrl": "https://images.example.test/original-2.png",
+          "previewSrc": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Foriginal-2.png&h=d44149a7673b3e72e240792d3ef312ff20ed168ef8800d4676186a0f97176173",
+          "previewId": "14eb4ec09ae3d05aa9b676f8",
+          "previewHref": "https://images.example.test/original-2.png",
+          "previewLabel": "Bildvorschau: Landschaft 3 — offene Bildsammlung",
+          "metadata": [
+            {
+              "id": "0",
+              "label": "Auflösung",
+              "value": "1600 × 1000"
+            },
+            {
+              "id": "1",
+              "label": "Format",
+              "value": "PNG"
+            },
+            {
+              "id": "2",
+              "label": "Dateigröße",
+              "value": "240 KB"
+            },
+            {
+              "id": "3",
+              "label": "Urheber",
+              "value": "XTend Testsammlung"
+            },
+            {
+              "id": "4",
+              "label": "Suchquellen",
+              "value": "xtend fixture"
+            }
+          ],
+          "formats": [
+            {
+              "id": "0",
+              "url": "https://images.example.test/original-2.webp",
+              "label": "WebP"
+            }
+          ],
+          "resolution": "1600 × 1000"
+        },
+        {
+          "id": "e559bea2cdf3303671866c68",
+          "url": "https://example.org/gallery/1",
+          "title": "Landschaft 4 — offene Bildsammlung",
+          "displayUrl": "example.org/gallery/1",
+          "snippetText": "Ein reproduzierbares Testmotiv für die Bildvorschau.",
+          "initial": "E",
+          "sourceLabel": "xtend fixture",
+          "thumbnail": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-3.png&h=60fcd7a59ad532e6759607c9f450f3c6bf44e271b751560b1b4c613f4350ee67",
+          "thumbnailKey": "549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-3.png&h=60fcd7a59ad532e6759607c9f450f3c6bf44e271b751560b1b4c613f4350ee67",
+          "thumbnailAlt": "Landschaft 4 — offene Bildsammlung",
+          "thumbnailFailed": false,
+          "imageUrl": "https://images.example.test/original-3.png",
+          "previewSrc": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Foriginal-3.png&h=198314b25c3a02f109b6ffe6842082711d2ef86612cdb26ac27ecfb6bb1d7106",
+          "previewId": "e559bea2cdf3303671866c68",
+          "previewHref": "https://images.example.test/original-3.png",
+          "previewLabel": "Bildvorschau: Landschaft 4 — offene Bildsammlung",
+          "metadata": [
+            {
+              "id": "0",
+              "label": "Auflösung",
+              "value": "1600 × 1000"
+            },
+            {
+              "id": "1",
+              "label": "Format",
+              "value": "PNG"
+            },
+            {
+              "id": "2",
+              "label": "Dateigröße",
+              "value": "240 KB"
+            },
+            {
+              "id": "3",
+              "label": "Urheber",
+              "value": "XTend Testsammlung"
+            },
+            {
+              "id": "4",
+              "label": "Suchquellen",
+              "value": "xtend fixture"
+            }
+          ],
+          "formats": [
+            {
+              "id": "0",
+              "url": "https://images.example.test/original-3.webp",
+              "label": "WebP"
+            }
+          ],
+          "resolution": "1600 × 1000"
+        },
+        {
+          "id": "1876772019d48195bed83701",
+          "url": "https://example.org/gallery/2",
+          "title": "Landschaft 5 — offene Bildsammlung",
+          "displayUrl": "example.org/gallery/2",
+          "snippetText": "Ein reproduzierbares Testmotiv für die Bildvorschau.",
+          "initial": "E",
+          "sourceLabel": "xtend fixture",
+          "thumbnail": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-4.png&h=194847ef7a6e8cc8b1069414bf4cfa810b48d915bf23f2b9160cd1d8f9506b36",
+          "thumbnailKey": "549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-4.png&h=194847ef7a6e8cc8b1069414bf4cfa810b48d915bf23f2b9160cd1d8f9506b36",
+          "thumbnailAlt": "Landschaft 5 — offene Bildsammlung",
+          "thumbnailFailed": false,
+          "imageUrl": "https://images.example.test/original-4.png",
+          "previewSrc": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Foriginal-4.png&h=d602b5b01a28e42f72a935bf4055ab091e13c2deb02a5b6bcd4d433c72b60b3e",
+          "previewId": "1876772019d48195bed83701",
+          "previewHref": "https://images.example.test/original-4.png",
+          "previewLabel": "Bildvorschau: Landschaft 5 — offene Bildsammlung",
+          "metadata": [
+            {
+              "id": "0",
+              "label": "Auflösung",
+              "value": "1600 × 1000"
+            },
+            {
+              "id": "1",
+              "label": "Format",
+              "value": "PNG"
+            },
+            {
+              "id": "2",
+              "label": "Dateigröße",
+              "value": "240 KB"
+            },
+            {
+              "id": "3",
+              "label": "Urheber",
+              "value": "XTend Testsammlung"
+            },
+            {
+              "id": "4",
+              "label": "Suchquellen",
+              "value": "xtend fixture"
+            }
+          ],
+          "formats": [
+            {
+              "id": "0",
+              "url": "https://images.example.test/original-4.webp",
+              "label": "WebP"
+            }
+          ],
+          "resolution": "1600 × 1000"
+        },
+        {
+          "id": "00cd94844b4fc9ee852989bb",
+          "url": "https://example.org/gallery/2",
+          "title": "Landschaft 6 — offene Bildsammlung",
+          "displayUrl": "example.org/gallery/2",
+          "snippetText": "Ein reproduzierbares Testmotiv für die Bildvorschau.",
+          "initial": "E",
+          "sourceLabel": "xtend fixture",
+          "thumbnail": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-5.png&h=77044897b5b33199c82d90ecd23be46391dfa9b17778c2a3cfd2651ef566de91",
+          "thumbnailKey": "549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-5.png&h=77044897b5b33199c82d90ecd23be46391dfa9b17778c2a3cfd2651ef566de91",
+          "thumbnailAlt": "Landschaft 6 — offene Bildsammlung",
+          "thumbnailFailed": false,
+          "imageUrl": "https://images.example.test/original-5.png",
+          "previewSrc": "/image_proxy?url=https%3A%2F%2Fimages.example.test%2Foriginal-5.png&h=99278259ca4b886032160ce35b7dff7f7a0ce650a0ba42f450759d61502fd578",
+          "previewId": "00cd94844b4fc9ee852989bb",
+          "previewHref": "https://images.example.test/original-5.png",
+          "previewLabel": "Bildvorschau: Landschaft 6 — offene Bildsammlung",
+          "metadata": [
+            {
+              "id": "0",
+              "label": "Auflösung",
+              "value": "1600 × 1000"
+            },
+            {
+              "id": "1",
+              "label": "Format",
+              "value": "PNG"
+            },
+            {
+              "id": "2",
+              "label": "Dateigröße",
+              "value": "240 KB"
+            },
+            {
+              "id": "3",
+              "label": "Urheber",
+              "value": "XTend Testsammlung"
+            },
+            {
+              "id": "4",
+              "label": "Suchquellen",
+              "value": "xtend fixture"
+            }
+          ],
+          "formats": [
+            {
+              "id": "0",
+              "url": "https://images.example.test/original-5.webp",
+              "label": "WebP"
+            }
+          ],
+          "resolution": "1600 × 1000"
+        }
+      ],
+      "knowledgeCards": [],
+      "hasKnowledge": false,
+      "warnings": [],
+      "pages": [
+        {
+          "id": "next",
+          "label": "Nächste Seite →",
+          "url": "/search?q=media&categories=images&language=all&time_range=&safesearch=1&pageno=2",
+          "rel": "next"
+        }
+      ],
+      "tabs": [
+        {
+          "id": "general",
+          "label": "Web",
+          "url": "/search?q=media&categories=general&language=all&time_range=&safesearch=1",
+          "className": "tab",
+          "current": "false"
+        },
+        {
+          "id": "images",
+          "label": "Bilder",
+          "url": "/search?q=media&categories=images&language=all&time_range=&safesearch=1",
+          "className": "tab active",
+          "current": "page"
+        }
+      ],
+      "countLabel": "6 Ergebnisse auf dieser Seite",
+      "pageLabel": "Seite 1",
+      "empty": false,
+      "error": false,
+      "errorMessage": "",
+      "fixture": true,
+      "listClass": "image-results",
+      "classicUrl": "/classic/search?q=media&categories=images&language=all&time_range=&safesearch=1",
+      "state": {
+        "q": "media",
+        "category": "images",
+        "language": "all",
+        "timeRange": "",
+        "safeSearch": "1",
+        "page": 1
+      }
+    },
+    "images": [
+      {
+        "html": "<a href=\"https://images.example.test/original-0.png\" data-preview-id=\"39c78fe3720ffce185b5e496\" aria-label=\"Bildvorschau: Landschaft 1 — offene Bildsammlung\" data-xtend-native=\"\" rel=\"noreferrer\" class=\"result-image\" data-unavailable=\"\"><img data-rmt-key=\"549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-0.png&amp;h=3682683fbe666a6df60df2ee1810df40a5fbaffdb8ea52c2f43c8b4898061ce8:unavailable\" src=\"/assets/xtend/image-placeholder.svg\" alt=\"Bild nicht verfügbar\" data-result-image=\"39c78fe3720ffce185b5e496\" loading=\"lazy\" width=\"360\" height=\"220\" referrerpolicy=\"no-referrer\"><span class=\"image-dimensions\">1600 × 1000</span></a>",
+        "width": 480,
+        "complete": true,
+        "currentSrc": "http://127.0.0.1:8093/assets/xtend/image-placeholder.svg"
+      },
+      {
+        "html": "<a href=\"https://images.example.test/original-1.png\" data-preview-id=\"e66b98c34a2d2f02d0da8d69\" aria-label=\"Bildvorschau: Landschaft 2 — offene Bildsammlung\" data-xtend-native=\"\" rel=\"noreferrer\" class=\"result-image\"><img data-rmt-key=\"549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-1.png&amp;h=b60f333930204e80f293ee16e952a56b71b302ac7898d4c954b1ec1ee4140cc8\" src=\"/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-1.png&amp;h=b60f333930204e80f293ee16e952a56b71b302ac7898d4c954b1ec1ee4140cc8\" alt=\"Landschaft 2 — offene Bildsammlung\" data-result-image=\"e66b98c34a2d2f02d0da8d69\" loading=\"lazy\" width=\"360\" height=\"220\" referrerpolicy=\"no-referrer\"><span class=\"image-dimensions\">1600 × 1000</span></a>",
+        "width": 800,
+        "complete": true,
+        "currentSrc": "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-1.png&h=b60f333930204e80f293ee16e952a56b71b302ac7898d4c954b1ec1ee4140cc8"
+      },
+      {
+        "html": "<a href=\"https://images.example.test/original-2.png\" data-preview-id=\"14eb4ec09ae3d05aa9b676f8\" aria-label=\"Bildvorschau: Landschaft 3 — offene Bildsammlung\" data-xtend-native=\"\" rel=\"noreferrer\" class=\"result-image\"><img data-rmt-key=\"549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-2.png&amp;h=d455530ad7aa9eda3a8e619cc2bcbeaa48b8d997cb36bf2709268bdc7d214ef7\" src=\"/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-2.png&amp;h=d455530ad7aa9eda3a8e619cc2bcbeaa48b8d997cb36bf2709268bdc7d214ef7\" alt=\"Landschaft 3 — offene Bildsammlung\" data-result-image=\"14eb4ec09ae3d05aa9b676f8\" loading=\"lazy\" width=\"360\" height=\"220\" referrerpolicy=\"no-referrer\"><span class=\"image-dimensions\">1600 × 1000</span></a>",
+        "width": 800,
+        "complete": true,
+        "currentSrc": "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-2.png&h=d455530ad7aa9eda3a8e619cc2bcbeaa48b8d997cb36bf2709268bdc7d214ef7"
+      },
+      {
+        "html": "<a href=\"https://images.example.test/original-3.png\" data-preview-id=\"e559bea2cdf3303671866c68\" aria-label=\"Bildvorschau: Landschaft 4 — offene Bildsammlung\" data-xtend-native=\"\" rel=\"noreferrer\" class=\"result-image\"><img data-rmt-key=\"549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-3.png&amp;h=60fcd7a59ad532e6759607c9f450f3c6bf44e271b751560b1b4c613f4350ee67\" src=\"/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-3.png&amp;h=60fcd7a59ad532e6759607c9f450f3c6bf44e271b751560b1b4c613f4350ee67\" alt=\"Landschaft 4 — offene Bildsammlung\" data-result-image=\"e559bea2cdf3303671866c68\" loading=\"lazy\" width=\"360\" height=\"220\" referrerpolicy=\"no-referrer\"><span class=\"image-dimensions\">1600 × 1000</span></a>",
+        "width": 800,
+        "complete": true,
+        "currentSrc": "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-3.png&h=60fcd7a59ad532e6759607c9f450f3c6bf44e271b751560b1b4c613f4350ee67"
+      },
+      {
+        "html": "<a href=\"https://images.example.test/original-4.png\" data-preview-id=\"1876772019d48195bed83701\" aria-label=\"Bildvorschau: Landschaft 5 — offene Bildsammlung\" data-xtend-native=\"\" rel=\"noreferrer\" class=\"result-image\"><img data-rmt-key=\"549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-4.png&amp;h=194847ef7a6e8cc8b1069414bf4cfa810b48d915bf23f2b9160cd1d8f9506b36\" src=\"/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-4.png&amp;h=194847ef7a6e8cc8b1069414bf4cfa810b48d915bf23f2b9160cd1d8f9506b36\" alt=\"Landschaft 5 — offene Bildsammlung\" data-result-image=\"1876772019d48195bed83701\" loading=\"lazy\" width=\"360\" height=\"220\" referrerpolicy=\"no-referrer\"><span class=\"image-dimensions\">1600 × 1000</span></a>",
+        "width": 800,
+        "complete": true,
+        "currentSrc": "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-4.png&h=194847ef7a6e8cc8b1069414bf4cfa810b48d915bf23f2b9160cd1d8f9506b36"
+      },
+      {
+        "html": "<a href=\"https://images.example.test/original-5.png\" data-preview-id=\"00cd94844b4fc9ee852989bb\" aria-label=\"Bildvorschau: Landschaft 6 — offene Bildsammlung\" data-xtend-native=\"\" rel=\"noreferrer\" class=\"result-image\"><img data-rmt-key=\"549596ba-a849-4d66-b219-1642688e8c90:/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-5.png&amp;h=77044897b5b33199c82d90ecd23be46391dfa9b17778c2a3cfd2651ef566de91\" src=\"/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-5.png&amp;h=77044897b5b33199c82d90ecd23be46391dfa9b17778c2a3cfd2651ef566de91\" alt=\"Landschaft 6 — offene Bildsammlung\" data-result-image=\"00cd94844b4fc9ee852989bb\" loading=\"lazy\" width=\"360\" height=\"220\" referrerpolicy=\"no-referrer\"><span class=\"image-dimensions\">1600 × 1000</span></a>",
+        "width": 800,
+        "complete": true,
+        "currentSrc": "http://127.0.0.1:8093/image_proxy?url=https%3A%2F%2Fimages.example.test%2Fthumb-5.png&h=77044897b5b33199c82d90ecd23be46391dfa9b17778c2a3cfd2651ef566de91"
+      }
+    ]
+  }
+}

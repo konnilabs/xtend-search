@@ -1,0 +1,1 @@
+{"schema":"xtend.page-build.v1","target":"node","assets":{"entry":"/assets/xtend/admin/page.mjs","css":["/assets/xtend/admin/admin.css"]},"assetRoot":"public","pages":{"Admin":{"source":"admin/admin.rmt","inputs":["admin.data","admin.live"],"maraca":{"entry":"/assets/xtend/admin/maraca/xtend.maraca.mjs"}}}}

@@ -1,0 +1,17 @@
+{"name":"chromium: signed resume, persistent shell, navigation, filters, history","status":"passed","ms":2059}
+{"name":"chromium: newer search wins, draft survives in-flight request","status":"passed","ms":2430}
+{"name":"chromium: empty state and engine error","status":"passed","ms":768}
+{"name":"chromium: no JavaScript search, filters, paging and branding","status":"passed","ms":1005}
+{"name":"chromium: mobile layout","status":"passed","ms":609}
+{"name":"chromium: rejected signature falls back once","status":"passed","ms":581}
+{"name":"chromium: early input is replayed and untrusted text stays text","status":"passed","ms":1107}
+{"name":"chromium: missing JavaScript keeps native form working","status":"passed","ms":300}
+{"name":"firefox: signed resume, persistent shell, navigation, filters, history","status":"passed","ms":3522}
+{"name":"firefox: newer search wins, draft survives in-flight request","status":"passed","ms":2878}
+{"name":"firefox: empty state and engine error","status":"passed","ms":1148}
+{"name":"firefox: no JavaScript search, filters, paging and branding","status":"passed","ms":1242}
+{"name":"firefox: mobile layout","status":"passed","ms":968}
+{"name":"firefox: rejected signature falls back once","status":"passed","ms":877}
+{"name":"firefox: early input is replayed and untrusted text stays text","status":"passed","ms":1479}
+{"name":"firefox: missing JavaScript keeps native form working","status":"passed","ms":532}
+{"name":"security: private routes and JSON are inaccessible","status":"passed","ms":37}

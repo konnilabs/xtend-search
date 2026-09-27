@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-09-19T21:15:23.337Z",
+  "base": "http://127.0.0.1:8090",
+  "note": "Explicit offline Python fixture; media alerts returns 101 results, error raises the fixture engine failure. Image responses use synthetic SVGs. Container assets without overrides.",
+  "results": [
+    {
+      "name": "chromium: real Classic XAlert, no autofocus, no timer, keyboard dismissal and focus",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: dismissed hint stays hidden through preview, full-screen carousel and filter edits",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: new response, same-query submit and history restore notices",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: engine warning can close while failure guidance remains",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: dark/light and narrow layout",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: unavailable Maraca component leaves SSR warnings and native search",
+      "status": "failed",
+      "error": "page.waitForURL: Timeout 10000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n    at /home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:51:115\n    at async check (/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:6:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:49:2"
+    },
+    {
+      "name": "chromium: no-JS SSR keeps both kinds readable without false close controls",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: real Classic XAlert, no autofocus, no timer, keyboard dismissal and focus",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: dismissed hint stays hidden through preview, full-screen carousel and filter edits",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: new response, same-query submit and history restore notices",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: engine warning can close while failure guidance remains",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: dark/light and narrow layout",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: unavailable Maraca component leaves SSR warnings and native search",
+      "status": "failed",
+      "error": "page.waitForURL: Timeout 10000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n    at /home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:51:115\n    at async check (/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:6:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/alerts.mjs:49:2"
+    },
+    {
+      "name": "firefox: no-JS SSR keeps both kinds readable without false close controls",
+      "status": "passed"
+    }
+  ]
+}

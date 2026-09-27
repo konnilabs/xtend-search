@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-09-19T20:44:02.431Z",
+  "base": "http://127.0.0.1:8090",
+  "note": "Offline SearXNG fixture; image-proxy responses replaced with deterministic SVGs. Real Python contract, Maraca SSR and signed resume.",
+  "results": [
+    {
+      "name": "chromium: knowledge, sources, facts, history, dark mode",
+      "status": "passed",
+      "ms": 1588
+    },
+    {
+      "name": "chromium: lazy panel, metadata, keyboard, boundaries, focus",
+      "status": "passed",
+      "ms": 1218
+    },
+    {
+      "name": "chromium: navigation clears preview",
+      "status": "passed",
+      "ms": 1711
+    },
+    {
+      "name": "chromium: image error fallback",
+      "status": "passed",
+      "ms": 1119
+    },
+    {
+      "name": "chromium: responsive 390px",
+      "status": "passed",
+      "ms": 1245
+    },
+    {
+      "name": "chromium: responsive 900px",
+      "status": "passed",
+      "ms": 1410
+    },
+    {
+      "name": "chromium: no-JS cards and native image links",
+      "status": "passed",
+      "ms": 432
+    },
+    {
+      "name": "firefox: knowledge, sources, facts, history, dark mode",
+      "status": "passed",
+      "ms": 2682
+    },
+    {
+      "name": "firefox: lazy panel, metadata, keyboard, boundaries, focus",
+      "status": "passed",
+      "ms": 1583
+    },
+    {
+      "name": "firefox: navigation clears preview",
+      "status": "passed",
+      "ms": 2292
+    },
+    {
+      "name": "firefox: image error fallback",
+      "status": "passed",
+      "ms": 1704
+    },
+    {
+      "name": "firefox: responsive 390px",
+      "status": "passed",
+      "ms": 1667
+    },
+    {
+      "name": "firefox: responsive 900px",
+      "status": "passed",
+      "ms": 1680
+    },
+    {
+      "name": "firefox: no-JS cards and native image links",
+      "status": "passed",
+      "ms": 716
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-09-20T00:35:23.953Z",
+  "checks": [
+    {
+      "name": "cross-origin rejected",
+      "status": 403
+    },
+    {
+      "name": "non-JSON rejected",
+      "status": 405
+    },
+    {
+      "name": "public core JSON stays unavailable",
+      "status": 403
+    },
+    {
+      "name": "disabled streaming endpoint",
+      "status": 404
+    },
+    {
+      "name": "XTEND_STREAMING=0 keeps complete conventional SPA response",
+      "results": 6
+    }
+  ]
+}

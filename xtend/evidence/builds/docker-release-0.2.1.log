@@ -1,0 +1,118 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  76.63MB
+Step 1/29 : ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+Step 2/29 : ARG PYTHON_IMAGE=python:3.12-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
+Step 3/29 : FROM ${NODE_IMAGE} AS frontend
+ ---> 622f209f6c16
+Step 4/29 : WORKDIR /build/xtend
+ ---> Using cache
+ ---> 4a54a32a878f
+Step 5/29 : COPY xtend/package.json xtend/package-lock.json ./
+ ---> ae0f3e142cad
+Step 6/29 : COPY xtend/vendor-inputs ./vendor-inputs
+ ---> dfe48855f34f
+Step 7/29 : RUN npm install --global npm@11.17.0 && npm ci --ignore-scripts
+ ---> Running in 70be7b493682
+
+changed 10 packages in 10s
+
+15 packages are looking for funding
+  run `npm fund` for details
+
+added 20 packages, and audited 21 packages in 3s
+
+found 0 vulnerabilities
+[91mnpm notice
+npm notice New major version of npm available! 11.17.0 -> 12.0.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+npm notice To update run: npm install -g npm@12.0.2
+npm notice
+[0m ---> Removed intermediate container 70be7b493682
+ ---> b555b6aa6e25
+Step 8/29 : WORKDIR /build
+ ---> Running in d46dbcdd1935
+ ---> Removed intermediate container d46dbcdd1935
+ ---> 5aa086641222
+Step 9/29 : COPY . .
+ ---> 00c2ba9c0c69
+Step 10/29 : RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.tar.gz .
+ ---> Running in 9c75795efeae
+ ---> Removed intermediate container 9c75795efeae
+ ---> f3bc97031023
+Step 11/29 : WORKDIR /build/xtend
+ ---> Running in 26f1d6a8456e
+ ---> Removed intermediate container 26f1d6a8456e
+ ---> f6e7de7decca
+Step 12/29 : RUN npm run build && npm prune --omit=dev --ignore-scripts
+ ---> Running in a929fd0d9bfe
+
+> xtend-search@0.2.1 build
+> node scripts/build.cjs
+
+{"ok":true,"node":"v24.19.0","version":"0c85faf3af38eee49c95835a183978dac6f5392fb4d63fb6232a64c4660d649d","sourceSha256":"2dd22e872959e114819a09154dc2edaa9c7a2e3afd56b47028bf58f7e458a8cc","compilation":{"compilations":1,"hits":1,"documents":1}}
+
+removed 19 packages, and audited 2 packages in 7s
+
+found 0 vulnerabilities
+ ---> Removed intermediate container a929fd0d9bfe
+ ---> e383fc072201
+Step 13/29 : FROM ${PYTHON_IMAGE} AS runtime
+ ---> febd0be41adb
+Step 14/29 : ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1     BIND_HOST=0.0.0.0 PORT=8080 XTEND_SECRET_DIR=/var/lib/xtend-search     SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.yml     SEARXNG_URL=http://localhost:8080/ XTEND_PYTHON=/usr/local/bin/python
+ ---> Using cache
+ ---> 50123adf30c2
+Step 15/29 : WORKDIR /app
+ ---> Using cache
+ ---> b384220990df
+Step 16/29 : RUN apt-get update && apt-get install -y --no-install-recommends tini libstdc++6 ca-certificates     && rm -rf /var/lib/apt/lists/*     && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend     && mkdir -p /var/lib/xtend-search && chown 10001:10001 /var/lib/xtend-search
+ ---> Using cache
+ ---> 16353030e18b
+Step 17/29 : COPY --from=frontend /usr/local/bin/node /usr/local/bin/node
+ ---> Using cache
+ ---> 4b08fa7b0489
+Step 18/29 : COPY xtend/requirements.lock.txt /app/xtend/requirements.lock.txt
+ ---> Using cache
+ ---> 53df2dca9118
+Step 19/29 : RUN pip install --no-cache-dir -r /app/xtend/requirements.lock.txt
+ ---> Using cache
+ ---> f896afa9f2df
+Step 20/29 : COPY searx /app/searx
+ ---> Using cache
+ ---> ee3f97817310
+Step 21/29 : COPY LICENSE /app/LICENSE
+ ---> Using cache
+ ---> b5c641eea9a0
+Step 22/29 : COPY --from=frontend /build/xtend /app/xtend
+ ---> df0889336b5b
+Step 23/29 : COPY --from=frontend /source.tar.gz /app/source.tar.gz
+ ---> ade4a5d6d887
+Step 24/29 : RUN python -c 'from pathlib import Path; Path("searx/version_frozen.py").write_text("VERSION_STRING = \"2026.9.19+e831fc2a1+xtend.0.2.1\"\nVERSION_TAG = \"2026.9.19+e831fc2a1\"\nDOCKER_TAG = \"xtend-search-0.2.1\"\nGIT_URL = \"/source.tar.gz\"\nGIT_BRANCH = \"xtend-search\"\n")'
+ ---> Running in 41b96b034123
+ ---> Removed intermediate container 41b96b034123
+ ---> 080778dcf9d1
+Step 25/29 : USER 10001:10001
+ ---> Running in 9352e4da3d09
+ ---> Removed intermediate container 9352e4da3d09
+ ---> d95079a647e9
+Step 26/29 : EXPOSE 8080
+ ---> Running in 0dc28d5f1940
+ ---> Removed intermediate container 0dc28d5f1940
+ ---> 69e65f2707c2
+Step 27/29 : HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+ ---> Running in f68cfd95f516
+ ---> Removed intermediate container f68cfd95f516
+ ---> e5e61ab3ac1b
+Step 28/29 : ENTRYPOINT ["/usr/bin/tini", "--"]
+ ---> Running in e5ff51b560aa
+ ---> Removed intermediate container e5ff51b560aa
+ ---> b79fe39d6a70
+Step 29/29 : CMD ["node", "xtend/server/supervisor.mjs"]
+ ---> Running in 8726059466bb
+ ---> Removed intermediate container 8726059466bb
+ ---> 2e6fb4d76418
+Successfully built 2e6fb4d76418
+Successfully tagged xtend-search:0.2.1
+Successfully tagged xtend-search:0.2.1-linux-amd64

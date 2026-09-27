@@ -1,0 +1,28 @@
+services:
+  search:
+    build:
+      context: .
+      dockerfile: Dockerfile.xtend
+    image: ${XTEND_IMAGE:-xtend-search:0.2.1}
+    ports:
+      - "${XTEND_BIND_IP:-127.0.0.1}:${XTEND_PORT:-8080}:8080"
+    environment:
+      FRONTEND_MODE: ${FRONTEND_MODE:-xtend}
+      XTEND_TEST_FIXTURE: ${XTEND_TEST_FIXTURE:-0}
+      XTEND_STREAMING: ${XTEND_STREAMING:-1}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:${XTEND_PORT:-8080}}
+      SEARXNG_URL: ${PUBLIC_BASE_URL:-http://localhost:${XTEND_PORT:-8080}}/
+      TRUSTED_PROXY_IPS: ${TRUSTED_PROXY_IPS:-}
+    volumes:
+      - search-secrets:/var/lib/xtend-search
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=128m
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 256
+    mem_limit: 1536m
+    restart: unless-stopped
+    stop_grace_period: 15s
+volumes:
+  search-secrets:

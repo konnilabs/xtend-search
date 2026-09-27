@@ -1,0 +1,27 @@
+{
+  "timestamp": "2026-09-19",
+  "upstream": {
+    "url": "https://github.com/searxng/searxng.git",
+    "commit": "e831fc2a1cad50c9979b5f6f680376410218188c",
+    "latestRemoteAtStart": "e831fc2a1cad50c9979b5f6f680376410218188c"
+  },
+  "xtend": {
+    "localRoot": "/home/konni/Downloads/xtend-main/xtend",
+    "head": "d9d54cee532bcfd78f84e8c34471da9d05d9c431",
+    "dirtyStatus": "M .github/workflows/xtend-default-gates.yml\n M docs/de/xtend-mcp.md\n M docs/en/xtend-mcp.md\n M package.json\n M products/xtend-mcp/README.md\n M products/xtend-mcp/generated/docs.jsonl\n M products/xtend-mcp/generated/knowledge-manifest.json\n M products/xtend-mcp/generated/rmt-ai-kit/rmt-ai-kit.compact.md\n M products/xtend-mcp/generated/rmt-ai-kit/rmt-ai-kit.manifest.json\n M products/xtend-mcp/generated/rmt-ai-kit/rmt-ai-kit.prompts.md\n M products/xtend-mcp/generated/rmt-ai-kit/rmt-ai-kit.recipes.jsonl\n M products/xtend-mcp/generated/rmt-ai-kit/rmt-ai-kit.reference.jsonl\n M products/xtend-mcp/scripts/build-knowledge.mjs\n M products/xtend-mcp/scripts/smoke-vsix.mjs\n M products/xtend-mcp/src/knowledge.mjs\n M products/xtend-mcp/tests/contract.test.mjs\n M products/xtend-mcp/tests/knowledge.test.mjs\n M scripts/test-runner/vsix-smoke.js\n M tests/rmt-language/rmt_ai_developer_kit_suite.js\n M tests/rmt-language/rmt_completion_suite.js\n M tests/rmt-language/rmt_editor_packaging_suite.js\n M tests/schemas/xtend-schema-inventory.json\n M tools/rmt-editor/vscode/README.md\n M tools/rmt-editor/vscode/build-vsix.js\n M tools/rmt-editor/vscode/package.json\n M tools/rmt-editor/vscode/snippets/rmt.code-snippets\n M tools/rmt-editor/vscode/syntaxes/rmt.tmLanguage.json\n M tools/rmt-language/completions.js\n M tools/rmt-language/generated/rmt-ai-developer-kit/rmt-ai-kit.compact.md\n M tools/rmt-language/generated/rmt-ai-developer-kit/rmt-ai-kit.manifest.json\n M tools/rmt-language/generated/rmt-ai-developer-kit/rmt-ai-kit.prompts.md\n M tools/rmt-language/generated/rmt-ai-developer-kit/rmt-ai-kit.recipes.jsonl\n M tools/rmt-language/generated/rmt-ai-developer-kit/rmt-ai-kit.reference.jsonl\n M tools/rmt-language/rmt-ai-developer-kit.js\n M tools/rmt-language/snippets/index.js\n M tools/rmt-language/snippets/rmt.code-snippets\n M tools/rmt-language/vnext-tooling.js\n?? development/XTend-0.8.0-Ecosystem-Paritaet.md\n?? tools/rmt-editor/vscode/xtend-rmt-language-0.1.0-rc.2.vsix",
+    "packageVersion": "0.8.0",
+    "mcpVersion": "0.1.0",
+    "tgzSha256": "677023093724ffeba6776f5908353a32fefcfe1454a83b9441f6f41e43c83b24"
+  },
+  "system": {
+    "platform": "Linux-6.8.0-139-generic-x86_64-with-glibc2.39",
+    "machine": "x86_64"
+  },
+  "tools": {
+    "node": "24.19.0",
+    "npm": "11.17.0",
+    "compose": "5.5.0",
+    "docker": "29.1.3"
+  },
+  "note": "Local XTend checkout was dirty before the task and was read and packed without editing it; exact package retained."
+}

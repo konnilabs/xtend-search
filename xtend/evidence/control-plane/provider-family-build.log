@@ -1,0 +1,82 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  77.09MB
+Step 1/23 : ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+Step 2/23 : FROM ${NODE_IMAGE} AS build
+ ---> 622f209f6c16
+Step 3/23 : WORKDIR /app/xtend
+ ---> Using cache
+ ---> 338f5444acec
+Step 4/23 : COPY xtend/package.json xtend/package-lock.json ./
+ ---> Using cache
+ ---> a6a4766d83e4
+Step 5/23 : COPY xtend/vendor-inputs ./vendor-inputs
+ ---> Using cache
+ ---> b42312e9bc3d
+Step 6/23 : RUN npm install -g npm@11.17.0 && npm ci --ignore-scripts
+ ---> Using cache
+ ---> 73ab9d6cb1a2
+Step 7/23 : WORKDIR /app
+ ---> Using cache
+ ---> 4e3b68dcf642
+Step 8/23 : COPY . .
+ ---> 26b8b97ca414
+Step 9/23 : RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.tar.gz .
+ ---> Running in 05a70b656ed6
+ ---> Removed intermediate container 05a70b656ed6
+ ---> d8490536714e
+Step 10/23 : WORKDIR /app/xtend
+ ---> Running in 95aa49fcecd0
+ ---> Removed intermediate container 95aa49fcecd0
+ ---> c22b8ce13730
+Step 11/23 : RUN node scripts/build-control.cjs && npm prune --omit=dev --ignore-scripts
+ ---> Running in 4930ab6aeffa
+{"ok":true,"summaries":[{"folder":"standalone","version":"7681b48d1bb35d27978f7d129e25e2432bf10b38ccaa0045e957cddac947c357","sourceSha256":"56bf7f08def48ea94ea142888e372d62181cc1f820f7efc9d95d3bc1a3e0a35b","services":"planned"},{"folder":"admin","version":"f9cf30d9147487657363a6beb8e6766d0f5054ea01a7efc079d45e04305d074b","sourceSha256":"b664c0c35883c8c827ea16f4727c97bfa8e35a398a0022e8c6e3f5595bfba864","services":"planned"}]}
+
+removed 19 packages, and audited 2 packages in 4s
+
+found 0 vulnerabilities
+ ---> Removed intermediate container 4930ab6aeffa
+ ---> 902f2c49c534
+Step 12/23 : FROM ${NODE_IMAGE}
+ ---> 622f209f6c16
+Step 13/23 : RUN apt-get update && apt-get install -y --no-install-recommends tini util-linux ca-certificates && rm -rf /var/lib/apt/lists/*  && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend  && mkdir -p /var/lib/xtend-search && chown 10001:10001 /var/lib/xtend-search
+ ---> Using cache
+ ---> aca63473e4ff
+Step 14/23 : WORKDIR /app
+ ---> Using cache
+ ---> 3f0a9454106e
+Step 15/23 : COPY --from=build /app/xtend /app/xtend
+ ---> 4d07d71e2a60
+Step 16/23 : COPY --from=build /source.tar.gz /app/source.tar.gz
+ ---> 8b0e97748930
+Step 17/23 : COPY LICENSE /app/LICENSE
+ ---> 8b71a3479a94
+Step 18/23 : ENV BIND_HOST=0.0.0.0 PORT=8080 XTEND_SECRET_DIR=/var/lib/xtend-search/resume XTEND_DATA_DIR=/var/lib/xtend-search/control WEB_CONCURRENCY=1 XTEND_REPLICAS=1
+ ---> Running in 9233fd1fe47f
+ ---> Removed intermediate container 9233fd1fe47f
+ ---> ab4d7bd5462e
+Step 19/23 : USER 10001:10001
+ ---> Running in 1638818134c0
+ ---> Removed intermediate container 1638818134c0
+ ---> 3558f63eff40
+Step 20/23 : EXPOSE 8080
+ ---> Running in e4db0f5df1f9
+ ---> Removed intermediate container e4db0f5df1f9
+ ---> 1dcc4bce6ffe
+Step 21/23 : HEALTHCHECK --interval=30s --timeout=5s --start-period=30s CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+ ---> Running in a4220de9962d
+ ---> Removed intermediate container a4220de9962d
+ ---> 6f1025ec33ff
+Step 22/23 : ENTRYPOINT ["/usr/bin/tini","--"]
+ ---> Running in aa1bfdceb749
+ ---> Removed intermediate container aa1bfdceb749
+ ---> 59681d922f98
+Step 23/23 : CMD ["sh","-c","flock -n /var/lib/xtend-search/owner.lock sh -c 'node xtend/scripts/keys.mjs && exec node xtend/server/standalone.mjs'"]
+ ---> Running in 5091f18fda58
+ ---> Removed intermediate container 5091f18fda58
+ ---> 81e68c3a2d5d
+Successfully built 81e68c3a2d5d
+Successfully tagged xtend-search:provider-family-fix

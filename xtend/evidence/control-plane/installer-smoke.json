@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "version": "0.3.0",
+  "from": "Extracted final installer, prepare.sh, docker load, fresh Compose project and fresh data volumes",
+  "checks": [
+    "All checksums passed",
+    "Both prebuilt images loaded",
+    "Existing local setup preserved",
+    "Generated configuration mode 0600",
+    "Both fresh containers healthy",
+    "Backend catalog compatible",
+    "Public SSR and attribution present",
+    "Unconfigured admin fails closed with setup guidance",
+    "Corresponding source archive available"
+  ]
+}

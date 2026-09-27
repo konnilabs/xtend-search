@@ -1,0 +1,14 @@
+{
+  "version": "0.4.0",
+  "tag": "xtend-search-searxng:0.4.0",
+  "id": "sha256:6395f9e351cbb2061582dc06d419e0420368a3a180521d52515f52383107f372",
+  "hashes": {
+    "xtend/server/backend.py": "c583640bafa7d847ad5d8c9c0af4047db34b0e5956b1f5bde94efd9fe21777fe",
+    "xtend/server/backend-start.py": "683f666347211a7812c5a0b54c97a346621086823f8a859d60997c804cabc673",
+    "xtend/server/favicon_backend.py": "a6eb8f8ed511272494a0140ebf9e4882f1dbad3c21048ed626517331d46f4c2d",
+    "xtend/requirements.lock.txt": "8e78ccb233012a0c08a80c307ccbf4d4974a016b4c914f8dfcb70cacd2312b24",
+    "xtend/config/settings.control.yml": "a7b66508e8903c4a5d0d30bfa1b9be5163c8cacb9bc211dfef8f19dc4d6acca1"
+  },
+  "archive": "XTend-search-SearXNG-Image-0.4.0-linux-amd64.tar.gz",
+  "bytes": 106961542
+}

@@ -1,4 +1,22 @@
-# Über SearXNG
+# Über XTend.search
+
+XTend.search ist eine eigenständige Suchoberfläche mit eigenem Branding. XTend und Maraca stellen die Oberfläche bereit; SearXNG führt die Suche über mehrere Quellen aus.
+
+## Powered by SearXNG
+
+**Powered by [SearXNG](https://github.com/searxng/searxng).**
+
+Dieses Projekt baut auf SearXNG auf und würdigt die Arbeit seiner Community. XTend.search ist kein offizielles Produkt des SearXNG-Projekts.
+
+## Datenschutz
+
+XTend.search verwendet keine Analyse-Tracker und lädt keine externen Schriften. Die Suche wird erst beim Absenden an den Server und dessen Suchquellen übermittelt. Suchbegriffe stehen bei der GET-Suche in der URL und im Browserverlauf. Eine vollständige Spurenfreiheit wird nicht zugesichert.
+
+## Quellcode & Lizenzen
+
+[Quellcode dieser Instanz herunterladen](/source.tar.gz). SearXNG und diese Integration stehen unter AGPL-3.0-or-later; XTend steht unter Apache-2.0. Die klassischen Einstellungen gelten nur für die klassische Ansicht; XTend.search verwendet die Filter im Suchformular.
+
+## Über SearXNG
 
 SearXNG ist eine [Metasuchmaschine], welche die Ergebnisse anderer
 {{link('Suchmaschinen', 'preferences')}} sammelt und aufbereitet ohne dabei

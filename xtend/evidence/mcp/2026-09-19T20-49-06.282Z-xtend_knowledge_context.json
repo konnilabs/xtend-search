@@ -1,0 +1,139 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"x-lightbox public API carousel items open index change close lazy loading Maraca component RMT overlay integration\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "x-lightbox public API carousel items open index change close lazy loading Maraca component RMT overlay integration",
+      "locale": "all",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 6,
+      "domains": [],
+      "hitCount": 6,
+      "hits": [
+        {
+          "uri": "xtend://docs/en/components-xlightbox",
+          "id": "en:components-xlightbox:2",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "en",
+          "title": "x-lightbox",
+          "heading": "What it solves",
+          "score": 32,
+          "excerpt": "## What it solves\n\nx-lightbox controls layered UI. Use its open or close API together with focus, Escape handling and stable CSS parts instead of replacing the shadow tree. The component is loaded from `components/xlightbox.js`, declared through `components/manifest.json` and typed through `components/xlightbox.d.ts`. That makes the article a practical contract: a host can see which attributes are safe, which events can be listened to, which methods are callable and which CSS hooks are intended for customization.\n\nUse this page when you are integrating XTend into a product shell, a micro frontend, a CMS-rendered page or an RMT-authored surface. It focuses on the public surface instead of internal implementation details, so it is suitable for teams that only consume the package.",
+          "sourceHash": "851eaeaa063794eee63ecff5fc73d9f16b7999c22566b351b71b7e3e81492562",
+          "sourcePath": "docs/en/components/xlightbox.md"
+        },
+        {
+          "uri": "xtend://docs/de/components-xlightbox",
+          "id": "de:components-xlightbox:7",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "de",
+          "title": "x-lightbox",
+          "heading": "API-Referenz",
+          "score": 31,
+          "excerpt": "## API-Referenz\n\nAttribute:\n- `src`\n- `open`\n- `alt`\n\nEvents:\n- `lightbox-opened`\n- `lightbox-closed`\n\nMethoden:\n- `open(src?: string)`\n- `snapshot()`\n\nSlots:\n- `trigger`\n\nCSS Parts:\n- `trigger`\n- `overlay`\n- `root`\n- `content`\n- `close`\n- `control`\n- `close-icon`\n- `icon`\n- `media`\n\nCSS Custom Properties:\n- `--xlightbox-overlay-bg`\n- `--lightbox-bg`\n- `--xtend-overlay-bg`\n- `--xlightbox-blur`\n- `--lightbox-blur`\n- `--xtend-glass-blur`\n- `--xlightbox-padding`\n- `--lightbox-padding`\n- `--xlightbox-radius`\n- `--lightbox-radius`\n- `--xtend-radius`\n- `--xlightbox-shadow`\n- `--lightbox-shadow`\n- `--xlightbox-close-bg`\n- `--lightbox-close-bg`\n- `--xlightbox-close-color`",
+          "sourceHash": "25517b33de8ab20fae7ae6fb8a46ac8e63f5fa427fd74c6cac5f67f8d38ae500",
+          "sourcePath": "docs/de/components/xlightbox.md"
+        },
+        {
+          "uri": "xtend://docs/en/changelog",
+          "id": "en:changelog:2",
+          "scope": "docs",
+          "kind": "reference",
+          "locale": "en",
+          "title": "Changelog",
+          "heading": "Changes in 0.8.0",
+          "score": 27,
+          "excerpt": "## Changes in 0.8.0\n\n| Area | Behavior and entry point |\n| --- | --- |\n| RMT microkernel | One scheduler authority, six canonical lanes and cancellable, thenable `RmtJobHandle`s. Paint, idle and `postTask` waits do not block ready work. [Migration](./rmt-kernel-0-8-migration.md) |\n| Maraca shell | `execution fastpass` and `dispatchFastPass()` apply navigation, focus and named close on `user-blocking`, independently of waiting business commands. [FastPass](./maraca-fastpass-abort-boundary.md) |\n| Presentation lifecycle | Automatic surface epochs guard hydration, UI-coprocessor responses and scheduled commits. `superseded` never starts a synchronous rendering fallback. Business transactions retain their order. [Abort Boundaries](./maraca-fastpass-abort-boundary.md) |\n| Diagnostic demand | `subscribeEvents()` delivers immutable lifecycle events. `subscribe()` retains full snapshots; `snapshot()` and DEV API methods synchronously read current data. [DEV API](./xtend-dev-api.md) |\n| Hydrangea JIT | Shared compile/preview/Maraca pipeline and a private cache of verified kernel artifacts. Explicitly enabled for the Docs host; `legacy` remains the default. [Hydrangea](./rmt-jit-hydrangea.md) |\n| Node and Laravel | Independent page hosts with props, forms, navigation, layouts, resume and streaming. Production Laravel renders prebuilt artifacts without Node. [Page runtime](./ssr-pages.md)…",
+          "sourceHash": "53e064bfec53e44b5519a6d95c254d98bf56c3fa685f2975fcfb460c460b03ec",
+          "sourcePath": "docs/en/changelog.md"
+        },
+        {
+          "uri": "xtend://docs/en/components-xdrawer",
+          "id": "en:components-xdrawer:8",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "en",
+          "title": "x-drawer",
+          "heading": "Integration notes",
+          "score": 27,
+          "excerpt": "## Integration notes\n\n- UX profile: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State key: `xdrawer-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.lazy.hydrate`, `route.visible.render`, `overlay.drawer.transition`, `diagnostics.snapshot`.\n- Theme und Tokens: `--drawer-bg-dark`, `--drawer-close-size`, `inert`, `openDrawer()`, `closeDrawer()`.\n\nRMT Hosts should treat the component as a Custom Element boundary: pass attributes as component props, bind DOM events to commands and keep scheduling metadata outside the component. Plain HTML hosts can use the same attributes and events without an RMT compiler.\n\nTheming should flow through XTend design tokens first. CSS parts are intended for targeted skinning of exposed controls, while CSS custom properties are better for broader color, spacing, radius and motion changes. Accessibility hooks such as labels, live regions and focus handling should be preserved when composing the component.\n\nTab navigation includes controls in assigned slots and open shadow roots. Hidden, inert and disabled controls are excluded; Tab and Shift-Tab stay within the open modal surface.",
+          "sourceHash": "41fe6d9148f9e4617167895314f93c99a812df037897de892f9cf96ed4fd7d09",
+          "sourcePath": "docs/en/components/xdrawer.md"
+        },
+        {
+          "uri": "xtend://docs/en/ssr-pages",
+          "id": "en:ssr-pages:7",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "Page runtime for Node and Laravel",
+          "heading": "Maraca pages and XTend.store",
+          "score": 25,
+          "excerpt": "## Maraca pages and XTend.store\n\n`createMaracaPageClient()` from `@ccslabs/xtend/maraca/page-client` connects the page client to a Maraca bundle. Each page or layout manifest may declare `maraca: { entry: \"/build/maraca/xtend.maraca.mjs\" }`. The bundle and portable projection use the same compiler facts; `createRmtCompilationSession()` shares analysis within a build. Configuration and referenced assets contribute to the build version.\n\nThe page runtime owns URL, history and transport; Maraca owns UI state and DOM commits. Each root has one controller, and unchanged shells survive navigation. Superseded activations are discarded and navigation releases remote surfaces. The generated entry uses `startMaracaPageApplication()` from `@ccslabs/xtend/maraca/page-bootstrap`: capture is installed before loading the composition, P-256 signatures use the public build key, and rejected integrity checks use the existing single hydration fallback.\n\nThe shared head contract also accepts canonical links (`tag: \"link\"`, `rel: \"canonical\"`, HTTP(S) URL) and identified JSON-LD records (`tag: \"json-ld\"`, `key`, `data`). Node, PHP and browser consumers deduplicate by identity. Script content is serialized safely; event attributes and executable canonical URLs are rejected.\n\n[XTend.store](../../products/xtend-shop/README.en.md) demonstrates this integration with Laravel, a guest cart and a separate…",
+          "sourceHash": "e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456",
+          "sourcePath": "docs/en/ssr-pages.md"
+        },
+        {
+          "uri": "xtend://docs/de/components-xdrawer",
+          "id": "de:components-xdrawer:8",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "de",
+          "title": "x-drawer",
+          "heading": "Integrationshinweise",
+          "score": 24,
+          "excerpt": "## Integrationshinweise\n\n- UX-Profil: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State-Key: `xdrawer-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.lazy.hydrate`, `route.visible.render`, `overlay.drawer.transition`, `diagnostics.snapshot`.\n- Theme und Tokens: `--drawer-bg-dark`, `--drawer-close-size`, `inert`, `openDrawer()`, `closeDrawer()`.\n\nRMT Hosts sollten die Komponente als Custom-Element-Grenze behandeln: Attribute werden als Component Props gesetzt, DOM-Events werden an Commands gebunden, und Scheduling-Metadaten bleiben außerhalb der Komponente. Reine HTML-Hosts verwenden dieselben Attribute und Events ohne RMT Compiler.\n\nTheming sollte zuerst über XTend Design Tokens laufen. CSS Parts sind für gezieltes Skinning freigegebener Controls gedacht, während CSS Custom Properties breitere Anpassungen an Farbe, Abstand, Radius und Bewegung abdecken. Accessibility-Hooks wie Labels, Live-Regionen und Fokusverhalten sollten beim Komponieren erhalten bleiben.\n\nDie Tab-Reihenfolge umfasst Controls in zugewiesenen Slots und offenen Shadow Roots. Versteckte, inaktive und deaktivierte Controls werden ausgelassen; Tab und Shift-Tab bleiben innerhalb der geöffneten modalen Oberfläche.",
+          "sourceHash": "73cfe3ef3846c4a90dfc6c101f5d4d5a4f0c4ef7de9dbcd2987b4a8fa7469fcf",
+          "sourcePath": "docs/de/components/xdrawer.md"
+        }
+      ],
+      "maxChars": 18000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: x-lightbox public API carousel items open index change close lazy loading Maraca component RMT overlay integration\nLocales: all\nScopes: docs, rmt-kit\n\n[K1] x-lightbox — What it solves\nResource: xtend://docs/en/components-xlightbox\nSource: docs/en/components/xlightbox.md#sha256:851eaeaa063794eee63ecff5fc73d9f16b7999c22566b351b71b7e3e81492562\n## What it solves\n\nx-lightbox controls layered UI. Use its open or close API together with focus, Escape handling and stable CSS parts instead of replacing the shadow tree. The component is loaded from `components/xlightbox.js`, declared through `components/manifest.json` and typed through `components/xlightbox.d.ts`. That makes the article a practical contract: a host can see which attributes are safe, which events can be listened to, which methods are callable and which CSS hooks are intended for customization.\n\nUse this page when you are integrating XTend into a product shell, a micro frontend, a CMS-rendered page or an RMT-authored surface. It focuses on the public surface instead of internal implementation details, so it is suitable for teams that only consume the package.\n\n[K2] x-lightbox — API-Referenz\nResource: xtend://docs/de/components-xlightbox\nSource: docs/de/components/xlightbox.md#sha256:25517b33de8ab20fae7ae6fb8a46ac8e63f5fa427fd74c6cac5f67f8d38ae500\n## API-Referenz\n\nAttribute:\n- `src`\n- `open`\n- `alt`\n\nEvents:\n- `lightbox-opened`\n- `lightbox-closed`\n\nMethoden:\n- `open(src?: string)`\n- `snapshot()`\n\nSlots:\n- `trigger`\n\nCSS Parts:\n- `trigger`\n- `overlay`\n- `root`\n- `content`\n- `close`\n- `control`\n- `close-icon`\n- `icon`\n- `media`\n\nCSS Custom Properties:\n- `--xlightbox-overlay-bg`\n- `--lightbox-bg`\n- `--xtend-overlay-bg`\n- `--xlightbox-blur`\n- `--lightbox-blur`\n- `--xtend-glass-blur`\n- `--xlightbox-padding`\n- `--lightbox-padding`\n- `--xlightbox-radius`\n- `--lightbox-radius`\n- `--xtend-radius`\n- `--xlightbox-shadow`\n- `--lightbox-shadow`\n- `--xlightbox-close-bg`\n- `--lightbox-close-bg`\n- `--xlightbox-close-color`\n\n[K3] Changelog — Changes in 0.8.0\nResource: xtend://docs/en/changelog\nSource: docs/en/changelog.md#sha256:53e064bfec53e44b5519a6d95c254d98bf56c3fa685f2975fcfb460c460b03ec\n## Changes in 0.8.0\n\n| Area | Behavior and entry point |\n| --- | --- |\n| RMT microkernel | One scheduler authority, six canonical lanes and cancellable, thenable `RmtJobHandle`s. Paint, idle and `postTask` waits do not block ready work. [Migration](./rmt-kernel-0-8-migration.md) |\n| Maraca shell | `execution fastpass` and `dispatchFastPass()` apply navigation, focus and named close on `user-blocking`, independently of waiting business commands. [FastPass](./maraca-fastpass-abort-boundary.md) |\n| Presentation lifecycle | Automatic surface epochs guard hydration, UI-coprocessor responses and scheduled commits. `superseded` never starts a synchronous rendering fallback. Business transactions retain their order. [Abort Boundaries](./maraca-fastpass-abort-boundary.md) |\n| Diagnostic demand | `subscribeEvents()` delivers immutable lifecycle events. `subscribe()` retains full snapshots; `snapshot()` and DEV API methods synchronously read current data. [DEV API](./xtend-dev-api.md) |\n| Hydrangea JIT | Shared compile/preview/Maraca pipeline and a private cache of verified kernel artifacts. Explicitly enabled for the Docs host; `legacy` remains the default. [Hydrangea](./rmt-jit-hydrangea.md) |\n| Node and Laravel | Independent page hosts with props, forms, navigation, layouts, resume and streaming. Production Laravel renders prebuilt artifacts without Node. [Page runtime](./ssr-pages.md)…\n\n[K4] x-drawer — Integration notes\nResource: xtend://docs/en/components-xdrawer\nSource: docs/en/components/xdrawer.md#sha256:41fe6d9148f9e4617167895314f93c99a812df037897de892f9cf96ed4fd7d09\n## Integration notes\n\n- UX profile: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State key: `xdrawer-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.lazy.hydrate`, `route.visible.render`, `overlay.drawer.transition`, `diagnostics.snapshot`.\n- Theme und Tokens: `--drawer-bg-dark`, `--drawer-close-size`, `inert`, `openDrawer()`, `closeDrawer()`.\n\nRMT Hosts should treat the component as a Custom Element boundary: pass attributes as component props, bind DOM events to commands and keep scheduling metadata outside the component. Plain HTML hosts can use the same attributes and events without an RMT compiler.\n\nTheming should flow through XTend design tokens first. CSS parts are intended for targeted skinning of exposed controls, while CSS custom properties are better for broader color, spacing, radius and motion changes. Accessibility hooks such as labels, live regions and focus handling should be preserved when composing the component.\n\nTab navigation includes controls in assigned slots and open shadow roots. Hidden, inert and disabled controls are excluded; Tab and Shift-Tab stay within the open modal surface.\n\n[K5] Page runtime for Node and Laravel — Maraca pages and XTend.store\nResource: xtend://docs/en/ssr-pages\nSource: docs/en/ssr-pages.md#sha256:e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456\n## Maraca pages and XTend.store\n\n`createMaracaPageClient()` from `@ccslabs/xtend/maraca/page-client` connects the page client to a Maraca bundle. Each page or layout manifest may declare `maraca: { entry: \"/build/maraca/xtend.maraca.mjs\" }`. The bundle and portable projection use the same compiler facts; `createRmtCompilationSession()` shares analysis within a build. Configuration and referenced assets contribute to the build version.\n\nThe page runtime owns URL, history and transport; Maraca owns UI state and DOM commits. Each root has one controller, and unchanged shells survive navigation. Superseded activations are discarded and navigation releases remote surfaces. The generated entry uses `startMaracaPageApplication()` from `@ccslabs/xtend/maraca/page-bootstrap`: capture is installed before loading the composition, P-256 signatures use the public build key, and rejected integrity checks use the existing single hydration fallback.\n\nThe shared head contract also accepts canonical links (`tag: \"link\"`, `rel: \"canonical\"`, HTTP(S) URL) and identified JSON-LD records (`tag: \"json-ld\"`, `key`, `data`). Node, PHP and browser consumers deduplicate by identity. Script content is serialized safely; event attributes and executable canonical URLs are rejected.\n\n[XTend.store](../../products/xtend-shop/README.en.md) demonstrates this integration with Laravel, a guest cart and a separate…\n\n[K6] x-drawer — Integrationshinweise\nResource: xtend://docs/de/components-xdrawer\nSource: docs/de/components/xdrawer.md#sha256:73cfe3ef3846c4a90dfc6c101f5d4d5a4f0c4ef7de9dbcd2987b4a8fa7469fcf\n## Integrationshinweise\n\n- UX-Profil: `xtend.component.overlay-interaction-ux-profile.v1`.\n- State-Key: `xdrawer-open-<id>`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.lazy.hydrate`, `route.visible.render`, `overlay.drawer.transition`, `diagnostics.snapshot`.\n- Theme und Tokens: `--drawer-bg-dark`, `--drawer-close-size`, `inert`, `openDrawer()`, `closeDrawer()`.\n\nRMT Hosts sollten die Komponente als Custom-Element-Grenze behandeln: Attribute werden als Component Props gesetzt, DOM-Events werden an Commands gebunden, und Scheduling-Metadaten bleiben außerhalb der Komponente. Reine HTML-Hosts verwenden dieselben Attribute und Events ohne RMT Compiler.\n\nTheming sollte zuerst über XTend Design Tokens laufen. CSS Parts sind für gezieltes Skinning freigegebener Controls gedacht, während CSS Custom Properties breitere Anpassungen an Farbe, Abstand, Radius und Bewegung abdecken. Accessibility-Hooks wie Labels, Live-Regionen und Fokusverhalten sollten beim Komponieren erhalten bleiben.\n\nDie Tab-Reihenfolge umfasst Controls in zugewiesenen Slots und offenen Shadow Roots. Versteckte, inaktive und deaktivierte Controls werden ausgelassen; Tab und Shift-Tab bleiben innerhalb der geöffneten modalen Oberfläche.\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/en/components-xlightbox",
+        "sourceHash": "851eaeaa063794eee63ecff5fc73d9f16b7999c22566b351b71b7e3e81492562",
+        "sourcePath": "docs/en/components/xlightbox.md"
+      },
+      {
+        "uri": "xtend://docs/de/components-xlightbox",
+        "sourceHash": "25517b33de8ab20fae7ae6fb8a46ac8e63f5fa427fd74c6cac5f67f8d38ae500",
+        "sourcePath": "docs/de/components/xlightbox.md"
+      },
+      {
+        "uri": "xtend://docs/en/changelog",
+        "sourceHash": "53e064bfec53e44b5519a6d95c254d98bf56c3fa685f2975fcfb460c460b03ec",
+        "sourcePath": "docs/en/changelog.md"
+      },
+      {
+        "uri": "xtend://docs/en/components-xdrawer",
+        "sourceHash": "41fe6d9148f9e4617167895314f93c99a812df037897de892f9cf96ed4fd7d09",
+        "sourcePath": "docs/en/components/xdrawer.md"
+      },
+      {
+        "uri": "xtend://docs/en/ssr-pages",
+        "sourceHash": "e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456",
+        "sourcePath": "docs/en/ssr-pages.md"
+      },
+      {
+        "uri": "xtend://docs/de/components-xdrawer",
+        "sourceHash": "73cfe3ef3846c4a90dfc6c101f5d4d5a4f0c4ef7de9dbcd2987b4a8fa7469fcf",
+        "sourcePath": "docs/de/components/xdrawer.md"
+      }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+✔ feedback claims resist forgery, attribute only actual contributors, deduplicate replay and keep URLs out of control state (160.499591ms)
+✔ optional evidence is separate, encrypted, operator-only and expires after seven days (136.084624ms)
+✔ reports create one review at five reports from three contexts; limit and atomic audit conflict protect actions (259.20961ms)
+✔ conservative auto cooldown is opt-in, waits for a new full window, scopes capability and preserves hard guards (811.044782ms)
+✔ automations cannot pause the last available capability or act on irrelevance; three confirmations propose permanent review (723.619576ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2161.266338

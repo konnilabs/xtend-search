@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "health": {
+    "ok": true,
+    "version": "0.4.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "containers": {
+    "xtend-search-control-search-1": {
+      "image": "sha256:32fbd3fd8429d4ec494f7b32c4f2bae6740066d967f2765f942cb276d23034e8",
+      "health": "healthy"
+    },
+    "xtend-search-control-searxng-1": {
+      "image": "sha256:6395f9e351cbb2061582dc06d419e0420368a3a180521d52515f52383107f372",
+      "health": "healthy"
+    }
+  },
+  "artifacts": [
+    {
+      "name": "XTend-search-0.4.0-Portainer.zip",
+      "bytes": 15254,
+      "sha256": "8f7fd9e62fbac1950fed359678a6ab1c14c454c4a39a1c2138ae077db8e754af"
+    },
+    {
+      "name": "XTend-search-0.4.0-Verification.zip",
+      "bytes": 569260,
+      "sha256": "69e2a37cabc52beec84606b1c122d2251ff2a484416ee98c1288bc50f9073d1c"
+    },
+    {
+      "name": "XTend-search-0.4.0-source.tar.gz",
+      "bytes": 62239171,
+      "sha256": "27ca32abcc2490ab203b832b93d34300261414b2bbf8463f78e3f4aff265d9d2"
+    },
+    {
+      "name": "XTend-search-Docker-Image-0.4.0-linux-amd64.tar.gz",
+      "bytes": 261513909,
+      "sha256": "d2d847be540495bab82d77d06f3097abc78f3d02b33c6e44d1b4b1d5637ae6ae"
+    },
+    {
+      "name": "XTend-search-SearXNG-Image-0.4.0-linux-amd64.tar.gz",
+      "bytes": 106961542,
+      "sha256": "d9116b4e64124154e67ee640ce8f0768c8171730854f766c1ee7f925edf29906"
+    }
+  ],
+  "temporaryTestResourcesRemoved": {
+    "containers": [
+      "xtend-cp-oauth-test",
+      "xtend-cp-search-test",
+      "xtend-cp-backend-test",
+      "xtend-v035-baseline"
+    ],
+    "volumes": [
+      "xtend-cp-fixture-data",
+      "xtend-v035-baseline"
+    ],
+    "network": "xtend-cp-fixture-net",
+    "proxyPids": [
+      168012,
+      184621
+    ]
+  }
+}

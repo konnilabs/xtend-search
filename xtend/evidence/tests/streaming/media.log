@@ -1,0 +1,14 @@
+{"name":"chromium: knowledge, sources, facts, history, dark mode","status":"passed","ms":1774}
+{"name":"chromium: lazy panel, metadata, keyboard, boundaries, focus","status":"passed","ms":1418}
+{"name":"chromium: navigation clears preview","status":"passed","ms":1248}
+{"name":"chromium: image error fallback","status":"passed","ms":1139}
+{"name":"chromium: responsive 390px","status":"passed","ms":1292}
+{"name":"chromium: responsive 900px","status":"passed","ms":1444}
+{"name":"chromium: no-JS cards and native image links","status":"passed","ms":463}
+{"name":"firefox: knowledge, sources, facts, history, dark mode","status":"passed","ms":3259}
+{"name":"firefox: lazy panel, metadata, keyboard, boundaries, focus","status":"passed","ms":1621}
+{"name":"firefox: navigation clears preview","status":"passed","ms":2100}
+{"name":"firefox: image error fallback","status":"passed","ms":1845}
+{"name":"firefox: responsive 390px","status":"passed","ms":1775}
+{"name":"firefox: responsive 900px","status":"passed","ms":1848}
+{"name":"firefox: no-JS cards and native image links","status":"passed","ms":684}

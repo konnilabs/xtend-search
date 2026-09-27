@@ -1,0 +1,99 @@
+{
+  "timestamp": "2026-09-20T00:58:38.307Z",
+  "base": "http://127.0.0.1:8096",
+  "partialCount": 6,
+  "finalCount": 7,
+  "fixture": true,
+  "sameDocument": true,
+  "transport": {
+    "schema": "xtend.xscaler.app-service-transport.v1",
+    "kind": "xscaler-remote-surface",
+    "disposed": true,
+    "activeCount": 0,
+    "configuredServiceIds": [
+      "search.results"
+    ],
+    "ownsLoader": true,
+    "runtimeBoundary": {
+      "remoteSurfaceOnly": true,
+      "remoteRuntimeExecution": false,
+      "kernelRemoteExecution": false
+    },
+    "loader": {
+      "schema": "xtend.xscaler.remote-adapter-loader-snapshot.v1",
+      "loaderSchema": "xtend.xscaler.remote-adapter-loader.v1",
+      "disposed": true,
+      "status": "disposed",
+      "sessionCount": 1,
+      "registeredAdapterCount": 0,
+      "counters": {
+        "preflight": 1,
+        "accepted": 1,
+        "rejected": 0,
+        "loadAttempts": 1,
+        "loaded": 1,
+        "attached": 1,
+        "cancelled": 0,
+        "detached": 1,
+        "disposed": 1
+      },
+      "runtimeBoundary": {
+        "remoteSurfaceOnly": true,
+        "remoteRuntimeExecution": false,
+        "kernelRemoteExecution": false,
+        "networkRequiredByKernel": false
+      },
+      "sessions": [
+        {
+          "schema": "xtend.xscaler.remote-adapter-session.v1",
+          "id": "search:c707e80b-0dab-428b-b651-66ef79f32173",
+          "surfaceId": "remoteSurface:search.results",
+          "state": "disposed",
+          "adapterUrl": "http://127.0.0.1:8096/assets/xtend/search-remote-adapter.mjs?xscaler-session=search%3Ac707e80b-0dab-428b-b651-66ef79f32173",
+          "integrity": "sha256-/WZlJciGSgtI/IzHtAlLV6zJU4LVAvCUVFCCzsCf2XI=",
+          "preflightAccepted": true,
+          "loadAttempted": true,
+          "loaded": true,
+          "adapterExecutionAttempted": true,
+          "adapterAttached": false,
+          "adapterDisposed": true,
+          "fallbackActivationAttempted": false,
+          "fallbackActivated": false,
+          "runtimeBoundary": {
+            "remoteRuntimeExecution": false,
+            "kernelRemoteExecution": false,
+            "networkRequiredByKernel": false
+          },
+          "diagnostics": []
+        }
+      ],
+      "history": [
+        {
+          "status": "attached",
+          "surfaceId": "remoteSurface:search.results",
+          "sessionId": "search:c707e80b-0dab-428b-b651-66ef79f32173",
+          "loadAttempted": true,
+          "loaded": true
+        },
+        {
+          "status": "detached",
+          "surfaceId": "remoteSurface:search.results",
+          "sessionId": "search:c707e80b-0dab-428b-b651-66ef79f32173",
+          "loadAttempted": true,
+          "loaded": true
+        }
+      ]
+    }
+  },
+  "frames": [
+    "start",
+    "delta",
+    "delta",
+    "complete",
+    "disposed"
+  ],
+  "errors": [],
+  "nativeSSR": "passed",
+  "about": "passed",
+  "note": "Release image, explicit offline fixture, fresh ephemeral secrets; no source bind mounts."
+}

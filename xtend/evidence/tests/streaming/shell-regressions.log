@@ -1,0 +1,8 @@
+{"name":"chromium / JS true: home preselection, existing filters, first search","status":"passed"}
+{"name":"chromium / JS true: dark first paint, filters, results and live scheme switch","status":"passed"}
+{"name":"chromium / JS false: home preselection, existing filters, first search","status":"passed"}
+{"name":"chromium / JS false: dark first paint, filters, results and live scheme switch","status":"passed"}
+{"name":"firefox / JS true: home preselection, existing filters, first search","status":"passed"}
+{"name":"firefox / JS true: dark first paint, filters, results and live scheme switch","status":"passed"}
+{"name":"firefox / JS false: home preselection, existing filters, first search","status":"passed"}
+{"name":"firefox / JS false: dark first paint, filters, results and live scheme switch","status":"passed"}

@@ -1,0 +1,20 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
++ actual - expected
+
++ 'search-lightbox'
+- 'preview-expand'
+
+    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/lightbox-live.mjs:12:223 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: 'search-lightbox',
+  expected: 'preview-expand',
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.19.0

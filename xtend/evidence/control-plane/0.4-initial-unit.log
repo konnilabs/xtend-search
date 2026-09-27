@@ -1,0 +1,42 @@
+✔ reviewed defaults isolate unrelated providers while preserving sibling CAPTCHA restrictions (156.859135ms)
+✔ shared-default repair retains origin protection, quotas and approvals; refuses ambiguous or active state (154.008926ms)
+✔ unavailable search explains protection and unsupported filters without leaking admin state (127.13707ms)
+✔ lexical query boundary rejects every upstream special parser prefix, preserves ordinary site syntax (0.789641ms)
+✔ Retry-After accepts seconds and dates without shortening (0.296384ms)
+✔ fresh catalog never auto-approves; policy changes preserve audit and revision (98.189604ms)
+✔ roles and stale revisions reject without changing durable state (97.916071ms)
+✔ idempotent commands create one revision and audit entry (98.180704ms)
+✔ audit failure never confirms a mutation (89.909238ms)
+✔ last budget token is reserved atomically across simultaneous requests (133.014312ms)
+✔ engine selection honors every filter and changed capability fingerprints (102.322782ms)
+✔ drain and provider deadlines are hard gates for manual probes (121.4754ms)
+✔ backend failures do not label every provider unhealthy; empty results are not failures (107.015838ms)
+✔ restart preserves quotas and policies, health becomes unknown (172.592836ms)
+✔ event allowlist discards search contents, query hashes, IDs and arbitrary errors (0.472506ms)
+✔ bounded telemetry reports drops while search state remains usable (87.980931ms)
+✔ media addresses exclude local, private, mapped and metadata networks (6.793985ms)
+✔ early engine batches, stable append, dedupe, signed paging and post-plan disable (1088.277428ms)
+✔ an idempotency key cannot authorize a different command (103.252775ms)
+✔ provider family cooldown blocks sibling engines and probes and survives restart (166.245536ms)
+✔ technical quarantine recovery is audited and cannot shorten provider deadlines (122.050538ms)
+✔ knowledge preserves one attributed entity, rejects ambiguity and never weakens filters (144.333609ms)
+✔ knowledge rate-limit fallback cannot reuse the same quota domain (163.775112ms)
+✔ no suitable sources and all-engine failures have honest terminal states (122.055898ms)
+✔ client cancellation stops commits and retains dispatched cost and concurrency leases across restart (176.335257ms)
+✔ corrupt storage is fail-closed and does not recreate approvals (37.434734ms)
+✔ special IPv6 representations and transition ranges cannot bypass the media boundary (0.405266ms)
+✔ a real SQLite audit insert failure rolls back policy and revision atomically (97.007947ms)
+✔ SafeSearch exception is explicit, durable and audited, without relaxing other eligibility guards (134.812856ms)
+✔ knowledge exception changes only its own dispatch, preserves native SafeSearch and discloses the exception in SSR and streaming (182.112298ms)
+✔ duplicate web hits retain every contributing source across incremental frames without moving the row (257.441492ms)
+✔ partial web success identifies failed sources and later provider exclusions without counting them as contributors (198.70494ms)
+✔ reserved budget failures are not successes; source explanations never expose raw backend errors (127.096637ms)
+✔ Wikipedia and Wikidata cannot consume web slots; knowledge remains separately and explicitly approved (296.504838ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5079.9945

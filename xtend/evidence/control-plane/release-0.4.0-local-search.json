@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "version": "0.4.0",
+  "results": 44,
+  "icons": 7,
+  "requests": [
+    {
+      "domain": "www.python.org",
+      "status": 200,
+      "type": "image/png"
+    },
+    {
+      "domain": "www.w3schools.com",
+      "status": 200,
+      "type": "image/png"
+    },
+    {
+      "domain": "en.wikipedia.org",
+      "status": 204
+    }
+  ],
+  "documentPreserved": true,
+  "feedbackNotSubmitted": true,
+  "errors": []
+}

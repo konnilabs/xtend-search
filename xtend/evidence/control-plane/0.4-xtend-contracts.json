@@ -1,0 +1,50 @@
+{
+  "version": "0.8.0",
+  "edition": "Hydrangea",
+  "method": "Local pinned SDK declarations and implementation; Maraca compiler and browser tests.",
+  "mcp": {
+    "availableXtendTools": 0,
+    "executedXtendMcpCalls": 0,
+    "limitation": "No callable XTend MCP endpoint in this session; MCP autonomy is not established by this release."
+  },
+  "contracts": [
+    {
+      "path": "@ccslabs/xtend/package.json",
+      "sha256": "ac7030b33dd9e504e87878e8316f6179b66532371ffd837ba9a7aaf2790a49f2"
+    },
+    {
+      "path": "@ccslabs/xtend/xtendrmt/page-client.d.ts",
+      "sha256": "5aff22de802ef14541bf45d889cddce66b4f8675a491efd2b29aab96a9f268b1"
+    },
+    {
+      "path": "@ccslabs/xtend/xtend-maraca/app-services.d.ts",
+      "sha256": "c86486a734e67d3662339b9b1566ca85968ded2095328b96f12ca7f7e6262e8d"
+    },
+    {
+      "path": "@ccslabs/xtend/components/xsurfacemanager.d.ts",
+      "sha256": "b5cd16582e83512fb1c41a16570b4809d7e120bc89b1533026cb4c17e8f74e4b"
+    },
+    {
+      "path": "@ccslabs/xtend/components/xsidepanel.d.ts",
+      "sha256": "8ea7bd0c04ae7eeea65aefeeaf2465801139a59e7c403a83d2392d7a8e743e03"
+    },
+    {
+      "path": "@ccslabs/xtend/components/xdialog.d.ts",
+      "sha256": "e127915a7c6a5b68ac481f7ba9a9f17817cd151e62518da96999396f53ad5238"
+    },
+    {
+      "path": "@ccslabs/xtend/components/xtoast.d.ts",
+      "sha256": "3f222bc8fd3b5ac1b34e27e2a37efc57a76b0448a34ccec34feb085fa13435a3"
+    }
+  ],
+  "integrationEvidence": [
+    "0.4-image-maraca-build.json",
+    "0.4-browser.json"
+  ],
+  "decisions": [
+    "Host-invoked Maraca services explicitly declared in RMT data sources so generated manifests authorize them.",
+    "RMT background / after_paint scheduler used for favicon work; no invented XScaler image priority API.",
+    "Public XSurfaceManager and XSidePanel contracts used; no floating desktop windows.",
+    "Live data and editable form state separated; keyed source details prevent DOM draft reuse."
+  ]
+}

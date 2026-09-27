@@ -1,0 +1,188 @@
+{
+  "meta": [
+    {
+      "id": 1,
+      "revision": 36,
+      "mode": "conservative"
+    }
+  ],
+  "policyCount": 14,
+  "policyHash": "af2dff78a12f3c8a0ed76174a976bfde1790236a66099ad5e3e7488d965bbe0f",
+  "guardCount": 22,
+  "guardHash": "636935f66a86950c33de36ed3f5f10cf7e40e49cb062be9b2350b560594c4a86",
+  "guardDeadlines": {
+    "egress": {
+      "reset": 1790531580000,
+      "count": 3,
+      "leases": []
+    },
+    "engine:bing": {
+      "reset": 1790531580000,
+      "count": 1,
+      "leases": []
+    },
+    "engine:bing images": {
+      "reset": 1790461740000,
+      "count": 3,
+      "leases": []
+    },
+    "engine:bing videos": {
+      "reset": 1790437920000,
+      "count": 1,
+      "leases": []
+    },
+    "engine:brave": {
+      "reset": 1790531580000,
+      "count": 1,
+      "leases": []
+    },
+    "engine:duckduckgo": {
+      "reset": 1790436600000,
+      "count": 1,
+      "leases": []
+    },
+    "engine:google cse": {
+      "reset": 1790531580000,
+      "count": 1,
+      "leases": []
+    },
+    "engine:google cse images": {
+      "reset": 1790461740000,
+      "count": 3,
+      "leases": []
+    },
+    "family:360search": {
+      "reset": 1790436600000,
+      "count": 0,
+      "leases": [],
+      "blockedUntil": 0
+    },
+    "family:bing": {
+      "reset": 1790531580000,
+      "count": 1,
+      "leases": [],
+      "blockedUntil": 0
+    },
+    "family:brave": {
+      "reset": 1790531580000,
+      "count": 1,
+      "leases": [],
+      "blockedUntil": 0
+    },
+    "family:duckduckgo": {
+      "reset": 1790436600000,
+      "count": 0,
+      "leases": [],
+      "blockedUntil": 1791732570808
+    },
+    "family:google-cse": {
+      "reset": 1790531580000,
+      "count": 1,
+      "leases": [],
+      "blockedUntil": 0
+    },
+    "family:shared": {
+      "reset": 1790436600000,
+      "count": 3,
+      "leases": [],
+      "blockedUntil": 1791732570808
+    },
+    "health:bing images:images": {
+      "health": "healthy",
+      "breaker": "closed",
+      "observedAt": 1790461739051,
+      "samples": [],
+      "consecutive": 0,
+      "successes": 7,
+      "watchSince": 0,
+      "localBackoffUntil": 0,
+      "providerRetryAfterAt": 0,
+      "backendSuspendedUntil": 0,
+      "quotaResetAt": 0
+    },
+    "health:bing videos:videos": {
+      "health": "healthy",
+      "breaker": "closed",
+      "observedAt": 1790437896752,
+      "samples": [],
+      "consecutive": 0,
+      "successes": 2,
+      "watchSince": 0,
+      "localBackoffUntil": 0,
+      "providerRetryAfterAt": 0,
+      "backendSuspendedUntil": 0,
+      "quotaResetAt": 0
+    },
+    "health:bing:general": {
+      "health": "healthy",
+      "breaker": "closed",
+      "observedAt": 1790531540921,
+      "samples": [],
+      "consecutive": 0,
+      "successes": 12,
+      "watchSince": 0,
+      "localBackoffUntil": 0,
+      "providerRetryAfterAt": 0,
+      "backendSuspendedUntil": 0,
+      "quotaResetAt": 0
+    },
+    "health:brave:general": {
+      "health": "healthy",
+      "breaker": "closed",
+      "observedAt": 1790531541269,
+      "samples": [],
+      "consecutive": 0,
+      "successes": 13,
+      "watchSince": 0,
+      "localBackoffUntil": 0,
+      "providerRetryAfterAt": 0,
+      "backendSuspendedUntil": 0,
+      "quotaResetAt": 0
+    },
+    "health:duckduckgo:general": {
+      "health": "unavailable",
+      "breaker": "open",
+      "observedAt": 1790436566171,
+      "samples": [],
+      "consecutive": 1,
+      "successes": 0,
+      "watchSince": 0,
+      "localBackoffUntil": 1791732570808,
+      "providerRetryAfterAt": 0,
+      "backendSuspendedUntil": 0,
+      "quotaResetAt": 0
+    },
+    "health:google cse images:images": {
+      "health": "healthy",
+      "breaker": "closed",
+      "observedAt": 1790461739086,
+      "samples": [],
+      "consecutive": 0,
+      "successes": 8,
+      "watchSince": 0,
+      "localBackoffUntil": 0,
+      "providerRetryAfterAt": 0,
+      "backendSuspendedUntil": 0,
+      "quotaResetAt": 0
+    },
+    "health:google cse:general": {
+      "health": "healthy",
+      "breaker": "closed",
+      "observedAt": 1790531541367,
+      "samples": [],
+      "consecutive": 0,
+      "successes": 12,
+      "watchSince": 0,
+      "localBackoffUntil": 0,
+      "providerRetryAfterAt": 0,
+      "backendSuspendedUntil": 0,
+      "quotaResetAt": 0
+    },
+    "service": {
+      "reset": 1790531580000,
+      "count": 3,
+      "leases": []
+    }
+  },
+  "backup": "/var/lib/xtend-search/control/pre-0.4.0.sqlite"
+}

@@ -1,0 +1,19 @@
+{
+  "deployment": "local Docker, localhost:8090",
+  "image": "sha256:81e68c3a2d5d6f8b8f0e439b7808b4f64467f3edc370b8605edfd5defa3db9b4",
+  "tag": "xtend-search:0.3.0",
+  "rollbackImage": "xtend-search:0.3.0-before-provider-family-fix",
+  "health": "healthy",
+  "unitTestsPassed": 42,
+  "fixtureBrowserTestsPassed": true,
+  "liveSmoke": "provider-family-live.json",
+  "configurationVerification": "provider-family-verification.json",
+  "repairLog": "provider-family-repair-applied.log",
+  "configurationRevisionBefore": 14,
+  "configurationRevisionAfter": 27,
+  "backupInPrivateDataVolume": "control/before-family-repair-14.sqlite",
+  "newsLimitation": "SafeSearch-capable DuckDuckGo News remains protected by CAPTCHA cooldown; approved Bing News lacks SafeSearch. brave.news is discoverable with SafeSearch but requires explicit administrator approval.",
+  "productionServerChanged": false,
+  "releaseArchiveReexported": false,
+  "testContainersRemoved": true
+}

@@ -1,0 +1,11 @@
+{
+  "version":"0.3.0",
+  "provider":"Nextcloud built-in OAuth2",
+  "providerVersion":"34.0.3",
+  "origin":"http://localhost:8090",
+  "callback":"http://localhost:8090/admin/oauth/callback",
+  "result":"authenticated admin SSR and resumed UI verified in browser; user confirmed success",
+  "providerIssue":"During unauthenticated flow Nextcloud redirected to /cloud/cloud/login/flow/grant (404). Reopening the canonical /cloud/login/flow/grant URL in the same session allowed the user to grant access and complete OAuth. No state, cookie, TLS, or role validation was disabled.",
+  "productionCallbackTested":false,
+  "secretsOrUserIdentifiersIncluded":false
+}

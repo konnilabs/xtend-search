@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-09-19T20:20:15.976Z",
+  "base": "http://localhost:8080",
+  "health": "ready",
+  "category": "images",
+  "scheme": "dark",
+  "resume": "resumed",
+  "errors": []
+}

@@ -1,0 +1,63 @@
+console Failed to load resource: the server responded with a status of 403 (Forbidden)
+console Failed to load resource: the server responded with a status of 403 (Forbidden)
+console Failed to load resource: the server responded with a status of 403 (Forbidden)
+console clickdebug true <button id="preview-expand" type="button" data-preview-action="expand" aria-label="Bild in Vollbild öffnen" title="Vollbild öffnen" class="preview-canvas preview-expand"><span aria-hidden="true" class="preview-expand-hint">Vollbild öffnen</span><img data-rmt-key="3" id="preview-image" data-image-req
+preview ×
+Bild 2 von 4
+Vollbild öffnen
+
+example.org/fixture-images/1/1
+
+fixture images — Ergebnis 2
+
+Stabile Testdaten. Diese Suche kontaktiert keine externen Provider.
+
+Seite besuchen ↗
+Originalbild öffnen ↗
+Auflösung
+1600 × 900
+Suchquellen
+fixture images
+boxdebug {
+  box: '<x-lightbox id="search-lightbox" class="search-lightbox" alt="fixture images — Ergebnis 2" src="/media?u=aHR0cHM6Ly9pbWFnZXMuZXhhbXBsZS50ZXN0LzEucG5n&amp;exp=1790434183&amp;h=giKU0n6ejTVwhkbyHVOAyr1dDkCBU0h4ZBDq3Gfis5o&amp;xtend_attempt=34cdacdc-cb25-4bc1-94aa-8e4eb8eb2eb7" open=""><div slot="controls" class="lightbox-controls"><button class="lightbox-step lightbox-previous" type="button" data-lightbox-action="previous" aria-label="Vorheriges Bild im Vollbild"><span class="preview-arrow" aria-hidden="true"></span></button>\n' +
+    ' <button class="lightbox-step lightbox-next" type="button" data-lightbox-action="next" aria-label="Nächstes Bild im Vollbild"><span class="preview-arrow" aria-hidden="true"></span></button>\n' +
+    ' <div class="lightbox-caption"><p class="lightbox-position" role="status" aria-live="polite" aria-atomic="true">Bild 2 von 4</p><h2 class="lightbox-title">fixture images — Ergebnis 2</h2><p class="lightbox-message" role="status" aria-live="polite"></p><div class="lightbox-links"><a class="lightbox-source" data-xtend-native="" rel="noreferrer" href="https://example.org/fixture-images/1/1">Seite besuchen ↗</a><a class="lightbox-original" data-xtend-native="" rel="noreferrer" href="https://images.example.test/1.png">Originalbild öffnen ↗</a></div></div></div></x-lightbox>',
+  button: '<button id="preview-expand" type="button" data-preview-action="expand" aria-label="Bild in Vollbild öffnen" title="Vollbild öffnen" class="preview-canvas preview-expand"><span aria-hidden="true" class="preview-expand-hint">Vollbild öffnen</span><img data-rmt-key="3" id="preview-image" data-image-req',
+  imgs: [
+    {
+      id: '8950f062c20b3e878ca996bf',
+      p: '8950f062c20b3e878ca996bf',
+      s: '/media?u=aHR0cHM6Ly9pbWFnZXMuZXhhbXBsZS50ZXN0LzAucG5n&exp=1790434183&h=jVQxsQgXML6F74n3tM59VPMLVsLNbE5W4aGFZgodqPM&xtend_attempt=34cdacdc-cb25-4bc1-94aa-8e4eb8eb2eb7'
+    },
+    {
+      id: '2c69a218383b083d315473ec',
+      p: '2c69a218383b083d315473ec',
+      s: '/media?u=aHR0cHM6Ly9pbWFnZXMuZXhhbXBsZS50ZXN0LzEucG5n&exp=1790434183&h=giKU0n6ejTVwhkbyHVOAyr1dDkCBU0h4ZBDq3Gfis5o&xtend_attempt=34cdacdc-cb25-4bc1-94aa-8e4eb8eb2eb7'
+    },
+    {
+      id: 'abec820f086b127c5654ecc5',
+      p: 'abec820f086b127c5654ecc5',
+      s: '/media?u=aHR0cHM6Ly9pbWFnZXMuZXhhbXBsZS50ZXN0LzIucG5n&exp=1790434183&h=EBxZAlfOEv6ZUo3gwuzG9k-4oLfPRNROQEwJhbTxSKU&xtend_attempt=34cdacdc-cb25-4bc1-94aa-8e4eb8eb2eb7'
+    },
+    {
+      id: '727e1244346ba60bf002c9c6',
+      p: '727e1244346ba60bf002c9c6',
+      s: '/media?u=aHR0cHM6Ly9pbWFnZXMuZXhhbXBsZS50ZXN0LzMucG5n&exp=1790434183&h=5leNs1C8u050-QjWwfrXaxANpieiQtLDgSjTP9PWftE&xtend_attempt=34cdacdc-cb25-4bc1-94aa-8e4eb8eb2eb7'
+    }
+  ]
+}
+console clickdebug false <button type="submit" class="search-button" data-rmt-resume-id="xtend-page:0.0.0.2.1.0.3:23" data-rmt-resume-generation="rmt-node-ssr-1790432382453">Suchen</button>
+console Failed to load resource: the server responded with a status of 403 (Forbidden)
+console clickdebug true undefined
+console Failed to load resource: the server responded with a status of 403 (Forbidden)
+console Failed to load resource: the server responded with a status of 403 (Forbidden)
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/control/debug-lightbox.mjs:10:294 {
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0

@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-09-19T20:36:00.374Z",
+  "base": "http://127.0.0.1:8080",
+  "queries": [
+    {
+      "q": "Mozilla Firefox",
+      "category": "general",
+      "results": 39,
+      "cards": 1,
+      "cardTitles": [
+        "Mozilla Firefox"
+      ],
+      "fixture": false,
+      "warnings": [
+        {
+          "id": "engine-0",
+          "message": "Eine Suchquelle antwortet derzeit nicht: wikidata"
+        }
+      ]
+    }
+  ],
+  "images": {
+    "count": 100,
+    "availablePreviews": 100,
+    "sameDocument": true
+  },
+  "preview": {
+    "title": "Self-Portrait (1878) // Walter Shirlaw (American, 1838–1909)",
+    "imageLoaded": false,
+    "fallback": "Die Vorschau ist nicht erreichbar. Du kannst die Quellseite oder das Originalbild öffnen.",
+    "background": "rgb(23, 41, 53)"
+  },
+  "errors": [],
+  "externalBrowserRequests": 0,
+  "health": 200
+}

@@ -1,0 +1,225 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "XTendRMT compile check completed with status syntax_error."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.rmt-compile-check.v1",
+      "sourceHash": "292b7e1ed559c70e544b65fdecd4e5f3c455aad60d5af18c1efb3a11f27cbeba",
+      "path": "admin/admin.rmt",
+      "ok": false,
+      "status": "syntax_error",
+      "diagnostics": [
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 839,
+              "character": 83
+            },
+            "end": {
+              "line": 839,
+              "character": 91
+            },
+            "startOffset": 47328,
+            "endOffset": 47336
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 840,
+              "character": 86
+            },
+            "end": {
+              "line": 840,
+              "character": 94
+            },
+            "startOffset": 47430,
+            "endOffset": 47438
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 854,
+              "character": 83
+            },
+            "end": {
+              "line": 854,
+              "character": 91
+            },
+            "startOffset": 47912,
+            "endOffset": 47920
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 855,
+              "character": 86
+            },
+            "end": {
+              "line": 855,
+              "character": 94
+            },
+            "startOffset": 48014,
+            "endOffset": 48022
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 903,
+              "character": 83
+            },
+            "end": {
+              "line": 903,
+              "character": 91
+            },
+            "startOffset": 49457,
+            "endOffset": 49465
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 904,
+              "character": 86
+            },
+            "end": {
+              "line": 904,
+              "character": 94
+            },
+            "startOffset": 49559,
+            "endOffset": 49567
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 934,
+              "character": 83
+            },
+            "end": {
+              "line": 934,
+              "character": 91
+            },
+            "startOffset": 50493,
+            "endOffset": 50501
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 935,
+              "character": 86
+            },
+            "end": {
+              "line": 935,
+              "character": 94
+            },
+            "startOffset": 50595,
+            "endOffset": 50603
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 965,
+              "character": 83
+            },
+            "end": {
+              "line": 965,
+              "character": 91
+            },
+            "startOffset": 51534,
+            "endOffset": 51542
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after trust policy.",
+          "range": {
+            "start": {
+              "line": 966,
+              "character": 86
+            },
+            "end": {
+              "line": 966,
+              "character": 94
+            },
+            "startOffset": 51636,
+            "endOffset": 51644
+          }
+        }
+      ],
+      "summary": {
+        "schema": "xtend.rmt.vnext-compiler.v1",
+        "mode": null,
+        "recordCount": null,
+        "outputCount": null
+      }
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "workspace://admin/admin.rmt",
+        "kind": "compile-check",
+        "sourceHash": "292b7e1ed559c70e544b65fdecd4e5f3c455aad60d5af18c1efb3a11f27cbeba"
+      }
+    ]
+  }
+}

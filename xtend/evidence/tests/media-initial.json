@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-09-19T20:32:01.426Z",
+  "base": "http://127.0.0.1:8090",
+  "note": "Offline SearXNG fixture; image-proxy responses replaced with deterministic SVGs. Real Python contract, Maraca SSR and signed resume.",
+  "results": [
+    {
+      "name": "chromium: knowledge, sources, facts, history, dark mode",
+      "status": "passed",
+      "ms": 1614
+    },
+    {
+      "name": "chromium: lazy panel, metadata, keyboard, boundaries, focus",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:33:214\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:6:65)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:31:2"
+    },
+    {
+      "name": "chromium: navigation clears preview",
+      "status": "passed",
+      "ms": 1791
+    },
+    {
+      "name": "chromium: image error fallback",
+      "status": "passed",
+      "ms": 1181
+    },
+    {
+      "name": "chromium: responsive 390px",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:51:495\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:6:65)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:49:31"
+    },
+    {
+      "name": "chromium: responsive 900px",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:51:495\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:6:65)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:49:31"
+    },
+    {
+      "name": "chromium: no-JS cards and native image links",
+      "status": "passed",
+      "ms": 390
+    },
+    {
+      "name": "firefox: knowledge, sources, facts, history, dark mode",
+      "status": "passed",
+      "ms": 2595
+    },
+    {
+      "name": "firefox: lazy panel, metadata, keyboard, boundaries, focus",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:33:214\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:6:65)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:31:2"
+    },
+    {
+      "name": "firefox: navigation clears preview",
+      "status": "passed",
+      "ms": 2290
+    },
+    {
+      "name": "firefox: image error fallback",
+      "status": "passed",
+      "ms": 1766
+    },
+    {
+      "name": "firefox: responsive 390px",
+      "status": "passed",
+      "ms": 1694
+    },
+    {
+      "name": "firefox: responsive 900px",
+      "status": "passed",
+      "ms": 1806
+    },
+    {
+      "name": "firefox: no-JS cards and native image links",
+      "status": "passed",
+      "ms": 722
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "health": {
+    "ok": true,
+    "version": "0.3.2",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "header": "0.3.2",
+  "preferencesRendered": true
+}

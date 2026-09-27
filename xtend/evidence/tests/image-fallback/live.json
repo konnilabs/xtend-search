@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-09-19T21:31:56.981Z",
+  "base": "http://127.0.0.1:8080",
+  "query": "ubuntu",
+  "fixture": false,
+  "placeholders": 19,
+  "badTitle": "ubuntu",
+  "goodTitle": "Ubuntu What's New In Ubuntu 20.04 LTS \"Focal Fossa\"",
+  "sameDocument": true,
+  "recovered": true,
+  "lightboxOpened": true,
+  "errors": [],
+  "foreign": [],
+  "failures": [
+    {
+      "source": "https://www.artic.edu/iiif/2//7b7a6f39-1cd8-ea2f-9811-18b0e23edac0/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//ab107179-7106-937e-7676-e0263b02e530/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//13bb7117-5115-b409-1dbb-1d9c1d70a5c9/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//1753b638-d4fb-8e45-3db9-92dde7f053da/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//2d484387-2509-5e8e-2c43-22f9981972eb/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//6983bf9e-3cd8-c42d-4c91-cd646c97399c/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//b55d836c-ee20-59f8-1f0c-a95e09905361/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//831a05de-d3f6-f4fa-a460-23008dd58dda/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//6b1edb9c-0f3f-0ee3-47c7-ca25c39ee360/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//b272df73-a965-ac37-4172-be4e99483637/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//e82b61d4-1d5b-a15d-4d2e-ff9caca3fb51/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//67f10695-cb9d-f716-9cd0-902217ebb317/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//72cc9b54-7549-dda8-9720-51c36e67ba3b/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//5df51c9d-dac5-d962-4d4b-300339219e54/full/843,/0/default.jpg",
+      "status": 403
+    },
+    {
+      "source": "https://www.artic.edu/iiif/2//7f5429b5-a966-ccbe-1ce3-7f131e96bf87/full/843,/0/default.jpg",
+      "status": 403
+    }
+  ],
+  "health": 200
+}

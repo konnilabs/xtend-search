@@ -1,0 +1,14 @@
+{"name":"chromium: early SSR image failures, 403 and invalid image body become local placeholders","status":"passed"}
+{"name":"chromium: unavailable sidebar recovers by arrows, another tile and close/reopen","status":"passed"}
+{"name":"chromium: late and repeated errors cannot poison the next selection","status":"passed"}
+{"name":"chromium: original-to-thumbnail fallback remains valid","status":"passed"}
+{"name":"chromium: full-screen skips unavailable images and resets the error state","status":"passed"}
+{"name":"chromium: fresh search retries the source, including the same query","status":"passed"}
+{"name":"chromium: mobile dark/light placeholder and navigation to a new result set","status":"passed"}
+{"name":"firefox: early SSR image failures, 403 and invalid image body become local placeholders","status":"passed"}
+{"name":"firefox: unavailable sidebar recovers by arrows, another tile and close/reopen","status":"passed"}
+{"name":"firefox: late and repeated errors cannot poison the next selection","status":"passed"}
+{"name":"firefox: original-to-thumbnail fallback remains valid","status":"passed"}
+{"name":"firefox: full-screen skips unavailable images and resets the error state","status":"passed"}
+{"name":"firefox: fresh search retries the source, including the same query","status":"failed","error":"page.waitForFunction: Timeout 10000ms exceeded.\n    at /home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/image-fallback.mjs:52:81\n    at async check (/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/image-fallback.mjs:4:35)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/image-fallback.mjs:46:2"}
+{"name":"firefox: mobile dark/light placeholder and navigation to a new result set","status":"passed"}

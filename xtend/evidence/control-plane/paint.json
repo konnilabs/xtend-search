@@ -1,0 +1,263 @@
+{
+  "deployment": "Docker frontend + private SearXNG backend + flushing gzip proxy",
+  "streamEncoding": "gzip",
+  "frames": [
+    {
+      "elapsed": 313.80000000074506,
+      "status": "delta",
+      "titles": [],
+      "boxes": []
+    },
+    {
+      "elapsed": 418.8999999985099,
+      "status": "delta",
+      "titles": [
+        "fixture fast — open source — Ergebnis 1",
+        "fixture fast — open source — Ergebnis 2",
+        "fixture fast — open source — Ergebnis 3",
+        "fixture fast — open source — Ergebnis 4"
+      ],
+      "boxes": [
+        {
+          "x": 176.3125,
+          "y": 463.390625,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 600.375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 737.359375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 874.34375,
+          "width": 740,
+          "height": 107.984375
+        }
+      ]
+    },
+    {
+      "elapsed": 1011.1999999992549,
+      "status": "delta",
+      "titles": [
+        "fixture fast — open source — Ergebnis 1",
+        "fixture fast — open source — Ergebnis 2",
+        "fixture fast — open source — Ergebnis 3",
+        "fixture fast — open source — Ergebnis 4",
+        "fixture medium — open source — Ergebnis 2",
+        "fixture medium — open source — Ergebnis 3",
+        "fixture medium — open source — Ergebnis 4"
+      ],
+      "boxes": [
+        {
+          "x": 176.3125,
+          "y": 463.390625,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 600.375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 737.359375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 874.34375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1011.328125,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1148.3125,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1285.296875,
+          "width": 740,
+          "height": 107.984375
+        }
+      ]
+    },
+    {
+      "elapsed": 2785.300000000745,
+      "status": "delta",
+      "titles": [
+        "fixture fast — open source — Ergebnis 1",
+        "fixture fast — open source — Ergebnis 2",
+        "fixture fast — open source — Ergebnis 3",
+        "fixture fast — open source — Ergebnis 4",
+        "fixture medium — open source — Ergebnis 2",
+        "fixture medium — open source — Ergebnis 3",
+        "fixture medium — open source — Ergebnis 4",
+        "fixture slow — open source — Ergebnis 2",
+        "fixture slow — open source — Ergebnis 3",
+        "fixture slow — open source — Ergebnis 4"
+      ],
+      "boxes": [
+        {
+          "x": 176.3125,
+          "y": 463.390625,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 600.375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 737.359375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 874.34375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1011.328125,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1148.3125,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1285.296875,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1422.28125,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1559.265625,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1696.25,
+          "width": 740,
+          "height": 107.984375
+        }
+      ]
+    },
+    {
+      "elapsed": 2904.10000000149,
+      "status": "complete",
+      "titles": [
+        "fixture fast — open source — Ergebnis 1",
+        "fixture fast — open source — Ergebnis 2",
+        "fixture fast — open source — Ergebnis 3",
+        "fixture fast — open source — Ergebnis 4",
+        "fixture medium — open source — Ergebnis 2",
+        "fixture medium — open source — Ergebnis 3",
+        "fixture medium — open source — Ergebnis 4",
+        "fixture slow — open source — Ergebnis 2",
+        "fixture slow — open source — Ergebnis 3",
+        "fixture slow — open source — Ergebnis 4"
+      ],
+      "boxes": [
+        {
+          "x": 176.3125,
+          "y": 463.390625,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 600.375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 737.359375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 874.34375,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1011.328125,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1148.3125,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1285.296875,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1422.28125,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1559.265625,
+          "width": 740,
+          "height": 107.984375
+        },
+        {
+          "x": 176.3125,
+          "y": 1696.25,
+          "width": 740,
+          "height": 107.984375
+        }
+      ]
+    }
+  ],
+  "firstPaintMs": 418.8999999985099,
+  "completeMs": 2904.10000000149
+}

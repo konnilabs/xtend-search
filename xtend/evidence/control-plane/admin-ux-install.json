@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "installedAt": "2026-09-26T15:07:11.594010+00:00",
+  "localURL": "http://localhost:8090/admin",
+  "image": "sha256:58a94e1ddc2c761ca64742b4ce073f0ad7231060df673da3d488cabfaf46eb86",
+  "health": {
+    "ok": true,
+    "version": "0.3.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "files": {
+    "xtend/admin/admin.rmt": "6b48c0c0759cbc6ed0d5b84b9cc884af6a800ef5179df14571d38f1bd0cb67e7",
+    "xtend/admin/admin.css": "e34ffbcd5be4f1075123a1492bed8f684ca8843920fb04c5866e0d124483a1c3"
+  },
+  "controlUnitTests": 39,
+  "uxBrowserEvidence": "admin-ux-browser.json",
+  "regressionEvidence": "admin-ux-regression.log",
+  "rollbackTag": "xtend-search:0.3.0-before-admin-ux"
+}

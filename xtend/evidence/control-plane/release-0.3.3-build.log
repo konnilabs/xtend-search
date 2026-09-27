@@ -1,0 +1,85 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   77.2MB
+Step 1/24 : ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+Step 2/24 : FROM ${NODE_IMAGE} AS build
+ ---> 622f209f6c16
+Step 3/24 : WORKDIR /app/xtend
+ ---> Using cache
+ ---> 338f5444acec
+Step 4/24 : COPY xtend/package.json xtend/package-lock.json ./
+ ---> Using cache
+ ---> 6d0dc7ebbdd8
+Step 5/24 : COPY xtend/vendor-inputs ./vendor-inputs
+ ---> Using cache
+ ---> 6bfb89a9ac9f
+Step 6/24 : RUN npm install -g npm@11.17.0 && npm ci --ignore-scripts
+ ---> Using cache
+ ---> 56ca3f4744eb
+Step 7/24 : WORKDIR /app
+ ---> Using cache
+ ---> 76773af717a5
+Step 8/24 : COPY . .
+ ---> b62460916320
+Step 9/24 : RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.tar.gz .
+ ---> Running in 255e59afe3d4
+ ---> Removed intermediate container 255e59afe3d4
+ ---> 3b07f12775a6
+Step 10/24 : WORKDIR /app/xtend
+ ---> Running in 61590af058f8
+ ---> Removed intermediate container 61590af058f8
+ ---> 5c4602952a25
+Step 11/24 : RUN node scripts/build-control.cjs && npm prune --omit=dev --ignore-scripts
+ ---> Running in ebff8a33caed
+{"ok":true,"summaries":[{"folder":"standalone","version":"7ee1a62e6909d3872b59248c0e83a59d5ab996c22d8071c3b82469b0e9fdcc85","sourceSha256":"c8b39514910ec181b0ae6a76599f7095fe114657e799757f04d6955354f133a4","services":"planned"},{"folder":"admin","version":"abf6cda3592b6977738c926ce3a4d1beeeb1222a94ad1237d79d4db99e12f161","sourceSha256":"648acb13042c0c473bd8aebad04858cdcdde4c2fefe09183346776512122ae5e","services":"planned"}]}
+
+removed 19 packages, and audited 2 packages in 7s
+
+found 0 vulnerabilities
+ ---> Removed intermediate container ebff8a33caed
+ ---> 193aef95e33f
+Step 12/24 : FROM ${NODE_IMAGE}
+ ---> 622f209f6c16
+Step 13/24 : LABEL org.opencontainers.image.title="XTend.search" org.opencontainers.image.version="0.3.3"
+ ---> Using cache
+ ---> b2bff9d9ec41
+Step 14/24 : RUN apt-get update && apt-get install -y --no-install-recommends tini util-linux ca-certificates && rm -rf /var/lib/apt/lists/*  && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend  && mkdir -p /var/lib/xtend-search && chown 10001:10001 /var/lib/xtend-search
+ ---> Using cache
+ ---> 7dd7e70e95f2
+Step 15/24 : WORKDIR /app
+ ---> Using cache
+ ---> 820116768e3b
+Step 16/24 : COPY --from=build /app/xtend /app/xtend
+ ---> e713360e8c14
+Step 17/24 : COPY --from=build /source.tar.gz /app/source.tar.gz
+ ---> 7b3dee1c33c0
+Step 18/24 : COPY LICENSE /app/LICENSE
+ ---> d89154a7abef
+Step 19/24 : ENV BIND_HOST=0.0.0.0 PORT=8080 XTEND_SECRET_DIR=/var/lib/xtend-search/resume XTEND_DATA_DIR=/var/lib/xtend-search/control WEB_CONCURRENCY=1 XTEND_REPLICAS=1
+ ---> Running in a5c923b7169d
+ ---> Removed intermediate container a5c923b7169d
+ ---> 81cf991195e5
+Step 20/24 : USER 10001:10001
+ ---> Running in 13cc02b3196e
+ ---> Removed intermediate container 13cc02b3196e
+ ---> 43de42a3669e
+Step 21/24 : EXPOSE 8080
+ ---> Running in a1de96a6b6c4
+ ---> Removed intermediate container a1de96a6b6c4
+ ---> 4996d0b2250c
+Step 22/24 : HEALTHCHECK --interval=30s --timeout=5s --start-period=30s CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+ ---> Running in 17361e700dfa
+ ---> Removed intermediate container 17361e700dfa
+ ---> cbb704aad2e8
+Step 23/24 : ENTRYPOINT ["/usr/bin/tini","--"]
+ ---> Running in c57ccfc7f5f5
+ ---> Removed intermediate container c57ccfc7f5f5
+ ---> cacf22d30067
+Step 24/24 : CMD ["sh","-c","flock -n /var/lib/xtend-search/owner.lock sh -c 'node xtend/scripts/keys.mjs && exec node xtend/server/standalone.mjs'"]
+ ---> Running in 11da18fb8f6a
+ ---> Removed intermediate container 11da18fb8f6a
+ ---> 6816700ba420
+Successfully built 6816700ba420
+Successfully tagged xtend-search:0.3.3

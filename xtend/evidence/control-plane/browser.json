@@ -1,0 +1,15 @@
+{
+  "ok": true,
+  "checks": [
+    "All six engine policies persisted through real RMT actions; source navigation resumes without document reload.",
+    "CSRF and stale revisions rejected by HTTP service boundary.",
+    "Routing mode commands update canonical state and audit.",
+    "Mobile and 200%-equivalent layout remain within viewport; input size >=16px.",
+    "Three delayed engines paint incrementally, append without moving existing results, and preserve the document.",
+    "A superseded query cannot commit into the new result surface.",
+    "News mode and browser back navigation work.",
+    "Direct SSR search remains useful without JavaScript.",
+    "Viewer cannot mutate through UI or direct service requests.",
+    "Operator can schedule a budgeted probe and drain a source, but cannot approve policies."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "reports": [
+    {
+      "language": "all",
+      "ssr": {
+        "label": "53 Ergebnisse",
+        "status": "2 von 2 Quellen abgeschlossen",
+        "results": 53,
+        "sources": [
+          null
+        ],
+        "warning": []
+      }
+    },
+    {
+      "language": "de",
+      "ssr": {
+        "label": "20 Ergebnisse",
+        "status": "1 von 1 Quellen abgeschlossen",
+        "results": 20,
+        "sources": [
+          null
+        ],
+        "warning": []
+      }
+    },
+    {
+      "stream": {
+        "label": "53 Ergebnisse",
+        "status": "2 von 2 Quellen abgeschlossen",
+        "results": 53,
+        "sources": [
+          null
+        ],
+        "warnings": []
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,103 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"x-toast show dismiss duration status success error imperative API notifications\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "x-toast show dismiss duration status success error imperative API notifications",
+      "locale": "all",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 4,
+      "domains": [],
+      "hitCount": 4,
+      "hits": [
+        {
+          "uri": "xtend://docs/de/components-xtoast",
+          "id": "de:components-xtoast:7",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "de",
+          "title": "x-toast",
+          "heading": "API-Referenz",
+          "score": 21,
+          "excerpt": "## API-Referenz\n\nAttribute:\n- `type`\n- `tone`\n- `duration`\n- `open`\n- `hidden`\n\nEvents:\n- `toast-shown`\n- `toast-dismissed`\n\nMethoden:\n- `dismiss(reason?: XToastDismissReason)`\n\nSlots:\n- `default`\n\nCSS Parts:\n- `root`\n- `content`\n- `close`\n- `control`\n- `close-icon`\n- `icon`\n\nCSS Custom Properties:\n- `--toast-animation-duration`\n- `--toast-width`\n- `--xtend-font-family`\n- `--toast-padding`\n- `--toast-radius`\n- `--xtend-feedback-radius`\n- `--xtend-radius`\n- `--toast-fg`\n- `--xtend-feedback-color`\n- `--toast-bg`\n- `--xtend-feedback-bg`\n- `--xtend-surface-muted`\n- `--xtend-shadow`\n- `--xtend-feedback-border`\n- `--xtend-border`\n- `--xtend-info-bg`",
+          "sourceHash": "1b5c37c380d47f1662d4a42d2a3605a522178c00890e227ae29564a5b1eb68ca",
+          "sourcePath": "docs/de/components/xtoast.md"
+        },
+        {
+          "uri": "xtend://docs/en/components-xtoast",
+          "id": "en:components-xtoast:7",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "en",
+          "title": "x-toast",
+          "heading": "API reference",
+          "score": 21,
+          "excerpt": "## API reference\n\nAttributes:\n- `type`\n- `tone`\n- `duration`\n- `open`\n- `hidden`\n\nEvents:\n- `toast-shown`\n- `toast-dismissed`\n\nMethods:\n- `dismiss(reason?: XToastDismissReason)`\n\nSlots:\n- `default`\n\nCSS parts:\n- `root`\n- `content`\n- `close`\n- `control`\n- `close-icon`\n- `icon`\n\nCSS custom properties:\n- `--toast-animation-duration`\n- `--toast-width`\n- `--xtend-font-family`\n- `--toast-padding`\n- `--toast-radius`\n- `--xtend-feedback-radius`\n- `--xtend-radius`\n- `--toast-fg`\n- `--xtend-feedback-color`\n- `--toast-bg`\n- `--xtend-feedback-bg`\n- `--xtend-surface-muted`\n- `--xtend-shadow`\n- `--xtend-feedback-border`\n- `--xtend-border`\n- `--xtend-info-bg`",
+          "sourceHash": "5880b62236ff5d4004975bdc8c298dafd40f3f08bcafd250d6011827ab628628",
+          "sourcePath": "docs/en/components/xtoast.md"
+        },
+        {
+          "uri": "xtend://docs/en/rmt-reference-primitives",
+          "id": "en:rmt-reference-primitives:2",
+          "scope": "docs",
+          "kind": "reference",
+          "locale": "en",
+          "title": "Primitives",
+          "heading": "Syntax",
+          "score": 18,
+          "excerpt": "## Syntax\n\n| Operator | Form | Allowed contexts | Parameters | Function | Diagnostics | Related operators |\n| --- | --- | --- | --- | --- | --- | --- |\n| <a id=\"state\"></a>`state` | `state app.status type object preserve { ... }` | Top-level, `template`, primitive `surface` | identifier, `type`, `initial`, `preserve` | Declares persistent or lifecycle-owned app state. | State blocks may contain `initial` only. | `selector`, `reduce` |\n| <a id=\"selector\"></a>`selector` | `selector view from state app.status { ... }` | Top-level, `template`, primitive `surface` | identifier, source reference | Derives a view model from state or datasource. | Selector blocks allow only `where`, `find`, `sort by`, `output`. | `from state`, `from datasource` |\n| <a id=\"datasource\"></a>`datasource` | `datasource list from endpoint \"/api\" { ... }` | Top-level, `template`, primitive `surface` | identifier, source kind, source target | Describes data access without free runtime execution. | DataSource blocks allow only `method`, `contract`, `result`, `fallback`. | `endpoint`, `fixture`, `worker` |\n| <a id=\"action\"></a>`action` | `action save { ... }` | Top-level, `template`, primitive `surface` | identifier | Declares typed inputs, reducers, effects and events. | Action blocks allow only `input`, `status`, `effect`, `reduce`, `emit`, `on`. | `emit`, `reduce`, `on success ->` |\n| <a id=\"portal\"></a>`port…",
+          "sourceHash": "769e1a467db77642e064ae1114be616a131f9890bb5467961c8b6d6f4168a70d",
+          "sourcePath": "docs/en/rmt-reference-primitives.md"
+        },
+        {
+          "uri": "xtend://docs/de/api",
+          "id": "de:api:4",
+          "scope": "docs",
+          "kind": "reference",
+          "locale": "de",
+          "title": "API",
+          "heading": "Empfohlener Ablauf",
+          "score": 16,
+          "excerpt": "## Empfohlener Ablauf\n\nImportiere die API explizit und warte auf das Ready-Event:\n\n```js\nimport { initXTendAPI } from \"/api.js\";\n\nwindow.addEventListener(\"xtend-api-ready\", ({ detail }) => {\n  if (detail.toast) window.XTend.toast.success(\"Ready\");\n}, { once: true });\n\nawait initXTendAPI({ \"x-toast\": \"./components/xtoast.js\" });\n```\n\nEin fehlendes Modul lehnt den Init-Pfad ab. Prüfe Manifest und Browser-Konsole, statt einen nicht initialisierten Namespace als erfolgreiche API zu behandeln.",
+          "sourceHash": "d5ff629e10a91c18142c243670f19140b4e13e5d476fdbc962ff54dd15c22bcd",
+          "sourcePath": "docs/de/api.md"
+        }
+      ],
+      "maxChars": 14000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: x-toast show dismiss duration status success error imperative API notifications\nLocales: all\nScopes: docs, rmt-kit\n\n[K1] x-toast — API-Referenz\nResource: xtend://docs/de/components-xtoast\nSource: docs/de/components/xtoast.md#sha256:1b5c37c380d47f1662d4a42d2a3605a522178c00890e227ae29564a5b1eb68ca\n## API-Referenz\n\nAttribute:\n- `type`\n- `tone`\n- `duration`\n- `open`\n- `hidden`\n\nEvents:\n- `toast-shown`\n- `toast-dismissed`\n\nMethoden:\n- `dismiss(reason?: XToastDismissReason)`\n\nSlots:\n- `default`\n\nCSS Parts:\n- `root`\n- `content`\n- `close`\n- `control`\n- `close-icon`\n- `icon`\n\nCSS Custom Properties:\n- `--toast-animation-duration`\n- `--toast-width`\n- `--xtend-font-family`\n- `--toast-padding`\n- `--toast-radius`\n- `--xtend-feedback-radius`\n- `--xtend-radius`\n- `--toast-fg`\n- `--xtend-feedback-color`\n- `--toast-bg`\n- `--xtend-feedback-bg`\n- `--xtend-surface-muted`\n- `--xtend-shadow`\n- `--xtend-feedback-border`\n- `--xtend-border`\n- `--xtend-info-bg`\n\n[K2] x-toast — API reference\nResource: xtend://docs/en/components-xtoast\nSource: docs/en/components/xtoast.md#sha256:5880b62236ff5d4004975bdc8c298dafd40f3f08bcafd250d6011827ab628628\n## API reference\n\nAttributes:\n- `type`\n- `tone`\n- `duration`\n- `open`\n- `hidden`\n\nEvents:\n- `toast-shown`\n- `toast-dismissed`\n\nMethods:\n- `dismiss(reason?: XToastDismissReason)`\n\nSlots:\n- `default`\n\nCSS parts:\n- `root`\n- `content`\n- `close`\n- `control`\n- `close-icon`\n- `icon`\n\nCSS custom properties:\n- `--toast-animation-duration`\n- `--toast-width`\n- `--xtend-font-family`\n- `--toast-padding`\n- `--toast-radius`\n- `--xtend-feedback-radius`\n- `--xtend-radius`\n- `--toast-fg`\n- `--xtend-feedback-color`\n- `--toast-bg`\n- `--xtend-feedback-bg`\n- `--xtend-surface-muted`\n- `--xtend-shadow`\n- `--xtend-feedback-border`\n- `--xtend-border`\n- `--xtend-info-bg`\n\n[K3] Primitives — Syntax\nResource: xtend://docs/en/rmt-reference-primitives\nSource: docs/en/rmt-reference-primitives.md#sha256:769e1a467db77642e064ae1114be616a131f9890bb5467961c8b6d6f4168a70d\n## Syntax\n\n| Operator | Form | Allowed contexts | Parameters | Function | Diagnostics | Related operators |\n| --- | --- | --- | --- | --- | --- | --- |\n| <a id=\"state\"></a>`state` | `state app.status type object preserve { ... }` | Top-level, `template`, primitive `surface` | identifier, `type`, `initial`, `preserve` | Declares persistent or lifecycle-owned app state. | State blocks may contain `initial` only. | `selector`, `reduce` |\n| <a id=\"selector\"></a>`selector` | `selector view from state app.status { ... }` | Top-level, `template`, primitive `surface` | identifier, source reference | Derives a view model from state or datasource. | Selector blocks allow only `where`, `find`, `sort by`, `output`. | `from state`, `from datasource` |\n| <a id=\"datasource\"></a>`datasource` | `datasource list from endpoint \"/api\" { ... }` | Top-level, `template`, primitive `surface` | identifier, source kind, source target | Describes data access without free runtime execution. | DataSource blocks allow only `method`, `contract`, `result`, `fallback`. | `endpoint`, `fixture`, `worker` |\n| <a id=\"action\"></a>`action` | `action save { ... }` | Top-level, `template`, primitive `surface` | identifier | Declares typed inputs, reducers, effects and events. | Action blocks allow only `input`, `status`, `effect`, `reduce`, `emit`, `on`. | `emit`, `reduce`, `on success ->` |\n| <a id=\"portal\"></a>`port…\n\n[K4] API — Empfohlener Ablauf\nResource: xtend://docs/de/api\nSource: docs/de/api.md#sha256:d5ff629e10a91c18142c243670f19140b4e13e5d476fdbc962ff54dd15c22bcd\n## Empfohlener Ablauf\n\nImportiere die API explizit und warte auf das Ready-Event:\n\n```js\nimport { initXTendAPI } from \"/api.js\";\n\nwindow.addEventListener(\"xtend-api-ready\", ({ detail }) => {\n  if (detail.toast) window.XTend.toast.success(\"Ready\");\n}, { once: true });\n\nawait initXTendAPI({ \"x-toast\": \"./components/xtoast.js\" });\n```\n\nEin fehlendes Modul lehnt den Init-Pfad ab. Prüfe Manifest und Browser-Konsole, statt einen nicht initialisierten Namespace als erfolgreiche API zu behandeln.\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/de/components-xtoast",
+        "sourceHash": "1b5c37c380d47f1662d4a42d2a3605a522178c00890e227ae29564a5b1eb68ca",
+        "sourcePath": "docs/de/components/xtoast.md"
+      },
+      {
+        "uri": "xtend://docs/en/components-xtoast",
+        "sourceHash": "5880b62236ff5d4004975bdc8c298dafd40f3f08bcafd250d6011827ab628628",
+        "sourcePath": "docs/en/components/xtoast.md"
+      },
+      {
+        "uri": "xtend://docs/en/rmt-reference-primitives",
+        "sourceHash": "769e1a467db77642e064ae1114be616a131f9890bb5467961c8b6d6f4168a70d",
+        "sourcePath": "docs/en/rmt-reference-primitives.md"
+      },
+      {
+        "uri": "xtend://docs/de/api",
+        "sourceHash": "d5ff629e10a91c18142c243670f19140b4e13e5d476fdbc962ff54dd15c22bcd",
+        "sourcePath": "docs/de/api.md"
+      }
+    ]
+  }
+}

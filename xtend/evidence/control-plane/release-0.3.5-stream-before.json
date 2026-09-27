@@ -1,0 +1,28 @@
+{
+  "filters": {
+    "language": "de",
+    "timeRange": "",
+    "safeSearch": "1"
+  },
+  "count": 43,
+  "status": "3 von 3 Quellen abgeschlossen",
+  "propsSources": [
+    "bing",
+    "google cse",
+    "brave"
+  ],
+  "domResults": 43,
+  "domSources": [
+    "bing",
+    "google cse",
+    "brave"
+  ],
+  "warnings": [],
+  "stream": {
+    "id": "052773bc-9fd8-4dd6-a5e1-8d1859836815",
+    "url": "/search?q=open+source&categories=general&language=de&time_range=&safesearch=1",
+    "phase": "complete"
+  },
+  "sameDocument": true,
+  "errors": []
+}

@@ -1,0 +1,54 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+const base=process.env.TEST_BASE_URL||'http://localhost:8093',browser=await chromium.launch(),checks=[],out=new URL('../../evidence/control-plane/',import.meta.url);
+let page,context;const errors=[];
+async function login(role,js=true){const context=await browser.newContext({javaScriptEnabled:js,viewport:{width:1600,height:1000},colorScheme:'dark'}),page=await context.newPage();await page.goto(base+'/admin');await page.getByRole('link',{name:'Mit Nextcloud anmelden'}).click();await page.getByRole('link',{name:role,exact:true}).click();await page.waitForURL(base+'/admin');if(js)await page.waitForFunction(()=>window.XTendPage);return {context,page};}
+async function visit(page,url){await page.evaluate(url=>window.XTendPage.visit(url,{preserveScroll:true}),url);await page.waitForTimeout(200);}
+async function source(id){await visit(page,'/admin?view=sources&engine='+encodeURIComponent(id));await page.locator('#policy-form').waitFor();}
+async function save(){const rev=await page.locator('#policy-form input[name=revision]').inputValue();await page.getByRole('button',{name:'Policy verbindlich speichern'}).click();await page.waitForFunction(rev=>document.querySelector('#policy-form input[name=revision]')?.value!==rev,rev);}
+try{
+ ({page,context}=await login('administrator'));page.on('pageerror',e=>errors.push(e.message));
+ const origin=await page.evaluate(()=>performance.timeOrigin);
+ for(const [id,cap]of [['fixture fast','general'],['fixture medium','general'],['fixture slow','general'],['fixture images','images'],['fixture news','news'],['fixture videos','videos']]){
+  console.log('policy',id);await source(id);const form=page.locator('#policy-form');await form.locator('select[name=state]').selectOption('allowed');await form.locator('input[name=capabilities]').fill(cap);await form.locator('input[name=rpm]').fill('60');await form.locator('input[name=concurrency]').fill('4');await form.locator('input[name=family]').fill(id.replaceAll(' ','-'));await form.locator('input[name=pagingVerified]').check();await save();
+ }
+ assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);checks.push('Six fixture policies saved through Maraca; no document reload.');
+ console.log('drafts');await source('fixture fast');await page.locator('#policy-form input[name=rpm]').fill('59');
+ await page.getByRole('link',{name:'Meldungen',exact:true}).click();await page.getByRole('button',{name:'Abbrechen',exact:true}).click();assert.equal(await page.locator('#policy-form input[name=rpm]').inputValue(),'59');assert.ok(page.url().includes('view=sources'));
+ await page.waitForTimeout(2500);assert.equal(await page.locator('#policy-form input[name=rpm]').inputValue(),'59');
+ await page.getByRole('link',{name:'Meldungen',exact:true}).click();await page.getByRole('button',{name:'Speichern',exact:true}).click();await page.waitForURL(/view=reports/);
+ await page.goBack();await page.waitForSelector('#policy-form');assert.equal(await page.locator('#policy-form input[name=rpm]').inputValue(),'59');
+ await page.locator('#policy-form input[name=rpm]').fill('58');await page.getByRole('link',{name:'Regeln',exact:true}).click();await page.getByRole('button',{name:'Verwerfen',exact:true}).click();await page.waitForURL(/view=rules/);checks.push('Save / discard / cancel, live updates during drafts and browser back preserve expected state.');
+ await source('fixture fast');
+ for(const width of [320,390,768,1280,1920,3840]){
+  await page.setViewportSize({width,height:1000});await page.waitForTimeout(250);
+  assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'overflow '+width);
+  const panel=await page.locator('#source-panel').boundingBox();assert.ok(panel&&panel.x>=-1&&panel.x+panel.width<=width+1,'panel '+width+' '+JSON.stringify(panel));
+  if(width<=900)assert.equal(await page.locator('#source-panel').getAttribute('mode'),'fullscreen');
+  if(width===320||width===1920)await page.screenshot({path:new URL('0.4-dashboard-'+width+'.png',out).pathname,fullPage:true});
+ }
+ await page.setViewportSize({width:1600,height:1000});await visit(page,'/admin?view=sources&category=images');assert.ok((await page.locator('.source-table tbody tr').allTextContents()).every(x=>x.includes('Bilder')));await page.goBack();await page.waitForSelector('#source-panel');
+ assert.equal(await page.locator('#observatory-surfaces').evaluate(e=>e.readSnapshot().surfaceCount),1);
+ checks.push('Native XSurfaceManager and XSidePanel, category filters, URL history and 320–3840px layouts.');
+ console.log('stream and favicon');const search=await context.newPage();search.on('pageerror',e=>errors.push(e.message));await search.goto(base+'/');await search.waitForFunction(()=>window.XTendPage);const searchOrigin=await search.evaluate(()=>performance.timeOrigin);
+ await search.route('**/favicon?*',async route=>{await new Promise(r=>setTimeout(r,4000));await route.fulfill({status:204}).catch(()=>{});});
+ await search.evaluate(()=>{window.framesSeen=[];window.t=performance.now();window.addEventListener('xtend-search:stream',e=>window.framesSeen.push({elapsed:performance.now()-window.t,status:e.detail.status,n:document.querySelectorAll('article.result').length}));});
+ await search.locator('#search-input').fill('quality baseline');await search.getByRole('button',{name:'Suchen',exact:true}).click();await search.waitForFunction(()=>window.framesSeen.some(x=>x.status==='complete'));
+ const frames=await search.evaluate(()=>window.framesSeen),first=frames.find(f=>f.n),last=frames.find(f=>f.status==='complete');assert.ok(first.elapsed<2000);assert.ok(last.elapsed<4000);assert.equal(last.n,10);assert.equal(await search.evaluate(()=>performance.timeOrigin),searchOrigin);await fs.writeFile(new URL('0.4-stream-performance.json',out),JSON.stringify({firstPaintMs:first.elapsed,completeMs:last.elapsed,frames,slowFaviconMs:4000},null,2));
+ await search.unroute('**/favicon?*');await search.goto(base+'/search?q=icons&categories=general');await search.waitForFunction(()=>document.querySelectorAll('.favicon-ready').length>0);const icons=await search.locator('.source-icon').evaluateAll(nodes=>nodes.map(n=>({w:n.getBoundingClientRect().width,h:n.getBoundingClientRect().height})));assert.ok(icons.every(i=>i.w===icons[0].w&&i.h===icons[0].h));checks.push('Four-second favicon responses do not block first paint or stream completion; successful icons retain fixed dimensions.');
+ console.log('feedback');let feedbackWire;
+ search.on('request',r=>{if(r.url().endsWith('/search.feedback.submit'))feedbackWire=JSON.parse(r.postData());});
+ await search.locator('a[data-report]').first().click();await search.locator('#feedback-form select').selectOption('spam');assert.equal(await search.locator('#feedback-form input[type=checkbox]').isChecked(),false);await search.locator('#feedback-form input[type=checkbox]').check();await search.locator('#feedback-form button').click();await search.waitForFunction(()=>document.querySelector('.feedback-toast'));assert.ok(feedbackWire);assert.ok(!('url' in feedbackWire.input));
+ await search.screenshot({path:new URL('0.4-feedback-accepted.png',out).pathname,fullPage:true});
+ // Five independent browser contexts are test contexts, not independent persons.
+ for(let i=0;i<4;i++){const c=await browser.newContext(),p=await c.newPage();await p.goto(base+'/search?q=report-'+i+'&categories=general');await p.waitForFunction(()=>window.XTendPage);await p.locator('a[data-report]').first().click();await p.locator('#feedback-form select').selectOption('spam');await p.locator('#feedback-form button').click();await p.waitForFunction(()=>document.querySelector('.feedback-toast'));await c.close();}
+ await visit(page,'/admin?view=reports');assert.ok(await page.locator('.proposal').count());await page.locator('.proposal a').first().click();await page.getByRole('button',{name:'Freiwillige Belege abrufen'}).click();await page.waitForFunction(()=>document.querySelector('#quality-evidence-list a'));assert.equal(await page.locator('#quality-evidence-list a').count(),1);assert.match(await page.locator('#quality-evidence-list').textContent(),/example/);await page.screenshot({path:new URL('0.4-report-inbox.png',out).pathname,fullPage:true});
+ await page.locator('#quality-decision-form select').selectOption('confirm');await page.getByRole('button',{name:'Entscheidung speichern'}).click();await page.waitForFunction(()=>!document.querySelector('#quality-decision-form'));checks.push('Anonymous XDialog reports create an inbox proposal; optional evidence is separate and manual decision audited.');
+ await visit(page,'/admin?view=rules&engine=fixture+fast&capability=general');assert.equal(await page.locator('#quality-rule-form input[name=enabled]').isChecked(),false);await page.getByRole('button',{name:'Unverbindlich vorprüfen'}).click();await page.waitForFunction(()=>document.querySelector('#quality-simulation')?.textContent.includes('Meldungen'));
+ await page.getByRole('button',{name:'Regel speichern',exact:true}).click();await page.waitForFunction(()=>document.querySelector('.admin-toasts')?.textContent.includes('gespeichert'));checks.push('Auto cooldown is off; rule preview and versioned rule save work.');
+ const viewer=await login('viewer');await visit(viewer.page,'/admin?view=rules&engine=fixture+fast');assert.equal(await viewer.page.getByRole('button',{name:'Regel speichern',exact:true}).isEnabled(),false);assert.equal(await viewer.page.getByRole('button',{name:'Freiwillige Belege abrufen'}).count(),0);await viewer.context.close();
+ const native=await login('administrator',false);await native.page.getByRole('link',{name:'Quellen',exact:true}).click();await native.page.locator('.source-table a').first().click();assert.ok(await native.page.locator('#policy-form').isVisible());await native.page.getByRole('button',{name:'Abmelden',exact:true}).click();assert.ok(await native.page.getByRole('link',{name:'Mit Nextcloud anmelden'}).isVisible());await native.context.close();
+ const nojs=await browser.newContext({javaScriptEnabled:false}),np=await nojs.newPage();await np.goto(base+'/search?q=native&categories=general');await np.locator('a[data-report]').first().click();await np.locator('#feedback-form select').selectOption('broken');await np.locator('#feedback-form button').click();await np.getByRole('heading',{name:'Vielen Dank'}).waitFor();await nojs.close();checks.push('Viewer restrictions, no-JS Observatory/logout and no-JS anonymous reporting.');
+ assert.deepEqual(errors,[]);await fs.writeFile(new URL('0.4-browser.json',out),JSON.stringify({ok:true,checks},null,2));console.log(JSON.stringify({ok:true,checks}));
+}catch(error){console.error(error);if(page)await page.screenshot({path:new URL('0.4-browser-failure.png',out).pathname,fullPage:true});process.exitCode=1;}finally{await browser.close();}

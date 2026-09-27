@@ -1,0 +1,261 @@
+{
+  "timestamp": "2026-09-20T00:51:56.257Z",
+  "base": "http://127.0.0.1:8093",
+  "rows": [
+    {
+      "name": "canonical AppService frames, early batch, deduplication, one terminal",
+      "firstMs": 67.86587500000002,
+      "finalMs": 1878.797789,
+      "types": [
+        "start",
+        "delta",
+        "delta",
+        "complete"
+      ]
+    },
+    {
+      "browser": "chromium",
+      "name": "real XScaler preflight, SRI module, progressive RMT commit and cleanup",
+      "firstMs": 361,
+      "finalMs": 2239,
+      "transport": {
+        "schema": "xtend.xscaler.app-service-transport.v1",
+        "kind": "xscaler-remote-surface",
+        "disposed": true,
+        "activeCount": 0,
+        "configuredServiceIds": [
+          "search.results"
+        ],
+        "ownsLoader": true,
+        "runtimeBoundary": {
+          "remoteSurfaceOnly": true,
+          "remoteRuntimeExecution": false,
+          "kernelRemoteExecution": false
+        },
+        "loader": {
+          "schema": "xtend.xscaler.remote-adapter-loader-snapshot.v1",
+          "loaderSchema": "xtend.xscaler.remote-adapter-loader.v1",
+          "disposed": true,
+          "status": "disposed",
+          "sessionCount": 1,
+          "registeredAdapterCount": 0,
+          "counters": {
+            "preflight": 1,
+            "accepted": 1,
+            "rejected": 0,
+            "loadAttempts": 1,
+            "loaded": 1,
+            "attached": 1,
+            "cancelled": 0,
+            "detached": 1,
+            "disposed": 1
+          },
+          "runtimeBoundary": {
+            "remoteSurfaceOnly": true,
+            "remoteRuntimeExecution": false,
+            "kernelRemoteExecution": false,
+            "networkRequiredByKernel": false
+          },
+          "sessions": [
+            {
+              "schema": "xtend.xscaler.remote-adapter-session.v1",
+              "id": "search:cce30cdf-6172-4292-a753-984f973e9016",
+              "surfaceId": "remoteSurface:search.results",
+              "state": "disposed",
+              "adapterUrl": "http://127.0.0.1:8093/assets/xtend/search-remote-adapter.mjs?xscaler-session=search%3Acce30cdf-6172-4292-a753-984f973e9016",
+              "integrity": "sha256-/WZlJciGSgtI/IzHtAlLV6zJU4LVAvCUVFCCzsCf2XI=",
+              "preflightAccepted": true,
+              "loadAttempted": true,
+              "loaded": true,
+              "adapterExecutionAttempted": true,
+              "adapterAttached": false,
+              "adapterDisposed": true,
+              "fallbackActivationAttempted": false,
+              "fallbackActivated": false,
+              "runtimeBoundary": {
+                "remoteRuntimeExecution": false,
+                "kernelRemoteExecution": false,
+                "networkRequiredByKernel": false
+              },
+              "diagnostics": []
+            }
+          ],
+          "history": [
+            {
+              "status": "attached",
+              "surfaceId": "remoteSurface:search.results",
+              "sessionId": "search:cce30cdf-6172-4292-a753-984f973e9016",
+              "loadAttempted": true,
+              "loaded": true
+            },
+            {
+              "status": "detached",
+              "surfaceId": "remoteSurface:search.results",
+              "sessionId": "search:cce30cdf-6172-4292-a753-984f973e9016",
+              "loadAttempted": true,
+              "loaded": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "browser": "chromium",
+      "name": "final results identical to conventional upstream search"
+    },
+    {
+      "browser": "chromium",
+      "name": "new navigation cancels XScaler; old frames cannot overwrite results"
+    },
+    {
+      "browser": "chromium",
+      "name": "native XTend history back/forward stays resumable"
+    },
+    {
+      "browser": "chromium",
+      "name": "adapter load failure falls back once to conventional SPA response"
+    },
+    {
+      "browser": "chromium",
+      "name": "real browser SRI rejects modified adapter before execution"
+    },
+    {
+      "browser": "chromium",
+      "name": "truncated stream retains received results and dismissible warning"
+    },
+    {
+      "browser": "chromium",
+      "name": "selected sidebar image survives batches; open XLightbox includes late images"
+    },
+    {
+      "browser": "chromium",
+      "name": "history restores scroll after incremental content has sufficient height"
+    },
+    {
+      "browser": "chromium",
+      "name": "no-JS initial SSR keeps complete results"
+    },
+    {
+      "browser": "firefox",
+      "name": "real XScaler preflight, SRI module, progressive RMT commit and cleanup",
+      "firstMs": 464,
+      "finalMs": 2409,
+      "transport": {
+        "schema": "xtend.xscaler.app-service-transport.v1",
+        "kind": "xscaler-remote-surface",
+        "disposed": true,
+        "activeCount": 0,
+        "configuredServiceIds": [
+          "search.results"
+        ],
+        "ownsLoader": true,
+        "runtimeBoundary": {
+          "remoteSurfaceOnly": true,
+          "remoteRuntimeExecution": false,
+          "kernelRemoteExecution": false
+        },
+        "loader": {
+          "schema": "xtend.xscaler.remote-adapter-loader-snapshot.v1",
+          "loaderSchema": "xtend.xscaler.remote-adapter-loader.v1",
+          "disposed": true,
+          "status": "disposed",
+          "sessionCount": 1,
+          "registeredAdapterCount": 0,
+          "counters": {
+            "preflight": 1,
+            "accepted": 1,
+            "rejected": 0,
+            "loadAttempts": 1,
+            "loaded": 1,
+            "attached": 1,
+            "cancelled": 0,
+            "detached": 1,
+            "disposed": 1
+          },
+          "runtimeBoundary": {
+            "remoteSurfaceOnly": true,
+            "remoteRuntimeExecution": false,
+            "kernelRemoteExecution": false,
+            "networkRequiredByKernel": false
+          },
+          "sessions": [
+            {
+              "schema": "xtend.xscaler.remote-adapter-session.v1",
+              "id": "search:866d11d5-0258-448f-8003-b979d828737a",
+              "surfaceId": "remoteSurface:search.results",
+              "state": "disposed",
+              "adapterUrl": "http://127.0.0.1:8093/assets/xtend/search-remote-adapter.mjs?xscaler-session=search%3A866d11d5-0258-448f-8003-b979d828737a",
+              "integrity": "sha256-/WZlJciGSgtI/IzHtAlLV6zJU4LVAvCUVFCCzsCf2XI=",
+              "preflightAccepted": true,
+              "loadAttempted": true,
+              "loaded": true,
+              "adapterExecutionAttempted": true,
+              "adapterAttached": false,
+              "adapterDisposed": true,
+              "fallbackActivationAttempted": false,
+              "fallbackActivated": false,
+              "runtimeBoundary": {
+                "remoteRuntimeExecution": false,
+                "kernelRemoteExecution": false,
+                "networkRequiredByKernel": false
+              },
+              "diagnostics": []
+            }
+          ],
+          "history": [
+            {
+              "status": "attached",
+              "surfaceId": "remoteSurface:search.results",
+              "sessionId": "search:866d11d5-0258-448f-8003-b979d828737a",
+              "loadAttempted": true,
+              "loaded": true
+            },
+            {
+              "status": "detached",
+              "surfaceId": "remoteSurface:search.results",
+              "sessionId": "search:866d11d5-0258-448f-8003-b979d828737a",
+              "loadAttempted": true,
+              "loaded": true
+            }
+          ]
+        }
+      }
+    },
+    {
+      "browser": "firefox",
+      "name": "final results identical to conventional upstream search"
+    },
+    {
+      "browser": "firefox",
+      "name": "new navigation cancels XScaler; old frames cannot overwrite results"
+    },
+    {
+      "browser": "firefox",
+      "name": "native XTend history back/forward stays resumable"
+    },
+    {
+      "browser": "firefox",
+      "name": "adapter load failure falls back once to conventional SPA response"
+    },
+    {
+      "browser": "firefox",
+      "name": "real browser SRI rejects modified adapter before execution"
+    },
+    {
+      "browser": "firefox",
+      "name": "truncated stream retains received results and dismissible warning"
+    },
+    {
+      "browser": "firefox",
+      "name": "selected sidebar image survives batches; open XLightbox includes late images"
+    },
+    {
+      "browser": "firefox",
+      "name": "history restores scroll after incremental content has sufficient height"
+    },
+    {
+      "browser": "firefox",
+      "name": "no-JS initial SSR keeps complete results"
+    }
+  ]
+}

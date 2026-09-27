@@ -1,0 +1,28 @@
+{
+  "timestamp": "2026-09-19T20:46:06.834Z",
+  "note": "Visual CSS verification using the actual application stylesheet and button markup.",
+  "results": [
+    {
+      "browser": "chromium",
+      "status": "passed",
+      "geometry": {
+        "headBox": "border-box",
+        "headWidth": "8px",
+        "headHeight": "8px",
+        "headCenter": 8,
+        "shaftCenter": 8
+      }
+    },
+    {
+      "browser": "firefox",
+      "status": "passed",
+      "geometry": {
+        "headBox": "border-box",
+        "headWidth": "8px",
+        "headHeight": "8px",
+        "headCenter": 8,
+        "shaftCenter": 8
+      }
+    }
+  ]
+}

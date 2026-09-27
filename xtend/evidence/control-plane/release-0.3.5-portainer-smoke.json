@@ -1,0 +1,23 @@
+{
+  "version": "0.3.5",
+  "project": "xtend035-smoke",
+  "checks": [
+    "Compose accepts filled variables and rejects empty required variables.",
+    "Frontend 0.3.5 and backend 0.3.0 healthy; literal punctuation and roles preserved; only loopback frontend port published; storage uses named volumes.",
+    "Nextcloud redirect is configured correctly, verified without contacting Nextcloud.",
+    "Recreation retains public signing-key fingerprint and database; no live provider approval or search performed."
+  ],
+  "ok": true,
+  "health": {
+    "ok": true,
+    "version": "0.3.5",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "imageIds": {
+    "search": "sha256:df943076660a1cff1f425dd8e9b591ca2e0aacdcfe0e9cdae7ccea0a460aeb54",
+    "searxng": "sha256:0a642d389dcbd7f6714a446fc379f405ee40854c6f95748de79a730144805dfd"
+  },
+  "composeSha256": "5f10c855ce7e0910f23a9c33c7a61e4d59c2a0718549bf746e65f65c32892eff",
+  "testResourcesRemoved": true
+}

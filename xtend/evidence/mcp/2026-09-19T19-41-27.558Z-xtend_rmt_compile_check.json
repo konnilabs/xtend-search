@@ -1,0 +1,73 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "XTendRMT compile check completed with status syntax_error."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.rmt-compile-check.v1",
+      "sourceHash": "7d1608e10701064fc67acddb0dca90a425e2d8a37dd84d75a0ce74cee58d5bff",
+      "path": "frontend/search.rmt",
+      "ok": false,
+      "status": "syntax_error",
+      "diagnostics": [
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after initial value.",
+          "range": {
+            "start": {
+              "line": 3,
+              "character": 68
+            },
+            "end": {
+              "line": 3,
+              "character": 75
+            },
+            "startOffset": 217,
+            "endOffset": 224
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "rmt-language",
+          "code": "rmt.vnext.syntax.error",
+          "severity": "error",
+          "message": "Expected statement end after initial value.",
+          "range": {
+            "start": {
+              "line": 5,
+              "character": 26
+            },
+            "end": {
+              "line": 5,
+              "character": 34
+            },
+            "startOffset": 301,
+            "endOffset": 309
+          }
+        }
+      ],
+      "summary": {
+        "schema": "xtend.rmt.vnext-compiler.v1",
+        "mode": null,
+        "recordCount": null,
+        "outputCount": null
+      }
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "workspace://frontend/search.rmt",
+        "kind": "compile-check",
+        "sourceHash": "7d1608e10701064fc67acddb0dca90a425e2d8a37dd84d75a0ce74cee58d5bff"
+      }
+    ]
+  }
+}

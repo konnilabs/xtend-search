@@ -1,0 +1,29 @@
+use_default_settings: true
+general:
+  instance_name: "XTend.search retrieval"
+  enable_metrics: false
+  debug: false
+server:
+  secret_key: "replaced-by-SEARXNG_SECRET"
+  limiter: false
+  public_instance: false
+  image_proxy: false
+search:
+  formats: [json]
+  safe_search: 1
+  autocomplete: ""
+  default_lang: "all"
+  favicon_resolver: ""
+outgoing:
+  request_timeout: 5.0
+  max_request_timeout: 10.0
+plugins:
+  searx.plugins.calculator.SXNGPlugin: {active: false}
+  searx.plugins.hash_plugin.SXNGPlugin: {active: false}
+  searx.plugins.self_info.SXNGPlugin: {active: false}
+  searx.plugins.unit_converter.SXNGPlugin: {active: false}
+  searx.plugins.ahmia_filter.SXNGPlugin: {active: false}
+  searx.plugins.hostnames.SXNGPlugin: {active: false}
+  searx.plugins.oa_doi_rewrite.SXNGPlugin: {active: false}
+  searx.plugins.tor_check.SXNGPlugin: {active: false}
+  searx.plugins.tracker_url_remover.SXNGPlugin: {active: false}

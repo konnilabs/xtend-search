@@ -1,0 +1,10 @@
+{
+  "http": 200,
+  "version": "0.3.4",
+  "seed": true,
+  "keys": [
+    "schema",
+    "root",
+    "nodes"
+  ]
+}

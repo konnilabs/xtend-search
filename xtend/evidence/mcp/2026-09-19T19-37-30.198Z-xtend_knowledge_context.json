@@ -1,0 +1,121 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"Maraca page SSR resumability native GET forms viewTemplate repeat state inputs\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "Maraca page SSR resumability native GET forms viewTemplate repeat state inputs",
+      "locale": "en",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 5,
+      "domains": [],
+      "hitCount": 5,
+      "hits": [
+        {
+          "uri": "xtend://docs/en/ssr-pages",
+          "id": "en:ssr-pages:7",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "Page runtime for Node and Laravel",
+          "heading": "Maraca pages and XTend.store",
+          "score": 27,
+          "excerpt": "## Maraca pages and XTend.store\n\n`createMaracaPageClient()` from `@ccslabs/xtend/maraca/page-client` connects the page client to a Maraca bundle. Each page or layout manifest may declare `maraca: { entry: \"/build/maraca/xtend.maraca.mjs\" }`. The bundle and portable projection use the same compiler facts; `createRmtCompilationSession()` shares analysis within a build. Configuration and referenced assets contribute to the build version.\n\nThe page runtime owns URL, history and transport; Maraca owns UI state and DOM commits. Each root has one controller, and unchanged shells survive navigation. Superseded activations are discarded and navigation releases remote surfaces. The generated entry uses `startMaracaPageApplication()` from `@ccslabs/xtend/maraca/page-bootstrap`: capture is installed before loading the composition, P-256 signatures use the public build key, and rejected integrity checks use the existing single hydration fallback.\n\nThe shared head contract also accepts canonical links (`tag: \"link\"`, `rel: \"canonical\"`, HTTP(S) URL) and identified JSON-LD records (`tag: \"json-ld\"`, `key`, `data`). Node, PHP and browser consumers deduplicate by identity. Script content is serialized safely; event attributes and executable canonical URLs are rejected.\n\n[XTend.store](../../products/xtend-shop/README.en.md) demonstrates this integration with Laravel, a guest cart and a separate…",
+          "sourceHash": "e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456",
+          "sourcePath": "docs/en/ssr-pages.md"
+        },
+        {
+          "uri": "xtend://docs/en/quick-start-guide",
+          "id": "en:quick-start-guide:9",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "en",
+          "title": "Quick Start Guide",
+          "heading": "0.8.0: local Maraca app and page hosts",
+          "score": 22,
+          "excerpt": "## 0.8.0: local Maraca app and page hosts\n\nPackages require Node >=24. In a framework checkout, the native example runs through a local HTTP server without SSR or resumability:\n\n```sh\nnode xtend-builder/bin/xt maraca build demos/xtendrmt/maraca-fastpass/app.rmt --out .xtend-build/maraca/fastpass --orchestration strict --kernel strict --hydration auto --css external\nnode xtend-builder/bin/xt serve --root .xtend-build/maraca/fastpass\n```\n\n[FastPass](./maraca-fastpass-abort-boundary.md) prioritizes shell actions. For server-rendered pages, forms and persistent layouts, use the [Node/Laravel page runtime](./ssr-pages.md). When upgrading, read the [0.8 migration](./rmt-kernel-0-8-migration.md) and rebuild existing bundles.",
+          "sourceHash": "537de2e0b2068029538c0e85edb34d176cb3e423ac98ff969828b2b0d7aa4dab",
+          "sourcePath": "docs/en/quick-start-guide.md"
+        },
+        {
+          "uri": "xtend://rmt/kit/reference/runtime%3Apage-runtime",
+          "id": "runtime:page-runtime",
+          "scope": "rmt-kit",
+          "kind": "runtime",
+          "locale": "en",
+          "title": "Node and Laravel page runtime",
+          "heading": "Node and Laravel page runtime",
+          "score": 20,
+          "excerpt": "runtime:page-runtime\nruntime\nNode and Laravel page runtime\nIndependent Node and Laravel page hosts support props, forms, navigation, layouts, resume and streaming. Production Laravel renders prebuilt artifacts without Node. Page-owned requests end with the visit; layout-owned resources follow their owner. Rebuild Maraca bundles and page manifests with the same framework version. XTend.store demonstrates Maraca, Laravel, a guest cart and a separate DemoPay provider.\npage\nssr\nlaravel\nnode\nforms\nnavigation",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+          "sourcePath": "docs/en/ssr-pages.md"
+        },
+        {
+          "uri": "xtend://docs/en/maraca-app-services",
+          "id": "en:maraca-app-services:8",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "en",
+          "title": "Maraca AppServices and TypeScript",
+          "heading": "Request-scoped Laravel bridge and progressive controls",
+          "score": 19,
+          "excerpt": "## Request-scoped Laravel bridge and progressive controls\n\n`Ccslabs\\XTend\\AppServiceHost` connects a prebuilt AppService manifest, a PHP callable registry and the current Laravel request. The web route retains session and CSRF middleware. Handlers receive `context[\"laravelRequest\"]`; RMT input policies run before the handler. Laravel validation failures return HTTP 422 with field errors and the error bag for the RMT validation group. A rejected check remains a failed invocation.\n\nWith `viewTemplate.progressive: true`, supported XTend form controls use a native SSR projection adopted by the shared renderer. Input, button, form, select, textarea, checkbox and radio are supported. Native names, labels, value bindings and validity messages are preserved. `data-xtend-component` retains the declared component identity without creating a second control.\n\n`@ccslabs/xtend/maraca/remote-surface` binds declared RMT state to an XScaler plan. The separately built adapter loads after preflight, integrity verification and ATC attach. PHP uses `XScalerPhpFragmentAdapter` from the built Laravel package. It accepts data only for declared state targets, preserves failures and emits exactly one terminal state after cleanup. Hosts and I/O must honor the 30-second deadline; cleanup is limited to five seconds. Remote code does not execute in the RMT kernel.",
+          "sourceHash": "a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649",
+          "sourcePath": "docs/en/maraca-app-services.md"
+        },
+        {
+          "uri": "xtend://rmt/kit/reference/operator%3Astate",
+          "id": "operator:state",
+          "scope": "rmt-kit",
+          "kind": "operator",
+          "locale": "en",
+          "title": "state",
+          "heading": "state",
+          "score": 17,
+          "excerpt": "operator:state\noperator\nstate\nDeclares owned application state.\nstate app.status type object preserve { initial { text \"Ready\" } }\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\nstate app.ready type boolean initial true\nstate app.ready { initial true }\nState needs a static type.\ntemplate",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+          "sourcePath": "docs/de/rmt-reference-state-selectors-data.md"
+        }
+      ],
+      "maxChars": 14000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: Maraca page SSR resumability native GET forms viewTemplate repeat state inputs\nLocales: en\nScopes: docs, rmt-kit\n\n[K1] Page runtime for Node and Laravel — Maraca pages and XTend.store\nResource: xtend://docs/en/ssr-pages\nSource: docs/en/ssr-pages.md#sha256:e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456\n## Maraca pages and XTend.store\n\n`createMaracaPageClient()` from `@ccslabs/xtend/maraca/page-client` connects the page client to a Maraca bundle. Each page or layout manifest may declare `maraca: { entry: \"/build/maraca/xtend.maraca.mjs\" }`. The bundle and portable projection use the same compiler facts; `createRmtCompilationSession()` shares analysis within a build. Configuration and referenced assets contribute to the build version.\n\nThe page runtime owns URL, history and transport; Maraca owns UI state and DOM commits. Each root has one controller, and unchanged shells survive navigation. Superseded activations are discarded and navigation releases remote surfaces. The generated entry uses `startMaracaPageApplication()` from `@ccslabs/xtend/maraca/page-bootstrap`: capture is installed before loading the composition, P-256 signatures use the public build key, and rejected integrity checks use the existing single hydration fallback.\n\nThe shared head contract also accepts canonical links (`tag: \"link\"`, `rel: \"canonical\"`, HTTP(S) URL) and identified JSON-LD records (`tag: \"json-ld\"`, `key`, `data`). Node, PHP and browser consumers deduplicate by identity. Script content is serialized safely; event attributes and executable canonical URLs are rejected.\n\n[XTend.store](../../products/xtend-shop/README.en.md) demonstrates this integration with Laravel, a guest cart and a separate…\n\n[K2] Quick Start Guide — 0.8.0: local Maraca app and page hosts\nResource: xtend://docs/en/quick-start-guide\nSource: docs/en/quick-start-guide.md#sha256:537de2e0b2068029538c0e85edb34d176cb3e423ac98ff969828b2b0d7aa4dab\n## 0.8.0: local Maraca app and page hosts\n\nPackages require Node >=24. In a framework checkout, the native example runs through a local HTTP server without SSR or resumability:\n\n```sh\nnode xtend-builder/bin/xt maraca build demos/xtendrmt/maraca-fastpass/app.rmt --out .xtend-build/maraca/fastpass --orchestration strict --kernel strict --hydration auto --css external\nnode xtend-builder/bin/xt serve --root .xtend-build/maraca/fastpass\n```\n\n[FastPass](./maraca-fastpass-abort-boundary.md) prioritizes shell actions. For server-rendered pages, forms and persistent layouts, use the [Node/Laravel page runtime](./ssr-pages.md). When upgrading, read the [0.8 migration](./rmt-kernel-0-8-migration.md) and rebuild existing bundles.\n\n[K3] Node and Laravel page runtime\nResource: xtend://rmt/kit/reference/runtime%3Apage-runtime\nSource: docs/en/ssr-pages.md#sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\nruntime:page-runtime\nruntime\nNode and Laravel page runtime\nIndependent Node and Laravel page hosts support props, forms, navigation, layouts, resume and streaming. Production Laravel renders prebuilt artifacts without Node. Page-owned requests end with the visit; layout-owned resources follow their owner. Rebuild Maraca bundles and page manifests with the same framework version. XTend.store demonstrates Maraca, Laravel, a guest cart and a separate DemoPay provider.\npage\nssr\nlaravel\nnode\nforms\nnavigation\n\n[K4] Maraca AppServices and TypeScript — Request-scoped Laravel bridge and progressive controls\nResource: xtend://docs/en/maraca-app-services\nSource: docs/en/maraca-app-services.md#sha256:a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649\n## Request-scoped Laravel bridge and progressive controls\n\n`Ccslabs\\XTend\\AppServiceHost` connects a prebuilt AppService manifest, a PHP callable registry and the current Laravel request. The web route retains session and CSRF middleware. Handlers receive `context[\"laravelRequest\"]`; RMT input policies run before the handler. Laravel validation failures return HTTP 422 with field errors and the error bag for the RMT validation group. A rejected check remains a failed invocation.\n\nWith `viewTemplate.progressive: true`, supported XTend form controls use a native SSR projection adopted by the shared renderer. Input, button, form, select, textarea, checkbox and radio are supported. Native names, labels, value bindings and validity messages are preserved. `data-xtend-component` retains the declared component identity without creating a second control.\n\n`@ccslabs/xtend/maraca/remote-surface` binds declared RMT state to an XScaler plan. The separately built adapter loads after preflight, integrity verification and ATC attach. PHP uses `XScalerPhpFragmentAdapter` from the built Laravel package. It accepts data only for declared state targets, preserves failures and emits exactly one terminal state after cleanup. Hosts and I/O must honor the 30-second deadline; cleanup is limited to five seconds. Remote code does not execute in the RMT kernel.\n\n[K5] state\nResource: xtend://rmt/kit/reference/operator%3Astate\nSource: docs/de/rmt-reference-state-selectors-data.md#sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\noperator:state\noperator\nstate\nDeclares owned application state.\nstate app.status type object preserve { initial { text \"Ready\" } }\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\nstate app.ready type boolean initial true\nstate app.ready { initial true }\nState needs a static type.\ntemplate\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/en/ssr-pages",
+        "sourceHash": "e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456",
+        "sourcePath": "docs/en/ssr-pages.md"
+      },
+      {
+        "uri": "xtend://docs/en/quick-start-guide",
+        "sourceHash": "537de2e0b2068029538c0e85edb34d176cb3e423ac98ff969828b2b0d7aa4dab",
+        "sourcePath": "docs/en/quick-start-guide.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/runtime%3Apage-runtime",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/en/ssr-pages.md"
+      },
+      {
+        "uri": "xtend://docs/en/maraca-app-services",
+        "sourceHash": "a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649",
+        "sourcePath": "docs/en/maraca-app-services.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/operator%3Astate",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/de/rmt-reference-state-selectors-data.md"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-09-19T21:17:49.129Z",
+  "base": "http://127.0.0.1:8080",
+  "query": "Mozilla Firefox",
+  "fixture": false,
+  "resultCount": 100,
+  "noticeCount": 2,
+  "types": [
+    "warning",
+    "info"
+  ],
+  "dismissed": [
+    "Eine Suchquelle antwortet derzeit nicht: duckduckgo images",
+    "Die Darstellung ist auf 100 Ergebnisse pro Seite begrenzt."
+  ],
+  "focusAfterLastClose": "results-heading",
+  "sameDocument": true,
+  "persistedThroughSidebar": true,
+  "errors": [],
+  "foreignRequests": 0,
+  "health": 200
+}

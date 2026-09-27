@@ -1,0 +1,38 @@
+{
+  "ok": true,
+  "version": "0.3.2",
+  "image": "sha256:fb3facb602de71807ba3c834c1a13148345d250aaeeaf14e114ad85afef824cd",
+  "unitTests": 48,
+  "mcpCompile": {
+    "search": "compiled",
+    "admin": "compiled"
+  },
+  "browser": {
+    "ok": true,
+    "checks": [
+      "Saved defaults persist for 180 days across browser contexts and SSR; explicit URLs override them; resumed category and back/forward navigation retain filters; deletion preserves current draft and restores defaults for future visits.",
+      "Native no-JS save/delete works without a search term. Failed saves stay recoverable. Cross-origin and invalid preference writes are rejected.",
+      "Per-source SafeSearch exception survives reload and source selection, enables an offline Wikipedia knowledge fixture, and can be revoked. Streaming and no-JS SSR show the card expanded plus the exception notice; mobile uses document flow without overflow."
+    ]
+  },
+  "local": {
+    "ok": true,
+    "health": {
+      "ok": true,
+      "version": "0.3.2",
+      "storage": "ready",
+      "retrieval": "compatible"
+    },
+    "header": "0.3.2",
+    "preferencesRendered": true
+  },
+  "existingPoliciesUnchanged": true,
+  "regressionSuites": [
+    "admin-feedback-browser.mjs",
+    "admin-ux-browser.mjs",
+    "browser.mjs"
+  ],
+  "archiveBytes": 261220843,
+  "backend": "xtend-search-searxng:0.3.0",
+  "liveProviderTest": false
+}

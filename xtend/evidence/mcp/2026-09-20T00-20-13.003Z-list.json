@@ -1,0 +1,245 @@
+{
+  "tools": [
+    {
+      "name": "xtend_knowledge_search",
+      "title": "Search XTend knowledge",
+      "description": "First step for XTend/RMT authoring: search canonical Markdown and curated AI Kit records before proposing source.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "locale": {
+            "default": "all",
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "all"
+            ]
+          },
+          "scopes": {
+            "minItems": 1,
+            "maxItems": 2,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "docs",
+                "rmt-kit"
+              ]
+            }
+          },
+          "limit": {
+            "default": 6,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "domains": {
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 64
+            }
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "xtend_knowledge_context",
+      "title": "Build XTend RAG context",
+      "description": "Build bounded, provenance-preserving XTend context. Set scopes to rmt-kit for LLM product parity.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "locale": {
+            "default": "all",
+            "type": "string",
+            "enum": [
+              "de",
+              "en",
+              "all"
+            ]
+          },
+          "scopes": {
+            "minItems": 1,
+            "maxItems": 2,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "docs",
+                "rmt-kit"
+              ]
+            }
+          },
+          "limit": {
+            "default": 6,
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "domains": {
+            "maxItems": 6,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 64
+            }
+          },
+          "maxChars": {
+            "type": "integer",
+            "minimum": 1000,
+            "maximum": 20000
+          },
+          "maxRecords": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8
+          },
+          "includeRecipes": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "xtend_rmt_diagnostics",
+      "title": "Diagnose XTendRMT source",
+      "description": "Run deterministic XTendRMT language diagnostics without executing application code.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "Inline RMT source.",
+            "type": "string",
+            "maxLength": 2000000
+          },
+          "path": {
+            "description": "Workspace-relative RMT file path.",
+            "type": "string",
+            "maxLength": 4096
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "xtend_rmt_compile_check",
+      "title": "Check XTendRMT compilation",
+      "description": "Required final validation for generated RMT source. Do not call source valid unless this returns ok=true and status=compiled.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "Inline RMT source.",
+            "type": "string",
+            "maxLength": 2000000
+          },
+          "path": {
+            "description": "Workspace-relative RMT file path.",
+            "type": "string",
+            "maxLength": 4096
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "xtend_maraca_plan",
+      "title": "Plan XTend Maraca build",
+      "description": "Create a deterministic Maraca build plan without writing artifacts.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "Inline RMT source.",
+            "type": "string",
+            "maxLength": 2000000
+          },
+          "path": {
+            "description": "Workspace-relative RMT file path.",
+            "type": "string",
+            "maxLength": 4096
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "xtend_rmt_repair_plan",
+      "title": "Plan safe XTendRMT repairs",
+      "description": "Produce safe, selectable workspace-edit repairs with source and plan fingerprints.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "description": "Inline RMT source.",
+            "type": "string",
+            "maxLength": 2000000
+          },
+          "path": {
+            "description": "Workspace-relative RMT file path.",
+            "type": "string",
+            "maxLength": 4096
+          }
+        },
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,1877 @@
+{
+  "time": "2026-09-27T16:49:44.758Z",
+  "revision": 36,
+  "mode": "conservative",
+  "plans": [
+    {
+      "language": "all",
+      "timeRange": "",
+      "plan": [
+        "bing",
+        "brave",
+        "google cse"
+      ],
+      "engines": [
+        {
+          "id": "360search",
+          "eligible": "safesearch",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": false,
+          "de": [],
+          "en": [],
+          "safeSearch": false,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "bing",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE",
+            "de-LI",
+            "de-LU"
+          ],
+          "en": [
+            "en-AG",
+            "en-AI",
+            "en-AS",
+            "en-AU",
+            "en-BB",
+            "en-BI",
+            "en-BM",
+            "en-BS",
+            "en-BW",
+            "en-BZ",
+            "en-CA",
+            "en-CC",
+            "en-CK",
+            "en-CM",
+            "en-CX",
+            "en-DM",
+            "en-ER",
+            "en-FJ",
+            "en-FK",
+            "en-FM",
+            "en-GB",
+            "en-GD",
+            "en-GG",
+            "en-GH",
+            "en-GI",
+            "en-GM",
+            "en-GU",
+            "en-GY",
+            "en-HK",
+            "en-IE",
+            "en-IN",
+            "en-JE",
+            "en-JM",
+            "en-KE",
+            "en-KI",
+            "en-KN",
+            "en-KY",
+            "en-LC",
+            "en-LR",
+            "en-LS",
+            "en-MG",
+            "en-MH",
+            "en-MP",
+            "en-MS",
+            "en-MT",
+            "en-MU",
+            "en-MW",
+            "en-NA",
+            "en-NF",
+            "en-NG",
+            "en-NR",
+            "en-NU",
+            "en-NZ",
+            "en-PG",
+            "en-PH",
+            "en-PK",
+            "en-PN",
+            "en-PR",
+            "en-PW",
+            "en-RW",
+            "en-SB",
+            "en-SC",
+            "en-SD",
+            "en-SG",
+            "en-SH",
+            "en-SL",
+            "en-SS",
+            "en-SX",
+            "en-SZ",
+            "en-TC",
+            "en-TK",
+            "en-TO",
+            "en-TT",
+            "en-TV",
+            "en-TZ",
+            "en-UG",
+            "en-US",
+            "en-VC",
+            "en-VG",
+            "en-VI",
+            "en-VU",
+            "en-WS",
+            "en-ZA",
+            "en-ZM",
+            "en-ZW"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900890,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "duckduckgo",
+          "eligible": "provider_family_cooldown",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "open",
+            "observedAt": 1790436566171,
+            "samples": [],
+            "consecutive": 1,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 1791732570808,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790436600000,
+            "count": 1,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900914,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 3,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "brave",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE"
+          ],
+          "en": [
+            "en-AU",
+            "en-CA",
+            "en-GB",
+            "en-HK",
+            "en-IN",
+            "en-NZ",
+            "en-PH",
+            "en-US",
+            "en-ZA"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437901150,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        }
+      ]
+    },
+    {
+      "language": "all",
+      "timeRange": "week",
+      "plan": [
+        "brave",
+        "google cse"
+      ],
+      "engines": [
+        {
+          "id": "360search",
+          "eligible": "safesearch",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": false,
+          "de": [],
+          "en": [],
+          "safeSearch": false,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "bing",
+          "eligible": "time_range",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE",
+            "de-LI",
+            "de-LU"
+          ],
+          "en": [
+            "en-AG",
+            "en-AI",
+            "en-AS",
+            "en-AU",
+            "en-BB",
+            "en-BI",
+            "en-BM",
+            "en-BS",
+            "en-BW",
+            "en-BZ",
+            "en-CA",
+            "en-CC",
+            "en-CK",
+            "en-CM",
+            "en-CX",
+            "en-DM",
+            "en-ER",
+            "en-FJ",
+            "en-FK",
+            "en-FM",
+            "en-GB",
+            "en-GD",
+            "en-GG",
+            "en-GH",
+            "en-GI",
+            "en-GM",
+            "en-GU",
+            "en-GY",
+            "en-HK",
+            "en-IE",
+            "en-IN",
+            "en-JE",
+            "en-JM",
+            "en-KE",
+            "en-KI",
+            "en-KN",
+            "en-KY",
+            "en-LC",
+            "en-LR",
+            "en-LS",
+            "en-MG",
+            "en-MH",
+            "en-MP",
+            "en-MS",
+            "en-MT",
+            "en-MU",
+            "en-MW",
+            "en-NA",
+            "en-NF",
+            "en-NG",
+            "en-NR",
+            "en-NU",
+            "en-NZ",
+            "en-PG",
+            "en-PH",
+            "en-PK",
+            "en-PN",
+            "en-PR",
+            "en-PW",
+            "en-RW",
+            "en-SB",
+            "en-SC",
+            "en-SD",
+            "en-SG",
+            "en-SH",
+            "en-SL",
+            "en-SS",
+            "en-SX",
+            "en-SZ",
+            "en-TC",
+            "en-TK",
+            "en-TO",
+            "en-TT",
+            "en-TV",
+            "en-TZ",
+            "en-UG",
+            "en-US",
+            "en-VC",
+            "en-VG",
+            "en-VI",
+            "en-VU",
+            "en-WS",
+            "en-ZA",
+            "en-ZM",
+            "en-ZW"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900890,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "duckduckgo",
+          "eligible": "provider_family_cooldown",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "open",
+            "observedAt": 1790436566171,
+            "samples": [],
+            "consecutive": 1,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 1791732570808,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790436600000,
+            "count": 1,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900914,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 3,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "brave",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE"
+          ],
+          "en": [
+            "en-AU",
+            "en-CA",
+            "en-GB",
+            "en-HK",
+            "en-IN",
+            "en-NZ",
+            "en-PH",
+            "en-US",
+            "en-ZA"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437901150,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        }
+      ]
+    },
+    {
+      "language": "de",
+      "timeRange": "",
+      "plan": [
+        "bing",
+        "brave",
+        "google cse"
+      ],
+      "engines": [
+        {
+          "id": "360search",
+          "eligible": "safesearch",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": false,
+          "de": [],
+          "en": [],
+          "safeSearch": false,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "bing",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE",
+            "de-LI",
+            "de-LU"
+          ],
+          "en": [
+            "en-AG",
+            "en-AI",
+            "en-AS",
+            "en-AU",
+            "en-BB",
+            "en-BI",
+            "en-BM",
+            "en-BS",
+            "en-BW",
+            "en-BZ",
+            "en-CA",
+            "en-CC",
+            "en-CK",
+            "en-CM",
+            "en-CX",
+            "en-DM",
+            "en-ER",
+            "en-FJ",
+            "en-FK",
+            "en-FM",
+            "en-GB",
+            "en-GD",
+            "en-GG",
+            "en-GH",
+            "en-GI",
+            "en-GM",
+            "en-GU",
+            "en-GY",
+            "en-HK",
+            "en-IE",
+            "en-IN",
+            "en-JE",
+            "en-JM",
+            "en-KE",
+            "en-KI",
+            "en-KN",
+            "en-KY",
+            "en-LC",
+            "en-LR",
+            "en-LS",
+            "en-MG",
+            "en-MH",
+            "en-MP",
+            "en-MS",
+            "en-MT",
+            "en-MU",
+            "en-MW",
+            "en-NA",
+            "en-NF",
+            "en-NG",
+            "en-NR",
+            "en-NU",
+            "en-NZ",
+            "en-PG",
+            "en-PH",
+            "en-PK",
+            "en-PN",
+            "en-PR",
+            "en-PW",
+            "en-RW",
+            "en-SB",
+            "en-SC",
+            "en-SD",
+            "en-SG",
+            "en-SH",
+            "en-SL",
+            "en-SS",
+            "en-SX",
+            "en-SZ",
+            "en-TC",
+            "en-TK",
+            "en-TO",
+            "en-TT",
+            "en-TV",
+            "en-TZ",
+            "en-UG",
+            "en-US",
+            "en-VC",
+            "en-VG",
+            "en-VI",
+            "en-VU",
+            "en-WS",
+            "en-ZA",
+            "en-ZM",
+            "en-ZW"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900890,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "duckduckgo",
+          "eligible": "provider_family_cooldown",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "open",
+            "observedAt": 1790436566171,
+            "samples": [],
+            "consecutive": 1,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 1791732570808,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790436600000,
+            "count": 1,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900914,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 3,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "brave",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE"
+          ],
+          "en": [
+            "en-AU",
+            "en-CA",
+            "en-GB",
+            "en-HK",
+            "en-IN",
+            "en-NZ",
+            "en-PH",
+            "en-US",
+            "en-ZA"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437901150,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        }
+      ]
+    },
+    {
+      "language": "de",
+      "timeRange": "week",
+      "plan": [
+        "brave",
+        "google cse"
+      ],
+      "engines": [
+        {
+          "id": "360search",
+          "eligible": "safesearch",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": false,
+          "de": [],
+          "en": [],
+          "safeSearch": false,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "bing",
+          "eligible": "time_range",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE",
+            "de-LI",
+            "de-LU"
+          ],
+          "en": [
+            "en-AG",
+            "en-AI",
+            "en-AS",
+            "en-AU",
+            "en-BB",
+            "en-BI",
+            "en-BM",
+            "en-BS",
+            "en-BW",
+            "en-BZ",
+            "en-CA",
+            "en-CC",
+            "en-CK",
+            "en-CM",
+            "en-CX",
+            "en-DM",
+            "en-ER",
+            "en-FJ",
+            "en-FK",
+            "en-FM",
+            "en-GB",
+            "en-GD",
+            "en-GG",
+            "en-GH",
+            "en-GI",
+            "en-GM",
+            "en-GU",
+            "en-GY",
+            "en-HK",
+            "en-IE",
+            "en-IN",
+            "en-JE",
+            "en-JM",
+            "en-KE",
+            "en-KI",
+            "en-KN",
+            "en-KY",
+            "en-LC",
+            "en-LR",
+            "en-LS",
+            "en-MG",
+            "en-MH",
+            "en-MP",
+            "en-MS",
+            "en-MT",
+            "en-MU",
+            "en-MW",
+            "en-NA",
+            "en-NF",
+            "en-NG",
+            "en-NR",
+            "en-NU",
+            "en-NZ",
+            "en-PG",
+            "en-PH",
+            "en-PK",
+            "en-PN",
+            "en-PR",
+            "en-PW",
+            "en-RW",
+            "en-SB",
+            "en-SC",
+            "en-SD",
+            "en-SG",
+            "en-SH",
+            "en-SL",
+            "en-SS",
+            "en-SX",
+            "en-SZ",
+            "en-TC",
+            "en-TK",
+            "en-TO",
+            "en-TT",
+            "en-TV",
+            "en-TZ",
+            "en-UG",
+            "en-US",
+            "en-VC",
+            "en-VG",
+            "en-VI",
+            "en-VU",
+            "en-WS",
+            "en-ZA",
+            "en-ZM",
+            "en-ZW"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900890,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "duckduckgo",
+          "eligible": "provider_family_cooldown",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "open",
+            "observedAt": 1790436566171,
+            "samples": [],
+            "consecutive": 1,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 1791732570808,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790436600000,
+            "count": 1,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900914,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 3,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "brave",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE"
+          ],
+          "en": [
+            "en-AU",
+            "en-CA",
+            "en-GB",
+            "en-HK",
+            "en-IN",
+            "en-NZ",
+            "en-PH",
+            "en-US",
+            "en-ZA"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437901150,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        }
+      ]
+    },
+    {
+      "language": "en",
+      "timeRange": "",
+      "plan": [
+        "bing",
+        "brave",
+        "google cse"
+      ],
+      "engines": [
+        {
+          "id": "360search",
+          "eligible": "safesearch",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": false,
+          "de": [],
+          "en": [],
+          "safeSearch": false,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "bing",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE",
+            "de-LI",
+            "de-LU"
+          ],
+          "en": [
+            "en-AG",
+            "en-AI",
+            "en-AS",
+            "en-AU",
+            "en-BB",
+            "en-BI",
+            "en-BM",
+            "en-BS",
+            "en-BW",
+            "en-BZ",
+            "en-CA",
+            "en-CC",
+            "en-CK",
+            "en-CM",
+            "en-CX",
+            "en-DM",
+            "en-ER",
+            "en-FJ",
+            "en-FK",
+            "en-FM",
+            "en-GB",
+            "en-GD",
+            "en-GG",
+            "en-GH",
+            "en-GI",
+            "en-GM",
+            "en-GU",
+            "en-GY",
+            "en-HK",
+            "en-IE",
+            "en-IN",
+            "en-JE",
+            "en-JM",
+            "en-KE",
+            "en-KI",
+            "en-KN",
+            "en-KY",
+            "en-LC",
+            "en-LR",
+            "en-LS",
+            "en-MG",
+            "en-MH",
+            "en-MP",
+            "en-MS",
+            "en-MT",
+            "en-MU",
+            "en-MW",
+            "en-NA",
+            "en-NF",
+            "en-NG",
+            "en-NR",
+            "en-NU",
+            "en-NZ",
+            "en-PG",
+            "en-PH",
+            "en-PK",
+            "en-PN",
+            "en-PR",
+            "en-PW",
+            "en-RW",
+            "en-SB",
+            "en-SC",
+            "en-SD",
+            "en-SG",
+            "en-SH",
+            "en-SL",
+            "en-SS",
+            "en-SX",
+            "en-SZ",
+            "en-TC",
+            "en-TK",
+            "en-TO",
+            "en-TT",
+            "en-TV",
+            "en-TZ",
+            "en-UG",
+            "en-US",
+            "en-VC",
+            "en-VG",
+            "en-VI",
+            "en-VU",
+            "en-WS",
+            "en-ZA",
+            "en-ZM",
+            "en-ZW"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900890,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "duckduckgo",
+          "eligible": "provider_family_cooldown",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "open",
+            "observedAt": 1790436566171,
+            "samples": [],
+            "consecutive": 1,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 1791732570808,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790436600000,
+            "count": 1,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900914,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 3,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "brave",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE"
+          ],
+          "en": [
+            "en-AU",
+            "en-CA",
+            "en-GB",
+            "en-HK",
+            "en-IN",
+            "en-NZ",
+            "en-PH",
+            "en-US",
+            "en-ZA"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437901150,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        }
+      ]
+    },
+    {
+      "language": "en",
+      "timeRange": "week",
+      "plan": [
+        "brave",
+        "google cse"
+      ],
+      "engines": [
+        {
+          "id": "360search",
+          "eligible": "safesearch",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": false,
+          "de": [],
+          "en": [],
+          "safeSearch": false,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "bing",
+          "eligible": "time_range",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE",
+            "de-LI",
+            "de-LU"
+          ],
+          "en": [
+            "en-AG",
+            "en-AI",
+            "en-AS",
+            "en-AU",
+            "en-BB",
+            "en-BI",
+            "en-BM",
+            "en-BS",
+            "en-BW",
+            "en-BZ",
+            "en-CA",
+            "en-CC",
+            "en-CK",
+            "en-CM",
+            "en-CX",
+            "en-DM",
+            "en-ER",
+            "en-FJ",
+            "en-FK",
+            "en-FM",
+            "en-GB",
+            "en-GD",
+            "en-GG",
+            "en-GH",
+            "en-GI",
+            "en-GM",
+            "en-GU",
+            "en-GY",
+            "en-HK",
+            "en-IE",
+            "en-IN",
+            "en-JE",
+            "en-JM",
+            "en-KE",
+            "en-KI",
+            "en-KN",
+            "en-KY",
+            "en-LC",
+            "en-LR",
+            "en-LS",
+            "en-MG",
+            "en-MH",
+            "en-MP",
+            "en-MS",
+            "en-MT",
+            "en-MU",
+            "en-MW",
+            "en-NA",
+            "en-NF",
+            "en-NG",
+            "en-NR",
+            "en-NU",
+            "en-NZ",
+            "en-PG",
+            "en-PH",
+            "en-PK",
+            "en-PN",
+            "en-PR",
+            "en-PW",
+            "en-RW",
+            "en-SB",
+            "en-SC",
+            "en-SD",
+            "en-SG",
+            "en-SH",
+            "en-SL",
+            "en-SS",
+            "en-SX",
+            "en-SZ",
+            "en-TC",
+            "en-TK",
+            "en-TO",
+            "en-TT",
+            "en-TV",
+            "en-TZ",
+            "en-UG",
+            "en-US",
+            "en-VC",
+            "en-VG",
+            "en-VI",
+            "en-VU",
+            "en-WS",
+            "en-ZA",
+            "en-ZM",
+            "en-ZW"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900890,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "duckduckgo",
+          "eligible": "provider_family_cooldown",
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "open",
+            "observedAt": 1790436566171,
+            "samples": [],
+            "consecutive": 1,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 1791732570808,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790436600000,
+            "count": 1,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de"
+          ],
+          "en": [
+            "en"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437900914,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 3,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790461740000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        },
+        {
+          "id": "brave",
+          "eligible": null,
+          "capabilities": [
+            "general"
+          ],
+          "policyCaps": [
+            "general"
+          ],
+          "language": true,
+          "de": [
+            "de-AT",
+            "de-BE",
+            "de-CH",
+            "de-DE"
+          ],
+          "en": [
+            "en-AU",
+            "en-CA",
+            "en-GB",
+            "en-HK",
+            "en-IN",
+            "en-NZ",
+            "en-PH",
+            "en-US",
+            "en-ZA"
+          ],
+          "safeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437901150,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 4,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "budget": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": []
+          },
+          "family": {
+            "reset": 1790437920000,
+            "count": 2,
+            "leases": [],
+            "blockedUntil": 0
+          }
+        }
+      ]
+    }
+  ],
+  "events": []
+}

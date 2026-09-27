@@ -1,0 +1,139 @@
+{
+  "ok": true,
+  "version": "0.3.5",
+  "image": "sha256:df943076660a1cff1f425dd8e9b591ca2e0aacdcfe0e9cdae7ccea0a460aeb54",
+  "unitTests": 55,
+  "knowledgeSlot": "Regression passed: three successful general engines plus one separately approved knowledge engine and visible card; general-only grants do not implicitly approve knowledge.",
+  "browserReport": "release-0.3.5-browser.json",
+  "liveQueryReport": {
+    "version": "0.3.5",
+    "query": "GNU/ Linux",
+    "language": "en",
+    "safeSearch": "0",
+    "timeRange": "",
+    "runs": [
+      {
+        "mode": "XScaler",
+        "query": "GNU/ Linux",
+        "language": "en",
+        "safeSearch": "0",
+        "timeRange": "",
+        "count": 41,
+        "status": "3 von 3 Quellen mit Treffern · 2 weitere nicht berücksichtigt",
+        "sources": [
+          "bing",
+          "brave",
+          "google cse"
+        ],
+        "sharedHits": [
+          {
+            "url": "https://www.reddit.com/r/linuxquestions/comments/1dcvvrx/eli5_what_exactly_gnulinux_and_whats_the/",
+            "sources": "brave · google cse"
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Linux",
+            "sources": "bing · brave · google cse"
+          },
+          {
+            "url": "https://www.debian.org/releases/forky/amd64/ch01s02.en.html",
+            "sources": "brave · google cse"
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/GNU/Linux_naming_controversy",
+            "sources": "brave · google cse"
+          },
+          {
+            "url": "https://www.getgnulinux.org/",
+            "sources": "bing · brave · google cse"
+          },
+          {
+            "url": "https://opensource.stackexchange.com/questions/1025/why-do-some-people-refer-to-linux-as-gnu-linux",
+            "sources": "brave · google cse"
+          },
+          {
+            "url": "https://www.pcmag.com/how-to/what-is-gnulinux",
+            "sources": "brave · google cse"
+          },
+          {
+            "url": "https://www.youtube.com/shorts/GUsFrtllXs8",
+            "sources": "brave · google cse"
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=D4hNLgJmshg",
+            "sources": "brave · google cse"
+          },
+          {
+            "url": "https://medium.com/thenixadmins/whats-gnu-linux-6041662c5732",
+            "sources": "brave · google cse"
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/GNU",
+            "sources": "bing · brave"
+          },
+          {
+            "url": "https://www.gnu.org/",
+            "sources": "bing · brave"
+          }
+        ],
+        "warnings": [
+          {
+            "id": "excluded-360search",
+            "domId": "search-warning-excluded-360search",
+            "type": "warning",
+            "message": "360search: Die Quelle unterstützt die gewählte Sprache nicht."
+          },
+          {
+            "id": "excluded-duckduckgo",
+            "domId": "search-warning-excluded-duckduckgo",
+            "type": "warning",
+            "message": "duckduckgo: Die Anbietergruppe pausiert nach einem Quellenfehler."
+          }
+        ],
+        "sameDocument": true
+      },
+      {
+        "mode": "SSR/no-JS",
+        "count": 42,
+        "status": "3 von 3 Quellen mit Treffern · 2 weitere nicht berücksichtigt",
+        "sources": [
+          "bing",
+          "brave",
+          "google cse"
+        ],
+        "sharedHits": 12
+      }
+    ],
+    "errors": [],
+    "ok": true
+  },
+  "policyAndGuardsUnchangedOnUpgrade": true,
+  "policyRevision": 36,
+  "portainerSmoke": {
+    "version": "0.3.5",
+    "project": "xtend035-smoke",
+    "checks": [
+      "Compose accepts filled variables and rejects empty required variables.",
+      "Frontend 0.3.5 and backend 0.3.0 healthy; literal punctuation and roles preserved; only loopback frontend port published; storage uses named volumes.",
+      "Nextcloud redirect is configured correctly, verified without contacting Nextcloud.",
+      "Recreation retains public signing-key fingerprint and database; no live provider approval or search performed."
+    ],
+    "ok": true,
+    "health": {
+      "ok": true,
+      "version": "0.3.5",
+      "storage": "ready",
+      "retrieval": "compatible"
+    },
+    "imageIds": {
+      "search": "sha256:df943076660a1cff1f425dd8e9b591ca2e0aacdcfe0e9cdae7ccea0a460aeb54",
+      "searxng": "sha256:0a642d389dcbd7f6714a446fc379f405ee40854c6f95748de79a730144805dfd"
+    },
+    "composeSha256": "5f10c855ce7e0910f23a9c33c7a61e4d59c2a0718549bf746e65f65c32892eff",
+    "testResourcesRemoved": true
+  },
+  "archiveChecksumVerified": true,
+  "archiveLoadVerified": true,
+  "archiveBytes": 261267981,
+  "backend": "xtend-search-searxng:0.3.0",
+  "production": "No deployment performed. Production provider errors are not fully identified; operator supplied an empty Wikidata general response, not a transport error. CAPTCHA/access-denied/cooldown guards remain effective."
+}

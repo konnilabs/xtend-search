@@ -1,0 +1,6 @@
+2026-09-26 14:43:23,303 WARNING:searx.botdetection.config: backend_event
+2026-09-26 14:43:24,220 ERROR:searx.botdetection: backend_event
+2026-09-26 14:44:07,868 ERROR:searx.engines.fixture fast: backend_event
+2026-09-26 14:44:08,472 ERROR:searx.engines.fixture medium: backend_event
+2026-09-26 14:44:10,274 ERROR:searx.engines.fixture slow: backend_event
+{"ok":true,"checks":["Private admin assets and server graphs are not anonymously served.","Private backend rejects missing authentication.","Success, provider-error and lexical-rejection canaries absent from Docker logs and every persisted control file.","A second Docker owner using the same volume is rejected by flock.","Multiple web workers fail before the service starts.","Corresponding source archive is available."]}

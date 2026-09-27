@@ -1,0 +1,43 @@
+{
+  "version": "0.3.5",
+  "tag": "xtend-search:0.3.5",
+  "id": "sha256:df943076660a1cff1f425dd8e9b591ca2e0aacdcfe0e9cdae7ccea0a460aeb54",
+  "platform": "linux/amd64",
+  "sourceHashes": {
+    "version": "0.3.5",
+    "files": {
+      "server/control/source-messages.mjs": "4616650cd3b35821eb105ee3a614a595645645206070bea7d31a28de15462a06",
+      "server/control/executor.mjs": "adf97908b7ac2fd095b9fdaa9d6257c5b84b59193b73fd7d5609497ff9fdf48e",
+      "server/control/adapter.mjs": "42365666e7586cfd0d68c5b6b6be3d815e9fd16447a31a4659db036a99d024a0",
+      "server/control/locales.mjs": "b9db94813c19d21a837e9ef5eb10ba1df9d4f00d7df0e5f2a047cb4270bb5732",
+      "scripts/repair-locale-catalog.mjs": "fc089651176bedf08b975b89b31aa3f7bdf5eac0bc38534b6782416dbb55801e",
+      "shared/about.mjs": "fb86018b9d96d599616524c43d4750c6999b70811fb452e6acc28caedfee9bd0",
+      "server/about.mjs": "161777c139b95cc92a49cc0959adaa78a9ccd9ae7a80befffaba79e86aed14ab",
+      "frontend/about.mjs": "c5a9f7fd04762237b7e06513a4a260bac813db7148f9deeb53d194d4967cb0c3",
+      "frontend/about-dialog.mjs": "f367a327c75a9db24af840bc097f55d63858a35869cb2a301eff75e829443c50",
+      "frontend/about.css": "af69f380c1b2c98a2d572d587ddb4a375c11d59943c680909db009b589427bad",
+      "frontend/favicon.png": "990e6de36273e8f887c8aab67b17f16f82adfac59091df6e3989d02009b1b05a",
+      "frontend/mark.svg": "42ca4d8d450664607e7224146d6eef2bc78caa450a971d364bcc1558dd0a40bb",
+      "scripts/build-control.cjs": "0a826fc7a3183e19cdbc71f8c9a0d6945d781ffecabd9a3b4b3f07b9204d5b34",
+      "admin/admin.css": "0336bfdf59785d2ba0a0d56fa368a6e83056a780e99bfab3634ae261602de87f",
+      "admin/admin.rmt": "648acb13042c0c473bd8aebad04858cdcdde4c2fefe09183346776512122ae5e",
+      "frontend/standalone.rmt": "c8b39514910ec181b0ae6a76599f7095fe114657e799757f04d6955354f133a4",
+      "frontend/standalone.css": "fdc77949039d2e0e8a13391d8e0845b5320c1da3ddee81ed9b2db131491ebb91",
+      "frontend/standalone-host.mjs": "c718ef8cded7eefd4a79da615b8f6964bc0b39eb2444888c0e6d96e2227ab39a",
+      "frontend/preferences.mjs": "f32ae1feae9efe508d5ebd3fb7ab149417293077170e2ee679f5d73e63b56712",
+      "server/preferences.mjs": "ef793692bf73c0cea5908d04ec1e77148208ca1d1f70a62eed6923501bcccfcf",
+      "server/standalone.mjs": "bb49d18accc299f9d932f78f418af085885093dcec259396f1feafdecad3fe75",
+      "server/control/plane.mjs": "b168fb6be8bf14d9df16fb6bc5bdeb1ca36a5e1c920a8c70ffe936b2dac2cc9e",
+      "server/control/admin.mjs": "b3e0ef0ea6d60be2346468c77f38b91ed96fe997cea8532544126b6074f346a8",
+      "server/control/release.mjs": "ce1fb5c85368e2c973f89242c528eaf4cc3be0548926bfb026def173e569aef7",
+      "standalone.pages.json": "1eb88c51bd04f17c81dd8731e772440953c251243928416dec0a06793e57ec3e"
+    },
+    "bundles": {
+      "admin/admin.css": "739780c089ca314e9d13a5784b448362f0888c257cb940bb7b6301640db632e2",
+      "standalone/search.css": "a3162c0ff2080b9984f941d1e2ed356bfa6087b4b113bfaf1b3e297dc0f6a1cd",
+      "standalone/page.mjs": "09b360436f73aab7cc71f0cdee9d81d9e105a9e4dfc6411b2c5ce033efc775c3"
+    }
+  },
+  "archive": "XTend-search-Docker-Image-0.3.5-linux-amd64.tar.gz",
+  "bytes": 261267981
+}

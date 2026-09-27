@@ -1,0 +1,121 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"PageClient navigate scroll preserveScroll scroll false xtend-page:event navigation forms\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "PageClient navigate scroll preserveScroll scroll false xtend-page:event navigation forms",
+      "locale": "all",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 5,
+      "domains": [],
+      "hitCount": 5,
+      "hits": [
+        {
+          "uri": "xtend://docs/en/ssr-pages",
+          "id": "en:ssr-pages:6",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "Page runtime for Node and Laravel",
+          "heading": "Acceptance and operation",
+          "score": 23,
+          "excerpt": "## Acceptance and operation\n\nThe canonical runner defines `ssr-pages:node`, `ssr-pages:laravel` and\n`ssr-pages:laravel-browser`. Executable reference hosts and the same CRUD browser flow\nlive in `tests/ssr-pages/`. The Laravel matrix covers 12/PHP 8.2–8.5 and 13/PHP 8.3–8.5,\nwith browser evidence for each Laravel major. Local PHP 8.3 results do not replace that CI matrix.\n\nPHP-FPM/proxy infrastructure timeouts must bound synchronously blocking providers;\nframe and cleanup budgets cannot interrupt a running PHP function.\nSet `XTEND_PHP_FPM_BINARY=/path/to/php-fpm` before the Laravel browser profile to run it behind an isolated FPM pool and FastCGI proxy.\n\nRun `node tests/ssr-pages/measure_resources.js .xtend-test-results/ssr-pages-resources.json` for 50 render iterations of the same list in both runtimes and a browser bundle measurement. PHP comparisons use scalar identities; compare list entries through their declared keys. String slices must preserve Unicode scalar boundaries.\n\nThe Node test path requires no PHP. The additional `ssr-pages-php` suite checks shared render parity once per PHP/Laravel environment. Assign `router.pageClient = client` before attaching an existing `x-router`, and call `client.start()`; the page runtime then owns links and history.\n\n`createPageClient({ initialPage, viewTransitions: true })` enables page animations through the existing RMT AnimationEng…",
+          "sourceHash": "e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456",
+          "sourcePath": "docs/en/ssr-pages.md"
+        },
+        {
+          "uri": "xtend://rmt/kit/reference/runtime%3Apage-runtime",
+          "id": "runtime:page-runtime",
+          "scope": "rmt-kit",
+          "kind": "runtime",
+          "locale": "en",
+          "title": "Node and Laravel page runtime",
+          "heading": "Node and Laravel page runtime",
+          "score": 20,
+          "excerpt": "runtime:page-runtime\nruntime\nNode and Laravel page runtime\nIndependent Node and Laravel page hosts support props, forms, navigation, layouts, resume and streaming. Production Laravel renders prebuilt artifacts without Node. Page-owned requests end with the visit; layout-owned resources follow their owner. Rebuild Maraca bundles and page manifests with the same framework version. XTend.store demonstrates Maraca, Laravel, a guest cart and a separate DemoPay provider.\npage\nssr\nlaravel\nnode\nforms\nnavigation",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+          "sourcePath": "docs/en/ssr-pages.md"
+        },
+        {
+          "uri": "xtend://docs/de/ssr-pages",
+          "id": "de:ssr-pages:6",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "de",
+          "title": "Seitenlaufzeit für Node und Laravel",
+          "heading": "Abnahme und Betrieb",
+          "score": 18,
+          "excerpt": "## Abnahme und Betrieb\n\nDie Auswahl liegt in `scripts/test-runner/catalog.json`: `ssr-pages:node`,\n`ssr-pages:laravel` und `ssr-pages:laravel-browser`. Die ausführbaren Referenzhosts\nund derselbe CRUD-Browserablauf liegen unter `tests/ssr-pages/`.\nDie Laravel-Matrix umfasst 12/PHP 8.2–8.5 und 13/PHP 8.3–8.5; Browsernachweise laufen\nzusätzlich je Hauptversion. Lokale PHP-8.3-Ergebnisse sind kein Ersatz für diese CI-Matrix.\n\nFür PHP-FPM/Proxy-Streaming müssen die Infrastruktur-Timeouts synchron blockierende\nProvider begrenzen; Frame- und Cleanupbudgets allein können eine laufende PHP-Funktion\nnicht unterbrechen. Die PHP-FPM-Prüfung kann mit `XTEND_PHP_FPM_BINARY=/pfad/zu/php-fpm` vor dem Laravel-Browserprofil aktiviert werden. Der Test startet ausschließlich einen eigenen temporären Pool.\n\nRessourcenmessung: `node tests/ssr-pages/measure_resources.js .xtend-test-results/ssr-pages-resources.json` vergleicht 50 Renderdurchläufe derselben Liste in beiden Laufzeiten und misst das Browserbundle. PHP-Vergleiche verwenden skalare Identitäten; Listenidentität muss als Schlüssel ausgedrückt werden. String-Slices müssen Unicode-Skalargrenzen erhalten.\n\nDer Node-Testpfad benötigt kein PHP. Die zusätzliche Suite `ssr-pages-php` prüft die gemeinsame Renderparität einmal pro PHP-/Laravel-Umgebung. Einen vorhandenen `x-router` vor dem Einfügen mit `router.pageClient = client` verbinden und `cli…",
+          "sourceHash": "b2693a76537c3fc547214184160b89b96ddec067cfb414c7c3b6732739ba1f69",
+          "sourcePath": "docs/de/ssr-pages.md"
+        },
+        {
+          "uri": "xtend://docs/en/components-xrouter",
+          "id": "en:components-xrouter:9",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "en",
+          "title": "x-router",
+          "heading": "API reference",
+          "score": 17,
+          "excerpt": "## API reference\n\nAttributes:\n- `mode`\n- `routesrc`\n- `reuse-component`\n- `adopt-prerendered-route`\n- `navigation-policy` (`progressive`, `spa`, `document`)\n- `skeleton`\n- `skeleton-profile`\n- `skeleton-lines`\n- `skeleton-min-height`\n- `title-template`\n- `document-title-template`\n- `title-prefix`\n- `title-suffix`\n- `default-title`\n- `path`\n- `component`\n- `import`\n- `title`\n- `document-title`\n- `meta-description`\n- `meta-keywords`\n- `hydrate-schedule`\n\nEvents:\n- `xrouter-before-navigate`\n- `navigation-error`: Failure from an attached page client, with `detail.error`.\n- `route-changed`\n- `routechange`\n- `xrouter-after-navigate`\n- `route-announced`\n- `xrouter-routes-registered`\n- `xrouter-route-reused`\n- `xrouter-route-adopted`\n- `xrouter-skeleton-shown`\n- `xrouter-skeleton-hidden`\n- `xrouter-route-hydrated`\n- `xrouter-scroll-boundary-normalized`\n- `xrouter-navigation-overlays-closed`\n- `xrouter-title-updated`\n- `xrouter-route-import-refused`\n\nMethods:\n- `focusRoute(detail?: XRouterRouteChangeDetail | null)`\n- `announceRoute(detail?: XRouterRouteChangeDetail | null)`\n- `canNavigate(href: string, context?: XRouterNavigationContext)`\n- `snapshot()`\n\nSlots:\n- No named slots; use the default content path when the component renders children.\n\nCSS parts:\n- `root`\n- `outlet`\n- `announcer`\n\nCSS custom properties:\n- `--xtend-router-reserved-block-size`\n- `--xtend-layout-reserved-block-siz…",
+          "sourceHash": "32baf36e6edfe4c2b009eef914cb784bbf22a9c0be4b50d9de7b9fdc63fc7989",
+          "sourcePath": "docs/en/components/xrouter.md"
+        },
+        {
+          "uri": "xtend://docs/de/components-xmenu",
+          "id": "de:components-xmenu:8",
+          "scope": "docs",
+          "kind": "component",
+          "locale": "de",
+          "title": "x-menu",
+          "heading": "Integrationshinweise",
+          "score": 14,
+          "excerpt": "## Integrationshinweise\n\n- UX-Profil: `xtend.component.navigation-routing-ux-profile.v1`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.visible.hydrate`, `ui.user-blocking.navigation`, `route.transition.navigate`, `route.visible.render`, `diagnostics.snapshot`.\n- Aktuelle Seite und Tastaturfokus sind getrennt: Nur ein zur Route passender oder explizit markierter Eintrag erhält `aria-current=\"page\"`; `focusIndex` hält unabhängig davon genau einen Eintrag über den roving Tabindex erreichbar.\n\nRMT Hosts sollten die Komponente als Custom-Element-Grenze behandeln: Attribute werden als Component Props gesetzt, DOM-Events werden an Commands gebunden, und Scheduling-Metadaten bleiben außerhalb der Komponente. Reine HTML-Hosts verwenden dieselben Attribute und Events ohne RMT Compiler.\n\nTheming sollte zuerst über XTend Design Tokens laufen. CSS Parts sind für gezieltes Skinning freigegebener Controls gedacht, während CSS Custom Properties breitere Anpassungen an Farbe, Abstand, Radius und Bewegung abdecken. Accessibility-Hooks wie Labels, Live-Regionen und Fokusverhalten sollten beim Komponieren erhalten bleiben.",
+          "sourceHash": "32fb653f4e1f7552dd6ba73e93b25641c71ea3ceeac98faac2b926be3f096b58",
+          "sourcePath": "docs/de/components/xmenu.md"
+        }
+      ],
+      "maxChars": 14000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: PageClient navigate scroll preserveScroll scroll false xtend-page:event navigation forms\nLocales: all\nScopes: docs, rmt-kit\n\n[K1] Page runtime for Node and Laravel — Acceptance and operation\nResource: xtend://docs/en/ssr-pages\nSource: docs/en/ssr-pages.md#sha256:e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456\n## Acceptance and operation\n\nThe canonical runner defines `ssr-pages:node`, `ssr-pages:laravel` and\n`ssr-pages:laravel-browser`. Executable reference hosts and the same CRUD browser flow\nlive in `tests/ssr-pages/`. The Laravel matrix covers 12/PHP 8.2–8.5 and 13/PHP 8.3–8.5,\nwith browser evidence for each Laravel major. Local PHP 8.3 results do not replace that CI matrix.\n\nPHP-FPM/proxy infrastructure timeouts must bound synchronously blocking providers;\nframe and cleanup budgets cannot interrupt a running PHP function.\nSet `XTEND_PHP_FPM_BINARY=/path/to/php-fpm` before the Laravel browser profile to run it behind an isolated FPM pool and FastCGI proxy.\n\nRun `node tests/ssr-pages/measure_resources.js .xtend-test-results/ssr-pages-resources.json` for 50 render iterations of the same list in both runtimes and a browser bundle measurement. PHP comparisons use scalar identities; compare list entries through their declared keys. String slices must preserve Unicode scalar boundaries.\n\nThe Node test path requires no PHP. The additional `ssr-pages-php` suite checks shared render parity once per PHP/Laravel environment. Assign `router.pageClient = client` before attaching an existing `x-router`, and call `client.start()`; the page runtime then owns links and history.\n\n`createPageClient({ initialPage, viewTransitions: true })` enables page animations through the existing RMT AnimationEng…\n\n[K2] Node and Laravel page runtime\nResource: xtend://rmt/kit/reference/runtime%3Apage-runtime\nSource: docs/en/ssr-pages.md#sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\nruntime:page-runtime\nruntime\nNode and Laravel page runtime\nIndependent Node and Laravel page hosts support props, forms, navigation, layouts, resume and streaming. Production Laravel renders prebuilt artifacts without Node. Page-owned requests end with the visit; layout-owned resources follow their owner. Rebuild Maraca bundles and page manifests with the same framework version. XTend.store demonstrates Maraca, Laravel, a guest cart and a separate DemoPay provider.\npage\nssr\nlaravel\nnode\nforms\nnavigation\n\n[K3] Seitenlaufzeit für Node und Laravel — Abnahme und Betrieb\nResource: xtend://docs/de/ssr-pages\nSource: docs/de/ssr-pages.md#sha256:b2693a76537c3fc547214184160b89b96ddec067cfb414c7c3b6732739ba1f69\n## Abnahme und Betrieb\n\nDie Auswahl liegt in `scripts/test-runner/catalog.json`: `ssr-pages:node`,\n`ssr-pages:laravel` und `ssr-pages:laravel-browser`. Die ausführbaren Referenzhosts\nund derselbe CRUD-Browserablauf liegen unter `tests/ssr-pages/`.\nDie Laravel-Matrix umfasst 12/PHP 8.2–8.5 und 13/PHP 8.3–8.5; Browsernachweise laufen\nzusätzlich je Hauptversion. Lokale PHP-8.3-Ergebnisse sind kein Ersatz für diese CI-Matrix.\n\nFür PHP-FPM/Proxy-Streaming müssen die Infrastruktur-Timeouts synchron blockierende\nProvider begrenzen; Frame- und Cleanupbudgets allein können eine laufende PHP-Funktion\nnicht unterbrechen. Die PHP-FPM-Prüfung kann mit `XTEND_PHP_FPM_BINARY=/pfad/zu/php-fpm` vor dem Laravel-Browserprofil aktiviert werden. Der Test startet ausschließlich einen eigenen temporären Pool.\n\nRessourcenmessung: `node tests/ssr-pages/measure_resources.js .xtend-test-results/ssr-pages-resources.json` vergleicht 50 Renderdurchläufe derselben Liste in beiden Laufzeiten und misst das Browserbundle. PHP-Vergleiche verwenden skalare Identitäten; Listenidentität muss als Schlüssel ausgedrückt werden. String-Slices müssen Unicode-Skalargrenzen erhalten.\n\nDer Node-Testpfad benötigt kein PHP. Die zusätzliche Suite `ssr-pages-php` prüft die gemeinsame Renderparität einmal pro PHP-/Laravel-Umgebung. Einen vorhandenen `x-router` vor dem Einfügen mit `router.pageClient = client` verbinden und `cli…\n\n[K4] x-router — API reference\nResource: xtend://docs/en/components-xrouter\nSource: docs/en/components/xrouter.md#sha256:32baf36e6edfe4c2b009eef914cb784bbf22a9c0be4b50d9de7b9fdc63fc7989\n## API reference\n\nAttributes:\n- `mode`\n- `routesrc`\n- `reuse-component`\n- `adopt-prerendered-route`\n- `navigation-policy` (`progressive`, `spa`, `document`)\n- `skeleton`\n- `skeleton-profile`\n- `skeleton-lines`\n- `skeleton-min-height`\n- `title-template`\n- `document-title-template`\n- `title-prefix`\n- `title-suffix`\n- `default-title`\n- `path`\n- `component`\n- `import`\n- `title`\n- `document-title`\n- `meta-description`\n- `meta-keywords`\n- `hydrate-schedule`\n\nEvents:\n- `xrouter-before-navigate`\n- `navigation-error`: Failure from an attached page client, with `detail.error`.\n- `route-changed`\n- `routechange`\n- `xrouter-after-navigate`\n- `route-announced`\n- `xrouter-routes-registered`\n- `xrouter-route-reused`\n- `xrouter-route-adopted`\n- `xrouter-skeleton-shown`\n- `xrouter-skeleton-hidden`\n- `xrouter-route-hydrated`\n- `xrouter-scroll-boundary-normalized`\n- `xrouter-navigation-overlays-closed`\n- `xrouter-title-updated`\n- `xrouter-route-import-refused`\n\nMethods:\n- `focusRoute(detail?: XRouterRouteChangeDetail | null)`\n- `announceRoute(detail?: XRouterRouteChangeDetail | null)`\n- `canNavigate(href: string, context?: XRouterNavigationContext)`\n- `snapshot()`\n\nSlots:\n- No named slots; use the default content path when the component renders children.\n\nCSS parts:\n- `root`\n- `outlet`\n- `announcer`\n\nCSS custom properties:\n- `--xtend-router-reserved-block-size`\n- `--xtend-layout-reserved-block-siz…\n\n[K5] x-menu — Integrationshinweise\nResource: xtend://docs/de/components-xmenu\nSource: docs/de/components/xmenu.md#sha256:32fb653f4e1f7552dd6ba73e93b25641c71ea3ceeac98faac2b926be3f096b58\n## Integrationshinweise\n\n- UX-Profil: `xtend.component.navigation-routing-ux-profile.v1`.\n- RMT contract: `xtend.rmt.component-contract.v1`.\n- Performance profile: `xtend.performance.component-profile.v1`.\n- RMT schedules: `component.visible.mount`, `component.visible.hydrate`, `ui.user-blocking.navigation`, `route.transition.navigate`, `route.visible.render`, `diagnostics.snapshot`.\n- Aktuelle Seite und Tastaturfokus sind getrennt: Nur ein zur Route passender oder explizit markierter Eintrag erhält `aria-current=\"page\"`; `focusIndex` hält unabhängig davon genau einen Eintrag über den roving Tabindex erreichbar.\n\nRMT Hosts sollten die Komponente als Custom-Element-Grenze behandeln: Attribute werden als Component Props gesetzt, DOM-Events werden an Commands gebunden, und Scheduling-Metadaten bleiben außerhalb der Komponente. Reine HTML-Hosts verwenden dieselben Attribute und Events ohne RMT Compiler.\n\nTheming sollte zuerst über XTend Design Tokens laufen. CSS Parts sind für gezieltes Skinning freigegebener Controls gedacht, während CSS Custom Properties breitere Anpassungen an Farbe, Abstand, Radius und Bewegung abdecken. Accessibility-Hooks wie Labels, Live-Regionen und Fokusverhalten sollten beim Komponieren erhalten bleiben.\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/en/ssr-pages",
+        "sourceHash": "e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456",
+        "sourcePath": "docs/en/ssr-pages.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/runtime%3Apage-runtime",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/en/ssr-pages.md"
+      },
+      {
+        "uri": "xtend://docs/de/ssr-pages",
+        "sourceHash": "b2693a76537c3fc547214184160b89b96ddec067cfb414c7c3b6732739ba1f69",
+        "sourcePath": "docs/de/ssr-pages.md"
+      },
+      {
+        "uri": "xtend://docs/en/components-xrouter",
+        "sourceHash": "32baf36e6edfe4c2b009eef914cb784bbf22a9c0be4b50d9de7b9fdc63fc7989",
+        "sourcePath": "docs/en/components/xrouter.md"
+      },
+      {
+        "uri": "xtend://docs/de/components-xmenu",
+        "sourceHash": "32fb653f4e1f7552dd6ba73e93b25641c71ea3ceeac98faac2b926be3f096b58",
+        "sourcePath": "docs/de/components/xmenu.md"
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "timestamp": "2026-09-20T00:48:02.503Z",
+  "base": "http://127.0.0.1:8093",
+  "note": "Explicit offline Python fixture; media alerts returns 101 results, error raises the fixture engine failure. Image responses use synthetic SVGs. Container assets without overrides.",
+  "results": [
+    {
+      "name": "chromium: real Classic XAlert, no autofocus, no timer, keyboard dismissal and focus",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: dismissed hint stays hidden through preview, full-screen carousel and filter edits",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: new response, same-query submit and history restore notices",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: engine warning can close while failure guidance remains",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: dark/light and narrow layout",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: unavailable Maraca component leaves SSR warnings and native search",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: no-JS SSR keeps both kinds readable without false close controls",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: real Classic XAlert, no autofocus, no timer, keyboard dismissal and focus",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: dismissed hint stays hidden through preview, full-screen carousel and filter edits",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: new response, same-query submit and history restore notices",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: engine warning can close while failure guidance remains",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: dark/light and narrow layout",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: unavailable Maraca component leaves SSR warnings and native search",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: no-JS SSR keeps both kinds readable without false close controls",
+      "status": "passed"
+    }
+  ]
+}

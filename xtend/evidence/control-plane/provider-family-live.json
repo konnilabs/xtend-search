@@ -1,0 +1,42 @@
+{
+  "time": "2026-09-26T15:40:38.632Z",
+  "modes": [
+    {
+      "category": "general",
+      "results": 42,
+      "error": false,
+      "message": "",
+      "status": "3 von 3 Quellen abgeschlossen",
+      "safeSearch": "1",
+      "documentOrigin": 1790437238634.7
+    },
+    {
+      "category": "images",
+      "results": 55,
+      "error": false,
+      "message": "",
+      "status": "2 von 2 Quellen abgeschlossen",
+      "safeSearch": "1",
+      "documentOrigin": 1790437238634.7
+    },
+    {
+      "category": "videos",
+      "results": 30,
+      "error": false,
+      "message": "",
+      "status": "1 von 1 Quellen abgeschlossen",
+      "safeSearch": "1",
+      "documentOrigin": 1790437238634.7
+    },
+    {
+      "category": "news",
+      "results": 0,
+      "error": true,
+      "message": "Die freigegebenen Quellen unterstützen den gewählten SafeSearch-Filter nicht. Suchquellen sind durch Schutzfristen oder eine Betriebspause gesperrt.",
+      "status": "0 von 0 Quellen abgeschlossen",
+      "safeSearch": "1",
+      "documentOrigin": 1790437238634.7
+    }
+  ],
+  "sameDocument": true
+}

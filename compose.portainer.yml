@@ -1,0 +1,115 @@
+# XTend.search 0.4.0 + SearXNG backend 0.4.0 — Portainer / Docker Standalone, Linux amd64
+# Host reverse proxy -> http://127.0.0.1:8090
+# Import BOTH images onto the target Docker host before deploying this stack.
+# Set the required values in Portainer > Stack > Environment variables.
+# Required: SEARXNG_TOKEN, NEXTCLOUD_CLIENT_ID, NEXTCLOUD_CLIENT_SECRET,
+# XTEND_ADMIN_ROLES. Uploading this YAML alone does not set these values.
+# SEARXNG_TOKEN is a separate internal backend key, not a Nextcloud credential.
+# New installation: generate it with openssl rand -hex 48 and paste the output
+# as ONE stack variable named SEARXNG_TOKEN; both services receive that value.
+# Updating an existing installation: retain its existing backend token.
+# This file needs no checkout, build context, local .env file or bind mounts.
+services:
+  search:
+    image: "${XTEND_SEARCH_IMAGE:-xtend-search:0.4.0}"
+    pull_policy: never
+    platform: linux/amd64
+    depends_on:
+      searxng:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:${XTEND_PORT:-8090}:8080"
+    environment:
+      PUBLIC_BASE_URL: "${PUBLIC_BASE_URL:-https://search.ccs-networks.de}"
+      SEARXNG_BASE_URL: "http://searxng:8082/"
+      XTEND_FAVICON_RESOLVER: "${XTEND_FAVICON_RESOLVER:-duckduckgo}"
+      SEARXNG_TOKEN: "${SEARXNG_TOKEN:?Set SEARXNG_TOKEN in Portainer}"
+      NEXTCLOUD_BASE_URL: "${NEXTCLOUD_BASE_URL:-https://vm.ccs-networks.de/cloud/}"
+      NEXTCLOUD_CLIENT_ID: "${NEXTCLOUD_CLIENT_ID:?Set NEXTCLOUD_CLIENT_ID in Portainer}"
+      NEXTCLOUD_CLIENT_SECRET: "${NEXTCLOUD_CLIENT_SECRET:?Set NEXTCLOUD_CLIENT_SECRET in Portainer}"
+      NEXTCLOUD_INDEX_PHP: "${NEXTCLOUD_INDEX_PHP:-0}"
+      XTEND_ADMIN_ROLES: "${XTEND_ADMIN_ROLES:?Set XTEND_ADMIN_ROLES as a JSON object in Portainer}"
+      XTEND_PROBES: "${XTEND_PROBES:-0}"
+      XTEND_ADMIN_MUTATIONS: "${XTEND_ADMIN_MUTATIONS:-1}"
+      XTEND_STREAMING: "${XTEND_STREAMING:-1}"
+      XTEND_KNOWLEDGE: "${XTEND_KNOWLEDGE:-1}"
+      WEB_CONCURRENCY: "1"
+      XTEND_REPLICAS: "1"
+    volumes:
+      - control-data:/var/lib/xtend-search
+      - evidence-data:/var/lib/xtend-evidence
+    networks:
+      - retrieval
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 1024m
+    pids_limit: 128
+    restart: unless-stopped
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 30s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  searxng:
+    image: "${XTEND_BACKEND_IMAGE:-xtend-search-searxng:0.4.0}"
+    pull_policy: never
+    platform: linux/amd64
+    environment:
+      XTEND_FAVICON_RESOLVER: "${XTEND_FAVICON_RESOLVER:-duckduckgo}"
+      SEARXNG_TOKEN: "${SEARXNG_TOKEN:?Set SEARXNG_TOKEN in Portainer}"
+      SEARXNG_SETTINGS_PATH: /app/xtend/config/settings.control.yml
+    volumes:
+      - backend-data:/var/lib/xtend-backend
+    networks:
+      - retrieval
+    # Reached over the private stack network; no port published on the host.
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=128m
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    mem_limit: 1024m
+    pids_limit: 256
+    restart: unless-stopped
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8082/healthz',timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  # Stable names retain policies, audit, budgets and keys across stack updates.
+  # Override ONLY when intentionally selecting another deployment's volumes.
+  control-data:
+    name: "${XTEND_CONTROL_VOLUME:-xtend-search-control_control-data}"
+  backend-data:
+    name: "${XTEND_BACKEND_VOLUME:-xtend-search-control_backend-data}"
+  evidence-data:
+    name: "${XTEND_EVIDENCE_VOLUME:-xtend-search-control_evidence-data}"
+
+networks:
+  retrieval:
+    driver: bridge
+    # Internet egress is required for search providers and Nextcloud OAuth.

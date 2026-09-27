@@ -1,0 +1,121 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"RMT action input object reduce state object viewTemplate conditional repeat nested repeat item scoping on click native link progressive enhancement image preview\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "RMT action input object reduce state object viewTemplate conditional repeat nested repeat item scoping on click native link progressive enhancement image preview",
+      "locale": "all",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 5,
+      "domains": [],
+      "hitCount": 5,
+      "hits": [
+        {
+          "uri": "xtend://docs/de/learn-rmt-actions-events",
+          "id": "de:learn-rmt-actions-events:2",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "de",
+          "title": "Actions und Events",
+          "heading": "Sicherer Event-Fluss",
+          "score": 27,
+          "excerpt": "## Sicherer Event-Fluss\n\nHalte Event-Selektoren deklarativ, übergib Payload-Werte über Action-Inputs und lass die Runtime Reducer anwenden.\n\n```rmt\ntemplate learn.rmt.interactions {\n  state page.counter type object preserve {\n    initial {\n      value 0\n      status \"ready\"\n    }\n  }\n\n  action page.increment {\n    input label string\n    reduce state.page.counter.status = \"incremented\"\n    emit page.counter.incremented with label input.label\n  }\n\n  surface counter.card kind card component x-status {\n    lane visible weight 90 {\n      mount counter-card\n    }\n\n    on click \"[data-action=increment]\" -> action page.increment {\n      payload label from target.dataset.label\n    }\n  }\n}\n```",
+          "sourceHash": "a0a866ebeb036d92756ac74b74fdc8605ab2356b3fbb1e84688bb9975ec85e31",
+          "sourcePath": "docs/de/learn-rmt-actions-events.md"
+        },
+        {
+          "uri": "xtend://docs/en/learn-rmt-actions-events",
+          "id": "en:learn-rmt-actions-events:2",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "en",
+          "title": "Actions and Events",
+          "heading": "Safe Event Flow",
+          "score": 27,
+          "excerpt": "## Safe Event Flow\n\nKeep event selectors declarative, pass payload values through the action input and let the runtime apply reducers.\n\n```rmt\ntemplate learn.rmt.interactions {\n  state page.counter type object preserve {\n    initial {\n      value 0\n      status \"ready\"\n    }\n  }\n\n  action page.increment {\n    input label string\n    reduce state.page.counter.status = \"incremented\"\n    emit page.counter.incremented with label input.label\n  }\n\n  surface counter.card kind card component x-status {\n    lane visible weight 90 {\n      mount counter-card\n    }\n\n    on click \"[data-action=increment]\" -> action page.increment {\n      payload label from target.dataset.label\n    }\n  }\n}\n```",
+          "sourceHash": "27851df33103ba58b9480c3b68372d85b66b0ae006a4ee2cd7d882d7db1eefc2",
+          "sourcePath": "docs/en/learn-rmt-actions-events.md"
+        },
+        {
+          "uri": "xtend://rmt/kit/reference/operator%3Aaction",
+          "id": "operator:action",
+          "scope": "rmt-kit",
+          "kind": "operator",
+          "locale": "en",
+          "title": "action",
+          "heading": "action",
+          "score": 26,
+          "excerpt": "operator:action\noperator\naction\nDeclares state changes, effects and emitted events.\naction app.save { input value string reduce state.app.form.value = input.value }\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\naction app.save { input value string reduce state.app.status.text = \"Saved\" }\naction app.save { save(value) }\nActions are declarative transitions, not functions.\ntemplate",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+          "sourcePath": "docs/de/rmt-reference-actions-events.md"
+        },
+        {
+          "uri": "xtend://docs/de/rmt-reference-actions-events",
+          "id": "de:rmt-reference-actions-events:2",
+          "scope": "docs",
+          "kind": "reference",
+          "locale": "de",
+          "title": "Actions und Events",
+          "heading": "Syntax",
+          "score": 25,
+          "excerpt": "## Syntax\n\n| Operator | Form | Allowed contexts | Parameters | Function | Diagnostics | Related operators |\n| --- | --- | --- | --- | --- | --- | --- |\n| <a id=\"execution-fastpass\"></a>`execution fastpass` | `execution fastpass` | `action` | `fastpass` | Navigation, Fokus oder Close auf `user-blocking` ohne Model-Transaktion. | Reducer, Fetch, Service, Stream, Custom-Effects und Command-Ketten sind verboten. | `effect navigation`, `effect close surface`, `effect focus surface` |\n| <a id=\"input\"></a>`input` | `input id string` | `action` | Name, Typ | Deklariert Action-Payload-Felder. | Fehlende Typen werden gemeldet. | `payload` |\n| <a id=\"status\"></a>`status` | `status app.request` | `action` | State-Pfad | Bindet Loading-, Success- und Error-Status. | Unbekannter State wird semantisch gemeldet. | `effect` |\n| <a id=\"effect\"></a>`effect` | `effect fetch datasource tickets` | `action` | Effect-Art, optionale Quelle | Deklariert host-owned asynchrone Arbeit oder einen festen Component-Command. | Fetch nutzt `datasource`, andere Effects ihre definierte Quelle. FastPass unterstützt Navigation sowie `close surface` und `focus surface`; Component-Commands nur `focus`, `reset` und `snapshot`. | `on success ->` |\n| <a id=\"reduce\"></a>`reduce` | `reduce state.app.status.text = \"Saved\"` | `action` | Zielpfad, Ausdruck | Schreibt deklarativ in State. | Fachliche Actions benötigen einen g…",
+          "sourceHash": "628d7b11c6b9d97dead857c38ae836a3cacb8164a4072e72d4d6b37497509fc4",
+          "sourcePath": "docs/de/rmt-reference-actions-events.md"
+        },
+        {
+          "uri": "xtend://docs/de/rmt-vnext-component-primitives",
+          "id": "de:rmt-vnext-component-primitives:3",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "de",
+          "title": "RMT Component Primitives und XTend UI",
+          "heading": "Minimale App Shell mit drei Primitives",
+          "score": 25,
+          "excerpt": "## Minimale App Shell mit drei Primitives\n\nDie JSON-Blöcke in den folgenden Abschnitten zeigen kompilierte Core Records. Sie sind **kein** `.rmt`-Quelltext. Wenn eine RMT App Shell verlangt wird, beginnt die Antwort mit `template` und verwendet die Authoring-Operatoren. Dieses minimale Beispiel besitzt genau drei sichtbare Component Primitives (`x-section`, `x-status`, `x-button`) und muss vor der Ausgabe mit dem RMT-Compiler geprüft werden:\n\n```rmt\ntemplate app.shell {\n  state app.shell type object preserve {\n    initial {\n      id \"app-shell\"\n      title \"XTend App Shell\"\n      text \"Willkommen bei XTend\"\n    }\n  }\n\n  state app.status type object preserve {\n    initial {\n      id \"app-status\"\n      text \"Bereit\"\n      tone \"success\"\n    }\n  }\n\n  state app.start type object preserve {\n    initial {\n      id \"app-start\"\n      text \"Start\"\n      tone \"primary\"\n      disabled false\n    }\n  }\n\n  selector app.shell from state app.shell { output AppShell }\n  selector app.status from state app.status { output AppStatus }\n  selector app.start from state app.start { output AppStart }\n\n  action app.start {\n    input label string\n    reduce state.app.status.text = \"Gestartet\"\n  }\n\n  portal app.root root \"#app\" layer surface\n\n  surface app.shell kind page component x-section {\n    source selector app.shell\n    key shell.id\n    portal app.root\n    bounds x 0 y 0 width 960 height 640\n    la…",
+          "sourceHash": "532cf620906f98f39ade46cf383a7416d5d34db356e5cc2246d6968d03656243",
+          "sourcePath": "docs/de/rmt-vnext-component-primitives.md"
+        }
+      ],
+      "maxChars": 11000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: RMT action input object reduce state object viewTemplate conditional repeat nested repeat item scoping on click native link progressive enhancement image preview\nLocales: all\nScopes: docs, rmt-kit\n\n[K1] Actions und Events — Sicherer Event-Fluss\nResource: xtend://docs/de/learn-rmt-actions-events\nSource: docs/de/learn-rmt-actions-events.md#sha256:a0a866ebeb036d92756ac74b74fdc8605ab2356b3fbb1e84688bb9975ec85e31\n## Sicherer Event-Fluss\n\nHalte Event-Selektoren deklarativ, übergib Payload-Werte über Action-Inputs und lass die Runtime Reducer anwenden.\n\n```rmt\ntemplate learn.rmt.interactions {\n  state page.counter type object preserve {\n    initial {\n      value 0\n      status \"ready\"\n    }\n  }\n\n  action page.increment {\n    input label string\n    reduce state.page.counter.status = \"incremented\"\n    emit page.counter.incremented with label input.label\n  }\n\n  surface counter.card kind card component x-status {\n    lane visible weight 90 {\n      mount counter-card\n    }\n\n    on click \"[data-action=increment]\" -> action page.increment {\n      payload label from target.dataset.label\n    }\n  }\n}\n```\n\n[K2] Actions and Events — Safe Event Flow\nResource: xtend://docs/en/learn-rmt-actions-events\nSource: docs/en/learn-rmt-actions-events.md#sha256:27851df33103ba58b9480c3b68372d85b66b0ae006a4ee2cd7d882d7db1eefc2\n## Safe Event Flow\n\nKeep event selectors declarative, pass payload values through the action input and let the runtime apply reducers.\n\n```rmt\ntemplate learn.rmt.interactions {\n  state page.counter type object preserve {\n    initial {\n      value 0\n      status \"ready\"\n    }\n  }\n\n  action page.increment {\n    input label string\n    reduce state.page.counter.status = \"incremented\"\n    emit page.counter.incremented with label input.label\n  }\n\n  surface counter.card kind card component x-status {\n    lane visible weight 90 {\n      mount counter-card\n    }\n\n    on click \"[data-action=increment]\" -> action page.increment {\n      payload label from target.dataset.label\n    }\n  }\n}\n```\n\n[K3] action\nResource: xtend://rmt/kit/reference/operator%3Aaction\nSource: docs/de/rmt-reference-actions-events.md#sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\noperator:action\noperator\naction\nDeclares state changes, effects and emitted events.\naction app.save { input value string reduce state.app.form.value = input.value }\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\naction app.save { input value string reduce state.app.status.text = \"Saved\" }\naction app.save { save(value) }\nActions are declarative transitions, not functions.\ntemplate\n\n[K4] Actions und Events — Syntax\nResource: xtend://docs/de/rmt-reference-actions-events\nSource: docs/de/rmt-reference-actions-events.md#sha256:628d7b11c6b9d97dead857c38ae836a3cacb8164a4072e72d4d6b37497509fc4\n## Syntax\n\n| Operator | Form | Allowed contexts | Parameters | Function | Diagnostics | Related operators |\n| --- | --- | --- | --- | --- | --- | --- |\n| <a id=\"execution-fastpass\"></a>`execution fastpass` | `execution fastpass` | `action` | `fastpass` | Navigation, Fokus oder Close auf `user-blocking` ohne Model-Transaktion. | Reducer, Fetch, Service, Stream, Custom-Effects und Command-Ketten sind verboten. | `effect navigation`, `effect close surface`, `effect focus surface` |\n| <a id=\"input\"></a>`input` | `input id string` | `action` | Name, Typ | Deklariert Action-Payload-Felder. | Fehlende Typen werden gemeldet. | `payload` |\n| <a id=\"status\"></a>`status` | `status app.request` | `action` | State-Pfad | Bindet Loading-, Success- und Error-Status. | Unbekannter State wird semantisch gemeldet. | `effect` |\n| <a id=\"effect\"></a>`effect` | `effect fetch datasource tickets` | `action` | Effect-Art, optionale Quelle | Deklariert host-owned asynchrone Arbeit oder einen festen Component-Command. | Fetch nutzt `datasource`, andere Effects ihre definierte Quelle. FastPass unterstützt Navigation sowie `close surface` und `focus surface`; Component-Commands nur `focus`, `reset` und `snapshot`. | `on success ->` |\n| <a id=\"reduce\"></a>`reduce` | `reduce state.app.status.text = \"Saved\"` | `action` | Zielpfad, Ausdruck | Schreibt deklarativ in State. | Fachliche Actions benötigen einen g…\n\n[K5] RMT Component Primitives und XTend UI — Minimale App Shell mit drei Primitives\nResource: xtend://docs/de/rmt-vnext-component-primitives\nSource: docs/de/rmt-vnext-component-primitives.md#sha256:532cf620906f98f39ade46cf383a7416d5d34db356e5cc2246d6968d03656243\n## Minimale App Shell mit drei Primitives\n\nDie JSON-Blöcke in den folgenden Abschnitten zeigen kompilierte Core Records. Sie sind **kein** `.rmt`-Quelltext. Wenn eine RMT App Shell verlangt wird, beginnt die Antwort mit `template` und verwendet die Authoring-Operatoren. Dieses minimale Beispiel besitzt genau drei sichtbare Component Primitives (`x-section`, `x-status`, `x-button`) und muss vor der Ausgabe mit dem RMT-Compiler geprüft werden:\n\n```rmt\ntemplate app.shell {\n  state app.shell type object preserve {\n    initial {\n      id \"app-shell\"\n      title \"XTend App Shell\"\n      text \"Willkommen bei XTend\"\n    }\n  }\n\n  state app.status type object preserve {\n    initial {\n      id \"app-status\"\n      text \"Bereit\"\n      tone \"success\"\n    }\n  }\n\n  state app.start type object preserve {\n    initial {\n      id \"app-start\"\n      text \"Start\"\n      tone \"primary\"\n      disabled false\n    }\n  }\n\n  selector app.shell from state app.shell { output AppShell }\n  selector app.status from state app.status { output AppStatus }\n  selector app.start from state app.start { output AppStart }\n\n  action app.start {\n    input label string\n    reduce state.app.status.text = \"Gestartet\"\n  }\n\n  portal app.root root \"#app\" layer surface\n\n  surface app.shell kind page component x-section {\n    source selector app.shell\n    key shell.id\n    portal app.root\n    bounds x 0 y 0 width 960 height 640\n    la…\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/de/learn-rmt-actions-events",
+        "sourceHash": "a0a866ebeb036d92756ac74b74fdc8605ab2356b3fbb1e84688bb9975ec85e31",
+        "sourcePath": "docs/de/learn-rmt-actions-events.md"
+      },
+      {
+        "uri": "xtend://docs/en/learn-rmt-actions-events",
+        "sourceHash": "27851df33103ba58b9480c3b68372d85b66b0ae006a4ee2cd7d882d7db1eefc2",
+        "sourcePath": "docs/en/learn-rmt-actions-events.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/operator%3Aaction",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/de/rmt-reference-actions-events.md"
+      },
+      {
+        "uri": "xtend://docs/de/rmt-reference-actions-events",
+        "sourceHash": "628d7b11c6b9d97dead857c38ae836a3cacb8164a4072e72d4d6b37497509fc4",
+        "sourcePath": "docs/de/rmt-reference-actions-events.md"
+      },
+      {
+        "uri": "xtend://docs/de/rmt-vnext-component-primitives",
+        "sourceHash": "532cf620906f98f39ade46cf383a7416d5d34db356e5cc2246d6968d03656243",
+        "sourcePath": "docs/de/rmt-vnext-component-primitives.md"
+      }
+    ]
+  }
+}

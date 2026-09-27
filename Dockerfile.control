@@ -1,0 +1,27 @@
+# syntax=docker/dockerfile:1
+ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+FROM ${NODE_IMAGE} AS build
+WORKDIR /app/xtend
+COPY xtend/package.json xtend/package-lock.json ./
+COPY xtend/vendor-inputs ./vendor-inputs
+RUN npm install -g npm@11.17.0 && npm ci --ignore-scripts
+WORKDIR /app
+COPY . .
+RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.tar.gz .
+WORKDIR /app/xtend
+RUN node scripts/build-control.cjs && npm prune --omit=dev --ignore-scripts
+FROM ${NODE_IMAGE}
+LABEL org.opencontainers.image.title="XTend.search" org.opencontainers.image.version="0.4.0"
+RUN apt-get update && apt-get install -y --no-install-recommends tini util-linux ca-certificates && rm -rf /var/lib/apt/lists/* \
+ && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend \
+ && mkdir -p /var/lib/xtend-search /var/lib/xtend-evidence && chown 10001:10001 /var/lib/xtend-search /var/lib/xtend-evidence
+WORKDIR /app
+COPY --from=build /app/xtend /app/xtend
+COPY --from=build /source.tar.gz /app/source.tar.gz
+COPY LICENSE /app/LICENSE
+ENV BIND_HOST=0.0.0.0 PORT=8080 XTEND_SECRET_DIR=/var/lib/xtend-search/resume XTEND_DATA_DIR=/var/lib/xtend-search/control XTEND_EVIDENCE_DIR=/var/lib/xtend-evidence WEB_CONCURRENCY=1 XTEND_REPLICAS=1
+USER 10001:10001
+EXPOSE 8080
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+ENTRYPOINT ["/usr/bin/tini","--"]
+CMD ["sh","-c","flock -n /var/lib/xtend-search/owner.lock sh -c 'node xtend/scripts/keys.mjs && exec node xtend/server/standalone.mjs'"]

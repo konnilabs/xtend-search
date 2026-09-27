@@ -1,0 +1,3 @@
+/xtend-cp-search-test sha256:5e64d5b210c47bd5ba685ac32d5cefbf6dd0493376befb0bd9ce3b5ca9747e0c
+/xtend-cp-backend-test sha256:0a642d389dcbd7f6714a446fc379f405ee40854c6f95748de79a730144805dfd
+/xtend-cp-legacy-benchmark sha256:2e6fb4d76418040106fab7688e3e55784c6459dda13672af2a0fd0fd8ed28be7

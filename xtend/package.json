@@ -1,0 +1,31 @@
+{
+  "name": "xtend-search",
+  "version": "0.4.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.18.0"
+  },
+  "packageManager": "npm@11.17.0",
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "keys": "node scripts/keys.mjs",
+    "start": "node server/host.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "node tests/browser.mjs",
+    "build:control": "node scripts/build-control.cjs",
+    "start:control": "node server/standalone.mjs",
+    "test:control": "node --test tests/control/*.test.mjs",
+    "setup:control": "node scripts/setup-control.mjs"
+  },
+  "dependencies": {
+    "@ccslabs/xtend": "file:vendor-inputs/ccslabs-xtend-0.8.0.tgz"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "playwright": "1.58.2",
+    "rollup": "4.60.4",
+    "terser": "5.48.0",
+    "typescript": "5.9.3"
+  }
+}

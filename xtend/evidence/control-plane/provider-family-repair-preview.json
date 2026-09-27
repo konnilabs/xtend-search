@@ -1,0 +1,119 @@
+{
+  "mode": "preview",
+  "revision": 14,
+  "changes": [
+    {
+      "id": "360search",
+      "from": "shared",
+      "to": "360search"
+    },
+    {
+      "id": "360search videos",
+      "from": "shared",
+      "to": "360search"
+    },
+    {
+      "id": "brave",
+      "from": "shared",
+      "to": "brave"
+    },
+    {
+      "id": "bing",
+      "from": "shared",
+      "to": "bing"
+    },
+    {
+      "id": "duckduckgo",
+      "from": "shared",
+      "to": "duckduckgo"
+    },
+    {
+      "id": "duckduckgo images",
+      "from": "shared",
+      "to": "duckduckgo"
+    },
+    {
+      "id": "duckduckgo videos",
+      "from": "shared",
+      "to": "duckduckgo"
+    },
+    {
+      "id": "duckduckgo news",
+      "from": "shared",
+      "to": "duckduckgo"
+    },
+    {
+      "id": "bing news",
+      "from": "shared",
+      "to": "bing"
+    },
+    {
+      "id": "bing images",
+      "from": "shared",
+      "to": "bing"
+    },
+    {
+      "id": "bing videos",
+      "from": "shared",
+      "to": "bing"
+    },
+    {
+      "id": "google cse",
+      "from": "shared",
+      "to": "google-cse"
+    },
+    {
+      "id": "google cse images",
+      "from": "shared",
+      "to": "google-cse"
+    }
+  ],
+  "guards": [
+    [
+      "family:360search",
+      {
+        "reset": 1790436600000,
+        "count": 0,
+        "leases": [],
+        "blockedUntil": 0
+      }
+    ],
+    [
+      "family:brave",
+      {
+        "reset": 1790436600000,
+        "count": 0,
+        "leases": [],
+        "blockedUntil": 0
+      }
+    ],
+    [
+      "family:bing",
+      {
+        "reset": 1790436600000,
+        "count": 0,
+        "leases": [],
+        "blockedUntil": 0
+      }
+    ],
+    [
+      "family:duckduckgo",
+      {
+        "reset": 1790436600000,
+        "count": 0,
+        "leases": [],
+        "blockedUntil": 1791732570808
+      }
+    ],
+    [
+      "family:google-cse",
+      {
+        "reset": 1790436600000,
+        "count": 0,
+        "leases": [],
+        "blockedUntil": 0
+      }
+    ]
+  ],
+  "preservedDuckDuckGoUntil": 1791732570808
+}

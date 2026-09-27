@@ -650,6 +650,12 @@ def search():
             sxng_request.preferences, sxng_request.form
         )
         search_obj = searx.search.SearchWithPlugins(search_query, sxng_request, sxng_request.user_plugins)
+        if (output_format == 'json'
+                and sxng_request.headers.get('X-SearXNG-XTend-Stream') == '1'
+                and sxng_request.headers.get('X-SearXNG-XTend-Contract') == '1'):
+            from searx.xtend_stream import stream_search_response
+
+            return stream_search_response(search_obj, search_query, sxng_request, image_proxify)
         result_container = search_obj.search()
 
     except SearxParameterException as e:
@@ -672,6 +678,12 @@ def search():
     if output_format == 'json':
 
         response = webutils.get_json_response(search_query, result_container)
+        # XTend.search's private adapter enriches the existing, completed search.
+        # Standard JSON callers remain unchanged. The gateway strips this header.
+        if sxng_request.headers.get('X-SearXNG-XTend-Contract') == '1':
+            from searx.xtend_integration import enrich_response  # pylint: disable=import-outside-toplevel
+
+            response = enrich_response(response, search_query, result_container, sxng_request, image_proxify)
         return Response(response, mimetype='application/json')
 
     if output_format == 'csv':

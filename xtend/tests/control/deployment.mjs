@@ -1,0 +1,15 @@
+import {execFileSync,spawnSync} from 'node:child_process';
+import fs from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const docker=(...args)=>execFileSync('docker',args,{maxBuffer:32*1024*1024}),checks=[],base='http://localhost:8093';
+for(const path of ['/assets/xtend/admin/page.mjs','/assets/xtend/standalone/maraca/server/xtend.maraca.services.mjs','/assets/xtend/standalone/maraca/xtend.maraca.services.json'])assert.ok([401,404].includes((await fetch(base+path)).status));checks.push('Private admin assets and server graphs are not anonymously served.');
+assert.equal((await fetch('http://localhost:8092/config')).status,403);checks.push('Private backend rejects missing authentication.');
+const canary='PRIVATE_CANARY_CP_030';for(const q of [canary,'error_'+canary,'!'+canary])await (await fetch(base+'/search?'+new URLSearchParams({q,categories:'general',language:'all',safesearch:'1'}))).arrayBuffer();
+await new Promise(r=>setTimeout(r,250));
+for(const name of ['xtend-cp-search-test','xtend-cp-backend-test'])assert.ok(!docker('logs',name).includes(Buffer.from(canary)));
+const files=docker('exec','xtend-cp-search-test','node','-e',`const fs=require('node:fs');for(const f of fs.readdirSync('/var/lib/xtend-search/control'))if(fs.statSync('/var/lib/xtend-search/control/'+f).isFile())process.stdout.write(fs.readFileSync('/var/lib/xtend-search/control/'+f));`);assert.ok(!files.includes(Buffer.from(canary)));checks.push('Success, provider-error and lexical-rejection canaries absent from Docker logs and every persisted control file.');
+const lock=spawnSync('docker',['run','--rm','-v','xtend-cp-fixture-data:/var/lib/xtend-search','xtend-search:0.3.0'],{encoding:'utf8'});assert.equal(lock.status,1);checks.push('A second Docker owner using the same volume is rejected by flock.');
+const worker=spawnSync('docker',['run','--rm','--entrypoint','node','-e','WEB_CONCURRENCY=2','xtend-search:0.3.0','xtend/server/standalone.mjs'],{encoding:'utf8'});assert.notEqual(worker.status,0);assert.match(worker.stderr,/Single owner required/);checks.push('Multiple web workers fail before the service starts.');
+const archive=await fetch(base+'/source.tar.gz');assert.equal(archive.status,200);checks.push('Corresponding source archive is available.');
+const ready=await(await fetch(base+'/health/ready')).json();assert.equal(ready.storage,'ready');assert.equal(ready.retrieval,'compatible');
+await fs.writeFile(new URL('../../evidence/control-plane/deployment.json',import.meta.url),JSON.stringify({ok:true,checks},null,2));console.log(JSON.stringify({ok:true,checks}));

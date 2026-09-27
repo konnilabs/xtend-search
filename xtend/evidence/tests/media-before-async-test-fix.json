@@ -1,0 +1,77 @@
+{
+  "timestamp": "2026-09-19T20:33:57.005Z",
+  "base": "http://127.0.0.1:8090",
+  "note": "Offline SearXNG fixture; image-proxy responses replaced with deterministic SVGs. Real Python contract, Maraca SSR and signed resume.",
+  "results": [
+    {
+      "name": "chromium: knowledge, sources, facts, history, dark mode",
+      "status": "passed",
+      "ms": 1876
+    },
+    {
+      "name": "chromium: lazy panel, metadata, keyboard, boundaries, focus",
+      "status": "failed",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:39:331\n    at async check (file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:6:65)\n    at async file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/media.mjs:31:2"
+    },
+    {
+      "name": "chromium: navigation clears preview",
+      "status": "passed",
+      "ms": 1736
+    },
+    {
+      "name": "chromium: image error fallback",
+      "status": "passed",
+      "ms": 1279
+    },
+    {
+      "name": "chromium: responsive 390px",
+      "status": "passed",
+      "ms": 1369
+    },
+    {
+      "name": "chromium: responsive 900px",
+      "status": "passed",
+      "ms": 1367
+    },
+    {
+      "name": "chromium: no-JS cards and native image links",
+      "status": "passed",
+      "ms": 412
+    },
+    {
+      "name": "firefox: knowledge, sources, facts, history, dark mode",
+      "status": "passed",
+      "ms": 2862
+    },
+    {
+      "name": "firefox: lazy panel, metadata, keyboard, boundaries, focus",
+      "status": "passed",
+      "ms": 1568
+    },
+    {
+      "name": "firefox: navigation clears preview",
+      "status": "passed",
+      "ms": 2217
+    },
+    {
+      "name": "firefox: image error fallback",
+      "status": "passed",
+      "ms": 1788
+    },
+    {
+      "name": "firefox: responsive 390px",
+      "status": "passed",
+      "ms": 1636
+    },
+    {
+      "name": "firefox: responsive 900px",
+      "status": "passed",
+      "ms": 1671
+    },
+    {
+      "name": "firefox: no-JS cards and native image links",
+      "status": "passed",
+      "ms": 640
+    }
+  ]
+}

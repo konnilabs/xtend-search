@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-09-19T21:30:15.921Z",
+  "base": "http://127.0.0.1:8090",
+  "cssOverride": null,
+  "results": [
+    {
+      "name": "chromium: genuine lazy XLightbox, current selection, full-page carousel, sidebar sync",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: modal focus, scroll lock, close button, reopen and Escape layers",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: failed originals, thumbnail fallback, failed media can be skipped",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: pending lazy import and active modal cannot survive navigation",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: unavailable optional module preserves sidebar",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: narrow viewport, swipe and no overflow",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: genuine lazy XLightbox, current selection, full-page carousel, sidebar sync",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: modal focus, scroll lock, close button, reopen and Escape layers",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: failed originals, thumbnail fallback, failed media can be skipped",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: pending lazy import and active modal cannot survive navigation",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: unavailable optional module preserves sidebar",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: narrow viewport, swipe and no overflow",
+      "status": "passed"
+    }
+  ]
+}

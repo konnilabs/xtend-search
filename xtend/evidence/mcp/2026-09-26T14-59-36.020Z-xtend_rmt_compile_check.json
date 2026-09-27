@@ -1,0 +1,225 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "XTendRMT compile check completed with status compiled."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.rmt-compile-check.v1",
+      "sourceHash": "9d6b19b23689bba13595e433e700ac7bf1c8a382d3acb5f9385744458bd368ad",
+      "path": "admin/admin.rmt",
+      "ok": false,
+      "status": "compiled",
+      "diagnostics": [
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"category\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 839,
+              "character": 26
+            },
+            "end": {
+              "line": 839,
+              "character": 43
+            },
+            "startOffset": 47073,
+            "endOffset": 47090
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"filterQuery\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 840,
+              "character": 29
+            },
+            "end": {
+              "line": 840,
+              "character": 46
+            },
+            "startOffset": 47120,
+            "endOffset": 47137
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"category\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 854,
+              "character": 26
+            },
+            "end": {
+              "line": 854,
+              "character": 43
+            },
+            "startOffset": 47547,
+            "endOffset": 47564
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"filterQuery\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 855,
+              "character": 29
+            },
+            "end": {
+              "line": 855,
+              "character": 46
+            },
+            "startOffset": 47594,
+            "endOffset": 47611
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"category\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 903,
+              "character": 26
+            },
+            "end": {
+              "line": 903,
+              "character": 43
+            },
+            "startOffset": 48982,
+            "endOffset": 48999
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"filterQuery\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 904,
+              "character": 29
+            },
+            "end": {
+              "line": 904,
+              "character": 46
+            },
+            "startOffset": 49029,
+            "endOffset": 49046
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"category\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 934,
+              "character": 26
+            },
+            "end": {
+              "line": 934,
+              "character": 43
+            },
+            "startOffset": 49908,
+            "endOffset": 49925
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"filterQuery\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 935,
+              "character": 29
+            },
+            "end": {
+              "line": 935,
+              "character": 46
+            },
+            "startOffset": 49955,
+            "endOffset": 49972
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"category\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 965,
+              "character": 26
+            },
+            "end": {
+              "line": 965,
+              "character": 43
+            },
+            "startOffset": 50839,
+            "endOffset": 50856
+          }
+        },
+        {
+          "schema": "xtend.compiler.tooling-diagnostic.v1",
+          "source": "xtend-compiler",
+          "code": "rmt.vnext.app_service.input_policy_missing",
+          "severity": "error",
+          "message": "AppService input \"filterQuery\" policy requires trust boundary.",
+          "range": {
+            "start": {
+              "line": 966,
+              "character": 29
+            },
+            "end": {
+              "line": 966,
+              "character": 46
+            },
+            "startOffset": 50886,
+            "endOffset": 50903
+          }
+        }
+      ],
+      "summary": {
+        "schema": "xtend.rmt.vnext-compiler.v1",
+        "mode": null,
+        "recordCount": null,
+        "outputCount": null
+      }
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "workspace://admin/admin.rmt",
+        "kind": "compile-check",
+        "sourceHash": "9d6b19b23689bba13595e433e700ac7bf1c8a382d3acb5f9385744458bd368ad"
+      }
+    ]
+  }
+}

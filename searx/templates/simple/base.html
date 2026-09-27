@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="endpoint" content="{{ endpoint }}">
-  <meta name="description" content="SearXNG — a privacy-respecting, open metasearch engine">
-  <meta name="keywords" content="SearXNG, search, search engine, metasearch, meta search">
+  <meta name="description" content="XTend.search — Deine Suche. Dein Horizont.">
+  <meta name="keywords" content="XTend.search, search, metasearch">
   <meta name="generator" content="searxng/{{ searxng_version }}">
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noarchive">
@@ -30,6 +30,7 @@
   <link rel="icon" href="{{ url_for('static', filename='img/favicon.svg') }}" type="image/svg+xml">
   <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/favicon.png') }}">
   <link rel="manifest" href="{{ url_for('manifest') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='xtend-brand.css') }}">
 </head>
 <body class="{{ endpoint }}_endpoint" >
   <main id="main_{{  self._TemplateReference__context.name|replace("simple/", "")|replace(".html", "") }}" class="{{body_class}}">

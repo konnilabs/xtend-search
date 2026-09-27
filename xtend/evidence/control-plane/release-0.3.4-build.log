@@ -1,0 +1,159 @@
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon  77.22MB
+Step 1/24 : ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+Step 2/24 : FROM ${NODE_IMAGE} AS build
+ ---> 622f209f6c16
+Step 3/24 : WORKDIR /app/xtend
+ ---> Using cache
+ ---> 338f5444acec
+Step 4/24 : COPY xtend/package.json xtend/package-lock.json ./
+ ---> d956b7edc0b6
+Step 5/24 : COPY xtend/vendor-inputs ./vendor-inputs
+ ---> 4473f242d38a
+Step 6/24 : RUN npm install -g npm@11.17.0 && npm ci --ignore-scripts
+ ---> Running in 8d89ef743926
+
+changed 10 packages in 9s
+
+15 packages are looking for funding
+  run `npm fund` for details
+
+added 20 packages, and audited 21 packages in 3s
+
+found 0 vulnerabilities
+[91mnpm notice
+npm notice New major version of npm available! 11.17.0 -> 12.1.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.1.0
+npm notice To update run: npm install -g npm@12.1.0
+npm notice
+[0m ---> Removed intermediate container 8d89ef743926
+ ---> aeded7229aef
+Step 7/24 : WORKDIR /app
+ ---> Running in 06123f5f8ebd
+ ---> Removed intermediate container 06123f5f8ebd
+ ---> 34512136651a
+Step 8/24 : COPY . .
+ ---> 0c0299d18e72
+Step 9/24 : RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.tar.gz .
+ ---> Running in 512ce62be304
+ ---> Removed intermediate container 512ce62be304
+ ---> 630c8cdc2874
+Step 10/24 : WORKDIR /app/xtend
+ ---> Running in 526335dd878e
+ ---> Removed intermediate container 526335dd878e
+ ---> 8a5f9343a82c
+Step 11/24 : RUN node scripts/build-control.cjs && npm prune --omit=dev --ignore-scripts
+ ---> Running in e9f20a804cc8
+{"ok":true,"summaries":[{"folder":"standalone","version":"1cdf1f90858cf213aadf3dd9bbfaf45ad33f88d05ff664ae125c8635c7277cd7","sourceSha256":"c8b39514910ec181b0ae6a76599f7095fe114657e799757f04d6955354f133a4","services":"planned"},{"folder":"admin","version":"2a7a8015d99256eb6a42a1a364bdaab27af53536da2353d44244e1b8a07ba1db","sourceSha256":"648acb13042c0c473bd8aebad04858cdcdde4c2fefe09183346776512122ae5e","services":"planned"}]}
+
+removed 19 packages, and audited 2 packages in 5s
+
+found 0 vulnerabilities
+ ---> Removed intermediate container e9f20a804cc8
+ ---> 35c5f452bf2a
+Step 12/24 : FROM ${NODE_IMAGE}
+ ---> 622f209f6c16
+Step 13/24 : LABEL org.opencontainers.image.title="XTend.search" org.opencontainers.image.version="0.3.4"
+ ---> Running in bbe181f35a44
+ ---> Removed intermediate container bbe181f35a44
+ ---> e3d8e661f1fc
+Step 14/24 : RUN apt-get update && apt-get install -y --no-install-recommends tini util-linux ca-certificates && rm -rf /var/lib/apt/lists/*  && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend  && mkdir -p /var/lib/xtend-search && chown 10001:10001 /var/lib/xtend-search
+ ---> Running in 284f0afb196e
+Get:1 http://deb.debian.org/debian bookworm InRelease [151 kB]
+Get:2 http://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+Get:3 http://deb.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]
+Get:5 http://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]
+Get:6 http://deb.debian.org/debian-security bookworm-security/main amd64 Packages [345 kB]
+Fetched 9383 kB in 2s (5238 kB/s)
+Reading package lists...
+Reading package lists...
+Building dependency tree...
+Reading state information...
+util-linux is already the newest version (2.38.1-5+deb12u3).
+util-linux set to manually installed.
+The following additional packages will be installed:
+  libssl3 openssl
+The following NEW packages will be installed:
+  ca-certificates libssl3 openssl tini
+0 upgraded, 4 newly installed, 0 to remove and 3 not upgraded.
+Need to get 3910 kB of archives.
+After this operation, 9703 kB of additional disk space will be used.
+Get:1 http://deb.debian.org/debian-security bookworm-security/main amd64 libssl3 amd64 3.0.22-1~deb12u1 [2039 kB]
+Get:2 http://deb.debian.org/debian-security bookworm-security/main amd64 openssl amd64 3.0.22-1~deb12u1 [1442 kB]
+Get:3 http://deb.debian.org/debian-security bookworm-security/main amd64 ca-certificates all 20250419~deb12u1 [162 kB]
+Get:4 http://deb.debian.org/debian bookworm/main amd64 tini amd64 0.19.0-1+b3 [267 kB]
+[91mdebconf: delaying package configuration, since apt-utils is not installed
+[0mFetched 3910 kB in 0s (10.7 MB/s)
+Selecting previously unselected package libssl3:amd64.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 6096 files and directories currently installed.)
+Preparing to unpack .../libssl3_3.0.22-1~deb12u1_amd64.deb ...
+Unpacking libssl3:amd64 (3.0.22-1~deb12u1) ...
+Selecting previously unselected package openssl.
+Preparing to unpack .../openssl_3.0.22-1~deb12u1_amd64.deb ...
+Unpacking openssl (3.0.22-1~deb12u1) ...
+Selecting previously unselected package ca-certificates.
+Preparing to unpack .../ca-certificates_20250419~deb12u1_all.deb ...
+Unpacking ca-certificates (20250419~deb12u1) ...
+Selecting previously unselected package tini.
+Preparing to unpack .../tini_0.19.0-1+b3_amd64.deb ...
+Unpacking tini (0.19.0-1+b3) ...
+Setting up libssl3:amd64 (3.0.22-1~deb12u1) ...
+Setting up tini (0.19.0-1+b3) ...
+Setting up openssl (3.0.22-1~deb12u1) ...
+Setting up ca-certificates (20250419~deb12u1) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (TERM is not set, so the dialog frontend is not usable.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.36.0 /usr/local/share/perl/5.36.0 /usr/lib/x86_64-linux-gnu/perl5/5.36 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.36 /usr/share/perl/5.36 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Updating certificates in /etc/ssl/certs...
+150 added, 0 removed; done.
+Processing triggers for libc-bin (2.36-9+deb12u14) ...
+Processing triggers for ca-certificates (20250419~deb12u1) ...
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+ ---> Removed intermediate container 284f0afb196e
+ ---> 31449a38f7c5
+Step 15/24 : WORKDIR /app
+ ---> Running in 48a54f0c0d3c
+ ---> Removed intermediate container 48a54f0c0d3c
+ ---> 170713efafba
+Step 16/24 : COPY --from=build /app/xtend /app/xtend
+ ---> 971c5a8e4f94
+Step 17/24 : COPY --from=build /source.tar.gz /app/source.tar.gz
+ ---> 8d8c81348b81
+Step 18/24 : COPY LICENSE /app/LICENSE
+ ---> fc0c0c307ebf
+Step 19/24 : ENV BIND_HOST=0.0.0.0 PORT=8080 XTEND_SECRET_DIR=/var/lib/xtend-search/resume XTEND_DATA_DIR=/var/lib/xtend-search/control WEB_CONCURRENCY=1 XTEND_REPLICAS=1
+ ---> Running in 69b4db670ba9
+ ---> Removed intermediate container 69b4db670ba9
+ ---> 0c2a6c93fcfc
+Step 20/24 : USER 10001:10001
+ ---> Running in 11f23bccc2a9
+ ---> Removed intermediate container 11f23bccc2a9
+ ---> 616f3b75509f
+Step 21/24 : EXPOSE 8080
+ ---> Running in b833c0e9c57c
+ ---> Removed intermediate container b833c0e9c57c
+ ---> b053985e9445
+Step 22/24 : HEALTHCHECK --interval=30s --timeout=5s --start-period=30s CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+ ---> Running in 3bf4d46ac1ed
+ ---> Removed intermediate container 3bf4d46ac1ed
+ ---> 4afd1a147a34
+Step 23/24 : ENTRYPOINT ["/usr/bin/tini","--"]
+ ---> Running in c3f524e9510c
+ ---> Removed intermediate container c3f524e9510c
+ ---> 06914669d668
+Step 24/24 : CMD ["sh","-c","flock -n /var/lib/xtend-search/owner.lock sh -c 'node xtend/scripts/keys.mjs && exec node xtend/server/standalone.mjs'"]
+ ---> Running in 12d69fc33f04
+ ---> Removed intermediate container 12d69fc33f04
+ ---> adcf461c4a8c
+Successfully built adcf461c4a8c
+Successfully tagged xtend-search:0.3.4

@@ -1,0 +1,425 @@
+// XTend.search — native forms and links, compiler-owned UI and surface commits.
+template xtend.search {
+  datasource search.feedback.submit from host search.feedback.submit { mode invoke
+ contract "xsearch.feedback.v1" }
+  action search.feedback.submit { effect fetch datasource search.feedback.submit }
+  datasource search.run from host search.run { mode stream
+ contract "xsearch.search.v1" }
+  action search.run { input url string { trust boundary "xtend.security.sanitizing-boundary.v1"
+ sanitize text }
+ effect stream datasource search.run }
+  datasource search.capabilities from host search.capabilities { mode invoke
+ contract "xsearch.capabilities.v1" }
+  action search.capabilities { effect fetch datasource search.capabilities }
+  state search.filters type object preserve { initial {
+    language "all"
+    timeRange ""
+    safeSearch "1"
+  } }
+  state search.preferences type object preserve { initial {
+    message ""
+    busy false
+  } }
+  state search.query type string initial ""
+  state search.activity type object preserve { initial {
+      busy false
+      message ""
+    } }
+  state search.data type object preserve {
+    initial {
+      view "home"
+      isSearch false
+      skeleton false
+      stream {}
+      q ""
+      category "general"
+      language "all"
+      timeRange ""
+      safeSearch "1"
+      results []
+      knowledgeCards []
+      hasKnowledge false
+      warnings []
+      pages []
+      tabs []
+      countLabel ""
+      pageLabel ""
+      empty false
+      error false
+      fixture false
+      classicUrl "/classic/"
+    }
+  }
+  state search.preview type object preserve {
+    initial {
+      open false
+      id ""
+      title ""
+      imageSrc ""
+      imageKey ""
+      imageUnavailable false
+      imageMessage ""
+      expandMessage ""
+      url ""
+      imageUrl ""
+      snippetText ""
+      displayUrl ""
+      position ""
+      previousDisabled true
+      nextDisabled true
+      metadata []
+      formats []
+    }
+  }
+  state search.shell type object preserve {
+    initial {
+      id "search-shell"
+      viewTemplate {
+        class "search-shell"
+        attributes { "data-view" "$model.search.data.view" }
+        children [
+          { type "element" tag "a" text "Zu den Ergebnissen" class "skip-link" attributes { href "#results" } }
+          { type "element" tag "header" class "topbar" children [
+            { type "element" tag "a" class "wordmark" attributes { href "/" "aria-label" "XTend.search Startseite" } children [
+              { type "element" tag "img" attributes { src "/assets/xtend/mark.svg" alt "" width 32 height 32 } }
+              { type "element" tag "span" text "XTend" }
+              { type "element" tag "span" text { op "literal" value ".search" } class "wordmark-suffix" }
+            ] }
+            { type "element" tag "nav" class "top-nav" attributes { "aria-label" "Hauptnavigation" } children [
+              { type "element" tag "a" text "Über XTend.search" attributes { href "/info/de/about" "data-xtend-native" "" "data-about-link" "" } }
+            ] }
+          ] }
+          { type "element" tag "section" class "search-area" children [
+            { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
+              type "element" tag "div" key "home-hero" class "hero" children [
+                { type "element" tag "div" class "eyebrow" text "DEIN FENSTER INS WEB" }
+                { type "element" tag "h1" class "hero-wordmark" children [
+                  { type "element" tag "span" text "XTend" }
+                  { type "element" tag "span" text { op "literal" value ".search" } }
+                ] }
+                { type "element" tag "p" text "Neugier braucht Freiraum." class "hero-subtitle" }
+              ]
+            } }
+            { type "element" tag "form" key "search-form" class "search-form" attributes { id "search-form" action "/search" method "get" role "$model.search.data.searchRole" } children [
+              { type "element" tag "div" class "search-box" children [
+                { type "element" tag "span" class "search-icon" attributes { "aria-hidden" "true" } }
+                { type "element" tag "label" text "Suchbegriff" class "sr-only" attributes { for "search-input" } }
+                { type "element" tag "input" attributes { id "search-input" type "search" name "q" value "$model.search.query" placeholder "Was möchtest du entdecken?" autocomplete "off" autocapitalize "none" spellcheck "false" maxlength 2048 required true } }
+                { type "element" tag "button" text "Suchen" class "search-button" attributes { type "submit" } }
+              ] }
+              { type "element" tag "input" attributes { type "hidden" name "categories" value "$model.search.data.category" } }
+              { type "element" tag "div" class "search-tools" children [
+                { type "element" tag "nav" class "category-tabs" attributes { "aria-label" "Suchkategorie" } children [
+                  { type "repeat" source "$model.search.data.tabs" key "id" template {
+                    type "element" tag "a" text "$item.label" class "$item.className" attributes { href "$item.url" "aria-current" "$item.current" }
+                  } }
+                ] }
+                { type "element" tag "details" class "filters" attributes { id "filters" } children [
+                  { type "element" tag "summary" text "Filter" }
+                  { type "element" tag "div" class "filter-panel" children [
+                    { type "element" tag "label" text "Sprache" attributes { for "language" } }
+                    { type "element" tag "select" attributes { id "language" name "language" value "$model.search.filters.language" } children [
+                      { type "element" tag "option" text "Alle Sprachen" properties { selected { op "equals" left "$model.search.filters.language" right "all" } } attributes { value "all" selected { op "equals" left "$model.search.filters.language" right "all" } } }
+                      { type "element" tag "option" text "Deutsch" properties { selected { op "equals" left "$model.search.filters.language" right "de" } } attributes { value "de" selected { op "equals" left "$model.search.filters.language" right "de" } } }
+                      { type "element" tag "option" text "Englisch" properties { selected { op "equals" left "$model.search.filters.language" right "en" } } attributes { value "en" selected { op "equals" left "$model.search.filters.language" right "en" } } }
+                    ] }
+                    { type "element" tag "label" text "Zeitraum" attributes { for "time-range" } }
+                    { type "element" tag "select" attributes { id "time-range" name "time_range" value "$model.search.filters.timeRange" } children [
+                      { type "element" tag "option" text "Jederzeit" properties { selected { op "equals" left "$model.search.filters.timeRange" right "" } } attributes { value "" selected { op "equals" left "$model.search.filters.timeRange" right "" } } }
+                      { type "element" tag "option" text "Letzte 24 Stunden" properties { selected { op "equals" left "$model.search.filters.timeRange" right "day" } } attributes { value "day" selected { op "equals" left "$model.search.filters.timeRange" right "day" } } }
+                      { type "element" tag "option" text "Letzte Woche" properties { selected { op "equals" left "$model.search.filters.timeRange" right "week" } } attributes { value "week" selected { op "equals" left "$model.search.filters.timeRange" right "week" } } }
+                      { type "element" tag "option" text "Letzter Monat" properties { selected { op "equals" left "$model.search.filters.timeRange" right "month" } } attributes { value "month" selected { op "equals" left "$model.search.filters.timeRange" right "month" } } }
+                      { type "element" tag "option" text "Letztes Jahr" properties { selected { op "equals" left "$model.search.filters.timeRange" right "year" } } attributes { value "year" selected { op "equals" left "$model.search.filters.timeRange" right "year" } } }
+                    ] }
+                    { type "element" tag "label" text "SafeSearch" attributes { for "safe-search" } }
+                    { type "element" tag "select" attributes { id "safe-search" name "safesearch" value "$model.search.filters.safeSearch" } children [
+                      { type "element" tag "option" text "Aus" properties { selected { op "equals" left "$model.search.filters.safeSearch" right "0" } } attributes { value "0" selected { op "equals" left "$model.search.filters.safeSearch" right "0" } } }
+                      { type "element" tag "option" text "Moderat" properties { selected { op "equals" left "$model.search.filters.safeSearch" right "1" } } attributes { value "1" selected { op "equals" left "$model.search.filters.safeSearch" right "1" } } }
+                      { type "element" tag "option" text "Streng" properties { selected { op "equals" left "$model.search.filters.safeSearch" right "2" } } attributes { value "2" selected { op "equals" left "$model.search.filters.safeSearch" right "2" } } }
+                    ] }
+                    { type "element" tag "p" text "Filter gelten für diese Suche. Als Standard speichern übernimmt sie für künftige Besuche in diesem Browser (180 Tage). Links mit eigenen Filtern haben Vorrang." class "filter-note" }
+                    { type "element" tag "button" text "Filter anwenden" class "apply-button" attributes { type "submit" } }
+                    { type "element" tag "button" text "Als Standard speichern" class "preference-button" attributes { type "submit" name "preferenceAction" value "save" formaction "/preferences" formmethod "post" formnovalidate true disabled "$model.search.preferences.busy" } }
+                    { type "element" tag "button" text "Gespeicherten Standard löschen" class "preference-button" attributes { type "submit" name "preferenceAction" value "delete" formaction "/preferences" formmethod "post" formnovalidate true disabled "$model.search.preferences.busy" } }
+                    { type "element" tag "p" text "$model.search.preferences.message" class "filter-note preference-status" attributes { role "status" "aria-live" "polite" } }
+                  ] }
+                ] }
+              ] }
+            ] }
+            { type "element" tag "p" key "activity" text "$model.search.activity.message" class "activity" attributes { id "search-status" role "status" "aria-live" "polite" } }
+          ] }
+          { type "element" tag "div" attributes { id "result-slot" } }
+          { type "element" tag "footer" class "site-footer" children [
+            { type "element" tag "span" text "Deine Suche. Dein Horizont." }
+            { type "element" tag "div" children [
+              { type "element" tag "a" text "Über & Datenschutz" attributes { href "/info/de/about" "data-xtend-native" "" "data-about-link" "" } }
+              { type "element" tag "a" text "Observatory" attributes { href "/admin" "data-xtend-native" "" } }
+            ] }
+          ] }
+        ]
+      }
+    }
+  }
+  state search.resultView type object preserve {
+    initial {
+      id "results"
+      viewTemplate {
+        class "result-area"
+        attributes { id "results" tabindex "-1" "aria-busy" "$model.search.activity.busy" "data-category" "$model.search.data.category" "data-has-cards" true "data-standalone" true "data-preview-open" "$model.search.preview.open" }
+        children [
+          { type "conditional" test "$model.search.data.fixture" then { type "element" tag "p" text "Testmodus · Diese Ergebnisse stammen aus reproduzierbaren Testdaten." class "fixture-notice" } }
+          { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
+            type "element" tag "div" class "home-details" children [
+              { type "element" tag "p" text "Mehr Perspektiven. Weniger Ablenkung." class "home-intro" }
+              { type "element" tag "p" text "Eine Suche über mehrere Quellen. Ohne Werbung von uns, ohne persönliches Suchprofil." }
+              { type "element" tag "div" class "home-points" children [
+                { type "element" tag "span" text "Mehrere Suchquellen" }
+                { type "element" tag "span" text "Keine Analyse-Tracker" }
+                { type "element" tag "span" text "Offene Technologie" }
+              ] }
+            ]
+          } }
+          { type "conditional" test "$model.search.data.isSearch" then {
+            type "element" tag "section" class "result-list" attributes { "aria-label" "Suchergebnisse" } children [
+              { type "element" tag "div" class "result-meta" children [
+                { type "element" tag "h1" text "$model.search.data.countLabel" attributes { id "results-heading" tabindex "-1" "aria-live" "polite" "aria-atomic" "true" } }
+                { type "element" tag "span" text "$model.search.data.pageLabel" }
+              ] }
+              { type "conditional" test "$model.search.data.safeSearchNotice" then {
+                type "element" tag "p" class "safe-search-notice" text "$model.search.data.safeSearchNotice" attributes { role "note" }
+              } }
+              { type "element" tag "details" class "source-status" children [
+                { type "element" tag "summary" text "$model.search.data.statusLabel" }
+                { type "element" tag "div" class "source-status-popover" children [
+              { type "repeat" source "$model.search.data.warnings" key "id" template { type "element" tag "x-alert" text "$item.message" class "search-warning" attributes { id "$item.domId" type "$item.type" closable true duration "0" "data-warning-id" "$item.id" "aria-label" "Hinweis zur Suche" } } }
+                ] }
+              ] }
+              { type "conditional" test "$model.search.data.skeleton" then {
+                type "element" tag "div" class "search-skeleton" attributes { "aria-hidden" "true" } children [
+                  { type "element" tag "div" class "skeleton-row" }
+                  { type "element" tag "div" class "skeleton-row" }
+                  { type "element" tag "div" class "skeleton-row" }
+                ]
+              } }
+              { type "conditional" test "$model.search.data.empty" then {
+                type "element" tag "div" class "empty-state" children [
+                  { type "element" tag "span" text "↗" class "empty-symbol" attributes { "aria-hidden" "true" } }
+                  { type "element" tag "h2" text "Noch nichts gefunden." }
+                  { type "element" tag "p" text "Versuche andere Begriffe oder erweitere deine Filter." }
+                ]
+              } }
+              { type "conditional" test "$model.search.data.error" then {
+                type "element" tag "div" class "empty-state" attributes { role "alert" } children [
+                  { type "element" tag "h2" text "Die Suche ist gerade nicht erreichbar." }
+                  { type "element" tag "p" text "$model.search.data.errorMessage" }
+                  { type "element" tag "a" text "Neue Suche starten" attributes { href "/" "data-xtend-native" "" } }
+                ]
+              } }
+              { type "element" tag "div" key "result-layout" class "result-layout" children [
+                { type "element" tag "div" key "result-main" class "result-main" children [
+              { type "element" tag "div" class "$model.search.data.listClass" children [
+                { type "repeat" source "$model.search.data.results" key "id" template {
+                  type "element" tag "article" class "result" attributes { "data-result-id" "$item.id" "data-selected" { op "equals" left "$item.id" right "$model.search.preview.id" } } children [
+                    { type "conditional" test "$item.thumbnail" then { type "element" tag "a" class "result-image" attributes { href "$item.previewHref" "data-preview-id" "$item.previewId" "aria-label" "$item.previewLabel" "data-unavailable" "$item.thumbnailFailed" "data-xtend-native" "" rel "noreferrer" } children [
+                      { type "element" tag "img" key "$item.thumbnailKey" attributes { src "$item.thumbnail" alt "$item.thumbnailAlt" "data-result-image" "$item.id" loading "lazy" width 360 height 220 referrerpolicy "no-referrer" } }
+                      { type "conditional" test "$item.resolution" then { type "element" tag "span" class "image-dimensions" text "$item.resolution" } }
+                    ] } }
+                    { type "element" tag "div" class "result-origin" children [
+                      { type "element" tag "span" text "$item.initial" class "source-icon" attributes { "aria-hidden" "true" "data-favicon" "$item.favicon" } }
+                      { type "element" tag "span" text "$item.displayUrl" }
+                    ] }
+                    { type "element" tag "h2" children [ { type "element" tag "a" text "$item.title" attributes { href "$item.url" "data-xtend-native" "" rel "noreferrer" } } ] }
+                    { type "element" tag "p" text "$item.snippetText" class "snippet" }
+                    { type "element" tag "div" text "$item.sourceLabel" class "result-sources" }
+{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report" text "Ergebnis melden" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" } } }
+                  ]
+                } }
+              ] }
+              { type "element" tag "nav" class "pagination" attributes { "aria-label" "Ergebnisseiten" } children [
+                { type "repeat" source "$model.search.data.pages" key "id" template { type "element" tag "a" text "$item.label" attributes { href "$item.url" rel "$item.rel" } } }
+              ] }                ] }
+                { type "conditional" test "$model.search.data.showKnowledge" then {
+                  type "element" tag "aside" key "knowledge-cards" class "knowledge-cards" attributes { "aria-label" "Wissenswertes zur Suche" } children [
+                    { type "element" tag "h2" class "card-eyebrow" text "WISSENSWERTES" }
+                    { type "element" tag "p" class "knowledge-state" text "$model.search.data.knowledgeMessage" }
+                    { type "repeat" source "$model.search.data.knowledgeCards" key "id" template {
+                      type "element" tag "section" class "knowledge-card" attributes { "aria-label" "$item.title" } children [
+                        { type "element" tag "h2" text "$item.title" }
+{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report" text "Ergebnis melden" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" } } }
+                        { type "conditional" test "$item.image" then { type "element" tag "img" class "knowledge-image" attributes { src "$item.image" alt "$item.title" loading "lazy" width 320 height 220 referrerpolicy "no-referrer" } } }
+                        { type "element" tag "p" class "knowledge-description" text "$item.description" }
+                        { type "element" tag "dl" class "knowledge-facts" children [
+                          { type "repeat" source "$item.facts" key "id" template { type "element" tag "div" children [
+                            { type "element" tag "dt" text "$item.label" }
+                            { type "element" tag "dd" children [
+                              { type "element" tag "span" text "$item.value" }
+                              { type "conditional" test "$item.image" then { type "element" tag "img" attributes { src "$item.image" alt "$item.imageAlt" loading "lazy" width 80 height 60 referrerpolicy "no-referrer" } } }
+                            ] }
+                          ] } }
+                        ] }
+                        { type "element" tag "nav" class "knowledge-sources" attributes { "aria-label" "Quellen und weiterführende Links" } children [
+                          { type "repeat" source "$item.links" key "id" template { type "element" tag "a" text "$item.label" attributes { href "$item.url" rel "noreferrer" "data-xtend-native" "" } } }
+                        ] }
+                        { type "element" tag "div" class "knowledge-related" children [
+                          { type "repeat" source "$item.related" key "id" template { type "element" tag "a" text "$item.label" attributes { href "$item.url" } } }
+                        ] }
+                      ]
+                    } }
+                  ]
+                } }
+                { type "conditional" test "$model.search.preview.open" then {
+                  type "element" tag "aside" key "image-preview" class "image-preview" attributes { id "image-preview" role "region" "aria-label" "Bildvorschau" } children [
+                    { type "element" tag "div" class "preview-toolbar" children [
+                      { type "element" tag "button" class "preview-control" text "×" attributes { id "preview-close" type "button" "data-preview-action" "close" "aria-label" "Bildvorschau schließen" title "Schließen (Escape)" } }
+                      { type "element" tag "span" class "preview-position" text "$model.search.preview.position" attributes { role "status" "aria-live" "polite" } }
+                      { type "element" tag "button" class "preview-control" attributes { type "button" "data-preview-action" "previous" "aria-label" "Vorheriges Bild" disabled "$model.search.preview.previousDisabled" } children [
+                        { type "element" tag "span" class "preview-arrow" attributes { "aria-hidden" "true" } }
+                      ] }
+                      { type "element" tag "button" class "preview-control" attributes { type "button" "data-preview-action" "next" "aria-label" "Nächstes Bild" disabled "$model.search.preview.nextDisabled" } children [
+                        { type "element" tag "span" class "preview-arrow" attributes { "aria-hidden" "true" } }
+                      ] }
+                    ] }
+                    { type "conditional" test "$model.search.preview.imageSrc" then {
+                      type "element" tag "button" class "preview-canvas preview-expand" attributes { id "preview-expand" type "button" "data-preview-action" "expand" "aria-label" "Bild in Vollbild öffnen" title "Vollbild öffnen" } children [
+                        { type "element" tag "span" class "preview-expand-hint" text "Vollbild öffnen" attributes { "aria-hidden" "true" } }
+                        { type "element" tag "img" key "$model.search.preview.imageKey" attributes { id "preview-image" "data-image-request" "$model.search.preview.imageKey" src "$model.search.preview.imageSrc" alt "$model.search.preview.title" referrerpolicy "no-referrer" } }
+                      ]
+                    } }
+                    { type "conditional" test "$model.search.preview.imageUnavailable" then {
+                      type "element" tag "div" class "preview-canvas preview-placeholder" children [
+                        { type "element" tag "img" attributes { src "/assets/xtend/image-placeholder.svg" alt "Bild nicht verfügbar" width 480 height 320 } }
+                      ]
+                    } }
+                    { type "conditional" test "$model.search.preview.imageMessage" then { type "element" tag "p" class "preview-message" text "$model.search.preview.imageMessage" attributes { role "status" } } }
+                    { type "conditional" test "$model.search.preview.expandMessage" then { type "element" tag "p" class "preview-message" text "$model.search.preview.expandMessage" attributes { role "status" } } }
+                    { type "element" tag "div" class "preview-details" children [
+                      { type "conditional" test "$model.search.preview.reportUrl" then { type "element" tag "a" class "result-report" text "Ergebnis melden" attributes { href "$model.search.preview.reportUrl" "data-report" "" "data-xtend-native" "" } } }
+{ type "element" tag "p" class "preview-domain" text "$model.search.preview.displayUrl" }
+                      { type "element" tag "h2" text "$model.search.preview.title" }
+                      { type "element" tag "p" class "preview-description" text "$model.search.preview.snippetText" }
+                      { type "element" tag "nav" class "preview-links" attributes { "aria-label" "Bild und Quelle öffnen" } children [
+                        { type "element" tag "a" class "preview-primary" text "Seite besuchen ↗" attributes { href "$model.search.preview.url" "data-xtend-native" "" rel "noreferrer" } }
+                        { type "conditional" test "$model.search.preview.imageUrl" then { type "element" tag "a" text "Originalbild öffnen ↗" attributes { href "$model.search.preview.imageUrl" "data-xtend-native" "" rel "noreferrer" } } }
+                      ] }
+                      { type "element" tag "dl" class "preview-metadata" children [
+                        { type "repeat" source "$model.search.preview.metadata" key "id" template { type "element" tag "div" children [
+                          { type "element" tag "dt" text "$item.label" }
+                          { type "element" tag "dd" text "$item.value" }
+                        ] } }
+                      ] }
+                      { type "element" tag "nav" class "preview-formats" attributes { "aria-label" "Weitere Bildformate" } children [
+                        { type "repeat" source "$model.search.preview.formats" key "id" template { type "element" tag "a" text "$item.label" attributes { href "$item.url" "data-xtend-native" "" rel "noreferrer" } } }
+                      ] }
+                    ] }
+                  ]
+                } }
+              ] }
+            ]
+          } }
+        ]
+      }
+    }
+  }
+  selector search.shell from state search.shell { output SearchView }
+  selector search.resultView from state search.resultView { output SearchView }
+  action search.edit {
+    input value string
+    reduce state.search.query = input.value
+  }
+  action search.images.set {
+    input value object
+    reduce state.search.data.results = input.value.results
+  }
+  action search.alerts.set {
+    input value object
+    reduce state.search.data.warnings = input.value.warnings
+  }
+  action search.preview.open {
+    input value object
+    reduce state.search.preview = input.value
+  }
+  action search.preview.expansion {
+    input message string
+    reduce state.search.preview.expandMessage = input.message
+  }
+  action search.preview.close {
+    reduce state.search.preview.open = false
+    reduce state.search.preview.id = ""
+  }
+  action search.preview.error {
+    input unavailable boolean
+    input key string
+    input src string
+    input message string
+    reduce state.search.preview.imageSrc = input.src
+    reduce state.search.preview.imageKey = input.key
+    reduce state.search.preview.imageUnavailable = input.unavailable
+    reduce state.search.preview.imageMessage = input.message
+  }
+  action search.preferences.status {
+    input message string
+    input busy boolean
+    reduce state.search.preferences.message = input.message
+    reduce state.search.preferences.busy = input.busy
+  }
+  action search.filter.language { input value string
+    reduce state.search.filters.language = input.value }
+  action search.filter.time { input value string
+    reduce state.search.filters.timeRange = input.value }
+  action search.filter.safe { input value string
+    reduce state.search.filters.safeSearch = input.value }
+  action search.pending {
+    reduce state.search.preview.open = false
+    reduce state.search.preview.id = ""
+    reduce state.search.activity.busy = true
+    reduce state.search.activity.message = "Suche läuft …"
+  }
+  action search.ready {
+    input message string
+    reduce state.search.activity.busy = false
+    reduce state.search.activity.message = input.message
+  }
+  action search.preview.position {
+    input position string
+    input previousDisabled boolean
+    input nextDisabled boolean
+    reduce state.search.preview.position = input.position
+    reduce state.search.preview.previousDisabled = input.previousDisabled
+    reduce state.search.preview.nextDisabled = input.nextDisabled
+  }
+  action search.streaming {
+    input busy boolean
+    input message string
+    reduce state.search.activity.busy = input.busy
+    reduce state.search.activity.message = input.message
+  }
+  portal search.root root "#xtend-page" layer surface
+  portal search.results root "#result-slot" layer surface
+  surface search.shell kind content component x-section {
+    source selector search.shell
+    key shell.id
+    portal search.root
+    lane visible weight 90 {
+      hydrate search-shell from selector search.shell {
+        hydration mode server_prerender_resume
+        resumability mode server_prerender_resume
+        resumability snapshot surface_state
+        resumability event replay intent_queue
+        resumability integrity signed_manifest
+      }
+    }
+    on change "#language" -> action search.filter.language { payload value from target.value }
+    on change "#time-range" -> action search.filter.time { payload value from target.value }
+    on change "#safe-search" -> action search.filter.safe { payload value from target.value }
+    on input "#search-input" -> action search.edit {
+      preventDefault false
+      payload value from target.value
+    }
+  }
+  surface search.results kind content component x-section {
+    source selector search.resultView
+    key resultView.id
+    portal search.results
+    lane visible weight 80 { hydrate search-results from selector search.resultView }
+  }
+}

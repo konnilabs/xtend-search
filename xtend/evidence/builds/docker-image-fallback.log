@@ -1,0 +1,108 @@
+time="2026-09-19T23:28:09+02:00" level=warning msg="Docker Compose requires buildx plugin to be installed"
+ Image xtend-search:0.1.0 Building 
+ Image xtend-search:0.1.0 Building 
+Sending build context to Docker daemon  524.4kBSending build context to Docker daemon  1.573MBSending build context to Docker daemon  3.159MBSending build context to Docker daemon  4.208MBSending build context to Docker daemon  5.257MBSending build context to Docker daemon  6.317MBSending build context to Docker daemon  11.04MBSending build context to Docker daemon  15.25MBSending build context to Docker daemon  19.97MBSending build context to Docker daemon   24.7MBSending build context to Docker daemon   28.9MBSending build context to Docker daemon  34.14MBSending build context to Docker daemon  38.86MBSending build context to Docker daemon  44.11MBSending build context to Docker daemon  49.88MBSending build context to Docker daemon  55.13MBSending build context to Docker daemon  60.38MBSending build context to Docker daemon  61.95MB
+Step 1/30 : ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+Step 2/30 : ARG PYTHON_IMAGE=python:3.12-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
+Step 3/30 : FROM ${NODE_IMAGE} AS frontend
+ ---> 622f209f6c16
+Step 4/30 : WORKDIR /build/xtend
+ ---> Using cache
+ ---> 4a54a32a878f
+Step 5/30 : COPY xtend/package.json xtend/package-lock.json ./
+ ---> Using cache
+ ---> e713c2517f08
+Step 6/30 : COPY xtend/vendor-inputs ./vendor-inputs
+ ---> Using cache
+ ---> 1b1d1c55fdbc
+Step 7/30 : RUN npm install --global npm@11.17.0 && npm ci --ignore-scripts
+ ---> Using cache
+ ---> 224f5eee891f
+Step 8/30 : WORKDIR /build
+ ---> Using cache
+ ---> 83304326e0b5
+Step 9/30 : COPY . .
+ ---> 67854c9be395
+Step 10/30 : RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.tar.gz .
+ ---> Running in 2a156ac84550
+ ---> Removed intermediate container 2a156ac84550
+ ---> a3725a0879ee
+Step 11/30 : WORKDIR /build/xtend
+ ---> Running in 85155d4e062c
+ ---> Removed intermediate container 85155d4e062c
+ ---> b0109b2722fd
+Step 12/30 : RUN npm run build && npm prune --omit=dev --ignore-scripts
+ ---> Running in 26cb7e7bbf1a
+
+> xtend-search@0.1.0 build
+> node scripts/build.cjs
+
+{"ok":true,"node":"v24.19.0","version":"31b8ce35b6feb8de19bda10b1a3999ac9d40c754ea1420c933c2d976b91e9897","sourceSha256":"e37553d09019827472d0891c24e13a32b1442b38d992f6780d26e23e986b086c","compilation":{"compilations":1,"hits":1,"documents":1}}
+
+removed 19 packages, and audited 2 packages in 4s
+
+found 0 vulnerabilities
+ ---> Removed intermediate container 26cb7e7bbf1a
+ ---> 4afb19e83691
+Step 13/30 : FROM ${PYTHON_IMAGE} AS runtime
+ ---> febd0be41adb
+Step 14/30 : ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1     BIND_HOST=0.0.0.0 PORT=8080 XTEND_SECRET_DIR=/var/lib/xtend-search     SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.yml     SEARXNG_URL=http://localhost:8080/ XTEND_PYTHON=/usr/local/bin/python
+ ---> Using cache
+ ---> 50123adf30c2
+Step 15/30 : WORKDIR /app
+ ---> Using cache
+ ---> b384220990df
+Step 16/30 : RUN apt-get update && apt-get install -y --no-install-recommends tini libstdc++6 ca-certificates     && rm -rf /var/lib/apt/lists/*     && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend     && mkdir -p /var/lib/xtend-search && chown 10001:10001 /var/lib/xtend-search
+ ---> Using cache
+ ---> 16353030e18b
+Step 17/30 : COPY --from=frontend /usr/local/bin/node /usr/local/bin/node
+ ---> Using cache
+ ---> 4b08fa7b0489
+Step 18/30 : COPY xtend/requirements.lock.txt /app/xtend/requirements.lock.txt
+ ---> Using cache
+ ---> 53df2dca9118
+Step 19/30 : RUN pip install --no-cache-dir -r /app/xtend/requirements.lock.txt
+ ---> Using cache
+ ---> f896afa9f2df
+Step 20/30 : COPY searx /app/searx
+ ---> Using cache
+ ---> 684616cb5247
+Step 21/30 : COPY LICENSE /app/LICENSE
+ ---> Using cache
+ ---> d9d793834cfb
+Step 22/30 : COPY --from=frontend /build/xtend /app/xtend
+ ---> 30b2e01903d6
+Step 23/30 : COPY --from=frontend /source.tar.gz /app/source.tar.gz
+ ---> ecdef21daf6f
+Step 24/30 : RUN python -c 'from pathlib import Path; Path("searx/version_frozen.py").write_text("VERSION_STRING = \"2026.9.19+e831fc2a1+xtend.0.1.0\"\nVERSION_TAG = \"2026.9.19+e831fc2a1\"\nDOCKER_TAG = \"xtend-search-0.1.0\"\nGIT_URL = \"/source.tar.gz\"\nGIT_BRANCH = \"xtend-search\"\n")'
+ ---> Running in 24eb84a31b2b
+ ---> Removed intermediate container 24eb84a31b2b
+ ---> ecbf18a207ff
+Step 25/30 : USER 10001:10001
+ ---> Running in 3e7f6936ae92
+ ---> Removed intermediate container 3e7f6936ae92
+ ---> 659b0fe73fc0
+Step 26/30 : EXPOSE 8080
+ ---> Running in febeeeb77185
+ ---> Removed intermediate container febeeeb77185
+ ---> 025349b47f72
+Step 27/30 : HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+ ---> Running in ac9b1a8c5d7e
+ ---> Removed intermediate container ac9b1a8c5d7e
+ ---> 5b758435c0ca
+Step 28/30 : ENTRYPOINT ["/usr/bin/tini", "--"]
+ ---> Running in 2d6ebe3432f9
+ ---> Removed intermediate container 2d6ebe3432f9
+ ---> 774990e00dea
+Step 29/30 : CMD ["node", "xtend/server/supervisor.mjs"]
+ ---> Running in ef3630a021b5
+ ---> Removed intermediate container ef3630a021b5
+ ---> 171d4a4d8072
+Step 30/30 : LABEL com.docker.compose.image.builder=classic
+ ---> Running in a57febf4d851
+ ---> Removed intermediate container a57febf4d851
+ ---> ddef0ce1b4c3
+Successfully built ddef0ce1b4c3
+Successfully tagged xtend-search:0.1.0
+ Image xtend-search:0.1.0 Built 
+ Image xtend-search:0.1.0 Built 

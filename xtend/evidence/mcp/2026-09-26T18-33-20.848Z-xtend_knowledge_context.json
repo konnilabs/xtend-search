@@ -1,0 +1,677 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"page navigation native form submit formaction formmethod data-xtend-native RMT properties selected checkbox\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend-llm.tool-result.rmt-knowledge.v1",
+      "name": "rmt_knowledge",
+      "query": "page navigation native form submit formaction formmethod data-xtend-native RMT properties selected checkbox",
+      "maxRecords": 6,
+      "domains": [],
+      "includeRecipes": true,
+      "knowledgeDir": "/home/konni/Downloads/xtend-main/xtend/products/xtend-mcp/generated/rmt-ai-kit",
+      "sourceHashes": [
+        {
+          "path": "demos/xtendrmt/maraca-fastpass/app.rmt",
+          "sha256": "ada8936246cbff31f23dccd76682f6d63dab87158a52aee104bd730b40291e66",
+          "bytes": 2252
+        },
+        {
+          "path": "development/XTendRMT-AI-Agent-Lint-Repair-Contract.md",
+          "sha256": "5f6c3d9ef84c5a003d8985dce20cd4302616f1d298c6c596c898007ead16b9ab",
+          "bytes": 3790
+        },
+        {
+          "path": "development/XTendRMT-vNext-Grammar-Contract.md",
+          "sha256": "c3829dc5d6d127645b9a70689943b8dc4ae851a444796252c7d13c0f113fd213",
+          "bytes": 10486
+        },
+        {
+          "path": "docs/de/changelog.md",
+          "sha256": "bc0a3520517f3d9421b8ccc0a67260db9d5a4abd791bf1463a407e9b5728d311",
+          "bytes": 6329
+        },
+        {
+          "path": "docs/de/learn-rmt-actions-events.md",
+          "sha256": "a0a866ebeb036d92756ac74b74fdc8605ab2356b3fbb1e84688bb9975ec85e31",
+          "bytes": 2313
+        },
+        {
+          "path": "docs/de/learn-rmt-data-resources.md",
+          "sha256": "964450bed206d58a83cf277d0789c8664b0c83bd485fecc71ac1b3e6e70d52e0",
+          "bytes": 2404
+        },
+        {
+          "path": "docs/de/learn-rmt-next-steps.md",
+          "sha256": "ada67a45499b8f2d462c45d3049b524dede4658c421b5c3967eeedee67e9cc6e",
+          "bytes": 2028
+        },
+        {
+          "path": "docs/de/learn-rmt-playground.md",
+          "sha256": "0557cd9a417e783f8e1cf94aa8a64104af7aaf4950f350cf1a1a09c43516961e",
+          "bytes": 3882
+        },
+        {
+          "path": "docs/de/learn-rmt-scheduling-lanes.md",
+          "sha256": "de124a41959e07093670f3272232e0d1ac836b608cf9809e569d04dbb9c8aef2",
+          "bytes": 1512
+        },
+        {
+          "path": "docs/de/learn-rmt-security-preview.md",
+          "sha256": "c3c2f086220f272df7c13d6ac7e8554b19b7bc70f3da811b5cff77fd011e8e31",
+          "bytes": 1970
+        },
+        {
+          "path": "docs/de/learn-rmt-state-selectors.md",
+          "sha256": "128889c9c1746a4d0c304ef101dddf5f6815bec974a14d70e9c9b76b4127ea30",
+          "bytes": 1747
+        },
+        {
+          "path": "docs/de/learn-rmt-syntax-basics.md",
+          "sha256": "f77a19a480a28e46f8abd3b4a7850c524bc42f81604026b2fae44bdb8bf1b2a0",
+          "bytes": 3123
+        },
+        {
+          "path": "docs/de/learn-rmt-templates-surfaces.md",
+          "sha256": "292e859bbb8ecbc76f16c28f0de37767fd26c3e6a18965867c6e85cb517bc223",
+          "bytes": 1570
+        },
+        {
+          "path": "docs/de/learn-rmt.md",
+          "sha256": "7add347a13f5b5d9b862ef7e087a291253534028693eac0ac17fc908a772af5d",
+          "bytes": 1819
+        },
+        {
+          "path": "docs/de/maraca-fastpass-abort-boundary.md",
+          "sha256": "31c229ec777031aaca9a60636bf1433969f8dfa5c4429bf3c50c81830c2432ae",
+          "bytes": 7594
+        },
+        {
+          "path": "docs/de/rmt-app-platform-tooling.md",
+          "sha256": "8698fff97901e16876ca3b5073addca3bb3d2ec5f860db7eef7c8c5df3827117",
+          "bytes": 2699
+        },
+        {
+          "path": "docs/de/rmt-jit-hydrangea.md",
+          "sha256": "1766b52f1eb2f3ddaabc48e1f55e42bf5e68ec5b7c1adcc2c7dc65d4fc714f85",
+          "bytes": 6226
+        },
+        {
+          "path": "docs/de/rmt-kernel-0-8-migration.md",
+          "sha256": "96f2b6b0ee55ccbc0a0e63854b60b2385585e2881f50a6a23880232a72d48376",
+          "bytes": 5413
+        },
+        {
+          "path": "docs/de/rmt-reference-actions-events.md",
+          "sha256": "628d7b11c6b9d97dead857c38ae836a3cacb8164a4072e72d4d6b37497509fc4",
+          "bytes": 8721
+        },
+        {
+          "path": "docs/de/rmt-reference-conditions-expressions.md",
+          "sha256": "1ad81179d618e903f5894c5d150dc93611f5a5a534679322a8ea0136715dda4a",
+          "bytes": 4414
+        },
+        {
+          "path": "docs/de/rmt-reference-document-template-import.md",
+          "sha256": "96ed13da92f97e78aad1b33ba434e4d3caf9e443097145ce977f0f5c0126480e",
+          "bytes": 2880
+        },
+        {
+          "path": "docs/de/rmt-reference-enums-catalogs.md",
+          "sha256": "414433235ebfd3a000ce0ffea9e3c1e4a5f7d3bec337762175a087c0f4f5bb46",
+          "bytes": 3751
+        },
+        {
+          "path": "docs/de/rmt-reference-primitives.md",
+          "sha256": "f60d8c9e41c96d1804d49e965edb4c38ca90fc854aa70bd47b539c18e262aa22",
+          "bytes": 5497
+        },
+        {
+          "path": "docs/de/rmt-reference-remote-surfaces.md",
+          "sha256": "a06011273b4c216fdad658dd85039bf799769b1337eb34d89dab5cf089d301a6",
+          "bytes": 4496
+        },
+        {
+          "path": "docs/de/rmt-reference-security-policies.md",
+          "sha256": "29bcea16b0fccbc385065c9886116315f96ee68d1bf95ba0ad8b90cf5582186a",
+          "bytes": 3328
+        },
+        {
+          "path": "docs/de/rmt-reference-state-selectors-data.md",
+          "sha256": "6e3d64c5f34c80f88b1eba397100284d9729aece2371722ea0d759fa02ee7626",
+          "bytes": 5287
+        },
+        {
+          "path": "docs/de/rmt-reference-surfaces-lanes-lifecycle.md",
+          "sha256": "8c3ea2d88561fe2746614080d22cb7606a5569f2ab3a9428ebade83f4894521a",
+          "bytes": 9278
+        },
+        {
+          "path": "docs/de/rmt-reference-validation-transitions.md",
+          "sha256": "c8f5344a2bc43a857ae0acd234d1a3a11539f5235c6ea6bc090aa7d7ca6cf1b6",
+          "bytes": 6424
+        },
+        {
+          "path": "docs/de/rmt-reference.md",
+          "sha256": "d9be54c299f64384708691004f96d2cb7b1f139e6ca58e744db5848b73b96ab8",
+          "bytes": 2514
+        },
+        {
+          "path": "docs/de/rmt-vnext-authoring.md",
+          "sha256": "008f17692bd660c7045242d3188e6229e253534e1c69775d0f57aea7590925ee",
+          "bytes": 5551
+        },
+        {
+          "path": "docs/de/ssr-pages.md",
+          "sha256": "b2693a76537c3fc547214184160b89b96ddec067cfb414c7c3b6732739ba1f69",
+          "bytes": 16823
+        },
+        {
+          "path": "docs/de/xtend-maraca-orchestration.md",
+          "sha256": "bdfa216e33a2835407e5df17f42ec9c08da28c5acf77c22c7df112561d7519ad",
+          "bytes": 10501
+        },
+        {
+          "path": "docs/de/xtendrmt-app-dsl.md",
+          "sha256": "d50a2aab0a182cafddcd5293b121a78b8b014c31a6dcf5dbbdf73b1454305f41",
+          "bytes": 1021
+        },
+        {
+          "path": "docs/en/a11y-keyboard-smokes.md",
+          "sha256": "bb8b7286b5926cc9136699ed403167b427f66495f9b9314b3d3546a633410f38",
+          "bytes": 1529
+        },
+        {
+          "path": "docs/en/changelog.md",
+          "sha256": "53e064bfec53e44b5519a6d95c254d98bf56c3fa685f2975fcfb460c460b03ec",
+          "bytes": 5688
+        },
+        {
+          "path": "docs/en/hydration-policies.md",
+          "sha256": "4d6edc4eb7cb69dc432d9fcd831579e0e5d1143ad367b00f8ce0157a1ebda584",
+          "bytes": 15497
+        },
+        {
+          "path": "docs/en/maraca-fastpass-abort-boundary.md",
+          "sha256": "ecb9b5a6e59ca3d53b3118227d923499849d7241d13b63b79928b45214f00a69",
+          "bytes": 6207
+        },
+        {
+          "path": "docs/en/release-verification.md",
+          "sha256": "617f2275afd2aea0210e53db2b4e9bd45fa7febfbd3c58207282d4c011c6fcf1",
+          "bytes": 5713
+        },
+        {
+          "path": "docs/en/rmt-jit-hydrangea.md",
+          "sha256": "f1e47415c1454a4dc0167c04e1d7e475b589eece7dc957b3be801df11d019ae1",
+          "bytes": 5704
+        },
+        {
+          "path": "docs/en/rmt-kernel-0-8-migration.md",
+          "sha256": "585da53adec63ef44f1ce525c4fc09b183b5ccd693e6a77dbeff24060e4038aa",
+          "bytes": 5161
+        },
+        {
+          "path": "docs/en/ssr-pages.md",
+          "sha256": "e1f51630a183300931592bc413acc5c6dd5b841fa2fbe6dc21ea8fa949315456",
+          "bytes": 15054
+        },
+        {
+          "path": "docs/en/xtend-dev-api.md",
+          "sha256": "e234a58ab78c1906825e20a0828e58c98b68b6cf79dc98e9895f3b49c32ead56",
+          "bytes": 15639
+        },
+        {
+          "path": "docs/en/xtend-dev-surface.md",
+          "sha256": "c92c3654c0d52bb4c93330800b5fa012dce7121131963c532ca4d1281b7cbfe0",
+          "bytes": 17688
+        },
+        {
+          "path": "products/rmt-maraca-kernel-orchestration/kernel-orchestration-app.rmt",
+          "sha256": "707888ddc576024742b6eb2888c56e0df6f4e28b048a26df100b25d13e83e58c",
+          "bytes": 20146
+        },
+        {
+          "path": "tests/rmt-language/fixtures/vnext-primitives-grammar-design.rmt",
+          "sha256": "c715ff0c316a13bbb647b76bd527765ae3c157e8db6fbb2fd5ba37af730a1293",
+          "bytes": 3181
+        },
+        {
+          "path": "tests/rmt-language/fixtures/vnext-responsive-bounds-valid.rmt",
+          "sha256": "0ac7752ccf62757dabb247aa744e68fe7549bd110b80ddbb1d40e1059e827246",
+          "bytes": 409
+        },
+        {
+          "path": "tools/rmt-jit-cache-cli.js",
+          "sha256": "bd204d523e904415ddfff720c671b2829beffc419206a12bd6259b263986d4dd",
+          "bytes": 583
+        },
+        {
+          "path": "tools/rmt-jit-kernel-cache.d.ts",
+          "sha256": "dd0703b3c0e2b2e35d00fecf75a092a72e0cad79f8ec2ba58399ef2568264647",
+          "bytes": 456
+        },
+        {
+          "path": "tools/rmt-language/diagnostics.d.ts",
+          "sha256": "af6cb0f8694971ec2ddf5baf9a01ea4cc8a9151b3e64e2885af4e3a93fa430b6",
+          "bytes": 1498
+        },
+        {
+          "path": "tools/rmt-language/rmt-ai-developer-kit.d.ts",
+          "sha256": "6076fc2b37b3c52abc78850ce8e14a0bf26c06be09bba6f404ef4ff8d17724cc",
+          "bytes": 5158
+        },
+        {
+          "path": "tools/rmt-language/rmt-ai-developer-kit.js",
+          "sha256": "6abc720b7cfd6666553ce022d4d908d4c7c35ea72ff57a69b8c9338e39e182f8",
+          "bytes": 43183
+        },
+        {
+          "path": "tools/rmt-language/rmt-tooling-public-types.d.ts",
+          "sha256": "a7c4d28ad15b9d7d42de1cb17824715852f12d922f5d66255704a2425637e139",
+          "bytes": 6425
+        },
+        {
+          "path": "tools/rmt-language/vnext-compiler.d.ts",
+          "sha256": "cfc09c8c359a68111cc15e5095b28015331b5e52e32433b1e93616ce791e77ea",
+          "bytes": 2391
+        },
+        {
+          "path": "tools/rmt-language/vnext-compiler.js",
+          "sha256": "e7c1b5d47b7993839337668fdace656271550da5b0c182314ffdcfbbfc450de1",
+          "bytes": 208092
+        },
+        {
+          "path": "tools/rmt-linter/cli.js",
+          "sha256": "f1a0e6f04cdba83a401ffda687205098eced6528434d5a7306d5856f3a47bc72",
+          "bytes": 14168
+        },
+        {
+          "path": "tools/rmt-linter/reporter.d.ts",
+          "sha256": "0f950e2dffa6a613c474f4ecf412c75b662f1f9984fcdc171b0183fbb1b7f564",
+          "bytes": 1123
+        },
+        {
+          "path": "tools/tooling-bridge.js",
+          "sha256": "4343d133e905b24b71429b76956a14e4dfdff32364acb59b9e7f5d4fc5dcc220",
+          "bytes": 7798
+        },
+        {
+          "path": "xtend-builder/lib/cli.js",
+          "sha256": "d8f92539e974cd18d0e3eb3e587cdc1f366bfe5351d9559f0b409c2610e81a4d",
+          "bytes": 40674
+        },
+        {
+          "path": "xtend-maraca/abort-boundary.d.ts",
+          "sha256": "54f6251f761724e00e549f3e9c784a57f049ff514724177d1429f342cd277eb8",
+          "bytes": 1339
+        },
+        {
+          "path": "xtend-maraca/fastpass-contract.js",
+          "sha256": "09cc73ea9e180f7449304bcfb6d099e1d63800cc5ed922f85153d7dda69f2dcc",
+          "bytes": 2674
+        },
+        {
+          "path": "xtend-maraca/fastpass.schema.json",
+          "sha256": "69c49eda370805216edfd5acaf795b4c2c7f39300c3429b551e458f3ebd91946",
+          "bytes": 2395
+        },
+        {
+          "path": "xtend-maraca/index.d.ts",
+          "sha256": "b6122d9450bb3327245617740a222a8fded2d61b5ead159a5951d3c74bba7987",
+          "bytes": 39582
+        },
+        {
+          "path": "xtend-maraca/page-bootstrap.d.ts",
+          "sha256": "42965fc84fb4263f653d9e4fd6c5fb4d5ebc841111cbbea44de25376b908d50d",
+          "bytes": 452
+        },
+        {
+          "path": "xtend-maraca/page-client.d.ts",
+          "sha256": "c962d9ef2103b4cc2ae04183903c4fc39e8c71825050701435af031201589ac5",
+          "bytes": 940
+        },
+        {
+          "path": "xtend-maraca/plan-runtime.d.ts",
+          "sha256": "885ba90dbd4a9e91812a6bb6a282a61c48d304149e09a08fc01d13af53f07d55",
+          "bytes": 14911
+        },
+        {
+          "path": "xtendrmt/rmt-kernel-scheduler.d.ts",
+          "sha256": "9835c8deef24d1f09345ad324f606ab587062856129d2f18c0a051886748acc6",
+          "bytes": 4857
+        }
+      ],
+      "recordCount": 6,
+      "recipeCount": 3,
+      "records": [
+        {
+          "marker": "R37",
+          "id": "runtime:page-runtime",
+          "title": "Node and Laravel page runtime",
+          "kind": "runtime",
+          "score": 17,
+          "domains": [
+            "runtime",
+            "page",
+            "ssr",
+            "laravel",
+            "node",
+            "forms",
+            "navigation"
+          ],
+          "sourceRefs": [
+            "docs/en/ssr-pages.md",
+            "docs/de/ssr-pages.md",
+            "xtend-maraca/page-bootstrap.d.ts",
+            "xtend-maraca/page-client.d.ts"
+          ],
+          "sourceRef": "",
+          "description": "Independent Node and Laravel page hosts support props, forms, navigation, layouts, resume and streaming. Production Laravel renders prebuilt artifacts without Node. Page-owned requests end with the visit; layout-owned resources follow their owner. Rebuild Maraca bundles and page manifests with the same framework version. XTend.store demonstrates Maraca, Laravel, a guest cart and a separate DemoPay provider.",
+          "resourceUri": "xtend://rmt/kit/reference/runtime%3Apage-runtime",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-reference",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f"
+        },
+        {
+          "marker": "R38",
+          "id": "runtime:page-wire-csp",
+          "title": "Page Wire compact transport and CSP",
+          "kind": "runtime",
+          "score": 13,
+          "domains": [
+            "runtime",
+            "page-wire",
+            "ssr",
+            "csp",
+            "conditional"
+          ],
+          "sourceRefs": [
+            "docs/en/ssr-pages.md",
+            "docs/de/ssr-pages.md"
+          ],
+          "sourceRef": "",
+          "description": "Opt-in xtend.page-wire.v1 reduces repeated page data. Conditional views materialize only their active branch. Trusted component styles can inherit the document nonce. Preserve the documented host ownership, transport and trust contracts when configuring page delivery.",
+          "resourceUri": "xtend://rmt/kit/reference/runtime%3Apage-wire-csp",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-reference",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f"
+        },
+        {
+          "marker": "R39",
+          "id": "runtime:release-verification",
+          "title": "XTend 0.8.0 ecosystem verification",
+          "kind": "runtime",
+          "score": 11,
+          "domains": [
+            "runtime",
+            "release",
+            "testing",
+            "accessibility",
+            "docs",
+            "migration"
+          ],
+          "sourceRefs": [
+            "docs/en/changelog.md",
+            "docs/en/release-verification.md",
+            "docs/en/a11y-keyboard-smokes.md",
+            "docs/en/xtend-dev-surface.md",
+            "xtend-maraca/fastpass.schema.json"
+          ],
+          "sourceRef": "",
+          "description": "Verify code, types, exports, bilingual docs and actual packaged artifacts together. Accept xtend.maraca.plan-runtime.v3 and xtend.rmt.presentation-effect-adapter.v2 where schema IDs are checked. fastpass.schema.json is additive; the released RMT v2 document schema is unchanged. Test focus through slotted and remote controls, Escape and restoration during hydration and fast surface switches. Docs language switches must update both search and navigation. The shared test catalog and run-bound artifacts define local and CI evidence.",
+          "resourceUri": "xtend://rmt/kit/reference/runtime%3Arelease-verification",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-reference",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f"
+        },
+        {
+          "marker": "R33",
+          "id": "runtime:scheduler-0.8",
+          "title": "XTend 0.8.0 scheduler migration",
+          "kind": "runtime",
+          "score": 8,
+          "domains": [
+            "runtime",
+            "scheduler",
+            "migration",
+            "lanes",
+            "fabric"
+          ],
+          "sourceRefs": [
+            "docs/en/rmt-kernel-0-8-migration.md",
+            "docs/de/rmt-kernel-0-8-migration.md",
+            "xtendrmt/rmt-kernel-scheduler.d.ts"
+          ],
+          "sourceRef": "",
+          "description": "One shared RMT microkernel owns scheduling. Canonical lanes are user-blocking, visible, transition, idle, background and diagnostics. Jobs return cancellable, thenable RmtJobHandles. Paint, idle and postTask waits release the execution slot until ready. inline/runInline no longer bypass the queue; Product Surface and prewarm require opt-in; ESM imports do not boot a runtime. Fabric supplies work intents and backpressure, not another scheduler.",
+          "resourceUri": "xtend://rmt/kit/reference/runtime%3Ascheduler-0.8",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-reference",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f"
+        },
+        {
+          "marker": "R5",
+          "id": "operator:datasource",
+          "title": "datasource",
+          "kind": "operator",
+          "score": 7,
+          "domains": [
+            "datasource",
+            "operator",
+            "template"
+          ],
+          "sourceRefs": [
+            "docs/de/rmt-reference-state-selectors-data.md"
+          ],
+          "sourceRef": "",
+          "operator": "datasource",
+          "syntax": "datasource items from endpoint \"/api/items\" { method GET result list }",
+          "description": "Declares host-owned data access.",
+          "validExample": "datasource tickets from endpoint \"/api/tickets\" { method GET result list fallback fixture tickets.empty }",
+          "invalidExample": "datasource tickets from fetch(\"/api/tickets\")",
+          "diagnostics": "Free function calls are refused.",
+          "resourceUri": "xtend://rmt/kit/reference/operator%3Adatasource",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-reference",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f"
+        },
+        {
+          "marker": "R12",
+          "id": "operator:mount",
+          "title": "mount",
+          "kind": "operator",
+          "score": 6,
+          "domains": [
+            "mount",
+            "operator",
+            "lane",
+            "slot"
+          ],
+          "sourceRefs": [
+            "docs/de/rmt-reference-surfaces-lanes-lifecycle.md"
+          ],
+          "sourceRef": "",
+          "operator": "mount",
+          "syntax": "mount target from selector app.view { ... }",
+          "description": "Materializes UI work and may contain policy blocks.",
+          "validExample": "mount editor.form from selector app.form { on submit -> action app.save }",
+          "invalidExample": "mount editor.form when canAccess(\"editor\")",
+          "diagnostics": "Conditions cannot call functions.",
+          "resourceUri": "xtend://rmt/kit/reference/operator%3Amount",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-reference",
+          "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f"
+        }
+      ],
+      "recipes": [
+        {
+          "marker": "P6",
+          "id": "data-resource-fallback",
+          "title": "DataSource, Resource and Fallback",
+          "kind": "recipe",
+          "score": 10,
+          "domains": [
+            "full",
+            "datasource",
+            "resource",
+            "fallback"
+          ],
+          "sourceRefs": [],
+          "sourceRef": "tests/rmt-language/fixtures/vnext-primitives-grammar-design.rmt",
+          "intent": "Use the canonical primitive fixture for data and owned cleanup patterns.",
+          "commands": [
+            "xt rmt lint tests/rmt-language/fixtures/vnext-primitives-grammar-design.rmt --agent"
+          ],
+          "resourceUri": "xtend://rmt/kit/recipe/data-resource-fallback",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-recipe",
+          "sourceHash": "6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e"
+        },
+        {
+          "marker": "P2",
+          "id": "abort-boundary-commit",
+          "title": "Guard asynchronous presentation commits",
+          "kind": "recipe",
+          "score": 9,
+          "domains": [
+            "maraca",
+            "abort",
+            "boundary",
+            "scheduler",
+            "hydration",
+            "worker"
+          ],
+          "sourceRefs": [],
+          "sourceRef": "",
+          "intent": "Integrate custom host adapters with automatic Maraca surface epochs; keep business ownership separate.",
+          "steps": [
+            "Read docs/en/maraca-fastpass-abort-boundary.md and docs/en/hydration-policies.md before writing host adapter code.",
+            "Capture a token from runtime.getSurfaceBoundary(id) before asynchronous work. Pass abortBoundary and presentationToken to requestUiCompute; hydration receives metadata.surfaces guards.",
+            "After each response check token validity. Return on superseded; never start synchronous rendering fallback.",
+            "Use boundary.scheduleCommit(scheduler, work, token) for scheduled commits or boundary.commit(work, token) for synchronous mutation. Recheck immediately before creating DOM/chart resources.",
+            "Exercise close/reopen, parent disposal, late worker responses and failed lifecycle operations. Keep shared cached data and business services under their existing owners."
+          ],
+          "commands": [
+            "node scripts/run_xtend_tests.js maraca-responsiveness rmt-kernel-scheduler --json"
+          ],
+          "resourceUri": "xtend://rmt/kit/recipe/abort-boundary-commit",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-recipe",
+          "sourceHash": "6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e"
+        },
+        {
+          "marker": "P1",
+          "id": "fastpass-shell",
+          "title": "FastPass shell actions",
+          "kind": "recipe",
+          "score": 8,
+          "domains": [
+            "maraca",
+            "fastpass",
+            "navigation",
+            "focus",
+            "close",
+            "scheduler"
+          ],
+          "sourceRefs": [],
+          "sourceRef": "demos/xtendrmt/maraca-fastpass/app.rmt",
+          "intent": "Declare execution fastpass for navigation, focus and named close on user-blocking. dispatchFastPass returns a cancellable RmtJobHandle; dispatchCommand keeps its Promise. No reducers, services, resources or business effects. Completion acknowledges shell intent, not loading or animation; synchronous work still needs cooperative chunking.",
+          "commands": [
+            "xt rmt lint demos/xtendrmt/maraca-fastpass/app.rmt --agent"
+          ],
+          "resourceUri": "xtend://rmt/kit/recipe/fastpass-shell",
+          "locale": "und",
+          "documentType": "rmt-ai-kit-recipe",
+          "sourceHash": "6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e"
+        }
+      ],
+      "guardrailsSummary": {
+        "forbiddenSyntax": [
+          "if",
+          "else",
+          "for",
+          "while",
+          "switch",
+          "try",
+          "catch",
+          "function",
+          "return",
+          "await",
+          "async",
+          "class"
+        ],
+        "securityBoundaries": [
+          "no-rmt-kernel-import-of-host-runtime-types",
+          "no-rmt-kernel-import-of-xtend-types",
+          "no manual HTML sinks in normal App Platform authoring",
+          "trusted output requires explicit trust boundary and sanitize policy"
+        ],
+        "repairPolicy": {
+          "applySafeWorkspaceEditsOnly": true,
+          "rerunLintAfterEachBatch": true,
+          "noOpReasonsRequireHumanReview": [
+            "unsafe-automatic-edit",
+            "component-stub-needs-authoring-context",
+            "source-not-parseable"
+          ]
+        }
+      },
+      "promptContext": "XTEND_RMT_KNOWLEDGE_CONTEXT\nQuery: page navigation native form submit formaction formmethod data-xtend-native RMT properties selected checkbox\nKnowledge schema: xtend.rmt.ai-developer-kit.v1\n\nAnswer rules:\n- Answer only from this RMT knowledge context and the conversation.\n- Do not invent RMT syntax. If a needed operator is missing, say so.\n- Put RMT code examples in fenced ```rmt blocks.\n- Mention `xt rmt lint <file> --agent` for validation or repair workflows.\n- Keep runtime behavior separated into Compiler Record, Host Adapter and Scheduler Signal.\n\nGuardrails:\nForbidden: if, else, for, while, switch, try, catch, function, return, await, async, class\nBoundaries: no-rmt-kernel-import-of-host-runtime-types, no-rmt-kernel-import-of-xtend-types, no manual HTML sinks in normal App Platform authoring, trusted output requires explicit trust boundary and sanitize policy\n\nReference records:\n[R37] Node and Laravel page runtime (runtime)\nResource: xtend://rmt/kit/reference/runtime%3Apage-runtime · locale:und · rmt-ai-kit-reference · sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\nUse: Independent Node and Laravel page hosts support props, forms, navigation, layouts, resume and streaming. Production Laravel renders prebuilt artifacts without Node. Page-owned requests end with the visit; layout-owned resources follow their owner. Rebuild Maraca bundles and page manifests with the same framework version. XTend.store demonstrates Maraca, Laravel, a guest cart and a separate DemoPay provider.\nSources: docs/en/ssr-pages.md, docs/de/ssr-pages.md, xtend-maraca/page-bootstrap.d.ts, xtend-maraca/page-client.d.ts\n\n[R38] Page Wire compact transport and CSP (runtime)\nResource: xtend://rmt/kit/reference/runtime%3Apage-wire-csp · locale:und · rmt-ai-kit-reference · sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\nUse: Opt-in xtend.page-wire.v1 reduces repeated page data. Conditional views materialize only their active branch. Trusted component styles can inherit the document nonce. Preserve the documented host ownership, transport and trust contracts when configuring page delivery.\nSources: docs/en/ssr-pages.md, docs/de/ssr-pages.md\n\n[R39] XTend 0.8.0 ecosystem verification (runtime)\nResource: xtend://rmt/kit/reference/runtime%3Arelease-verification · locale:und · rmt-ai-kit-reference · sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\nUse: Verify code, types, exports, bilingual docs and actual packaged artifacts together. Accept xtend.maraca.plan-runtime.v3 and xtend.rmt.presentation-effect-adapter.v2 where schema IDs are checked. fastpass.schema.json is additive; the released RMT v2 document schema is unchanged. Test focus through slotted and remote controls, Escape and restoration during hydration and fast surface switches. Docs language switches must update both search and navigation. The shared test catalog and run-bound artifacts define local and CI evidence.\nSources: docs/en/changelog.md, docs/en/release-verification.md, docs/en/a11y-keyboard-smokes.md, docs/en/xtend-dev-surface.md, xtend-maraca/fastpass.schema.json\n\n[R33] XTend 0.8.0 scheduler migration (runtime)\nResource: xtend://rmt/kit/reference/runtime%3Ascheduler-0.8 · locale:und · rmt-ai-kit-reference · sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\nUse: One shared RMT microkernel owns scheduling. Canonical lanes are user-blocking, visible, transition, idle, background and diagnostics. Jobs return cancellable, thenable RmtJobHandles. Paint, idle and postTask waits release the execution slot until ready. inline/runInline no longer bypass the queue; Product Surface and prewarm require opt-in; ESM imports do not boot a runtime. Fabric supplies work intents and backpressure, not another scheduler.\nSources: docs/en/rmt-kernel-0-8-migration.md, docs/de/rmt-kernel-0-8-migration.md, xtendrmt/rmt-kernel-scheduler.d.ts\n\n[R5] datasource (operator)\nResource: xtend://rmt/kit/reference/operator%3Adatasource · locale:und · rmt-ai-kit-reference · sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\nSyntax: datasource items from endpoint \"/api/items\" { method GET result list }\nUse: Declares host-owned data access.\nValid: datasource tickets from endpoint \"/api/tickets\" { method GET result list fallback fixture tickets.empty }\nInvalid: datasource tickets from fetch(\"/api/tickets\")\nDiagnostic hint: Free function calls are refused.\nSources: docs/de/rmt-reference-state-selectors-data.md\n\n[R12] mount (operator)\nResource: xtend://rmt/kit/reference/operator%3Amount · locale:und · rmt-ai-kit-reference · sha256:5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f\nSyntax: mount target from selector app.view { ... }\nUse: Materializes UI work and may contain policy blocks.\nValid: mount editor.form from selector app.form { on submit -> action app.save }\nInvalid: mount editor.form when canAccess(\"editor\")\nDiagnostic hint: Conditions cannot call functions.\nSources: docs/de/rmt-reference-surfaces-lanes-lifecycle.md\n\nRecipes:\n[P6] DataSource, Resource and Fallback (recipe)\nResource: xtend://rmt/kit/recipe/data-resource-fallback · locale:und · rmt-ai-kit-recipe · sha256:6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e\nIntent: Use the canonical primitive fixture for data and owned cleanup patterns.\nSourceRef: tests/rmt-language/fixtures/vnext-primitives-grammar-design.rmt\nCommands: xt rmt lint tests/rmt-language/fixtures/vnext-primitives-grammar-design.rmt --agent\n\n[P2] Guard asynchronous presentation commits (recipe)\nResource: xtend://rmt/kit/recipe/abort-boundary-commit · locale:und · rmt-ai-kit-recipe · sha256:6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e\nIntent: Integrate custom host adapters with automatic Maraca surface epochs; keep business ownership separate.\nSteps: Read docs/en/maraca-fastpass-abort-boundary.md and docs/en/hydration-policies.md before writing host adapter code. Capture a token from runtime.getSurfaceBoundary(id) before asynchronous work. Pass abortBoundary and presentationToken to requestUiCompute; hydration receives metadata.surfaces guards. After each response check token validity. Return on superseded; never start synchronous rendering fallback. Use boundary.scheduleCommit(scheduler, work, token) for scheduled commits or boundary.commit(work, token) for synchronous mutation. Recheck immediately before creating DOM/chart resources. Exercise close/reopen, parent disposal, late worker responses and failed lifecycle operations. Keep shared cached data and business services under their existing owners.\nCommands: node scripts/run_xtend_tests.js maraca-responsiveness rmt-kernel-scheduler --json\n\n[P1] FastPass shell actions (recipe)\nResource: xtend://rmt/kit/recipe/fastpass-shell · locale:und · rmt-ai-kit-recipe · sha256:6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e\nIntent: Declare execution fastpass for navigation, focus and named close on user-blocking. dispatchFastPass returns a cancellable RmtJobHandle; dispatchCommand keeps its Promise. No reducers, services, resources or business effects. Completion acknowledges shell intent, not loading or animation; synchronous work still needs cooperative chunking.\nSourceRef: demos/xtendrmt/maraca-fastpass/app.rmt\nCommands: xt rmt lint demos/xtendrmt/maraca-fastpass/app.rmt --agent\n\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://rmt/kit/reference/runtime%3Apage-runtime",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/en/ssr-pages.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/runtime%3Apage-wire-csp",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/en/ssr-pages.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/runtime%3Arelease-verification",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/en/changelog.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/runtime%3Ascheduler-0.8",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/en/rmt-kernel-0-8-migration.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/operator%3Adatasource",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/de/rmt-reference-state-selectors-data.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/reference/operator%3Amount",
+        "sourceHash": "5c36d6bf79972570e81f9bcd69189b81778be53f22d26a3bb8f89a9212a6df6f",
+        "sourcePath": "docs/de/rmt-reference-surfaces-lanes-lifecycle.md"
+      },
+      {
+        "uri": "xtend://rmt/kit/recipe/data-resource-fallback",
+        "sourceHash": "6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e",
+        "sourcePath": "tests/rmt-language/fixtures/vnext-primitives-grammar-design.rmt"
+      },
+      {
+        "uri": "xtend://rmt/kit/recipe/abort-boundary-commit",
+        "sourceHash": "6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e",
+        "sourcePath": ""
+      },
+      {
+        "uri": "xtend://rmt/kit/recipe/fastpass-shell",
+        "sourceHash": "6950e6a073af8b150ef1ba9efbafec0564eb540099282be63ceb49de461e312e",
+        "sourcePath": "demos/xtendrmt/maraca-fastpass/app.rmt"
+      }
+    ]
+  }
+}

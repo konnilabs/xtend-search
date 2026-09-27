@@ -1,0 +1,6 @@
+{
+  "identical": true,
+  "filesCompared": 79,
+  "differentFiles": [],
+  "purpose": "Final image adds missing corresponding-source build files; runtime graphs compared with the image that passed full Docker browser suite."
+}

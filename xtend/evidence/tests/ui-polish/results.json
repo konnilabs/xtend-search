@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-09-19T20:43:46.260Z",
+  "base": "http://127.0.0.1:8090",
+  "results": [
+    {
+      "browser": "chromium",
+      "status": "passed",
+      "singleCount": true,
+      "loadingAndErrorsVisible": true,
+      "history": true,
+      "arrows": [
+        {
+          "action": "previous",
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "action": "next",
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "controlsWork": true
+    },
+    {
+      "browser": "firefox",
+      "status": "passed",
+      "singleCount": true,
+      "loadingAndErrorsVisible": true,
+      "history": true,
+      "arrows": [
+        {
+          "action": "previous",
+          "dx": 0,
+          "dy": 0
+        },
+        {
+          "action": "next",
+          "dx": 0,
+          "dy": 0
+        }
+      ],
+      "controlsWork": true
+    }
+  ]
+}

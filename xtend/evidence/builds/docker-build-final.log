@@ -1,0 +1,123 @@
+time="2026-09-19T22:03:41+02:00" level=warning msg="Docker Compose requires buildx plugin to be installed"
+ Image xtend-search:0.1.0 Building 
+ Image xtend-search:0.1.0 Building 
+Sending build context to Docker daemon  524.4kBSending build context to Docker daemon  1.573MBSending build context to Docker daemon  3.159MBSending build context to Docker daemon  4.208MBSending build context to Docker daemon  4.732MBSending build context to Docker daemon  5.781MBSending build context to Docker daemon  9.995MBSending build context to Docker daemon  13.15MBSending build context to Docker daemon  17.88MBSending build context to Docker daemon   22.6MBSending build context to Docker daemon   26.8MBSending build context to Docker daemon  32.05MBSending build context to Docker daemon  37.29MBSending build context to Docker daemon  42.02MBSending build context to Docker daemon  46.74MBSending build context to Docker daemon  51.46MBSending build context to Docker daemon  57.23MBSending build context to Docker daemon  61.92MB
+Step 1/30 : ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+Step 2/30 : ARG PYTHON_IMAGE=python:3.12-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
+Step 3/30 : FROM ${NODE_IMAGE} AS frontend
+ ---> 622f209f6c16
+Step 4/30 : WORKDIR /build/xtend
+ ---> Running in ee272b60fa4e
+ ---> Removed intermediate container ee272b60fa4e
+ ---> 4a54a32a878f
+Step 5/30 : COPY xtend/package.json xtend/package-lock.json ./
+ ---> e713c2517f08
+Step 6/30 : COPY xtend/vendor-inputs ./vendor-inputs
+ ---> 1b1d1c55fdbc
+Step 7/30 : RUN npm install --global npm@11.17.0 && npm ci --ignore-scripts
+ ---> Running in 782752a667d4
+
+changed 10 packages in 9s
+
+15 packages are looking for funding
+  run `npm fund` for details
+
+added 20 packages, and audited 21 packages in 3s
+
+found 0 vulnerabilities
+[91mnpm notice
+npm notice New major version of npm available! 11.17.0 -> 12.0.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.0.2
+npm notice To update run: npm install -g npm@12.0.2
+npm notice
+[0m ---> Removed intermediate container 782752a667d4
+ ---> 224f5eee891f
+Step 8/30 : WORKDIR /build
+ ---> Running in b9f5022c5a25
+ ---> Removed intermediate container b9f5022c5a25
+ ---> 83304326e0b5
+Step 9/30 : COPY . .
+ ---> 35e44e6ce592
+Step 10/30 : RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.tar.gz .
+ ---> Running in 14a1ef2e019a
+ ---> Removed intermediate container 14a1ef2e019a
+ ---> 9483951ae54a
+Step 11/30 : WORKDIR /build/xtend
+ ---> Running in b95fd52bfa2b
+ ---> Removed intermediate container b95fd52bfa2b
+ ---> d97feae9cfd3
+Step 12/30 : RUN npm run build && npm prune --omit=dev --ignore-scripts
+ ---> Running in dde2beb3fe87
+
+> xtend-search@0.1.0 build
+> node scripts/build.cjs
+
+{"ok":true,"node":"v24.19.0","version":"347a48c37d95e1b89927421e1ef23f9c0c57050a9f575763de890b6bf7302df8","sourceSha256":"1f065c7161d33ab8fc791561376b6bd100ba6039460c7705813cd1a22da6a177","compilation":{"compilations":1,"hits":1,"documents":1}}
+
+removed 19 packages, and audited 2 packages in 8s
+
+found 0 vulnerabilities
+ ---> Removed intermediate container dde2beb3fe87
+ ---> 07a896809c45
+Step 13/30 : FROM ${PYTHON_IMAGE} AS runtime
+ ---> febd0be41adb
+Step 14/30 : ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1     BIND_HOST=0.0.0.0 PORT=8080 XTEND_SECRET_DIR=/var/lib/xtend-search     SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.yml     SEARXNG_URL=http://localhost:8080/ XTEND_PYTHON=/usr/local/bin/python
+ ---> Using cache
+ ---> 50123adf30c2
+Step 15/30 : WORKDIR /app
+ ---> Using cache
+ ---> b384220990df
+Step 16/30 : RUN apt-get update && apt-get install -y --no-install-recommends tini libstdc++6 ca-certificates     && rm -rf /var/lib/apt/lists/*     && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend     && mkdir -p /var/lib/xtend-search && chown 10001:10001 /var/lib/xtend-search
+ ---> Using cache
+ ---> 16353030e18b
+Step 17/30 : COPY --from=frontend /usr/local/bin/node /usr/local/bin/node
+ ---> Using cache
+ ---> 4b08fa7b0489
+Step 18/30 : COPY xtend/requirements.lock.txt /app/xtend/requirements.lock.txt
+ ---> Using cache
+ ---> 53df2dca9118
+Step 19/30 : RUN pip install --no-cache-dir -r /app/xtend/requirements.lock.txt
+ ---> Using cache
+ ---> f896afa9f2df
+Step 20/30 : COPY searx /app/searx
+ ---> Using cache
+ ---> 92aab27127a0
+Step 21/30 : COPY LICENSE /app/LICENSE
+ ---> Using cache
+ ---> 5fdf5c37e982
+Step 22/30 : COPY --from=frontend /build/xtend /app/xtend
+ ---> fd53a0542910
+Step 23/30 : COPY --from=frontend /source.tar.gz /app/source.tar.gz
+ ---> b7ac85e0ffa1
+Step 24/30 : RUN python -c 'from pathlib import Path; Path("searx/version_frozen.py").write_text("VERSION_STRING = \"2026.9.19+e831fc2a1+xtend.0.1.0\"\nVERSION_TAG = \"2026.9.19+e831fc2a1\"\nDOCKER_TAG = \"xtend-search-0.1.0\"\nGIT_URL = \"/source.tar.gz\"\nGIT_BRANCH = \"xtend-search\"\n")'
+ ---> Running in 9a1e461d6b93
+ ---> Removed intermediate container 9a1e461d6b93
+ ---> 213b7ee56cdd
+Step 25/30 : USER 10001:10001
+ ---> Running in c272c7c16ca3
+ ---> Removed intermediate container c272c7c16ca3
+ ---> 48b611f15cbe
+Step 26/30 : EXPOSE 8080
+ ---> Running in a09180b6de3e
+ ---> Removed intermediate container a09180b6de3e
+ ---> 72b5cc9c0a04
+Step 27/30 : HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'
+ ---> Running in d76bfa0df554
+ ---> Removed intermediate container d76bfa0df554
+ ---> 69ab339822de
+Step 28/30 : ENTRYPOINT ["/usr/bin/tini", "--"]
+ ---> Running in 1cf450795e79
+ ---> Removed intermediate container 1cf450795e79
+ ---> 56fe22bac890
+Step 29/30 : CMD ["node", "xtend/server/supervisor.mjs"]
+ ---> Running in 9e2e472b8f12
+ ---> Removed intermediate container 9e2e472b8f12
+ ---> 343a3c1bf5e4
+Step 30/30 : LABEL com.docker.compose.image.builder=classic
+ ---> Running in 199460b60deb
+ ---> Removed intermediate container 199460b60deb
+ ---> 786d8139b044
+Successfully built 786d8139b044
+Successfully tagged xtend-search:0.1.0
+ Image xtend-search:0.1.0 Built 
+ Image xtend-search:0.1.0 Built 

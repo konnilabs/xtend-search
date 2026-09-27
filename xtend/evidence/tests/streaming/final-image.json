@@ -1,0 +1,83 @@
+{
+  "image": "sha256:87436f07ef27149b002017c7533336ee9503a125afe0f698ad18fe7230b01e6c",
+  "sourceMatches": true,
+  "bindMounts": [],
+  "files": [
+    {
+      "file": "searx/xtend_stream.py",
+      "sha256": "ebc32d3a262ec34e29b77d7c98e7c2864acc1dc839c7708cce0edcf226b6f00b",
+      "containerSha256": "ebc32d3a262ec34e29b77d7c98e7c2864acc1dc839c7708cce0edcf226b6f00b"
+    },
+    {
+      "file": "searx/webapp.py",
+      "sha256": "4c101309024b330d748b3471134bb4ba3192db8d609196c042d9ba6356670cf6",
+      "containerSha256": "4c101309024b330d748b3471134bb4ba3192db8d609196c042d9ba6356670cf6"
+    },
+    {
+      "file": "xtend/server/stream.mjs",
+      "sha256": "b773eddc4e90a6b8b1b0fa460e1bb0537dbba36df39e52f7d08fcd3f7676c3b1",
+      "containerSha256": "b773eddc4e90a6b8b1b0fa460e1bb0537dbba36df39e52f7d08fcd3f7676c3b1"
+    },
+    {
+      "file": "xtend/server/host.mjs",
+      "sha256": "583ec50c6a44b5853c66df61b054a0d2aae7b36b057f90bf2aaff5616a42a920",
+      "containerSha256": "583ec50c6a44b5853c66df61b054a0d2aae7b36b057f90bf2aaff5616a42a920"
+    },
+    {
+      "file": "xtend/server/search.mjs",
+      "sha256": "0d278723e50c95153b4775d55d012b3bfc49ae6440ffbb931ef75372e6b833ff",
+      "containerSha256": "0d278723e50c95153b4775d55d012b3bfc49ae6440ffbb931ef75372e6b833ff"
+    },
+    {
+      "file": "xtend/server/gateway.mjs",
+      "sha256": "1ffa0e7c91138608d1f17f4f591b9f4f67cd05b11ef015c77fcac3937fbef6e9",
+      "containerSha256": "1ffa0e7c91138608d1f17f4f591b9f4f67cd05b11ef015c77fcac3937fbef6e9"
+    },
+    {
+      "file": "xtend/frontend/search.rmt",
+      "sha256": "2dd22e872959e114819a09154dc2edaa9c7a2e3afd56b47028bf58f7e458a8cc",
+      "containerSha256": "2dd22e872959e114819a09154dc2edaa9c7a2e3afd56b47028bf58f7e458a8cc"
+    },
+    {
+      "file": "xtend/frontend/streaming.mjs",
+      "sha256": "fa60c0552d1c4c21f729717043e9798961d228ff3cbe05ff8be97db676ffe3e2",
+      "containerSha256": "fa60c0552d1c4c21f729717043e9798961d228ff3cbe05ff8be97db676ffe3e2"
+    },
+    {
+      "file": "xtend/frontend/search-remote-adapter.mjs",
+      "sha256": "c9786d1cda254f7bab8223f02b894f07802e2ac05ebf4ea2e8830f19a27068b8",
+      "containerSha256": "c9786d1cda254f7bab8223f02b894f07802e2ac05ebf4ea2e8830f19a27068b8"
+    },
+    {
+      "file": "xtend/frontend/images.mjs",
+      "sha256": "9d04c5473b5502f37ef539eed5b888807a94033868f10898106f2f70b20c902a",
+      "containerSha256": "9d04c5473b5502f37ef539eed5b888807a94033868f10898106f2f70b20c902a"
+    },
+    {
+      "file": "xtend/frontend/preview.mjs",
+      "sha256": "836b86d573019579a0ca205d3cfc69f2fa0e583df71402220d79eb94e5fd2c3b",
+      "containerSha256": "836b86d573019579a0ca205d3cfc69f2fa0e583df71402220d79eb94e5fd2c3b"
+    },
+    {
+      "file": "xtend/frontend/lightbox.mjs",
+      "sha256": "3abfd3e59fd15882053094a8dec617b9d25ff830e0c0cd6c650042439d8e5294",
+      "containerSha256": "3abfd3e59fd15882053094a8dec617b9d25ff830e0c0cd6c650042439d8e5294"
+    },
+    {
+      "file": "xtend/frontend/alerts.mjs",
+      "sha256": "a236709f923684403a8d98ad340db12f4fd525875a793a7607865d21e7e00329",
+      "containerSha256": "a236709f923684403a8d98ad340db12f4fd525875a793a7607865d21e7e00329"
+    },
+    {
+      "file": "xtend/scripts/build.cjs",
+      "sha256": "30a361e7785c6a7e37d32714c6790cb9f8ace428660117a715355cc4a828778e",
+      "containerSha256": "30a361e7785c6a7e37d32714c6790cb9f8ace428660117a715355cc4a828778e"
+    },
+    {
+      "file": "xtend/vendor-inputs/ccslabs-xtend-0.8.0.tgz",
+      "sha256": "677023093724ffeba6776f5908353a32fefcfe1454a83b9441f6f41e43c83b24",
+      "containerSha256": "677023093724ffeba6776f5908353a32fefcfe1454a83b9441f6f41e43c83b24"
+    }
+  ],
+  "timestamp": "2026-09-20T00:50:00.055050+00:00"
+}

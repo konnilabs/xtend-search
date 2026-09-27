@@ -1,0 +1,7 @@
+ Container xtend-search-control-searxng-1 Running 
+ Container xtend-search-control-search-1 Recreate 
+ Container xtend-search-control-search-1 Recreated 
+ Container xtend-search-control-searxng-1 Waiting 
+ Container xtend-search-control-searxng-1 Healthy 
+ Container xtend-search-control-search-1 Starting 
+ Container xtend-search-control-search-1 Started 

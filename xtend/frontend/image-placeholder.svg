@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="320" viewBox="0 0 480 320">
+  <style>
+    .surface{fill:#edf4f7}.line{stroke:#7193a3}.label{fill:#526f80}
+    @media(prefers-color-scheme:dark){.surface{fill:#213846}.line{stroke:#89adbd}.label{fill:#b1cbd7}}
+  </style>
+  <rect class="surface" width="480" height="320" rx="18"/>
+  <g class="line" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="186" y="80" width="108" height="88" rx="12"/>
+    <circle cx="263" cy="105" r="9"/>
+    <path d="m193 155 28-31 24 24 16-17 26 25M183 77l114 96"/>
+  </g>
+  <text class="label" x="240" y="215" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20">Bild nicht verfügbar</text>
+</svg>

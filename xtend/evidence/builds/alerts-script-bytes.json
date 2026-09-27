@@ -1,0 +1,106 @@
+{
+  "timestamp": "2026-09-19T21:15:57.446Z",
+  "note": "Script-byte inventory, no timing/load benchmark; real fixture container assets.",
+  "initial": {
+    "/assets/xtend/page.mjs": {
+      "bytes": 7877,
+      "gzip": 3253
+    },
+    "/assets/xtend/resume-key.mjs": {
+      "bytes": 193,
+      "gzip": 184
+    },
+    "/assets/xtend/chunks/chunk-HDGUSJ7J.mjs": {
+      "bytes": 3844,
+      "gzip": 1681
+    },
+    "/assets/xtend/chunks/chunk-2VBRXMZZ.mjs": {
+      "bytes": 4889,
+      "gzip": 2131
+    },
+    "/assets/xtend/chunks/page-client-EUQT5AQW.mjs": {
+      "bytes": 151970,
+      "gzip": 46791
+    },
+    "/assets/xtend/maraca/xtend.maraca.mjs": {
+      "bytes": 540430,
+      "gzip": 110654
+    },
+    "/assets/xtend/maraca/runtime/xtend-maraca-browser-composition-runtime.mjs": {
+      "bytes": 32604,
+      "gzip": 7391
+    },
+    "/assets/xtend/maraca/runtime/xtendrmt-kernel-orchestration-controller.mjs": {
+      "bytes": 47182,
+      "gzip": 9226
+    },
+    "/assets/xtend/maraca/runtime/xtend-maraca-plan-runtime.mjs": {
+      "bytes": 140063,
+      "gzip": 28009
+    },
+    "/assets/xtend/maraca/runtime/xtendrmt-runtime.esm.mjs": {
+      "bytes": 1402773,
+      "gzip": 206832
+    },
+    "/assets/xtend/maraca/runtime/abort-boundary.mjs": {
+      "bytes": 3594,
+      "gzip": 1144
+    },
+    "/assets/xtend/maraca/runtime/fastpass.mjs": {
+      "bytes": 4079,
+      "gzip": 1565
+    },
+    "/assets/xtend/maraca/runtime/browser-host-adapter.mjs": {
+      "bytes": 22928,
+      "gzip": 5741
+    },
+    "/assets/xtend/maraca/runtime/rmt-resume-runtime.mjs": {
+      "bytes": 2096,
+      "gzip": 531
+    },
+    "/assets/xtend/maraca/runtime/rmt-kernel-scheduler.mjs": {
+      "bytes": 27403,
+      "gzip": 6415
+    },
+    "/assets/xtend/maraca/runtime/fastpass-contract.js": {
+      "bytes": 2674,
+      "gzip": 994
+    },
+    "/assets/xtend/maraca/runtime/rmt-resume-command-adapter.mjs": {
+      "bytes": 4441,
+      "gzip": 1382
+    },
+    "/assets/xtend/maraca/runtime/rmt-resume-capture-adapter.mjs": {
+      "bytes": 4816,
+      "gzip": 1516
+    },
+    "/assets/xtend/maraca/runtime/rmt-resume-host-adapter.mjs": {
+      "bytes": 3571,
+      "gzip": 1220
+    },
+    "/assets/xtend/maraca/runtime/rmt-resume-protocol.mjs": {
+      "bytes": 3011,
+      "gzip": 963
+    },
+    "/assets/xtend/maraca/runtime/rmt-resume-command-controller.mjs": {
+      "bytes": 16101,
+      "gzip": 3469
+    },
+    "/assets/xtend/maraca/chunks/x-alert-BpyFLeVW.mjs": {
+      "bytes": 15003,
+      "gzip": 4235
+    },
+    "/assets/xtend/maraca/chunks/x-section-XRXdoACj.mjs": {
+      "bytes": 16242,
+      "gzip": 4976
+    }
+  },
+  "additionalLightbox": {
+    "/assets/xtend/chunks/lightbox-RLDQHL5O.mjs": {
+      "bytes": 27000,
+      "gzip": 8081
+    }
+  },
+  "initialGzip": 450303,
+  "additionalLightboxGzip": 8081
+}

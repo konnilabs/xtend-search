@@ -1,0 +1,85 @@
+{
+  "ok": true,
+  "version": "0.3.5",
+  "checks": [
+    "Three delayed sources stream through gzip/XScaler; duplicate row keeps its DOM identity, title and position while all three attributions appear; no document reload.",
+    "Direct SSR without JavaScript has the same ten unique hits and combined provenance.",
+    "Excluded approved sources are named; wrapping status and its popup fit 320px and 390px viewports.",
+    "Provider failures produce named, allowlisted diagnostics and an honest zero-of-three contribution status."
+  ],
+  "frames": [
+    {
+      "phase": "delta",
+      "rows": 0,
+      "stable": true
+    },
+    {
+      "phase": "delta",
+      "rows": 4,
+      "label": "fixture fast",
+      "stable": true
+    },
+    {
+      "phase": "delta",
+      "rows": 7,
+      "label": "fixture fast · fixture medium",
+      "stable": true
+    },
+    {
+      "phase": "delta",
+      "rows": 10,
+      "label": "fixture fast · fixture medium · fixture slow",
+      "stable": true
+    },
+    {
+      "phase": "complete",
+      "rows": 10,
+      "label": "fixture fast · fixture medium · fixture slow",
+      "stable": true
+    }
+  ],
+  "mobile": [
+    {
+      "width": 390,
+      "status": "0 von 0 Quellen mit Treffern · 3 weitere nicht berücksichtigtfixture fast: Die Quelle unterstützt die gewählte Sprache nicht.fixture medium: Die Quelle unterstützt die gewählte Sprache nicht.fixture slow: Die Quelle unterstützt die gewählte Sprache nicht.",
+      "summaryHeight": 33,
+      "statusHeight": 42,
+      "popupTop": 465.78125,
+      "summaryBottom": 456.78125,
+      "overflow": false
+    },
+    {
+      "width": 320,
+      "status": "0 von 0 Quellen mit Treffern · 3 weitere nicht berücksichtigtfixture fast: Die Quelle unterstützt die gewählte Sprache nicht.fixture medium: Die Quelle unterstützt die gewählte Sprache nicht.fixture slow: Die Quelle unterstützt die gewählte Sprache nicht.",
+      "summaryHeight": 50,
+      "statusHeight": 50,
+      "popupTop": 473.78125,
+      "summaryBottom": 473.78125,
+      "overflow": false
+    }
+  ],
+  "failure": {
+    "status": "0 von 3 Quellen mit Treffern · 3 fehlgeschlagen",
+    "warnings": [
+      {
+        "id": "source-fixture%20fast",
+        "domId": "search-warning-source-fixture%20fast",
+        "type": "warning",
+        "message": "fixture fast: Die Quelle meldet einen Fehler."
+      },
+      {
+        "id": "source-fixture%20medium",
+        "domId": "search-warning-source-fixture%20medium",
+        "type": "warning",
+        "message": "fixture medium: Die Quelle meldet einen Fehler."
+      },
+      {
+        "id": "source-fixture%20slow",
+        "domId": "search-warning-source-fixture%20slow",
+        "type": "warning",
+        "message": "fixture slow: Die Quelle meldet einen Fehler."
+      }
+    ]
+  },
+  "errors": []
+}

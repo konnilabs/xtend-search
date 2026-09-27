@@ -1,0 +1,31 @@
+{
+  "files": [
+    {
+      "path": "page.mjs",
+      "bytes": 5863,
+      "gzip": 2560
+    },
+    {
+      "path": "chunks/chunk-2VBRXMZZ.mjs",
+      "bytes": 4889,
+      "gzip": 2131
+    },
+    {
+      "path": "chunks/chunk-HDGUSJ7J.mjs",
+      "bytes": 3844,
+      "gzip": 1681
+    },
+    {
+      "path": "chunks/page-client-EUQT5AQW.mjs",
+      "bytes": 151970,
+      "gzip": 46791
+    },
+    {
+      "path": "chunks/rmt-resume-runtime-TDYASBDO.mjs",
+      "bytes": 12928,
+      "gzip": 4484
+    }
+  ],
+  "totalBytes": 179494,
+  "totalGzip": 57647
+}

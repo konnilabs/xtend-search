@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "health": {
+    "ok": true,
+    "version": "0.4.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "policyCount": 14,
+  "revision": 36,
+  "policyHashPreserved": true,
+  "allGuardBytesPreserved": true,
+  "quality": {
+    "schema": 2,
+    "rules": 0,
+    "reports": 0
+  }
+}

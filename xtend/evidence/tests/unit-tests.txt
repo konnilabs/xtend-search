@@ -1,0 +1,14 @@
+✔ URL state round trips Unicode and reserved characters (1.430727ms)
+✔ reject invalid filters, oversized input and invalid pagination (0.754779ms)
+✔ unsafe links cannot reach rendering (0.220462ms)
+✔ normalization retains text, deduplicates, tolerates broken escaping and drops foreign images (1.069772ms)
+✔ empty, failed and partial engine responses remain distinguishable (1.091673ms)
+✔ backend effective supported filters are authoritative (0.168282ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 67.108586

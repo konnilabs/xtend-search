@@ -1,0 +1,49 @@
+url http://localhost:8093/admin?filterQuery=&view=sources&page=1&engine=fixture+fast&proposal= panel { x: 896, y: 174, width: 680, height: 800 }
+manager {
+  registry: {
+    schema: 'xtend.surface.snapshot.v1',
+    managerId: 'observatory-workspace',
+    stateKey: 'xtend.surface.registry',
+    activeSurfaceId: 'source-detail',
+    version: 96,
+    surfaceCount: 1,
+    openSurfaceCount: 1,
+    destroyedSurfaceCount: 0,
+    surfaces: [ [Object] ],
+    stack: [ 'source-detail' ],
+    diagnostics: [
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object], [Object], [Object],
+      [Object], [Object]
+    ],
+    updatedAt: '1970-01-01T00:00:00.000Z'
+  },
+  rect: {
+    x: 24,
+    y: 174,
+    width: 1552,
+    height: 800,
+    top: 174,
+    right: 1576,
+    bottom: 974,
+    left: 24
+  }
+}
+CONSOLE POLICY DOMStringMap
+CONSOLE SUBMIT FORM JSHandle@node false FORM,DIV,SLOT,DIV,ASIDE
+HTTP 405 http://localhost:8093/admin
+CONSOLE Failed to load resource: the server responded with a status of 405 (Method Not Allowed)
+ERROR locator.textContent: Timeout 30000ms exceeded.
+Call log:
+[2m  - waiting for locator('.admin-toasts')[22m
+

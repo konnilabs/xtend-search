@@ -1,0 +1,121 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"XScaler AppService streaming remote-surface createXScalerAppServiceTransport createNodeAppServiceHost frames HTTP transport\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "XScaler AppService streaming remote-surface createXScalerAppServiceTransport createNodeAppServiceHost frames HTTP transport",
+      "locale": "all",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 5,
+      "domains": [],
+      "hitCount": 5,
+      "hits": [
+        {
+          "uri": "xtend://docs/de/maraca-app-services",
+          "id": "de:maraca-app-services:7",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "de",
+          "title": "Maraca AppServices und TypeScript",
+          "heading": "XScaler",
+          "score": 25,
+          "excerpt": "## XScaler\n\n`target: 'remote-surface'` ist ausschließlich für XScaler-Surface-/XTension-Adapter vorgesehen. Der XScaler-Transport führt Preflight vor jedem Remote-Code aus, prüft Origin und SRI und aktiviert bei Ablehnung den deklarierten Surface-Fallback. Normale lokale und HTTP-AppServices durchlaufen keinen XScaler-Preflight. SSR validiert nur den Vertrag und führt weder Netzwerkzugriffe noch Remote-Module aus.\n\nDer öffentliche Einstieg ist `@ccslabs/xtend/xscaler`; der Adapter für die Registry ist `createXScalerAppServiceTransport(...)`. Ein abgelehnter Preflight oder eine fehlerhafte Integrität beendet den Pfad vor Import und Ausführung des Remote-Moduls. `dispose` bricht aktive ATC-/Servicearbeit ab und verhindert weitere Operationen.",
+          "sourceHash": "df08a19ab041a1d729713bd188a3a1634eb682421220d9f4f3b34dbe91d2966b",
+          "sourcePath": "docs/de/maraca-app-services.md"
+        },
+        {
+          "uri": "xtend://docs/en/maraca-app-services",
+          "id": "en:maraca-app-services:7",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "en",
+          "title": "Maraca AppServices and TypeScript",
+          "heading": "XScaler",
+          "score": 25,
+          "excerpt": "## XScaler\n\n`target: 'remote-surface'` is reserved for XScaler Surface/XTension adapters. Its transport runs preflight before remote code, validates origin and SRI, and selects the declared surface fallback on rejection. Local and ordinary HTTP AppServices never enter that preflight. SSR validates and emits the contract without network access or remote-module execution.\n\nUse `@ccslabs/xtend/xscaler` as the public entry and `createXScalerAppServiceTransport(...)` as the registry adapter. Rejected preflight or invalid integrity stops the path before remote-module import or execution. Disposal aborts active ATC/service work and prevents further operations.\n\nStart diagnostics with `dist/xtend.maraca.services.json` and `dist/xtend.maraca.report.json`. TypeScript diagnostics include file, line, and column. A sentinel secret from Node or PHP must never occur in browser output, client source maps, or reports.\n\n| Code | Meaning and remedy |\n| --- | --- |\n| `xtend.maraca.services.missing_client_binding` | An RMT service ID is missing from `services.ts`. |\n| `xtend.maraca.services.mode_mismatch` | RMT `invoke`/`stream` does not match TypeScript `query|command|stream`. |\n| `xtend.maraca.services.missing_node_implementation` / `missing_php_implementation` | A handler is missing for an enabled server target. |\n| `xtend.maraca.services.target_collision` | A local service also has a server imp…",
+          "sourceHash": "a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649",
+          "sourcePath": "docs/en/maraca-app-services.md"
+        },
+        {
+          "uri": "xtend://docs/en/xscaler-protocol",
+          "id": "en:xscaler-protocol:5",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "XScaler Protocol",
+          "heading": "Remote surface plan",
+          "score": 20,
+          "excerpt": "## Remote surface plan\n\nThe plan mirrors the RMT remote-surface contract: owner, origin, integrity, fallback surface and lane target are static facts. XScaler does not load or execute the remote bundle during validation.",
+          "sourceHash": "78554252516479bde8667419e05e025dc60851dcc97b222de97898b381729e3f",
+          "sourcePath": "docs/en/xscaler-protocol.md"
+        },
+        {
+          "uri": "xtend://docs/de/rmt-vnext-remote-surfaces",
+          "id": "de:rmt-vnext-remote-surfaces:1",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "de",
+          "title": "RMT Remote Surfaces",
+          "heading": "RMT Remote Surfaces",
+          "score": 19,
+          "excerpt": "# RMT Remote Surfaces\n\nRemote UI-Bereiche sicher beschreiben, laden und degradieren.",
+          "sourceHash": "5ef9eba31aab04deffd989a9af6f7f581b08e0ac1e584a325aa51e7a3c393d5a",
+          "sourcePath": "docs/de/rmt-vnext-remote-surfaces.md"
+        },
+        {
+          "uri": "xtend://docs/de/xscaler-protocol",
+          "id": "de:xscaler-protocol:5",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "de",
+          "title": "XScaler-Protokoll",
+          "heading": "Remote-Surface-Plan",
+          "score": 19,
+          "excerpt": "## Remote-Surface-Plan\n\nDer Plan spiegelt den RMT-Remote-Surface-Vertrag: Owner, Origin, Integrity, Fallback-Surface und Lane-Ziel sind statische Fakten. XScaler lädt oder führt während der Validierung kein Remote-Bundle aus.",
+          "sourceHash": "416e84da61b3adfaaeb0cc74d181f9cc15cf4c549ec0e317a42d3835e53707d7",
+          "sourcePath": "docs/de/xscaler-protocol.md"
+        }
+      ],
+      "maxChars": 15000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: XScaler AppService streaming remote-surface createXScalerAppServiceTransport createNodeAppServiceHost frames HTTP transport\nLocales: all\nScopes: docs, rmt-kit\n\n[K1] Maraca AppServices und TypeScript — XScaler\nResource: xtend://docs/de/maraca-app-services\nSource: docs/de/maraca-app-services.md#sha256:df08a19ab041a1d729713bd188a3a1634eb682421220d9f4f3b34dbe91d2966b\n## XScaler\n\n`target: 'remote-surface'` ist ausschließlich für XScaler-Surface-/XTension-Adapter vorgesehen. Der XScaler-Transport führt Preflight vor jedem Remote-Code aus, prüft Origin und SRI und aktiviert bei Ablehnung den deklarierten Surface-Fallback. Normale lokale und HTTP-AppServices durchlaufen keinen XScaler-Preflight. SSR validiert nur den Vertrag und führt weder Netzwerkzugriffe noch Remote-Module aus.\n\nDer öffentliche Einstieg ist `@ccslabs/xtend/xscaler`; der Adapter für die Registry ist `createXScalerAppServiceTransport(...)`. Ein abgelehnter Preflight oder eine fehlerhafte Integrität beendet den Pfad vor Import und Ausführung des Remote-Moduls. `dispose` bricht aktive ATC-/Servicearbeit ab und verhindert weitere Operationen.\n\n[K2] Maraca AppServices and TypeScript — XScaler\nResource: xtend://docs/en/maraca-app-services\nSource: docs/en/maraca-app-services.md#sha256:a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649\n## XScaler\n\n`target: 'remote-surface'` is reserved for XScaler Surface/XTension adapters. Its transport runs preflight before remote code, validates origin and SRI, and selects the declared surface fallback on rejection. Local and ordinary HTTP AppServices never enter that preflight. SSR validates and emits the contract without network access or remote-module execution.\n\nUse `@ccslabs/xtend/xscaler` as the public entry and `createXScalerAppServiceTransport(...)` as the registry adapter. Rejected preflight or invalid integrity stops the path before remote-module import or execution. Disposal aborts active ATC/service work and prevents further operations.\n\nStart diagnostics with `dist/xtend.maraca.services.json` and `dist/xtend.maraca.report.json`. TypeScript diagnostics include file, line, and column. A sentinel secret from Node or PHP must never occur in browser output, client source maps, or reports.\n\n| Code | Meaning and remedy |\n| --- | --- |\n| `xtend.maraca.services.missing_client_binding` | An RMT service ID is missing from `services.ts`. |\n| `xtend.maraca.services.mode_mismatch` | RMT `invoke`/`stream` does not match TypeScript `query|command|stream`. |\n| `xtend.maraca.services.missing_node_implementation` / `missing_php_implementation` | A handler is missing for an enabled server target. |\n| `xtend.maraca.services.target_collision` | A local service also has a server imp…\n\n[K3] XScaler Protocol — Remote surface plan\nResource: xtend://docs/en/xscaler-protocol\nSource: docs/en/xscaler-protocol.md#sha256:78554252516479bde8667419e05e025dc60851dcc97b222de97898b381729e3f\n## Remote surface plan\n\nThe plan mirrors the RMT remote-surface contract: owner, origin, integrity, fallback surface and lane target are static facts. XScaler does not load or execute the remote bundle during validation.\n\n[K4] RMT Remote Surfaces\nResource: xtend://docs/de/rmt-vnext-remote-surfaces\nSource: docs/de/rmt-vnext-remote-surfaces.md#sha256:5ef9eba31aab04deffd989a9af6f7f581b08e0ac1e584a325aa51e7a3c393d5a\n# RMT Remote Surfaces\n\nRemote UI-Bereiche sicher beschreiben, laden und degradieren.\n\n[K5] XScaler-Protokoll — Remote-Surface-Plan\nResource: xtend://docs/de/xscaler-protocol\nSource: docs/de/xscaler-protocol.md#sha256:416e84da61b3adfaaeb0cc74d181f9cc15cf4c549ec0e317a42d3835e53707d7\n## Remote-Surface-Plan\n\nDer Plan spiegelt den RMT-Remote-Surface-Vertrag: Owner, Origin, Integrity, Fallback-Surface und Lane-Ziel sind statische Fakten. XScaler lädt oder führt während der Validierung kein Remote-Bundle aus.\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/de/maraca-app-services",
+        "sourceHash": "df08a19ab041a1d729713bd188a3a1634eb682421220d9f4f3b34dbe91d2966b",
+        "sourcePath": "docs/de/maraca-app-services.md"
+      },
+      {
+        "uri": "xtend://docs/en/maraca-app-services",
+        "sourceHash": "a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649",
+        "sourcePath": "docs/en/maraca-app-services.md"
+      },
+      {
+        "uri": "xtend://docs/en/xscaler-protocol",
+        "sourceHash": "78554252516479bde8667419e05e025dc60851dcc97b222de97898b381729e3f",
+        "sourcePath": "docs/en/xscaler-protocol.md"
+      },
+      {
+        "uri": "xtend://docs/de/rmt-vnext-remote-surfaces",
+        "sourceHash": "5ef9eba31aab04deffd989a9af6f7f581b08e0ac1e584a325aa51e7a3c393d5a",
+        "sourcePath": "docs/de/rmt-vnext-remote-surfaces.md"
+      },
+      {
+        "uri": "xtend://docs/de/xscaler-protocol",
+        "sourceHash": "416e84da61b3adfaaeb0cc74d181f9cc15cf4c549ec0e317a42d3835e53707d7",
+        "sourcePath": "docs/de/xscaler-protocol.md"
+      }
+    ]
+  }
+}

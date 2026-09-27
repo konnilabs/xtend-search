@@ -1,0 +1,18 @@
+✔ URL state round trips Unicode and reserved characters (1.518687ms)
+✔ home category preselection round trips without a query or a search page (0.335644ms)
+✔ reject invalid filters, oversized input and invalid pagination (0.765349ms)
+✔ unsafe links cannot reach rendering (0.209013ms)
+✔ normalization retains text, deduplicates, tolerates broken escaping and drops foreign images (2.53649ms)
+✔ empty, failed and partial engine responses remain distinguishable (0.355744ms)
+✔ backend effective supported filters are authoritative (0.181313ms)
+✔ knowledge cards keep safe sources, facts and related searches without trusting HTML (0.417755ms)
+✔ images on the same source page retain separate identities and only proxied previews (0.688558ms)
+✔ image retry identities preserve signed source URLs and stay stable within a stream (0.717828ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 69.040724

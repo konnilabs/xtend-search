@@ -1,0 +1,253 @@
+use_default_settings:
+  engines:
+    keep_only: []
+general:
+  instance_name: "XTend.search retrieval"
+  enable_metrics: false
+  debug: false
+server:
+  secret_key: "replaced-by-SEARXNG_SECRET"
+  limiter: false
+  public_instance: false
+  image_proxy: false
+search:
+  formats: [json]
+  safe_search: 1
+  autocomplete: ""
+  default_lang: "all"
+  favicon_resolver: ""
+outgoing:
+  request_timeout: 5.0
+  max_request_timeout: 10.0
+plugins:
+  searx.plugins.calculator.SXNGPlugin: {active: false}
+  searx.plugins.hash_plugin.SXNGPlugin: {active: false}
+  searx.plugins.self_info.SXNGPlugin: {active: false}
+  searx.plugins.unit_converter.SXNGPlugin: {active: false}
+  searx.plugins.ahmia_filter.SXNGPlugin: {active: false}
+  searx.plugins.hostnames.SXNGPlugin: {active: false}
+  searx.plugins.oa_doi_rewrite.SXNGPlugin: {active: false}
+  searx.plugins.tor_check.SXNGPlugin: {active: false}
+  searx.plugins.tracker_url_remover.SXNGPlugin: {active: false}
+
+engines:
+  - name: fixture fast
+    engine: xtend_control_fixture
+    shortcut: fixturefast
+    categories: [general]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture medium
+    engine: xtend_control_fixture
+    shortcut: fixturemedium
+    categories: [general]
+    fixture_kind: general
+    delay: 0.7
+    disabled: false
+  - name: fixture slow
+    engine: xtend_control_fixture
+    shortcut: fixtureslow
+    categories: [general]
+    fixture_kind: general
+    delay: 2.5
+    disabled: false
+  - name: fixture images
+    engine: xtend_control_fixture
+    shortcut: fixtureimages
+    categories: [images]
+    fixture_kind: images
+    delay: 0.1
+    disabled: false
+  - name: fixture news
+    engine: xtend_control_fixture
+    shortcut: fixturenews
+    categories: [news]
+    fixture_kind: news
+    delay: 0.1
+    disabled: false
+  - name: fixture videos
+    engine: xtend_control_fixture
+    shortcut: fixturevideos
+    categories: [videos]
+    fixture_kind: videos
+    delay: 0.1
+    disabled: false
+
+# Admin layout fixtures; disabled by the control plane until explicitly approved.
+  - name: fixture ux 00 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux00
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 01 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux01
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 02 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux02
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 03 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux03
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 04 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux04
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 05 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux05
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 06 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux06
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 07 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux07
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 08 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux08
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 09 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux09
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 10 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux10
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 11 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux11
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 12 extended-source-name-without-breaks-for-layout-verification
+    engine: xtend_control_fixture
+    shortcut: fixtureux12
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 13 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux13
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 14 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux14
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 15 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux15
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 16 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux16
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 17 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux17
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 18 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux18
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 19 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux19
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 20 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux20
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 21 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux21
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 22 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux22
+    categories: [general, images]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+  - name: fixture ux 23 catalog source
+    engine: xtend_control_fixture
+    shortcut: fixtureux23
+    categories: [it, social media]
+    fixture_kind: general
+    delay: 0.1
+    disabled: false
+
+  - name: wikipedia
+    engine: xtend_fixture
+    language_support: true
+    shortcut: fixturewiki
+    categories: [general]
+    safesearch: false
+    disabled: false

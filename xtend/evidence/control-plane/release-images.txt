@@ -1,0 +1,2 @@
+/xtend-search-control-search-1 sha256:2076769f1ee1f8b5b3e1936d250a682ce5b62f74a1bae21055f7d70cb286362f
+/xtend-search-control-searxng-1 sha256:0a642d389dcbd7f6714a446fc379f405ee40854c6f95748de79a730144805dfd

@@ -1,0 +1,47 @@
+✔ Observatory streams are bounded per account and release slots on cancellation (25.472671ms)
+✔ category and case-insensitive name filters compose and keep only matching selection (1.314946ms)
+✔ empty filters never display an unrelated policy; reset is unfiltered (1.189345ms)
+✔ refresh and mutation retain filters without passing UI parameters into the policy write (1.055883ms)
+✔ lexical query boundary rejects every upstream special parser prefix, preserves ordinary site syntax (1.5881ms)
+✔ Retry-After accepts seconds and dates without shortening (0.515527ms)
+✔ fresh catalog never auto-approves; policy changes preserve audit and revision (100.799951ms)
+✔ roles and stale revisions reject without changing durable state (83.28176ms)
+✔ idempotent commands create one revision and audit entry (76.630406ms)
+✔ audit failure never confirms a mutation (72.538615ms)
+✔ last budget token is reserved atomically across simultaneous requests (99.334992ms)
+✔ engine selection honors every filter and changed capability fingerprints (85.454337ms)
+✔ drain and provider deadlines are hard gates for manual probes (100.061531ms)
+✔ backend failures do not label every provider unhealthy; empty results are not failures (88.314484ms)
+✔ restart preserves quotas and policies, health becomes unknown (137.94455ms)
+✔ event allowlist discards search contents, query hashes, IDs and arbitrary errors (0.392695ms)
+✔ bounded telemetry reports drops while search state remains usable (76.302552ms)
+✔ media addresses exclude local, private, mapped and metadata networks (8.670519ms)
+✔ early engine batches, stable append, dedupe, signed paging and post-plan disable (1078.317485ms)
+✔ an idempotency key cannot authorize a different command (83.227079ms)
+✔ provider family cooldown blocks sibling engines and probes and survives restart (147.744553ms)
+✔ technical quarantine recovery is audited and cannot shorten provider deadlines (98.992218ms)
+✔ knowledge preserves one attributed entity, rejects ambiguity and never weakens filters (112.835722ms)
+✔ knowledge rate-limit fallback cannot reuse the same quota domain (141.052699ms)
+✔ no suitable sources and all-engine failures have honest terminal states (100.068242ms)
+✔ client cancellation stops commits and retains dispatched cost and concurrency leases across restart (149.281152ms)
+✔ corrupt storage is fail-closed and does not recreate approvals (31.868692ms)
+✔ special IPv6 representations and transition ranges cannot bypass the media boundary (0.350794ms)
+✔ a real SQLite audit insert failure rolls back policy and revision atomically (78.388408ms)
+✔ OAuth authorization pins the full subdirectory and production callback; only secure HttpOnly cookies (1.916295ms)
+✔ OAuth state is browser-bound and single-use (0.872271ms)
+✔ OAuth uses authenticated OCS identity; session keeps neither access nor refresh tokens (4.012891ms)
+✔ mismatched identities and accounts without explicit roles cannot sign in (1.439788ms)
+✔ unencrypted public admin origins are refused; local testing remains possible (0.269324ms)
+✔ adapter attests pinned backend, inactive plugins, and never treats discovery as health (1.764402ms)
+✔ engine request contains only explicit reviewed fields, no categories, cookies, or browser engine_data (1.721232ms)
+✔ HTTP200 provider errors, unsafe URLs and foreign attribution never become successful results (1.349387ms)
+✔ backend 429 remains backend ingress scope and retains Retry-After (0.615928ms)
+✔ media proxy refuses unsigned requests and signed internal targets before any network read (5.880884ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3073.817245

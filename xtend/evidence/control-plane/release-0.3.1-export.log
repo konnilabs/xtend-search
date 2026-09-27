@@ -1,0 +1,16 @@
+{
+  "version": "0.3.1",
+  "tag": "xtend-search:0.3.1",
+  "id": "sha256:3bc1c104a0b77803f18dfe4465cceb2cab8fc9027aadec1d861d92cc70bb682b",
+  "platform": "linux/amd64",
+  "sourceHashes": {
+    "version": "0.3.1",
+    "css": "19fa8c39cf28679608181d8079fa036146e93ed5a3eb77bf68692b0488ae524a",
+    "rmt": "f43b760ff3afd4707ebdffed5280532e69c79560b2f67ce83c2d9c31a80f7976",
+    "host": "2c5825126beef2779951652962a6c383c58859c22473b26170b259beb63078e1",
+    "release": "dae3effddfc2ad666f45501dd55cd148a9f856b099eae535aba302b31e6b82eb",
+    "bundle": "c13d13ad0639d5b298c742c1be1748bbfc45e7110eaaedb6263e299e50655888"
+  },
+  "archive": "XTend-search-Docker-Image-0.3.1-linux-amd64.tar.gz",
+  "bytes": 261184415
+}

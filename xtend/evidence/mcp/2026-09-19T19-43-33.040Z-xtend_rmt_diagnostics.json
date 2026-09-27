@@ -1,0 +1,28 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "XTendRMT diagnostics completed with 0 diagnostic(s)."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.rmt-diagnostics.v1",
+      "sourceHash": "43f5fa154fe535afec79a57bcdfcf273a6886f3d5f4f68b45fc48221e56f5dc6",
+      "path": "frontend/search.rmt",
+      "ok": true,
+      "status": "diagnostics",
+      "diagnostics": []
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "workspace://frontend/search.rmt",
+        "kind": "diagnostics",
+        "sourceHash": "43f5fa154fe535afec79a57bcdfcf273a6886f3d5f4f68b45fc48221e56f5dc6"
+      }
+    ]
+  }
+}

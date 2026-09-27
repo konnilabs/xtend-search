@@ -1,0 +1,66 @@
+name: xtend-search-control
+services:
+  search:
+    build:
+      context: .
+      dockerfile: Dockerfile.control
+    image: xtend-search:0.4.0
+    depends_on:
+      searxng:
+        condition: service_healthy
+    ports: ["${XTEND_BIND_IP:-127.0.0.1}:${XTEND_PORT:-8090}:8080"]
+    environment:
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:-http://localhost:8090}
+      SEARXNG_BASE_URL: ${SEARXNG_BASE_URL:-http://searxng:8082/}
+      XTEND_FAVICON_RESOLVER: ${XTEND_FAVICON_RESOLVER:-duckduckgo}
+      SEARXNG_TOKEN: ${SEARXNG_TOKEN:?Generate .env.control with scripts/setup-control.mjs}
+      NEXTCLOUD_BASE_URL: ${NEXTCLOUD_BASE_URL:-https://vm.ccs-networks.de/cloud/}
+      NEXTCLOUD_CLIENT_ID: ${NEXTCLOUD_CLIENT_ID:-}
+      NEXTCLOUD_CLIENT_SECRET: ${NEXTCLOUD_CLIENT_SECRET:-}
+      NEXTCLOUD_INDEX_PHP: ${NEXTCLOUD_INDEX_PHP:-0}
+      XTEND_ADMIN_ROLES: ${XTEND_ADMIN_ROLES:-{}}
+      XTEND_PROBES: ${XTEND_PROBES:-0}
+      XTEND_ADMIN_MUTATIONS: ${XTEND_ADMIN_MUTATIONS:-1}
+      XTEND_STREAMING: ${XTEND_STREAMING:-1}
+      XTEND_KNOWLEDGE: ${XTEND_KNOWLEDGE:-1}
+      XTEND_TEST_FIXTURE: ${XTEND_TEST_FIXTURE:-0}
+      WEB_CONCURRENCY: "1"
+      XTEND_REPLICAS: "1"
+    volumes: [control-data:/var/lib/xtend-search, evidence-data:/var/lib/xtend-evidence]
+    networks: [retrieval]
+    read_only: true
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=64m"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 1024m
+    pids_limit: 128
+    restart: unless-stopped
+    stop_grace_period: 30s
+  searxng:
+    build:
+      context: .
+      dockerfile: Dockerfile.searxng
+    image: xtend-search-searxng:0.4.0
+    environment:
+      XTEND_FAVICON_RESOLVER: ${XTEND_FAVICON_RESOLVER:-duckduckgo}
+      SEARXNG_TOKEN: ${SEARXNG_TOKEN:?Generate .env.control}
+      SEARXNG_SETTINGS_PATH: ${SEARXNG_SETTINGS_PATH:-/app/xtend/config/settings.control.yml}
+      XTEND_TEST_FIXTURE: ${XTEND_TEST_FIXTURE:-0}
+    volumes: [backend-data:/var/lib/xtend-backend]
+    networks: [retrieval]
+    read_only: true
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=128m"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    mem_limit: 1024m
+    pids_limit: 256
+    restart: unless-stopped
+volumes:
+  control-data:
+  backend-data:
+  evidence-data:
+networks:
+  retrieval:
+    # Private service discovery, no published SearXNG port. Internet egress is
+    # required by retrieval; internal:true would prevent provider access.
+    driver: bridge

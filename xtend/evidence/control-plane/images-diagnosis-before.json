@@ -1,0 +1,497 @@
+{
+  "time": "2026-09-26T22:22:20.549Z",
+  "mode": "conservative",
+  "revision": 27,
+  "totalImageSources": 35,
+  "checks": [
+    {
+      "safeSearch": "0",
+      "plan": [
+        "bing images",
+        "google cse images"
+      ],
+      "allowed": [
+        {
+          "id": "bing images",
+          "reason": null,
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "bing",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "fba6f87d9697c5d9db732930e52d22351ba75427763f1e77d13de554448a493a",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437880161,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 2,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790437920000,
+            "count": 4,
+            "leases": [],
+            "blockedUntil": 0
+          },
+          "engineBudget": {
+            "reset": 1790437920000,
+            "count": 1,
+            "leases": []
+          }
+        },
+        {
+          "id": "duckduckgo images",
+          "reason": "provider_family_cooldown",
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "duckduckgo",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "0d37c522b1fb9be07130a44db4fa29864ff0aeb91a81d95626bcb56a2c717303",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse images",
+          "reason": null,
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "google-cse",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "6afe3beef584ef9df79f6ebfb5018def924dd4bf06f124e86736c07df3a9cfb7",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437880084,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 2,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790437920000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          },
+          "engineBudget": {
+            "reset": 1790437920000,
+            "count": 1,
+            "leases": []
+          }
+        }
+      ]
+    },
+    {
+      "safeSearch": "1",
+      "plan": [
+        "bing images",
+        "google cse images"
+      ],
+      "allowed": [
+        {
+          "id": "bing images",
+          "reason": null,
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "bing",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "fba6f87d9697c5d9db732930e52d22351ba75427763f1e77d13de554448a493a",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437880161,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 2,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790437920000,
+            "count": 4,
+            "leases": [],
+            "blockedUntil": 0
+          },
+          "engineBudget": {
+            "reset": 1790437920000,
+            "count": 1,
+            "leases": []
+          }
+        },
+        {
+          "id": "duckduckgo images",
+          "reason": "provider_family_cooldown",
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "duckduckgo",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "0d37c522b1fb9be07130a44db4fa29864ff0aeb91a81d95626bcb56a2c717303",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse images",
+          "reason": null,
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "google-cse",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "6afe3beef584ef9df79f6ebfb5018def924dd4bf06f124e86736c07df3a9cfb7",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437880084,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 2,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790437920000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          },
+          "engineBudget": {
+            "reset": 1790437920000,
+            "count": 1,
+            "leases": []
+          }
+        }
+      ]
+    },
+    {
+      "safeSearch": "2",
+      "plan": [
+        "bing images",
+        "google cse images"
+      ],
+      "allowed": [
+        {
+          "id": "bing images",
+          "reason": null,
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "bing",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "fba6f87d9697c5d9db732930e52d22351ba75427763f1e77d13de554448a493a",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437880161,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 2,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790437920000,
+            "count": 4,
+            "leases": [],
+            "blockedUntil": 0
+          },
+          "engineBudget": {
+            "reset": 1790437920000,
+            "count": 1,
+            "leases": []
+          }
+        },
+        {
+          "id": "duckduckgo images",
+          "reason": "provider_family_cooldown",
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "duckduckgo",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "0d37c522b1fb9be07130a44db4fa29864ff0aeb91a81d95626bcb56a2c717303",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 0,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 0,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790436600000,
+            "count": 0,
+            "leases": [],
+            "blockedUntil": 1791732570808
+          }
+        },
+        {
+          "id": "google cse images",
+          "reason": null,
+          "policy": {
+            "state": "allowed",
+            "capabilities": [
+              "images"
+            ],
+            "rpm": 6,
+            "concurrency": 1,
+            "family": "google-cse",
+            "drainedUntil": 0,
+            "quarantine": false,
+            "reason": "maintenance",
+            "fingerprint": "6afe3beef584ef9df79f6ebfb5018def924dd4bf06f124e86736c07df3a9cfb7",
+            "pagingVerified": false
+          },
+          "nativeSafeSearch": true,
+          "health": {
+            "health": "unknown",
+            "breaker": "closed",
+            "observedAt": 1790437880084,
+            "samples": [],
+            "consecutive": 0,
+            "successes": 2,
+            "watchSince": 0,
+            "localBackoffUntil": 0,
+            "providerRetryAfterAt": 0,
+            "backendSuspendedUntil": 0,
+            "quotaResetAt": 0
+          },
+          "familyBudget": {
+            "reset": 1790437920000,
+            "count": 3,
+            "leases": [],
+            "blockedUntil": 0
+          },
+          "engineBudget": {
+            "reset": 1790437920000,
+            "count": 1,
+            "leases": []
+          }
+        }
+      ]
+    }
+  ],
+  "events": [
+    {
+      "specversion": "1.0",
+      "id": "ee04bc5b-e066-4554-885b-d9503d578a24",
+      "source": "urn:xtend:search:control-plane:primary",
+      "type": "de.ccs-networks.xtend.search.engine.observed.v1",
+      "time": "2026-09-26T15:51:20.161Z",
+      "datacontenttype": "application/json",
+      "dataschema": "urn:xtend:search:schema:operation:v1",
+      "data": {
+        "backendId": "searxng-primary",
+        "engineId": "bing images",
+        "capability": "images",
+        "origin": "live",
+        "outcome": "success",
+        "errorClass": null,
+        "durationMs": 467.18997299997136,
+        "validResultCount": 35,
+        "policyRevision": 27,
+        "measurementScope": "adapter_round_trip",
+        "providerDurationMs": null
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "7f87510f-49e5-46af-870b-ae53201c4cc9",
+      "source": "urn:xtend:search:control-plane:primary",
+      "type": "de.ccs-networks.xtend.search.engine.observed.v1",
+      "time": "2026-09-26T15:51:20.084Z",
+      "datacontenttype": "application/json",
+      "dataschema": "urn:xtend:search:schema:operation:v1",
+      "data": {
+        "backendId": "searxng-primary",
+        "engineId": "google cse images",
+        "capability": "images",
+        "origin": "live",
+        "outcome": "success",
+        "errorClass": null,
+        "durationMs": 386.92051299999,
+        "validResultCount": 20,
+        "policyRevision": 27,
+        "measurementScope": "adapter_round_trip",
+        "providerDurationMs": null
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "188fba8e-504a-40ca-8add-a09b534a2e89",
+      "source": "urn:xtend:search:control-plane:primary",
+      "type": "de.ccs-networks.xtend.search.engine.observed.v1",
+      "time": "2026-09-26T15:40:41.205Z",
+      "datacontenttype": "application/json",
+      "dataschema": "urn:xtend:search:schema:operation:v1",
+      "data": {
+        "backendId": "searxng-primary",
+        "engineId": "bing images",
+        "capability": "images",
+        "origin": "live",
+        "outcome": "success",
+        "errorClass": null,
+        "durationMs": 507.9601879999973,
+        "validResultCount": 35,
+        "policyRevision": 27,
+        "measurementScope": "adapter_round_trip",
+        "providerDurationMs": null
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "ac712164-e140-45df-8f94-e950d1c0bd44",
+      "source": "urn:xtend:search:control-plane:primary",
+      "type": "de.ccs-networks.xtend.search.engine.observed.v1",
+      "time": "2026-09-26T15:40:41.190Z",
+      "datacontenttype": "application/json",
+      "dataschema": "urn:xtend:search:schema:operation:v1",
+      "data": {
+        "backendId": "searxng-primary",
+        "engineId": "google cse images",
+        "capability": "images",
+        "origin": "live",
+        "outcome": "success",
+        "errorClass": null,
+        "durationMs": 488.92906799999764,
+        "validResultCount": 20,
+        "policyRevision": 27,
+        "measurementScope": "adapter_round_trip",
+        "providerDurationMs": null
+      }
+    }
+  ]
+}

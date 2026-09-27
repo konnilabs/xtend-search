@@ -1,0 +1,103 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Built bounded XTend knowledge context for \"Maraca AppServices RMT datasource effect fetch response state patch declarative actions services strict\"."
+    }
+  ],
+  "structuredContent": {
+    "schemaVersion": "0.1",
+    "schema": "xtend.mcp.tool-result.v1",
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "Maraca AppServices RMT datasource effect fetch response state patch declarative actions services strict",
+      "locale": "all",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 4,
+      "domains": [],
+      "hitCount": 4,
+      "hits": [
+        {
+          "uri": "xtend://docs/de/maraca-app-services",
+          "id": "de:maraca-app-services:3",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "de",
+          "title": "Maraca AppServices und TypeScript",
+          "heading": "Service in RMT deklarieren",
+          "score": 34,
+          "excerpt": "## Service in RMT deklarieren\n\n```rmt\ndatasource orders.search from host orders.search {\n  mode invoke\n  contract \"acme.orders.search.v1\"\n}\n\naction orders.runSearch {\n  input query string {\n    trust boundary \"xtend.security.sanitizing-boundary.v1\"\n    sanitize text\n  }\n  effect fetch datasource orders.search\n}\n```\n\nRMT bleibt die Source of Truth für ID, `invoke`/`stream`, Contract und aufrufende Actions. Der Compiler schreibt daraus ein Bedarfsmanifest. Nicht auflösbare Payloads bleiben in den generierten Deklarationen `unknown`; App-Code kann sie mit Service-Generics konkretisieren.\n\nDer optionale Input-Policy-Block gehört ebenfalls ausschließlich RMT. `sanitize text` akzeptiert nur Strings, normalisiert CRLF zu LF und weist NUL sowie andere unzulässige Steuerzeichen zurück. Eine unvollständige Policy, eine unbekannte Boundary, ein anderes Sanitize-Format oder widersprüchliche Policies desselben Servicefelds stoppen den Build mit Source-Range. Bei servergerichteten Services prüft die Browser-Registry vor dem Transport; `createNodeAppServiceHost({ services, manifest })` prüft denselben Input vor dem Handler erneut. Der Handler erhält das redigierte Ergebnis als `executionContext.inputPolicyVerdict`; `registry.listInputPolicyVerdicts()` und die Registry-Historie liefern dieselbe Evidence ohne Rohinput.",
+          "sourceHash": "df08a19ab041a1d729713bd188a3a1634eb682421220d9f4f3b34dbe91d2966b",
+          "sourcePath": "docs/de/maraca-app-services.md"
+        },
+        {
+          "uri": "xtend://docs/en/maraca-app-services",
+          "id": "en:maraca-app-services:3",
+          "scope": "docs",
+          "kind": "tutorial",
+          "locale": "en",
+          "title": "Maraca AppServices and TypeScript",
+          "heading": "Declare demand in RMT",
+          "score": 34,
+          "excerpt": "## Declare demand in RMT\n\n```rmt\ndatasource orders.search from host orders.search {\n  mode invoke\n  contract \"acme.orders.search.v1\"\n}\n\naction orders.runSearch {\n  input query string {\n    trust boundary \"xtend.security.sanitizing-boundary.v1\"\n    sanitize text\n  }\n  effect fetch datasource orders.search\n}\n```\n\nRMT remains the source of truth for the ID, `invoke`/`stream` mode, contract, and calling actions. Unresolved payload shapes stay diagnosed `unknown`, never `any`, and can be refined with service generics.\n\nThe optional input-policy block also belongs exclusively to RMT. `sanitize text` accepts only strings, normalizes CRLF to LF, and rejects NUL and other forbidden control characters. An incomplete policy, unknown boundary, unsupported sanitize format, or conflicting policies for the same service field stop the build with a source range. For server-targeted services, the browser registry checks before transport, and `createNodeAppServiceHost({ services, manifest })` checks the same input again before invoking the handler. The handler receives the redacted result as `executionContext.inputPolicyVerdict`; `registry.listInputPolicyVerdicts()` and registry history expose the same evidence without raw input.",
+          "sourceHash": "a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649",
+          "sourcePath": "docs/en/maraca-app-services.md"
+        },
+        {
+          "uri": "xtend://docs/en/rmt-action-effect-runtime",
+          "id": "en:rmt-action-effect-runtime:1",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "RMT Action Effect Runtime",
+          "heading": "RMT Action Effect Runtime",
+          "score": 25,
+          "excerpt": "# RMT Action Effect Runtime\n\nRMT actions and effects connect declarative UI records to state changes, resource queries and host effects. The runtime surface is intentionally narrow: actions name what may happen, effects name which adapter may perform it, and policies block free execution.",
+          "sourceHash": "357c76898f880c1e9138a3313f154a46e73ce5a952a19508d748b267c9195e1d",
+          "sourcePath": "docs/en/rmt-action-effect-runtime.md"
+        },
+        {
+          "uri": "xtend://docs/en/rmt-reference-actions-events",
+          "id": "en:rmt-reference-actions-events:2",
+          "scope": "docs",
+          "kind": "reference",
+          "locale": "en",
+          "title": "Actions and Events",
+          "heading": "Syntax",
+          "score": 25,
+          "excerpt": "## Syntax\n\n| Operator | Form | Allowed contexts | Parameters | Function | Diagnostics | Related operators |\n| --- | --- | --- | --- | --- | --- | --- |\n| <a id=\"execution-fastpass\"></a>`execution fastpass` | `execution fastpass` | `action` | `fastpass` | Navigation, focus or close on `user-blocking` without a Model transaction. | Reducers, fetch, services, streams, custom effects and command chains are forbidden. | `effect navigation`, `effect close surface`, `effect focus surface` |\n| <a id=\"input\"></a>`input` | `input id string` | `action` | name, type | Declares action payload fields. | Missing types are reported. | `payload` |\n| <a id=\"status\"></a>`status` | `status app.request` | `action` | state path | Binds loading, success and error status. | Unknown state is semantic diagnostic. | `effect` |\n| <a id=\"effect\"></a>`effect` | `effect fetch datasource tickets` | `action` | effect kind, optional source | Declares host-owned asynchronous work or a fixed component command. | Fetch uses `datasource`; other effects use their declared source contract. FastPass supports navigation, `close surface` and `focus surface`; component commands permit only `focus`, `reset` and `snapshot`. | `on success ->` |\n| <a id=\"reduce\"></a>`reduce` | `reduce state.app.status.text = \"Saved\"` | `action` | target path, expression | Writes declaratively to state. | Business actions require a valid redu…",
+          "sourceHash": "8d20998bb1aacc85c6d8d37ed7197e3ef107efc072057360dfdfaa7b405cf054",
+          "sourcePath": "docs/en/rmt-reference-actions-events.md"
+        }
+      ],
+      "maxChars": 12000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: Maraca AppServices RMT datasource effect fetch response state patch declarative actions services strict\nLocales: all\nScopes: docs, rmt-kit\n\n[K1] Maraca AppServices und TypeScript — Service in RMT deklarieren\nResource: xtend://docs/de/maraca-app-services\nSource: docs/de/maraca-app-services.md#sha256:df08a19ab041a1d729713bd188a3a1634eb682421220d9f4f3b34dbe91d2966b\n## Service in RMT deklarieren\n\n```rmt\ndatasource orders.search from host orders.search {\n  mode invoke\n  contract \"acme.orders.search.v1\"\n}\n\naction orders.runSearch {\n  input query string {\n    trust boundary \"xtend.security.sanitizing-boundary.v1\"\n    sanitize text\n  }\n  effect fetch datasource orders.search\n}\n```\n\nRMT bleibt die Source of Truth für ID, `invoke`/`stream`, Contract und aufrufende Actions. Der Compiler schreibt daraus ein Bedarfsmanifest. Nicht auflösbare Payloads bleiben in den generierten Deklarationen `unknown`; App-Code kann sie mit Service-Generics konkretisieren.\n\nDer optionale Input-Policy-Block gehört ebenfalls ausschließlich RMT. `sanitize text` akzeptiert nur Strings, normalisiert CRLF zu LF und weist NUL sowie andere unzulässige Steuerzeichen zurück. Eine unvollständige Policy, eine unbekannte Boundary, ein anderes Sanitize-Format oder widersprüchliche Policies desselben Servicefelds stoppen den Build mit Source-Range. Bei servergerichteten Services prüft die Browser-Registry vor dem Transport; `createNodeAppServiceHost({ services, manifest })` prüft denselben Input vor dem Handler erneut. Der Handler erhält das redigierte Ergebnis als `executionContext.inputPolicyVerdict`; `registry.listInputPolicyVerdicts()` und die Registry-Historie liefern dieselbe Evidence ohne Rohinput.\n\n[K2] Maraca AppServices and TypeScript — Declare demand in RMT\nResource: xtend://docs/en/maraca-app-services\nSource: docs/en/maraca-app-services.md#sha256:a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649\n## Declare demand in RMT\n\n```rmt\ndatasource orders.search from host orders.search {\n  mode invoke\n  contract \"acme.orders.search.v1\"\n}\n\naction orders.runSearch {\n  input query string {\n    trust boundary \"xtend.security.sanitizing-boundary.v1\"\n    sanitize text\n  }\n  effect fetch datasource orders.search\n}\n```\n\nRMT remains the source of truth for the ID, `invoke`/`stream` mode, contract, and calling actions. Unresolved payload shapes stay diagnosed `unknown`, never `any`, and can be refined with service generics.\n\nThe optional input-policy block also belongs exclusively to RMT. `sanitize text` accepts only strings, normalizes CRLF to LF, and rejects NUL and other forbidden control characters. An incomplete policy, unknown boundary, unsupported sanitize format, or conflicting policies for the same service field stop the build with a source range. For server-targeted services, the browser registry checks before transport, and `createNodeAppServiceHost({ services, manifest })` checks the same input again before invoking the handler. The handler receives the redacted result as `executionContext.inputPolicyVerdict`; `registry.listInputPolicyVerdicts()` and registry history expose the same evidence without raw input.\n\n[K3] RMT Action Effect Runtime\nResource: xtend://docs/en/rmt-action-effect-runtime\nSource: docs/en/rmt-action-effect-runtime.md#sha256:357c76898f880c1e9138a3313f154a46e73ce5a952a19508d748b267c9195e1d\n# RMT Action Effect Runtime\n\nRMT actions and effects connect declarative UI records to state changes, resource queries and host effects. The runtime surface is intentionally narrow: actions name what may happen, effects name which adapter may perform it, and policies block free execution.\n\n[K4] Actions and Events — Syntax\nResource: xtend://docs/en/rmt-reference-actions-events\nSource: docs/en/rmt-reference-actions-events.md#sha256:8d20998bb1aacc85c6d8d37ed7197e3ef107efc072057360dfdfaa7b405cf054\n## Syntax\n\n| Operator | Form | Allowed contexts | Parameters | Function | Diagnostics | Related operators |\n| --- | --- | --- | --- | --- | --- | --- |\n| <a id=\"execution-fastpass\"></a>`execution fastpass` | `execution fastpass` | `action` | `fastpass` | Navigation, focus or close on `user-blocking` without a Model transaction. | Reducers, fetch, services, streams, custom effects and command chains are forbidden. | `effect navigation`, `effect close surface`, `effect focus surface` |\n| <a id=\"input\"></a>`input` | `input id string` | `action` | name, type | Declares action payload fields. | Missing types are reported. | `payload` |\n| <a id=\"status\"></a>`status` | `status app.request` | `action` | state path | Binds loading, success and error status. | Unknown state is semantic diagnostic. | `effect` |\n| <a id=\"effect\"></a>`effect` | `effect fetch datasource tickets` | `action` | effect kind, optional source | Declares host-owned asynchronous work or a fixed component command. | Fetch uses `datasource`; other effects use their declared source contract. FastPass supports navigation, `close surface` and `focus surface`; component commands permit only `focus`, `reset` and `snapshot`. | `on success ->` |\n| <a id=\"reduce\"></a>`reduce` | `reduce state.app.status.text = \"Saved\"` | `action` | target path, expression | Writes declaratively to state. | Business actions require a valid redu…\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    },
+    "warnings": [],
+    "provenance": [
+      {
+        "uri": "xtend://docs/de/maraca-app-services",
+        "sourceHash": "df08a19ab041a1d729713bd188a3a1634eb682421220d9f4f3b34dbe91d2966b",
+        "sourcePath": "docs/de/maraca-app-services.md"
+      },
+      {
+        "uri": "xtend://docs/en/maraca-app-services",
+        "sourceHash": "a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649",
+        "sourcePath": "docs/en/maraca-app-services.md"
+      },
+      {
+        "uri": "xtend://docs/en/rmt-action-effect-runtime",
+        "sourceHash": "357c76898f880c1e9138a3313f154a46e73ce5a952a19508d748b267c9195e1d",
+        "sourcePath": "docs/en/rmt-action-effect-runtime.md"
+      },
+      {
+        "uri": "xtend://docs/en/rmt-reference-actions-events",
+        "sourceHash": "8d20998bb1aacc85c6d8d37ed7197e3ef107efc072057360dfdfaa7b405cf054",
+        "sourcePath": "docs/en/rmt-reference-actions-events.md"
+      }
+    ]
+  }
+}

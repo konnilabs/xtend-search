@@ -1,0 +1,19 @@
+{
+  "project": "xtend-portainer-check-64553d0a",
+  "checks": [
+    "Compose interpolation, literal secret punctuation, role JSON, required variables, cached images, volume-only storage and loopback-only exposure validated.",
+    "Both real 0.3.0 images start healthy; private backend has no published port or Nextcloud credentials.",
+    "HTTP shell, ready storage, compatible backend and correctly configured Nextcloud OAuth redirect verified without contacting Nextcloud.",
+    "Container recreation retains signing keys and persistent database; no sources approved or queried by the smoke test."
+  ],
+  "imageIds": {
+    "search": "sha256:81e68c3a2d5d6f8b8f0e439b7808b4f64467f3edc370b8605edfd5defa3db9b4",
+    "searxng": "sha256:0a642d389dcbd7f6714a446fc379f405ee40854c6f95748de79a730144805dfd"
+  },
+  "ok": true,
+  "testResourcesRemoved": true,
+  "composeSha256": "d718d0f866e4e04233faa2477bc67c2f23355b9bb7b6fb815187ed3b70636863",
+  "runtimeTestComposeSha256": "4ed88e30c08047dd2550d0e9aa10ffe61ebacfc42c0fe17d6b0e4189b8e80b36",
+  "onlyCommentsChangedSinceRuntimeTest": true,
+  "missingTokenReproducedAndFilledConfigurationValidated": true
+}

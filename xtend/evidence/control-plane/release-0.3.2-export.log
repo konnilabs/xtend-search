@@ -1,0 +1,31 @@
+{
+  "version": "0.3.2",
+  "tag": "xtend-search:0.3.2",
+  "id": "sha256:fb3facb602de71807ba3c834c1a13148345d250aaeeaf14e114ad85afef824cd",
+  "platform": "linux/amd64",
+  "sourceHashes": {
+    "version": "0.3.2",
+    "files": {
+      "admin/admin.css": "0336bfdf59785d2ba0a0d56fa368a6e83056a780e99bfab3634ae261602de87f",
+      "admin/admin.rmt": "648acb13042c0c473bd8aebad04858cdcdde4c2fefe09183346776512122ae5e",
+      "frontend/standalone.rmt": "2e28de72f6e114131c1224cd2b2f335958996273b2a5552913eb3b4752ccb26b",
+      "frontend/standalone.css": "815968d01dec096bfe5fdfbba0644147f31483e9884d15e65d0f4c99bc8a8452",
+      "frontend/standalone-host.mjs": "eca2cbf0e334cb898e5ab8c02daa2c21dcdb45ebd981c76c55d74881e7cae9f9",
+      "frontend/preferences.mjs": "f32ae1feae9efe508d5ebd3fb7ab149417293077170e2ee679f5d73e63b56712",
+      "server/preferences.mjs": "ef793692bf73c0cea5908d04ec1e77148208ca1d1f70a62eed6923501bcccfcf",
+      "server/standalone.mjs": "e9287048740de05becf56d61c002dc17b76f70e1c27190920d55e0410266c6fb",
+      "server/control/plane.mjs": "51d2f68e606eb1aae67127c0579f9a6665ebb4b86fd5b763a0f8f8357ebac4b4",
+      "server/control/executor.mjs": "124b010c30ecb186775c33dbf627e8e6cb37dd5a4e69bbd71eca75923f95b493",
+      "server/control/admin.mjs": "a8a030fa52b8314dc31bcf8fb975c7f230aa46e5a38582c7a3a60a84e652fed5",
+      "server/control/release.mjs": "6d616a22e195581d17be3255430b262bae747dc889fc93484e7250dd767143f6",
+      "standalone.pages.json": "1eb88c51bd04f17c81dd8731e772440953c251243928416dec0a06793e57ec3e"
+    },
+    "bundles": {
+      "admin/admin.css": "739780c089ca314e9d13a5784b448362f0888c257cb940bb7b6301640db632e2",
+      "standalone/search.css": "a7943ded5f05ae0c12b6e5a22b9af462b4cd45f043ffcca55fe262635ea7a3a3",
+      "standalone/page.mjs": "aa6b33135a5e144aa74bfafe55671b42ef0cddf6dad1aa7ebc330f6fa6500ceb"
+    }
+  },
+  "archive": "XTend-search-Docker-Image-0.3.2-linux-amd64.tar.gz",
+  "bytes": 261220843
+}

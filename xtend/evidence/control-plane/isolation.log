@@ -1,0 +1,2 @@
+2026-09-26 14:30:19,563 WARNING:searx.botdetection.config: missing config file: /app/xtend/config/limiter.toml
+{"ok": true, "scope": "actual pinned SearXNG Search._get_requests/_search_with_accepted_requests processor dispatch, no external networking", "checks": ["explicit valid single engine dispatch isolated", "ordinary syntax and unicode whitespace preserve isolation", "negative control: category adds unplanned engine", "negative control: bang replaces planned engine", "negative control: unknown engine expands default pool"]}

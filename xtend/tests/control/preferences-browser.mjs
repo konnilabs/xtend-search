@@ -1,0 +1,49 @@
+import {chromium} from 'playwright';
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+const base=process.env.TEST_BASE_URL||'http://localhost:8093',out=new URL('../../evidence/control-plane/',import.meta.url),checks=[];
+const browser=await chromium.launch();let page;
+async function filters(p,values){await p.locator('#filters').evaluate(e=>e.open=true);for(const [id,value]of Object.entries(values))await p.locator('#'+id).selectOption(value);}
+async function expectFilters(p,values){for(const [id,value]of Object.entries(values))assert.equal(await p.locator('#'+id).inputValue(),value,id);}
+try{
+ const context=await browser.newContext({viewport:{width:1440,height:1050},colorScheme:'dark'});page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(base+'/');await page.waitForFunction(()=>window.XTendPage?.getRuntime());const origin=await page.evaluate(()=>performance.timeOrigin);
+ await filters(page,{'language':'de','time-range':'week','safe-search':'2'});
+ await page.getByRole('button',{name:'Als Standard speichern',exact:true}).click();await page.getByRole('status').filter({hasText:'Standard für diesen Browser gespeichert.'}).waitFor();
+ assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);await expectFilters(page,{'language':'de','time-range':'week','safe-search':'2'});
+ const cookie=(await context.cookies()).find(c=>c.name==='xtend_search_filters');assert.ok(cookie.httpOnly);assert.ok(cookie.expires>Date.now()/1000+15000000);assert.deepEqual(JSON.parse(decodeURIComponent(cookie.value)),{v:1,language:'de',time_range:'week',safesearch:'2'});
+ const restored=await browser.newContext({storageState:await context.storageState()}),rp=await restored.newPage();await rp.goto(base+'/');await expectFilters(rp,{'language':'de','time-range':'week','safe-search':'2'});await restored.close();
+ await page.goto(base+'/?language=en&time_range=&safesearch=0');await expectFilters(page,{'language':'en','time-range':'','safe-search':'0'});await page.waitForFunction(()=>window.XTendPage?.getRuntime());
+ const explicitOrigin=await page.evaluate(()=>performance.timeOrigin);await page.getByRole('link',{name:'Bilder',exact:true}).click();await page.waitForURL(/categories=images/);await expectFilters(page,{'language':'en','time-range':'','safe-search':'0'});
+ await page.goBack();await expectFilters(page,{'language':'en','time-range':'','safe-search':'0'});await page.goForward();await expectFilters(page,{'language':'en','time-range':'','safe-search':'0'});assert.equal(await page.evaluate(()=>performance.timeOrigin),explicitOrigin);
+ await filters(page,{'language':'all','time-range':'month','safe-search':'1'});await page.getByRole('button',{name:'Gespeicherten Standard löschen',exact:true}).click();await page.getByRole('status').filter({hasText:'Gespeicherter Standard gelöscht.'}).waitFor();
+ assert.ok(!(await context.cookies()).some(c=>c.name==='xtend_search_filters'));await expectFilters(page,{'language':'all','time-range':'month','safe-search':'1'});
+ await page.goto(base+'/');await expectFilters(page,{'language':'all','time-range':'','safe-search':'1'});
+ checks.push('Saved defaults persist for 180 days across browser contexts and SSR; explicit URLs override them; resumed category and back/forward navigation retain filters; deletion preserves current draft and restores defaults for future visits.');
+ // A failed save must report failure, with the search still usable.
+ await page.waitForFunction(()=>window.XTendPage?.getRuntime());await page.route('**/preferences',r=>r.abort());await filters(page,{'language':'de'});await page.getByRole('button',{name:'Als Standard speichern',exact:true}).click();await page.getByRole('status').filter({hasText:'Speichern nicht bestätigt'}).waitFor();await page.unroute('**/preferences');assert.ok(await page.getByRole('button',{name:'Suchen',exact:true}).isEnabled());
+ const nojs=await browser.newContext({javaScriptEnabled:false}),np=await nojs.newPage();await np.goto(base+'/');await filters(np,{'language':'en','time-range':'month','safe-search':'0'});await np.getByRole('button',{name:'Als Standard speichern',exact:true}).click();await np.waitForURL(/language=en/);await np.goto(base+'/');await expectFilters(np,{'language':'en','time-range':'month','safe-search':'0'});
+ await np.locator('#filters summary').click();await np.getByRole('button',{name:'Gespeicherten Standard löschen',exact:true}).click();await np.waitForLoadState();await np.goto(base+'/');await expectFilters(np,{'language':'all','time-range':'','safe-search':'1'});await nojs.close();
+ const badOrigin=await context.request.post(base+'/preferences',{headers:{Origin:'https://foreign.example'},form:{preferenceAction:'save',language:'all',time_range:'',safesearch:'0'}});assert.equal(badOrigin.status(),403);
+ const invalid=await context.request.post(base+'/preferences',{headers:{Origin:base},form:{preferenceAction:'save',language:'xx',time_range:'',safesearch:'0'}});assert.equal(invalid.status(),400);
+ checks.push('Native no-JS save/delete works without a search term. Failed saves stay recoverable. Cross-origin and invalid preference writes are rejected.');
+ await page.goto(base+'/admin');await page.getByRole('link',{name:'Mit Nextcloud anmelden'}).click();await page.getByRole('link',{name:'administrator',exact:true}).click();await page.waitForFunction(()=>window.XTendPage?.getRuntime());
+ async function select(id){await page.evaluate(id=>window.XTendPage.visit('/admin?view=sources&engine='+encodeURIComponent(id)),id);await page.waitForFunction(id=>document.querySelector('.engine-detail h3')?.textContent===id,id);}
+ async function save(){const before=await page.locator('#policy-form input[name=revision]').inputValue();await page.getByRole('button',{name:'Policy verbindlich speichern',exact:true}).click();await page.waitForFunction(before=>document.querySelector('#policy-form input[name=revision]').value!==before,before);}
+ for(const [id,cap,family]of [['fixture fast','general','fixture-fast'],['wikipedia','knowledge','wikimedia']]){
+  await select(id);await page.locator('#policy-form select[name=state]').selectOption('allowed');await page.locator('#policy-form input[name=capabilities]').fill(cap);await page.locator('#policy-form input[name=family]').fill(family);await page.locator('#policy-form input[name=rpm]').fill('60');await page.locator('#policy-form input[name=concurrency]').fill('4');await save();
+ }
+ const toggle=page.locator('#policy-form input[name=safeSearchBypass]');assert.equal(await toggle.isChecked(),false);
+ const search=await context.newPage();await search.goto(base+'/search?q=media+only&language=all&time_range=&safesearch=2');assert.equal(await search.locator('.knowledge-card').count(),0);
+ await toggle.check();await save();await page.reload();await page.waitForFunction(()=>window.XTendPage?.getRuntime());assert.equal(await toggle.isChecked(),true);
+ await select('fixture fast');assert.equal(await toggle.isChecked(),false);await select('wikipedia');assert.equal(await toggle.isChecked(),true);
+ await page.screenshot({path:new URL('release-0.3.2-safesearch-admin.png',out).pathname,fullPage:true});
+ await search.goto(base+'/');await search.waitForFunction(()=>window.XTendPage?.getRuntime());const searchOrigin=await search.evaluate(()=>performance.timeOrigin);
+ await search.locator('#search-input').fill('media only');await search.getByRole('button',{name:'Suchen',exact:true}).click();await search.waitForFunction(()=>window.XTendPage.page.props['search.data'].stream?.phase==='complete');
+ assert.equal(await search.evaluate(()=>performance.timeOrigin),searchOrigin);assert.ok(await search.locator('.knowledge-card').isVisible());assert.ok(await search.locator('.knowledge-description').isVisible());assert.equal(await search.locator('details.knowledge-cards').count(),0);assert.ok(await search.locator('.safe-search-notice').isVisible());assert.match(await search.locator('.safe-search-notice').textContent(),/wikipedia/);assert.equal(await search.locator('#safe-search').inputValue(),'1');
+ await search.screenshot({path:new URL('release-0.3.2-knowledge-desktop.png',out).pathname,fullPage:true});await search.setViewportSize({width:390,height:844});assert.ok(await search.locator('.knowledge-description').isVisible());assert.equal(await search.locator('.knowledge-cards').evaluate(e=>getComputedStyle(e).position),'static');assert.ok(await search.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await search.screenshot({path:new URL('release-0.3.2-knowledge-mobile.png',out).pathname,fullPage:true});
+ const nc=await browser.newContext({javaScriptEnabled:false}),ssr=await nc.newPage();await ssr.goto(base+'/search?q=media+only&language=all&time_range=&safesearch=2');assert.ok(await ssr.locator('.knowledge-description').isVisible());assert.ok(await ssr.locator('.safe-search-notice').isVisible());await nc.close();
+ await toggle.uncheck();await save();await search.goto(base+'/search?q=media+only&language=all&time_range=&safesearch=2');assert.equal(await search.locator('.knowledge-card').count(),0);assert.equal(await search.locator('.safe-search-notice').count(),0);
+ checks.push('Per-source SafeSearch exception survives reload and source selection, enables an offline Wikipedia knowledge fixture, and can be revoked. Streaming and no-JS SSR show the card expanded plus the exception notice; mobile uses document flow without overflow.');
+ assert.deepEqual(errors,[]);const result={ok:true,checks};await fs.writeFile(new URL('release-0.3.2-preferences-browser.json',out),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+}catch(e){console.error(e);await page?.screenshot({path:new URL('release-0.3.2-preferences-failure.png',out).pathname,fullPage:true}).catch(()=>{});process.exitCode=1;}finally{await browser.close();}

@@ -1,0 +1,59 @@
+paging-debug {
+  url: 'http://localhost:8093/search?q=paging&categories=images&language=all&time_range=&safesearch=1&pageno=2&cursor=eyJ2IjoxLCJlbmdpbmVzIjpbImZpeHR1cmUgaW1hZ2VzIl0sImNhdGVnb3J5IjoiaW1hZ2VzIiwicGFnZSI6MiwiZXhwIjoxNzkwNDMzNTcwMzQyfQ.uBCRW7XJpcs1p6A1tYdKC1dsx8kuzG0UgP7ZDv5V8jo',
+  data: {
+    q: 'paging',
+    category: 'images',
+    language: 'all',
+    timeRange: '',
+    safeSearch: '1',
+    page: 2,
+    continuation: 'eyJ2IjoxLCJlbmdpbmVzIjpbImZpeHR1cmUgaW1hZ2VzIl0sImNhdGVnb3J5IjoiaW1hZ2VzIiwicGFnZSI6MiwiZXhwIjoxNzkwNDMzNTcwMzQyfQ.uBCRW7XJpcs1p6A1tYdKC1dsx8kuzG0UgP7ZDv5V8jo',
+    skeleton: false,
+    stream: {
+      id: 'ab1c52b6-8296-47af-9059-55250f4fa826',
+      url: '/search?q=paging&categories=images&language=all&time_range=&safesearch=1&pageno=2&cursor=eyJ2IjoxLCJlbmdpbmVzIjpbImZpeHR1cmUgaW1hZ2VzIl0sImNhdGVnb3J5IjoiaW1hZ2VzIiwicGFnZSI6MiwiZXhwIjoxNzkwNDMzNTcwMzQyfQ.uBCRW7XJpcs1p6A1tYdKC1dsx8kuzG0UgP7ZDv5V8jo',
+      phase: 'error'
+    },
+    view: 'results',
+    isSearch: true,
+    results: [ [Object], [Object], [Object], [Object] ],
+    knowledgeCards: [],
+    hasKnowledge: false,
+    warnings: [ [Object] ],
+    pages: [],
+    tabs: [ [Object], [Object], [Object], [Object] ],
+    countLabel: '4 Ergebnisse · Suche läuft …',
+    pageLabel: 'Seite 2',
+    empty: false,
+    error: false,
+    errorMessage: '',
+    fixture: true,
+    listClass: 'image-results',
+    classicUrl: '/',
+    state: {
+      q: 'paging',
+      category: 'images',
+      language: 'all',
+      timeRange: '',
+      safeSearch: '1',
+      page: 2,
+      continuation: 'eyJ2IjoxLCJlbmdpbmVzIjpbImZpeHR1cmUgaW1hZ2VzIl0sImNhdGVnb3J5IjoiaW1hZ2VzIiwicGFnZSI6MiwiZXhwIjoxNzkwNDMzNTcwMzQyfQ.uBCRW7XJpcs1p6A1tYdKC1dsx8kuzG0UgP7ZDv5V8jo'
+    },
+    standalone: true,
+    searchRole: 'search',
+    knowledgeStatus: 'not_applicable',
+    showKnowledge: false,
+    knowledgeMessage: '',
+    statusLabel: 'Verbindung unterbrochen · bereits geladene Ergebnisse bleiben sichtbar'
+  }
+}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.waitForFunction: Timeout 30000ms exceeded.
+    at /home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/control/debug-paging.mjs:10:449 {
+  name: 'TimeoutError'
+}
+
+Node.js v24.19.0

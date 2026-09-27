@@ -27,3 +27,16 @@ searx/version_frozen.py
 .dir-locals.el
 
 .python-version
+
+# XTend.search local runtime/build material
+xtend/node_modules/
+xtend/.secrets/
+xtend/resume-public.json
+xtend/.xtend-build/
+xtend/public/assets/xtend/
+xtend/evidence/tests/*.zip
+xtend/evidence/tests/*.webm
+xtend/.env
+
+.env.control
+xtend/.control/

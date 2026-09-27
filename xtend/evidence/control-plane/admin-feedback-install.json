@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "installedAt": "2026-09-26T15:23:43.283558+00:00",
+  "localURL": "http://localhost:8090/admin",
+  "image": "sha256:7f046c79d892122fe5c6181ec30f43ee2df7555e6ce4581abea80f42212ae8e3",
+  "health": {
+    "ok": true,
+    "version": "0.3.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "files": {
+    "xtend/admin/admin.rmt": "9069fdecaed1f7566b8f281e3f79cae66654dda3cf9bb13227b0386e2b32fdfa",
+    "xtend/admin/admin.css": "19fa8c39cf28679608181d8079fa036146e93ed5a3eb77bf68692b0488ae524a",
+    "xtend/admin/live.mjs": "e7124d0c2359d8de037c0712e101b1d600019088f4a3f1f7bdaba226af54484c",
+    "xtend/server/control/admin.mjs": "3eccba1bd75095e4e7f5dee34d0de4af1de0b2f0ba1151e0ce922dec1844fa37"
+  },
+  "controlUnitTests": 39,
+  "browserEvidence": [
+    "admin-feedback-browser.json",
+    "admin-feedback-regression.log",
+    "admin-feedback-ux.log"
+  ],
+  "rollbackTag": "xtend-search:0.3.0-before-feedback"
+}

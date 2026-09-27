@@ -1,0 +1,3106 @@
+template xtend.observatory {
+  datasource admin.quality.rule.set from host admin.quality.rule.set { mode invoke
+ contract "xsearch.quality.v1" }
+  action admin.quality.rule.set { effect fetch datasource admin.quality.rule.set }
+  datasource admin.quality.decision from host admin.quality.decision { mode invoke
+ contract "xsearch.quality.v1" }
+  action admin.quality.decision { effect fetch datasource admin.quality.decision }
+  datasource admin.quality.resume from host admin.quality.resume { mode invoke
+ contract "xsearch.quality.v1" }
+  action admin.quality.resume { effect fetch datasource admin.quality.resume }
+  datasource admin.quality.evidence from host admin.quality.evidence { mode invoke
+ contract "xsearch.quality.v1" }
+  action admin.quality.evidence { effect fetch datasource admin.quality.evidence }
+  datasource admin.quality.simulate from host admin.quality.simulate { mode invoke
+ contract "xsearch.quality.v1" }
+  action admin.quality.simulate { effect fetch datasource admin.quality.simulate }
+
+  state admin.data type object preserve {
+    initial {
+    }
+  }
+  state admin.live type object preserve {
+    initial {
+      telemetry [
+      ]
+    }
+  }
+  state admin.message type string initial ""
+  state admin.connection type string initial ""
+  state admin.request type object preserve {
+    initial {
+    }
+  }
+  state admin.shell type object preserve {
+    initial {
+      id "observatory"
+      viewTemplate {
+        "children" [
+          {
+            "type" "element"
+            "tag" "div"
+            "class" "observatory"
+            "children" [
+              {
+                "type" "element"
+                "tag" "div"
+                "class" "admin-toasts"
+                "children" [
+                  {
+                    "type" "conditional"
+                    "test" {
+                      "op" "equals"
+                      "left" "$model.admin.request.status"
+                      "right" "success"
+                    }
+                    "then" {
+                      "type" "repeat"
+                      "source" "$model.admin.data.notices"
+                      "key" "id"
+                      "template" {
+                        "type" "element"
+                        "tag" "x-toast"
+                        "class" "admin-toast"
+                        "attributes" {
+                          "id" "$item.id"
+                          "type" "$item.type"
+                          "duration" "6000"
+                          "data-notice-kind" "success"
+                        }
+                        "children" [
+                          {
+                            "type" "element"
+                            "tag" "strong"
+                            "text" "$item.title"
+                          }
+                          {
+                            "type" "element"
+                            "tag" "span"
+                            "text" "$item.message"
+                          }
+                        ]
+                      }
+                    }
+                  }
+                  {
+                    "type" "conditional"
+                    "test" {
+                      "op" "equals"
+                      "left" "$model.admin.request.status"
+                      "right" "error"
+                    }
+                    "then" {
+                      "type" "element"
+                      "tag" "x-toast"
+                      "class" "admin-toast"
+                      "attributes" {
+                        "id" "admin-error-toast"
+                        "type" "error"
+                        "duration" "0"
+                        "data-notice-kind" "error"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "strong"
+                          "text" "Aktion nicht bestätigt"
+                        }
+                        {
+                          "type" "element"
+                          "tag" "span"
+                          "text" "$model.admin.request.error.message"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+              {
+                "type" "element"
+                "tag" "a"
+                "text" "Zum Betriebszustand"
+                "class" "skip-link"
+                "attributes" {
+                  "href" "#overview"
+                }
+              }
+              {
+                "type" "element"
+                "tag" "header"
+                "class" "admin-header"
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "a"
+                    "text" "XTend.search"
+                    "class" "wordmark"
+                    "attributes" {
+                      "href" "/"
+                      "data-xtend-native" ""
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "div"
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "span"
+                        "text" "Operations Observatory"
+                        "class" "eyebrow"
+                      }
+                      {
+                        "type" "element"
+                        "tag" "p"
+                        "text" "$model.admin.data.actor"
+                      }
+                    ]
+                  }
+                  {
+                    "type" "element"
+                    "tag" "form"
+                    "attributes" {
+                      "action" "/admin/logout"
+                      "method" "post"
+                      "data-xtend-native" ""
+                    }
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "input"
+                        "attributes" {
+                          "type" "hidden"
+                          "name" "csrf"
+                          "value" "$model.admin.data.csrf"
+                        }
+                      }
+                      {
+                        "type" "element"
+                        "tag" "button"
+                        "text" "Abmelden"
+                        "attributes" {
+                          "type" "submit"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+              {
+                "type" "element"
+                "tag" "nav"
+                "class" "admin-nav"
+                "attributes" {
+                  "aria-label" "Observatory-Bereiche"
+                }
+                "children" [
+                  {
+                    "type" "repeat"
+                    "source" "$model.admin.data.views"
+                    "key" "id"
+                    "template" {
+                      "type" "element"
+                      "tag" "a"
+                      "text" "$item.label"
+                      "attributes" {
+                        "href" "$item.url"
+                        "aria-current" "$item.current"
+                        "data-xtend-preserve-scroll" "true"
+                      }
+                    }
+                  }
+                ]
+              }
+              {
+                "type" "element"
+                "tag" "main"
+                "class" "admin-main"
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "p"
+                    "text" "$model.admin.connection"
+                    "class" "connection"
+                    "attributes" {
+                      "role" "status"
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "x-surface-manager"
+                    "attributes" {
+                      "id" "observatory-surfaces"
+                      "manager-id" "observatory-workspace"
+                      "layout-engine" "docked"
+                      "persistence-mode" "none"
+                      "data-detail" "$model.admin.data.panelOpen"
+                    }
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "div"
+                        "class" "dashboard-workspace"
+                        "attributes" {
+                          "data-xtend-scroll" "dashboard-workspace"
+                        }
+                        "children" [
+                          {
+                            "type" "conditional"
+                            "test" "$model.admin.data.showOverview"
+                            "then" {
+                              "type" "element"
+                              "tag" "section"
+                              "attributes" {
+                                "id" "overview"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "class" "section-heading"
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "div"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "text" "BETRIEBSZUSTAND"
+                                          "class" "eyebrow"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "h1"
+                                          "text" "Deine Quellen. Unter Kontrolle."
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "text" "$model.admin.data.updated"
+                                          "class" "muted"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "text" "Live-Aktualisierung und Änderungen benötigen JavaScript. Ohne JavaScript bleibt die Übersicht lesbar."
+                                          "class" "muted"
+                                        }
+                                      ]
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "button"
+                                      "text" "Stand aktualisieren"
+                                      "attributes" {
+                                        "type" "button"
+                                        "id" "admin-refresh"
+                                        "data-id" "$model.admin.data.selected"
+                                        "data-category" "$model.admin.data.filters.category"
+                                        "data-query" "$model.admin.data.filters.filterQuery"
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "$model.admin.data.message"
+                                  "class" "admin-message"
+                                }
+                                {
+                                  "type" "conditional"
+                                  "test" {
+                                    "op" "equals"
+                                    "left" "$model.admin.request.status"
+                                    "right" "error"
+                                  }
+                                  "then" {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.request.error.message"
+                                    "class" "admin-error"
+                                  }
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "class" "metric-grid"
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.data.summary"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "article"
+                                        "class" "metric"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "$item.label"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "strong"
+                                            "text" "$item.value"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "class" "backend-state"
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "$model.admin.data.backend"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "$model.admin.data.storageLabel"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "$model.admin.connection"
+                                      "class" "connection"
+                                      "attributes" {
+                                        "role" "status"
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "class" "metric-grid quality-metrics"
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.live.qualitySummary"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "a"
+                                        "class" "metric"
+                                        "attributes" {
+                                          "href" "$item.url"
+                                        }
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "$item.label"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "strong"
+                                            "text" "$item.value"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "h2"
+                                  "text" "Aktive Qualitätspausen"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "ul"
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.live.pausedSources"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "li"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "a"
+                                            "text" "$item.label"
+                                            "attributes" {
+                                              "href" "$item.url"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "$item.detail"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                          {
+                            "type" "conditional"
+                            "test" "$model.admin.data.showCatalog"
+                            "then" {
+                              "type" "element"
+                              "tag" "section"
+                              "attributes" {
+                                "id" "pool"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "h1"
+                                  "text" "Quellen und Capabilities"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "details"
+                                  "class" "capability-help"
+                                  "attributes" {
+                                    "id" "capability-help"
+                                  }
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "summary"
+                                      "text" "Hilfe: Capabilities verstehen und Quellen freigeben"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "Eine Capability beschreibt, welche Art von Suchergebnissen eine Quelle liefern kann, zum Beispiel Web, Bilder oder Nachrichten. Diese Fähigkeiten stammen aus dem geprüften SearXNG-Katalog. Eine Freigabe erlaubt ihre Nutzung; sie fügt der Quelle keine neue Fähigkeit hinzu."
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "ol"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "li"
+                                          "text" "Quelle auswählen und die verfügbaren Kategorien unter ihrem Namen prüfen."
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "li"
+                                          "text" "Im Feld Freigegebene Capabilities die gewünschten Kennungen eintragen, durch Kommas getrennt. Nur Kennungen verwenden, die bei dieser Quelle verfügbar sind."
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "li"
+                                          "text" "Freigabe auf Freigegeben setzen, Dispatches pro Minute und Parallelität festlegen. Gemeinsame Budgetgrenzen und Sperrfristen gelten weiterhin."
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "li"
+                                          "text" "Seitennavigation nur nach einem erfolgreichen Test bestätigen. Einen passenden Grundcode wählen und Policy verbindlich speichern."
+                                        }
+                                      ]
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "Beispiel: Unterstützt eine Quelle Web und Bilder, gibt general,images beide Kategorien frei. Mit general wird nur Web freigegeben. Ein leeres Feld ist bei einer freigegebenen Quelle nicht zulässig."
+                                      "class" "help-example"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "Kennungen zum Nachschlagen"
+                                      "class" "eyebrow"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "dl"
+                                      "class" "capability-glossary"
+                                      "children" [
+                                        {
+                                          "type" "repeat"
+                                          "source" "$model.admin.data.capabilityHelp"
+                                          "key" "id"
+                                          "template" {
+                                            "type" "element"
+                                            "tag" "div"
+                                            "children" [
+                                              {
+                                                "type" "element"
+                                                "tag" "dt"
+                                                "text" "$item.label"
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "dd"
+                                                "children" [
+                                                  {
+                                                    "type" "element"
+                                                    "tag" "code"
+                                                    "text" "$item.id"
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "Sprache, SafeSearch, Zeitfilter und Seitennavigation sind separate Eigenschaften. Eine Kategorie-Freigabe bestätigt diese Filter nicht. Wissenskarten ergänzen Ergebnisse; sie sind kein eigener Suchmodus. Für Wikipedia oder Wikidata kann nach Prüfung eine SafeSearch-Ausnahme aktiviert werden. Dann darf diese Quelle trotz fehlender SafeSearch-Unterstützung Inhalte liefern. Die Suche weist darauf hin; Sprach- und Zeitraumfilter gelten weiterhin."
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "Providergruppen teilen Budgets und Sperren: Bing Web, Bilder und Videos gehören beispielsweise gemeinsam zu bing. Andere Anbieter erhalten eigene Gruppen. shared ist kein neutraler Platzhalter: Eine CAPTCHA-Sperre würde alle Quellen dieser Gruppe treffen. Für unbekannte Anbieter muss die Gruppe vor der Freigabe geprüft werden."
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "Nur Administratoren dürfen Quellen freigeben. Operatoren können budgetierte Probes vormerken und Quellen vorübergehend pausieren. Viewer lesen den aktuellen Stand. Neue Quellen bleiben bis zur bewussten Freigabe gesperrt."
+                                      "class" "muted"
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "form"
+                                  "class" "pool-filters"
+                                  "attributes" {
+                                    "id" "pool-filters"
+                                    "method" "get"
+                                    "action" "/admin"
+                                    "data-xtend-preserve-scroll" "true"
+                                    "aria-label" "Quellen filtern"
+                                  }
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "view"
+                                        "value" "$model.admin.data.view"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "engine"
+                                        "value" "$model.admin.data.selected"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "label"
+                                      "class" "field"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "span"
+                                          "text" "Zustand"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "select"
+                                          "attributes" {
+                                            "name" "status"
+                                          }
+                                          "children" [
+                                            {
+                                              "type" "repeat"
+                                              "source" "$model.admin.data.statusOptions"
+                                              "key" "id"
+                                              "template" {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "$item.label"
+                                                "attributes" {
+                                                  "value" "$item.id"
+                                                  "selected" "$item.selected"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "label"
+                                      "class" "field"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "span"
+                                          "text" "Kategorie"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "select"
+                                          "attributes" {
+                                            "name" "category"
+                                            "value" "$model.admin.data.filters.category"
+                                          }
+                                          "children" [
+                                            {
+                                              "type" "repeat"
+                                              "source" "$model.admin.data.categoryOptions"
+                                              "key" "id"
+                                              "template" {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "$item.label"
+                                                "properties" {
+                                                  "selected" "$item.selected"
+                                                }
+                                                "attributes" {
+                                                  "value" "$item.id"
+                                                  "selected" "$item.selected"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "label"
+                                      "class" "field"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "span"
+                                          "text" "Quelle suchen"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "key" "$model.admin.data.filters.filterQuery"
+                                          "attributes" {
+                                            "type" "search"
+                                            "name" "filterQuery"
+                                            "value" "$model.admin.data.filters.filterQuery"
+                                            "placeholder" "Name eingeben …"
+                                            "maxlength" 100
+                                            "autocomplete" "off"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "button"
+                                      "text" "Filtern"
+                                      "attributes" {
+                                        "type" "submit"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "a"
+                                      "text" "Zurücksetzen"
+                                      "attributes" {
+                                        "href" "$model.admin.data.resetUrl"
+                                        "data-xtend-preserve-scroll" "true"
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "$model.admin.data.poolCount"
+                                  "class" "muted"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "class" "source-table-wrap"
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "table"
+                                      "class" "source-table"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "thead"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "tr"
+                                              "children" [
+                                                {
+                                                  "type" "element"
+                                                  "tag" "th"
+                                                  "text" "Quelle"
+                                                }
+                                                {
+                                                  "type" "element"
+                                                  "tag" "th"
+                                                  "text" "Freigabe / Kategorien"
+                                                }
+                                                {
+                                                  "type" "element"
+                                                  "tag" "th"
+                                                  "text" "Meldungen · 30 Tage"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "tbody"
+                                          "children" [
+                                            {
+                                              "type" "repeat"
+                                              "source" "$model.admin.live.engines"
+                                              "key" "id"
+                                              "template" {
+                                                "type" "element"
+                                                "tag" "tr"
+                                                "children" [
+                                                  {
+                                                    "type" "element"
+                                                    "tag" "td"
+                                                    "children" [
+                                                      {
+                                                        "type" "element"
+                                                        "tag" "a"
+                                                        "text" "$item.label"
+                                                        "attributes" {
+                                                          "href" "$item.url"
+                                                          "aria-current" "$item.current"
+                                                          "data-xtend-preserve-scroll" "true"
+                                                        }
+                                                      }
+                                                    ]
+                                                  }
+                                                  {
+                                                    "type" "element"
+                                                    "tag" "td"
+                                                    "text" "$item.detail"
+                                                  }
+                                                  {
+                                                    "type" "element"
+                                                    "tag" "td"
+                                                    "text" "$item.count"
+                                                  }
+                                                ]
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "nav"
+                                  "class" "pagination"
+                                  "attributes" {
+                                    "aria-label" "Quellenseiten"
+                                  }
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.data.pagination"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "a"
+                                        "text" "$item.label"
+                                        "attributes" {
+                                          "href" "$item.url"
+                                          "data-xtend-preserve-scroll" "true"
+                                        }
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "conditional"
+                                  "test" "$model.admin.data.emptyPool"
+                                  "then" {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "Keine passenden Quellen."
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                          {
+                            "type" "conditional"
+                            "test" "$model.admin.data.showReports"
+                            "then" {
+                              "type" "element"
+                              "tag" "section"
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "h1"
+                                  "text" "Qualitätsmeldungen"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "Prüfvorschläge sind keine technischen Providerfehler. Dauerhafte Sperren erfolgen ausschließlich durch Administratoren."
+                                  "class" "muted"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "class" "proposal-list"
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.live.proposals"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "article"
+                                        "class" "proposal"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "$item.status"
+                                            "class" "badge"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "a"
+                                            "text" "$item.label"
+                                            "attributes" {
+                                              "href" "$item.url"
+                                              "data-xtend-preserve-scroll" "true"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "strong"
+                                            "text" "$item.kind"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "time"
+                                            "text" "$item.time"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "p"
+                                            "text" "$item.distribution"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "p"
+                                            "class" "muted"
+                                            "text" "$item.evidenceLabel"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "conditional"
+                                  "test" {
+                                    "op" "equals"
+                                    "left" "$model.admin.live.hasProposals"
+                                    "right" false
+                                  }
+                                  "then" {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "Noch keine gebündelten Prüfvorschläge. Neue Vorschläge erscheinen ab fünf Meldungen aus mindestens drei Browser-Kontexten in einer Stunde."
+                                  }
+                                }
+                              ]
+                            }
+                          }
+                          {
+                            "type" "conditional"
+                            "test" "$model.admin.data.showRules"
+                            "then" {
+                              "type" "element"
+                              "tag" "section"
+                              "attributes" {
+                                "id" "routing"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "h2"
+                                  "text" "Betriebsmodus"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "Beide Modi beachten Freigaben, Schutzfristen und Budgets. Adaptive Auswahl gewichtet geeignete Quellen nach beobachteter Latenz; sie erhöht das Suchlaufbudget nicht."
+                                  "class" "muted"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "form"
+                                  "attributes" {
+                                    "id" "routing-form"
+                                    "method" "post"
+                                    "action" "/admin"
+                                  }
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "id"
+                                        "value" "$model.admin.data.selected"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "category"
+                                        "value" "$model.admin.data.filters.category"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "filterQuery"
+                                        "value" "$model.admin.data.filters.filterQuery"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "revision"
+                                        "value" "$model.admin.data.revision"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "requestKey"
+                                        "value" "$model.admin.data.requestKey"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "reason"
+                                        "value" "maintenance"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "label"
+                                      "class" "field"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "span"
+                                          "text" "Auswahlverfahren"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "select"
+                                          "attributes" {
+                                            "name" "mode"
+                                            "value" "$model.admin.data.mode"
+                                            "disabled" "$model.admin.data.operatorDisabled"
+                                          }
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "option"
+                                              "text" "Konservativ"
+                                              "attributes" {
+                                                "value" "conservative"
+                                                "selected" {
+                                                  "op" "equals"
+                                                  "left" "$model.admin.data.mode"
+                                                  "right" "conservative"
+                                                }
+                                              }
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "option"
+                                              "text" "Adaptiv"
+                                              "attributes" {
+                                                "value" "adaptive"
+                                                "selected" {
+                                                  "op" "equals"
+                                                  "left" "$model.admin.data.mode"
+                                                  "right" "adaptive"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "button"
+                                      "text" "Betriebsmodus speichern"
+                                      "attributes" {
+                                        "type" "submit"
+                                        "disabled" "$model.admin.data.operatorDisabled"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "view"
+                                        "value" "$model.admin.data.view"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "status"
+                                        "value" "$model.admin.data.filters.status"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "page"
+                                        "value" "$model.admin.data.filters.page"
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "ul"
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.data.skips"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "li"
+                                        "text" "$item.detail"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                          {
+                            "type" "conditional"
+                            "test" "$model.admin.data.showEvents"
+                            "then" {
+                              "type" "element"
+                              "tag" "section"
+                              "attributes" {
+                                "id" "events"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "h2"
+                                  "text" "Live-Ereignisse"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "Inhaltsfreie technische Beobachtungen. Keine Suchbegriffe, Treffer oder Nutzersitzungen."
+                                  "class" "muted"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "ol"
+                                  "class" "timeline"
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.live.telemetry"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "li"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "time"
+                                            "text" "$item.time"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "strong"
+                                            "text" "$item.type"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "p"
+                                            "text" "$item.detail"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                          {
+                            "type" "conditional"
+                            "test" "$model.admin.data.showEvents"
+                            "then" {
+                              "type" "element"
+                              "tag" "section"
+                              "attributes" {
+                                "id" "history"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "h2"
+                                  "text" "Minutenverlauf"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "Persistierte Dispatch-Aggregate; keine Browser-Paint-Messung."
+                                  "class" "muted"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "ul"
+                                  "class" "timeline"
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.data.history"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "li"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "time"
+                                            "text" "$item.time"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "p"
+                                            "text" "$item.detail"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                          {
+                            "type" "conditional"
+                            "test" "$model.admin.data.showAudit"
+                            "then" {
+                              "type" "element"
+                              "tag" "section"
+                              "attributes" {
+                                "id" "audit"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "h2"
+                                  "text" "Änderungsprotokoll"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "Erfolgreiche Änderungen werden gemeinsam mit ihrem Audit gespeichert."
+                                  "class" "muted"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "ol"
+                                  "class" "timeline"
+                                  "children" [
+                                    {
+                                      "type" "repeat"
+                                      "source" "$model.admin.data.audit"
+                                      "key" "id"
+                                      "template" {
+                                        "type" "element"
+                                        "tag" "li"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "time"
+                                            "text" "$item.time"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "p"
+                                            "text" "$item.detail"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      }
+                      {
+                        "type" "conditional"
+                        "test" "$model.admin.data.panelOpen"
+                        "then" {
+                          "type" "element"
+                          "tag" "x-side-panel"
+                          "class" "source-panel"
+                          "attributes" {
+                            "id" "source-panel"
+                            "surface-id" "source-detail"
+                            "slot" "panels"
+                            "label" "$model.admin.data.selected"
+                            "open" true
+                            "mode" "docked"
+                            "placement" "right"
+                            "initial-width" 580
+                            "closable" "false"
+                            "pinnable" "false"
+                            "collapsible" "false"
+                            "persistence-mode" "none"
+                          }
+                          "children" [
+                            {
+                              "type" "element"
+                              "tag" "a"
+                              "text" "Details schließen"
+                              "class" "close-detail"
+                              "attributes" {
+                                "href" "$model.admin.data.closePanelUrl"
+                                "data-xtend-preserve-scroll" "true"
+                              }
+                            }
+                            {
+                              "type" "conditional"
+                              "test" "$model.admin.data.showPolicy"
+                              "then" {
+                                "type" "element"
+                                "tag" "div"
+                                "class" "engine-detail"
+                                "key" "$model.admin.data.requestKey"
+                                "attributes" {
+
+                                }
+                                "children" [
+                                  {
+                                    "type" "element"
+                                    "tag" "h3"
+                                    "text" "$model.admin.data.selected"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.engine.capabilityLabel"
+                                    "class" "muted"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.filterCoverage"
+                                    "class" "muted"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.budget"
+                                    "class" "budget"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "details"
+                                    "children" [
+                                      {
+                                        "type" "element"
+                                        "tag" "summary"
+                                        "text" "Gemeinsame Budgetgrenzen"
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "p"
+                                        "class" "muted"
+                                        "text" "Es gilt immer die strengste Grenze. Ein höheres Quellenbudget hebt die gemeinsamen Grenzen nicht auf."
+                                      }
+                                      {
+                                        "type" "repeat"
+                                        "source" "$model.admin.data.sharedBudgets"
+                                        "key" "id"
+                                        "template" {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "strong"
+                                              "text" "$item.label"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "span"
+                                              "text" "$item.detail"
+                                              "class" "muted"
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.protection"
+                                    "class" "muted"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "div"
+                                    "class" "capability-grid"
+                                    "children" [
+                                      {
+                                        "type" "repeat"
+                                        "source" "$model.admin.data.engine.states"
+                                        "key" "id"
+                                        "template" {
+                                          "type" "element"
+                                          "tag" "article"
+                                          "class" "capability"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "h4"
+                                              "text" "$item.label"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "strong"
+                                              "text" "$item.health"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "p"
+                                              "text" "$item.freshness"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "p"
+                                              "text" "$item.samples"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "p"
+                                              "text" "$item.latency"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "p"
+                                              "text" "$item.cooldown"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "p"
+                                              "text" "$item.quarantine"
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.capabilitiesNote"
+                                    "class" "muted"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "form"
+                                    "class" "policy-form"
+                                    "attributes" {
+                                      "id" "policy-form"
+                                      "method" "post"
+                                      "action" "/admin"
+                                    }
+                                    "children" [
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "hidden"
+                                          "name" "id"
+                                          "value" "$model.admin.data.selected"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "hidden"
+                                          "name" "category"
+                                          "value" "$model.admin.data.filters.category"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "hidden"
+                                          "name" "filterQuery"
+                                          "value" "$model.admin.data.filters.filterQuery"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "hidden"
+                                          "name" "revision"
+                                          "value" "$model.admin.data.revision"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "hidden"
+                                          "name" "requestKey"
+                                          "value" "$model.admin.data.requestKey"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Freigabe"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "select"
+                                            "attributes" {
+                                              "name" "state"
+                                              "value" "$model.admin.data.form.state"
+                                              "disabled" "$model.admin.data.readOnly"
+                                            }
+                                            "children" [
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "Gesperrt"
+                                                "attributes" {
+                                                  "value" "disabled"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "$model.admin.data.form.state"
+                                                    "right" "disabled"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "Freigegeben"
+                                                "attributes" {
+                                                  "value" "allowed"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "$model.admin.data.form.state"
+                                                    "right" "allowed"
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Freigegebene Capabilities (kommagetrennt)"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "aria-describedby" "available-capabilities"
+                                              "name" "capabilities"
+                                              "type" "text"
+                                              "value" "$model.admin.data.form.capabilities"
+                                              "disabled" "$model.admin.data.readOnly"
+                                              "required" false
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Verfügbare Kennungen für diese Quelle:"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "$model.admin.data.engine.capabilityLabel"
+                                            "attributes" {
+                                              "id" "available-capabilities"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Dispatches pro Minute"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "name" "rpm"
+                                              "type" "number"
+                                              "value" "$model.admin.data.form.rpm"
+                                              "min" 1
+                                              "max" 600
+                                              "disabled" "$model.admin.data.readOnly"
+                                              "required" true
+                                            }
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Maximale Parallelität"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "name" "concurrency"
+                                              "type" "number"
+                                              "value" "$model.admin.data.form.concurrency"
+                                              "min" 1
+                                              "max" 4
+                                              "disabled" "$model.admin.data.readOnly"
+                                              "required" true
+                                            }
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Gemeinsame Provider-/Credential-Domäne"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "name" "family"
+                                              "type" "text"
+                                              "value" "$model.admin.data.form.family"
+                                              "disabled" "$model.admin.data.readOnly"
+                                              "required" true
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "small"
+                                            "text" "$model.admin.data.familyHelp"
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "check-field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "properties" {
+                                              "checked" "$model.admin.data.form.safeSearchBypass"
+                                            }
+                                            "attributes" {
+                                              "name" "safeSearchBypass"
+                                              "type" "checkbox"
+                                              "checked" "$model.admin.data.form.safeSearchBypass"
+                                              "disabled" "$model.admin.data.readOnly"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "children" [
+                                              {
+                                                "type" "element"
+                                                "tag" "strong"
+                                                "text" "SafeSearch-Ausnahme für diese Quelle"
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "small"
+                                                "text" "Auch bei aktivem SafeSearch verwenden, wenn die Quelle keinen eigenen SafeSearch-Filter unterstützt, z. B. Wikipedia oder Wikidata. Ungefilterte Inhalte sind möglich. Eigene SafeSearch-Unterstützung, Sprach- und Zeitraumfilter, Budgets und Sperrfristen bleiben wirksam."
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "check-field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "name" "pagingVerified"
+                                              "type" "checkbox"
+                                              "checked" "$model.admin.data.form.pagingVerified"
+                                              "disabled" "$model.admin.data.readOnly"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Seitennavigation dieser Quelle wurde getestet"
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "check-field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "name" "quarantine"
+                                              "type" "checkbox"
+                                              "checked" "$model.admin.data.form.quarantine"
+                                              "disabled" "$model.admin.data.readOnly"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Administrative Quarantäne"
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "field"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Grundcode"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "select"
+                                            "attributes" {
+                                              "name" "reason"
+                                              "value" "initial_review"
+                                            }
+                                            "children" [
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "initial_review"
+                                                "attributes" {
+                                                  "value" "initial_review"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "initial_review"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "maintenance"
+                                                "attributes" {
+                                                  "value" "maintenance"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "maintenance"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "provider_limit"
+                                                "attributes" {
+                                                  "value" "provider_limit"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "provider_limit"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "technical_failure"
+                                                "attributes" {
+                                                  "value" "technical_failure"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "technical_failure"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "schema_invalid"
+                                                "attributes" {
+                                                  "value" "schema_invalid"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "schema_invalid"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "wrong_result_type"
+                                                "attributes" {
+                                                  "value" "wrong_result_type"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "wrong_result_type"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "unsafe_url_scheme"
+                                                "attributes" {
+                                                  "value" "unsafe_url_scheme"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "unsafe_url_scheme"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "audience_mismatch"
+                                                "attributes" {
+                                                  "value" "audience_mismatch"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "audience_mismatch"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "insufficient_editorial_quality"
+                                                "attributes" {
+                                                  "value" "insufficient_editorial_quality"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "insufficient_editorial_quality"
+                                                  }
+                                                }
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "option"
+                                                "text" "recovery_review"
+                                                "attributes" {
+                                                  "value" "recovery_review"
+                                                  "selected" {
+                                                    "op" "equals"
+                                                    "left" "initial_review"
+                                                    "right" "recovery_review"
+                                                  }
+                                                }
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "button"
+                                        "text" "Policy verbindlich speichern"
+                                        "attributes" {
+                                          "type" "submit"
+                                          "disabled" "$model.admin.data.readOnly"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "hidden"
+                                          "name" "view"
+                                          "value" "$model.admin.data.view"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "hidden"
+                                          "name" "status"
+                                          "value" "$model.admin.data.filters.status"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "hidden"
+                                          "name" "page"
+                                          "value" "$model.admin.data.filters.page"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "div"
+                                    "class" "operations"
+                                    "children" [
+                                      {
+                                        "type" "element"
+                                        "tag" "form"
+                                        "attributes" {
+                                          "id" "drain-form"
+                                          "method" "post"
+                                          "action" "/admin"
+                                        }
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "id"
+                                              "value" "$model.admin.data.selected"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "category"
+                                              "value" "$model.admin.data.filters.category"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "filterQuery"
+                                              "value" "$model.admin.data.filters.filterQuery"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "revision"
+                                              "value" "$model.admin.data.revision"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "requestKey"
+                                              "value" "$model.admin.data.requestKey"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "reason"
+                                              "value" "maintenance"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "label"
+                                            "class" "field"
+                                            "children" [
+                                              {
+                                                "type" "element"
+                                                "tag" "span"
+                                                "text" "Drain für Minuten"
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "input"
+                                                "attributes" {
+                                                  "name" "minutes"
+                                                  "type" "number"
+                                                  "value" "15"
+                                                  "min" 1
+                                                  "max" 1440
+                                                  "disabled" "$model.admin.data.operatorDisabled"
+                                                }
+                                              }
+                                            ]
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "button"
+                                            "text" "Drain anfordern"
+                                            "attributes" {
+                                              "type" "submit"
+                                              "disabled" "$model.admin.data.operatorDisabled"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "view"
+                                              "value" "$model.admin.data.view"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "status"
+                                              "value" "$model.admin.data.filters.status"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "page"
+                                              "value" "$model.admin.data.filters.page"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "form"
+                                        "attributes" {
+                                          "id" "probe-form"
+                                          "method" "post"
+                                          "action" "/admin"
+                                        }
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "p"
+                                            "class" "muted"
+                                            "text" "$model.admin.data.probeNote"
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "id"
+                                              "value" "$model.admin.data.selected"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "category"
+                                              "value" "$model.admin.data.filters.category"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "filterQuery"
+                                              "value" "$model.admin.data.filters.filterQuery"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "revision"
+                                              "value" "$model.admin.data.revision"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "requestKey"
+                                              "value" "$model.admin.data.requestKey"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "reason"
+                                              "value" "recovery_review"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "label"
+                                            "class" "field"
+                                            "children" [
+                                              {
+                                                "type" "element"
+                                                "tag" "span"
+                                                "text" "Capability für Probe"
+                                              }
+                                              {
+                                                "type" "element"
+                                                "tag" "select"
+                                                "attributes" {
+                                                  "name" "capability"
+                                                  "disabled" "$model.admin.data.probeDisabled"
+                                                }
+                                                "children" [
+                                                  {
+                                                    "type" "repeat"
+                                                    "source" "$model.admin.data.probeCapabilities"
+                                                    "key" "id"
+                                                    "template" {
+                                                      "type" "element"
+                                                      "tag" "option"
+                                                      "text" "$item.label"
+                                                      "properties" {
+                                                        "selected" "$item.selected"
+                                                      }
+                                                      "attributes" {
+                                                        "value" "$item.id"
+                                                        "selected" "$item.selected"
+                                                      }
+                                                    }
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "button"
+                                            "text" "Budgetierte Probe vormerken"
+                                            "attributes" {
+                                              "type" "submit"
+                                              "disabled" "$model.admin.data.probeDisabled"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "view"
+                                              "value" "$model.admin.data.view"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "status"
+                                              "value" "$model.admin.data.filters.status"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "hidden"
+                                              "name" "page"
+                                              "value" "$model.admin.data.filters.page"
+                                            }
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                            {
+                              "type" "conditional"
+                              "test" "$model.admin.data.showQuality"
+                              "then" {
+                                "type" "element"
+                                "tag" "div"
+                                "class" "engine-detail"
+                                "key" "$model.admin.data.requestKey"
+                                "children" [
+                                  {
+                                    "type" "element"
+                                    "tag" "h2"
+                                    "text" "$model.admin.data.qualityLabel"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "nav"
+                                    "class" "quality-scopes"
+                                    "children" [
+                                      {
+                                        "type" "repeat"
+                                        "source" "$model.admin.data.qualityScopes"
+                                        "key" "id"
+                                        "template" {
+                                          "type" "element"
+                                          "tag" "a"
+                                          "text" "$item.label"
+                                          "attributes" {
+                                            "href" "$item.url"
+                                            "aria-current" "$item.current"
+                                            "data-xtend-preserve-scroll" "true"
+                                          }
+                                        }
+                                      }
+                                    ]
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.qualityDistribution"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.qualityWindow"
+                                    "class" "muted"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.qualityHint"
+                                    "class" "muted"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.qualityPause"
+                                    "class" "budget"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.qualityWarmup"
+                                    "class" "muted"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "Technischer Betriebszustand"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$model.admin.data.qualityTechnical"
+                                  }
+                                  {
+                                    "type" "conditional"
+                                    "test" "$model.admin.data.qualityCanDecide"
+                                    "then" {
+                                      "type" "element"
+                                      "tag" "form"
+                                      "attributes" {
+                                        "id" "quality-decision-form"
+                                        "method" "post"
+                                        "action" "/admin"
+                                        "data-admin-service" "admin.quality.decision"
+                                      }
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "id"
+                                            "value" "$model.admin.data.selected"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "revision"
+                                            "value" "$model.admin.data.revision"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "requestKey"
+                                            "value" "$model.admin.data.requestKey"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "capability"
+                                            "value" "$model.admin.data.capability"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "proposal"
+                                            "value" "$model.admin.data.proposalId"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "label"
+                                          "class" "field"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "span"
+                                              "text" "Entscheidung"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "select"
+                                              "attributes" {
+                                                "name" "decision"
+                                              }
+                                              "children" [
+                                                {
+                                                  "type" "element"
+                                                  "tag" "option"
+                                                  "text" "Vorfall bestätigen"
+                                                  "attributes" {
+                                                    "value" "confirm"
+                                                  }
+                                                }
+                                                {
+                                                  "type" "element"
+                                                  "tag" "option"
+                                                  "text" "Vorschlag verwerfen"
+                                                  "attributes" {
+                                                    "value" "dismiss"
+                                                  }
+                                                }
+                                                {
+                                                  "type" "element"
+                                                  "tag" "option"
+                                                  "text" "Capability 15 Minuten pausieren"
+                                                  "attributes" {
+                                                    "value" "cooldown"
+                                                  }
+                                                }
+                                                {
+                                                  "type" "conditional"
+                                                  "test" "$model.admin.data.canAdmin"
+                                                  "then" {
+                                                    "type" "element"
+                                                    "tag" "option"
+                                                    "text" "Gesamte Engine dauerhaft sperren"
+                                                    "attributes" {
+                                                      "value" "disable"
+                                                    }
+                                                  }
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "button"
+                                          "text" "Entscheidung speichern"
+                                          "attributes" {
+                                            "type" "submit"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "view"
+                                            "value" "$model.admin.data.view"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "status"
+                                            "value" "$model.admin.data.filters.status"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "page"
+                                            "value" "$model.admin.data.filters.page"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                  {
+                                    "type" "conditional"
+                                    "test" "$model.admin.data.qualityCanResume"
+                                    "then" {
+                                      "type" "element"
+                                      "tag" "form"
+                                      "attributes" {
+                                        "method" "post"
+                                        "action" "/admin"
+                                        "data-admin-service" "admin.quality.resume"
+                                      }
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "id"
+                                            "value" "$model.admin.data.selected"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "revision"
+                                            "value" "$model.admin.data.revision"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "requestKey"
+                                            "value" "$model.admin.data.requestKey"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "capability"
+                                            "value" "$model.admin.data.capability"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "button"
+                                          "text" "Nur Qualitätspause aufheben"
+                                          "attributes" {
+                                            "type" "submit"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "view"
+                                            "value" "$model.admin.data.view"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "status"
+                                            "value" "$model.admin.data.filters.status"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "page"
+                                            "value" "$model.admin.data.filters.page"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                  {
+                                    "type" "conditional"
+                                    "test" "$model.admin.data.canOperate"
+                                    "then" {
+                                      "type" "element"
+                                      "tag" "div"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "button"
+                                          "text" "Freiwillige Belege abrufen"
+                                          "attributes" {
+                                            "type" "button"
+                                            "id" "quality-evidence"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "div"
+                                          "attributes" {
+                                            "id" "quality-evidence-list"
+                                            "aria-live" "polite"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                  {
+                                    "type" "conditional"
+                                    "test" "$model.admin.data.showRules"
+                                    "then" {
+                                      "type" "element"
+                                      "tag" "form"
+                                      "class" "policy-form"
+                                      "attributes" {
+                                        "id" "quality-rule-form"
+                                        "method" "post"
+                                        "action" "/admin"
+                                        "data-admin-service" "admin.quality.rule.set"
+                                      }
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "id"
+                                            "value" "$model.admin.data.selected"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "revision"
+                                            "value" "$model.admin.data.revision"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "requestKey"
+                                            "value" "$model.admin.data.requestKey"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "capability"
+                                            "value" "$model.admin.data.capability"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "label"
+                                          "class" "check-field"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "input"
+                                              "attributes" {
+                                                "name" "enabled"
+                                                "type" "checkbox"
+                                                "checked" "$model.admin.data.qualityRule.enabled"
+                                                "disabled" "$model.admin.data.readOnly"
+                                              }
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "span"
+                                              "text" "Auto-Cooldown für diese Engine / Capability einschalten"
+                                            }
+                                          ]
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "label"
+                                          "class" "field"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "span"
+                                              "text" "Passende Meldungen"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "input"
+                                              "attributes" {
+                                                "name" "threshold"
+                                                "type" "number"
+                                                "value" "$model.admin.data.qualityRule.threshold"
+                                                "min" 5
+                                                "max" 1000
+                                                "required" true
+                                                "disabled" "$model.admin.data.readOnly"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "label"
+                                          "class" "field"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "span"
+                                              "text" "Browser-Kontexte"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "input"
+                                              "attributes" {
+                                                "name" "contexts"
+                                                "type" "number"
+                                                "value" "$model.admin.data.qualityRule.contexts"
+                                                "min" 3
+                                                "max" 100
+                                                "required" true
+                                                "disabled" "$model.admin.data.readOnly"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "label"
+                                          "class" "field"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "span"
+                                              "text" "Fenster in Minuten"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "input"
+                                              "attributes" {
+                                                "name" "windowMinutes"
+                                                "type" "number"
+                                                "value" "$model.admin.data.qualityRule.windowMinutes"
+                                                "min" 10
+                                                "max" 60
+                                                "required" true
+                                                "disabled" "$model.admin.data.readOnly"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "label"
+                                          "class" "field"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "span"
+                                              "text" "Pause in Minuten"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "input"
+                                              "attributes" {
+                                                "name" "cooldownMinutes"
+                                                "type" "number"
+                                                "value" "$model.admin.data.qualityRule.cooldownMinutes"
+                                                "min" 5
+                                                "max" 60
+                                                "required" true
+                                                "disabled" "$model.admin.data.readOnly"
+                                              }
+                                            }
+                                          ]
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "button"
+                                          "text" "Regel speichern"
+                                          "attributes" {
+                                            "type" "submit"
+                                            "disabled" "$model.admin.data.readOnly"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "button"
+                                          "text" "Unverbindlich vorprüfen"
+                                          "attributes" {
+                                            "type" "button"
+                                            "id" "quality-simulate"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "attributes" {
+                                            "id" "quality-simulation"
+                                            "role" "status"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "view"
+                                            "value" "$model.admin.data.view"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "status"
+                                            "value" "$model.admin.data.filters.status"
+                                          }
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "input"
+                                          "attributes" {
+                                            "type" "hidden"
+                                            "name" "page"
+                                            "value" "$model.admin.data.filters.page"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "Automatische Prüfung: nur Spam, gefährliche Inhalte und falscher Ergebnistyp. Maximal eine automatische Pause in 24 Stunden; die letzte verfügbare Quelle bleibt erhalten."
+                                    "class" "muted"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "h3"
+                                    "text" "Relevante Ereignisse"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "ul"
+                                    "class" "timeline"
+                                    "children" [
+                                      {
+                                        "type" "repeat"
+                                        "source" "$model.admin.data.qualityEvents"
+                                        "key" "id"
+                                        "template" {
+                                          "type" "element"
+                                          "tag" "li"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "strong"
+                                              "text" "$item.type"
+                                            }
+                                            {
+                                              "type" "element"
+                                              "tag" "p"
+                                              "text" "$item.detail"
+                                            }
+                                          ]
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                  {
+                    "type" "element"
+                    "tag" "footer"
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "p"
+                        "text" "$model.admin.data.productLabel"
+                      }
+                      {
+                        "type" "element"
+                        "tag" "a"
+                        "text" "Zur Suche"
+                        "attributes" {
+                          "href" "/"
+                          "data-xtend-native" ""
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+  datasource admin.observatory.snapshot from host admin.observatory.snapshot {
+    mode invoke
+    contract "xsearch.admin.v1"
+  }
+  action admin.refresh {
+    input category string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input filterQuery string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input id string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    status admin.request
+    effect fetch datasource admin.observatory.snapshot
+    reduce state.admin.data = result
+  }
+  datasource admin.engine.policy.set from host admin.engine.policy.set {
+    mode invoke
+    contract "xsearch.admin.v1"
+  }
+  action admin.savePolicy {
+    input category string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input filterQuery string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input id string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input revision string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input requestKey string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input reason string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input state string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input rpm string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input concurrency string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input family string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input capabilities string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input safeSearchBypass boolean
+    input pagingVerified boolean
+    input quarantine boolean
+    status admin.request
+    effect fetch datasource admin.engine.policy.set
+    reduce state.admin.data = result
+  }
+  datasource admin.engine.drain from host admin.engine.drain {
+    mode invoke
+    contract "xsearch.admin.v1"
+  }
+  action admin.drain {
+    input category string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input filterQuery string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input id string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input revision string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input requestKey string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input reason string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input minutes string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    status admin.request
+    effect fetch datasource admin.engine.drain
+    reduce state.admin.data = result
+  }
+  datasource admin.engine.probe.request from host admin.engine.probe.request {
+    mode invoke
+    contract "xsearch.admin.v1"
+  }
+  action admin.probe {
+    input category string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input filterQuery string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input id string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input revision string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input requestKey string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input reason string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input capability string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    status admin.request
+    effect fetch datasource admin.engine.probe.request
+    reduce state.admin.data = result
+  }
+  datasource admin.routing.mode.set from host admin.routing.mode.set {
+    mode invoke
+    contract "xsearch.admin.v1"
+  }
+  action admin.routing {
+    input category string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input filterQuery string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input id string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input revision string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input requestKey string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input reason string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    input mode string {
+      trust boundary "xtend.security.sanitizing-boundary.v1"
+      sanitize text
+    }
+    status admin.request
+    effect fetch datasource admin.routing.mode.set
+    reduce state.admin.data = result
+  }
+  datasource admin.observatory.events from host admin.observatory.events {
+    mode stream
+    contract "xsearch.admin.events.v1"
+  }
+  action admin.watch {
+    effect stream datasource admin.observatory.events
+  }
+  action admin.notice.dismiss {
+    reduce state.admin.data.notices = []
+  }
+  action admin.error.dismiss {
+    reduce state.admin.request.status = "idle"
+  }
+  action admin.feedback.clear {
+    reduce state.admin.data.notices = []
+    reduce state.admin.request.status = "idle"
+  }
+  action admin.live.set {
+    input value object
+    reduce state.admin.live = input.value
+  }
+  action admin.connection.set {
+    input message string
+    reduce state.admin.connection = input.message
+  }
+  selector admin.shell from state admin.shell {
+    output ObservatoryView
+  }
+  portal admin.root root "#xtend-page" layer surface
+  surface admin.shell kind content component x-section {
+    source selector admin.shell
+    key shell.id
+    portal admin.root
+    lane visible weight 90 {
+      hydrate observatory from selector admin.shell {
+        hydration mode server_prerender_resume
+        resumability mode server_prerender_resume
+        resumability snapshot surface_state
+        resumability event replay intent_queue
+        resumability integrity signed_manifest
+      }
+    }
+  }
+}

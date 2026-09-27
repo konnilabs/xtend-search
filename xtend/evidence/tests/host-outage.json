@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "http": 503,
+  "classic": 200,
+  "pageProtocol": 503,
+  "automaticDuplicateSearch": false
+}

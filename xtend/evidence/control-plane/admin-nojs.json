@@ -1,0 +1,6 @@
+{
+  "ok": true,
+  "checks": [
+    "Admin remains readable without JavaScript, mutation forms cannot fall back to querystrings, and native logout works."
+  ]
+}

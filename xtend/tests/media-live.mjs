@@ -1,0 +1,15 @@
+import {chromium} from 'playwright';import fs from 'node:fs';import assert from 'node:assert/strict';
+const base=process.env.TEST_BASE_URL || 'http://127.0.0.1:8080',browser=await chromium.launch(),page=await browser.newPage({viewport:{width:1440,height:1000},colorScheme:'dark'}),errors=[],external=[],report={timestamp:new Date().toISOString(),base,queries:[]};
+page.setDefaultTimeout(30000);page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(!r.url().startsWith(base))external.push(r.url());});
+await page.goto(base+'/search?q=Mozilla%20Firefox&language=de');await page.waitForFunction(()=>window.XTendPage);assert.equal(await page.locator('[data-rmt-resume-status]').first().getAttribute('data-rmt-resume-status'),'resumed');
+report.queries.push(await page.evaluate(()=>{const d=window.XTendPage.page.props['search.data'];return {q:d.q,category:d.category,results:d.results.length,cards:d.knowledgeCards.length,cardTitles:d.knowledgeCards.map(x=>x.title),fixture:d.fixture,warnings:d.warnings};}));
+assert.equal(report.queries[0].fixture,false);
+await page.screenshot({path:'evidence/tests/media-live-web.png'});
+await page.evaluate(()=>window.__liveDocument=document);await page.getByRole('link',{name:'Bilder',exact:true}).click();await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].category==='images');
+report.images=await page.evaluate(()=>{const d=window.XTendPage.page.props['search.data'];return {count:d.results.length,availablePreviews:d.results.filter(r=>r.previewId).length,sameDocument:window.__liveDocument===document};});assert.ok(report.images.availablePreviews>0);assert.equal(report.images.sameDocument,true);
+const preferred=page.getByRole('link',{name:/Bildvorschau: About Mozilla Firefox dialog/});await (await preferred.count()?preferred.first():page.locator('a[data-preview-id]').first()).click();await page.locator('#image-preview').waitFor();
+await page.waitForFunction(()=>(document.getElementById('preview-image')?.complete && document.getElementById('preview-image')?.naturalWidth>0) || document.querySelector('.preview-message'));
+report.preview=await page.locator('#image-preview').evaluate(el=>({title:el.querySelector('h2').textContent,imageLoaded:!!el.querySelector('img')?.naturalWidth,src:el.querySelector('img')?.getAttribute('src'),fallback:el.querySelector('.preview-message')?.textContent || null,background:getComputedStyle(el).backgroundColor}));
+await page.screenshot({path:'evidence/tests/media-live-preview.png'});await page.keyboard.press('Escape');await page.locator('#image-preview').waitFor({state:'detached'});
+assert.deepEqual(errors,[]);assert.deepEqual(external,[]);report.errors=errors;report.externalBrowserRequests=external.length;report.health=(await fetch(base+'/health/ready')).status;assert.equal(report.health,200);
+fs.writeFileSync('evidence/tests/media-live.json',JSON.stringify(report,null,2));console.log(JSON.stringify(report));await browser.close();

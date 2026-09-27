@@ -1,0 +1,151 @@
+{
+  "revision": 36,
+  "policies": [
+    {
+      "id": "360search",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"general\"],\"rpm\":6,\"concurrency\":1,\"family\":\"360search\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"241727efac163a80d7cf84e5f27a5889d99804c754acfef9e55f0cc014b07ce7\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "360search videos",
+      "value": "{\"state\":\"disabled\",\"capabilities\":[\"videos\"],\"rpm\":6,\"concurrency\":1,\"family\":\"360search\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"9b71c836ef625d125e645091842dd7d746b97ff4afed9a0b35605cd9d9c76d28\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "bing",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"general\"],\"rpm\":6,\"concurrency\":1,\"family\":\"bing\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"92019a5d88d735863cf65c735b19b0581771174cc34d11ad3bbac8aaddd20cf3\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "bing images",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"images\"],\"rpm\":6,\"concurrency\":1,\"family\":\"bing\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"fd155788df55fdbae27745f8b1e3d9f511c44119a369e93628289e19243a093e\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "bing news",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"news\"],\"rpm\":6,\"concurrency\":1,\"family\":\"bing\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"1c2a4e07594b3a8eaabd1b5975ac2a4da025a7aa9cd8091d17ade073e3417449\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "bing videos",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"videos\"],\"rpm\":6,\"concurrency\":1,\"family\":\"bing\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"c49315aea342c7f82ba166ea71cb4b4bf9e61d45622d2e93c482320eb9025012\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "brave",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"general\"],\"rpm\":6,\"concurrency\":1,\"family\":\"brave\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"79a2d27d7b6d310c4cfb20177e118962c5bf98dc5728a181b79311d18574a69a\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "duckduckgo",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"general\"],\"rpm\":6,\"concurrency\":1,\"family\":\"duckduckgo\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"3d9ac5669cdb0295934b778d7349596b60abc129b398a6c5894bd58ee2a7913a\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "duckduckgo images",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"images\"],\"rpm\":6,\"concurrency\":1,\"family\":\"duckduckgo\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"3bb89ac1cfa556612eb68fc3a1093948677f5cce92d5b8a76896895831e208c7\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "duckduckgo news",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"news\"],\"rpm\":6,\"concurrency\":1,\"family\":\"duckduckgo\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"063eeffac3b14a073af775a2b63e859c768f1c466d78be008b6f349bb2d12c05\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "duckduckgo videos",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"videos\"],\"rpm\":6,\"concurrency\":1,\"family\":\"duckduckgo\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"c6684687b7715139b8f7daaea3e3366d4a2ed7922227cf39fca7c57571215ee0\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "google cse",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"general\"],\"rpm\":6,\"concurrency\":1,\"family\":\"google-cse\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"261e496f1f00c72df08929ce501322231742d3830436bdc51178df6ba2455726\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "google cse images",
+      "value": "{\"state\":\"allowed\",\"capabilities\":[\"images\"],\"rpm\":6,\"concurrency\":1,\"family\":\"google-cse\",\"drainedUntil\":0,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"6afe3beef584ef9df79f6ebfb5018def924dd4bf06f124e86736c07df3a9cfb7\",\"pagingVerified\":false}"
+    },
+    {
+      "id": "wikipedia",
+      "value": "{\"state\":\"disabled\",\"capabilities\":[],\"rpm\":6,\"concurrency\":1,\"family\":\"shared\",\"drainedUntil\":1790437277780,\"quarantine\":false,\"reason\":\"maintenance\",\"fingerprint\":\"\"}"
+    }
+  ],
+  "guards": [
+    {
+      "id": "egress",
+      "value": "{\"reset\":1790461380000,\"count\":5,\"leases\":[]}"
+    },
+    {
+      "id": "engine:bing",
+      "value": "{\"reset\":1790437920000,\"count\":2,\"leases\":[]}"
+    },
+    {
+      "id": "engine:bing images",
+      "value": "{\"reset\":1790461380000,\"count\":2,\"leases\":[]}"
+    },
+    {
+      "id": "engine:bing videos",
+      "value": "{\"reset\":1790437920000,\"count\":1,\"leases\":[]}"
+    },
+    {
+      "id": "engine:brave",
+      "value": "{\"reset\":1790437920000,\"count\":2,\"leases\":[]}"
+    },
+    {
+      "id": "engine:duckduckgo",
+      "value": "{\"reset\":1790436600000,\"count\":1,\"leases\":[]}"
+    },
+    {
+      "id": "engine:google cse",
+      "value": "{\"reset\":1790437920000,\"count\":2,\"leases\":[]}"
+    },
+    {
+      "id": "engine:google cse images",
+      "value": "{\"reset\":1790461380000,\"count\":3,\"leases\":[]}"
+    },
+    {
+      "id": "family:360search",
+      "value": "{\"reset\":1790436600000,\"count\":0,\"leases\":[],\"blockedUntil\":0}"
+    },
+    {
+      "id": "family:bing",
+      "value": "{\"reset\":1790461380000,\"count\":2,\"leases\":[],\"blockedUntil\":0}"
+    },
+    {
+      "id": "family:brave",
+      "value": "{\"reset\":1790437920000,\"count\":2,\"leases\":[],\"blockedUntil\":0}"
+    },
+    {
+      "id": "family:duckduckgo",
+      "value": "{\"reset\":1790436600000,\"count\":0,\"leases\":[],\"blockedUntil\":1791732570808}"
+    },
+    {
+      "id": "family:google-cse",
+      "value": "{\"reset\":1790461380000,\"count\":3,\"leases\":[],\"blockedUntil\":0}"
+    },
+    {
+      "id": "family:shared",
+      "value": "{\"reset\":1790436600000,\"count\":3,\"leases\":[],\"blockedUntil\":1791732570808}"
+    },
+    {
+      "id": "health:bing images:images",
+      "value": "{\"health\":\"healthy\",\"breaker\":\"closed\",\"observedAt\":1790461363917,\"samples\":[],\"consecutive\":0,\"successes\":4,\"watchSince\":0,\"localBackoffUntil\":0,\"providerRetryAfterAt\":0,\"backendSuspendedUntil\":0,\"quotaResetAt\":0}"
+    },
+    {
+      "id": "health:bing videos:videos",
+      "value": "{\"health\":\"healthy\",\"breaker\":\"closed\",\"observedAt\":1790437896752,\"samples\":[],\"consecutive\":0,\"successes\":2,\"watchSince\":0,\"localBackoffUntil\":0,\"providerRetryAfterAt\":0,\"backendSuspendedUntil\":0,\"quotaResetAt\":0}"
+    },
+    {
+      "id": "health:bing:general",
+      "value": "{\"health\":\"healthy\",\"breaker\":\"closed\",\"observedAt\":1790437900890,\"samples\":[],\"consecutive\":0,\"successes\":4,\"watchSince\":0,\"localBackoffUntil\":0,\"providerRetryAfterAt\":0,\"backendSuspendedUntil\":0,\"quotaResetAt\":0}"
+    },
+    {
+      "id": "health:brave:general",
+      "value": "{\"health\":\"healthy\",\"breaker\":\"closed\",\"observedAt\":1790437901150,\"samples\":[],\"consecutive\":0,\"successes\":4,\"watchSince\":0,\"localBackoffUntil\":0,\"providerRetryAfterAt\":0,\"backendSuspendedUntil\":0,\"quotaResetAt\":0}"
+    },
+    {
+      "id": "health:duckduckgo:general",
+      "value": "{\"health\":\"unavailable\",\"breaker\":\"open\",\"observedAt\":1790436566171,\"samples\":[],\"consecutive\":1,\"successes\":0,\"watchSince\":0,\"localBackoffUntil\":1791732570808,\"providerRetryAfterAt\":0,\"backendSuspendedUntil\":0,\"quotaResetAt\":0}"
+    },
+    {
+      "id": "health:google cse images:images",
+      "value": "{\"health\":\"healthy\",\"breaker\":\"closed\",\"observedAt\":1790461363818,\"samples\":[],\"consecutive\":0,\"successes\":5,\"watchSince\":0,\"localBackoffUntil\":0,\"providerRetryAfterAt\":0,\"backendSuspendedUntil\":0,\"quotaResetAt\":0}"
+    },
+    {
+      "id": "health:google cse:general",
+      "value": "{\"health\":\"healthy\",\"breaker\":\"closed\",\"observedAt\":1790437900914,\"samples\":[],\"consecutive\":0,\"successes\":3,\"watchSince\":0,\"localBackoffUntil\":0,\"providerRetryAfterAt\":0,\"backendSuspendedUntil\":0,\"quotaResetAt\":0}"
+    },
+    {
+      "id": "service",
+      "value": "{\"reset\":1790461380000,\"count\":5,\"leases\":[]}"
+    }
+  ]
+}

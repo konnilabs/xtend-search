@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "reports": [
+    {
+      "mode": "SSR",
+      "category": "images",
+      "status": "2 von 2 Quellen abgeschlossen",
+      "count": "52 Ergebnisse",
+      "results": 52,
+      "sources": [
+        "bing images",
+        "google cse images"
+      ],
+      "warnings": []
+    },
+    {
+      "mode": "XScaler",
+      "category": "images",
+      "status": "2 von 2 Quellen abgeschlossen",
+      "count": "52 Ergebnisse",
+      "results": 52,
+      "sources": [
+        "bing images",
+        "google cse images"
+      ],
+      "warnings": [],
+      "phase": "complete"
+    },
+    {
+      "mode": "no-JS",
+      "results": 52,
+      "sources": [
+        "bing images",
+        "google cse images"
+      ]
+    }
+  ],
+  "errors": [],
+  "health": {
+    "ok": true,
+    "version": "0.3.4",
+    "storage": "ready",
+    "retrieval": "compatible"
+  }
+}

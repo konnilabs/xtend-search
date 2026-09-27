@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "updatedFingerprints": [
+    "bing",
+    "bing images",
+    "bing news",
+    "bing videos",
+    "brave",
+    "duckduckgo",
+    "duckduckgo images",
+    "duckduckgo news",
+    "duckduckgo videos"
+  ],
+  "guardsUnchanged": true,
+  "allOtherPolicyFieldsUnchanged": true,
+  "revision": 36
+}

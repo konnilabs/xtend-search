@@ -1,0 +1,24 @@
+logout-debug POST null true
+after-logout http://localhost:8093/admin/logout Anfrage nicht abgeschlossen
+
+Die Sicherheitsprüfung ist fehlgeschlagen. Bitte die Admin-Seite neu öffnen.
+
+Zurück
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok(await page.getByRole('link',{name:'Mit Nextcloud anmelden'}).isVisible())
+
+    at file:///home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/outputs/xtend-search/xtend/tests/control/debug-logout.mjs:4:400 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: false,
+  expected: true,
+  operator: '==',
+  diff: 'simple'
+}
+
+Node.js v24.19.0
