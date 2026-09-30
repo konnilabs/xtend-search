@@ -1,0 +1,117 @@
+{
+  "schema": "xtend.test.report.v1",
+  "status": "passed",
+  "startedAt": "2026-09-30T18:58:24.518Z",
+  "completedAt": "2026-09-30T18:58:30.742Z",
+  "durationMs": 6224,
+  "suiteCount": 6,
+  "passedCount": 6,
+  "failedCount": 0,
+  "skippedCount": 0,
+  "warningCount": 0,
+  "suites": [
+    {
+      "id": "rmt-node-ssr-adapter",
+      "label": "RMT Node SSR Adapter",
+      "status": "passed",
+      "exitCode": 0,
+      "passCount": 123,
+      "failureCount": 0,
+      "skipCount": 0,
+      "warningCount": 0,
+      "failures": [],
+      "skips": [],
+      "warnings": []
+    },
+    {
+      "id": "rmt-dom-descriptor-renderer",
+      "label": "Epic 18 RMT DOM Descriptor renderer",
+      "status": "passed",
+      "exitCode": 0,
+      "passCount": 267,
+      "failureCount": 0,
+      "skipCount": 0,
+      "warningCount": 0,
+      "failures": [],
+      "skips": [],
+      "warnings": []
+    },
+    {
+      "id": "ssr-pages",
+      "label": "Shared page contracts and Node host",
+      "status": "passed",
+      "exitCode": 0,
+      "passCount": 34,
+      "failureCount": 0,
+      "skipCount": 0,
+      "warningCount": 0,
+      "failures": [],
+      "skips": [],
+      "warnings": []
+    },
+    {
+      "id": "ssr-pages-php",
+      "label": "Portable Node/PHP render parity",
+      "status": "passed",
+      "exitCode": 0,
+      "passCount": 11,
+      "failureCount": 0,
+      "skipCount": 0,
+      "warningCount": 0,
+      "failures": [],
+      "skips": [],
+      "warnings": []
+    },
+    {
+      "id": "rmt-php-ssr-adapter",
+      "label": "RMT PHP/Laravel SSR Adapter",
+      "status": "passed",
+      "exitCode": 0,
+      "passCount": 134,
+      "failureCount": 0,
+      "skipCount": 0,
+      "warningCount": 0,
+      "failures": [],
+      "skips": [],
+      "warnings": []
+    },
+    {
+      "id": "rmt-vnext-component-primitives",
+      "label": "RMT vNext XTend Component Primitive Compatibility",
+      "status": "passed",
+      "exitCode": 0,
+      "passCount": 78,
+      "failureCount": 0,
+      "skipCount": 0,
+      "warningCount": 0,
+      "failures": [],
+      "skips": [],
+      "warnings": [],
+      "report": {
+        "schema": "xtend.rmt.component-capability-registry-report.v1",
+        "manifestCount": 47,
+        "publicComponentCount": 42,
+        "nonVisualCount": 5,
+        "familyCounts": {
+          "media-feedback-layout": 13,
+          "form": 8,
+          "overlay-surface": 12,
+          "navigation": 4,
+          "theme-layout": 5,
+          "demo-non-production": 1,
+          "infrastructure-module": 3,
+          "non-visual-utility": 1
+        },
+        "browserSmokeFamilies": [
+          "form",
+          "navigation",
+          "overlay-surface",
+          "media-feedback-layout",
+          "theme-layout"
+        ],
+        "localGate": "node scripts/run_xtend_tests.js rmt-vnext-component-primitives --json",
+        "packageScript": "npm run test:rmt-vnext-component-primitives"
+      }
+    }
+  ]
+}

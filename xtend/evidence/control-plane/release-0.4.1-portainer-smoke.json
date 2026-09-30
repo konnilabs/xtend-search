@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "health": {
+    "ok": true,
+    "version": "0.4.1",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "configuration": "compose.portainer.yml, isolated temporary volumes and port 8104, fixture credentials only"
+}

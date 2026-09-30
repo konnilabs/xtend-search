@@ -1,0 +1,39 @@
+{
+  "package": "@ccslabs/xtend",
+  "version": "0.8.0",
+  "upstreamBase": "ce40c1b3694438d597661a148fb9f29992a786c2",
+  "files": [
+    {
+      "path": "xtendrmt/rmt-node-ssr-adapter.js",
+      "before": "cdde39e17cb4c7a29a77f3f38c0e4a011382fd1b9cab16b2ecfc43ea1644de49",
+      "after": "7cb23828e4d31d3e01083e1a18a4b83b5c2923ee73a2b9f0588219f479a523fe"
+    },
+    {
+      "path": "xtendrmt/rmt-dom-descriptor-renderer.js",
+      "before": "00ee0c6c740c8e6a2ef1a24bbd46e84b033c1e5fd35de6476462361dff3d2369",
+      "after": "6892c92031fef4db30324b9041ea97732d54984a669859739a575cd4857c866b"
+    },
+    {
+      "path": "xtendrmt/node-page-host.mjs",
+      "before": "d441c9c6a08d04039b29f61256117c2ae54ac64ce267585f4589da78be0b544d",
+      "after": "778114ab03919450ea2975a8311c9aa3d032c4e451e55d55b6510937eae526cf"
+    },
+    {
+      "path": "xtendrmt/rmt-node-ssr-adapter.d.ts",
+      "before": "5c0f02b2f58212e5c8f3201c6ce36dddef0951fa916f0e7a635367d7c85b9dd4",
+      "after": "c31a6ff73658fdbb3365a70703895852da50b3278d5f6156ab9ebf86b02e4dc2"
+    },
+    {
+      "path": "xtendrmt/rmt-dom-descriptor-renderer.d.ts",
+      "before": "0ca1f746331cb127d75b439177df1e8e7b76f94afe2e6e57ae6070a962283973",
+      "after": "600160cb6bb64362d2f52f05665e70e879fe039d4769d469d63319544072dc2e"
+    },
+    {
+      "path": "xtendrmt/rmt-portable-render.js",
+      "before": "71f2d0db5864af4c5a03e919e26a384b4119fe189b6ab114c6ab654568cecfc0",
+      "after": "73995e04d41165cb99331d7b553d09c10caaa8c2bf98b09016d307855c0c794c"
+    }
+  ],
+  "upstreamPullRequest": "https://github.com/konnilabs/xtend/pull/84",
+  "upstreamCommit": "9b421fe6df0f9f3e016f87f9f607fbb632a319ef"
+}

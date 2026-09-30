@@ -1,0 +1,38 @@
+{
+  "ok": true,
+  "scope": "Sum of all emitted browser JS/CSS assets including lazy files; server directories excluded. These totals are not initial network transfers. Same Docker build configuration.",
+  "versions": {
+    "0.4.0": {
+      "standalone": {
+        "fileCount": 37,
+        "allAssetBytes": 2698379,
+        "allAssetGzipBytes": 512134,
+        "entryBytes": 20342,
+        "entryGzipBytes": 7570
+      },
+      "admin": {
+        "fileCount": 33,
+        "allAssetBytes": 3089556,
+        "allAssetGzipBytes": 600623,
+        "entryBytes": 241099,
+        "entryGzipBytes": 61214
+      }
+    },
+    "0.4.1": {
+      "standalone": {
+        "fileCount": 37,
+        "allAssetBytes": 2700798,
+        "allAssetGzipBytes": 512677,
+        "entryBytes": 20342,
+        "entryGzipBytes": 7568
+      },
+      "admin": {
+        "fileCount": 33,
+        "allAssetBytes": 3091975,
+        "allAssetGzipBytes": 601166,
+        "entryBytes": 241099,
+        "entryGzipBytes": 61215
+      }
+    }
+  }
+}

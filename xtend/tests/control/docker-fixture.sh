@@ -1,7 +1,7 @@
 #!/bin/sh
 # Run as a Docker-authorized user from the repository root. No live credentials.
 set -eu
-fixture_image=${FIXTURE_IMAGE:-xtend-search:0.4.0}
+fixture_image=${FIXTURE_IMAGE:-xtend-search:0.4.1}
 fixture_settings=${FIXTURE_SETTINGS:-xtend/config/settings.control.fixture.yml}
 case "$PWD" in */xtend-search) ;; *) echo 'Run from the product repository.'; exit 1;; esac
 docker network inspect xtend-cp-fixture-net >/dev/null 2>&1 || docker network create xtend-cp-fixture-net >/dev/null

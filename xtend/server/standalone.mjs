@@ -1,3 +1,4 @@
+import {ssrCapabilities} from './ssr-capabilities.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
@@ -22,7 +23,7 @@ const renderOptions={executionMode:'server_prerender_resume',resume:{sign:canoni
 // Icons belong to the static document envelope, outside client-owned head nodes.
 const faviconLinks='<link rel="icon" href="/assets/xtend/favicon.png" type="image/png" sizes="64x64"><link rel="icon" href="/assets/xtend/mark.svg" type="image/svg+xml" sizes="any">';
 const head=(title,referrer='no-referrer')=>[{tag:'title',text:title},{tag:'meta',attributes:{name:'viewport',content:'width=device-width, initial-scale=1'}},{tag:'meta',attributes:{name:'referrer',content:referrer}},{tag:'meta',attributes:{name:'robots',content:'noindex, noarchive'}}];
-const pages=createNodePageHost({manifest,compactResponses:true,timeoutMs:16000,createContext:()=>({contextKey:'xtend-search-public-'+manifest.version,origin:app.auth.origin}),resolvePage:async context=>{
+const pages=createNodePageHost({manifest,ssr:ssrCapabilities,compactResponses:true,timeoutMs:16000,createContext:()=>({contextKey:'xtend-search-public-'+manifest.version,origin:app.auth.origin}),resolvePage:async context=>{
  const url=new URL(context.request.url,app.auth.origin);if(!['/','/search'].includes(url.pathname))return null;
  let state,data,status=200;
  try{
@@ -31,7 +32,7 @@ const pages=createNodePageHost({manifest,compactResponses:true,timeoutMs:16000,c
  }catch(error){if(context.signal.aborted)throw error;state||={q:'',category:'general',language:'all',timeRange:'',safeSearch:'1',page:1};status=error.code==='xsearch.query'||error.code==='xsearch.cursor'?400:503;data={...app.search.base(state),view:'results',isSearch:true,error:true,errorMessage:error.expose?error.message:'Die Suchquellen sind derzeit nicht verfügbar.',countLabel:'Suche derzeit nicht verfügbar'};}
  return {page:'Search',url:searchUrl(state),status,props:{'search.data':data,'search.query':state.q,'search.filters':{language:state.language,timeRange:state.timeRange,safeSearch:state.safeSearch}},head:head(state.q?`${state.q} · XTend.search`:'XTend.search — Dein Fenster ins Web','same-origin'),renderOptions};
 },onError:()=>console.error('{"event":"public-page-failed"}')});
-const adminPages=createNodePageHost({manifest:adminManifest,compactResponses:true,timeoutMs:10000,createContext:req=>({contextKey:'xtend-admin-'+app.auth.context(req).csrf,csrfToken:app.auth.context(req).csrf,origin:app.auth.origin}),resolvePage:context=>{
+const adminPages=createNodePageHost({manifest:adminManifest,ssr:ssrCapabilities,compactResponses:true,timeoutMs:10000,createContext:req=>({contextKey:'xtend-admin-'+app.auth.context(req).csrf,csrfToken:app.auth.context(req).csrf,origin:app.auth.origin}),resolvePage:context=>{
  const url=new URL(context.request.url,app.auth.origin);if(url.pathname!=='/admin')return null;const auth=app.auth.context(context.request),data=adminView(app.plane,auth,url.searchParams.get('engine')||'',Object.fromEntries(url.searchParams));
  return {page:'Admin',url:data.url,props:{'admin.data':data,'admin.live':data},head:[...head('Observatory · XTend.search','same-origin'),{tag:'meta',attributes:{name:'csrf-token',content:auth.csrf}}],renderOptions};
 },onError:()=>console.error('{"event":"admin-page-failed"}')});

@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "archive": "XTend-search-0.4.1-source.tar.gz",
+  "bytes": 62313277,
+  "entries": 977,
+  "privateRuntimeFiles": false,
+  "unsafePaths": false,
+  "sourceRebuildInputsPresent": true
+}

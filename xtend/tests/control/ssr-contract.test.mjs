@@ -1,0 +1,26 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {createRmtNodeSsrAdapter,canonicalizeRmtResumePayload} from '@ccslabs/xtend/rmt/node-ssr-adapter';
+import {renderPageDocument} from '@ccslabs/xtend/rmt/node-page-host';
+import {decodePageWire} from '../../node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs';
+import {projectPortableRender} from '@ccslabs/xtend/rmt/portable-render';
+import {ssrCapabilities} from '../../server/ssr-capabilities.mjs';
+const manifest=JSON.parse(fs.readFileSync(new URL('../../.xtend-build/pages-standalone.json',import.meta.url)));
+test('search SSR preserves type search, supplies x-section capability and ships no duplicate markup',async()=>{
+ const artifact=manifest.pages.Search.artifact;
+ const props={'search.query':'','search.data':{view:'home',tabs:[],knowledgeCards:[],results:[],warnings:[],pages:[]},'search.filters':{language:'all',timeRange:'',safeSearch:'1'}};
+ const input=projectPortableRender(artifact,props),adapter=createRmtNodeSsrAdapter(ssrCapabilities);
+ const rendered=await adapter.render({descriptor:input.descriptor},{model:input.model,nativeForms:true,executionMode:'server_prerender_resume',resume:{state:input.model,sign:()=>({keyId:'fixture',signature:'fixture'})}});
+ assert.equal(rendered.ok,true,JSON.stringify(rendered.diagnostics.map(d=>({code:d.code,attribute:d.attribute,message:d.message}))));
+ const tag=rendered.html.match(/<input[^>]*id="search-input"[^>]*>/)[0];
+ assert.match(tag,/type="search"/);assert.ok(!tag.includes('viewTemplate'));
+ assert.ok(!rendered.diagnostics.some(d=>d.code==='rmt.node_ssr.component_capability_missing'));
+ assert.ok(rendered.hydration.coverage.componentNodes>0);assert.equal(rendered.hydration.coverage.missingCapabilityNodes,0);
+ const page={schema:'xtend.page-response.v1',head:[],renderArtifact:artifact,ssr:rendered.response};
+ const document=renderPageDocument(page,rendered.html,{},'',{compact:true});
+ const wire=decodePageWire(JSON.parse(document.match(/id="xtend-page-data"[^>]*>([\s\S]*?)<\/script>/)[1]));
+ assert.equal(wire.ssr.chunk.markup.html,undefined);assert.equal(wire.ssr.chunks[0].markup.html,undefined);
+ assert.equal(canonicalizeRmtResumePayload(wire.ssr.resume),canonicalizeRmtResumePayload(rendered.resume));
+ assert.ok(adapter.renderDescriptorToHtml(wire.ssr.chunk.markup.descriptor,{model:input.model,nativeForms:true}).html.includes('type="search"'));
+});

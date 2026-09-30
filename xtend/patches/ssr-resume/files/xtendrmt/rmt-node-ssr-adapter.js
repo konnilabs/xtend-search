@@ -1,0 +1,1675 @@
+import { Readable } from 'node:stream';
+import { createHash } from 'node:crypto';
+import { createRmtComponentCapabilityRegistry } from './rmt-component-capability-registry.js';
+import { createRmtDomDescriptorRenderer } from './rmt-dom-descriptor-renderer.js';
+import { createRmtSsrStreamHost } from './rmt-ssr-stream-host.js';
+
+export const RMT_NODE_SSR_ADAPTER_SCHEMA = 'xtend.rmt.node-ssr-adapter.v1';
+export const RMT_NODE_SSR_RENDER_RESULT_SCHEMA = 'xtend.rmt.node-ssr-render-result.v1';
+export const RMT_NODE_SSR_JSONL_FRAME_SCHEMA = 'xtend.rmt.node-ssr-jsonl-frame.v1';
+export const RMT_NODE_SSR_DIAGNOSTIC_SCHEMA = 'xtend.rmt.node-ssr-diagnostic.v1';
+export const RMT_NODE_SSR_HYDRATION_SCHEMA = 'xtend.rmt.node-ssr-hydration-payload.v1';
+export const RMT_NODE_SSR_CHUNK_KIND = 'rmt_template_chunk';
+export const RMT_NODE_SSR_RESPONSE_KIND = 'rmt_template_prerender_response';
+export const RMT_NODE_SSR_EXECUTION_MODE = 'server_prerender_hydrate';
+export const RMT_NODE_SSR_RESUME_EXECUTION_MODE = 'server_prerender_resume';
+export const RMT_SSR_RESUME_ENVELOPE_SCHEMA = 'xtend.rmt.ssr-resume-envelope.v1';
+export const RMT_SSR_RESUME_INTEGRITY_SCHEMA = 'xtend.rmt.ssr-resume-integrity.v1';
+export const RMT_NODE_SSR_EXECUTION_MODES = Object.freeze([
+  RMT_NODE_SSR_EXECUTION_MODE,
+  RMT_NODE_SSR_RESUME_EXECUTION_MODE
+]);
+export const RMT_NODE_SSR_STREAMING_CONTRACT_SCHEMA = 'xtend.rmt.vnext-streaming-contract.v1';
+export const RMT_NODE_SSR_KERNEL_BOUNDARY = 'no-rmt-kernel-import-of-xtend-types';
+export const RMT_SSR_CSP_POLICY_SCHEMA = 'xtend.rmt.ssr-csp-policy.v1';
+export const RMT_SSR_CSP_HEADER = 'Content-Security-Policy';
+export const RMT_XSCALER_SSR_HYDRATION_SCHEMA = 'xtend.xscaler.ssr-hydration.v1';
+
+const XSCALER_PROTOCOL = 'xscaler';
+const XSCALER_PREFLIGHT_RESPONSE_SCHEMA = 'xtend.xscaler.preflight-response.v1';
+const XSCALER_REMOTE_SURFACE_PLAN_SCHEMA = 'xtend.xscaler.remote-surface-plan.v1';
+const XSCALER_ATC_HANDOFF_SCHEMA = 'xtend.xscaler.atc-handoff.v1';
+
+const BLOCKING_SEVERITIES = new Set(['error', 'fatal']);
+const TRUST_BOUNDARY_TOKENS = new Set([
+  'xtend.security.trusted-dom-boundary.v1',
+  'xtend.security.sanitizing-boundary.v1',
+  'xtend.security.streaming-boundary.v1',
+  'trusted',
+  'sanitized',
+  'host-sanitized'
+]);
+const URL_ATTRIBUTES = new Set(['href', 'src', 'action', 'formaction', 'poster', 'xlink:href']);
+const BLOCKED_ATTRIBUTES = new Set(['srcdoc']);
+const VOID_TAGS = new Set([
+  'area',
+  'base',
+  'br',
+  'col',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr'
+]);
+const BLOCKED_MARKUP_TAGS = new Set(['script', 'iframe', 'frame', 'frameset', 'object', 'embed', 'base', 'link', 'meta', 'form', 'style', 'svg', 'math', 'template']);
+const BLOCKED_MARKUP_TAG_PATTERN = [...BLOCKED_MARKUP_TAGS].join('|');
+const DEFAULT_SSR_CSP_DIRECTIVES = Object.freeze({
+  'default-src': ["'self'"],
+  'script-src': ["'self'"],
+  'style-src': ["'self'", "'unsafe-inline'"],
+  'img-src': ["'self'", 'data:', 'blob:'],
+  'font-src': ["'self'", 'data:'],
+  'connect-src': ["'self'"],
+  'worker-src': ["'self'"],
+  'object-src': ["'none'"],
+  'base-uri': ["'self'"],
+  'frame-ancestors': ["'self'"],
+  'form-action': ["'self'"]
+});
+
+function asArray(value) {
+  if (Array.isArray(value)) return value;
+  if (value == null || value === false) return [];
+  return [value];
+}
+
+function objectRecord(value) {
+  return value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+}
+
+function cloneJson(value) {
+  if (value == null) return value;
+  return JSON.parse(JSON.stringify(value));
+}
+
+export function canonicalizeRmtResumePayload(value) {
+  if (value === null) return 'null';
+  if (Array.isArray(value)) return `[${value.map((entry) => canonicalizeRmtResumePayload(entry)).join(',')}]`;
+  if (value && typeof value === 'object') {
+    return `{${Object.keys(value).sort().filter((key) => value[key] !== undefined).map((key) => `${JSON.stringify(key)}:${canonicalizeRmtResumePayload(value[key])}`).join(',')}}`;
+  }
+  if (typeof value === 'number' && !Number.isFinite(value)) return 'null';
+  return JSON.stringify(value);
+}
+
+function sha256(value) {
+  return createHash('sha256').update(value).digest('base64url');
+}
+
+function normalizeExecutionMode(options, diagnostics) {
+  const requested = stableString(options && options.executionMode, RMT_NODE_SSR_EXECUTION_MODE);
+  if (requested === 'worker_prerender_resume') {
+    diagnostics.publish(
+      'rmt.node_ssr.worker_resume_unsupported',
+      'worker_prerender_resume is not implemented by the Node SSR adapter.',
+      'error',
+      { executionMode: requested }
+    );
+    return requested;
+  }
+  if (!RMT_NODE_SSR_EXECUTION_MODES.includes(requested)) {
+    diagnostics.publish(
+      'rmt.node_ssr.execution_mode_unsupported',
+      `Node SSR does not support execution mode "${requested}".`,
+      'error',
+      { executionMode: requested }
+    );
+  }
+  return requested;
+}
+
+function decorateResumeDescriptor(input, rootId, generation) {
+  let index = 0;
+  const decorate = (descriptor, path = '0') => {
+    if (!descriptor || typeof descriptor !== 'object') return descriptor;
+    if (Array.isArray(descriptor)) return descriptor.map((entry, childIndex) => decorate(entry, `${path}.${childIndex}`));
+    const copy = { ...descriptor };
+    if (copy.type === 'element' || copy.tag) {
+      copy.attributes = {
+        ...objectRecord(copy.attributes),
+        'data-rmt-resume-id': objectRecord(copy.attributes)['data-rmt-resume-id'] || `${rootId}:${path}:${index++}`,
+        'data-rmt-resume-generation': generation
+      };
+    }
+    if (Array.isArray(copy.children)) copy.children = copy.children.map((entry, childIndex) => decorate(entry, `${path}.${childIndex}`));
+    return copy;
+  };
+  const descriptor = decorate(normalizeDescriptor(input));
+  if (descriptor && (descriptor.type === 'element' || descriptor.tag)) {
+    descriptor.attributes = {
+      ...objectRecord(descriptor.attributes),
+      id: objectRecord(descriptor.attributes).id || rootId,
+      'data-rmt-resume-root': 'true',
+      'data-rmt-resume-generation': generation
+    };
+    return descriptor;
+  }
+  return {
+    type: 'element',
+    tag: 'section',
+    attributes: {
+      id: rootId,
+      'data-rmt-resume-root': 'true',
+      'data-rmt-resume-id': `${rootId}:root`,
+      'data-rmt-resume-generation': generation
+    },
+    children: [descriptor]
+  };
+}
+
+function preservedStateFromCore(coreDocument) {
+  return Object.fromEntries(asArray(coreDocument && coreDocument.states)
+    .filter((state) => state && state.preserve === true)
+    .map((state) => [state.name || state.id, cloneJson(state.initial)]));
+}
+
+function createResumeNodeManifest(descriptor) {
+  const records = [];
+  const visit = (entry) => {
+    if (!entry || typeof entry !== 'object') return;
+    if (Array.isArray(entry)) {
+      entry.forEach(visit);
+      return;
+    }
+    const attributes = objectRecord(entry.attributes);
+    const id = stableString(attributes['data-rmt-resume-id'], '').trim();
+    if (id) {
+      records.push({
+        generation: stableString(attributes['data-rmt-resume-generation'], ''),
+        id,
+        tag: stableString(entry.tag || entry.component, '').toLowerCase()
+      });
+    }
+    asArray(entry.children || entry.nodes).forEach(visit);
+  };
+  visit(descriptor);
+  return records;
+}
+
+async function createResumeEnvelope(renderState, html, renderDescriptor, hydration, diagnostics) {
+  if (renderState.executionMode !== RMT_NODE_SSR_RESUME_EXECUTION_MODE) return null;
+  const resumeOptions = objectRecord(renderState.options.resume);
+  const issuedAt = resumeOptions.issuedAt || renderState.renderedAt;
+  const expiresAt = resumeOptions.expiresAt || new Date((Date.parse(issuedAt) || Date.now()) + 5 * 60 * 1000).toISOString();
+  const resumeNodeManifest = createResumeNodeManifest(renderDescriptor);
+  const unsignedEnvelope = {
+    schema: RMT_SSR_RESUME_ENVELOPE_SCHEMA,
+    version: 1,
+    executionMode: RMT_NODE_SSR_RESUME_EXECUTION_MODE,
+    requestId: renderState.requestId,
+    rootId: renderState.rootId,
+    templateId: renderState.templateId,
+    generation: renderState.generation,
+    issuedAt,
+    expiresAt,
+    snapshot: {
+      schema: 'xtend.rmt.resume-snapshot.v1',
+      state: cloneJson(resumeOptions.state || preservedStateFromCore(renderState.coreDocument)),
+      surfaces: cloneJson(resumeOptions.surfaces || renderState.options.selectorValues || {})
+    },
+    eventReplay: {
+      schema: 'xtend.rmt.resume-intent-queue-policy.v1',
+      mode: 'intent_queue',
+      generation: renderState.generation,
+      maxEntries: 128,
+      replayExactlyOnce: true
+    },
+    xtensions: cloneJson(resumeOptions.xtensions || []),
+    manifests: cloneJson(resumeOptions.manifests || []),
+    dom: {
+      schema: 'xtend.rmt.resume-dom-digest.v1',
+      algorithm: 'SHA-256',
+      encoding: 'base64url',
+      canonicalization: 'resume-node-manifest.v1',
+      nodeCount: resumeNodeManifest.length,
+      digest: sha256(canonicalizeRmtResumePayload(resumeNodeManifest))
+    },
+    fallbackMode: RMT_NODE_SSR_EXECUTION_MODE,
+    hydrationSchema: hydration && hydration.schema || RMT_NODE_SSR_HYDRATION_SCHEMA
+  };
+  const canonicalPayload = canonicalizeRmtResumePayload(unsignedEnvelope);
+  const signer = resumeOptions.sign || renderState.options.signResumeEnvelope;
+  if (typeof signer !== 'function') {
+    diagnostics.publish(
+      'rmt.node_ssr.resume_signer_missing',
+      'server_prerender_resume requires a host-provided resume signer.',
+      'error',
+      { executionMode: renderState.executionMode, rootId: renderState.rootId }
+    );
+    return {
+      ...unsignedEnvelope,
+      integrity: {
+        schema: RMT_SSR_RESUME_INTEGRITY_SCHEMA,
+        algorithm: null,
+        encoding: 'base64url',
+        keyId: null,
+        digest: sha256(canonicalPayload),
+        signature: null,
+        verified: false
+      }
+    };
+  }
+  let signed;
+  try {
+    signed = await signer(canonicalPayload, {
+      schema: RMT_SSR_RESUME_ENVELOPE_SCHEMA,
+      requestId: renderState.requestId,
+      rootId: renderState.rootId,
+      generation: renderState.generation
+    });
+  } catch (error) {
+    diagnostics.publish(
+      'rmt.node_ssr.resume_signing_failed',
+      error && error.message ? error.message : 'Resume signer failed.',
+      'error',
+      { rootId: renderState.rootId }
+    );
+    signed = {};
+  }
+  const signature = typeof signed === 'string' ? signed : signed && signed.signature;
+  const algorithm = typeof signed === 'object' && signed && signed.algorithm || 'ECDSA-P256-SHA256';
+  const keyId = typeof signed === 'object' && signed && signed.keyId || resumeOptions.keyId || null;
+  if (!signature || !keyId) {
+    diagnostics.publish(
+      'rmt.node_ssr.resume_signature_incomplete',
+      'Resume signer must return signature and keyId.',
+      'error',
+      { rootId: renderState.rootId }
+    );
+  }
+  return {
+    ...unsignedEnvelope,
+    integrity: {
+      schema: RMT_SSR_RESUME_INTEGRITY_SCHEMA,
+      algorithm,
+      encoding: 'base64url',
+      keyId,
+      digest: sha256(canonicalPayload),
+      signature: signature || null
+    }
+  };
+}
+
+function stableString(value, fallback = '') {
+  if (value == null) return fallback;
+  if (typeof value === 'string') return value;
+  if (typeof value === 'number' || typeof value === 'boolean' || typeof value === 'bigint') return String(value);
+  return fallback;
+}
+
+function safeIdentifier(value, fallback = 'rmt-node-ssr') {
+  const normalized = stableString(value, '').trim().replace(/[^a-zA-Z0-9_.:-]+/gu, '-').replace(/^-+|-+$/gu, '');
+  return normalized || fallback;
+}
+
+function escapeHtml(value) {
+  return stableString(value, '').replace(/[&<>"']/gu, (character) => {
+    switch (character) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#39;';
+      default: return character;
+    }
+  });
+}
+
+function escapeAttribute(value) {
+  return escapeHtml(value).replace(/`/gu, '&#96;');
+}
+
+function isSafeTagName(tagName) {
+  return /^[a-z][a-z0-9._:-]*$/u.test(stableString(tagName, '').toLowerCase());
+}
+
+function normalizeTagName(tagName, diagnostics, context) {
+  const normalized = stableString(tagName, '').trim().toLowerCase();
+  if (isSafeTagName(normalized) && !BLOCKED_MARKUP_TAGS.has(normalized)) return normalized;
+  diagnostics.publish('rmt.node_ssr.tag_blocked', `Blocked unsafe tag "${stableString(tagName, '<empty>')}".`, 'error', context);
+  return 'div';
+}
+
+function normalizeAttributeName(name) {
+  return stableString(name, '').trim().toLowerCase();
+}
+
+function isSafeAttributeName(name) {
+  return /^[a-z_:][a-z0-9_.:-]*$/u.test(name);
+}
+
+function isSafeUrl(value) {
+  const raw = stableString(value, '').trim();
+  if (!raw) return true;
+  const compact = raw.replace(/[\u0000-\u001F\u007F\s]+/gu, '').toLowerCase();
+  if (compact.startsWith('#') || compact.startsWith('/') || compact.startsWith('./') || compact.startsWith('../')) return true;
+  if (compact.startsWith('http://') || compact.startsWith('https://') || compact.startsWith('mailto:') || compact.startsWith('tel:') || compact.startsWith('blob:')) return true;
+  if (compact.startsWith('data:image/')) return true;
+  if (/^[a-z][a-z0-9+.-]*:/u.test(compact)) return false;
+  return true;
+}
+
+function normalizeCspDirectiveValues(value) {
+  if (value === false || value == null) return [];
+  if (Array.isArray(value)) return value.flatMap((entry) => normalizeCspDirectiveValues(entry));
+  return stableString(value, '').split(/\s+/u).map((entry) => entry.trim()).filter(Boolean);
+}
+
+function mergeCspDirectives(...records) {
+  const directives = {};
+  records.forEach((record) => {
+    Object.entries(objectRecord(record)).forEach(([name, value]) => {
+      const directiveName = normalizeAttributeName(name);
+      if (!directiveName) return;
+      const values = normalizeCspDirectiveValues(value);
+      if (values.length === 0) {
+        directives[directiveName] = [];
+        return;
+      }
+      directives[directiveName] = [...new Set([...(directives[directiveName] || []), ...values])];
+    });
+  });
+  return directives;
+}
+
+function serializeCspDirectives(directives) {
+  return Object.entries(objectRecord(directives))
+    .filter(([name]) => normalizeAttributeName(name))
+    .map(([name, values]) => {
+      const normalizedValues = normalizeCspDirectiveValues(values);
+      return normalizedValues.length ? `${normalizeAttributeName(name)} ${normalizedValues.join(' ')}` : normalizeAttributeName(name);
+    })
+    .join('; ');
+}
+
+function createSsrCspPolicy(options = {}) {
+  const headerPolicy = Object.entries(objectRecord(options.headers)).find(([name]) => normalizeAttributeName(name) === normalizeAttributeName(RMT_SSR_CSP_HEADER));
+  const explicitPolicy = options.contentSecurityPolicy || options.cspPolicy || options.csp || (headerPolicy && headerPolicy[1]);
+  if (typeof explicitPolicy === 'string' && explicitPolicy.trim()) {
+    return {
+      schema: RMT_SSR_CSP_POLICY_SCHEMA,
+      mode: 'host-supplied',
+      header: explicitPolicy.trim(),
+      directives: {},
+      managedBy: RMT_NODE_SSR_ADAPTER_SCHEMA,
+      automatic: true
+    };
+  }
+  const explicitDirectives = explicitPolicy && typeof explicitPolicy === 'object'
+    ? explicitPolicy.directives || explicitPolicy
+    : {};
+  const directives = mergeCspDirectives(DEFAULT_SSR_CSP_DIRECTIVES, explicitDirectives, options.cspDirectives);
+  return {
+    schema: RMT_SSR_CSP_POLICY_SCHEMA,
+    mode: 'framework-default',
+    header: serializeCspDirectives(directives),
+    directives,
+    managedBy: RMT_NODE_SSR_ADAPTER_SCHEMA,
+    automatic: true
+  };
+}
+
+function hasHeader(headers, headerName) {
+  const normalizedHeaderName = normalizeAttributeName(headerName);
+  return Object.keys(objectRecord(headers)).some((name) => normalizeAttributeName(name) === normalizedHeaderName);
+}
+
+function createSsrSecurityHeaders(cspPolicy, headers = {}) {
+  const mergedHeaders = { ...objectRecord(headers) };
+  if (!hasHeader(mergedHeaders, RMT_SSR_CSP_HEADER)) {
+    mergedHeaders[RMT_SSR_CSP_HEADER] = cspPolicy.header;
+  }
+  return mergedHeaders;
+}
+
+function createDiagnostic(code, message, severity = 'error', details = {}) {
+  let safeDetails = {};
+  if (details && typeof details === 'object') {
+    safeDetails = JSON.parse(JSON.stringify(details, (key, value) => {
+      if (typeof value === 'function') return undefined;
+      if (value instanceof Map) return [...value.entries()];
+      if (value instanceof Set) return [...value.values()];
+      if (key === 'options' || key === 'diagnostics' || key === 'componentRegistry') return undefined;
+      return value;
+    }));
+  }
+  return {
+    schema: RMT_NODE_SSR_DIAGNOSTIC_SCHEMA,
+    code,
+    severity,
+    message,
+    ...safeDetails
+  };
+}
+
+function createDiagnosticsCollector(options = {}) {
+  const diagnostics = [];
+  return {
+    diagnostics,
+    publish(code, message, severity = 'error', details = {}) {
+      const diagnostic = createDiagnostic(code, message, severity, details);
+      diagnostics.push(diagnostic);
+      if (typeof options.publishDiagnostic === 'function') {
+        options.publishDiagnostic(diagnostic);
+      }
+      return diagnostic;
+    },
+    pushMany(entries) {
+      asArray(entries).forEach((entry) => {
+        if (!entry) return;
+        if (entry.schema === RMT_NODE_SSR_DIAGNOSTIC_SCHEMA) {
+          diagnostics.push(entry);
+        } else {
+          diagnostics.push(createDiagnostic(
+            entry.code || 'rmt.node_ssr.upstream_diagnostic',
+            entry.message || 'Upstream RMT diagnostic.',
+            entry.severity || 'warning',
+            { upstream: cloneJson(entry) }
+          ));
+        }
+      });
+    }
+  };
+}
+
+function isNonEmptyString(value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+function hasOwn(record, key) {
+  return Object.prototype.hasOwnProperty.call(record, key);
+}
+
+function validXScalerDiagnostics(value) {
+  return Array.isArray(value) && value.every((entry) => {
+    const diagnostic = objectRecord(entry);
+    return isNonEmptyString(diagnostic.code)
+      && isNonEmptyString(diagnostic.severity)
+      && isNonEmptyString(diagnostic.message);
+  });
+}
+
+function validXScalerRemoteSurfacePlan(plan, response) {
+  const ssr = objectRecord(plan.ssr);
+  const boundary = objectRecord(plan.runtimeBoundary);
+  const integrity = objectRecord(plan.integrity);
+  return plan.schema === XSCALER_REMOTE_SURFACE_PLAN_SCHEMA
+    && plan.protocol === XSCALER_PROTOCOL
+    && isNonEmptyString(plan.surface)
+    && plan.surface === response.surface
+    && isNonEmptyString(plan.surfaceId)
+    && plan.surfaceId.startsWith('remoteSurface:')
+    && isNonEmptyString(plan.owner)
+    && isNonEmptyString(plan.origin)
+    && plan.origin.startsWith('https://')
+    && ['sha256', 'sha384', 'sha512'].includes(integrity.algorithm)
+    && isNonEmptyString(integrity.digest)
+    && integrity.digest.startsWith(`${integrity.algorithm}-`)
+    && isNonEmptyString(plan.fallbackSurface)
+    && Array.isArray(plan.lanes)
+    && plan.lanes.length > 0
+    && plan.lanes.every((lane) => isNonEmptyString(objectRecord(lane).lane) && isNonEmptyString(objectRecord(lane).target))
+    && isNonEmptyString(ssr.mode)
+    && ssr.networkDuringRender === false
+    && boundary.remoteRuntimeExecution === false
+    && boundary.kernelRemoteExecution === false
+    && boundary.networkRequiredByKernel === false;
+}
+
+function validXScalerAtc(atc, response, plan) {
+  const boundary = objectRecord(atc.runtimeBoundary);
+  const expectedSurfaceId = plan.surfaceId || `remoteSurface:${response.surface}`;
+  return atc.schema === XSCALER_ATC_HANDOFF_SCHEMA
+    && atc.protocol === XSCALER_PROTOCOL
+    && atc.surfaceId === expectedSurfaceId
+    && isNonEmptyString(atc.sessionId)
+    && isNonEmptyString(atc.handoffSignal)
+    && isNonEmptyString(atc.lifecycleState)
+    && typeof atc.accepted === 'boolean'
+    && atc.ok === atc.accepted
+    && atc.accepted === response.accepted
+    && isNonEmptyString(atc.status)
+    && (response.accepted ? atc.status !== 'refused' : atc.status === 'refused')
+    && hasOwn(atc, 'fallback')
+    && boundary.remoteRuntimeExecution === false
+    && boundary.kernelRemoteExecution === false
+    && boundary.networkRequiredByHandoff === false
+    && validXScalerDiagnostics(atc.diagnostics);
+}
+
+function validXScalerPreflightResponse(response) {
+  const plan = objectRecord(response.remoteSurfacePlan);
+  const atc = objectRecord(response.atc);
+  const compatibility = objectRecord(response.compatibility);
+  const anchors = response.requiredAnchors;
+  const accepted = response.accepted === true;
+  const planPresent = response.remoteSurfacePlan != null;
+  const atcPresent = response.atc != null;
+  const rejection = objectRecord(response.rejection);
+  const requiredKeys = ['schema', 'protocol', 'requestId', 'accepted', 'ok', 'surface', 'compatibility', 'requiredAnchors', 'remoteSurfacePlan', 'atc', 'rejection', 'diagnostics'];
+  const commonValid = requiredKeys.every((key) => hasOwn(response, key))
+    && response.schema === XSCALER_PREFLIGHT_RESPONSE_SCHEMA
+    && response.protocol === XSCALER_PROTOCOL
+    && isNonEmptyString(response.requestId)
+    && typeof response.accepted === 'boolean'
+    && response.ok === response.accepted
+    && isNonEmptyString(response.surface)
+    && isNonEmptyString(compatibility.ssr)
+    && isNonEmptyString(compatibility.remoteSurfacePlan)
+    && isNonEmptyString(compatibility.xtensionDeployment)
+    && Array.isArray(anchors)
+    && anchors.every(isNonEmptyString)
+    && new Set(anchors).size === anchors.length
+    && validXScalerDiagnostics(response.diagnostics);
+  if (!commonValid) return false;
+  if (planPresent && !validXScalerRemoteSurfacePlan(plan, response)) return false;
+  if (atcPresent && !validXScalerAtc(atc, response, plan)) return false;
+  if (accepted) {
+    return planPresent
+      && atcPresent
+      && response.rejection === null
+      && compatibility.ssr === 'compatible'
+      && compatibility.remoteSurfacePlan === 'required'
+      && compatibility.xtensionDeployment === 'allowed';
+  }
+  return (!atcPresent || validXScalerAtc(atc, response, plan))
+    && isNonEmptyString(rejection.code)
+    && isNonEmptyString(rejection.message)
+    && compatibility.ssr === 'blocked'
+    && compatibility.remoteSurfacePlan === 'blocked'
+    && compatibility.xtensionDeployment === 'blocked';
+}
+
+function createXScalerSsrHydration(options, diagnostics) {
+  const configured = options.xscalerPreflights !== undefined
+    ? options.xscalerPreflights
+    : options.xscalerPreflight;
+  const responses = asArray(configured);
+  const preflights = [];
+  responses.forEach((entry, index) => {
+    const response = objectRecord(entry && entry.response || entry);
+    const plan = objectRecord(response.remoteSurfacePlan);
+    const atc = objectRecord(response.atc);
+    if (!validXScalerPreflightResponse(response)) {
+      diagnostics.publish(
+        'rmt.node_ssr.xscaler_preflight_invalid',
+        'Node SSR accepts only a validated XScaler preflight response with no-network/no-remote-execution boundaries.',
+        'error',
+        { index }
+      );
+      return;
+    }
+    preflights.push({
+      schema: response.schema,
+      requestId: response.requestId || null,
+      accepted: response.accepted,
+      ok: response.ok,
+      status: response.accepted ? 'accepted' : 'rejected',
+      compatibility: cloneJson(response.compatibility || null),
+      remoteSurfacePlan: cloneJson(response.remoteSurfacePlan),
+      atc: cloneJson(response.atc),
+      rejection: cloneJson(response.rejection || null)
+    });
+  });
+  return {
+    schema: RMT_XSCALER_SSR_HYDRATION_SCHEMA,
+    mode: 'preflight-only',
+    networkDuringRender: false,
+    remoteModuleExecuted: false,
+    count: preflights.length,
+    preflights
+  };
+}
+
+function createValueResolver() {
+  const renderer = createRmtDomDescriptorRenderer({
+    documentTarget: {
+      createElement: () => ({}),
+      createTextNode: (text) => ({ nodeType: 3, textContent: stableString(text, '') }),
+      createDocumentFragment: () => ({ nodeType: 11, childNodes: [] })
+    }
+  });
+  const resolve = (value, context = {}) => renderer.resolveValue(value, context);
+  resolve.attribute = (value, context = {}) => renderer.resolveAttributeValue(value, context);
+  return resolve;
+}
+
+function hasTrustBoundary(record, options = {}) {
+  const candidates = asArray(record && (record.trustBoundary || record.trust || record.securityBoundary || record.sanitizer));
+  const optionCandidates = asArray(options.trustBoundary || options.defaultTrustBoundary);
+  return [...candidates, ...optionCandidates].some((entry) => TRUST_BOUNDARY_TOKENS.has(stableString(entry, '').trim()));
+}
+
+function fallbackSanitizeHtml(html, diagnostics, context) {
+  let sanitized = stableString(html, '');
+  const before = sanitized;
+  sanitized = sanitized.replace(new RegExp(`<(${BLOCKED_MARKUP_TAG_PATTERN})\\b[^>]*>[\\s\\S]*?<\\/\\1>`, 'giu'), '');
+  sanitized = sanitized.replace(new RegExp(`<\\/?(${BLOCKED_MARKUP_TAG_PATTERN})\\b[^>]*>`, 'giu'), '');
+  sanitized = sanitized.replace(/\s+on[a-z0-9_-]+\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/giu, '');
+  sanitized = sanitized.replace(/\s+srcdoc\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/giu, '');
+  sanitized = sanitized.replace(/\s+(href|src|action|formaction|poster|xlink:href)\s*=\s*("[^"]*"|'[^']*'|[^\s>]+)/giu, (match, name, rawValue) => {
+    const value = rawValue.replace(/^['"]|['"]$/gu, '');
+    return isSafeUrl(value) ? match : '';
+  });
+  if (before !== sanitized) {
+    diagnostics.publish(
+      'rmt.node_ssr.html_sanitized',
+      'Unsafe server markup was sanitized by the Node SSR adapter fallback sanitizer.',
+      'warning',
+      context
+    );
+  }
+  return sanitized;
+}
+
+function sanitizeHtmlFragment(html, diagnostics, context, options = {}) {
+  if (!hasTrustBoundary(context && context.descriptor, options)) {
+    diagnostics.publish(
+      'rmt.node_ssr.trust_boundary_missing',
+      'HTML fragments require an explicit XTend trust boundary or host sanitizer.',
+      'error',
+      context
+    );
+  }
+  if (typeof options.sanitizeHtmlOutput === 'function') {
+    return stableString(options.sanitizeHtmlOutput(stableString(html, ''), { ...context, diagnostics: diagnostics.diagnostics }), '');
+  }
+  return fallbackSanitizeHtml(html, diagnostics, context);
+}
+
+function serializeAttribute(name, value, diagnostics, context) {
+  const attrName = normalizeAttributeName(name);
+  if (!attrName || !isSafeAttributeName(attrName)) {
+    diagnostics.publish('rmt.node_ssr.attribute_blocked', `Blocked invalid attribute "${stableString(name, '<empty>')}".`, 'error', context);
+    return '';
+  }
+  if (attrName.startsWith('on') || BLOCKED_ATTRIBUTES.has(attrName)) {
+    diagnostics.publish('rmt.node_ssr.attribute_blocked', `Blocked unsafe attribute "${attrName}".`, 'error', context);
+    return '';
+  }
+  const resolvedValue = context && typeof context.resolveValue === 'function'
+    ? context.resolveValue.attribute(value, context)
+    : value;
+  if (resolvedValue == null || resolvedValue === false) return '';
+  if (!attrName.startsWith('data-') && (!['string', 'number', 'boolean'].includes(typeof resolvedValue) || typeof resolvedValue === 'number' && !Number.isFinite(resolvedValue))) {
+    diagnostics.publish('rmt.node_ssr.attribute_value_invalid', `Attribute "${attrName}" requires a scalar value.`, 'error', { tag: context && context.tag, attribute: attrName });
+    return '';
+  }
+  if (URL_ATTRIBUTES.has(attrName) && !isSafeUrl(resolvedValue)) {
+    diagnostics.publish('rmt.node_ssr.url_blocked', `Blocked unsafe URL in "${attrName}".`, 'error', { ...context, attribute: attrName });
+    return '';
+  }
+  if (resolvedValue === true) return ` ${attrName}="true"`;
+  if (typeof resolvedValue === 'object') {
+    return ` ${attrName}="${escapeAttribute(JSON.stringify(resolvedValue))}"`;
+  }
+  return ` ${attrName}="${escapeAttribute(resolvedValue)}"`;
+}
+
+function mergeAttributes(...records) {
+  return Object.assign({}, ...records.map(objectRecord));
+}
+
+function serializeAttributes(attributes, diagnostics, context) {
+  return Object.entries(objectRecord(attributes))
+    .map(([name, value]) => serializeAttribute(name, value, diagnostics, context))
+    .join('');
+}
+
+function normalizeDescriptor(input) {
+  if (Array.isArray(input)) return { type: 'fragment', children: input };
+  if (typeof input === 'string' || typeof input === 'number' || typeof input === 'boolean') return { type: 'text', text: input };
+  if (!input || typeof input !== 'object') return { type: 'empty' };
+  if (input.descriptor) return normalizeDescriptor(input.descriptor);
+  if (input.domDescriptor) return normalizeDescriptor(input.domDescriptor);
+  if (input.type || input.kind || input.tag || input.component || input.html || input.text || input.children || input.nodes) return input;
+  return { type: 'empty' };
+}
+
+function orchestrationDescriptor(artifacts, coreDocument) {
+  const root = artifacts && artifacts.render && artifacts.render.root;
+  return root ? normalizeDescriptor(root) : deriveDescriptorFromCore(coreDocument);
+}
+
+function descriptorWithSlot(descriptor, slotName) {
+  if (!descriptor || typeof descriptor !== 'object' || Array.isArray(descriptor)) {
+    return {
+      type: 'element',
+      tag: 'span',
+      attributes: { slot: slotName },
+      children: [descriptor]
+    };
+  }
+  if (descriptor.text != null && !descriptor.type && !descriptor.tag && !descriptor.component) {
+    return {
+      type: 'element',
+      tag: 'span',
+      attributes: {
+        ...objectRecord(descriptor.attributes),
+        slot: descriptor.slot || objectRecord(descriptor.attributes).slot || slotName
+      },
+      children: [{ type: 'text', text: descriptor.text }]
+    };
+  }
+  return {
+    ...descriptor,
+    attributes: {
+      ...objectRecord(descriptor.attributes),
+      slot: descriptor.slot || objectRecord(descriptor.attributes).slot || slotName
+    }
+  };
+}
+
+function resolveComponentDescriptor(descriptor, registry, diagnostics, context) {
+  const tag = descriptor.tag || descriptor.componentTag || descriptor.host || descriptor.component || descriptor.ref || 'div';
+  const capability = registry && typeof registry.resolveComponentCapability === 'function'
+    ? registry.resolveComponentCapability(tag) || registry.resolveComponentCapability(descriptor.component)
+    : null;
+  const built = capability && typeof registry.buildComponentDescriptor === 'function'
+    ? registry.buildComponentDescriptor({
+        ...descriptor,
+        tag: capability.tag,
+        component: descriptor.component || capability.tag,
+        id: descriptor.id || descriptor.key || capability.tag
+      }, { source: context.source || null })
+    : null;
+  if (capability && context.componentCapabilities && !context.componentCapabilities.has(capability.tag)) {
+    context.componentCapabilities.set(capability.tag, {
+      tag: capability.tag,
+      family: capability.family,
+      visualKind: capability.visualKind,
+      modulePath: capability.modulePath,
+      slots: asArray(capability.slots),
+      parts: asArray(capability.parts),
+      events: asArray(capability.events),
+      importPolicy: capability.importPolicy,
+      kernelBoundary: capability.kernelBoundary
+    });
+  }
+  if (!capability && tag && String(tag).startsWith('x-')) {
+    diagnostics.publish(
+      'rmt.node_ssr.component_capability_missing',
+      `No XTend component capability metadata was available for "${tag}".`,
+      'warning',
+      { tag, source: context.source || null }
+    );
+  }
+  return {
+    descriptor: built || descriptor,
+    capability
+  };
+}
+
+function serializeElementLike(descriptor, context) {
+  const tag = descriptor.tag === 'form' && context.options.nativeForms === true ? 'form' : normalizeTagName(descriptor.tag || descriptor.element || 'div', context.diagnostics, context);
+  const attributes = mergeAttributes(descriptor.attributes, descriptor.attrs);
+  if (context.coverage) {
+    context.coverage.descriptorElementNodes++;
+    if (attributes['data-rmt-resume-id']) context.coverage.resumeMarkedNodes++;
+  }
+  const children = asArray(descriptor.children || descriptor.nodes || descriptor.childNodes);
+  if (!children.length && Object.prototype.hasOwnProperty.call(descriptor, 'text')) children.push({ type: 'text', text: descriptor.text });
+  const open = `<${tag}${serializeAttributes(attributes, context.diagnostics, { ...context, tag })}>`;
+  if (VOID_TAGS.has(tag)) return open;
+  return `${open}${children.map((child, index) => serializeDescriptor(child, { ...context, source: { ...(context.source || {}), index } })).join('')}</${tag}>`;
+}
+
+function serializeComponent(descriptor, context) {
+  const registryResult = resolveComponentDescriptor(descriptor, context.componentRegistry, context.diagnostics, context);
+  const componentDescriptor = registryResult.descriptor;
+  const capability = registryResult.capability || componentDescriptor.capability || null;
+  if (context.coverage) {
+    context.coverage.componentNodes++;
+    if (!capability) context.coverage.missingCapabilityNodes++;
+  }
+  const tag = normalizeTagName(componentDescriptor.tag || descriptor.tag || descriptor.componentTag || descriptor.host || descriptor.component || descriptor.ref || 'div', context.diagnostics, context);
+  const partList = [
+    ...asArray(componentDescriptor.parts),
+    ...asArray(descriptor.parts || descriptor.part)
+  ].filter(Boolean);
+  const eventAttributes = Object.fromEntries(Object.entries(objectRecord(componentDescriptor.events || descriptor.events || descriptor.eventBindings))
+    .map(([eventName, action]) => [`data-rmt-event-${safeIdentifier(eventName, 'event')}`, stableString(action, '')]));
+  const propertyAttributes = Object.fromEntries(Object.entries(objectRecord(componentDescriptor.properties || componentDescriptor.props || descriptor.properties || descriptor.props))
+    .map(([name, value]) => [name, context.resolveValue(value, context)])
+    .filter(([, value]) => value == null || typeof value !== 'function')
+    .map(([name, value]) => {
+      if (value != null && typeof value === 'object') return [`data-rmt-prop-${safeIdentifier(name, 'prop')}`, JSON.stringify(value)];
+      return [name, {op:'literal',value}];
+    }));
+  const attributes = mergeAttributes(
+    componentDescriptor.attributes,
+    descriptor.attributes,
+    propertyAttributes,
+    {
+      'data-rmt-node-ssr': 'true',
+      'data-rmt-component-capability': capability && capability.tag || tag,
+      'data-rmt-component-family': capability && capability.family || componentDescriptor.attributes && componentDescriptor.attributes['data-rmt-component-family'],
+      'data-rmt-lazy-import': capability && capability.modulePath || componentDescriptor.attributes && componentDescriptor.attributes['data-rmt-lazy-import']
+    },
+    eventAttributes
+  );
+  if (partList.length) attributes.part = [...new Set(partList.map((entry) => stableString(entry, '').trim()).filter(Boolean))].join(' ');
+  if (context.coverage) {
+    context.coverage.descriptorElementNodes++;
+    if (attributes['data-rmt-resume-id']) context.coverage.resumeMarkedNodes++;
+  }
+  const slotChildren = Object.entries(objectRecord(componentDescriptor.slots || descriptor.slots))
+    .flatMap(([slotName, slotValue]) => asArray(slotValue).map((entry) => descriptorWithSlot(entry, slotName)));
+  const children = [
+    ...slotChildren,
+    ...asArray(componentDescriptor.children || componentDescriptor.nodes || descriptor.children || descriptor.nodes)
+  ];
+  if (!children.length && Object.prototype.hasOwnProperty.call(descriptor, 'text')) children.push({ type: 'text', text: descriptor.text });
+  const open = `<${tag}${serializeAttributes(attributes, context.diagnostics, { ...context, tag, capability: capability && capability.tag || tag })}>`;
+  return `${open}${children.map((child, index) => serializeDescriptor(child, { ...context, source: { ...(context.source || {}), index } })).join('')}</${tag}>`;
+}
+
+function serializeDescriptor(descriptorInput, context) {
+  const descriptor = normalizeDescriptor(descriptorInput);
+  const type = stableString(descriptor.type || descriptor.kind || (descriptor.component || descriptor.componentTag ? 'component' : descriptor.tag ? 'element' : descriptor.html ? 'html' : descriptor.text != null ? 'text' : 'fragment'), 'fragment');
+  if (type === 'empty') return '';
+  if (type === 'text') return escapeHtml(context.resolveValue(descriptor.text, context));
+  if (type === 'html' || type === 'trusted_html' || descriptor.html != null) {
+    if (context.coverage) context.coverage.rawHtmlFragments++;
+    return sanitizeHtmlFragment(context.resolveValue(descriptor.html || descriptor.content || '', context), context.diagnostics, { ...context, descriptor }, context.options);
+  }
+  if (type === 'component') return serializeComponent(descriptor, context);
+  if (type === 'element') return serializeElementLike(descriptor, context);
+  if (type === 'fragment') {
+    return asArray(descriptor.children || descriptor.nodes).map((child, index) => serializeDescriptor(child, {
+      ...context,
+      source: { ...(context.source || {}), index }
+    })).join('');
+  }
+  if (type === 'slot') {
+    return serializeDescriptor(descriptorWithSlot(descriptor.children || descriptor.text || '', descriptor.slot || descriptor.name || 'default'), context);
+  }
+  context.diagnostics.publish('rmt.node_ssr.descriptor_type_unsupported', `Unsupported SSR descriptor type "${type}".`, 'error', context);
+  return '';
+}
+
+function extractTextContent(html) {
+  return stableString(html, '').replace(/<[^>]*>/gu, '').replace(/\s+/gu, ' ').trim();
+}
+
+function findStateValue(coreDocument, selector) {
+  if (!selector) return null;
+  const candidates = [
+    selector.target,
+    selector.source,
+    selector.sourceRef,
+    selector.id && `state:${selector.id}`,
+    selector.name && `state:${selector.name}`
+  ].filter(Boolean);
+  const states = asArray(coreDocument && coreDocument.states);
+  for (const candidate of candidates) {
+    const found = states.find((state) => state && (state.id === candidate || state.name === candidate || state.target === candidate));
+    if (found) return found.initial || found.value || found.defaultValue || null;
+  }
+  return null;
+}
+
+function deriveDescriptorFromCore(coreDocument) {
+  const selectors = new Map(asArray(coreDocument && coreDocument.selectors).map((selector) => [selector.id || selector.name, selector]));
+  const lanes = asArray(coreDocument && coreDocument.lanes);
+  const children = asArray(coreDocument && coreDocument.surfaces).map((surface) => {
+    const selector = selectors.get(surface.source && (surface.source.selectorId || surface.source.id || surface.source.name));
+    const stateValue = findStateValue(coreDocument, selector);
+    const text = stateValue && (stateValue.text || stateValue.label || stateValue.value || stateValue.status);
+    const lane = lanes.find((entry) => entry && asArray(entry.surfaceIds || entry.surfaces).includes(surface.id));
+    return {
+      type: 'component',
+      tag: surface.component || surface.tag || 'section',
+      id: safeIdentifier(surface.id || surface.name),
+      key: safeIdentifier(surface.key || surface.id || surface.name),
+      attributes: {
+        id: safeIdentifier(surface.id || surface.name),
+        'data-rmt-surface-id': surface.id || surface.name,
+        'data-rmt-surface-name': surface.name || surface.id,
+        'data-rmt-surface-kind': surface.kind || surface.type || 'surface',
+        'data-rmt-primitive-id': surface.name || surface.id,
+        'data-rmt-lane': lane && (lane.name || lane.id) || 'server-prerender',
+        'data-rmt-source-ref': surface.sourceRef || surface.source && surface.source.sourceRef || null
+      },
+      children: text ? [{ type: 'text', text }] : []
+    };
+  });
+  return {
+    type: 'element',
+    tag: 'section',
+    attributes: {
+      'data-rmt-node-ssr-root': 'true',
+      'data-rmt-document-id': coreDocument && coreDocument.manifest && coreDocument.manifest.id || 'rmt-document'
+    },
+    children
+  };
+}
+
+async function loadDefaultCompiler(disabled) {
+  if (disabled) return null;
+  try {
+    const moduleApi = await import('../tools/rmt-language/vnext-compiler.js');
+    return moduleApi.compileRmtVNextSource || moduleApi.default && moduleApi.default.compileRmtVNextSource || null;
+  } catch {
+    return null;
+  }
+}
+
+async function loadDefaultStreamingContractFactory() {
+  try {
+    const moduleApi = await import('../tools/rmt-language/vnext-streaming.js');
+    return moduleApi.createStreamingContract || moduleApi.default && moduleApi.default.createStreamingContract || null;
+  } catch {
+    return null;
+  }
+}
+
+function isCoreDocument(value) {
+  return Boolean(value && typeof value === 'object' && (value.schema === 'xtend.rmt.core-format.vnext.v1' || Array.isArray(value.surfaces) && Array.isArray(value.operations)));
+}
+
+async function normalizeRenderInput(input, adapterOptions, renderOptions, diagnostics) {
+  const value = input && typeof input === 'object' && !Array.isArray(input) ? input : { descriptor: input };
+  if (value.descriptor || value.domDescriptor) {
+    return {
+      kind: 'dom-descriptor',
+      descriptor: normalizeDescriptor(value.descriptor || value.domDescriptor),
+      sourceRef: value.filePath || value.sourceRef || null
+    };
+  }
+  if (isCoreDocument(value.coreDocument || value.core || value)) {
+    const coreDocument = value.coreDocument || value.core || value;
+    return {
+      kind: 'core-document',
+      coreDocument,
+      descriptor: value.descriptor
+        ? normalizeDescriptor(value.descriptor)
+        : orchestrationDescriptor(value.orchestrationArtifacts, coreDocument),
+      sourceRef: value.filePath || coreDocument.sourceRef || null
+    };
+  }
+  if (value.template || value.preparedTemplate || value.kind === 'rmt_prepared_template') {
+    const template = value.template || value.preparedTemplate || value;
+    return {
+      kind: 'prepared-template',
+      template,
+      descriptor: normalizeDescriptor(template.descriptor || template.domDescriptor || template.markup && template.markup.descriptor || template.html && { html: template.html, trustBoundary: template.trustBoundary }),
+      sourceRef: value.filePath || template.sourceRef || null
+    };
+  }
+  if (typeof input === 'string' || typeof value.source === 'string' || typeof value.text === 'string') {
+    const source = typeof input === 'string' ? input : value.source || value.text;
+    const compileRmtVNextSource = adapterOptions.compileRmtVNextSource || renderOptions.compileRmtVNextSource || await loadDefaultCompiler(adapterOptions.disableAutoCompiler || renderOptions.disableAutoCompiler);
+    if (typeof compileRmtVNextSource !== 'function') {
+      diagnostics.publish(
+        'rmt.node_ssr.compiler_required',
+        'Rendering RMT source in the runtime-only adapter requires an injected compileRmtVNextSource function.',
+        'error',
+        { filePath: value.filePath || null }
+      );
+      return {
+        kind: 'source',
+        source,
+        sourceRef: value.filePath || null,
+        descriptor: { type: 'empty' }
+      };
+    }
+    const compileResult = compileRmtVNextSource(source, { filePath: value.filePath || value.sourceRef || 'inline.rmt' });
+    diagnostics.pushMany(compileResult && (compileResult.diagnostics || compileResult.compilerDiagnostics));
+    if (!compileResult || compileResult.ok === false || !compileResult.coreDocument) {
+      diagnostics.publish('rmt.node_ssr.compile_failed', 'RMT source could not be compiled for SSR.', 'error', { filePath: value.filePath || null });
+      return {
+        kind: 'source',
+        source,
+        compileResult,
+        sourceRef: value.filePath || null,
+        descriptor: { type: 'empty' }
+      };
+    }
+    return {
+      kind: 'source',
+      source,
+      compileResult,
+      coreDocument: compileResult.coreDocument,
+      descriptor: orchestrationDescriptor(compileResult.orchestrationArtifacts, compileResult.coreDocument),
+      sourceRef: value.filePath || compileResult.coreDocument.sourceRef || null
+    };
+  }
+  return {
+    kind: 'dom-descriptor',
+    descriptor: normalizeDescriptor(input),
+    sourceRef: null
+  };
+}
+
+function createChunk(renderState, html, descriptor, hydration, resume) {
+  const documentId = renderState.coreDocument && renderState.coreDocument.manifest && renderState.coreDocument.manifest.id || renderState.requestId;
+  const templateId = safeIdentifier(renderState.options.templateId || documentId, 'rmt-node-ssr-template');
+  const qualifiedId = `${safeIdentifier(renderState.options.namespace || 'rmt')}:${templateId}`;
+  return {
+    kind: RMT_NODE_SSR_CHUNK_KIND,
+    version: '1.0',
+    executionMode: renderState.executionMode,
+    transport: 'server',
+    rootId: renderState.rootId,
+    template: {
+      id: templateId,
+      qualifiedId,
+      namespace: renderState.options.namespace || 'rmt',
+      documentId,
+      mode: 'dom_descriptor',
+      props: []
+    },
+    target: {
+      elementId: renderState.rootId,
+      selector: `#${renderState.rootId}`,
+      ownershipMode: 'hydrate_existing',
+      namespace: renderState.options.namespace || 'rmt'
+    },
+    markup: {
+      html,
+      textContent: extractTextContent(html),
+      descriptor: cloneJson(descriptor)
+    },
+    hydration: {
+      bindings: [],
+      slots: [],
+      props: [],
+      templateHydration: {
+        mode: renderState.executionMode,
+        schema: RMT_NODE_SSR_HYDRATION_SCHEMA
+      },
+      errorBoundary: {
+        mode: 'preserve-server-markup'
+      },
+      reactivityHints: {
+        source: 'rmt-node-ssr-adapter'
+      },
+      ownershipMode: 'hydrate_existing',
+      resourceId: `template.chunk:${qualifiedId}`,
+      metadata: hydration,
+      resume
+    },
+    modelSnapshot: renderState.model || {},
+    plan: {
+      executionMode: renderState.executionMode,
+      rootId: renderState.rootId,
+      templateQualifiedId: qualifiedId,
+      namespace: renderState.options.namespace || 'rmt',
+      phases: ['server_prerender', 'html_delivery', renderState.executionMode === RMT_NODE_SSR_RESUME_EXECUTION_MODE ? 'client_resume' : 'client_hydrate']
+    },
+    renderedAt: renderState.renderedAt
+  };
+}
+
+function createPrerenderResponseEnvelope(renderState, chunk, hydration, resume, diagnostics, ok, cspPolicy, headers) {
+  const renderedAt = Date.parse(renderState.renderedAt) || Date.now();
+  const metadata = {
+    adapterKind: 'node-ssr',
+    adapterSchema: RMT_NODE_SSR_ADAPTER_SCHEMA,
+    hydrationSchema: RMT_NODE_SSR_HYDRATION_SCHEMA,
+    requestId: renderState.requestId,
+    sourceKind: hydration && hydration.sourceKind || null,
+    sourceRef: hydration && hydration.sourceRef || null,
+    cspPolicy: cloneJson(cspPolicy)
+  };
+  const request = {
+    kind: 'rmt_template_prerender_request',
+    version: '1.0',
+    executionMode: renderState.executionMode,
+    transport: 'server',
+    rootId: renderState.rootId,
+    template: cloneJson(chunk.template),
+    target: cloneJson(chunk.target),
+    metadata: cloneJson(metadata),
+    requestedAt: renderedAt
+  };
+  return {
+    kind: RMT_NODE_SSR_RESPONSE_KIND,
+    version: '1.0',
+    ok,
+    status: ok ? 'rendered' : 'blocked',
+    transport: 'server',
+    executionMode: renderState.executionMode,
+    adapterKind: 'node-ssr',
+    supportStatus: ok ? 'supported' : 'blocked',
+    rootId: renderState.rootId,
+    template: cloneJson(chunk.template),
+    target: cloneJson(chunk.target),
+    plan: cloneJson(chunk.plan),
+    request,
+    metadata,
+    headers: cloneJson(headers),
+    chunk,
+    chunks: [chunk],
+    hydration,
+    resume,
+    diagnostics: diagnostics.slice(),
+    superseded: false,
+    error: ok ? null : {
+      code: 'rmt.node_ssr.prerender_blocked',
+      message: 'Node SSR prerender response was blocked by diagnostics.',
+      diagnostics: diagnostics.slice()
+    },
+    requestedAt: renderedAt,
+    respondedAt: renderedAt
+  };
+}
+
+function normalizeDataSources(coreDocument, options = {}) {
+  const records = [
+    ...asArray(coreDocument && coreDocument.dataSources),
+    ...asArray(options.dataSources)
+  ];
+  return records.map((entry, index) => ({
+    id: entry.id || entry.dataSourceId || entry.target || `dataSource.${index}`,
+    kind: entry.kind || entry.type || null,
+    target: entry.target || entry.id || entry.dataSourceId || null,
+    unsafe: entry.unsafe === true || entry.requiresTrustBoundary === true,
+    format: entry.format || entry.responseType || null,
+    requiresTrustBoundary: entry.requiresTrustBoundary !== false && (entry.unsafe === true || entry.format === 'html' || entry.responseType === 'html' || entry.kind === 'endpoint'),
+    source: entry
+  }));
+}
+
+async function createStreamingContract(coreDocument, options, diagnostics) {
+  if (!coreDocument || asArray(coreDocument.dataSources).length === 0) return null;
+  const factory = options.createStreamingContract || await loadDefaultStreamingContractFactory();
+  if (typeof factory !== 'function') return null;
+  const contract = factory(coreDocument, {
+    dataSources: normalizeDataSources(coreDocument, options),
+    runtimeProbes: options.runtimeProbes || []
+  });
+  diagnostics.pushMany(contract && contract.diagnostics);
+  return contract;
+}
+
+async function resolveDataSource(record, context) {
+  const options = context.options || {};
+  if (typeof options.resolveDataSource === 'function') {
+    return options.resolveDataSource(record, context);
+  }
+  const endpointHandlers = objectRecord(options.endpointHandlers);
+  const target = record && (record.target || record.id);
+  if (target && typeof endpointHandlers[target] === 'function') {
+    return endpointHandlers[target](record, context);
+  }
+  const staticDataSources = {
+    ...objectRecord(options.staticDataSources),
+    ...objectRecord(options.fixtures)
+  };
+  if (target && Object.prototype.hasOwnProperty.call(staticDataSources, target)) {
+    return staticDataSources[target];
+  }
+  if (target && Object.prototype.hasOwnProperty.call(staticDataSources, record.id)) {
+    return staticDataSources[record.id];
+  }
+  if (typeof options.fetchAdapter === 'function') {
+    return options.fetchAdapter(record, context);
+  }
+  context.diagnostics.publish(
+    'rmt.node_ssr.datasource_missing',
+    `No host resolver was provided for data source "${target || '<unknown>'}".`,
+    'error',
+    { operationId: context.operationId || null, dataSourceId: record && record.id || null, target: target || null }
+  );
+  return null;
+}
+
+function normalizeJsonlPayload(value) {
+  if (value == null) return {};
+  if (typeof value === 'string') return { html: value };
+  if (value && typeof value === 'object') return value;
+  return { value };
+}
+
+function toJsonlLine(frame) {
+  return `${JSON.stringify(frame)}\n`;
+}
+
+function createFrameFactory(base) {
+  let sequence = base.sequence || 0;
+  return (type, fields = {}) => ({
+    schema: RMT_NODE_SSR_JSONL_FRAME_SCHEMA,
+    type,
+    requestId: base.requestId,
+    sequence: sequence++,
+    operationId: fields.operationId || null,
+    variant: fields.variant || null,
+    capability: fields.capability || null,
+    lane: fields.lane || null,
+    chunkKey: fields.chunkKey || null,
+    payload: fields.payload || {},
+    diagnostics: asArray(fields.diagnostics)
+  });
+}
+
+function hasBlockingDiagnostics(diagnostics) {
+  return asArray(diagnostics).some((entry) => BLOCKING_SEVERITIES.has(entry && entry.severity));
+}
+
+function collectPreloads(html) {
+  const preloads = [];
+  for (const match of stableString(html, '').matchAll(/data-rmt-lazy-import="([^"]+)"/gu)) {
+    const href = match[1];
+    if (href && !preloads.some((entry) => entry.href === href)) {
+      preloads.push({ href, as: 'script', rel: 'modulepreload' });
+    }
+  }
+  return preloads;
+}
+
+export function createRmtNodeSsrAdapter(options = {}) {
+  const adapterOptions = { ...options };
+  const resolveValue = createValueResolver();
+  const componentRegistry = adapterOptions.componentRegistry || (
+    adapterOptions.manifest
+      ? createRmtComponentCapabilityRegistry({
+          manifest: adapterOptions.manifest,
+          sourceTexts: adapterOptions.sourceTexts || {},
+          contracts: adapterOptions.contracts || {},
+          metadata: adapterOptions.metadata || {}
+        })
+      : null
+  );
+
+  async function render(input, renderOptions = {}) {
+    const mergedOptions = { ...adapterOptions, ...renderOptions };
+    const diagnostics = createDiagnosticsCollector(mergedOptions);
+    const cspPolicy = createSsrCspPolicy(mergedOptions);
+    const headers = createSsrSecurityHeaders(cspPolicy, mergedOptions.headers);
+    const requestId = safeIdentifier(mergedOptions.requestId || mergedOptions.operationId || `rmt-node-ssr-${Date.now()}`);
+    const executionMode = normalizeExecutionMode(mergedOptions, diagnostics);
+    const normalized = await normalizeRenderInput(input, adapterOptions, renderOptions, diagnostics);
+    const rootId = safeIdentifier(mergedOptions.rootId || 'rmt-node-ssr-root');
+    const generation = safeIdentifier(mergedOptions.resume && mergedOptions.resume.generation || mergedOptions.generation || requestId);
+    const renderDescriptor = executionMode === RMT_NODE_SSR_RESUME_EXECUTION_MODE
+      ? decorateResumeDescriptor(normalized.descriptor, rootId, generation)
+      : normalized.descriptor;
+    const componentCapabilities = new Map();
+    const coverage = {schema:'xtend.rmt.ssr-coverage.v1',descriptorElementNodes:0,resumeMarkedNodes:0,componentNodes:0,missingCapabilityNodes:0,rawHtmlFragments:0};
+    const html = serializeDescriptor(renderDescriptor, {
+      options: mergedOptions,
+      diagnostics,
+      componentRegistry: mergedOptions.componentRegistry || componentRegistry,
+      componentCapabilities,
+      coverage,
+      model: mergedOptions.model || {},
+      selectorValues: mergedOptions.selectorValues || {},
+      source: { inputKind: normalized.kind, sourceRef: normalized.sourceRef },
+      resolveValue
+    });
+    const streamingContract = await createStreamingContract(normalized.coreDocument, mergedOptions, diagnostics);
+    const xscaler = createXScalerSsrHydration(mergedOptions, diagnostics);
+    const hydration = {
+      schema: RMT_NODE_SSR_HYDRATION_SCHEMA,
+      requestId,
+      executionMode,
+      sourceKind: normalized.kind,
+      sourceRef: normalized.sourceRef,
+      componentCapabilities: [...componentCapabilities.values()],
+      coreDocumentSchema: normalized.coreDocument && normalized.coreDocument.schema || null,
+      streamingContractSchema: streamingContract && streamingContract.schema || null,
+      cspPolicy,
+      xscaler
+    };
+    // Marker coverage is not proof of a successful client resume. Opaque HTML
+    // nodes and actual browser fallback counts are intentionally not inferred.
+    hydration.coverage = {...coverage, resumeMarkerCoverage:coverage.descriptorElementNodes ? coverage.resumeMarkedNodes / coverage.descriptorElementNodes : null};
+    const renderState = {
+      requestId,
+      rootId,
+      executionMode,
+      generation,
+      templateId: safeIdentifier(mergedOptions.templateId || normalized.coreDocument && normalized.coreDocument.manifest && normalized.coreDocument.manifest.id || requestId),
+      options: mergedOptions,
+      coreDocument: normalized.coreDocument,
+      renderedAt: mergedOptions.renderedAt || new Date().toISOString(),
+      model: mergedOptions.model || {}
+    };
+    const resume = await createResumeEnvelope(renderState, html, renderDescriptor, hydration, diagnostics);
+    const chunk = createChunk(renderState, html, renderDescriptor, hydration, resume);
+    const ok = !hasBlockingDiagnostics(diagnostics.diagnostics);
+    const result = {
+      schema: RMT_NODE_SSR_RENDER_RESULT_SCHEMA,
+      adapterSchema: RMT_NODE_SSR_ADAPTER_SCHEMA,
+      ok,
+      status: ok ? 'rendered' : 'blocked',
+      requestId,
+      html,
+      head: {
+        preloads: collectPreloads(html),
+        csp: cspPolicy,
+        securityHeaders: headers,
+        hints: [
+          {
+            rel: 'xtend-rmt-hydration',
+            schema: RMT_NODE_SSR_HYDRATION_SCHEMA
+          },
+          {
+            rel: 'xtend-xscaler-preflight',
+            schema: RMT_XSCALER_SSR_HYDRATION_SCHEMA,
+            count: xscaler.count
+          }
+        ]
+      },
+      headers,
+      cspPolicy,
+      chunks: [chunk],
+      response: createPrerenderResponseEnvelope(renderState, chunk, hydration, resume, diagnostics.diagnostics, ok, cspPolicy, headers),
+      hydration,
+      resume,
+      streamingContract,
+      componentCapabilities: [...componentCapabilities.values()],
+      fabricTelemetryHints: {
+        schema: 'xtend.rmt.node-ssr-fabric-telemetry-hints.v1',
+        lanes: asArray(normalized.coreDocument && normalized.coreDocument.lanes).map((lane) => lane.id || lane.name).filter(Boolean),
+        kernelBoundary: RMT_NODE_SSR_KERNEL_BOUNDARY,
+        transport: 'node-ssr'
+      },
+      diagnostics: diagnostics.diagnostics.slice()
+    };
+    return result;
+  }
+
+  async function* streamJsonl(input, streamOptions = {}) {
+    const options = { ...adapterOptions, ...streamOptions };
+    const host = createRmtSsrStreamHost(options);
+    const iterator = streamFrames(input, { ...options, signal: host.signal });
+    let sequence = 0, requestId = safeIdentifier(options.requestId || 'rmt-node-stream'), count = 0;
+    try {
+      while (true) {
+        const next = await host.next(iterator);
+        if (next.done) break;
+        const record = JSON.parse(next.value);
+        requestId = record.requestId; sequence = record.sequence + 1;
+        if (record.type === 'diagnostic') count += record.diagnostics.length;
+        yield next.value;
+      }
+    } catch (error) {
+      const diagnostics = [createDiagnostic(host.signal.aborted ? 'rmt.node_ssr.stream_aborted' : 'rmt.node_ssr.stream_failed', 'The SSR stream did not complete.', 'error')];
+      try { options.onError?.(error); } catch { diagnostics.push(createDiagnostic('rmt.node_ssr.error_handler_failed', 'The host error handler failed.', 'error')); }
+      const frame = createFrameFactory({ requestId, sequence });
+      if (!sequence) yield toJsonlLine(frame('start'));
+      yield toJsonlLine(frame('error', { diagnostics, payload: { status: 'blocked' } }));
+      yield toJsonlLine(frame('complete', { payload: { ok: false, status: 'blocked', diagnostics: count + diagnostics.length } }));
+    } finally {
+      await host.close(iterator);
+    }
+  }
+
+  async function* streamFrames(input, streamOptions = {}) {
+    const mergedOptions = { ...adapterOptions, ...streamOptions };
+    const renderResult = await render(input, { ...mergedOptions, streamMode: true });
+    const streamDiagnostics = [...renderResult.diagnostics];
+    const frame = createFrameFactory({ requestId: renderResult.requestId });
+    yield toJsonlLine(frame('start', {
+      payload: {
+        adapterSchema: RMT_NODE_SSR_ADAPTER_SCHEMA,
+        streamingContractSchema: renderResult.streamingContract && renderResult.streamingContract.schema || RMT_NODE_SSR_STREAMING_CONTRACT_SCHEMA,
+        cspPolicy: renderResult.cspPolicy,
+        headers: renderResult.headers
+      }
+    }));
+    for (const diagnostic of renderResult.diagnostics) {
+      yield toJsonlLine(frame('diagnostic', { diagnostics: [diagnostic], payload: { code: diagnostic.code } }));
+    }
+    for (const capability of renderResult.componentCapabilities) {
+      yield toJsonlLine(frame('component', {
+        capability: capability.tag,
+        payload: capability
+      }));
+    }
+    yield toJsonlLine(frame('html', {
+      variant: 'ssr',
+      capability: 'stream.ssr.incremental',
+      lane: 'server-prerender',
+      chunkKey: renderResult.chunks[0] && renderResult.chunks[0].template && renderResult.chunks[0].template.qualifiedId,
+      payload: { html: renderResult.html }
+    }));
+    const operations = asArray(
+      renderResult.streamingContract && (renderResult.streamingContract.streams || renderResult.streamingContract.operations)
+    );
+    for (const operation of operations) {
+      if (mergedOptions.signal && mergedOptions.signal.aborted) {
+        streamDiagnostics.push(createDiagnostic('rmt.node_ssr.stream_aborted', 'Node SSR JSONL stream was aborted.', 'error'));
+        yield toJsonlLine(frame('error', {
+          operationId: operation.operationId || operation.id,
+          variant: operation.variant,
+          capability: operation.capability,
+          diagnostics: [createDiagnostic('rmt.node_ssr.stream_aborted', 'Node SSR JSONL stream was aborted.', 'error', { operationId: operation.operationId || operation.id })]
+        }));
+        break;
+      }
+      const operationId = operation.operationId || operation.id || null;
+      const record = operation.dataSource
+        ? {
+            id: operation.dataSource.id || operation.sourceId || operation.sourceRef || operationId,
+            kind: operation.dataSource.kind || null,
+            target: operation.dataSource.target || operation.dataSource.id || null,
+            unsafe: operation.dataSource.catalog && operation.dataSource.catalog.unsafe === true,
+            format: operation.dataSource.catalog && operation.dataSource.catalog.format || null,
+            requiresTrustBoundary: operation.security && operation.security.required === true,
+            source: operation.dataSource
+          }
+        : null;
+      if (!record) continue;
+      const diagnostics = createDiagnosticsCollector(mergedOptions);
+      let payload;
+      try {
+        payload = normalizeJsonlPayload(await resolveDataSource(record, {
+        options: mergedOptions,
+        diagnostics,
+        operationId,
+        renderResult
+      }));
+      } catch (error) {
+        diagnostics.publish('rmt.node_ssr.datasource_failed', 'The host data source failed.', 'error', { operationId });
+        if (typeof mergedOptions.onError === 'function') mergedOptions.onError(error);
+        payload = {};
+      }
+      if (payload.html != null) {
+        const html = sanitizeHtmlFragment(payload.html, diagnostics, {
+          descriptor: {
+            trustBoundary: payload.trustBoundary
+              || record.source && record.source.trustBoundary
+              || operation.security && operation.security.boundaryIds
+              || mergedOptions.defaultTrustBoundary
+          },
+          operationId
+        }, mergedOptions);
+        yield toJsonlLine(frame('html', {
+          operationId,
+          variant: operation.variant,
+          capability: operation.capability,
+          lane: operation.scheduler && operation.scheduler.laneId || operation.lane || operation.variant || null,
+          chunkKey: operation.chunking && operation.chunking.metadata && operation.chunking.metadata.chunkKey || operation.chunkKey || operationId,
+          payload: { html, dataSourceId: record.id }
+        }));
+      }
+      if (payload.descriptor) {
+        const descriptorHtml = serializeDescriptor(payload.descriptor, {
+          options: mergedOptions,
+          diagnostics,
+          componentRegistry: mergedOptions.componentRegistry || componentRegistry,
+          componentCapabilities: new Map(),
+          model: mergedOptions.model || {},
+          selectorValues: mergedOptions.selectorValues || {},
+          source: { inputKind: 'stream-descriptor', operationId },
+          resolveValue
+        });
+        yield toJsonlLine(frame('html', {
+          operationId,
+          variant: operation.variant,
+          capability: operation.capability,
+          lane: operation.scheduler && operation.scheduler.laneId || operation.lane || operation.variant || null,
+          chunkKey: operation.chunking && operation.chunking.metadata && operation.chunking.metadata.chunkKey || operation.chunkKey || operationId,
+          payload: { html: descriptorHtml, dataSourceId: record.id }
+        }));
+      }
+      streamDiagnostics.push(...diagnostics.diagnostics);
+      for (const diagnostic of diagnostics.diagnostics) {
+        yield toJsonlLine(frame('diagnostic', {
+          operationId,
+          variant: operation.variant,
+          capability: operation.capability,
+          diagnostics: [diagnostic],
+          payload: { code: diagnostic.code }
+        }));
+      }
+      if (diagnostics.diagnostics.some(d => ['error', 'fatal'].includes(d.severity))) {
+        yield toJsonlLine(frame('error', { operationId, diagnostics: diagnostics.diagnostics, payload: { status: 'blocked' } }));
+      }
+    }
+    yield toJsonlLine(frame('hydration', {
+      variant: 'hydration',
+      capability: 'stream.hydration.chunked',
+      lane: 'client-hydrate',
+      chunkKey: renderResult.chunks[0] && renderResult.chunks[0].template && renderResult.chunks[0].template.qualifiedId,
+      payload: renderResult.hydration
+    }));
+    yield toJsonlLine(frame('complete', {
+      payload: {
+        ok: renderResult.ok && !streamDiagnostics.some(d => ['error', 'fatal'].includes(d.severity)),
+        status: streamDiagnostics.some(d => ['error', 'fatal'].includes(d.severity)) ? 'blocked' : renderResult.status,
+        diagnostics: streamDiagnostics.length
+      }
+    }));
+  }
+
+  function toNodeReadable(input, streamOptions = {}) {
+    const host = createRmtSsrStreamHost({ ...adapterOptions, ...streamOptions });
+    const iterator = streamJsonl(input, { ...streamOptions, signal: host.signal })[Symbol.asyncIterator]();
+    let pending = false;
+    return new Readable({
+      objectMode: true,
+      read() {
+        if (pending) return;
+        pending = true;
+        iterator.next().then(next => {
+          pending = false;
+          if (!this.destroyed) this.push(next.done ? null : next.value);
+        }, error => this.destroy(error));
+      },
+      destroy(error, callback) {
+        // Abort before awaiting iterator.return(): a provider may still be pending.
+        host.abort(error);
+        host.close(iterator).then(() => callback(error), callback);
+      }
+    });
+  }
+
+  async function toHttpResponse(input, responseOptions = {}) {
+    const result = await render(input, responseOptions);
+    return {
+      status: !result.ok && !(responseOptions.status >= 400) ? 500 : responseOptions.status || (result.ok ? 200 : 500),
+      headers: createSsrSecurityHeaders(result.cspPolicy, {
+        'Content-Type': 'text/html; charset=UTF-8',
+        'X-XTend-RMT-SSR-Adapter': RMT_NODE_SSR_ADAPTER_SCHEMA,
+        ...objectRecord(result.headers),
+        ...objectRecord(responseOptions.headers)
+      }),
+      body: result.html,
+      result
+    };
+  }
+
+  async function sendNodeResponse(nodeResponse, input, responseOptions = {}) {
+    const response = await toHttpResponse(input, responseOptions);
+    if (nodeResponse && typeof nodeResponse === 'object') {
+      nodeResponse.statusCode = response.status;
+      Object.entries(response.headers).forEach(([name, value]) => {
+        if (typeof nodeResponse.setHeader === 'function') nodeResponse.setHeader(name, value);
+      });
+      if (typeof nodeResponse.end === 'function') nodeResponse.end(response.body);
+    }
+    return response;
+  }
+
+  function toReadableStream(input, streamOptions = {}) {
+    if (typeof ReadableStream === 'function') {
+      const host = createRmtSsrStreamHost({ ...adapterOptions, ...streamOptions });
+      const iterable = streamJsonl(input, { ...streamOptions, signal: host.signal });
+      const iterator = iterable[Symbol.asyncIterator]();
+      return new ReadableStream({
+        async pull(controller) {
+          const next = await iterator.next();
+          if (next.done) {
+            await host.close();
+            controller.close();
+          } else {
+            controller.enqueue(next.value);
+          }
+        },
+        async cancel() {
+          await host.close(iterator);
+        }
+      });
+    }
+    return Readable.toWeb(toNodeReadable(input, streamOptions));
+  }
+
+  return Object.freeze({
+    schema: RMT_NODE_SSR_ADAPTER_SCHEMA,
+    kernelBoundary: RMT_NODE_SSR_KERNEL_BOUNDARY,
+    componentRegistry,
+    render,
+    streamJsonl,
+    toReadableStream,
+    toNodeReadable,
+    toHttpResponse,
+    sendNodeResponse,
+    renderDescriptorToHtml(descriptor, renderOptions = {}) {
+      const diagnostics = createDiagnosticsCollector({ ...adapterOptions, ...renderOptions });
+      const componentCapabilities = new Map();
+      const html = serializeDescriptor(descriptor, {
+        options: { ...adapterOptions, ...renderOptions },
+        diagnostics,
+        componentRegistry: renderOptions.componentRegistry || componentRegistry,
+        componentCapabilities,
+        model: renderOptions.model || {},
+        selectorValues: renderOptions.selectorValues || {},
+        source: { inputKind: 'descriptor-helper' },
+        resolveValue
+      });
+      return {
+        html,
+        componentCapabilities: [...componentCapabilities.values()],
+        diagnostics: diagnostics.diagnostics.slice()
+      };
+    },
+    listDiagnostics() {
+      return componentRegistry && typeof componentRegistry.listDiagnostics === 'function'
+        ? componentRegistry.listDiagnostics()
+        : [];
+    }
+  });
+}
+
+export default {
+  RMT_NODE_SSR_ADAPTER_SCHEMA,
+  RMT_NODE_SSR_RENDER_RESULT_SCHEMA,
+  RMT_NODE_SSR_JSONL_FRAME_SCHEMA,
+  RMT_NODE_SSR_DIAGNOSTIC_SCHEMA,
+  RMT_NODE_SSR_HYDRATION_SCHEMA,
+  RMT_NODE_SSR_CHUNK_KIND,
+  RMT_NODE_SSR_RESPONSE_KIND,
+  RMT_NODE_SSR_EXECUTION_MODE,
+  RMT_NODE_SSR_RESUME_EXECUTION_MODE,
+  RMT_NODE_SSR_EXECUTION_MODES,
+  RMT_SSR_RESUME_ENVELOPE_SCHEMA,
+  RMT_SSR_RESUME_INTEGRITY_SCHEMA,
+  RMT_NODE_SSR_STREAMING_CONTRACT_SCHEMA,
+  RMT_NODE_SSR_KERNEL_BOUNDARY,
+  RMT_SSR_CSP_POLICY_SCHEMA,
+  RMT_SSR_CSP_HEADER,
+  RMT_XSCALER_SSR_HYDRATION_SCHEMA,
+  canonicalizeRmtResumePayload,
+  createRmtNodeSsrAdapter
+};

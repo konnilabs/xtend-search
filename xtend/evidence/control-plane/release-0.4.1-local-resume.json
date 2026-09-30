@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "resume": {
+    "status": "resumed",
+    "verified": true
+  },
+  "type": "search",
+  "preserved": true,
+  "errors": []
+}

@@ -1,3 +1,4 @@
+require('../patches/ssr-resume/apply.cjs')();
 const fs=require('node:fs'),path=require('node:path'),{createHash}=require('node:crypto');
 const {buildMaracaBundleAsync}=require('@ccslabs/xtend/maraca');
 const {buildPages}=require('@ccslabs/xtend/rmt-language/page-build');

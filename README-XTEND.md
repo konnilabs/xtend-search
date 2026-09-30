@@ -6,7 +6,7 @@ In 0.3.4: korrigierte Sprachabdeckung für Quellen mit SearXNG-Regionskatalog, i
 
 In 0.3.3: wiederhergestelltes Favicon, bereinigte Navigation und About als XDialog mit barrierearmem Seiten-Fallback. [Update-Anleitung](xtend/docs/UPGRADE-0.3.3.md).
 
-Aktuelles Frontend: **0.3.5**, Backend: **0.3.0**. Gespeicherte Suchfilter, explizite SafeSearch-Ausnahmen pro Quelle und immer sichtbare Wissenskarten: [Update und Bedienung](xtend/docs/UPGRADE-0.3.2.md).
+Aktuelles Frontend: **0.4.1**, Backend: **0.4.0**. SSR-Attributkorrektur, kompakteres Resume-Wire und Capability-Abdeckung: [Patch und Abnahme](xtend/docs/RELEASE-0.4.1.md). Gespeicherte Suchfilter, explizite SafeSearch-Ausnahmen pro Quelle und immer sichtbare Wissenskarten: [Update und Bedienung](xtend/docs/UPGRADE-0.3.2.md).
 
 Der aktuelle Entwicklungsstand verwendet einen eigenen XTend/Node-Container und einen privaten SearXNG-Container. Die neue Admin-Oberfläche liegt unter `/admin` und verwendet Nextclouds eingebautes OAuth2 mit expliziten Rollen. Quellen bleiben bis zur administrativen Freigabe gesperrt.
 

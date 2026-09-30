@@ -1,3 +1,4 @@
+import {ssrCapabilities} from './ssr-capabilities.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -14,7 +15,7 @@ const publicKey=JSON.parse(fs.readFileSync(path.join(secretDir,'resume-public.js
 const actual=createPublicKey(key).export({format:'jwk'});
 if(actual.x!==publicKey.x || actual.y!==publicKey.y)throw new Error('Resume key does not match the build.');
 const pages=createNodePageHost({
- manifest,compactResponses:true,timeoutMs:15000,
+ manifest,ssr:ssrCapabilities,compactResponses:true,timeoutMs:15000,
  createContext:request=>({contextKey:'xtend-search-public-'+manifest.version,origin:'http://localhost',clientIp:request.headers['x-real-ip'] || '127.0.0.1'}),
  resolvePage:async context=>{
   const url=new URL(context.request.url,'http://localhost');
