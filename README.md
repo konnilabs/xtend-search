@@ -4,7 +4,7 @@ Meta search engine powered by SearXNG and XTend/Maraca.
 
 XTend.search provides server-rendered, resumable search, XScaler result streaming and a separate operations dashboard. SearXNG remains the Python search core; the public interface and Observatory run in their own XTend/Node container.
 
-Current baseline: **frontend 0.4.3**, **SearXNG adapter 0.4.2**, **XTend 0.8.0 / Hydrangea**.
+Current baseline: **frontend 0.4.4**, **SearXNG adapter 0.4.2**, **XTend 0.8.0 / Hydrangea**.
 
 ## Features
 
@@ -61,8 +61,8 @@ GitHub Actions runs this build and test sequence on pushes and pull requests to 
 
 ## Documentation
 
-- [0.4.3 landing page and search motion](xtend/docs/RELEASE-0.4.3.md)
-- [Upgrade and rollback](xtend/docs/UPGRADE-0.4.3.md)
+- [0.4.4 wordmark morph and minimal landing page](xtend/docs/RELEASE-0.4.4.md)
+- [Upgrade and rollback](xtend/docs/UPGRADE-0.4.4.md)
 - [Operations and Nextcloud configuration](xtend/docs/CONTROL-PLANE-OPERATIONS.md)
 - [Quality-report architecture](xtend/docs/ADR-XSEARCH-QUALITY-004.md)
 - [Original XTend development notes, in German](README-XTEND.md)

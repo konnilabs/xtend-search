@@ -81,10 +81,12 @@ template xtend.search {
           { type "element" tag "a" text "Zu den Ergebnissen" class "skip-link" attributes { href "#results" } }
           { type "element" tag "header" class "topbar" children [
             { type "element" tag "div" class "header-backdrop" attributes { "aria-hidden" "true" } }
-            { type "element" tag "a" class "wordmark" attributes { href "/" "aria-label" "XTend.search Startseite" } children [
-              { type "element" tag "img" attributes { src "/assets/xtend/mark.svg" alt "" width 32 height 32 } }
-              { type "element" tag "span" text "XTend" }
-              { type "element" tag "span" text { op "literal" value ".search" } class "wordmark-suffix" }
+            { type "element" tag "a" key "search-brand" class "wordmark" attributes { href "/" "aria-label" "XTend.search Startseite" } children [
+              { type "element" tag "img" class "brand-mark" attributes { id "search-logo" src "/assets/xtend/mark.svg" alt "" width 32 height 32 } }
+              { type "element" tag "span" key "search-wordmark" class "brand-name" attributes { id "search-wordmark" role { op "if" test { op "equals" left "$model.search.data.view" right "home" } then "heading" else null } "aria-level" { op "if" test { op "equals" left "$model.search.data.view" right "home" } then 1 else null } } children [
+                { type "element" tag "span" text "XTend" }
+                { type "element" tag "span" text { op "literal" value ".search" } class "wordmark-suffix" }
+              ] }
             ] }
             { type "element" tag "form" key "search-form" class "search-form" attributes { id "search-form" action "/search" method "get" role "$model.search.data.searchRole" } children [
               { type "element" tag "div" class "search-box" children [
@@ -139,10 +141,6 @@ template xtend.search {
           { type "element" tag "section" class "search-area" children [
             { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
               type "element" tag "div" key "home-hero" class "hero" children [
-                { type "element" tag "h1" class "hero-wordmark" children [
-                  { type "element" tag "span" text "XTend" }
-                  { type "element" tag "span" text { op "literal" value ".search" } }
-                ] }
                 { type "element" tag "p" text "Neugier braucht Freiraum." class "hero-subtitle" }
               ]
             } }

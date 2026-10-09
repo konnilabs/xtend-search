@@ -1,0 +1,79 @@
+{
+  "ok": true,
+  "checks": [
+    "Only one centered wordmark and no logo on the classic landing page; heading semantics, light/dark, 320–3840px, full viewport and footer tested.",
+    "Persisted wordmark and input morph through real XUtils layout-flip; logo and background fade together, batches do not replay motion, history and animation cleanup work without reload.",
+    "Reduced motion and unavailable Web Animations use immediate layout; no-JS landing and native result-header search remain usable."
+  ],
+  "errors": [],
+  "animations": [
+    {
+      "target": "search-form",
+      "frames": [
+        {
+          "transform": "translate(260.25px,309.59375px) scale(0.8809523809523809,1.1296296296296295)",
+          "transformOrigin": "0 0"
+        },
+        {
+          "transform": "none",
+          "transformOrigin": "0 0"
+        }
+      ],
+      "options": {
+        "duration": 320,
+        "easing": "cubic-bezier(.2,.8,.2,1)",
+        "fill": "both"
+      }
+    },
+    {
+      "target": "search-wordmark",
+      "frames": [
+        {
+          "transform": "translate(587.859375px,127.796875px) scale(3.337325809052171,3.391845979614949)",
+          "transformOrigin": "0 0"
+        },
+        {
+          "transform": "none",
+          "transformOrigin": "0 0"
+        }
+      ],
+      "options": {
+        "duration": 320,
+        "easing": "cubic-bezier(.2,.8,.2,1)",
+        "fill": "both"
+      }
+    },
+    {
+      "target": "header-backdrop",
+      "frames": [
+        {
+          "opacity": 0
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "options": {
+        "duration": 320,
+        "easing": "cubic-bezier(.2,.8,.2,1)",
+        "fill": "both"
+      }
+    },
+    {
+      "target": "search-logo",
+      "frames": [
+        {
+          "opacity": 0
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "options": {
+        "duration": 320,
+        "easing": "cubic-bezier(.2,.8,.2,1)",
+        "fill": "both"
+      }
+    }
+  ]
+}

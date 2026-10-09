@@ -10,7 +10,15 @@ async function landing(page){
  const text=await page.locator('body').innerText();
  for(const old of ['DEIN FENSTER INS WEB','Mehr Perspektiven. Weniger Ablenkung.','Keine Analyse-Tracker'])assert.ok(!text.includes(old));
  const form=await page.locator('#search-form').boundingBox(),hero=await page.locator('.hero').boundingBox();
+ const wordmark=await page.locator('#search-wordmark').boundingBox();
  const width=await page.evaluate(()=>innerWidth);
+ assert.equal(await page.locator('.topbar .wordmark').count(),1);
+ assert.equal(await page.locator('.hero-wordmark').count(),0,'no duplicate central wordmark');
+ assert.equal(await page.getByRole('heading',{name:'XTend.search',level:1}).count(),1);
+ assert.ok(Math.abs(wordmark.x+wordmark.width/2-width/2)<1,'single wordmark is centered');
+ assert.ok(wordmark.y>90,'no small wordmark in the top-left corner');
+ assert.ok(hero.y>=wordmark.y+wordmark.height-1,'tagline follows wordmark');
+ assert.equal(await page.locator('#search-logo').evaluate(e=>getComputedStyle(e).display),'none');
  assert.ok(Math.abs(form.x+form.width/2-width/2)<1,'landing form is centered');
  assert.ok(form.y>=hero.y+hero.height-1,'form follows logo/tagline');
  assert.equal(await page.locator('.header-backdrop').evaluate(e=>getComputedStyle(e).display),'none');
@@ -25,7 +33,7 @@ try{
  await page.addInitScript(()=>{
   window.searchAnimations=[];const original=Element.prototype.animate;
   Element.prototype.animate=function(frames,options){
-   if(this.id==='search-form'||this.classList.contains('header-backdrop'))window.searchAnimations.push({target:this.id||'header-backdrop',frames,options});
+   if(['search-form','search-wordmark','search-logo'].includes(this.id)||this.classList.contains('header-backdrop'))window.searchAnimations.push({target:this.id||'header-backdrop',frames,options});
    return original.call(this,frames,options);
   };
  });
@@ -37,26 +45,35 @@ try{
    if([390,1920].includes(width))await page.screenshot({path:new URL(version+'-home-'+scheme+'-'+width+'.png',out).pathname});
   }
  }
- checks.push('Classic centered landing page has no filled header or removed marketing text; light/dark, 320–3840px, full viewport and footer tested.');
+ checks.push('Only one centered wordmark and no logo on the classic landing page; heading semantics, light/dark, 320–3840px, full viewport and footer tested.');
  await page.setViewportSize({width:1920,height:959});await page.emulateMedia({colorScheme:'dark'});
- const origin=await page.evaluate(()=>{window.originalInput=document.querySelector('#search-input');return performance.timeOrigin;});
+ const origin=await page.evaluate(()=>{window.originalInput=document.querySelector('#search-input');window.originalWordmark=document.querySelector('#search-wordmark');return performance.timeOrigin;});
  await page.locator('#search-input').fill('home morph');await page.getByRole('button',{name:'Suchen',exact:true}).click();
  await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].stream?.phase==='complete');
  assert.ok(await page.evaluate(()=>window.originalInput===document.querySelector('#search-input')));
+ assert.ok(await page.evaluate(()=>window.originalWordmark===document.querySelector('#search-wordmark')));
+ assert.equal(await page.getByRole('heading',{name:'XTend.search',level:1}).count(),0);
  assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);
  const animations=await page.evaluate(()=>window.searchAnimations);
  assert.equal(animations.filter(a=>a.target==='search-form').length,1);
  assert.equal(animations.filter(a=>a.target==='header-backdrop').length,1);
+ assert.equal(animations.filter(a=>a.target==='search-wordmark').length,1);
+ assert.equal(animations.filter(a=>a.target==='search-logo').length,1);
  assert.match(animations.find(a=>a.target==='search-form').frames[0].transform,/translate\(.+\) scale\(.+\)/);
+ assert.match(animations.find(a=>a.target==='search-wordmark').frames[0].transform,/translate\(.+\) scale\(.+\)/);
+ assert.deepEqual(animations.find(a=>a.target==='search-logo').frames,animations.find(a=>a.target==='header-backdrop').frames);
  await page.waitForFunction(()=>document.querySelector('#search-form').getAnimations().length===0);
  const resultForm=await page.locator('#search-form').boundingBox();assert.ok(resultForm.y<80);
+ const resultWordmark=await page.locator('#search-wordmark').boundingBox();assert.ok(resultWordmark.x<200&&resultWordmark.y<80);
+ assert.notEqual(await page.locator('#search-logo').evaluate(e=>getComputedStyle(e).display),'none');
  await page.screenshot({path:new URL(version+'-results-header.png',out).pathname});
  await page.goBack();await page.waitForFunction(()=>document.querySelector('#search-shell').dataset.view==='home');
  await page.waitForFunction(()=>document.querySelector('#search-form').getAnimations().length===0);await landing(page);
+ assert.ok(await page.evaluate(()=>window.originalWordmark===document.querySelector('#search-wordmark')));
  await page.goForward();await page.waitForFunction(()=>document.querySelector('#search-shell').dataset.view==='results');
  await page.waitForFunction(()=>document.querySelector('#search-form').getAnimations().length===0);
  assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);
- checks.push('One persisted input morphs through real XUtils layout-flip; background fades separately, batches do not replay motion, history and animation cleanup work without reload.');
+ checks.push('Persisted wordmark and input morph through real XUtils layout-flip; logo and background fade together, batches do not replay motion, history and animation cleanup work without reload.');
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto(base+'/');await page.waitForFunction(()=>window.XTendPage?.getRuntime());
  await page.locator('#search-input').fill('reduced motion');await page.getByRole('button',{name:'Suchen',exact:true}).click();
  await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].stream?.phase==='complete');
