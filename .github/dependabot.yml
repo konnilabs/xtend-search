@@ -7,7 +7,7 @@ updates:
       interval: "weekly"
       day: "friday"
     open-pull-requests-limit: 5
-    target-branch: "master"
+    target-branch: "main"
     commit-message:
       prefix: "[upd] pypi:"
     groups:
@@ -23,7 +23,7 @@ updates:
       interval: "weekly"
       day: "friday"
     open-pull-requests-limit: 5
-    target-branch: "master"
+    target-branch: "main"
     commit-message:
       prefix: "[upd] web-client (simple):"
     groups:
@@ -39,7 +39,7 @@ updates:
       interval: "weekly"
       day: "friday"
     open-pull-requests-limit: 5
-    target-branch: "master"
+    target-branch: "main"
     commit-message:
       prefix: "[upd] searxng.org/devtools (Node.js):"
     groups:
@@ -55,7 +55,7 @@ updates:
       interval: "weekly"
       day: "friday"
     open-pull-requests-limit: 5
-    target-branch: "master"
+    target-branch: "main"
     commit-message:
       prefix: "[upd] searxng.org/devtools (Go):"
     groups:
@@ -70,6 +70,15 @@ updates:
     schedule:
       interval: "weekly"
       day: "friday"
-    target-branch: "master"
+    target-branch: "main"
     commit-message:
       prefix: "[upd] github-actions:"
+
+  - package-ecosystem: "npm"
+    directory: "/xtend"
+    schedule:
+      interval: "weekly"
+    target-branch: "main"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "[upd] xtend-search:"

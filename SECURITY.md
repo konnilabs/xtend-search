@@ -1,10 +1,7 @@
-# Security Policy
+# Security policy for XTend.search
 
-We love responsible reports of (potential) security issues in SearXNG.
+Report potential vulnerabilities privately to the konnilabs maintainers. Use GitHub private vulnerability reporting when it is enabled; do not put credentials, private keys, session cookies or exploitable private deployment details in public issues.
 
-You can contact us at security@searxng.org.
+Include the affected frontend/backend version, a minimal reproduction and the relevant component. Development and fixes for this integration are handled in this repository.
 
-Be sure to provide as much information as possible and if found
-also reproduction steps of the identified vulnerability. Also
-add the specific URL of the project as well as code you found
-the issue in to your report.
+For an issue in unmodified SearXNG, the [preserved upstream policy](docs/upstream-searxng/SECURITY.md) identifies its own reporting channel.

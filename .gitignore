@@ -40,3 +40,22 @@ xtend/.env
 
 .env.control
 xtend/.control/
+
+# Credentials and persisted instance data; example files may be committed.
+.env
+.env.*
+!.env.example
+!**/.env.example
+xtend/.evidence/
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite-journal
+resume-private.pem
+signing-key
+owner.lock
+
+# Exported images belong in Releases rather than the source repository.
+XTend-search-Docker*.tar*
+XTend-search-SearXNG-Image*.tar*

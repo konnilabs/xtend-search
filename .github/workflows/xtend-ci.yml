@@ -1,0 +1,42 @@
+name: XTend.search CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: xtend-search-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: xtend
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.19.0
+          cache: npm
+          cache-dependency-path: xtend/package-lock.json
+      - name: Use pinned npm
+        run: npm install --global npm@11.17.0
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts
+      - name: Build Maraca search and Observatory
+        run: npm run build:control
+      - name: Run application and contract tests
+        run: npm run test:control

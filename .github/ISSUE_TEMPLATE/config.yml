@@ -1,5 +1,5 @@
-blank_issues_enabled: false
+blank_issues_enabled: true
 contact_links:
-  - name: Questions & Answers (Q&A)
-    url: https://github.com/searxng/searxng/discussions/categories/q-a
-    about: Ask questions and find answers
+  - name: XTend.search development guide
+    url: https://github.com/konnilabs/xtend-search/blob/main/CONTRIBUTING.md
+    about: Build, tests and contribution workflow
