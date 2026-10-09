@@ -26,6 +26,6 @@
     "playwright": "1.58.2",
     "rollup": "4.60.4",
     "terser": "5.48.0",
-    "typescript": "5.9.3"
+    "typescript": "7.0.2"
   }
 }
