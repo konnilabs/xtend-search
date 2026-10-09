@@ -2,6 +2,8 @@
 
 Basis: `e831fc2a1cad50c9979b5f6f680376410218188c` vom 19.09.2026.
 
+Aktuelle Update-Bewertung und reproduzierbare Gates: [SearXNG-Upstream-Prüfung vom 09.10.2026](SEARXNG-UPSTREAM-REVIEW-2026-10-09.md). Der konkrete Pin und die geprüfte Integrationsboundary stehen in `xtend/upstream-searxng.json`.
+
 | Bereich | Änderung |
 | --- | --- |
 | `searx/webapp.py` | Optionale private JSON-Metadaten und Auswahl des privaten Streamingadapters; Standardschnittstelle bleibt gleich. |
