@@ -80,7 +80,7 @@ Lokale Reproduktion: Auf diesem Rechner benötigte der Docker-Build `XTEND_BUILD
 
 ## Folgender Update-PR
 
-1. Branch von `main`; geprüften SHA fetchen und vollständige Upstream-Lineage integrieren. Bei geändertem Kandidaten erneut prüfen. Nach dem Merge `git restore --source=HEAD --staged --worktree .github` verwenden: Produkt-CI bewahren und wieder eingeführte Upstream-Workflows entfernen.
+1. Branch von `main`; geprüften SHA fetchen und vollständige Upstream-Lineage integrieren. Bei geändertem Kandidaten erneut prüfen. Den modify/delete-Konflikt zuerst mit `git rm .github/workflows/ai-policy.yml` auflösen, danach `git restore --source=HEAD --staged --worktree .github` verwenden: Produkt-CI bewahren und wieder eingeführte Upstream-Workflows entfernen.
 2. Python-Lock, Adapter-Pin, Frozen-Versionen und Review-Manifest gemeinsam aktualisieren. Neue eindeutige Frontend-/Backend-Release-Tags und Image-IDs vergeben; verteilte 0.4.1-/0.4.0-Tags nicht ersetzen.
 3. Alten/neuen Live-Profil-Katalog vergleichen: Quellen, Kategorien, Paging, Sprache, SafeSearch, Timeout, `enabled`. SearXNG-`disabled` ist eine Defaultauswahl, kein Ersatz für Observatory-Policy. Geänderte Fingerprints führen bereits zu `capability_changed`; Freigaben nach Review erneuern. Unveränderte Metadaten beweisen keine unveränderte Engine-Implementierung.
 4. Policies, Budgets, technische Schutzfristen und Qualitätspausen erhalten. Keine globale Freigabe oder Löschung von Guards; neue Quellen starten ungeprüft. Drei Webquellen plus Knowledge-Card erneut prüfen.
@@ -88,3 +88,5 @@ Lokale Reproduktion: Auf diesem Rechner benötigte der Docker-Build `XTEND_BUILD
 6. Upgrade mit Kopien persistierter Volumes testen; Verfügbarkeitsdifferenz dokumentieren; Source-Archiv, Prüfsummen und Portainer-Paket bereitstellen; zuerst im Test-Stack einsetzen. Rollback nutzt das bisherige zusammenpassende Image-Paar und erhaltene Volumes.
 
 `XTEND_BACKEND_IMAGE` ist eine Image-Auswahl für unseren erweiterten Backend-Vertrag. Ein beliebiges offizielles SearXNG-Image enthält interne Authentifizierung, Contract-Header und Favicon-Route nicht. Upstream-Updates erfolgen daher durch geprüften Source-Merge und anschließenden Image-Build.
+
+Die konkrete Übernahme und distributablen Images erfolgen in [Release 0.4.2](RELEASE-0.4.2.md). Die obigen Messungen bleiben historische Kandidaten-Nachweise.

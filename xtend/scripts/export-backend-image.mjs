@@ -2,7 +2,11 @@ import fs from 'node:fs';import path from 'node:path';import {execFileSync,spawn
 const output=path.resolve(process.argv[2]||'..'),ref='xtend-search-searxng:'+VERSION;
 const [info]=JSON.parse(execFileSync('docker',['image','inspect',ref],{encoding:'utf8'}));
 if(info.Architecture!=='amd64'||info.Os!=='linux'||info.Config.Labels['org.opencontainers.image.version']!==VERSION)throw Error('Backend version or platform mismatch');
-const root=path.resolve(import.meta.dirname,'../..'),files=['xtend/server/backend.py','xtend/server/backend-start.py','xtend/server/favicon_backend.py','xtend/requirements.lock.txt','xtend/config/settings.control.yml'];
+const root=path.resolve(import.meta.dirname,'../..');
+const pin=JSON.parse(fs.readFileSync(path.join(root,'xtend/upstream-searxng.json')));
+const files=[...Object.keys(pin.reviewedIntegratedFiles),'xtend/server/backend.py','xtend/server/backend-start.py','xtend/server/favicon_backend.py','xtend/requirements.lock.txt','xtend/config/settings.control.yml'];
+const frozen=execFileSync('docker',['run','--rm','--entrypoint','python',ref,'-c','from searx.version_frozen import VERSION_TAG; print(VERSION_TAG)'],{encoding:'utf8'}).trim();
+if(frozen!==pin.version)throw Error('Backend core identity mismatch');
 const script='import json,hashlib;from pathlib import Path;print(json.dumps({p:hashlib.sha256(Path("/app",p).read_bytes()).hexdigest() for p in '+JSON.stringify(files)+'}))';
 const hashes=JSON.parse(execFileSync('docker',['run','--rm','--entrypoint','python',ref,'-c',script],{encoding:'utf8'}));
 for(const f of files)if(hashes[f]!==createHash('sha256').update(fs.readFileSync(path.join(root,f))).digest('hex'))throw Error('Stale backend: '+f);

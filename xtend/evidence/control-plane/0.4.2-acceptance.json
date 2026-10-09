@@ -1,0 +1,127 @@
+{
+  "version": "0.4.2",
+  "sdk": "0.8.0/Hydrangea",
+  "xtendMcpCallable": false,
+  "nodeTests": 68,
+  "pythonBoundaryTests": 6,
+  "browserSuites": [
+    "v04-browser",
+    "preferences-browser",
+    "ssr-browser",
+    "edge-browser",
+    "about-browser",
+    "release-0.4.2-browser"
+  ],
+  "stream": {
+    "firstPaintMs": 499,
+    "completeMs": 2981.2999999998137,
+    "frames": [
+      {
+        "elapsed": 392,
+        "status": "delta",
+        "n": 0
+      },
+      {
+        "elapsed": 499,
+        "status": "delta",
+        "n": 4
+      },
+      {
+        "elapsed": 1018.5,
+        "status": "delta",
+        "n": 7
+      },
+      {
+        "elapsed": 2845.0999999996275,
+        "status": "delta",
+        "n": 10
+      },
+      {
+        "elapsed": 2981.2999999998137,
+        "status": "complete",
+        "n": 10
+      }
+    ],
+    "slowFaviconMs": 4000
+  },
+  "ssr": {
+    "ok": true,
+    "date": "2026-10-09T16:58:30.618Z",
+    "checks": [
+      "Initial wire is measured and bounded; input literal, registry coverage and absence of duplicate HTML are asserted.",
+      "Verified resume preserves the SSR input; stream and history work without document replacement.",
+      "Invalid signature recovers through descriptors; stream and history work without HTML copy.",
+      "No-JS direct SSR search keeps the native search input and results."
+    ],
+    "metrics": {
+      "baseline": null,
+      "patched": {
+        "htmlBytes": 82677,
+        "htmlGzipBytes": 16202,
+        "wireBytes": 68807,
+        "wireGzipBytes": 14050,
+        "snapshotStateBytes": 46478,
+        "duplicateHtmlFields": 0,
+        "uniqueDuplicateHtmlBytes": 0,
+        "inputTypeBytes": 6,
+        "inputTypeIsSearch": true,
+        "coverage": {
+          "schema": "xtend.rmt.ssr-coverage.v1",
+          "descriptorElementNodes": 71,
+          "resumeMarkedNodes": 71,
+          "componentNodes": 2,
+          "missingCapabilityNodes": 0,
+          "rawHtmlFragments": 0,
+          "resumeMarkerCoverage": 1
+        },
+        "missingCapabilityDiagnostics": 0
+      }
+    },
+    "scope": "Local Docker 0.4.2; optional baseline URL is measured separately. Signed state, timestamps and signatures vary. Byte/gzip comparison is transport size, not a production latency claim. Marker coverage is not a successful-resume ratio."
+  },
+  "localStoreBackup": {
+    "file": "pre-0.4.2.sqlite",
+    "private": true,
+    "before": {
+      "revision": 36,
+      "policies": 14,
+      "guards": 22,
+      "quality_rules": 0,
+      "quality_pauses": 0
+    }
+  },
+  "baselineHome": {
+    "version": "0.4.1",
+    "htmlBytes": 80936,
+    "htmlGzipBytes": 15805,
+    "wireBytes": 67332,
+    "wireGzipBytes": 13717,
+    "snapshotStateBytes": 44860
+  },
+  "localUpgrade": {
+    "ok": true,
+    "version": "0.4.2",
+    "retrieval": "compatible",
+    "storage": "ready",
+    "after": {
+      "revision": 36,
+      "policies": 14,
+      "guards": 22,
+      "quality_rules": 0,
+      "quality_pauses": 0
+    },
+    "policiesGuardsRulesPausesByteEqualToBackup": true
+  },
+  "portainer": {
+    "ok": true,
+    "health": {
+      "ok": true,
+      "version": "0.4.2",
+      "storage": "ready",
+      "retrieval": "compatible"
+    },
+    "configuration": "Portainer Compose; isolated disposable volumes and synthetic credentials; no live SSO"
+  },
+  "frontendImage": "sha256:4270956b3d7d5e009a70f483746b6b122f40566eab942284019bea970ba4ec1d",
+  "backendImage": "sha256:0ccc36b9e00b9d3fde0033feeb857ffc321af5b846c4da09738a306e194b554e"
+}

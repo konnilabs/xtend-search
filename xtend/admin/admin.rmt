@@ -132,8 +132,12 @@ template xtend.observatory {
                   {
                     "type" "element"
                     "tag" "a"
-                    "text" "XTend.search"
                     "class" "wordmark"
+                    "children" [
+                      { type "element" tag "img" attributes { src "/assets/xtend/mark.svg" alt "" width 32 height 32 } }
+                      { type "element" tag "span" text "XTend" }
+                      { type "element" tag "span" text { op "literal" value ".search" } class "wordmark-suffix" }
+                    ]
                     "attributes" {
                       "href" "/"
                       "data-xtend-native" ""

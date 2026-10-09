@@ -1,4 +1,6 @@
-# XTend.search 0.3.5 in Portainer installieren
+# Portainer – historische Erstinstallation 0.3.5
+
+Für die aktuelle Version **0.4.2** das zusammenpassende Frontend-/Backend-Paar und [die aktuelle Update-Anleitung](UPGRADE-0.4.2.md) verwenden. `compose.portainer.yml` und `xtend/config/portainer.env.example` enthalten die aktuellen Defaults. Die folgenden 0.3.5-Angaben sind historische Hinweise.
 
 Diese Stack-Datei ist für **Docker Standalone auf Linux amd64** und deinen
 Reverse Proxy auf dem Host vorbereitet. Sie startet die XTend-Shell und den

@@ -3,7 +3,9 @@
 set -eu
 fixture_image=${FIXTURE_IMAGE:-xtend-search:0.4.2}
 fixture_settings=${FIXTURE_SETTINGS:-xtend/config/settings.control.fixture.yml}
-case "$PWD" in */xtend-search) ;; *) echo 'Run from the product repository.'; exit 1;; esac
+fixture_data=${FIXTURE_DATA_VOLUME:-xtend-cp-fixture-data}
+repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/../../.." && pwd)
+cd "$repo_dir"
 docker network inspect xtend-cp-fixture-net >/dev/null 2>&1 || docker network create xtend-cp-fixture-net >/dev/null
 for name in xtend-cp-oauth-test xtend-cp-search-test xtend-cp-backend-test; do
  if docker container inspect "$name" >/dev/null 2>&1; then docker rm -f "$name" >/dev/null; fi
@@ -24,7 +26,7 @@ if [ "$backend_ready" != 1 ]; then docker logs --tail 30 xtend-cp-backend-test; 
 if [ "${FIXTURE_SOURCE:-0}" = 1 ]; then set -- -v "$PWD/xtend:/app/xtend:ro"; else set --; fi
 docker run "$@" -d --name xtend-cp-search-test --network xtend-cp-fixture-net \
  -p 127.0.0.1:8096:8080 -p 127.0.0.1:8094:8094 --read-only --tmpfs /tmp \
- --cap-drop ALL --security-opt no-new-privileges -v xtend-cp-fixture-data:/var/lib/xtend-search --tmpfs /var/lib/xtend-evidence:uid=10001,gid=10001 \
+ --cap-drop ALL --security-opt no-new-privileges -v "$fixture_data:/var/lib/xtend-search" --tmpfs /var/lib/xtend-evidence:uid=10001,gid=10001 \
  -e PUBLIC_BASE_URL=http://localhost:8093 -e SEARXNG_BASE_URL=http://searxng:8082/ -e SEARXNG_TOKEN=fixture-test-only \
  -e NEXTCLOUD_BASE_URL=http://localhost:8094 -e NEXTCLOUD_CLIENT_ID=fixture -e NEXTCLOUD_CLIENT_SECRET=fixture-only \
  -e 'XTEND_ADMIN_ROLES={"administrator":"administrator","operator":"operator","viewer":"viewer"}' \

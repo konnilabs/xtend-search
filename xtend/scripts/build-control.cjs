@@ -25,6 +25,7 @@ async function main(){
   summaries.push({folder,version:pages.manifest.version,sourceSha256:createHash('sha256').update(fs.readFileSync(path.join(root,source))).digest('hex'),services:built.plan.services?.status});
  }
  for(const file of ['mark.svg','image-placeholder.svg','favicon.png'])fs.copyFileSync(path.join(root,'frontend',file),path.join(out,file));
+ await esbuild.build({entryPoints:[path.join(root,'frontend/admin-login.mjs')],bundle:true,minify:true,format:'esm',platform:'browser',target:'es2022',outfile:path.join(out,'standalone/admin-login.mjs')});
  fs.mkdirSync(path.join(root,'evidence/control-plane'),{recursive:true});fs.writeFileSync(path.join(root,'evidence/control-plane/build.json'),JSON.stringify({ok:true,node:process.version,summaries},null,2));console.log(JSON.stringify({ok:true,summaries}));
  }finally{session.dispose();}
 }

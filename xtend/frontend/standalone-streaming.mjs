@@ -1,5 +1,6 @@
 import {createAppServiceRegistry,createHttpAppServiceTransport} from '@ccslabs/xtend/maraca/app-services';
 import services from './services.ts';
+import {preserveFilterDraft} from './filter-navigation.mjs';
 // Presentation coordinator for the existing PageClient. The SDK owns framing,
 // sequencing, transport, cancellation and stale invocations. No second router.
 export function installSearchStreaming(){
@@ -19,14 +20,14 @@ export function installSearchStreaming(){
     // At most one pending commit: await one animation frame and Maraca's commit.
     // The stream iterator supplies backpressure; there is no unbounded UI queue.
     await new Promise(resolve=>requestAnimationFrame(resolve));if(!valid())return;
-    await client().optimistic(props=>valid()?{...props,'search.data':{...payload.data,stream:{...stream,phase:final?'complete':'partial'}}}:props,async()=>undefined);
+    await client().optimistic(props=>valid()?{...preserveFilterDraft(props),'search.data':{...payload.data,stream:{...stream,phase:final?'complete':'partial'}}}:props,async()=>undefined);
     window.dispatchEvent(new CustomEvent('xtend-search:stream',{detail:{id:stream.id,status:frame.type,event:payload.event,sequence:frame.sequence}}));
     if(restoring&&(document.documentElement.scrollHeight-innerHeight>=restoring[1]||final)){scrollTo(...restoring);restoring=null;}
     if(final)return;
    }
    throw new Error('Unvollständiger Stream');
   }catch{
-   if(valid())await client().optimistic(props=>({...props,'search.data':{...props['search.data'],skeleton:false,stream:{...stream,phase:'error'},statusLabel:'Verbindung unterbrochen · bereits geladene Ergebnisse bleiben sichtbar',warnings:[{id:'stream',domId:'search-warning-stream',type:'warning',message:'Die Verbindung wurde unterbrochen. Bitte starte bei Bedarf eine neue Suche.'}]}}),async()=>undefined);
+   if(valid())await client().optimistic(props=>({...preserveFilterDraft(props),'search.data':{...props['search.data'],skeleton:false,stream:{...stream,phase:'error'},statusLabel:'Verbindung unterbrochen · bereits geladene Ergebnisse bleiben sichtbar',warnings:[{id:'stream',domId:'search-warning-stream',type:'warning',message:'Die Verbindung wurde unterbrochen. Bitte starte bei Bedarf eine neue Suche.'}]}}),async()=>undefined);
   }finally{registry.dispose();transport.dispose?.();if(active===record)active=null;}
  }
  window.addEventListener('popstate',()=>{restoring=positions.get(location.pathname+location.search)||null;},true);

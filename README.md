@@ -4,7 +4,7 @@ Meta search engine powered by SearXNG and XTend/Maraca.
 
 XTend.search provides server-rendered, resumable search, XScaler result streaming and a separate operations dashboard. SearXNG remains the Python search core; the public interface and Observatory run in their own XTend/Node container.
 
-Current baseline: **frontend 0.4.1**, **SearXNG adapter 0.4.0**, **XTend 0.8.0 / Hydrangea**.
+Current baseline: **frontend 0.4.2**, **SearXNG adapter 0.4.2**, **XTend 0.8.0 / Hydrangea**.
 
 ## Features
 
@@ -61,8 +61,8 @@ GitHub Actions runs this build and test sequence on pushes and pull requests to 
 
 ## Documentation
 
-- [0.4.1 patch and acceptance](xtend/docs/RELEASE-0.4.1.md)
-- [Upgrade and rollback](xtend/docs/UPGRADE-0.4.1.md)
+- [0.4.2 corporate shell and reviewed core update](xtend/docs/RELEASE-0.4.2.md)
+- [Upgrade and rollback](xtend/docs/UPGRADE-0.4.2.md)
 - [Operations and Nextcloud configuration](xtend/docs/CONTROL-PLANE-OPERATIONS.md)
 - [Quality-report architecture](xtend/docs/ADR-XSEARCH-QUALITY-004.md)
 - [Original XTend development notes, in German](README-XTEND.md)
@@ -74,6 +74,6 @@ Local environment files, private keys, databases and Docker exports are excluded
 
 The SearXNG-derived codebase retains its [GNU Affero General Public License v3](LICENSE). Third-party dependencies, including the pinned XTend SDK, retain their own license files and notices. This import does not relicense those dependencies.
 
-SearXNG baseline: `e831fc2a1cad50c9979b5f6f680376410218188c`. Framework fixes are tracked in [konnilabs/xtend#84](https://github.com/konnilabs/xtend/pull/84); the local overlay remains necessary until a compatible framework package is deliberately adopted.
+SearXNG baseline: `9f042d2f67666f86204d6874488880a23ba81a8f`. Framework fixes are tracked in [konnilabs/xtend#84](https://github.com/konnilabs/xtend/pull/84); the local overlay remains necessary until a compatible framework package is deliberately adopted.
 
 The original SearXNG history is preserved. Its publishing, translation and issue-closing workflows are not active in this repository.

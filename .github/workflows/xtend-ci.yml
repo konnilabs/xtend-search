@@ -51,3 +51,48 @@ jobs:
           persist-credentials: false
       - name: Build reviewed backend and test modified SearXNG contracts offline
         run: sh xtend/tests/control/upstream-gate.sh
+
+  docker-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24.19.0
+      - name: Install browser test dependencies
+        working-directory: xtend
+        run: |
+          npm install --global npm@11.17.0
+          npm ci --ignore-scripts
+          npx playwright install --with-deps chromium
+      - name: Build paired release images
+        run: |
+          docker build -f Dockerfile.control -t xtend-search:0.4.2 .
+          docker build -f Dockerfile.searxng -t xtend-search-searxng:0.4.2 .
+      - name: Run isolated OAuth, XScaler and responsive UI gates
+        env:
+          FIXTURE_SETTINGS: xtend/config/settings.preferences.fixture.yml
+          FIXTURE_DATA_VOLUME: xtend-cp-ci-0.4.2
+        run: |
+          sh xtend/tests/control/docker-fixture.sh
+          node xtend/tests/control/proxy-fixture.mjs > /tmp/xtend-proxy.log 2>&1 &
+          trap 'kill $! || true' EXIT
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://localhost:8093/health/ready > /dev/null; then break; fi
+            sleep 1
+          done
+          node xtend/tests/control/v04-browser.mjs
+          node xtend/tests/control/release-0.4.2-browser.mjs
+          node xtend/tests/control/ssr-browser.mjs
+          node xtend/tests/control/about-browser.mjs
+          node xtend/tests/control/edge-browser.mjs
+      - name: Fixture diagnostics
+        if: failure()
+        run: |
+          docker logs --tail 100 xtend-cp-search-test
+          docker logs --tail 100 xtend-cp-backend-test
