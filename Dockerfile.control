@@ -11,7 +11,7 @@ RUN tar --exclude=./xtend/node_modules --exclude=./source.tar.gz -czf /source.ta
 WORKDIR /app/xtend
 RUN node scripts/build-control.cjs && npm prune --omit=dev --ignore-scripts
 FROM ${NODE_IMAGE}
-LABEL org.opencontainers.image.title="XTend.search" org.opencontainers.image.version="0.4.1"
+LABEL org.opencontainers.image.title="XTend.search" org.opencontainers.image.version="0.4.2"
 RUN apt-get update && apt-get install -y --no-install-recommends tini util-linux ca-certificates && rm -rf /var/lib/apt/lists/* \
  && groupadd --gid 10001 xtend && useradd --uid 10001 --gid 10001 --no-create-home xtend \
  && mkdir -p /var/lib/xtend-search /var/lib/xtend-evidence && chown 10001:10001 /var/lib/xtend-search /var/lib/xtend-evidence

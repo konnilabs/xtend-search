@@ -1,7 +1,7 @@
 #!/bin/sh
 # Run as a Docker-authorized user from the repository root. No live credentials.
 set -eu
-fixture_image=${FIXTURE_IMAGE:-xtend-search:0.4.1}
+fixture_image=${FIXTURE_IMAGE:-xtend-search:0.4.2}
 fixture_settings=${FIXTURE_SETTINGS:-xtend/config/settings.control.fixture.yml}
 case "$PWD" in */xtend-search) ;; *) echo 'Run from the product repository.'; exit 1;; esac
 docker network inspect xtend-cp-fixture-net >/dev/null 2>&1 || docker network create xtend-cp-fixture-net >/dev/null
@@ -13,7 +13,7 @@ docker run -d --name xtend-cp-backend-test --network xtend-cp-fixture-net --netw
  -v "$PWD/$fixture_settings:/app/xtend/config/settings.control.fixture.yml:ro" \
  --cap-drop ALL --security-opt no-new-privileges \
  -e SEARXNG_TOKEN=fixture-test-only -e XTEND_TEST_FIXTURE=1 \
- -e SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.control.fixture.yml xtend-search-searxng:0.4.0 >/dev/null
+ -e SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.control.fixture.yml xtend-search-searxng:0.4.2 >/dev/null
 # Start the frontend only after the private backend passes its health endpoint.
 backend_ready=0
 for attempt in $(seq 1 30); do

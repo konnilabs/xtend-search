@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.control
-    image: xtend-search:0.4.1
+    image: xtend-search:0.4.2
     depends_on:
       searxng:
         condition: service_healthy
@@ -40,7 +40,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.searxng
-    image: xtend-search-searxng:0.4.0
+    image: xtend-search-searxng:0.4.2
     environment:
       XTEND_FAVICON_RESOLVER: ${XTEND_FAVICON_RESOLVER:-duckduckgo}
       SEARXNG_TOKEN: ${SEARXNG_TOKEN:?Generate .env.control}

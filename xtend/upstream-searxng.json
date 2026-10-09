@@ -1,27 +1,27 @@
 {
   "schema": "xtend.search.searxng-pin.v1",
   "repository": "https://github.com/searxng/searxng",
-  "commit": "e831fc2a1cad50c9979b5f6f680376410218188c",
-  "version": "2026.9.19+e831fc2a1",
+  "commit": "9f042d2f67666f86204d6874488880a23ba81a8f",
+  "version": "2026.10.9+9f042d2f6",
   "backendContract": "engine-json-v1",
   "reviewedIntegratedFiles": {
-    "searx/webapp.py": "4c101309024b330d748b3471134bb4ba3192db8d609196c042d9ba6356670cf6",
+    "searx/webapp.py": "07c4dc5a3275974a1726d4ec95acd4412011cd00d0081f99d2a87875f0c7fc72",
     "searx/webadapter.py": "fa1c9a5d02eabd4f91b715efaa759fc5a3fb33d95c7a92a0e25e1fa7b0c20aa6",
     "searx/webutils.py": "0c193cc553ed8e7db20ddc6b2072f0226e4b2a408fc8e30a5a9e369a9ff14851",
-    "searx/results.py": "5c1be81f866473021370f3f92fc32173e2df30446191aa151d9358c1f4512cc7",
-    "searx/search/__init__.py": "fe9c6a4cb742fd6ef8afdb7b8b4bd294acc27595294adb6d89b780d536932e26",
-    "searx/search/processors/abstract.py": "5ec6efb8915eb988b21bf7e91afb08f29b2d3d1819400189f68fa99a03a7bffb",
+    "searx/results.py": "9b7f246037a66d7cdf91c77f2de105989d95f7f8c93e745998bff51761e05ae8",
+    "searx/search/__init__.py": "683ce2bf1e83f5cbd5aa22362370d4ec5f65fc244bafe3d7bd9acfb65a441bd4",
+    "searx/search/processors/abstract.py": "eb06c4bb029fa9794bf8a4bc1d21c61f3b87c5cfbd24d6aae93ec15c7776556c",
     "searx/search/processors/online.py": "256762f1d762d7d1d02f227e79566f56e9a4ce94b8cccc1faa0c658c2238d39b",
     "searx/search/processors/offline.py": "3bba7315b1d7fe97fe28275368f52d4bd5c64a758d7bfb48c53c83fe7daec294",
-    "searx/result_types/_base.py": "93342a7dabe346edfcfdca90a9180ee8306ab723a65a29b637b4fbc24becfb84",
-    "searx/favicons/cache.py": "53d7a0f4b2a2855b5318aa6bb4450528b1e8bee729122775c1029c087b1cbf90",
+    "searx/result_types/_base.py": "1b0fe4ec19a9229926bf31ce5ead6fc032c7cb992da5cc39ca10a20e82581ece",
+    "searx/favicons/cache.py": "5f50eaf799b9a9454913411c6e35bbf0c091b2449a14e283bf3f47d74587ad5f",
     "searx/favicons/resolvers.py": "f4f29482fa2a2318bd727ecffdb2e85085721f27004dd9094c824ec9e06ad79c",
-    "searx/settings.yml": "622cff65788af05eb2602e15e296d6c16f69df5915d4cccdb0a5d9a9ee674a78",
+    "searx/settings.yml": "cd928422d82a83372d27a41bdaba8d21b43bb0db37367b9a00953c6b17952a3a",
     "searx/xtend_stream.py": "ebc32d3a262ec34e29b77d7c98e7c2864acc1dc839c7708cce0edcf226b6f00b",
     "searx/xtend_integration.py": "a7f2e35bd2d7a3234a13346acaa2d04061ecf2b61c0dda6a59108973d7136c38",
     "xtend/server/backend.py": "c583640bafa7d847ad5d8c9c0af4047db34b0e5956b1f5bde94efd9fe21777fe",
     "xtend/server/backend-start.py": "683f666347211a7812c5a0b54c97a346621086823f8a859d60997c804cabc673",
     "xtend/server/favicon_backend.py": "a6eb8f8ed511272494a0140ebf9e4882f1dbad3c21048ed626517331d46f4c2d"
   },
-  "review": "xtend/docs/SEARXNG-UPSTREAM-REVIEW-2026-10-09.md"
+  "review": "xtend/docs/RELEASE-0.4.2.md"
 }
