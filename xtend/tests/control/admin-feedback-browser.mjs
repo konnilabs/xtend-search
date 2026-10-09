@@ -6,7 +6,7 @@ const out=new URL('../../evidence/control-plane/',import.meta.url),checks=[],wid
 const browser=await chromium.launch();let page;
 try{
  const context=await browser.newContext({viewport:{width:1920,height:1080},colorScheme:'dark'});page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
- await page.goto(base+'/admin');await page.getByRole('link',{name:'Mit Nextcloud anmelden'}).click();await page.getByRole('link',{name:'administrator',exact:true}).click();await page.waitForFunction(()=>window.XTendPage?.getRuntime());
+ await page.goto(base+'/admin');await page.getByRole('button',{name:'Anmelden mit CCS Account',exact:true}).or(page.getByRole('link',{name:'Anmelden mit CCS Account',exact:true})).click();await page.getByRole('link',{name:'administrator',exact:true}).click();await page.waitForFunction(()=>window.XTendPage?.getRuntime());
  const health=await context.request.get(base+'/health/ready');assert.equal((await health.json()).version,'0.3.5');assert.equal(health.headers()['x-xtend-version'],'0.3.5');
  const css=await context.request.get(base+'/assets/xtend/admin/admin.css');assert.equal(css.headers()['cache-control'],'private, no-store');
  assert.equal(await page.getByText('XTend.search 0.3.5 · Powered by SearXNG',{exact:true}).count(),1);

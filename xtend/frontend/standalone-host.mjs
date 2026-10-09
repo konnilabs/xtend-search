@@ -6,10 +6,14 @@ import {installImagePreview} from './preview.mjs';
 import {installSearchAlerts} from './alerts.mjs';
 import {installResultImages} from './images.mjs';
 import {installSearchStreaming} from './standalone-streaming.mjs';
+import {installFilterNavigation} from './filter-navigation.mjs';
+import {installSearchMotion} from './search-motion.mjs';
 // Browser integration only. XTend owns navigation, history, state and all UI commits.
 export function installSearchHost(){
  let draft='',revision=0,submittedRevision=0,pending=false;
  const command=(name,payload={})=>window.XTendPage?.getRuntime()?.dispatchCommand(name,payload).catch(()=>{});
+ installFilterNavigation(command);
+ installSearchMotion();
  installAbout();
  installFavicons();installFeedback();
  installPreferences(command);

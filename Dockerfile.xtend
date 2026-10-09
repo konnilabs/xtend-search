@@ -30,7 +30,7 @@ COPY searx /app/searx
 COPY LICENSE /app/LICENSE
 COPY --from=frontend /build/xtend /app/xtend
 COPY --from=frontend /source.tar.gz /app/source.tar.gz
-RUN python -c 'from pathlib import Path; Path("searx/version_frozen.py").write_text("VERSION_STRING = \"2026.9.19+e831fc2a1+xtend.0.2.1\"\nVERSION_TAG = \"2026.9.19+e831fc2a1\"\nDOCKER_TAG = \"xtend-search-0.2.1\"\nGIT_URL = \"/source.tar.gz\"\nGIT_BRANCH = \"xtend-search\"\n")'
+RUN python -c 'from pathlib import Path; Path("searx/version_frozen.py").write_text("VERSION_STRING = \"2026.10.9+9f042d2f6+xtend.0.2.1\"\nVERSION_TAG = \"2026.10.9+9f042d2f6\"\nDOCKER_TAG = \"xtend-search-0.2.1\"\nGIT_URL = \"/source.tar.gz\"\nGIT_BRANCH = \"xtend-search\"\n")'
 USER 10001:10001
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'

@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
 import {fail,key,validateQuery,allowedUrl,plain,retryAfter,MODES} from './contracts.mjs';
 import {catalogLanguages} from './locales.mjs';
-export const PINNED='2026.9.19+e831fc2a1';
+export const PINNED='2026.10.9+9f042d2f6';
 export async function jsonResponse(response,limit=2097152){
  if(!response.headers.get('content-type')?.includes('json'))throw new Error('schema_invalid');
  const reader=response.body.getReader(),parts=[];let size=0;

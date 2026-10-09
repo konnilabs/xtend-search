@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {gzipSync} from 'node:zlib';
 import {decodePageWire,encodePageWire} from '../../node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs';
+const version=JSON.parse(await fs.readFile(new URL('../../package.json',import.meta.url))).version;
 const base=process.env.TEST_BASE_URL||'http://localhost:8093';
 const baseline=process.env.SSR_BASELINE_URL;
 const checks=[],browser=await chromium.launch();
@@ -57,7 +58,7 @@ try{
  await page.goto(base+'/search?q=native&categories=general&language=all&safesearch=1');
  assert.equal(await page.locator('#search-input').getAttribute('type'),'search');
  assert.equal(await page.locator('article.result').count(),10);await nojs.close();checks.push('No-JS direct SSR search keeps the native search input and results.');
- const report={ok:true,date:new Date().toISOString(),checks,metrics,scope:'Local Docker 0.4.0 and 0.4.1 home documents; signed state, timestamps and signatures vary. Byte/gzip comparison is transport size, not a production latency claim. Marker coverage is not a successful-resume ratio.'};
- await fs.writeFile(new URL('../../evidence/control-plane/0.4.1-ssr-browser.json',import.meta.url),JSON.stringify(report,null,2));
+ const report={ok:true,date:new Date().toISOString(),checks,metrics,scope:'Local Docker '+version+'; optional baseline URL is measured separately. Signed state, timestamps and signatures vary. Byte/gzip comparison is transport size, not a production latency claim. Marker coverage is not a successful-resume ratio.'};
+ await fs.writeFile(new URL('../../evidence/control-plane/'+version+'-ssr-browser.json',import.meta.url),JSON.stringify(report,null,2));
  console.log(JSON.stringify(report,null,2));
 }finally{await browser.close();}

@@ -14,4 +14,6 @@ Framework defects belong in [konnilabs/xtend](https://github.com/konnilabs/xtend
 
 The checked-in SDK archive is a required build input. Treat replacement as a reviewed dependency update, with bundle/SSR and regression measurements. Preserve upstream licenses and notices.
 
+SearXNG is modified source, not an interchangeable container dependency. Start core updates with the [upstream review](xtend/docs/SEARXNG-UPSTREAM-REVIEW-2026-10-09.md). Keep `xtend/upstream-searxng.json`, adapter/Docker identities and the Python lock consistent; run `node xtend/scripts/check-searxng.mjs` and `sh xtend/tests/control/upstream-gate.sh`. Refresh reviewed source hashes only after validating the affected boundaries. Preserve this repository's GitHub automation when merging upstream.
+
 The original `README.rst`, `CONTRIBUTING.rst` and `AI_POLICY.rst` describe SearXNG upstream. They are not this fork's GitHub automation. Follow the upstream project's own requirements when submitting changes there.

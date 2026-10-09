@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "date": "2026-10-09T17:35:27.210Z",
+  "checks": [
+    "Initial wire is measured and bounded; input literal, registry coverage and absence of duplicate HTML are asserted.",
+    "Verified resume preserves the SSR input; stream and history work without document replacement.",
+    "Invalid signature recovers through descriptors; stream and history work without HTML copy.",
+    "No-JS direct SSR search keeps the native search input and results."
+  ],
+  "metrics": {
+    "baseline": null,
+    "patched": {
+      "htmlBytes": 79192,
+      "htmlGzipBytes": 15685,
+      "wireBytes": 66469,
+      "wireGzipBytes": 13623,
+      "snapshotStateBytes": 45696,
+      "duplicateHtmlFields": 0,
+      "uniqueDuplicateHtmlBytes": 0,
+      "inputTypeBytes": 6,
+      "inputTypeIsSearch": true,
+      "coverage": {
+        "schema": "xtend.rmt.ssr-coverage.v1",
+        "descriptorElementNodes": 62,
+        "resumeMarkedNodes": 62,
+        "componentNodes": 2,
+        "missingCapabilityNodes": 0,
+        "rawHtmlFragments": 0,
+        "resumeMarkerCoverage": 1
+      },
+      "missingCapabilityDiagnostics": 0
+    }
+  },
+  "scope": "Local Docker 0.4.4; optional baseline URL is measured separately. Signed state, timestamps and signatures vary. Byte/gzip comparison is transport size, not a production latency claim. Marker coverage is not a successful-resume ratio."
+}

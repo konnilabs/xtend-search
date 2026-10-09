@@ -1,0 +1,28 @@
+{
+  "version": "0.4.2",
+  "tag": "xtend-search-searxng:0.4.2",
+  "id": "sha256:0ccc36b9e00b9d3fde0033feeb857ffc321af5b846c4da09738a306e194b554e",
+  "hashes": {
+    "searx/webapp.py": "07c4dc5a3275974a1726d4ec95acd4412011cd00d0081f99d2a87875f0c7fc72",
+    "searx/webadapter.py": "fa1c9a5d02eabd4f91b715efaa759fc5a3fb33d95c7a92a0e25e1fa7b0c20aa6",
+    "searx/webutils.py": "0c193cc553ed8e7db20ddc6b2072f0226e4b2a408fc8e30a5a9e369a9ff14851",
+    "searx/results.py": "9b7f246037a66d7cdf91c77f2de105989d95f7f8c93e745998bff51761e05ae8",
+    "searx/search/__init__.py": "683ce2bf1e83f5cbd5aa22362370d4ec5f65fc244bafe3d7bd9acfb65a441bd4",
+    "searx/search/processors/abstract.py": "eb06c4bb029fa9794bf8a4bc1d21c61f3b87c5cfbd24d6aae93ec15c7776556c",
+    "searx/search/processors/online.py": "256762f1d762d7d1d02f227e79566f56e9a4ce94b8cccc1faa0c658c2238d39b",
+    "searx/search/processors/offline.py": "3bba7315b1d7fe97fe28275368f52d4bd5c64a758d7bfb48c53c83fe7daec294",
+    "searx/result_types/_base.py": "1b0fe4ec19a9229926bf31ce5ead6fc032c7cb992da5cc39ca10a20e82581ece",
+    "searx/favicons/cache.py": "5f50eaf799b9a9454913411c6e35bbf0c091b2449a14e283bf3f47d74587ad5f",
+    "searx/favicons/resolvers.py": "f4f29482fa2a2318bd727ecffdb2e85085721f27004dd9094c824ec9e06ad79c",
+    "searx/settings.yml": "cd928422d82a83372d27a41bdaba8d21b43bb0db37367b9a00953c6b17952a3a",
+    "searx/xtend_stream.py": "ebc32d3a262ec34e29b77d7c98e7c2864acc1dc839c7708cce0edcf226b6f00b",
+    "searx/xtend_integration.py": "a7f2e35bd2d7a3234a13346acaa2d04061ecf2b61c0dda6a59108973d7136c38",
+    "xtend/server/backend.py": "c583640bafa7d847ad5d8c9c0af4047db34b0e5956b1f5bde94efd9fe21777fe",
+    "xtend/server/backend-start.py": "683f666347211a7812c5a0b54c97a346621086823f8a859d60997c804cabc673",
+    "xtend/server/favicon_backend.py": "a6eb8f8ed511272494a0140ebf9e4882f1dbad3c21048ed626517331d46f4c2d",
+    "xtend/requirements.lock.txt": "3f67f7c6d9f573149c046ab0420116d5dabc5c0f29582316644c6c072880899b",
+    "xtend/config/settings.control.yml": "a7b66508e8903c4a5d0d30bfa1b9be5163c8cacb9bc211dfef8f19dc4d6acca1"
+  },
+  "archive": "XTend-search-SearXNG-Image-0.4.2-linux-amd64.tar.gz",
+  "bytes": 107222036
+}

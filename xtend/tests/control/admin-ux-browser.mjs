@@ -6,7 +6,7 @@ const out=new URL('../../evidence/control-plane/',import.meta.url),checks=[];
 const browser=await chromium.launch();let page;
 async function login(javaScriptEnabled=true){
  const context=await browser.newContext({javaScriptEnabled,viewport:{width:1440,height:1000},colorScheme:'dark'});
- const p=await context.newPage();await p.goto(base+'/admin');await p.getByRole('link',{name:'Mit Nextcloud anmelden'}).click();await p.getByRole('link',{name:'administrator',exact:true}).click();
+ const p=await context.newPage();await p.goto(base+'/admin');await p.getByRole('button',{name:'Anmelden mit CCS Account',exact:true}).or(p.getByRole('link',{name:'Anmelden mit CCS Account',exact:true})).click();await p.getByRole('link',{name:'administrator',exact:true}).click();
  await p.getByRole('heading',{name:'Deine Quellen. Unter Kontrolle.'}).waitFor();
  if(javaScriptEnabled)await p.waitForFunction(()=>window.XTendPage?.getRuntime());
  return {context,page:p};
@@ -61,7 +61,7 @@ try{
  const nojs=await login(false),np=nojs.page;await np.locator('#capability-help summary').click();assert.ok(await np.locator('.capability-glossary').isVisible());
  await np.locator('#pool-filters select[name=category]').selectOption('images');await np.getByRole('button',{name:'Filtern',exact:true}).click();assert.equal(await np.locator('.engine-choice').count(),13);
  await np.locator('#pool-filters input[name=filterQuery]').fill('ux 12');await np.getByRole('button',{name:'Filtern',exact:true}).click();assert.equal(await np.locator('.engine-choice').count(),1);await np.locator('.engine-choice').click();assert.match(await np.locator('.engine-detail h3').textContent(),/ux 12/);assert.equal(await np.locator('#pool-filters select[name=category]').inputValue(),'images');
- assert.equal(await np.locator('#policy-form').getAttribute('method'),'post');await np.getByRole('button',{name:'Abmelden',exact:true}).click();assert.ok(await np.getByRole('link',{name:'Mit Nextcloud anmelden'}).isVisible());await nojs.context.close();
+ assert.equal(await np.locator('#policy-form').getAttribute('method'),'post');await np.getByRole('button',{name:'Abmelden',exact:true}).click();assert.ok(await np.getByRole('button',{name:'Anmelden mit CCS Account',exact:true}).or(np.getByRole('link',{name:'Anmelden mit CCS Account',exact:true})).isVisible());await nojs.context.close();
  checks.push('Help, composed filters and source selection work with JavaScript disabled; safe POST forms and native logout remain intact.');
  const result={ok:true,checks,scroll:{before:position,after},fixtureSources:30};await fs.writeFile(new URL('admin-ux-browser.json',out),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
 }catch(error){console.error(await page?.evaluate(()=>({url:location.href,filters:window.XTendPage?.getRuntime().model.getState('admin.data').filters,options:[...document.querySelectorAll('#pool-filters select option')].map(o=>({value:o.value,selected:o.selected,attribute:o.getAttribute('selected')}))})).catch(()=>null));await page?.screenshot({path:new URL('admin-ux-failure.png',out).pathname,fullPage:true}).catch(()=>{});console.error(error);process.exitCode=1;}finally{await browser.close();}

@@ -1,0 +1,95 @@
+{
+  "checkedAt": "2026-10-09T16:18:35.565893+00:00",
+  "repository": "https://github.com/searxng/searxng",
+  "baseline": "e831fc2a1cad50c9979b5f6f680376410218188c",
+  "candidate": "9f042d2f67666f86204d6874488880a23ba81a8f",
+  "commitsAhead": 45,
+  "candidateVersion": "2026.10.9+9f042d2f6",
+  "candidateBackendImage": "sha256:77d718c5b86772980c44fcffa9f76932e8c80a2abf45738c13059a5847b4b440",
+  "frontendImageUsedAsHost": "xtend-search:0.4.1",
+  "frontendSourceMounted": true,
+  "temporaryChanges": [
+    "Dockerfile.searxng frozen version prefix and adapter PINNED advanced together",
+    "msgspec 0.21.1 -> 0.22.0; granian 2.8.3 -> 2.8.4 in lock",
+    "automatic source merge with upstream; GitHub automation conflict left outside test/build inputs"
+  ],
+  "unitTests": {
+    "candidateNode": 65,
+    "baselineBackend": 6,
+    "candidateBackend": 6,
+    "failures": 0
+  },
+  "versionPairing": {
+    "oldFrontend": "incompatible",
+    "candidateFrontend": "compatible",
+    "candidateCatalogEngines": 30
+  },
+  "browserChecks": [
+    "Six fixture policies saved through Maraca; no document reload.",
+    "Save / discard / cancel, live updates during drafts and browser back preserve expected state.",
+    "Native XSurfaceManager and XSidePanel, category filters, URL history and 320\u20133840px layouts.",
+    "Four-second favicon responses do not block first paint or stream completion; successful icons retain fixed dimensions.",
+    "Anonymous XDialog reports create an inbox proposal; optional evidence is separate and manual decision audited.",
+    "Auto cooldown is off; rule preview and versioned rule save work.",
+    "Viewer restrictions, no-JS Observatory/logout and no-JS anonymous reporting.",
+    "Initial wire is measured and bounded; input literal, registry coverage and absence of duplicate HTML are asserted.",
+    "Verified resume preserves the SSR input; stream and history work without document replacement.",
+    "Invalid signature recovers through descriptors; stream and history work without HTML copy.",
+    "No-JS direct SSR search keeps the native search input and results.",
+    "Malformed, duplicate and incomplete frames settle without retries; blocked image recovers; XLightbox and signed pagination work."
+  ],
+  "candidatePerformance": {
+    "firstPaintMs": 455.3999999994412,
+    "completeMs": 2960.2999999998137,
+    "frames": [
+      {
+        "elapsed": 337.3999999994412,
+        "status": "delta",
+        "n": 0
+      },
+      {
+        "elapsed": 455.3999999994412,
+        "status": "delta",
+        "n": 4
+      },
+      {
+        "elapsed": 1032.7000000001863,
+        "status": "delta",
+        "n": 7
+      },
+      {
+        "elapsed": 2819.899999999441,
+        "status": "delta",
+        "n": 10
+      },
+      {
+        "elapsed": 2960.2999999998137,
+        "status": "complete",
+        "n": 10
+      }
+    ],
+    "slowFaviconMs": 4000
+  },
+  "candidateSsr": {
+    "htmlBytes": 80936,
+    "htmlGzipBytes": 15804,
+    "wireBytes": 67332,
+    "wireGzipBytes": 13717,
+    "snapshotStateBytes": 44860,
+    "duplicateHtmlFields": 0,
+    "uniqueDuplicateHtmlBytes": 0,
+    "inputTypeBytes": 6,
+    "inputTypeIsSearch": true,
+    "coverage": {
+      "schema": "xtend.rmt.ssr-coverage.v1",
+      "descriptorElementNodes": 70,
+      "resumeMarkedNodes": 70,
+      "componentNodes": 2,
+      "missingCapabilityNodes": 0,
+      "rawHtmlFragments": 0,
+      "resumeMarkerCoverage": 1
+    },
+    "missingCapabilityDiagnostics": 0
+  },
+  "scope": "Local offline provider fixtures, actual modified SearXNG backend, reviewed candidate frontend source mounted into existing 0.4.1 runtime host and flushing gzip proxy. Python adapter gate ran with Docker --network none on both baseline and candidate. Mock OAuth only; no production SSO or live-provider reliability claim. No comparison against a fresh baseline performance run; numbers show incremental delivery, not a speedup."
+}

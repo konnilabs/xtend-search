@@ -1,0 +1,115 @@
+{
+  "version": "0.4.3",
+  "backendVersion": "0.4.2",
+  "sdk": "0.8.0/Hydrangea",
+  "xtendMcpCallable": false,
+  "nodeTests": 68,
+  "browserSuites": [
+    "v04-browser",
+    "release-0.4.2-browser",
+    "home-browser",
+    "ssr-browser",
+    "about-browser",
+    "edge-browser"
+  ],
+  "stream": {
+    "firstBatchMs": 589.1999999992549,
+    "completeMs": 2969.199999999255,
+    "slowFaviconMs": 4000,
+    "frames": [
+      {
+        "elapsedMs": 365.40000000037253,
+        "status": "delta",
+        "results": 0
+      },
+      {
+        "elapsedMs": 589.1999999992549,
+        "status": "delta",
+        "results": 4
+      },
+      {
+        "elapsedMs": 999.1999999992549,
+        "status": "delta",
+        "results": 7
+      },
+      {
+        "elapsedMs": 2811,
+        "status": "delta",
+        "results": 10
+      },
+      {
+        "elapsedMs": 2969.199999999255,
+        "status": "complete",
+        "results": 10
+      }
+    ],
+    "scope": "Final local Docker 0.4.3; deterministic engines, DOM commit observations, not production latency or a measured browser paint event."
+  },
+  "localUpgrade": {
+    "ok": true,
+    "version": "0.4.3",
+    "retrieval": "compatible",
+    "storage": "ready",
+    "privateBackup": "pre-0.4.3.sqlite",
+    "policiesGuardsRulesPausesByteEqualToBackup": true
+  },
+  "ssr": {
+    "ok": true,
+    "date": "2026-10-09T17:15:52.350Z",
+    "checks": [
+      "Initial wire is measured and bounded; input literal, registry coverage and absence of duplicate HTML are asserted.",
+      "Verified resume preserves the SSR input; stream and history work without document replacement.",
+      "Invalid signature recovers through descriptors; stream and history work without HTML copy.",
+      "No-JS direct SSR search keeps the native search input and results."
+    ],
+    "metrics": {
+      "baseline": null,
+      "patched": {
+        "htmlBytes": 79055,
+        "htmlGzipBytes": 15537,
+        "wireBytes": 66235,
+        "wireGzipBytes": 13495,
+        "snapshotStateBytes": 45222,
+        "duplicateHtmlFields": 0,
+        "uniqueDuplicateHtmlBytes": 0,
+        "inputTypeBytes": 6,
+        "inputTypeIsSearch": true,
+        "coverage": {
+          "schema": "xtend.rmt.ssr-coverage.v1",
+          "descriptorElementNodes": 64,
+          "resumeMarkedNodes": 64,
+          "componentNodes": 2,
+          "missingCapabilityNodes": 0,
+          "rawHtmlFragments": 0,
+          "resumeMarkerCoverage": 1
+        },
+        "missingCapabilityDiagnostics": 0
+      }
+    },
+    "scope": "Local Docker 0.4.3; optional baseline URL is measured separately. Signed state, timestamps and signatures vary. Byte/gzip comparison is transport size, not a production latency claim. Marker coverage is not a successful-resume ratio."
+  },
+  "frontendImage": "sha256:39bfdbb16d2eb8264f5d86f7fe297b326c88fb11af14260a7691a24f7fa1609e",
+  "bundles": {
+    "baseline0.4.2": {
+      "page.mjs": {
+        "bytes": 21922,
+        "gzip": 8008
+      },
+      "search.css": {
+        "bytes": 35712,
+        "gzip": 8367
+      }
+    },
+    "patched0.4.3": {
+      "page.mjs": {
+        "bytes": 37785,
+        "gzip": 12863
+      },
+      "search.css": {
+        "bytes": 38148,
+        "gzip": 8709
+      }
+    },
+    "scope": "Entry assets only; split chunks not included"
+  }
+}

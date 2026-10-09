@@ -1,4 +1,4 @@
-# XTend.search 0.4.1 + SearXNG backend 0.4.0 — Portainer / Docker Standalone, Linux amd64
+# XTend.search 0.4.4 + SearXNG backend 0.4.2 — Portainer / Docker Standalone, Linux amd64
 # Host reverse proxy -> http://127.0.0.1:8090
 # Import BOTH images onto the target Docker host before deploying this stack.
 # Set the required values in Portainer > Stack > Environment variables.
@@ -11,7 +11,7 @@
 # This file needs no checkout, build context, local .env file or bind mounts.
 services:
   search:
-    image: "${XTEND_SEARCH_IMAGE:-xtend-search:0.4.1}"
+    image: "${XTEND_SEARCH_IMAGE:-xtend-search:0.4.4}"
     pull_policy: never
     platform: linux/amd64
     depends_on:
@@ -64,7 +64,7 @@ services:
         max-file: "3"
 
   searxng:
-    image: "${XTEND_BACKEND_IMAGE:-xtend-search-searxng:0.4.0}"
+    image: "${XTEND_BACKEND_IMAGE:-xtend-search-searxng:0.4.2}"
     pull_policy: never
     platform: linux/amd64
     environment:

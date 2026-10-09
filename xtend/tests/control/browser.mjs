@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 const base=process.env.TEST_BASE_URL||'http://localhost:8093',out=new URL('../../evidence/control-plane/',import.meta.url),checks=[];
 await fs.mkdir(out,{recursive:true});const browser=await chromium.launch({headless:true});
-async function login(role){const context=await browser.newContext({viewport:{width:1440,height:1000},colorScheme:'dark'}),page=await context.newPage();await page.goto(base+'/admin');await page.getByRole('link',{name:'Mit Nextcloud anmelden'}).click();await page.getByRole('link',{name:role,exact:true}).click();await page.waitForURL(base+'/admin');await page.waitForFunction(()=>Boolean(window.XTendPage));return {context,page};}
+async function login(role){const context=await browser.newContext({viewport:{width:1440,height:1000},colorScheme:'dark'}),page=await context.newPage();await page.goto(base+'/admin');await page.getByRole('button',{name:'Anmelden mit CCS Account',exact:true}).or(page.getByRole('link',{name:'Anmelden mit CCS Account',exact:true})).click();await page.getByRole('link',{name:role,exact:true}).click();await page.waitForURL(base+'/admin');await page.waitForFunction(()=>Boolean(window.XTendPage));return {context,page};}
 let admin;
 try{
  admin=await login('administrator');const {page,context}=admin,errors=[];let saveRequest;

@@ -3,7 +3,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import http from 'node:http';
 import {fileURLToPath} from 'node:url';
-import {sign,randomUUID} from 'node:crypto';
+import {sign,randomUUID,randomBytes} from 'node:crypto';
+import {loginPage} from './control/login-page.mjs';
 import {createGzip} from 'node:zlib';
 import {createNodePageHost} from '@ccslabs/xtend/rmt/node-page-host';
 import {createNodeAppServiceHost} from '@ccslabs/xtend/maraca/node-app-service-host';
@@ -101,7 +102,13 @@ const server=http.createServer(async(req,res)=>{
    // no-referrer makes Chromium send Origin:null. Cross-origin referrers
    // remain suppressed, and the strict Origin + CSRF check stays intact.
    res.setHeader('Referrer-Policy','same-origin');
-   if(!app.auth.session(req)){message(res,'Operations Observatory',app.auth.configured?'Melde dich mit einem freigegebenen Nextcloud-Konto an.':'Die Nextcloud-Anmeldung benötigt noch Client-ID, Secret und Rollenfreigabe.','/admin/login','Mit Nextcloud anmelden');return;}
+   if(!app.auth.session(req)){
+    const nonce=randomBytes(18).toString('base64');
+    // XTend 0.8.0 XButton has one static spinner style="display:none".
+    // Permit that exact declaration, without allowing arbitrary inline styles.
+    res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':`default-src 'self'; script-src 'self'; style-src 'self' 'nonce-${nonce}'; style-src-attr 'unsafe-hashes' 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='; frame-ancestors 'none'; base-uri 'none'; form-action 'self'`});
+    res.end(req.method==='HEAD'?'':loginPage(nonce,app.auth.configured));return;
+   }
    await adminPages.handle(req,res);return;
   }
   if(pathname==='/info/de/about'||pathname==='/info/en/about'){

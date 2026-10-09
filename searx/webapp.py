@@ -186,7 +186,7 @@ def code_highlighter(codelines, language=None, hl_lines=None, strip_whitespace=T
         lexer = get_lexer_by_name(language, stripall=strip_whitespace, stripnl=strip_new_lines)
 
     except Exception as e:  # pylint: disable=broad-except
-        logger.warning("pygments lexer: %s " % e)
+        logger.warning("pygments lexer: %s ", e)
         # if lexer is not found, using default one
         lexer = get_lexer_by_name('text', stripall=strip_whitespace, stripnl=strip_new_lines)
 
@@ -323,11 +323,35 @@ def image_proxify(url: str):
 def get_translations():
     return {
         # when there is autocompletion
-        'no_item_found': gettext('No item found'),
+        "no_item_found": gettext("No item found"),
         # /preferences: the source of the engine description (wikipedata, wikidata, website)
-        'Source': gettext('Source'),
+        "Source": gettext("Source"),
         # infinite scroll
-        'error_loading_next_page': gettext('Error loading the next page'),
+        "error_loading_next_page": gettext("Error loading the next page"),
+        # keyboard hotkeys help (client/simple/src/js/main/keyboard.ts)
+        "close": gettext("close"),
+        "hotkeys_navigation_title": gettext("How to navigate SearXNG with hotkeys"),
+        "hotkeys_category_control": gettext("Control"),
+        "hotkeys_category_results": gettext("Results"),
+        "hotkeys_category_navigation": gettext("Navigation"),
+        "hotkeys_category_other": gettext("Other"),
+        "hotkeys_remove_focus": gettext("remove focus from the focused input"),
+        "hotkeys_copy_url": gettext("copy url of the selected result to the clipboard"),
+        "hotkeys_toggle_help": gettext("toggle help window"),
+        "hotkeys_focus_search": gettext("focus on the search input"),
+        "hotkeys_next_page": gettext("go to next page"),
+        "hotkeys_open_result": gettext("open search result"),
+        "hotkeys_previous_page": gettext("go to previous page"),
+        "hotkeys_reload_page": gettext("reload page from the server"),
+        "hotkeys_open_new_tab": gettext("open the result in a new tab"),
+        "hotkeys_select_previous": gettext("select previous search result"),
+        "hotkeys_select_next": gettext("select next search result"),
+        "hotkeys_page_up": gettext("scroll one page up"),
+        "hotkeys_half_page_down": gettext("scroll half a page down"),
+        "hotkeys_page_down": gettext("scroll one page down"),
+        "hotkeys_scroll_top": gettext("scroll to the top of the page"),
+        "hotkeys_half_page_up": gettext("scroll half a page up"),
+        "hotkeys_scroll_bottom": gettext("scroll to the bottom of the page"),
     }
 
 
@@ -971,6 +995,7 @@ def preferences():
         # fmt: off
         'preferences.html',
         preferences = True,
+        engines_with_tokens = any(getattr(e, "tokens", None) for e in engines.values()),
         selected_categories = get_selected_categories(sxng_request.preferences, sxng_request.form),
         locales = LOCALE_NAMES,
         current_locale = sxng_request.preferences.get_value("locale"),
@@ -987,7 +1012,7 @@ def preferences():
         shortcuts = {y: x for x, y in engine_shortcuts.items()},
         themes = themes,
         plugins_storage = searx.plugins.STORAGE.info,
-        current_doi_resolver = get_doi_resolver(),
+        current_doi_resolver = sxng_request.preferences.get_value("doi_resolver"),
         allowed_plugins = allowed_plugins,
         preferences_url_params = sxng_request.preferences.get_as_url_params(),
         locked_preferences = get_setting("preferences").lock,
@@ -1059,7 +1084,7 @@ def image_proxy():
             del resp
             del stream
         except RequestException as e:
-            logger.debug('Exception while closing response', e)
+            logger.debug('Exception while closing response: %s', e)
 
     try:
         headers = dict_subset(resp.headers, {'Content-Type', 'Content-Encoding', 'Content-Length', 'Length'})

@@ -80,26 +80,14 @@ template xtend.search {
         children [
           { type "element" tag "a" text "Zu den Ergebnissen" class "skip-link" attributes { href "#results" } }
           { type "element" tag "header" class "topbar" children [
-            { type "element" tag "a" class "wordmark" attributes { href "/" "aria-label" "XTend.search Startseite" } children [
-              { type "element" tag "img" attributes { src "/assets/xtend/mark.svg" alt "" width 32 height 32 } }
-              { type "element" tag "span" text "XTend" }
-              { type "element" tag "span" text { op "literal" value ".search" } class "wordmark-suffix" }
+            { type "element" tag "div" class "header-backdrop" attributes { "aria-hidden" "true" } }
+            { type "element" tag "a" key "search-brand" class "wordmark" attributes { href "/" "aria-label" "XTend.search Startseite" } children [
+              { type "element" tag "img" class "brand-mark" attributes { id "search-logo" src "/assets/xtend/mark.svg" alt "" width 32 height 32 } }
+              { type "element" tag "span" key "search-wordmark" class "brand-name" attributes { id "search-wordmark" role { op "if" test { op "equals" left "$model.search.data.view" right "home" } then "heading" else null } "aria-level" { op "if" test { op "equals" left "$model.search.data.view" right "home" } then 1 else null } } children [
+                { type "element" tag "span" text "XTend" }
+                { type "element" tag "span" text { op "literal" value ".search" } class "wordmark-suffix" }
+              ] }
             ] }
-            { type "element" tag "nav" class "top-nav" attributes { "aria-label" "Hauptnavigation" } children [
-              { type "element" tag "a" text "Über XTend.search" attributes { href "/info/de/about" "data-xtend-native" "" "data-about-link" "" } }
-            ] }
-          ] }
-          { type "element" tag "section" class "search-area" children [
-            { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
-              type "element" tag "div" key "home-hero" class "hero" children [
-                { type "element" tag "div" class "eyebrow" text "DEIN FENSTER INS WEB" }
-                { type "element" tag "h1" class "hero-wordmark" children [
-                  { type "element" tag "span" text "XTend" }
-                  { type "element" tag "span" text { op "literal" value ".search" } }
-                ] }
-                { type "element" tag "p" text "Neugier braucht Freiraum." class "hero-subtitle" }
-              ]
-            } }
             { type "element" tag "form" key "search-form" class "search-form" attributes { id "search-form" action "/search" method "get" role "$model.search.data.searchRole" } children [
               { type "element" tag "div" class "search-box" children [
                 { type "element" tag "span" class "search-icon" attributes { "aria-hidden" "true" } }
@@ -146,6 +134,16 @@ template xtend.search {
                 ] }
               ] }
             ] }
+            { type "element" tag "nav" class "top-nav" attributes { "aria-label" "Hauptnavigation" } children [
+              { type "element" tag "a" class "icon-link about-icon" attributes { href "/info/de/about" "data-xtend-native" "" "data-about-link" "" "aria-label" "Über XTend.search" title "Über XTend.search" } children [ { type "element" tag "x-icon" text "ⓘ" attributes { name "info" pack "core" size "20" decorative true "aria-hidden" "true" } } ] }
+            ] }
+          ] }
+          { type "element" tag "section" class "search-area" children [
+            { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
+              type "element" tag "div" key "home-hero" class "hero" children [
+                { type "element" tag "p" text "Neugier braucht Freiraum." class "hero-subtitle" }
+              ]
+            } }
             { type "element" tag "p" key "activity" text "$model.search.activity.message" class "activity" attributes { id "search-status" role "status" "aria-live" "polite" } }
           ] }
           { type "element" tag "div" attributes { id "result-slot" } }
@@ -168,17 +166,6 @@ template xtend.search {
         attributes { id "results" tabindex "-1" "aria-busy" "$model.search.activity.busy" "data-category" "$model.search.data.category" "data-has-cards" true "data-standalone" true "data-preview-open" "$model.search.preview.open" }
         children [
           { type "conditional" test "$model.search.data.fixture" then { type "element" tag "p" text "Testmodus · Diese Ergebnisse stammen aus reproduzierbaren Testdaten." class "fixture-notice" } }
-          { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
-            type "element" tag "div" class "home-details" children [
-              { type "element" tag "p" text "Mehr Perspektiven. Weniger Ablenkung." class "home-intro" }
-              { type "element" tag "p" text "Eine Suche über mehrere Quellen. Ohne Werbung von uns, ohne persönliches Suchprofil." }
-              { type "element" tag "div" class "home-points" children [
-                { type "element" tag "span" text "Mehrere Suchquellen" }
-                { type "element" tag "span" text "Keine Analyse-Tracker" }
-                { type "element" tag "span" text "Offene Technologie" }
-              ] }
-            ]
-          } }
           { type "conditional" test "$model.search.data.isSearch" then {
             type "element" tag "section" class "result-list" attributes { "aria-label" "Suchergebnisse" } children [
               { type "element" tag "div" class "result-meta" children [
@@ -231,7 +218,7 @@ template xtend.search {
                     { type "element" tag "h2" children [ { type "element" tag "a" text "$item.title" attributes { href "$item.url" "data-xtend-native" "" rel "noreferrer" } } ] }
                     { type "element" tag "p" text "$item.snippetText" class "snippet" }
                     { type "element" tag "div" text "$item.sourceLabel" class "result-sources" }
-{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report" text "Ergebnis melden" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" } } }
+{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16" decorative true "aria-hidden" "true" } } ] } }
                   ]
                 } }
               ] }
@@ -245,7 +232,7 @@ template xtend.search {
                     { type "repeat" source "$model.search.data.knowledgeCards" key "id" template {
                       type "element" tag "section" class "knowledge-card" attributes { "aria-label" "$item.title" } children [
                         { type "element" tag "h2" text "$item.title" }
-{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report" text "Ergebnis melden" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" } } }
+{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16" decorative true "aria-hidden" "true" } } ] } }
                         { type "conditional" test "$item.image" then { type "element" tag "img" class "knowledge-image" attributes { src "$item.image" alt "$item.title" loading "lazy" width 320 height 220 referrerpolicy "no-referrer" } } }
                         { type "element" tag "p" class "knowledge-description" text "$item.description" }
                         { type "element" tag "dl" class "knowledge-facts" children [
@@ -293,7 +280,7 @@ template xtend.search {
                     { type "conditional" test "$model.search.preview.imageMessage" then { type "element" tag "p" class "preview-message" text "$model.search.preview.imageMessage" attributes { role "status" } } }
                     { type "conditional" test "$model.search.preview.expandMessage" then { type "element" tag "p" class "preview-message" text "$model.search.preview.expandMessage" attributes { role "status" } } }
                     { type "element" tag "div" class "preview-details" children [
-                      { type "conditional" test "$model.search.preview.reportUrl" then { type "element" tag "a" class "result-report" text "Ergebnis melden" attributes { href "$model.search.preview.reportUrl" "data-report" "" "data-xtend-native" "" } } }
+                      { type "conditional" test "$model.search.preview.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$model.search.preview.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16" decorative true "aria-hidden" "true" } } ] } }
 { type "element" tag "p" class "preview-domain" text "$model.search.preview.displayUrl" }
                       { type "element" tag "h2" text "$model.search.preview.title" }
                       { type "element" tag "p" class "preview-description" text "$model.search.preview.snippetText" }
@@ -364,6 +351,8 @@ template xtend.search {
   }
   action search.filter.language { input value string
     reduce state.search.filters.language = input.value }
+  action search.filters.restore { input value object
+    reduce state.search.filters = input.value }
   action search.filter.time { input value string
     reduce state.search.filters.timeRange = input.value }
   action search.filter.safe { input value string
