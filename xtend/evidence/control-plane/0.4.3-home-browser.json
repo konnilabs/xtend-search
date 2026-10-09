@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "checks": [
+    "Classic centered landing page has no filled header or removed marketing text; light/dark, 320–3840px, full viewport and footer tested.",
+    "One persisted input morphs through real XUtils layout-flip; background fades separately, batches do not replay motion, history and animation cleanup work without reload.",
+    "Reduced motion and unavailable Web Animations use immediate layout; no-JS landing and native result-header search remain usable."
+  ],
+  "errors": [],
+  "animations": [
+    {
+      "target": "search-form",
+      "frames": [
+        {
+          "transform": "translate(260.25px,309.59375px) scale(0.8809523809523809,1.1296296296296295)",
+          "transformOrigin": "0 0"
+        },
+        {
+          "transform": "none",
+          "transformOrigin": "0 0"
+        }
+      ],
+      "options": {
+        "duration": 320,
+        "easing": "cubic-bezier(.2,.8,.2,1)",
+        "fill": "both"
+      }
+    },
+    {
+      "target": "header-backdrop",
+      "frames": [
+        {
+          "opacity": 0
+        },
+        {
+          "opacity": 1
+        }
+      ],
+      "options": {
+        "duration": 320,
+        "easing": "cubic-bezier(.2,.8,.2,1)",
+        "fill": "both"
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.control
-    image: xtend-search:0.4.2
+    image: xtend-search:0.4.3
     depends_on:
       searxng:
         condition: service_healthy

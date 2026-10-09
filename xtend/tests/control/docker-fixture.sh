@@ -1,7 +1,7 @@
 #!/bin/sh
 # Run as a Docker-authorized user from the repository root. No live credentials.
 set -eu
-fixture_image=${FIXTURE_IMAGE:-xtend-search:0.4.2}
+fixture_image=${FIXTURE_IMAGE:-xtend-search:0.4.3}
 fixture_settings=${FIXTURE_SETTINGS:-xtend/config/settings.control.fixture.yml}
 fixture_data=${FIXTURE_DATA_VOLUME:-xtend-cp-fixture-data}
 repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/../../.." && pwd)

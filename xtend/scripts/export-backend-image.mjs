@@ -1,4 +1,4 @@
-import fs from 'node:fs';import path from 'node:path';import {execFileSync,spawn} from 'node:child_process';import {pipeline} from 'node:stream/promises';import {createGzip} from 'node:zlib';import {createHash} from 'node:crypto';import {VERSION} from '../server/control/release.mjs';
+import fs from 'node:fs';import path from 'node:path';import {execFileSync,spawn} from 'node:child_process';import {pipeline} from 'node:stream/promises';import {createGzip} from 'node:zlib';import {createHash} from 'node:crypto';import {BACKEND_VERSION as VERSION} from '../server/control/release.mjs';
 const output=path.resolve(process.argv[2]||'..'),ref='xtend-search-searxng:'+VERSION;
 const [info]=JSON.parse(execFileSync('docker',['image','inspect',ref],{encoding:'utf8'}));
 if(info.Architecture!=='amd64'||info.Os!=='linux'||info.Config.Labels['org.opencontainers.image.version']!==VERSION)throw Error('Backend version or platform mismatch');

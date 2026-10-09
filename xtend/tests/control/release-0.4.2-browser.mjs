@@ -1,6 +1,7 @@
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+const version=JSON.parse(await fs.readFile(new URL('../../package.json',import.meta.url))).version;
 const base=process.env.TEST_BASE_URL||'http://localhost:8093';
 const out=new URL('../../evidence/control-plane/',import.meta.url),checks=[],errors=[];
 const browser=await chromium.launch();
@@ -46,14 +47,14 @@ try{
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'search overflow '+scheme+' '+width);
    const form=await page.locator('header #search-form').boundingBox();assert.ok(form&&form.x>=0&&form.x+form.width<=width+1);
    const input=await page.locator('#search-input').evaluate(e=>parseFloat(getComputedStyle(e).fontSize));assert.ok(input>=16);
-   if(width===1920||width===390)await page.screenshot({path:new URL('0.4.2-search-'+scheme+'-'+width+'.png',out).pathname,fullPage:true});
+   if(width===1920||width===390)await page.screenshot({path:new URL(version+'-search-'+scheme+'-'+width+'.png',out).pathname,fullPage:true});
   }
  }
  checks.push('One header form, accessible XIcon links, keyboard reporting and responsive light/dark layouts at 320–3840px; search input remains at least 16px.');
  await page.setViewportSize({width:1600,height:1000});await page.goto(base+'/admin');
  await page.waitForFunction(()=>customElements.get('x-button')&&!document.querySelector('#ccs-login').hidden);
  assert.ok(await page.locator('#ccs-login').evaluate(e=>!!e.shadowRoot?.querySelector('button')));
- await page.screenshot({path:new URL('0.4.2-ccs-login.png',out).pathname});
+ await page.screenshot({path:new URL(version+'-ccs-login.png',out).pathname});
  for(const scheme of ['dark','light'])for(const width of [320,390,768,1920,3840]){
   await page.emulateMedia({colorScheme:scheme});await page.setViewportSize({width,height:1000});
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'login overflow '+scheme+' '+width);
@@ -65,7 +66,7 @@ try{
   const color=await page.locator('.observatory').evaluate(e=>getComputedStyle(e).backgroundColor);
   assert.equal(color,scheme==='dark'?'rgb(9, 9, 9)':'rgb(245, 242, 236)');
   assert.equal(await page.locator('.metric').first().evaluate(e=>getComputedStyle(e).borderRadius),'3px');
-  await page.screenshot({path:new URL('0.4.2-observatory-'+scheme+'.png',out).pathname});
+  await page.screenshot({path:new URL(version+'-observatory-'+scheme+'.png',out).pathname});
   for(const width of [320,390,768,1280,1920,3840]){
    await page.setViewportSize({width,height:1000});
    assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Observatory overflow '+scheme+' '+width);
@@ -76,6 +77,6 @@ try{
  await np.getByRole('link',{name:'Anmelden mit CCS Account',exact:true}).click();await np.getByRole('link',{name:'viewer',exact:true}).click();await np.getByRole('heading',{name:'Deine Quellen. Unter Kontrolle.'}).waitFor();await native.close();
  checks.push('Real XButton login and native no-JS fallback use the same mock Nextcloud OAuth flow; Observatory shares corporate tokens and restrained corners.');
  assert.deepEqual(errors,[]);
- await fs.writeFile(new URL('0.4.2-browser.json',out),JSON.stringify({ok:true,checks,errors},null,2));console.log(JSON.stringify({ok:true,checks}));
+ await fs.writeFile(new URL(version+'-browser.json',out),JSON.stringify({ok:true,checks,errors},null,2));console.log(JSON.stringify({ok:true,checks}));
  await context.close();
 }finally{await browser.close();}

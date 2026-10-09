@@ -1,6 +1,7 @@
 """Exercise the shipped Portainer Compose without live secrets or data volumes."""
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import time
@@ -8,12 +9,13 @@ import urllib.request
 
 root = Path(__file__).resolve().parents[3]
 version = json.loads((root / 'xtend/package.json').read_text())['version']
+backend_version = re.search(r"BACKEND_VERSION = '([^']+)'", (root / 'xtend/server/control/release.mjs').read_text()).group(1)
 project = 'xtend-release-smoke-' + version.replace('.', '')
 port = int(os.environ.get('SMOKE_PORT', '8104'))
 env = dict(os.environ, PUBLIC_BASE_URL=f'http://localhost:{port}', XTEND_PORT=str(port),
            SEARXNG_TOKEN='release-smoke-test-only', NEXTCLOUD_CLIENT_ID='release-smoke', NEXTCLOUD_CLIENT_SECRET='release-smoke-test-only',
            XTEND_ADMIN_ROLES='{}', XTEND_SEARCH_IMAGE=f'xtend-search:{version}',
-           XTEND_BACKEND_IMAGE=f'xtend-search-searxng:{version}',
+           XTEND_BACKEND_IMAGE=f'xtend-search-searxng:{backend_version}',
            XTEND_CONTROL_VOLUME=project+'-control', XTEND_BACKEND_VOLUME=project+'-backend',
            XTEND_EVIDENCE_VOLUME=project+'-evidence', XTEND_FAVICON_RESOLVER='off')
 compose = ['docker', 'compose', '--project-name', project, '-f', str(root / 'compose.portainer.yml')]

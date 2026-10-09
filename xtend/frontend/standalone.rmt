@@ -80,6 +80,7 @@ template xtend.search {
         children [
           { type "element" tag "a" text "Zu den Ergebnissen" class "skip-link" attributes { href "#results" } }
           { type "element" tag "header" class "topbar" children [
+            { type "element" tag "div" class "header-backdrop" attributes { "aria-hidden" "true" } }
             { type "element" tag "a" class "wordmark" attributes { href "/" "aria-label" "XTend.search Startseite" } children [
               { type "element" tag "img" attributes { src "/assets/xtend/mark.svg" alt "" width 32 height 32 } }
               { type "element" tag "span" text "XTend" }
@@ -138,7 +139,6 @@ template xtend.search {
           { type "element" tag "section" class "search-area" children [
             { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
               type "element" tag "div" key "home-hero" class "hero" children [
-                { type "element" tag "div" class "eyebrow" text "DEIN FENSTER INS WEB" }
                 { type "element" tag "h1" class "hero-wordmark" children [
                   { type "element" tag "span" text "XTend" }
                   { type "element" tag "span" text { op "literal" value ".search" } }
@@ -168,17 +168,6 @@ template xtend.search {
         attributes { id "results" tabindex "-1" "aria-busy" "$model.search.activity.busy" "data-category" "$model.search.data.category" "data-has-cards" true "data-standalone" true "data-preview-open" "$model.search.preview.open" }
         children [
           { type "conditional" test "$model.search.data.fixture" then { type "element" tag "p" text "Testmodus · Diese Ergebnisse stammen aus reproduzierbaren Testdaten." class "fixture-notice" } }
-          { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
-            type "element" tag "div" class "home-details" children [
-              { type "element" tag "p" text "Mehr Perspektiven. Weniger Ablenkung." class "home-intro" }
-              { type "element" tag "p" text "Eine Suche über mehrere Quellen. Ohne Werbung von uns, ohne persönliches Suchprofil." }
-              { type "element" tag "div" class "home-points" children [
-                { type "element" tag "span" text "Mehrere Suchquellen" }
-                { type "element" tag "span" text "Keine Analyse-Tracker" }
-                { type "element" tag "span" text "Offene Technologie" }
-              ] }
-            ]
-          } }
           { type "conditional" test "$model.search.data.isSearch" then {
             type "element" tag "section" class "result-list" attributes { "aria-label" "Suchergebnisse" } children [
               { type "element" tag "div" class "result-meta" children [

@@ -40,3 +40,32 @@
 #ccs-login[hidden],#ccs-login-fallback[hidden]{display:none!important}.auth-login-fallback{display:inline-flex;min-height:48px;align-items:center;padding:14px 22px;background:var(--deep);color:var(--on-accent);margin-top:22px;border-radius:3px;font-size:14px;font-weight:600}
 .auth-note{margin-top:18px;font-size:12px!important}.auth-back{display:inline-block;margin-top:18px;font-size:13px;color:var(--panel-link)}
 @media(max-width:600px){.auth-screen{padding:24px 16px;gap:28px}.auth-card{margin:0 auto 24px;padding:26px 22px}}
+
+/* The classic landing page and the compact result header share one form. */
+.search-shell .topbar,.search-shell[data-view=results] .topbar{position:relative;z-index:20;isolation:isolate;background:transparent;border-bottom-color:transparent}
+.header-backdrop{position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--header);border-bottom:1px solid var(--line)}
+#search-shell[data-view=home]{display:block}
+#search-shell[data-view=home]:not(:defined),#search-shell[data-view=home]::part(content){display:grid;grid-template-columns:minmax(16px,1fr) minmax(0,740px) minmax(16px,1fr);grid-template-rows:90px auto auto auto minmax(0,1fr) auto}
+.search-shell[data-view=home] .topbar,.search-shell[data-view=home] .search-area{display:contents}
+.search-shell[data-view=home] .header-backdrop{display:none}
+.search-shell[data-view=home] .topbar>.wordmark{grid-column:1/-1;grid-row:1;justify-self:start;align-self:center;margin:0 5.3vw}
+.search-shell[data-view=home] .topbar>.top-nav{grid-column:1/-1;grid-row:1;justify-self:end;align-self:center;margin:0 5.3vw}
+.search-shell[data-view=home] .hero{grid-column:2;grid-row:2;padding:76px 0 32px}
+.search-shell[data-view=home] .search-form{grid-column:2;grid-row:3;width:100%;max-width:none;justify-self:stretch;margin:0}
+.search-shell[data-view=home] .activity{grid-column:2;grid-row:4}
+.search-shell[data-view=home] #result-slot{grid-column:1/-1;grid-row:5;min-width:0}
+#search-shell[data-view=home] .site-footer{grid-column:1/-1;grid-row:6;margin-top:0}
+.search-shell[data-view=home] .search-box{height:66px;border-radius:19px;padding-left:23px}
+.search-shell[data-view=home] .search-button{height:48px;border-radius:13px;padding-inline:28px}
+.search-shell[data-view=home] .search-tools{margin:14px 3px 0}
+.search-shell[data-view=home] .tab{padding:9px 18px;border-radius:9px;font-size:13px}
+.search-shell[data-view=home] .home-details{margin-top:34px}
+@media(max-width:600px){
+ #search-shell[data-view=home]:not(:defined),#search-shell[data-view=home]::part(content){grid-template-rows:74px auto auto auto minmax(0,1fr) auto}
+ .search-shell[data-view=home] .topbar>.wordmark,.search-shell[data-view=home] .topbar>.top-nav{margin-inline:20px}
+ .search-shell[data-view=home] .hero{padding:52px 0 28px}
+ .search-shell[data-view=home] .search-box{height:62px;padding-left:16px}
+ .search-shell[data-view=home] .search-button{height:46px;padding-inline:17px}
+ .search-shell[data-view=home] .tab{padding:9px 10px;font-size:12px}
+ .search-shell[data-view=home] .home-details{margin-top:24px}
+}

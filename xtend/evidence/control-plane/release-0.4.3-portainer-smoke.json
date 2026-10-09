@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "health": {
+    "ok": true,
+    "version": "0.4.3",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "configuration": "Portainer Compose; isolated disposable volumes and synthetic credentials; no live SSO"
+}
