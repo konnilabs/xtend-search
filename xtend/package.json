@@ -22,10 +22,10 @@
     "@ccslabs/xtend": "file:vendor-inputs/ccslabs-xtend-0.8.0.tgz"
   },
   "devDependencies": {
-    "esbuild": "0.25.12",
+    "esbuild": "0.28.2",
     "playwright": "1.58.2",
     "rollup": "4.60.4",
-    "terser": "5.48.0",
-    "typescript": "7.0.2"
+    "terser": "5.51.2",
+    "typescript": "5.9.3"
   }
 }
