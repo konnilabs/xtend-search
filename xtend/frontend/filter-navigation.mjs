@@ -22,7 +22,7 @@ export function installFilterNavigation(command){
   const form=document.getElementById('search-form');if(!form)return;
   const url=categoryDraftUrl(link.href,new FormData(form),location.origin);
   event.preventDefault();event.stopImmediatePropagation();
-  void window.XTendPage.visit(url).catch(()=>{});
+  void window.XTendPage.visit(url,{cache:'reuse'}).catch(()=>{});
  },true);
  window.addEventListener('xtend-page:event',({detail:event})=>{
   if(event.type==='pending'){pending=true;submitted=revision;}

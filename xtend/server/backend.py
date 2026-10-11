@@ -18,6 +18,8 @@ def private_record(*args, **kwargs):
     return record
 logging.setLogRecordFactory(private_record)
 from searx.webapp import app
+from flask import request
+import json
 from searx import get_setting
 if set(get_setting("preferences.lock", set())) & {"categories", "language", "safesearch"}:
     raise RuntimeError("Unsupported locked retrieval parameters")
@@ -38,7 +40,15 @@ token = read_secret('SEARXNG_TOKEN')
 if not token:
     raise RuntimeError('SEARXNG_TOKEN is required')
 
-from xtend.server import favicon_backend
+from xtend.server import favicon_backend, engine_health
+
+@app.after_request
+def health_discovery(response):
+    if request.path == '/config' and response.is_json:
+        data = response.get_json()
+        data['xtend_engine_health'] = engine_health.snapshot(sorted(engine_health.PROCESSORS))
+        response.set_data(json.dumps(data, separators=(',', ':')))
+    return response
 
 def application(environ, start_response):
     if environ.get('PATH_INFO') == '/healthz':
@@ -48,6 +58,8 @@ def application(environ, start_response):
     if not hmac.compare_digest(supplied, 'Bearer ' + token):
         start_response('403 Forbidden', [('Content-Type', 'text/plain')])
         return [b'Forbidden']
+    if environ.get('PATH_INFO') == '/xtend/engine-health':
+        return engine_health.handle(environ, start_response)
     if environ.get('PATH_INFO') == '/xtend/favicon':
         return favicon_backend.handle(environ, start_response)
     if environ.get('PATH_INFO') not in ['/config', '/search']:
@@ -55,6 +67,8 @@ def application(environ, start_response):
         return [b'Not Found']
     def contract_response(status, headers, exc_info=None):
         headers.append(("X-XTend-Backend-Contract", "engine-json-v1"))
+        headers.append(("X-XTend-Engine-Health-Contract", "engine-health-v1"))
+        headers.append(("X-XTend-Backend-Instance", engine_health.INSTANCE_ID))
         if favicon_backend.available():
             headers.append(("X-XTend-Favicon-Contract", "favicon-v1"))
         return start_response(status, headers, exc_info)

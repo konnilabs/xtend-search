@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "checks": [
+    "Private admin assets and server graphs are not anonymously served.",
+    "Private backend rejects missing authentication.",
+    "Success, provider-error and lexical-rejection canaries absent from Docker logs and every persisted control file.",
+    "A second Docker owner using the same volume is rejected by flock.",
+    "Multiple web workers fail before the service starts.",
+    "Corresponding source archive is available."
+  ]
+}

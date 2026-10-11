@@ -13,17 +13,16 @@ const output=path.resolve(process.argv[2]||path.join(root,'../..'));
 const ref=`xtend-search:${VERSION}`;
 const [info]=JSON.parse(execFileSync('docker',['image','inspect',ref],{encoding:'utf8'}));
 if(info.Architecture!=='amd64'||info.Os!=='linux'||info.Config.Labels?.['org.opencontainers.image.version']!==VERSION)throw new Error('Image platform or release label mismatch');
-const sources=['frontend/search-motion.mjs','frontend/standalone-streaming.mjs','frontend/search.css','frontend/filter-navigation.mjs','frontend/admin-login.mjs','server/control/login-page.mjs','upstream-searxng.json','server/ssr-capabilities.mjs','patches/ssr-resume/apply.cjs','patches/ssr-resume/manifest.json','frontend/preview.mjs','server/control/quality.mjs','server/control/evidence.mjs','server/control/favicons.mjs','server/control/dashboard.mjs','server/control/composition.mjs','server/control/storage-worker.mjs','server/control/feedback-http.mjs','server/control/server-services.ts','frontend/services.ts','admin/services.ts','admin/live.mjs','frontend/feedback.mjs','frontend/favicons.mjs','shared/feedback.mjs','shared/feedback-form.mjs','server/control/source-messages.mjs','server/control/executor.mjs','server/control/adapter.mjs','server/control/locales.mjs','scripts/repair-locale-catalog.mjs','shared/about.mjs','server/about.mjs','frontend/about.mjs','frontend/about-dialog.mjs','frontend/about.css','frontend/favicon.png','frontend/mark.svg','scripts/build-control.cjs','admin/admin.css','admin/admin.rmt','frontend/standalone.rmt','frontend/standalone.css','frontend/standalone-host.mjs','frontend/preferences.mjs','server/preferences.mjs','server/standalone.mjs','server/control/plane.mjs','server/control/executor.mjs','server/control/admin.mjs','server/control/release.mjs','standalone.pages.json'];
+const sources=[];
+for(const directory of ['frontend','admin','server','shared','patches','vendor-inputs'])for(const file of fs.readdirSync(path.join(root,directory),{recursive:true})){
+ const name=directory+'/'+file;if(fs.statSync(path.join(root,name)).isFile()&&!name.includes('__pycache__')&&!name.endsWith('.pyc'))sources.push(name);
+}
+sources.push('package.json','package-lock.json','standalone.pages.json','upstream-searxng.json','scripts/build-control.cjs');
 const verify=`const fs=require('fs'),crypto=require('crypto');const root='/app/xtend/';const hash=p=>crypto.createHash('sha256').update(fs.readFileSync(root+p)).digest('hex');console.log(JSON.stringify({version:JSON.parse(fs.readFileSync(root+'package.json')).version,files:Object.fromEntries(${JSON.stringify(sources)}.map(p=>[p,hash(p)])),bundles:Object.fromEntries(['admin/admin.css','standalone/search.css','standalone/page.mjs','standalone/admin-login.mjs'].map(p=>[p,hash('public/assets/xtend/'+p)]))}));`;
 const built=JSON.parse(execFileSync('docker',['run','--rm','--entrypoint','node',info.Id,'-e',verify],{encoding:'utf8'}));
 const hashFile=file=>createHash('sha256').update(fs.readFileSync(file)).digest('hex');
-const overlay=JSON.parse(fs.readFileSync(path.join(root,'patches/ssr-resume/manifest.json')));
-for(const file of overlay.files){
- const expected=hashFile(path.join(root,'patches/ssr-resume/files',file.path));
- if(expected!==file.after)throw new Error('Patch replacement hash mismatch: '+file.path);
- const imageHash=execFileSync('docker',['run','--rm','--entrypoint','node',info.Id,'-e',`console.log(require('crypto').createHash('sha256').update(require('fs').readFileSync('/app/xtend/node_modules/@ccslabs/xtend/'+${JSON.stringify(file.path)})).digest('hex'))`],{encoding:'utf8'}).trim();
- if(imageHash!==file.after)throw new Error('Image lacks framework patch: '+file.path);
-}
+const sdkProvenance=JSON.parse(fs.readFileSync(path.join(root,'vendor-inputs/xtend-0.9.0-provenance.json')));
+if(hashFile(path.join(root,'vendor-inputs',sdkProvenance.artifact))!==sdkProvenance.sha256)throw new Error('SDK provenance mismatch');
 if(built.version!==VERSION)throw new Error('Packaged version mismatch');
 for(const file of sources)if(built.files[file]!==hashFile(path.join(root,file)))throw new Error('Image is older than release source: '+file);
 fs.mkdirSync(output,{recursive:true});

@@ -38,7 +38,7 @@ const adminPages=createNodePageHost({manifest:adminManifest,ssr:ssrCapabilities,
  return {page:'Admin',url:data.url,props:{'admin.data':data,'admin.live':data},head:[...head('Observatory · XTend.search','same-origin'),{tag:'meta',attributes:{name:'csrf-token',content:auth.csrf}}],renderOptions};
 },onError:()=>console.error('{"event":"admin-page-failed"}')});
 const publicServiceManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/xtend/standalone/maraca/xtend.maraca.services.json'))),adminServiceManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/xtend/admin/maraca/xtend.maraca.services.json')));
-const hosts=new Map();for(const [kind,m]of [['public',publicServiceManifest],['admin',adminServiceManifest]])hosts.set(kind,createNodeAppServiceHost({services,manifest:m,pathPrefix:'/api/xtend/services',historyLimit:0,bodyLimit:16384,exposeErrors:false,createContext:req=>kind==='admin'?app.auth.protect(req):(req.feedbackContext||{}),onError:()=>{}}));
+const hosts=new Map();for(const [kind,m]of [['public',publicServiceManifest],['admin',adminServiceManifest]])hosts.set(kind,createNodeAppServiceHost({services,manifest:m,allowedOrigins:[app.auth.origin],pathPrefix:'/api/xtend/services',historyLimit:0,bodyLimit:16384,exposeErrors:false,createContext:req=>kind==='admin'?app.auth.protect(req):(req.feedbackContext||{}),onError:()=>{}}));
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function message(res,title,text,link='/admin',label='Zurück'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"});res.end(`<!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)} · XTend.search</title><link rel="icon" href="/assets/xtend/favicon.png" type="image/png" sizes="64x64"><link rel="icon" sizes="any" href="/assets/xtend/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/xtend/standalone/search.css"><main class="empty-state"><img src="/assets/xtend/mark.svg" alt="" width="48" height="48"><h1>${escape(title)}</h1><p>${escape(text)}</p><a href="${escape(link)}">${escape(label)}</a></main></html>`);}
 let ingressCount=0,ingressReset=0;
@@ -91,7 +91,7 @@ const server=http.createServer(async(req,res)=>{
    if(req.method!=='POST'||!req.headers['content-type']?.startsWith('application/json')||url.search){res.writeHead(405);res.end();return;}
    if(req.headers.origin&&req.headers.origin!==app.auth.origin){res.writeHead(403);res.end();return;}
    const id=pathname.slice('/api/xtend/services/'.length),admin=id.startsWith('admin.');
-   if(!(admin?adminServiceManifest:publicServiceManifest).services.some(s=>s.id===id)){res.writeHead(404);res.end();return;}
+   if(!(admin?adminServiceManifest:publicServiceManifest).services.some(s=>s.id===id&&s.target==='server')){res.writeHead(404);res.end();return;}
    if(id==='search.feedback.submit')req.feedbackContext=app.quality.protect(req,res,app.auth.origin);
    if(id==='search.run'){if(ingressReset<Date.now()){ingressReset=Date.now()+60000;ingressCount=0;}if(++ingressCount>120){res.writeHead(429,{'Retry-After':'60'});res.end();return;}}
    res.setHeader('X-Accel-Buffering','no');await hosts.get(admin?'admin':'public').handle(req,res);return;
@@ -104,7 +104,7 @@ const server=http.createServer(async(req,res)=>{
    res.setHeader('Referrer-Policy','same-origin');
    if(!app.auth.session(req)){
     const nonce=randomBytes(18).toString('base64');
-    // XTend 0.8.0 XButton has one static spinner style="display:none".
+    // Reviewed XTend 0.9.0 XButton has one static spinner style="display:none".
     // Permit that exact declaration, without allowing arbitrary inline styles.
     res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':`default-src 'self'; script-src 'self'; style-src 'self' 'nonce-${nonce}'; style-src-attr 'unsafe-hashes' 'sha256-aqNNdDLnnrDOnTNdkJpYlAxKVJtLt9CtFLklmInuUAE='; frame-ancestors 'none'; base-uri 'none'; form-action 'self'`});
     res.end(req.method==='HEAD'?'':loginPage(nonce,app.auth.configured));return;

@@ -2,7 +2,7 @@ import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {gzipSync} from 'node:zlib';
-import {decodePageWire,encodePageWire} from '../../node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs';
+import {decodePageInitialDocument as decodePageWire} from '@ccslabs/xtend/rmt/page-contract';
 const version=JSON.parse(await fs.readFile(new URL('../../package.json',import.meta.url))).version;
 const base=process.env.TEST_BASE_URL||'http://localhost:8093';
 const baseline=process.env.SSR_BASELINE_URL;
@@ -12,13 +12,13 @@ async function measure(url){
  const response=await fetch(url),html=await response.text(),raw=extract(html),page=decodePageWire(JSON.parse(raw));
  const htmlCopies=[page.ssr.chunk,...page.ssr.chunks].map(c=>c.markup.html).filter(Boolean);
  const tag=html.match(/<input[^>]*id="search-input"[^>]*>/)[0],type=tag.match(/\btype="([^"]*)"/)?.[1];
- return {htmlBytes:Buffer.byteLength(html),htmlGzipBytes:gzipSync(html).length,wireBytes:Buffer.byteLength(raw),wireGzipBytes:gzipSync(raw).length,snapshotStateBytes:Buffer.byteLength(JSON.stringify(page.ssr.resume.snapshot.state)),duplicateHtmlFields:htmlCopies.length,uniqueDuplicateHtmlBytes:[...new Set(htmlCopies)].reduce((n,s)=>n+Buffer.byteLength(s),0),inputTypeBytes:Buffer.byteLength(type),inputTypeIsSearch:type==='search',coverage:page.ssr.hydration.coverage||null,missingCapabilityDiagnostics:page.ssr.diagnostics.filter(d=>d.code==='rmt.node_ssr.component_capability_missing').length};
+ return {htmlBytes:Buffer.byteLength(html),htmlGzipBytes:gzipSync(html).length,wireBytes:Buffer.byteLength(raw),wireGzipBytes:gzipSync(raw).length,snapshotStateBytes:Buffer.byteLength(JSON.stringify(page.ssr.resume.snapshot.state)),duplicateHtmlFields:htmlCopies.length,uniqueDuplicateHtmlBytes:[...new Set(htmlCopies)].reduce((n,s)=>n+Buffer.byteLength(s),0),inputTypeBytes:Buffer.byteLength(type),inputTypeIsSearch:type==='search',capabilityMetadataCount:Object.keys(page.ssr.hydration.componentCapabilities).length,missingCapabilityDiagnostics:page.ssr.diagnostics.filter(d=>d.code==='rmt.node_ssr.component_capability_missing').length};
 }
 try{
  const metrics={baseline:baseline?await measure(baseline+'/'):null,patched:await measure(base+'/')};
  assert.equal(metrics.patched.inputTypeIsSearch,true);assert.equal(metrics.patched.duplicateHtmlFields,0);
- assert.equal(metrics.patched.missingCapabilityDiagnostics,0);assert.equal(metrics.patched.coverage.missingCapabilityNodes,0);
- assert.equal(metrics.patched.coverage.resumeMarkerCoverage,1);
+ assert.equal(metrics.patched.missingCapabilityDiagnostics,0);assert.ok(metrics.patched.capabilityMetadataCount>0);
+ // SSR coverage counters are asserted at the adapter boundary by ssr-contract.test.mjs; 0.9 excludes them from the wire.
  if(metrics.baseline)assert.ok(metrics.patched.wireBytes<metrics.baseline.wireBytes);
  // Guard payload growth without deleting state used by reducers and recovery.
  assert.ok(metrics.patched.wireBytes<120000);checks.push('Initial wire is measured and bounded; input literal, registry coverage and absence of duplicate HTML are asserted.');
@@ -32,9 +32,9 @@ try{
    addEventListener('xtend-page:error',({detail})=>window.ssrProbe.errors.push(detail.code||detail.message));
   });
   if(tampered)await page.route(base+'/',async route=>{
-   const response=await route.fetch(),html=await response.text(),raw=extract(html),wire=decodePageWire(JSON.parse(raw));
-   wire.ssr.resume.integrity.signature='AAAA';
-   const replacement=JSON.stringify(encodePageWire(wire)).replace(/</g,'\\u003c');
+   const response=await route.fetch(),html=await response.text(),raw=extract(html),wire=JSON.parse(raw);
+   if(wire.schema==='xtend.page-initial-wire.v1'){const signed=wire.nodes.find(n=>n&&typeof n==='object'&&n.signature&&n.algorithm==='ECDSA-P256-SHA256');if(!signed)throw Error('No signature node');signed.signature='AAAA';}else wire.ssr.resume.integrity.signature='AAAA';
+   const replacement=JSON.stringify(wire).replace(/</g,'\\u003c');
    await route.fulfill({response,body:html.replace(raw,replacement)});
   });
   await page.goto(base+'/');await page.waitForFunction(()=>window.XTendPage && window.ssrProbe.resume);

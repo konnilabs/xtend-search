@@ -22,6 +22,9 @@ def search(query, params):
         return results
     if query.startswith('error'):
         raise RuntimeError('synthetic failure')
+    if fixture_kind == 'knowledge':
+        results.append({'infobox': 'Fixture knowledge', 'content': 'Offline knowledge contract.', 'urls': [{'url': 'https://example.org/knowledge', 'title': 'Fixture source'}]})
+        return results
     page = params.get('pageno', 1)
     for index in range(4):
         url = f'https://example.org/{name.replace(" ","-")}/{page}/{index}'

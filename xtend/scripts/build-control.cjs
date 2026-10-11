@@ -1,4 +1,3 @@
-require('../patches/ssr-resume/apply.cjs')();
 const fs=require('node:fs'),path=require('node:path'),{createHash}=require('node:crypto');
 const {buildMaracaBundleAsync}=require('@ccslabs/xtend/maraca');
 const {buildPages}=require('@ccslabs/xtend/rmt-language/page-build');
@@ -16,7 +15,7 @@ async function main(){
   const configuration={applicationKey:admin?'xtend.search.admin':'xtend.search',viewTransitions:false,events:built.plan.orchestration?.artifact?.events||[]};
   const bootstrap=admin?
    `import {watchObservatory} from './admin/live.mjs';const csrf=document.querySelector('meta[name="csrf-token"]').content;startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey}).then(client=>watchObservatory(client,csrf)).catch(error=>console.error("observatory-boot",error.message));`:
-   `import {installSearchHost} from './frontend/standalone-host.mjs';installSearchHost();startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey}).catch(()=>{});`;
+   `import {installSearchHost} from './frontend/standalone-host.mjs';import {createSearchResourcePolicy} from './frontend/search-cache.mjs';installSearchHost();startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey,resourceCache:createSearchResourcePolicy()}).catch(()=>{});`;
   await esbuild.build({plugins:[lightboxControls],stdin:{contents:`import publicKey from '/assets/xtend/resume-key.mjs';import {startMaracaPageApplication} from '@ccslabs/xtend/maraca/page-bootstrap';${bootstrap}`,resolveDir:root,sourcefile:'page.mjs'},bundle:true,minify:true,format:'esm',platform:'browser',target:'es2022',splitting:true,external:['/assets/xtend/resume-key.mjs'],outExtension:{'.js':'.mjs'},entryNames:'page',chunkNames:'chunks/[name]-[hash]',outdir:path.join(out,folder)});
   await esbuild.build({entryPoints:[path.join(root,admin?'admin/admin.css':'frontend/standalone.css')],bundle:true,minify:true,outfile:path.join(out,folder,admin?'admin.css':'search.css')});
   const pages=await buildPages({root,target:'node',config:admin?'admin/pages.json':'standalone.pages.json',compileSource:session.compileSource});

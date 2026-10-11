@@ -66,6 +66,32 @@ class UpstreamContract(unittest.TestCase):
         self.assertIn('fixture fast', [e['name'] for e in config['engines']])
         self.assertEqual(client.get('/preferences', headers={'Authorization': 'Bearer fixture-test-only'}).status_code, 404)
 
+    def test_private_native_health_is_metadata_only_and_converts_monotone_duration(self):
+        client = Client(application, Response)
+        url = '/xtend/engine-health?engine=fixture+fast'
+        self.assertEqual(client.get(url).status_code, 403)
+        processor = PROCESSORS['fixture fast']
+        processor.suspended_status.suspend(60, 'searx.exceptions.SearxEngineCaptchaException')
+        try:
+            reply = client.get(url, headers={'Authorization': 'Bearer fixture-test-only'})
+            self.assertEqual(reply.status_code, 200)
+            self.assertEqual(reply.headers['X-XTend-Engine-Health-Contract'], 'engine-health-v1')
+            data = reply.json
+            self.assertEqual(data['schema'], 'xtend.engine-health.v1')
+            self.assertEqual(data['engines'][0]['errorClass'], 'captcha')
+            self.assertGreater(data['engines'][0]['remainingMs'], 58000)
+            self.assertLessEqual(data['engines'][0]['remainingMs'], 60000)
+            self.assertEqual(len(data['engines'][0]['scope']), 32)
+            self.assertNotIn('q', json.dumps(data))
+            self.assertEqual(CALLS, [])
+            discovery = client.get('/config', headers={'Authorization': 'Bearer fixture-test-only'}, environ_overrides={'REMOTE_ADDR': '127.0.0.1'})
+            self.assertEqual(discovery.headers['X-XTend-Backend-Instance'], data['instanceId'])
+            self.assertIn('xtend_engine_health', discovery.json)
+            self.assertEqual(client.get('/xtend/engine-health?engine=unknown', headers={'Authorization': 'Bearer fixture-test-only'}).status_code, 400)
+            self.assertEqual(client.get('/xtend/engine-health?q=private', headers={'Authorization': 'Bearer fixture-test-only'}).status_code, 400)
+        finally:
+            processor.suspended_status.resume()
+
     def test_explicit_engine_filters_and_json_attribution(self):
         response = app.test_client().post('/search', data={**self.form, 'safesearch': '1', 'pageno': '2', 'time_range': 'month'})
         self.assertEqual(response.status_code, 200)

@@ -1,5 +1,13 @@
 // XTend.search — native forms and links, compiler-owned UI and surface commits.
 template xtend.search {
+  datasource search.cache.context from host search.cache.context { mode invoke
+    contract "xsearch.cache-context.v1" }
+  datasource search.cache.capture from host search.cache.capture { mode invoke
+    contract "xsearch.cache-capture.v1" }
+  datasource search.cache.restore from host search.cache.restore { mode invoke
+    contract "xsearch.cache-restore.v1" }
+  datasource search.cache.invalidate from host search.cache.invalidate { mode invoke
+    contract "xsearch.cache-invalidate.v1" }
   datasource search.feedback.submit from host search.feedback.submit { mode invoke
  contract "xsearch.feedback.v1" }
   action search.feedback.submit { effect fetch datasource search.feedback.submit }
@@ -88,7 +96,7 @@ template xtend.search {
                 { type "element" tag "span" text { op "literal" value ".search" } class "wordmark-suffix" }
               ] }
             ] }
-            { type "element" tag "form" key "search-form" class "search-form" attributes { id "search-form" action "/search" method "get" role "$model.search.data.searchRole" } children [
+            { type "element" tag "form" key "search-form" class "search-form" attributes { id "search-form" "data-xtend-cache" "reload" action "/search" method "get" role "$model.search.data.searchRole" } children [
               { type "element" tag "div" class "search-box" children [
                 { type "element" tag "span" class "search-icon" attributes { "aria-hidden" "true" } }
                 { type "element" tag "label" text "Suchbegriff" class "sr-only" attributes { for "search-input" } }

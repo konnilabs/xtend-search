@@ -3,7 +3,7 @@
 const families = new Map(Object.entries({
  '360search': ['360search','360search videos'],
  bing: ['bing','bing images','bing news','bing videos'],
- duckduckgo: ['duckduckgo','duckduckgo web','duckduckgo images','duckduckgo news','duckduckgo videos','duckduckgo weather'],
+ duckduckgo: ['duckduckgo','duckduckgo web','duckduckgo images','duckduckgo news','duckduckgo videos','duckduckgo weather','ddg definitions'],
  brave: ['brave','brave.images','brave.news','brave.videos'],
  'google-cse': ['google cse','google cse images'],
  wikimedia: ['wikipedia','wikidata','wikicommons.images','wikicommons.videos','wikicommons.audio','wikicommons.files'],
