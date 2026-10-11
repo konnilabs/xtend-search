@@ -72,12 +72,13 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Build paired release images
         run: |
-          docker build -f Dockerfile.control -t xtend-search:0.4.4 .
-          docker build -f Dockerfile.searxng -t xtend-search-searxng:0.4.2 .
+          docker build -f Dockerfile.control -t xtend-search:0.5.0 .
+          docker build -f Dockerfile.searxng -t xtend-search-searxng:0.5.0 .
       - name: Run isolated OAuth, XScaler and responsive UI gates
         env:
-          FIXTURE_SETTINGS: xtend/config/settings.preferences.fixture.yml
-          FIXTURE_DATA_VOLUME: xtend-cp-ci-0.4.4
+          FIXTURE_SETTINGS: xtend/config/settings.control.v05.fixture.yml
+          FIXTURE_DATA_VOLUME: xtend-cp-ci-0.5.0
+          FIXTURE_PROBES: "0"
         run: |
           sh xtend/tests/control/docker-fixture.sh
           node xtend/tests/control/proxy-fixture.mjs > /tmp/xtend-proxy.log 2>&1 &
@@ -87,6 +88,8 @@ jobs:
             sleep 1
           done
           node xtend/tests/control/v04-browser.mjs
+          node xtend/tests/control/cache-browser.mjs
+          node xtend/tests/control/preferences-browser.mjs
           node xtend/tests/control/release-0.4.2-browser.mjs
           node xtend/tests/control/home-browser.mjs
           node xtend/tests/control/ssr-browser.mjs

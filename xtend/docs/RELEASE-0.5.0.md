@@ -4,7 +4,7 @@ Status: Release-Kandidat; Merge, Framework-Publishing und Produktionsdeployment 
 
 ## Framework-Abhängigkeit
 
-Framework-PR: https://github.com/konnilabs/xtend/pull/110, Basis `d4912deb30fe8d85d8e442e34d74ec6050f0fe09`, SDK-Head `ac0e80eaa46be15ee852cbaa00d63d9f3dea9f16`. Das SDK wurde lokal per npm pack gebaut; es ist keine veröffentlichte npm-Version. `xtend/vendor-inputs/xtend-0.9.0-provenance.json` enthält den SHA-256 des Artefakts, das Lockfile dessen npm-Integrität.
+Framework-PR: https://github.com/konnilabs/xtend/pull/110, Basis `d4912deb30fe8d85d8e442e34d74ec6050f0fe09`, SDK-Head `dd1917bfeb8f173dde585f743a866c1b0d38e9f1`. Das SDK wurde lokal per npm pack gebaut; es ist keine veröffentlichte npm-Version. `xtend/vendor-inputs/xtend-0.9.0-provenance.json` enthält den SHA-256 des Artefakts, das Lockfile dessen npm-Integrität.
 
 Search verwendet den generischen `createPageResourceCache` und PageClients optionale `resourceCache`-Policy über deklarierte Maraca App Services. Im Framework sind keine Providerregeln enthalten. Der alte 0.8-SSR-Overlay ist entfernt; beide Page-Builds aktivieren den offiziellen `xtend.page-initial-resume.v1`-Vertrag. Der XLightbox-Controls-Slot bleibt eine explizite, gegen 0.9 geprüfte Build-Erweiterung ohne SDK-Dateimutationen.
 
@@ -44,7 +44,7 @@ Der Single-Owner-Lock und bestehende additive SQLite-Tabellen bleiben. Neue Reco
 
 ## Reproduzierbare Gates / Nachweise
 
-Node 24.19 / npm 11.17. Framework: ci-pr 189 Gruppen, SSR/PageClient, Browser-Lifecycle, App Services, Paketexports und Strict-Beispiel; Cache-Modul 1.009 Byte gzip. SDK-Migrationskosten werden separat vom Cache-Modul gemessen.
+Node 24.19 / npm 11.17. Framework: Der erste Cache-Stand bestand ci-pr mit 189/189 Gruppen. Nach dem zusätzlichen Initial-Wire-Patch bestanden 188/189; die einzige fehlgeschlagene Schema-Registrierung wurde korrigiert und das Schema-Inventar separat erneut erfolgreich geprüft (53 dokumentierte Inventar-Warnungen). SSR/PageClient, Browser-Lifecycle, App Services, Paketexports und Strict-Beispiel sind nachgewiesen; ein weiterer vollständiger 189-Gruppen-Lauf wird nicht behauptet. Cache-Modul: 1.009 Byte gzip. SDK-Migrationskosten werden separat vom Cache-Modul gemessen.
 
 Search: `npm --prefix xtend ci --ignore-scripts`, `npm --prefix xtend run build:control`, `npm --prefix xtend run test:control`. Private Python-Verträge: `XTEND_BUILD_NETWORK=host sh xtend/tests/control/upstream-gate.sh xtend-search-searxng:0.5.0`. Builds auf diesem Rechner benötigen Docker-Build-Netzwerk `host`, weil die BuildKit-Bridge keine externen Pakete erreicht.
 
@@ -53,3 +53,5 @@ Offline-Fixturnetz mit synthetischem OAuth, gesonderten Volumes und deaktivierte
 `0.5.0-baseline.json`, `0.5.0-performance.json`, `0.5.0-cache-browser.json` und Regression-Berichte im Verification-Archiv liefern die konkreten Ergebnisse. Performance: gleiche 100/700/2500-ms-Fixtures, zehn frische Browserkontexte, erster sichtbarer Treffer, Streamabschluss, Cache-Metadaten-/Renderzeit, JS-Transport und Cache-RAM getrennt. Frischer erster Paint darf im Median nicht mehr als zehn Prozent zurückfallen. Das ist ein lokaler reproduzierbarer Vergleich, keine Messung produktiver Providerlatenz.
 
 Zu Beginn wurde nach callable XTend-MCP-Werkzeugen gesucht; kein XTend-MCP-Connector war exponiert. Framework-/Search-Implementierung, Strict-Builds und Gates sind **SDK-/CLI-Nachweise**, keine behaupteten MCP-Interaktionen. `0.5.0-engineering.json` protokolliert Vertragsentscheidungen und relevante Befunde ohne Suchbegriffe, Ergebnislinks oder Secrets. Der Framework-PR und der Search-PR dokumentieren die Abhängigkeit und sind separat reviewbar.
+
+Der About-Dialog wurde zusätzlich in der lokalen Docker-Instanz mit dem In-App-Browser geprüft: Nach dem JavaScript-Start öffnet der Shell-Link ein XDialog ohne Seitennavigation; Schließen stellt den Fokus wieder her. Direkte Links und No-JS behalten die lesbare separate Fallback-Seite.

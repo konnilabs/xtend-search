@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "frameworkPullRequest": "https://github.com/konnilabs/xtend/pull/110",
   "frameworkBase": "d4912deb30fe8d85d8e442e34d74ec6050f0fe09",
-  "frameworkHead": "ac0e80eaa46be15ee852cbaa00d63d9f3dea9f16",
+  "frameworkHead": "dd1917bfeb8f173dde585f743a866c1b0d38e9f1",
   "searchBase": "879c8119dea61d6c86ce8a429324b016f834fceb",
   "searxngPin": "9f042d2f67666f86204d6874488880a23ba81a8f",
   "mcp": {
