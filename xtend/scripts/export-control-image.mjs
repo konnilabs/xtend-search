@@ -14,7 +14,7 @@ const ref=`xtend-search:${VERSION}`;
 const [info]=JSON.parse(execFileSync('docker',['image','inspect',ref],{encoding:'utf8'}));
 if(info.Architecture!=='amd64'||info.Os!=='linux'||info.Config.Labels?.['org.opencontainers.image.version']!==VERSION)throw new Error('Image platform or release label mismatch');
 const sources=[];
-for(const directory of ['frontend','admin','server','shared','patches','vendor-inputs'])for(const file of fs.readdirSync(path.join(root,directory),{recursive:true})){
+for(const directory of ['frontend','admin','server','shared','vendor-inputs'])for(const file of fs.readdirSync(path.join(root,directory),{recursive:true})){
  const name=directory+'/'+file;if(fs.statSync(path.join(root,name)).isFile()&&!name.includes('__pycache__')&&!name.endsWith('.pyc'))sources.push(name);
 }
 sources.push('package.json','package-lock.json','standalone.pages.json','upstream-searxng.json','scripts/build-control.cjs');

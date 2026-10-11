@@ -1,6 +1,7 @@
 import {defineAppServices,service} from '@ccslabs/xtend/maraca/app-services';
 import {captureSearchResource,restoreSearchResource,invalidateSearchResource,type CacheScope,type SearchCacheData,type SearchCachedResource} from './cache-service-core.mjs';
 export default defineAppServices({
+ 'search.motd':service({kind:'query',target:'server'}),
  'search.cache.context':service({kind:'query',target:'server'}),
  'search.cache.capture':service<{data:SearchCacheData;scope:CacheScope},boolean>({kind:'command',target:'local',invoke:input=>captureSearchResource(input)}),
  'search.cache.restore':service<{url:string;scope:CacheScope},SearchCachedResource|null>({kind:'query',target:'local',invoke:(input,context)=>restoreSearchResource(input,context)}),

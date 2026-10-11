@@ -21,5 +21,5 @@ export function aboutContent(locale='de',version=''){
   <div class="about-credits"><a href="https://github.com/searxng/searxng" target="_blank" rel="noopener noreferrer" data-xtend-native>Powered by SearXNG <span aria-hidden="true">↗</span></a><span>XTend.search ${escapeHtml(version)}</span></div>
   <nav class="about-links" aria-label="${en?'Project links':'Projektlinks'}"><a href="/source.tar.gz" download data-xtend-native>${en?'Download source & licenses':'Quellcode & Lizenzen herunterladen'} <span aria-hidden="true">↓</span></a></nav>
  </div>`;
- return {title,html};
+ return {title,html,blocks,version,locale};
 }

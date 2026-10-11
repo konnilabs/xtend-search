@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),{createHash}=require('node
 const {buildMaracaBundleAsync}=require('@ccslabs/xtend/maraca');
 const {buildPages}=require('@ccslabs/xtend/rmt-language/page-build');
 const {createRmtCompilationSession}=require('@ccslabs/xtend/rmt-language/compilation-session');
-const esbuild=require('esbuild'),lightboxControls=require('../patches/xlightbox-controls.cjs');
+const esbuild=require('esbuild');
 async function main(){
  const root=path.resolve(__dirname,'..'),out=path.join(root,'public/assets/xtend');fs.mkdirSync(out,{recursive:true});
  const session=createRmtCompilationSession({root});const summaries=[];
@@ -15,12 +15,12 @@ async function main(){
   const configuration={applicationKey:admin?'xtend.search.admin':'xtend.search',viewTransitions:false,events:built.plan.orchestration?.artifact?.events||[]};
   const bootstrap=admin?
    `import {watchObservatory} from './admin/live.mjs';const csrf=document.querySelector('meta[name="csrf-token"]').content;startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey}).then(client=>watchObservatory(client,csrf)).catch(error=>console.error("observatory-boot",error.message));`:
-   `import {installSearchHost} from './frontend/standalone-host.mjs';import {createSearchResourcePolicy} from './frontend/search-cache.mjs';installSearchHost();startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey,resourceCache:createSearchResourcePolicy()}).catch(()=>{});`;
-  await esbuild.build({plugins:[lightboxControls],stdin:{contents:`import publicKey from '/assets/xtend/resume-key.mjs';import {startMaracaPageApplication} from '@ccslabs/xtend/maraca/page-bootstrap';${bootstrap}`,resolveDir:root,sourcefile:'page.mjs'},bundle:true,minify:true,format:'esm',platform:'browser',target:'es2022',splitting:true,external:['/assets/xtend/resume-key.mjs'],outExtension:{'.js':'.mjs'},entryNames:'page',chunkNames:'chunks/[name]-[hash]',outdir:path.join(out,folder)});
+   `import {installSearchHost} from './frontend/standalone-host.mjs';import {createSearchResourcePolicy} from './frontend/search-cache.mjs';installSearchHost();startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey,resourceCache:createSearchResourcePolicy()}).catch(error=>console.error('search-boot',error.message));`;
+  await esbuild.build({stdin:{contents:`import publicKey from '/assets/xtend/resume-key.mjs';import {startMaracaPageApplication} from '@ccslabs/xtend/maraca/page-bootstrap';${bootstrap}`,resolveDir:root,sourcefile:'page.mjs'},bundle:true,minify:true,format:'esm',platform:'browser',target:'es2022',splitting:true,external:['/assets/xtend/resume-key.mjs'],outExtension:{'.js':'.mjs'},entryNames:'page',chunkNames:'chunks/[name]-[hash]',outdir:path.join(out,folder)});
   await esbuild.build({entryPoints:[path.join(root,admin?'admin/admin.css':'frontend/standalone.css')],bundle:true,minify:true,outfile:path.join(out,folder,admin?'admin.css':'search.css')});
   const pages=await buildPages({root,target:'node',config:admin?'admin/pages.json':'standalone.pages.json',compileSource:session.compileSource});
   fs.copyFileSync(path.join(root,'.xtend-build/pages.json'),path.join(root,'.xtend-build',admin?'pages-admin.json':'pages-standalone.json'));
-  fs.copyFileSync(path.join(root,'server/control/storage-worker.mjs'),path.join(out,folder,'maraca/server/storage-worker.mjs'));
+  await esbuild.build({entryPoints:[path.join(root,'server/control/storage-worker.mjs')],bundle:true,format:'esm',platform:'node',target:'node24',outfile:path.join(out,folder,'maraca/server/storage-worker.mjs')});
   summaries.push({folder,version:pages.manifest.version,sourceSha256:createHash('sha256').update(fs.readFileSync(path.join(root,source))).digest('hex'),services:built.plan.services?.status});
  }
  for(const file of ['mark.svg','image-placeholder.svg','favicon.png'])fs.copyFileSync(path.join(root,'frontend',file),path.join(out,file));

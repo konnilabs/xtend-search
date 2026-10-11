@@ -49,7 +49,7 @@ export function adminView(plane,context,selected='',input={}){
 }
 export class AdminService {
  constructor(plane){this.plane=plane;this.streams=new Map();this.streamCount=0;}
- async snapshot(input,context){requireRole(context,'viewer');await this.plane.refreshHistory();return {...adminView(this.plane,context,input?.id,input),message:''};}
+ async snapshot(input,context){requireRole(context,'viewer');await this.plane.motd?.current();await this.plane.refreshHistory();return {...adminView(this.plane,context,input?.id,input),message:''};}
  async mutate(action,input,context){
   requireRole(context,action==='policy'?'administrator':'operator');
   if(typeof input?.id!=='string')fail('validation');
@@ -70,6 +70,7 @@ export class AdminService {
    input.state==='allowed'?`${input.id}: Freigabe, Capabilities und Budgets sind gespeichert.`:`${input.id}: Für neue Suchanfragen gesperrt.`;
   return {...view,message:result.message,notices:[{id:'admin-notice-'+view.requestKey,title,type,message:duplicate?result.message:detail}]};
  }
+ async motd(input,context){await this.plane.motd.mutate(input,context);return {...adminView(this.plane,context,'',{...input,view:'appearance'}),message:'Tagline gespeichert. Die Tagesauswahl ist sofort aktiv.'};}
  async quality(action,input,context){
   await this.plane.quality.mutate(action,input,context);
   const view=adminView(this.plane,context,input.id,{...input,engine:input.id});
@@ -77,7 +78,7 @@ export class AdminService {
  }
  async evidence(input,context){return this.plane.quality.evidenceLinks(input,context);}
  simulate(input,context){requireRole(context,'viewer');const q=this.plane.quality;const rule={threshold:Number(input.threshold),contexts:Number(input.contexts),windowMinutes:Number(input.windowMinutes)};if(!Number.isFinite(rule.threshold)||rule.threshold<5||rule.contexts<3||rule.windowMinutes<10||rule.windowMinutes>60)fail('validation','Bitte gültige Schwellen eintragen.');const stats=q.stats(input.id,input.capability,q.now()-rule.windowMinutes*60000,true);return {count:stats.count,contexts:stats.contexts,wouldMatch:stats.count>=rule.threshold&&stats.contexts>=rule.contexts,message:'Unverbindliche Schwellenprüfung. Neustartfenster, Schutzfristen, Pausenhäufigkeit und Quellenabdeckung werden zusätzlich vor jeder echten Aktion geprüft.'};}
- async* events(input,context){requireRole(context,'viewer');
+ async* events(input,context){requireRole(context,'viewer');await this.plane.motd?.current();
   const actor=context.actor;
   if(this.streamCount>=16||(this.streams.get(actor)||0)>=2)fail('overload','Zu viele offene Observatory-Verbindungen. Bitte weitere Admin-Tabs schließen.');
   this.streamCount++;this.streams.set(actor,(this.streams.get(actor)||0)+1);

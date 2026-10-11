@@ -86,11 +86,11 @@ for(const [name,type] of [['chromium',chromium],['firefox',firefox]]){
   await page.evaluate(()=>window.__streamThumbnail=document.querySelector('img[data-result-image]'));
   await page.locator('a[data-preview-id]').first().click();
   const selected=await page.locator('article[data-selected]').getAttribute('data-result-id');
-  await page.locator('#preview-expand').click();await page.locator('x-lightbox[open]').waitFor();
+  await page.locator('#preview-expand').click();await page.locator('x-search-lightbox[open]').waitFor();
   await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].stream?.phase==='complete');
   assert.equal(await page.locator('article[data-selected]').getAttribute('data-result-id'),selected);
   assert.equal(await page.evaluate(()=>window.__streamThumbnail?.isConnected),true,'received thumbnails retain their DOM identity within the stream');
-  assert.equal(await page.locator('x-lightbox[open]').count(),1);
+  assert.equal(await page.locator('x-search-lightbox[open]').count(),1);
   assert.match(await page.locator('.lightbox-position').innerText(),/von 7/);
   await page.keyboard.press('End');await page.waitForFunction(()=>document.querySelector('.lightbox-position')?.textContent==='Bild 7 von 7');
   await page.keyboard.press('Escape');

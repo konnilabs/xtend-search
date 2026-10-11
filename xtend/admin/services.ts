@@ -1,5 +1,6 @@
 import {defineAppServices,service} from '@ccslabs/xtend/maraca/app-services';
 export default defineAppServices({
+ 'admin.motd.set':service({kind:'command',target:'server'}),
  'admin.quality.rule.set':service({kind:'command',target:'server'}),
  'admin.quality.decision':service({kind:'command',target:'server'}),
  'admin.quality.resume':service({kind:'command',target:'server'}),

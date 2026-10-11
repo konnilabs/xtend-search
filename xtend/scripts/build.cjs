@@ -4,7 +4,6 @@ const {buildMaracaBundleAsync}=require('@ccslabs/xtend/maraca');
 const {buildPages}=require('@ccslabs/xtend/rmt-language/page-build');
 const {createRmtCompilationSession}=require('@ccslabs/xtend/rmt-language/compilation-session');
 const esbuild=require('esbuild');
-const lightboxControls=require('../patches/xlightbox-controls.cjs');
 async function build(){
  const root=path.resolve(__dirname,'..'),out=path.join(root,'public/assets/xtend');
  fs.rmSync(out,{recursive:true,force:true});
@@ -19,7 +18,7 @@ async function build(){
  if(!report.toolchain.rollup.available || !report.toolchain.terser.available)throw new Error('Production requires Rollup and Terser; local importgraph fallback is not deployable.');
  const configuration={applicationKey:'xtend.search',viewTransitions:false,events:built.plan.orchestration?.artifact?.events || []};
  const entry=`import publicKey from '/assets/xtend/resume-key.mjs';import {startMaracaPageApplication} from '@ccslabs/xtend/maraca/page-bootstrap';import {installSearchHost} from './frontend/host.mjs';installSearchHost();startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey}).catch(()=>{});`;
- await esbuild.build({define:{__SEARCH_STREAM_INTEGRITY__:JSON.stringify(streamIntegrity)},plugins:[lightboxControls],stdin:{contents:entry,resolveDir:root,sourcefile:'page.mjs'},bundle:true,minify:true,format:'esm',platform:'browser',target:'es2022',splitting:true,external:['/assets/xtend/resume-key.mjs'],outExtension:{'.js':'.mjs'},entryNames:'page',chunkNames:'chunks/[name]-[hash]',outdir:out});
+ await esbuild.build({define:{__SEARCH_STREAM_INTEGRITY__:JSON.stringify(streamIntegrity)},stdin:{contents:entry,resolveDir:root,sourcefile:'page.mjs'},bundle:true,minify:true,format:'esm',platform:'browser',target:'es2022',splitting:true,external:['/assets/xtend/resume-key.mjs'],outExtension:{'.js':'.mjs'},entryNames:'page',chunkNames:'chunks/[name]-[hash]',outdir:out});
  await esbuild.build({entryPoints:[path.join(root,'frontend/search.css')],minify:true,bundle:true,outfile:path.join(out,'search.css')});
  for(const file of ['mark.svg','image-placeholder.svg'])fs.copyFileSync(path.join(root,'frontend',file),path.join(out,file));
  const pages=await buildPages({root,target:'node',compileSource:session.compileSource});

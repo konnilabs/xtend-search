@@ -1,5 +1,5 @@
 import {FEEDBACK_REASONS,QUALITY_DEFAULTS} from '../../shared/feedback.mjs';
-const views={overview:'Übersicht',sources:'Quellen',reports:'Meldungen',rules:'Regeln',events:'Ereignisse',audit:'Audit'};
+const views={overview:'Übersicht',sources:'Quellen',reports:'Meldungen',rules:'Regeln',events:'Ereignisse',audit:'Audit',appearance:'Startseite'};
 const date=n=>n?new Date(n).toLocaleString('de-DE'):'–';
 export function dashboard(plane,snapshot,base,input,requested){
  const view=Object.hasOwn(views,input.view)?input.view:requested?'sources':'overview',status=['allowed','disabled','paused'].includes(input.status)?input.status:'';
@@ -17,7 +17,8 @@ export function dashboard(plane,snapshot,base,input,requested){
  const stats=quality?.stats(selected,capability,now-rule.windowMinutes*60000,true)||{count:0,contexts:0};
  const proposals=state.proposals.slice().sort((a,b)=>(a.status==='pending'?-1:1)-(b.status==='pending'?-1:1)||b.created-a.created);
  const pending=proposals.filter(p=>p.status==='pending'),pauses=state.pauses.filter(p=>p.until>now);
- return {view,filters,url:url(),panelOpen:!!requested&&base.hasEngine,closePanelUrl:url({engine:'',capability:'',proposal:''}),capability,proposalId:proposal?.id||'',
+ const motd=plane.motdState||{messages:['Neugier braucht Freiraum.'],message:'Neugier braucht Freiraum.',day:'',manual:false};
+ return {showAppearance:view==='appearance',motd:{...motd,messagesText:motd.messages.join('\n'),status:(motd.manual?'Manuell für heute':'Tagesauswahl')+' · '+motd.day+' · Europe/Berlin'},view,filters,url:url(),panelOpen:!!requested&&base.hasEngine,closePanelUrl:url({engine:'',capability:'',proposal:''}),capability,proposalId:proposal?.id||'',
   views:Object.keys(views).map(id=>({id,label:views[id],url:'/admin?view='+id,current:id===view?'page':'false'})),
   showOverview:view==='overview',showSources:view==='sources',showReports:view==='reports',showRules:view==='rules',showEvents:view==='events',showAudit:view==='audit',
   showCatalog:view==='sources'||view==='rules',showPolicy:view==='sources',showQuality:view==='reports'||view==='rules',

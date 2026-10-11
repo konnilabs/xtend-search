@@ -1,3 +1,4 @@
+import {element as el} from './dom.mjs';
 import '@ccslabs/xtend/components/xdialog.js';
 import {aboutContent} from '../shared/about.mjs';
 import {VERSION} from '../server/control/release.mjs';
@@ -7,8 +8,13 @@ export async function createAboutDialog(){
  finally{clearTimeout(timer);}
  const box=document.createElement('x-dialog'),copy=aboutContent('de',VERSION);
  box.id='search-about';box.className='search-about';box.setAttribute('overlay','');box.setAttribute('title',copy.title);box.setAttribute('width','min(680px, calc(100vw - 32px))');
- // Only the shared, static product copy; no user strings are inserted as HTML.
- box.innerHTML=copy.html;document.body.append(box);
+ // Share structured copy with the server page; create nodes without parsing HTML.
+ box.append(el('div',{class:'about-content'},[
+  el('div',{class:'about-brand'},[el('img',{src:'/assets/xtend/mark.svg',width:48,height:48,alt:''}),el('div',{},[el('p',{class:'about-wordmark'},['XTend',el('span',{},['.search'])]),el('p',{class:'about-tagline'},['Deine Suche. Dein Horizont.'])])]),
+  el('div',{class:'about-sections'},copy.blocks.map(([heading,text])=>el('section',{},[el('h2',{},[heading]),el('p',{},[text])]))),
+  el('div',{class:'about-credits'},[el('a',{href:'https://github.com/searxng/searxng',target:'_blank',rel:'noopener noreferrer','data-xtend-native':true},['Powered by SearXNG ',el('span',{'aria-hidden':'true'},['↗'])]),el('span',{},['XTend.search '+copy.version])]),
+  el('nav',{class:'about-links','aria-label':'Projektlinks'},[el('a',{href:'/source.tar.gz',download:true,'data-xtend-native':true},['Quellcode & Lizenzen herunterladen ',el('span',{'aria-hidden':'true'},['↓'])])])
+ ]));document.body.append(box);
  let active=false,opener=null,overflow='',position=[0,0];const inertStates=new Map();
  box.addEventListener('dialog-opened',()=>{
   active=true;position=[scrollX,scrollY];overflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';

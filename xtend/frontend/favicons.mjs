@@ -8,8 +8,11 @@ export function installFavicons(){
  function pump(){while(active<2&&queue.length){const src=queue.shift(),own=epoch,c=new AbortController();controllers.add(c);active++;
   fetch(src,{signal:c.signal,priority:'low',credentials:'same-origin',referrerPolicy:'no-referrer'}).then(async response=>{if(!response.ok||response.status===204)return;const blob=await response.blob();if(blob.type!=='image/png'||own!==epoch)return;const url=URL.createObjectURL(blob);cache.set(src,url);if(cache.size>300){const [key,value]=cache.entries().next().value;URL.revokeObjectURL(value);cache.delete(key);}paint(src,url);}).catch(()=>{}).finally(()=>{controllers.delete(c);active--;pump();});
  }}
- function schedule(){if(scheduled)return;const scheduler=window.XTendPage?.getRuntime()?.getScheduler?.();if(!scheduler){scheduled=true;requestAnimationFrame(()=>requestAnimationFrame(()=>{scheduled=false;scan();}));return;}scheduled=true;scheduler.schedule({lane:'background',priority:5,strategy:'after_paint',coalesceKey:'search-favicons',endpointName:'search.favicons',scope:'search'},()=>{scheduled=false;scan();}).catch(()=>{scheduled=false;});}
+ function schedule(){if(!window.XTendPage?.getRuntime()||scheduled)return;const scheduler=window.XTendPage?.getRuntime()?.getScheduler?.();if(!scheduler){scheduled=true;requestAnimationFrame(()=>requestAnimationFrame(()=>{scheduled=false;scan();}));return;}scheduled=true;scheduler.schedule({lane:'background',priority:5,strategy:'after_paint',coalesceKey:'search-favicons',endpointName:'search.favicons',scope:'search'},()=>{scheduled=false;scan();}).catch(()=>{scheduled=false;});}
  function reset(){epoch++;for(const c of controllers)c.abort();queue.length=0;queued.clear();observer.disconnect();observed=new WeakSet();scheduled=false;}
+ // The SDK publishes this only after start/resume and assigning XTendPage.
+ // Do not add images to signed SSR DOM while its digest is being checked.
+ window.addEventListener('xtend-page:ready',schedule);
  window.addEventListener('xtend-search:stream',schedule);
  window.addEventListener('xtend-page:event',({detail})=>{if(detail.type==='pending')reset();if(detail.type==='navigate')schedule();});
  window.addEventListener('pagehide',()=>{reset();for(const url of cache.values())URL.revokeObjectURL(url);cache.clear();});

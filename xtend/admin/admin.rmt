@@ -1,4 +1,7 @@
 template xtend.observatory {
+  datasource admin.motd.set from host admin.motd.set { mode invoke
+ contract "xsearch.motd.v1" }
+  action admin.motd.set { effect fetch datasource admin.motd.set }
   datasource admin.quality.rule.set from host admin.quality.rule.set { mode invoke
  contract "xsearch.quality.v1" }
   action admin.quality.rule.set { effect fetch datasource admin.quality.rule.set }
@@ -25,6 +28,15 @@ template xtend.observatory {
       ]
     }
   }
+  state admin.evidence type object preserve { initial {
+    rows []
+    message ""
+  } }
+  state admin.simulation type string initial ""
+  action admin.evidence.set { input value object
+    reduce state.admin.evidence = input.value }
+  action admin.simulation.set { input value string
+    reduce state.admin.simulation = input.value }
   state admin.message type string initial ""
   state admin.connection type string initial ""
   state admin.request type object preserve {
@@ -248,6 +260,230 @@ template xtend.observatory {
                           "data-xtend-scroll" "dashboard-workspace"
                         }
                         "children" [
+                          {
+                            "type" "conditional"
+                            "test" "$model.admin.data.showAppearance"
+                            "then" {
+                              "type" "element"
+                              "tag" "section"
+                              "attributes" {
+                                "id" "appearance"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "h2"
+                                  "text" "Tagline der Startseite"
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "Eine zufällige Tagline gilt gemeinsam für alle Besucher bis Mitternacht in Europe/Berlin. Manuelle Änderungen gelten sofort für den laufenden Tag. Morgen wird wieder aus der Liste gewählt."
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "blockquote"
+                                  "text" "$model.admin.live.motd.message"
+                                  "attributes" {
+                                    "id" "motd-current"
+                                  }
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "$model.admin.live.motd.status"
+                                  "attributes" {
+                                    "id" "motd-status"
+                                  }
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "form"
+                                  "attributes" {
+                                    "id" "motd-list-form"
+                                    "data-admin-service" "admin.motd.set"
+                                  }
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "operation"
+                                        "value" "list"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "revision"
+                                        "value" "$model.admin.data.revision"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "requestKey"
+                                        "value" "$model.admin.data.requestKey"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "label"
+                                      "text" "Taglines – eine pro Zeile (1–50, jeweils maximal 160 Zeichen)"
+                                      "attributes" {
+                                        "for" "motd-messages"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "textarea"
+                                      "text" "$model.admin.data.motd.messagesText"
+                                      "attributes" {
+                                        "id" "motd-messages"
+                                        "name" "messages"
+                                        "rows" 8
+                                        "required" true
+                                        "maxlength" 8192
+                                        "disabled" "$model.admin.data.readOnly"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "button"
+                                      "text" "Liste speichern"
+                                      "attributes" {
+                                        "type" "submit"
+                                        "disabled" "$model.admin.data.readOnly"
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "form"
+                                  "attributes" {
+                                    "id" "motd-override-form"
+                                    "data-admin-service" "admin.motd.set"
+                                  }
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "operation"
+                                        "value" "override"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "revision"
+                                        "value" "$model.admin.data.revision"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "requestKey"
+                                        "value" "$model.admin.data.requestKey"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "label"
+                                      "text" "Tagline für heute sofort ändern"
+                                      "attributes" {
+                                        "for" "motd-override"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "id" "motd-override"
+                                        "name" "message"
+                                        "type" "text"
+                                        "value" "$model.admin.data.motd.message"
+                                        "required" true
+                                        "maxlength" 160
+                                        "disabled" "$model.admin.data.readOnly"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "button"
+                                      "text" "Heute sofort anzeigen"
+                                      "attributes" {
+                                        "type" "submit"
+                                        "disabled" "$model.admin.data.readOnly"
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "form"
+                                  "attributes" {
+                                    "id" "motd-rotate-form"
+                                    "data-admin-service" "admin.motd.set"
+                                  }
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "operation"
+                                        "value" "rotate"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "revision"
+                                        "value" "$model.admin.data.revision"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "input"
+                                      "attributes" {
+                                        "type" "hidden"
+                                        "name" "requestKey"
+                                        "value" "$model.admin.data.requestKey"
+                                      }
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "button"
+                                      "text" "Neue Tagesauswahl aus der Liste"
+                                      "attributes" {
+                                        "type" "submit"
+                                        "disabled" "$model.admin.data.readOnly"
+                                      }
+                                    }
+                                  ]
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "Standard: Neugier braucht Freiraum. Nur Administratoren dürfen Taglines ändern; jede Änderung wird gemeinsam mit dem Audit gespeichert."
+                                }
+                              ]
+                            }
+                          }
                           {
                             "type" "conditional"
                             "test" "$model.admin.data.showOverview"
@@ -2569,6 +2805,12 @@ template xtend.observatory {
                                             "id" "quality-evidence-list"
                                             "aria-live" "polite"
                                           }
+                                          "children" [
+                                            { "type" "element" "tag" "p" "text" "$model.admin.evidence.message" }
+                                            { "type" "repeat" "source" "$model.admin.evidence.rows" "key" "id" "template" {
+                                              "type" "element" "tag" "a" "text" "$item.label" "attributes" { "href" "$item.url" "target" "_blank" "rel" "noopener noreferrer" "data-xtend-native" "" }
+                                            } }
+                                          ]
                                         }
                                       ]
                                     }
@@ -2770,6 +3012,7 @@ template xtend.observatory {
                                             "id" "quality-simulation"
                                             "role" "status"
                                           }
+                                          "text" "$model.admin.simulation"
                                         }
                                         {
                                           "type" "element"
