@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "version": "0.5.0",
+  "port": 8090,
+  "health": {
+    "ok": true,
+    "version": "0.5.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "backedUpVolumes": 3,
+  "approvalsPreserved": true,
+  "persistedGuardsPreserved": true,
+  "authenticationConfigurationPreserved": true,
+  "cacheEnabled": true,
+  "demandRecoveryEnabled": true,
+  "productionDeployed": false
+}

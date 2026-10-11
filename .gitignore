@@ -59,3 +59,6 @@ owner.lock
 # Exported images belong in Releases rather than the source repository.
 XTend-search-Docker*.tar*
 XTend-search-SearXNG-Image*.tar*
+
+# Full CI internals stay in the release verification bundle; Git keeps bounded summaries.
+xtend/evidence/control-plane/framework-raw/

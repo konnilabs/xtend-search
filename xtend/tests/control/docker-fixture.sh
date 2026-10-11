@@ -1,7 +1,7 @@
 #!/bin/sh
 # Run as a Docker-authorized user from the repository root. No live credentials.
 set -eu
-fixture_image=${FIXTURE_IMAGE:-xtend-search:0.4.4}
+fixture_image=${FIXTURE_IMAGE:-xtend-search:0.5.0}
 fixture_settings=${FIXTURE_SETTINGS:-xtend/config/settings.control.fixture.yml}
 fixture_data=${FIXTURE_DATA_VOLUME:-xtend-cp-fixture-data}
 repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/../../.." && pwd)
@@ -15,7 +15,7 @@ docker run -d --name xtend-cp-backend-test --network xtend-cp-fixture-net --netw
  -v "$PWD/$fixture_settings:/app/xtend/config/settings.control.fixture.yml:ro" \
  --cap-drop ALL --security-opt no-new-privileges \
  -e SEARXNG_TOKEN=fixture-test-only -e XTEND_TEST_FIXTURE=1 \
- -e SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.control.fixture.yml xtend-search-searxng:0.4.2 >/dev/null
+ -e SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.control.fixture.yml xtend-search-searxng:0.5.0 >/dev/null
 # Start the frontend only after the private backend passes its health endpoint.
 backend_ready=0
 for attempt in $(seq 1 30); do
@@ -30,7 +30,7 @@ docker run "$@" -d --name xtend-cp-search-test --network xtend-cp-fixture-net \
  -e PUBLIC_BASE_URL=http://localhost:8093 -e SEARXNG_BASE_URL=http://searxng:8082/ -e SEARXNG_TOKEN=fixture-test-only \
  -e NEXTCLOUD_BASE_URL=http://localhost:8094 -e NEXTCLOUD_CLIENT_ID=fixture -e NEXTCLOUD_CLIENT_SECRET=fixture-only \
  -e 'XTEND_ADMIN_ROLES={"administrator":"administrator","operator":"operator","viewer":"viewer"}' \
- -e XTEND_PROBES=1 -e XTEND_TEST_FIXTURE=1 "$fixture_image" >/dev/null
+ -e XTEND_PROBES="${FIXTURE_PROBES:-1}" -e XTEND_TEST_FIXTURE=1 "$fixture_image" >/dev/null
 docker run -d --name xtend-cp-oauth-test --network container:xtend-cp-search-test --read-only --cap-drop ALL \
  -e FIXTURE_BIND=0.0.0.0 --entrypoint node "$fixture_image" xtend/tests/control/oauth-fixture.mjs >/dev/null
 printf '%s\n' 'Fixtures started. Run proxy-fixture.mjs, then browser.mjs and edge-browser.mjs.'

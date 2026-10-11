@@ -1,0 +1,61 @@
+{
+  "schema": "xtend.search.engineering.v1",
+  "version": "0.5.0",
+  "frameworkPullRequest": "https://github.com/konnilabs/xtend/pull/110",
+  "frameworkBase": "d4912deb30fe8d85d8e442e34d74ec6050f0fe09",
+  "frameworkHead": "dd1917bfeb8f173dde585f743a866c1b0d38e9f1",
+  "searchBase": "879c8119dea61d6c86ce8a429324b016f834fceb",
+  "searxngPin": "9f042d2f67666f86204d6874488880a23ba81a8f",
+  "mcp": {
+    "discovery": "Enabled tool metadata searched for XTend capabilities at task start",
+    "callableXtendConnector": false,
+    "xtendMcpCalls": [],
+    "evidenceType": "SDK/CLI/browser only"
+  },
+  "decisions": [
+    "Use the framework RAM cache and native PageClient history/generation lifecycle; Search owns identity and epoch policy through App Services.",
+    "Keep compiled artifacts for projection; cache only completed result JSON, never SSR/resume data.",
+    "Metadata health calls have no provider dispatch and carry no search inputs.",
+    "Preserve old approvals and guard deadlines; do not automatically grant DDG knowledge.",
+    "Use one recovery lease for engine/capability and shared native/provider scopes.",
+    "0.9 enforces allowedOrigins for AppServices; pass the configured origin explicitly.",
+    "Dogfooding exposed an uninterned initial-resume transport; repaired upstream with a strict initial-only compact graph codec.",
+    "Keep SearXNG core pinned; extend only private adapters and offline fixtures.",
+    "Lease cleanup persists the current health object after concurrent administrative reviews; a regression asserts the newer quarantine survives storage and cleanup.",
+    "Regenerate the MCP documentation knowledge index after public contract docs; package smoke and MCP CLI contracts pass. The final full ci-pr profile passes 189/189 on the exact pinned head."
+  ],
+  "gates": {
+    "searchNodeTests": 87,
+    "legacyNodeTests": 10,
+    "backendOfflineTests": 7,
+    "frameworkOriginalCiPr": {
+      "passed": 189,
+      "failed": 0
+    },
+    "frameworkTransportCiPr": {
+      "passed": 188,
+      "failed": 1,
+      "failure": "new schema inventory registration"
+    },
+    "frameworkInventoryRepair": "passed; 53 inventory warnings",
+    "cacheModuleGzipBytes": 1009,
+    "cacheRestore": {
+      "elapsedMs": 110,
+      "metadataRoundtripMs": 8.1,
+      "maracaCommitMs": 36.5,
+      "searchStreams": 0,
+      "providerDispatches": 0
+    },
+    "performancePassed": true,
+    "firstPaintRegressionPercent": 5.133203378653972,
+    "frameworkReleaseCiPr": {
+      "passed": 189,
+      "failed": 0,
+      "skipped": 0,
+      "inventoryWarnings": 53
+    },
+    "frameworkMcpContractsCli": "passed"
+  },
+  "privacy": "No real search inputs, result URLs, secrets or browser resource keys are recorded in this report.",
+  "searchPullRequest": "https://github.com/konnilabs/xtend-search/pull/13"
+}

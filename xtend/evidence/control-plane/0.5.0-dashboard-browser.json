@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "checks": [
+    "Six fixture policies saved through Maraca; no document reload.",
+    "Save / discard / cancel, live updates during drafts and browser back preserve expected state.",
+    "Native XSurfaceManager and XSidePanel, category filters, URL history and 320–3840px layouts.",
+    "Four-second favicon responses do not block first paint or stream completion; successful icons retain fixed dimensions.",
+    "Anonymous XDialog reports create an inbox proposal; optional evidence is separate and manual decision audited.",
+    "Auto cooldown is off; rule preview and versioned rule save work.",
+    "Viewer restrictions, no-JS Observatory/logout and no-JS anonymous reporting."
+  ]
+}

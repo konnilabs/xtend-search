@@ -1,9 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {createRmtNodeSsrAdapter,canonicalizeRmtResumePayload} from '@ccslabs/xtend/rmt/node-ssr-adapter';
+import {createRmtNodeSsrAdapter,canonicalizeRmtResumePayload,getRmtSsrCoverage} from '@ccslabs/xtend/rmt/node-ssr-adapter';
 import {renderPageDocument} from '@ccslabs/xtend/rmt/node-page-host';
-import {decodePageWire} from '../../node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs';
+import {decodePageInitialDocument} from '@ccslabs/xtend/rmt/page-contract';
 import {projectPortableRender} from '@ccslabs/xtend/rmt/portable-render';
 import {ssrCapabilities} from '../../server/ssr-capabilities.mjs';
 const manifest=JSON.parse(fs.readFileSync(new URL('../../.xtend-build/pages-standalone.json',import.meta.url)));
@@ -16,10 +16,10 @@ test('search SSR preserves type search, supplies x-section capability and ships 
  const tag=rendered.html.match(/<input[^>]*id="search-input"[^>]*>/)[0];
  assert.match(tag,/type="search"/);assert.ok(!tag.includes('viewTemplate'));
  assert.ok(!rendered.diagnostics.some(d=>d.code==='rmt.node_ssr.component_capability_missing'));
- assert.ok(rendered.hydration.coverage.componentNodes>0);assert.equal(rendered.hydration.coverage.missingCapabilityNodes,0);
- const page={schema:'xtend.page-response.v1',head:[],renderArtifact:artifact,ssr:rendered.response};
- const document=renderPageDocument(page,rendered.html,{},'',{compact:true});
- const wire=decodePageWire(JSON.parse(document.match(/id="xtend-page-data"[^>]*>([\s\S]*?)<\/script>/)[1]));
+ assert.ok(getRmtSsrCoverage(rendered).componentNodes>0);assert.equal(getRmtSsrCoverage(rendered).missingCapabilityNodes,0);
+ const page={schema:'xtend.page-response.v2',kind:'page',version:manifest.version,contextKey:'fixture',page:'Search',url:'/',layout:null,partial:false,shared:{},flash:{},errors:{},props,deferred:{},once:{},merge:{},head:[],renderArtifact:artifact,ssr:rendered.response};
+ const document=renderPageDocument(page,rendered.html,{},'',{compact:true,initialResumeSchema:'xtend.page-initial-resume.v1'});
+ const wire=decodePageInitialDocument(JSON.parse(document.match(/id="xtend-page-data"[^>]*>([\s\S]*?)<\/script>/)[1]));
  assert.equal(wire.ssr.chunk.markup.html,undefined);assert.equal(wire.ssr.chunks[0].markup.html,undefined);
  assert.equal(canonicalizeRmtResumePayload(wire.ssr.resume),canonicalizeRmtResumePayload(rendered.resume));
  assert.ok(adapter.renderDescriptorToHtml(wire.ssr.chunk.markup.descriptor,{model:input.model,nativeForms:true}).html.includes('type="search"'));

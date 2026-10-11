@@ -19,9 +19,11 @@
     "searx/settings.yml": "cd928422d82a83372d27a41bdaba8d21b43bb0db37367b9a00953c6b17952a3a",
     "searx/xtend_stream.py": "ebc32d3a262ec34e29b77d7c98e7c2864acc1dc839c7708cce0edcf226b6f00b",
     "searx/xtend_integration.py": "a7f2e35bd2d7a3234a13346acaa2d04061ecf2b61c0dda6a59108973d7136c38",
-    "xtend/server/backend.py": "c583640bafa7d847ad5d8c9c0af4047db34b0e5956b1f5bde94efd9fe21777fe",
+    "xtend/server/backend.py": "907eaf8b2f5149f7a7f494116f3bc7d549e23a3ab13f65f331226097a518b719",
     "xtend/server/backend-start.py": "683f666347211a7812c5a0b54c97a346621086823f8a859d60997c804cabc673",
-    "xtend/server/favicon_backend.py": "a6eb8f8ed511272494a0140ebf9e4882f1dbad3c21048ed626517331d46f4c2d"
+    "xtend/server/favicon_backend.py": "a6eb8f8ed511272494a0140ebf9e4882f1dbad3c21048ed626517331d46f4c2d",
+    "xtend/server/engine_health.py": "569f36e2c8857bc05da4b448ead3ebd88d011cd99c7433fc07011133441ab2c4",
+    "searx/engines/duckduckgo_definitions.py": "164f273b8e6d1315d504081f7d20bc0248013c9cc37f9201ce34662d4fadec4f"
   },
-  "review": "xtend/docs/RELEASE-0.4.2.md"
+  "review": "xtend/docs/RELEASE-0.5.0.md"
 }

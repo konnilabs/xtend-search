@@ -1,0 +1,13 @@
+{
+  "version": "0.5.0",
+  "ok": true,
+  "environment": "local Docker 8090",
+  "interaction": "Codex in-app browser via cua_repl",
+  "checks": {
+    "initializedShellOpensXDialog": true,
+    "pageNavigationOccurred": false,
+    "closeReturnsFocusToTrigger": true,
+    "existingAutomatedAboutRegressionPassed": true
+  },
+  "finding": "Reported page navigation occurred before JavaScript initialization; user withdrew the regression report. No runtime patch required. Direct links and no-JS continue to use the standalone fallback."
+}

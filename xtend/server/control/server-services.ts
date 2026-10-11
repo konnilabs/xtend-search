@@ -7,6 +7,7 @@ export default defineServerServices({
   const state=parseSearch(new URL(input.url,'http://localhost'));
   for await(const payload of application().search.run(state,context))yield {type:payload.event==='search.summary'?'complete':'delta',value:payload};
  }}),
+ 'search.cache.context':service({kind:'query',target:'server',invoke(_input,context){return application().search.cacheContext(context.signal);}}),
  'search.feedback.submit':service({kind:'command',target:'server',invoke(input,context){return application().quality.submit(input,context);}}),
  'search.capabilities':service({kind:'query',target:'server',invoke(){return application().search.base({q:'',category:'general',language:'all',timeRange:'',safeSearch:'1',page:1}).tabs.map((t: {id:string,label:string})=>({id:t.id,label:t.label}));}}),
  'admin.quality.rule.set':service({kind:'command',target:'server',invoke(input,context){return application().admin.quality('rule',input,context);}}),

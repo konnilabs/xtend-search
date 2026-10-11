@@ -1,0 +1,103 @@
+{
+  "version": "0.5.0",
+  "ok": true,
+  "browser": "145.0.7632.6",
+  "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+  "scope": "Offline Docker, identical 100/700/2500ms engine fixtures, ten fresh contexts; no live providers",
+  "runs": [
+    {
+      "firstMs": 476.79999999981374,
+      "completeMs": 2976.7000000001863,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 11200000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 457.90000000037253,
+      "completeMs": 2956.5,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 12700000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 495.5,
+      "completeMs": 3068.2000000001863,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 12700000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 465.8999999994412,
+      "completeMs": 2949.5,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 11900000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 469.6000000005588,
+      "completeMs": 2934.100000000559,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 12700000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 485.3999999994412,
+      "completeMs": 2949.199999999255,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 12700000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 515.2000000001863,
+      "completeMs": 2992.5,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 12700000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 486.70000000018626,
+      "completeMs": 2987.2999999998137,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 11200000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 471.6000000005588,
+      "completeMs": 2973,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 12700000,
+      "jsGzipBytes": 556093
+    },
+    {
+      "firstMs": 505,
+      "completeMs": 2947.5,
+      "cls": 0,
+      "cacheSerializedBytes": 20447,
+      "heapUsedBytes": 12700000,
+      "jsGzipBytes": 556093
+    }
+  ],
+  "comparison": {
+    "baselineVersion": "0.4.4",
+    "baselineFirstMs": 461.70000000018626,
+    "firstMs": 485.3999999994412,
+    "baselineCompleteMs": 2951.2000000001863,
+    "completeMs": 2973,
+    "baselineJsGzipBytes": 493871,
+    "jsGzipBytes": 556093,
+    "firstRegressionPercent": 5.133203378653972,
+    "sdkAndAppMigrationGzipBytes": 62222,
+    "baselineHeapUsedBytes": 11200000,
+    "heapUsedBytes": 12700000
+  },
+  "heapMeasurement": "Chromium coarse whole-JS-heap estimate at stream completion, not cache allocation or process RSS."
+}

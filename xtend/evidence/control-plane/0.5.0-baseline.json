@@ -1,0 +1,79 @@
+{
+  "version": "0.4.4",
+  "ok": true,
+  "browser": "145.0.7632.6",
+  "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+  "scope": "Offline Docker 0.4.4 frontend with the same 0.5.0 backend and v05 fixture catalogue as the new-version measurement, 100/700/2500ms delays, ten fresh contexts; no live providers",
+  "runs": [
+    {
+      "firstMs": 497.70000000018626,
+      "completeMs": 2951.4000000003725,
+      "cls": 0,
+      "heapUsedBytes": 10600000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 454.5,
+      "completeMs": 2925.9000000003725,
+      "cls": 0,
+      "heapUsedBytes": 11200000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 476.8999999994412,
+      "completeMs": 2914.5999999996275,
+      "cls": 0,
+      "heapUsedBytes": 10600000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 438.6000000005588,
+      "completeMs": 2961.7000000001863,
+      "cls": 0,
+      "heapUsedBytes": 11200000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 455.09999999962747,
+      "completeMs": 2911.7000000001863,
+      "cls": 0,
+      "heapUsedBytes": 11200000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 449.79999999981374,
+      "completeMs": 2965.2000000001863,
+      "cls": 0,
+      "heapUsedBytes": 11200000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 490.70000000018626,
+      "completeMs": 2951.2000000001863,
+      "cls": 0,
+      "heapUsedBytes": 11200000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 460.6000000005588,
+      "completeMs": 2957,
+      "cls": 0,
+      "heapUsedBytes": 10600000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 461.70000000018626,
+      "completeMs": 2947.2999999998137,
+      "cls": 0,
+      "heapUsedBytes": 10600000,
+      "jsGzipBytes": 493871
+    },
+    {
+      "firstMs": 504.29999999981374,
+      "completeMs": 2933,
+      "cls": 0,
+      "heapUsedBytes": 11200000,
+      "jsGzipBytes": 493871
+    }
+  ]
+}

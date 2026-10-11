@@ -1,0 +1,13 @@
+{
+  "schema": "xtend.search.sdk-provenance.v1",
+  "repository": "https://github.com/konnilabs/xtend",
+  "pullRequest": "https://github.com/konnilabs/xtend/pull/110",
+  "baseCommit": "d4912deb30fe8d85d8e442e34d74ec6050f0fe09",
+  "commit": "dd1917bfeb8f173dde585f743a866c1b0d38e9f1",
+  "packageVersion": "0.9.0",
+  "artifact": "ccslabs-xtend-0.9.0-dd1917bfeb8f.tgz",
+  "sha256": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc",
+  "cacheModuleGzipBytes": 1009,
+  "mcpAvailable": false,
+  "validation": "Final ci-pr 189/189, zero failures/skips, 53 documented inventory warnings on pinned head; SSR/PageClient/browser/AppServices and MCP CLI contracts/package smoke passed"
+}

@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "version": "0.5.0",
+  "sdkHead": "dd1917bfeb8f173dde585f743a866c1b0d38e9f1",
+  "sdkSha256": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc",
+  "imageIds": {
+    "xtend-search:0.5.0": "sha256:dbc5115a0562461864263ea67e832944dfc89d851f52f5f91683f7de3d240f1f",
+    "xtend-search-searxng:0.5.0": "sha256:c02cc4c1f30f3609814017876a15d8a3be538e527054f038d8459eb934978f78"
+  },
+  "platform": "linux/amd64",
+  "dockerArchiveRoundTrip": "load.sh checksums and both docker load operations passed; loaded IDs match IMAGE-IDS.txt",
+  "correspondingSourceSdkVerified": true,
+  "localReadiness": {
+    "ok": true,
+    "version": "0.5.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "productionDeployed": false
+}

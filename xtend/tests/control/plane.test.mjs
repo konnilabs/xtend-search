@@ -102,7 +102,7 @@ test('knowledge preserves one attributed entity, rejects ambiguity and never wea
   const one=await executor.load(state,{});assert.equal(one.knowledgeStatus,'available');assert.equal(one.knowledgeCards[0].title,'Entity A');
   boxes.push({infobox:'Entity B',urls:[{url:'https://example.org/entity-b'}]});
   const ambiguous=await executor.load(state,{});assert.equal(ambiguous.knowledgeStatus,'ambiguous');assert.equal(ambiguous.knowledgeCards.length,0);assert.equal(ambiguous.statusLabel,'0 von 1 Quellen mit Treffern');
-  e.safeSearch=false;const filtered=await executor.load(state,{});assert.equal(filtered.knowledgeStatus,'not_applicable');assert.equal(filtered.knowledgeCards.length,0);
+  e.safeSearch=false;const filtered=await executor.load(state,{});assert.equal(filtered.knowledgeStatus,'unavailable');assert.equal(filtered.knowledgeCards.length,0);
  }finally{await h.close();}
 });
 test('knowledge rate-limit fallback cannot reuse the same quota domain',async()=>{

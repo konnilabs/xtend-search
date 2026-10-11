@@ -8,7 +8,7 @@ export function event(type,input={}){
  for(const name of ['backendId','engineId','capability','origin','reason'])if(typeof input[name]==='string' && input[name].length<=100 && /^[\p{L}\p{N} .:_-]+$/u.test(input[name]))data[name]=input[name];
  if(outcomes.has(input.outcome))data.outcome=input.outcome;
  if(errors.has(input.errorClass))data.errorClass=input.errorClass;
- for(const name of ['durationMs','validResultCount','policyRevision','retryNotBefore','dropped'])if(Number.isFinite(input[name])&&input[name]>=0)data[name]=input[name];
+ for(const name of ['durationMs','validResultCount','validKnowledgeCount','policyRevision','retryNotBefore','dropped'])if(Number.isFinite(input[name])&&input[name]>=0)data[name]=input[name];
  data.measurementScope=type.startsWith('quality.')||type==='feedback.received'?'quality_feedback':'adapter_round_trip';if(data.measurementScope==='adapter_round_trip')data.providerDurationMs=null;
  return {specversion:'1.0',id:randomUUID(),source:'urn:xtend:search:control-plane:primary',type:`de.ccs-networks.xtend.search.${type}.v1`,time:new Date().toISOString(),datacontenttype:'application/json',dataschema:'urn:xtend:search:schema:operation:v1',data};
 }
