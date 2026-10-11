@@ -1,5 +1,7 @@
 # XTend.search 0.5.0 — Browser-Ressourcen, Knowledge und Wiederanlauf
 
+Search-PR: https://github.com/konnilabs/xtend-search/pull/13.
+
 Status: Release-Kandidat; Merge, Framework-Publishing und Produktionsdeployment sind eigene Schritte. Frontend und privates Backend tragen beide **0.5.0**. Der SearXNG-Pin bleibt `9f042d2f67666f86204d6874488880a23ba81a8f` / `2026.10.9+9f042d2f6`.
 
 ## Framework-Abhängigkeit
@@ -44,7 +46,7 @@ Der Single-Owner-Lock und bestehende additive SQLite-Tabellen bleiben. Neue Reco
 
 ## Reproduzierbare Gates / Nachweise
 
-Node 24.19 / npm 11.17. Framework: Der erste Cache-Stand bestand ci-pr mit 189/189 Gruppen. Nach dem zusätzlichen Initial-Wire-Patch bestanden 188/189; die einzige fehlgeschlagene Schema-Registrierung wurde korrigiert und das Schema-Inventar separat erneut erfolgreich geprüft (53 dokumentierte Inventar-Warnungen). SSR/PageClient, Browser-Lifecycle, App Services, Paketexports und Strict-Beispiel sind nachgewiesen; ein weiterer vollständiger 189-Gruppen-Lauf wird nicht behauptet. Cache-Modul: 1.009 Byte gzip. SDK-Migrationskosten werden separat vom Cache-Modul gemessen.
+Node 24.19 / npm 11.17. Framework: Der abschließende vollständige ci-pr-Lauf auf dem gepinnten Head bestand **189/189 Gruppen**, ohne Fehler oder Skips, mit 53 dokumentierten Inventar-Warnungen. SSR/PageClient, Browser-Lifecycle, App Services, Paketexports und Strict-Beispiel sind nachgewiesen. Der frühere Transportlauf mit 188/189, seine Schema-Reparatur und der aktualisierte MCP-Dokumentationsindex werden als getrennte Nachweise aufbewahrt. MCP-Vertrags- und Paketprüfungen per CLI bestehen ebenfalls. Cache-Modul: 1.009 Byte gzip. SDK-Migrationskosten werden separat vom Cache-Modul gemessen.
 
 Search: `npm --prefix xtend ci --ignore-scripts`, `npm --prefix xtend run build:control`, `npm --prefix xtend run test:control`. Private Python-Verträge: `XTEND_BUILD_NETWORK=host sh xtend/tests/control/upstream-gate.sh xtend-search-searxng:0.5.0`. Builds auf diesem Rechner benötigen Docker-Build-Netzwerk `host`, weil die BuildKit-Bridge keine externen Pakete erreicht.
 

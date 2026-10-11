@@ -21,7 +21,8 @@
     "0.9 enforces allowedOrigins for AppServices; pass the configured origin explicitly.",
     "Dogfooding exposed an uninterned initial-resume transport; repaired upstream with a strict initial-only compact graph codec.",
     "Keep SearXNG core pinned; extend only private adapters and offline fixtures.",
-    "Lease cleanup persists the current health object after concurrent administrative reviews; a regression asserts the newer quarantine survives storage and cleanup."
+    "Lease cleanup persists the current health object after concurrent administrative reviews; a regression asserts the newer quarantine survives storage and cleanup.",
+    "Regenerate the MCP documentation knowledge index after public contract docs; package smoke and MCP CLI contracts pass. The final full ci-pr profile passes 189/189 on the exact pinned head."
   ],
   "gates": {
     "searchNodeTests": 87,
@@ -46,7 +47,15 @@
       "providerDispatches": 0
     },
     "performancePassed": true,
-    "firstPaintRegressionPercent": 5.133203378653972
+    "firstPaintRegressionPercent": 5.133203378653972,
+    "frameworkReleaseCiPr": {
+      "passed": 189,
+      "failed": 0,
+      "skipped": 0,
+      "inventoryWarnings": 53
+    },
+    "frameworkMcpContractsCli": "passed"
   },
-  "privacy": "No real search inputs, result URLs, secrets or browser resource keys are recorded in this report."
+  "privacy": "No real search inputs, result URLs, secrets or browser resource keys are recorded in this report.",
+  "searchPullRequest": "https://github.com/konnilabs/xtend-search/pull/13"
 }

@@ -9,5 +9,5 @@
   "sha256": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc",
   "cacheModuleGzipBytes": 1009,
   "mcpAvailable": false,
-  "validation": "ci-pr 189/189 on cache commit; transport rerun 188/189 plus repaired schema-inventory; regenerated MCP docs, MCP contracts and scoped package smoke passed; final full profile running"
+  "validation": "Final ci-pr 189/189, zero failures/skips, 53 documented inventory warnings on pinned head; SSR/PageClient/browser/AppServices and MCP CLI contracts/package smoke passed"
 }
