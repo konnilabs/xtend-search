@@ -1,0 +1,97 @@
+{
+  "ok": true,
+  "version": "0.6.0",
+  "bundle": "XTend-search-Docker-0.6.0-linux-amd64.tar.gz",
+  "bundleSha256": "a43a7b4b76f6a34388c3903ff2b33dba115810b0397396a91774a641425276e4",
+  "bundleBytes": 308181212,
+  "dockerArchivesLoaded": true,
+  "loadedImageIds": {
+    "xtend-search:0.6.0": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
+    "xtend-search-searxng:0.5.0": "sha256:c02cc4c1f30f3609814017876a15d8a3be538e527054f038d8459eb934978f78"
+  },
+  "sourceExcludesSecretsAndRuntimeData": true,
+  "outerArchiveMatchesVerifiedFiles": true,
+  "files": [
+    {
+      "file": "XTend-search-SearXNG-Image-0.5.0-linux-amd64.tar.gz",
+      "sha256": "e9999f81c42c9a84c1e0f24236939992720822a680bee904e7d91531bbd29807",
+      "bytes": 107214027
+    },
+    {
+      "file": "xtend-search-0.6.0-source.tar.gz",
+      "sha256": "b4e3a18f55a764fe8b4b3f4e7a00c23c6b49f9573c5d82a1e11e0412b575e564",
+      "bytes": 31128040
+    },
+    {
+      "file": "UPGRADE.md",
+      "sha256": "dc241b9e65f3556d2ee37652742981b3188cd8d3901b9743555d4b4d2afe09d9",
+      "bytes": 9571
+    },
+    {
+      "file": "SHA256SUMS",
+      "sha256": "f074df60f38507eb7d876102e34b79d4518ee5fc74197c8d1dcbaad15fb403cc",
+      "bytes": 1427
+    },
+    {
+      "file": "SDK-PROVENANCE.json",
+      "sha256": "cb415b188c41e9898d37cd88493a00c261442b10aa0a6d10b276f993314819e8",
+      "bytes": 691
+    },
+    {
+      "file": "XTend-search-Docker-Image-0.6.0-linux-amd64.tar.gz.sha256",
+      "sha256": "00dfaed0217c0cedca0d38903ca797047b7e1497c26afa4a9a0af53f663c93fe",
+      "bytes": 117
+    },
+    {
+      "file": "load.sh",
+      "sha256": "8f06ac9499be4574a929d37b0068bca3f43b1551a89364847e6760d9f0ccf349",
+      "bytes": 196
+    },
+    {
+      "file": "xtend-search-0.6.0-framework-validation.tar.gz",
+      "sha256": "3b56a304ec18b4bfc58c37ead26815eb929f4a2cb2ae4893a43e1d28af0645c3",
+      "bytes": 621217
+    },
+    {
+      "file": "portainer.env.example",
+      "sha256": "ad33243685341f7922d4f1a1700390a01d7b14fa31c2470f1a2cc8eff0c2e227",
+      "bytes": 1366
+    },
+    {
+      "file": "XTend-search-0.6.0-IMAGE-ID.txt",
+      "sha256": "5a0545a35669b03450f65b7968caa811d8bbbc14e35d9237c5746d3829adc233",
+      "bytes": 103
+    },
+    {
+      "file": "xtend-search-0.6.0-verification.tar.gz",
+      "sha256": "d94bc8b54b22448ce21ae2b4224466becccd802bb0c2da1cd6e245457e573256",
+      "bytes": 27287
+    },
+    {
+      "file": "compose.control.yml",
+      "sha256": "82289da3e5bc298451a14a27a2724ce7324ba923b00d87b993592172155f3e69",
+      "bytes": 2652
+    },
+    {
+      "file": "compose.portainer.yml",
+      "sha256": "56d3e0a3b4305fc769c60f9c5e9e8ec4e969646fb4798f6dce753fbf86ccd9f9",
+      "bytes": 4578
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "57c8ff33c9c0cfc3ef00e650a1cc910d7ee479a8bc509f6c9209a7c2a11399d6",
+      "bytes": 34520
+    },
+    {
+      "file": "IMAGE-IDS.txt",
+      "sha256": "975326a06c7a2abc74d6e3b553e7351d8a747b828fb4315d5040915f003f698a",
+      "bytes": 214
+    },
+    {
+      "file": "XTend-search-Docker-Image-0.6.0-linux-amd64.tar.gz",
+      "sha256": "feac16aebf3d252ed0292c39dcab5984825486be56cdd203188a73d2ac2f8f44",
+      "bytes": 170462599
+    }
+  ],
+  "scope": "Exact exported images and package; post-export load proof is separate to avoid a self-referential checksum. Verification archive contains the current acceptance; source archive is the build-time snapshot."
+}

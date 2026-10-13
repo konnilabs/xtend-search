@@ -59,7 +59,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 736.0999999977648,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.004587,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 1214.3999999985099,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -125,7 +131,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 721.6000000014901,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0071983125,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 949.1000000014901,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -191,7 +203,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 711.1999999992549,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.010632594642857143,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 886.3000000007451,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -257,7 +275,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 724,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0035217562500000003,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 961.6999999992549,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -323,7 +347,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 763.8000000007451,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0038531992187499997,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 943.1000000014901,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -389,7 +419,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 769.3999999985099,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.004624411463737488,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 984.8999999985099,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -455,7 +491,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 818.1999999992549,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0047274875217013885,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 917.1000000014901,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -521,7 +563,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 739.7999999970198,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.003588935004340278,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 909,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -587,7 +635,13 @@
         "overflow": false,
         "clippedText": []
       },
-      "streamAfterLayoutMs": 693.5999999977648,
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0008972337510850695,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 925.5999999977648,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,

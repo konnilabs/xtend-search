@@ -3,7 +3,7 @@
   "version": "0.6.0",
   "ok": true,
   "completedUtc": "2026-10-13T21:49:08.174404+00:00",
-  "scope": "CSS-only weather layout follow-up. Exact built frontend image with no source mount. Offline streaming fixtures, both color schemes, responsive and native SSR geometry, plus normal search/slow-link/spinner regressions. Earlier comprehensive acceptance remains a separately identified baseline; no production deployment or live-provider performance claim.",
+  "scope": "Acceptance baseline at commit 6b8c89a86c6dccf2625c994950e0b28bdca7bf3f: CSS-only weather layout follow-up. Exact built frontend image with no source mount. Offline streaming fixtures, both color schemes, responsive and native SSR geometry, plus normal search/slow-link/spinner regressions. Earlier comprehensive acceptance remains a separately identified baseline; no production deployment or live-provider performance claim.",
   "baselineCommit": "0a42e36bf6aa50ef5f81b868361467bb33faf617",
   "frontendImage": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
   "fixtureImage": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
@@ -94,11 +94,11 @@
   },
   "reports": [
     {
-      "report": "0.6.0-weather-layout.json",
+      "report": "0.6.0-weather-layout-pre-units.json",
       "sha256": "21e30c2b9a2595962af60d1cbdfca290f1fb22c15f8888f6973b85958f5b9a41"
     },
     {
-      "report": "0.6.0-prerelease-audit.json",
+      "report": "0.6.0-prerelease-audit-pre-units.json",
       "sha256": "06e29c1d73c728f94fd84b44873dc96a55fe0de4909e5546587c06ea198b7801"
     },
     {
@@ -106,7 +106,7 @@
       "sha256": "5f36023244b2b0e80b6ee627cfd1d06c58dc845af24530c45c8e1cc1b136d961"
     },
     {
-      "report": "0.6.0-ux-local-image.json",
+      "report": "0.6.0-ux-local-image-pre-units.json",
       "sha256": "976efede78e4735c7006bbdce4689226950f31b08b5b4163f106dc2cbb0ae854"
     },
     {
@@ -114,5 +114,6 @@
       "sha256": "2d223cda0ca8629f9328d73a410ee11438c46ade4af4244ae21fdf7312964592"
     }
   ],
-  "previousAcceptance": "0.6.0-ux-verification.json"
+  "previousAcceptance": "0.6.0-ux-verification.json",
+  "supersededBy": "0.6.0-weather-units-verification.json"
 }

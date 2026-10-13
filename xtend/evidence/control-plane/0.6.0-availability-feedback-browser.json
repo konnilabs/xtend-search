@@ -9,7 +9,7 @@
     "Filter portal retains its own readable width and three equal 44px action slots with 10px gaps at 320–1920px, with report button, weather/home layouts, Reduced Motion and native no-JS details.",
     "Checked results and Knowledge cards have a pastel-red surface in both themes, including an open image preview; uncheck and discard clear it. Keyboard focus never covers the reason label at 320–1440px."
   ],
-  "visibleMs": 5918,
+  "visibleMs": 5969,
   "filters": [
     {
       "width": 288,

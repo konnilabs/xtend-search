@@ -4,3 +4,10 @@ const groups={sun:[0],clear:[1],partly:[2],cloud:[3],fog:[45,48],drizzle:[51,53,
 const labels={sun:'Klar',clear:'Überwiegend klar',partly:'Teilweise bewölkt',cloud:'Bedeckt',fog:'Nebel',drizzle:'Nieselregen',freezing:'Gefrierender Niederschlag',rain:'Regen',snow:'Schnee',storm:'Gewitter',unknown:'Wetterzustand nicht verfügbar'};
 export function weatherCondition(code,isDay=1){const kind=Object.keys(groups).find(k=>typeof code==='number'&&groups[k].includes(code))||'unknown';return {kind,label:labels[kind],icon:'/assets/xtend/weather/'+(isDay===0&&['sun','clear'].includes(kind)?'moon':isDay===0&&kind==='partly'?'partly-night':kind)+'.svg'};}
 export function weatherIdentity(state){return searchIdentity({...state,category:'weather',page:1,continuation:''});}
+// Presentation only: providers and shared caches always use Celsius. Convert
+// from the original value, rather than from an already rounded display string.
+export function weatherTemperature(celsius,fahrenheit=false){
+ if(typeof celsius!=='number'||!Number.isFinite(celsius))return {value:'–',label:'–'};
+ const value=String(Math.round((fahrenheit?celsius*9/5+32:celsius)*10)/10);
+ return {value,label:value+(fahrenheit?' °F':' °C')};
+}

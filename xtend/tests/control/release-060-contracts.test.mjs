@@ -20,3 +20,10 @@ test('report assistant and discard dialog are SSR/resume capable while a draft i
  const rendered=await adapter.render({descriptor:projected.descriptor},{model:projected.model,nativeForms:true,executionMode:'server_prerender_resume',resume:{state:projected.model,sign:()=>({keyId:'fixture',signature:'fixture'})}});
  assert.equal(rendered.ok,true);assert.match(rendered.html,/<x-search-report-assistant/);assert.match(rendered.html,/Meldung verwerfen\?/);assert.equal(getRmtSsrCoverage(rendered).missingCapabilityNodes,0);
 });
+test('weather units use the native XToggle contract with complete SSR/resume coverage',async()=>{
+ const manifest=JSON.parse(fs.readFileSync(new URL('../../.xtend-build/pages-standalone.json',import.meta.url))),artifact=structuredClone(manifest.pages.Search.artifact);
+ const props={'search.query':'Fixture','search.data':{view:'results',isSearch:true,category:'weather',tabs:[],results:[],knowledgeCards:[],warnings:[],pages:[],weather:{hasPlace:false,places:[]}},'search.filters':{language:'all',timeRange:'',safeSearch:'1'}};
+ const projected=projectPortableRender(artifact,props),adapter=createRmtNodeSsrAdapter(ssrCapabilities);
+ const rendered=await adapter.render({descriptor:projected.descriptor},{model:projected.model,nativeForms:true,executionMode:'server_prerender_resume',resume:{state:projected.model,sign:()=>({keyId:'fixture',signature:'fixture'})}});
+ assert.equal(rendered.ok,true);assert.match(rendered.html,/<x-toggle[^>]*id="weather-unit-toggle"/);assert.doesNotMatch(rendered.html,/id="report-start"/);assert.equal(getRmtSsrCoverage(rendered).missingCapabilityNodes,0);
+});

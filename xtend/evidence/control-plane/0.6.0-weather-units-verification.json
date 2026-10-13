@@ -1,0 +1,158 @@
+{
+  "schema": "xtend.search.validation.v1",
+  "version": "0.6.0",
+  "ok": true,
+  "completedUtc": "2026-10-13T22:44:20.927474+00:00",
+  "scope": "Temperature-unit and XIcon follow-up against exact built images, without source mounts. Offline Docker fixtures in both palettes, pointer/keyboard changes, native SSR, history/cache, normal streams, constrained mobile link, report UI and Portainer smoke. Prior full acceptance is retained as a historical baseline. No live-provider or production claim.",
+  "baselineCommit": "6b8c89a86c6dccf2625c994950e0b28bdca7bf3f",
+  "frontendImage": "sha256:c0000cff9f0e835462ff002b26e0e0fc34e7245d9b348c95a3db5360899157ae",
+  "fixtureImage": "sha256:c0000cff9f0e835462ff002b26e0e0fc34e7245d9b348c95a3db5360899157ae",
+  "localImage": "sha256:c0000cff9f0e835462ff002b26e0e0fc34e7245d9b348c95a3db5360899157ae",
+  "backendImage": "sha256:c02cc4c1f30f3609814017876a15d8a3be538e527054f038d8459eb934978f78",
+  "sourceMountedIntoFixture": false,
+  "widths": [
+    320,
+    390,
+    700,
+    900,
+    1000,
+    1024,
+    1440,
+    1920,
+    3840
+  ],
+  "noJsWidths": [
+    320,
+    390,
+    1440,
+    3840
+  ],
+  "tests": {
+    "strictMaracaBuild": true,
+    "controlPlane": {
+      "pass": 116,
+      "fail": 0
+    },
+    "application": {
+      "pass": 10,
+      "fail": 0
+    },
+    "focusedBrowserGates": 6,
+    "portainerSmoke": true,
+    "ssrToggleCapabilityCoverage": true
+  },
+  "temperatureUnits": {
+    "default": "Celsius",
+    "preference": "RMT preserved state in current tab only",
+    "conversion": "Pure display conversion from original numeric Celsius, before rounding; both choices in streamed/cached resource.",
+    "newWeatherStreams": 0,
+    "providerRequests": 0,
+    "citySelectionAndUrlUnchanged": true,
+    "contextualToolbarAndHomeVisibility": true,
+    "weatherDomAndCardGeometryPreserved": true,
+    "minimumLabelContrastRatio": 7.570343963096609,
+    "webVitalsUnitClsMax": 0,
+    "recentInputGlyphShiftsMax": 0.010632594642857143,
+    "layoutShiftMethod": "Visible glyphs necessarily repaint. Card/row rectangles remain identical. Browser glyph shifts during input are reported separately and excluded from Web Vitals CLS; stream CLS also includes recent-input shifts."
+  },
+  "weatherStreamClsMax": 0,
+  "normalSearchStreamClsMax": 0,
+  "icons": {
+    "minimum": 7,
+    "maximum": 7,
+    "rainProbability": 31,
+    "labels": "Text alternatives and titles included; decorative XIcons."
+  },
+  "framework": {
+    "sdkCommit": "dd1917bfeb8f173dde585f743a866c1b0d38e9f1",
+    "sdkArtifactSha256": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc",
+    "sdkUnchanged": true,
+    "fixPullRequest": "https://github.com/konnilabs/xtend/pull/111",
+    "fixHead": "e1a6f7666a11ab7d0430c3906ce78414ff8f7532",
+    "searchAdapter": "Public toggle() activation; no SDK rewrite or DOM injection. RMT receives toggle-changed."
+  },
+  "assetComparison": {
+    "baseline": {
+      "search.css": {
+        "bytes": 50862,
+        "gzipBytes": 11084,
+        "sha256": "5f33e6568db4c0af35a891466688c34eb5422c05b377e6cdf15508bbe99e877f"
+      },
+      "page.mjs": {
+        "bytes": 84137,
+        "gzipBytes": 26599,
+        "sha256": "564faf9b591e100ad6fbbbb5411332dada6739dc497e11072d7eb6cdc508ddcc"
+      }
+    },
+    "candidate": {
+      "search.css": {
+        "bytes": 54069,
+        "gzipBytes": 11660,
+        "sha256": "578efd6fc8a05c434aefa0961b40aa4ed5e72206fe3373c564371c60d7c921e6"
+      },
+      "page.mjs": {
+        "bytes": 85334,
+        "gzipBytes": 26907,
+        "sha256": "19b8001ff9c3cc9ac6a52868e9a6e0eda33ec445be2a7bf850a6a7ced07a4788"
+      }
+    },
+    "cssGzipDeltaBytes": 576,
+    "entryGzipDeltaBytes": 308,
+    "scope": "Individual CSS and entry assets; lazy SDK chunks and payload size are not represented by this entry comparison."
+  },
+  "reports": [
+    {
+      "report": "0.6.0-weather-layout.json",
+      "sha256": "56f249fd0e4afb38398b85e411cf780a303b71c1a8c1335748100c2326f0c81c"
+    },
+    {
+      "report": "0.6.0-prerelease-audit.json",
+      "sha256": "387ea98be416c9202ec3ecbcdf695cc6d9856d5a5f1798b4683cb560bd028fea"
+    },
+    {
+      "report": "0.6.0-spinner-stream.json",
+      "sha256": "5f36023244b2b0e80b6ee627cfd1d06c58dc845af24530c45c8e1cc1b136d961"
+    },
+    {
+      "report": "0.6.0-availability-feedback-browser.json",
+      "sha256": "83491249d70525dc5f32bd756bdc70c43155c34e6be6d033701b4dff2a39f5c5"
+    },
+    {
+      "report": "0.6.0-home-browser.json",
+      "sha256": "c502c244f930ac94c6c19a0a42408936b684f06831d104e3e4a67d111946c241"
+    },
+    {
+      "report": "0.6.0-about-browser.json",
+      "sha256": "97676a5060bfbdf56809cad4e5009af0790646a01e8afde1b66deb87cf536b04"
+    },
+    {
+      "report": "0.6.0-ux-local-image.json",
+      "sha256": "98680815b664ea2117f551bd57e0f2e244470eca73c8861ba8e73f09abdde2ea"
+    },
+    {
+      "report": "release-0.6.0-portainer-smoke.json",
+      "sha256": "2d223cda0ca8629f9328d73a410ee11438c46ade4af4244ae21fdf7312964592"
+    },
+    {
+      "report": "0.6.0-xtoggle-native-browser.json",
+      "sha256": "023e826b0ca92d6d1f46354a804498f4e3e43f954039cd935f16cb2c98cc60ff"
+    }
+  ],
+  "previousAcceptance": "0.6.0-weather-responsive-verification.json",
+  "localStatePreserved": {
+    "metadata": true,
+    "policies": true,
+    "guards": true,
+    "weather_policy": true,
+    "quality_rules": true,
+    "quality_pauses": true,
+    "signingKeys": true,
+    "environmentAndSSO": true,
+    "image": true
+  },
+  "mcp": {
+    "matchingXtendNamespaces": [],
+    "calls": [],
+    "method": "SDK/CLI and real browser fixtures, not XTend MCP interactions."
+  }
+}

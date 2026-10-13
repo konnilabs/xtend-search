@@ -6,26 +6,26 @@
       "width": 320,
       "throttled": false,
       "initial": {
-        "ttfbMs": 55.19999999925494,
-        "domContentLoadedMs": 104.70000000298023,
-        "resumeReadyMs": 530,
-        "fcpMs": 140,
-        "lcpMs": 140,
+        "ttfbMs": 57.30000000074506,
+        "domContentLoadedMs": 190.39999999850988,
+        "resumeReadyMs": 702.0999999977648,
+        "fcpMs": 196,
+        "lcpMs": 196,
         "cls": 0,
-        "jsEncodedBytes": 619892
+        "jsEncodedBytes": 627896
       },
       "stream": {
-        "started": 663.9000000022352,
-        "headerMs": 120.39999999850988,
-        "first": 468.5,
-        "complete": 3072.89999999851,
+        "started": 856.5,
+        "headerMs": 153,
+        "first": 598.0999999977648,
+        "complete": 3177.39999999851,
         "bootstrapCls": 0,
-        "lcpMs": 140,
+        "lcpMs": 196,
         "cls": 0,
         "allShifts": 0.06004593984374999,
         "shifts": [
           {
-            "atMs": 138.09999999776483,
+            "atMs": 189,
             "value": 0.06004593984374999,
             "recentInput": true,
             "nodes": [
@@ -84,43 +84,59 @@
         ],
         "longTasks": [
           {
-            "startMs": 237.5,
-            "durationMs": 142
+            "startMs": 112.59999999776483,
+            "durationMs": 62
           },
           {
-            "startMs": 419.20000000298023,
-            "durationMs": 61
+            "startMs": 330.5999999977648,
+            "durationMs": 158
           },
           {
-            "startMs": 1650.5,
-            "durationMs": 67
+            "startMs": 535.8999999985099,
+            "durationMs": 72
           },
           {
-            "startMs": 3466.60000000149,
-            "durationMs": 69
+            "startMs": 1046.3999999985099,
+            "durationMs": 63
+          },
+          {
+            "startMs": 1394.5,
+            "durationMs": 60
+          },
+          {
+            "startMs": 1914.199999999255,
+            "durationMs": 59
+          },
+          {
+            "startMs": 3713.7999999970198,
+            "durationMs": 65
+          },
+          {
+            "startMs": 3972.39999999851,
+            "durationMs": 62
           }
         ],
         "frames": [
           {
-            "elapsedMs": 468.5,
+            "elapsedMs": 598.0999999977648,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 4
           },
           {
-            "elapsedMs": 1054.0999999977648,
+            "elapsedMs": 1116.7999999970198,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 7
           },
           {
-            "elapsedMs": 2871.699999999255,
+            "elapsedMs": 2922.39999999851,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 10
           },
           {
-            "elapsedMs": 3072.89999999851,
+            "elapsedMs": 3177.39999999851,
             "status": "complete",
             "event": "search.summary",
             "resultCount": 10
@@ -130,7 +146,7 @@
         "weatherAssetRequests": 0
       },
       "restore": {
-        "elapsedMs": 366,
+        "elapsedMs": 501,
         "searchStreamDelta": 0,
         "metadataDelta": 1
       },
@@ -140,26 +156,26 @@
       "width": 390,
       "throttled": false,
       "initial": {
-        "ttfbMs": 41.30000000074506,
-        "domContentLoadedMs": 128.59999999776483,
-        "resumeReadyMs": 514.3000000007451,
+        "ttfbMs": 55.100000001490116,
+        "domContentLoadedMs": 123.10000000149012,
+        "resumeReadyMs": 636.5,
         "fcpMs": 100,
         "lcpMs": 100,
         "cls": 0,
-        "jsEncodedBytes": 619892
+        "jsEncodedBytes": 627896
       },
       "stream": {
-        "started": 665.3000000007451,
-        "headerMs": 122.79999999701977,
-        "first": 466.69999999925494,
-        "complete": 3063.2999999970198,
+        "started": 786.9000000022352,
+        "headerMs": 150.19999999925494,
+        "first": 565.1999999992549,
+        "complete": 3222.099999997765,
         "bootstrapCls": 0,
         "lcpMs": 100,
         "cls": 0,
         "allShifts": 0.05668803717948718,
         "shifts": [
           {
-            "atMs": 140.29999999701977,
+            "atMs": 189.09999999776483,
             "value": 0.05668803717948718,
             "recentInput": true,
             "nodes": [
@@ -218,51 +234,59 @@
         ],
         "longTasks": [
           {
-            "startMs": 243.89999999850988,
-            "durationMs": 126
+            "startMs": 256.20000000298023,
+            "durationMs": 165
           },
           {
-            "startMs": 405.0999999977648,
-            "durationMs": 60
+            "startMs": 471,
+            "durationMs": 79
           },
           {
-            "startMs": 813.8999999985099,
+            "startMs": 977,
+            "durationMs": 64
+          },
+          {
+            "startMs": 1296.9000000022352,
+            "durationMs": 55
+          },
+          {
+            "startMs": 1845.2000000029802,
+            "durationMs": 59
+          },
+          {
+            "startMs": 1928.1000000014901,
             "durationMs": 54
           },
           {
-            "startMs": 1081.800000000745,
-            "durationMs": 50
+            "startMs": 3648.2000000029802,
+            "durationMs": 91
           },
           {
-            "startMs": 1652.199999999255,
-            "durationMs": 74
-          },
-          {
-            "startMs": 3449.300000000745,
-            "durationMs": 62
+            "startMs": 3955.300000000745,
+            "durationMs": 54
           }
         ],
         "frames": [
           {
-            "elapsedMs": 466.69999999925494,
+            "elapsedMs": 565.1999999992549,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 4
           },
           {
-            "elapsedMs": 1061.699999999255,
+            "elapsedMs": 1117.699999999255,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 7
           },
           {
-            "elapsedMs": 2846.599999997765,
+            "elapsedMs": 2952.800000000745,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 10
           },
           {
-            "elapsedMs": 3063.2999999970198,
+            "elapsedMs": 3222.099999997765,
             "status": "complete",
             "event": "search.summary",
             "resultCount": 10
@@ -272,7 +296,7 @@
         "weatherAssetRequests": 0
       },
       "restore": {
-        "elapsedMs": 413,
+        "elapsedMs": 450,
         "searchStreamDelta": 0,
         "metadataDelta": 1
       },
@@ -282,26 +306,26 @@
       "width": 1440,
       "throttled": false,
       "initial": {
-        "ttfbMs": 55.600000001490116,
-        "domContentLoadedMs": 119,
-        "resumeReadyMs": 545.8000000007451,
-        "fcpMs": 104,
-        "lcpMs": 104,
+        "ttfbMs": 57,
+        "domContentLoadedMs": 125.19999999925494,
+        "resumeReadyMs": 615.8999999985099,
+        "fcpMs": 108,
+        "lcpMs": 108,
         "cls": 0,
-        "jsEncodedBytes": 619892
+        "jsEncodedBytes": 627896
       },
       "stream": {
-        "started": 706.5,
-        "headerMs": 128.40000000223517,
-        "first": 465.80000000074506,
-        "complete": 3078.900000002235,
+        "started": 771.2999999970198,
+        "headerMs": 145.70000000298023,
+        "first": 579.1000000014901,
+        "complete": 3159.7000000029802,
         "bootstrapCls": 0,
-        "lcpMs": 104,
+        "lcpMs": 108,
         "cls": 0,
         "allShifts": 0.03156934576340664,
         "shifts": [
           {
-            "atMs": 147.80000000074506,
+            "atMs": 180.5,
             "value": 0.03156934576340664,
             "recentInput": true,
             "nodes": [
@@ -385,47 +409,55 @@
         ],
         "longTasks": [
           {
-            "startMs": 250,
-            "durationMs": 134
+            "startMs": 260,
+            "durationMs": 151
           },
           {
-            "startMs": 415.20000000298023,
+            "startMs": 452.5,
+            "durationMs": 74
+          },
+          {
+            "startMs": 952.8999999985099,
             "durationMs": 65
           },
           {
-            "startMs": 1702.7000000029802,
-            "durationMs": 70
+            "startMs": 1282.699999999255,
+            "durationMs": 67
           },
           {
-            "startMs": 3516.60000000149,
-            "durationMs": 61
+            "startMs": 1817.8999999985099,
+            "durationMs": 75
           },
           {
-            "startMs": 3734.2000000029802,
-            "durationMs": 51
+            "startMs": 3629.7999999970198,
+            "durationMs": 58
+          },
+          {
+            "startMs": 3870.7999999970198,
+            "durationMs": 60
           }
         ],
         "frames": [
           {
-            "elapsedMs": 465.80000000074506,
+            "elapsedMs": 579.1000000014901,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 4
           },
           {
-            "elapsedMs": 1066.5,
+            "elapsedMs": 1121.7000000029802,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 7
           },
           {
-            "elapsedMs": 2871.400000002235,
+            "elapsedMs": 2916.900000002235,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 10
           },
           {
-            "elapsedMs": 3078.900000002235,
+            "elapsedMs": 3159.7000000029802,
             "status": "complete",
             "event": "search.summary",
             "resultCount": 10
@@ -435,7 +467,7 @@
         "weatherAssetRequests": 0
       },
       "restore": {
-        "elapsedMs": 413,
+        "elapsedMs": 513,
         "searchStreamDelta": 0,
         "metadataDelta": 1
       },
@@ -445,26 +477,26 @@
       "width": 1920,
       "throttled": false,
       "initial": {
-        "ttfbMs": 55,
-        "domContentLoadedMs": 119.69999999925494,
-        "resumeReadyMs": 532.9000000022352,
-        "fcpMs": 108,
-        "lcpMs": 108,
+        "ttfbMs": 54.19999999925494,
+        "domContentLoadedMs": 117.39999999850988,
+        "resumeReadyMs": 646,
+        "fcpMs": 120,
+        "lcpMs": 120,
         "cls": 0,
-        "jsEncodedBytes": 619892
+        "jsEncodedBytes": 627896
       },
       "stream": {
-        "started": 684.9000000022352,
-        "headerMs": 131,
-        "first": 506.8999999985099,
-        "complete": 3101.89999999851,
+        "started": 801.7999999970198,
+        "headerMs": 150,
+        "first": 546.6000000014901,
+        "complete": 3197.7000000029802,
         "bootstrapCls": 0,
-        "lcpMs": 108,
+        "lcpMs": 120,
         "cls": 0,
         "allShifts": 0.03264743893093533,
         "shifts": [
           {
-            "atMs": 149.59999999776483,
+            "atMs": 183.70000000298023,
             "value": 0.03264743893093533,
             "recentInput": true,
             "nodes": [
@@ -548,47 +580,55 @@
         ],
         "longTasks": [
           {
-            "startMs": 242.19999999925494,
-            "durationMs": 145
+            "startMs": 267.5999999977648,
+            "durationMs": 160
           },
           {
-            "startMs": 419,
-            "durationMs": 62
+            "startMs": 474.29999999701977,
+            "durationMs": 76
           },
           {
-            "startMs": 845,
-            "durationMs": 57
+            "startMs": 986.1999999992549,
+            "durationMs": 64
           },
           {
-            "startMs": 1699.1000000014901,
+            "startMs": 1288.8999999985099,
+            "durationMs": 59
+          },
+          {
+            "startMs": 1850.7999999970198,
+            "durationMs": 56
+          },
+          {
+            "startMs": 3649.699999999255,
             "durationMs": 69
           },
           {
-            "startMs": 3510.10000000149,
-            "durationMs": 59
+            "startMs": 3941.89999999851,
+            "durationMs": 57
           }
         ],
         "frames": [
           {
-            "elapsedMs": 506.8999999985099,
+            "elapsedMs": 546.6000000014901,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 4
           },
           {
-            "elapsedMs": 1083.8999999985099,
+            "elapsedMs": 1105.1000000014901,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 7
           },
           {
-            "elapsedMs": 2885,
+            "elapsedMs": 2917.60000000149,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 10
           },
           {
-            "elapsedMs": 3101.89999999851,
+            "elapsedMs": 3197.7000000029802,
             "status": "complete",
             "event": "search.summary",
             "resultCount": 10
@@ -598,7 +638,7 @@
         "weatherAssetRequests": 0
       },
       "restore": {
-        "elapsedMs": 417,
+        "elapsedMs": 509,
         "searchStreamDelta": 0,
         "metadataDelta": 1
       },
@@ -608,26 +648,26 @@
       "width": 3840,
       "throttled": false,
       "initial": {
-        "ttfbMs": 49,
-        "domContentLoadedMs": 110,
-        "resumeReadyMs": 538.4000000022352,
-        "fcpMs": 100,
-        "lcpMs": 100,
+        "ttfbMs": 54.30000000074506,
+        "domContentLoadedMs": 128.19999999925494,
+        "resumeReadyMs": 650.1999999992549,
+        "fcpMs": 112,
+        "lcpMs": 112,
         "cls": 0,
-        "jsEncodedBytes": 619892
+        "jsEncodedBytes": 627896
       },
       "stream": {
-        "started": 670.5,
-        "headerMs": 121.69999999925494,
-        "first": 468.19999999925494,
-        "complete": 3061.900000002235,
+        "started": 806.6999999992549,
+        "headerMs": 146.89999999850988,
+        "first": 562.8999999985099,
+        "complete": 3166.39999999851,
         "bootstrapCls": 0,
-        "lcpMs": 100,
+        "lcpMs": 112,
         "cls": 0,
         "allShifts": 0.03282943635728624,
         "shifts": [
           {
-            "atMs": 141.40000000223517,
+            "atMs": 182.69999999925494,
             "value": 0.03282943635728624,
             "recentInput": true,
             "nodes": [
@@ -711,47 +751,55 @@
         ],
         "longTasks": [
           {
-            "startMs": 233.30000000074506,
-            "durationMs": 147
+            "startMs": 263.79999999701977,
+            "durationMs": 171
           },
           {
-            "startMs": 415.6000000014901,
-            "durationMs": 67
+            "startMs": 478.69999999925494,
+            "durationMs": 81
           },
           {
-            "startMs": 819.9000000022352,
-            "durationMs": 53
+            "startMs": 990.3999999985099,
+            "durationMs": 66
           },
           {
-            "startMs": 1671.699999999255,
-            "durationMs": 56
+            "startMs": 1309.699999999255,
+            "durationMs": 60
           },
           {
-            "startMs": 3468.699999999255,
-            "durationMs": 74
+            "startMs": 1851.8999999985099,
+            "durationMs": 75
+          },
+          {
+            "startMs": 3662.699999999255,
+            "durationMs": 57
+          },
+          {
+            "startMs": 3915.599999997765,
+            "durationMs": 57
           }
         ],
         "frames": [
           {
-            "elapsedMs": 468.19999999925494,
+            "elapsedMs": 562.8999999985099,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 4
           },
           {
-            "elapsedMs": 1058.1000000014901,
+            "elapsedMs": 1120.199999999255,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 7
           },
           {
-            "elapsedMs": 2872.199999999255,
+            "elapsedMs": 2913.599999997765,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 10
           },
           {
-            "elapsedMs": 3061.900000002235,
+            "elapsedMs": 3166.39999999851,
             "status": "complete",
             "event": "search.summary",
             "resultCount": 10
@@ -761,7 +809,7 @@
         "weatherAssetRequests": 0
       },
       "restore": {
-        "elapsedMs": 407,
+        "elapsedMs": 522,
         "searchStreamDelta": 0,
         "metadataDelta": 1
       },
@@ -771,26 +819,26 @@
       "width": 390,
       "throttled": true,
       "initial": {
-        "ttfbMs": 48.5,
-        "domContentLoadedMs": 1558.7000000029802,
-        "resumeReadyMs": 7156.60000000149,
-        "fcpMs": 460,
-        "lcpMs": 460,
+        "ttfbMs": 51.69999999925494,
+        "domContentLoadedMs": 1593.6000000014901,
+        "resumeReadyMs": 11754.300000000745,
+        "fcpMs": 472,
+        "lcpMs": 472,
         "cls": 0,
-        "jsEncodedBytes": 619892
+        "jsEncodedBytes": 627896
       },
       "stream": {
-        "started": 7315.400000002235,
-        "headerMs": 135.39999999850988,
-        "first": 955.5,
-        "complete": 3598.699999999255,
+        "started": 11914.800000000745,
+        "headerMs": 150.30000000074506,
+        "first": 1027.199999999255,
+        "complete": 3724.900000002235,
         "bootstrapCls": 0,
-        "lcpMs": 460,
+        "lcpMs": 472,
         "cls": 0,
         "allShifts": 0.05668803717948718,
         "shifts": [
           {
-            "atMs": 152,
+            "atMs": 169.40000000223517,
             "value": 0.05668803717948718,
             "recentInput": true,
             "nodes": [
@@ -849,47 +897,55 @@
         ],
         "longTasks": [
           {
-            "startMs": 6039.800000000745,
-            "durationMs": 182
+            "startMs": 6080.60000000149,
+            "durationMs": 183
           },
           {
-            "startMs": 7020.400000002235,
-            "durationMs": 75
+            "startMs": 11569.300000000745,
+            "durationMs": 90
           },
           {
-            "startMs": 7948.400000002235,
-            "durationMs": 56
+            "startMs": 12576.10000000149,
+            "durationMs": 55
           },
           {
-            "startMs": 8825.5,
-            "durationMs": 54
+            "startMs": 12884.20000000298,
+            "durationMs": 57
           },
           {
-            "startMs": 10642,
-            "durationMs": 67
+            "startMs": 13452.300000000745,
+            "durationMs": 60
+          },
+          {
+            "startMs": 15270.20000000298,
+            "durationMs": 70
+          },
+          {
+            "startMs": 15550.10000000149,
+            "durationMs": 90
           }
         ],
         "frames": [
           {
-            "elapsedMs": 955.5,
+            "elapsedMs": 1027.199999999255,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 4
           },
           {
-            "elapsedMs": 1564.800000000745,
+            "elapsedMs": 1598.1000000014901,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 7
           },
           {
-            "elapsedMs": 3394.099999997765,
+            "elapsedMs": 3426,
             "status": "delta",
             "event": "results.batch",
             "resultCount": 10
           },
           {
-            "elapsedMs": 3598.699999999255,
+            "elapsedMs": 3724.900000002235,
             "status": "complete",
             "event": "search.summary",
             "resultCount": 10
@@ -899,7 +955,7 @@
         "weatherAssetRequests": 0
       },
       "restore": {
-        "elapsedMs": 511,
+        "elapsedMs": 539,
         "searchStreamDelta": 0,
         "metadataDelta": 1
       },

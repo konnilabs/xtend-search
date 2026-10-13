@@ -663,6 +663,7 @@ template xtend.search {
 }
 
   state search.weatherUi type object preserve { initial { visible true
+    fahrenheit false
 }
 
 }
@@ -670,6 +671,11 @@ template xtend.search {
   action search.weather.visible {
     input visible boolean
     reduce state.search.weatherUi.visible = input.visible
+}
+
+  action search.weather.unit {
+    input value boolean
+    reduce state.search.weatherUi.fahrenheit = input.value
 }
 
   action search.report.selection {
@@ -998,8 +1004,32 @@ template xtend.search {
                     }
                     {
                       "type" "conditional"
-                      "test" "$model.search.data.reportable"
+                      "test" {
+                        "op" "equals"
+                        "left" { "op" "if" "test" "$model.search.presentation.view" "then" "$model.search.presentation.view" "else" "$model.search.data.view" }
+                        "right" "results"
+                      }
                       "then" {
+                        "type" "conditional"
+                        "test" { "op" "equals" "left" "$model.search.data.category" "right" "weather" }
+                        "then" {
+                          "type" "element"
+                          "tag" "div"
+                          "key" "weather-unit-tools"
+                          "class" "weather-unit-tools"
+                          "attributes" { "id" "weather-unit-tools" "data-fahrenheit" "$model.search.weatherUi.fahrenheit" }
+                          "children" [
+                            { "type" "element" "tag" "x-toggle" "key" "weather-unit-toggle"
+                              "attributes" { "id" "weather-unit-toggle" "label" "Fahrenheit verwenden (aus: Celsius)" "checked" "$model.search.weatherUi.fahrenheit" }
+                            }
+                            { "type" "element" "tag" "span" "class" "weather-unit-c" "text" "°C" "attributes" { "aria-hidden" true } }
+                            { "type" "element" "tag" "span" "class" "weather-unit-f" "text" "°F" "attributes" { "aria-hidden" true } }
+                          ]
+                        }
+                        "else" {
+                          "type" "conditional"
+                          "test" "$model.search.data.reportable"
+                          "then" {
                         "type" "element"
                         "tag" "x-button"
                         "attributes" {
@@ -1010,6 +1040,8 @@ template xtend.search {
                           "variant" "ghost"
                         }
                         "class" "report-start"
+                          }
+                        }
                       }
                     }
                     {
@@ -2543,8 +2575,11 @@ template xtend.search {
                                     {
                                       "type" "element"
                                       "tag" "p"
-                                      "text" "$model.search.data.weather.current.temperature"
                                       "class" "weather-temperature"
+                                      "children" [
+                                        { "type" "element" "tag" "span" "class" "weather-value" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" "$model.search.data.weather.current.temperatureFahrenheit" "else" "$model.search.data.weather.current.temperatureValue" } }
+                                        { "type" "element" "tag" "span" "class" "weather-temperature-unit" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" " °F" "else" " °C" } }
+                                      ]
                                     }
                                     {
                                       "type" "element"
@@ -2554,7 +2589,8 @@ template xtend.search {
                                     {
                                       "type" "element"
                                       "tag" "p"
-                                      "text" "$model.search.data.weather.current.apparent"
+                                      "class" "weather-apparent"
+                                      "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" "$model.search.data.weather.current.apparentFahrenheit" "else" "$model.search.data.weather.current.apparent" }
                                     }
                                     {
                                       "type" "element"
@@ -2622,12 +2658,22 @@ template xtend.search {
                                         {
                                           "type" "element"
                                           "tag" "strong"
-                                          "text" "$item.temperature"
+                                          "class" "weather-temperature-reading"
+                                          "children" [
+                                            { "type" "element" "tag" "span" "class" "weather-value" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" "$item.temperatureFahrenheit" "else" "$item.temperatureValue" } }
+                                            { "type" "element" "tag" "span" "class" "weather-temperature-unit" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" " °F" "else" " °C" } }
+                                          ]
                                         }
                                         {
                                           "type" "element"
                                           "tag" "span"
-                                          "text" "$item.rain"
+                                          "class" "weather-reading weather-rain"
+                                          "attributes" { "title" "Niederschlagswahrscheinlichkeit" }
+                                          "children" [
+                                            { "type" "element" "tag" "x-icon" "text" "♧" "attributes" { "pack" "search" "name" "rain-probability" "size" "14px" "decorative" true "aria-hidden" true } }
+                                            { "type" "element" "tag" "span" "class" "weather-sr-label" "text" "Niederschlagswahrscheinlichkeit: " }
+                                            { "type" "element" "tag" "span" "class" "weather-value" "text" "$item.rain" }
+                                          ]
                                         }
                                       ]
                                     }
@@ -2674,17 +2720,37 @@ template xtend.search {
                                     {
                                       "type" "element"
                                       "tag" "span"
-                                      "text" "$item.low"
+                                      "class" "weather-reading weather-low"
+                                      "attributes" { "title" "Tiefsttemperatur" }
+                                      "children" [
+                                        { "type" "element" "tag" "x-icon" "text" "↓" "attributes" { "pack" "search" "name" "temperature-low" "size" "14px" "decorative" true "aria-hidden" true } }
+                                        { "type" "element" "tag" "span" "class" "weather-sr-label" "text" "Tiefsttemperatur: " }
+                                        { "type" "element" "tag" "span" "class" "weather-value" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" "$item.lowFahrenheit" "else" "$item.lowValue" } }
+                                        { "type" "element" "tag" "span" "class" "weather-temperature-unit" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" " °F" "else" " °C" } }
+                                      ]
                                     }
                                     {
                                       "type" "element"
                                       "tag" "strong"
-                                      "text" "$item.high"
+                                      "class" "weather-reading weather-high"
+                                      "attributes" { "title" "Höchsttemperatur" }
+                                      "children" [
+                                        { "type" "element" "tag" "x-icon" "text" "↑" "attributes" { "pack" "search" "name" "temperature-high" "size" "14px" "decorative" true "aria-hidden" true } }
+                                        { "type" "element" "tag" "span" "class" "weather-sr-label" "text" "Höchsttemperatur: " }
+                                        { "type" "element" "tag" "span" "class" "weather-value" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" "$item.highFahrenheit" "else" "$item.highValue" } }
+                                        { "type" "element" "tag" "span" "class" "weather-temperature-unit" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" " °F" "else" " °C" } }
+                                      ]
                                     }
                                     {
                                       "type" "element"
                                       "tag" "span"
-                                      "text" "$item.rain"
+                                      "class" "weather-reading weather-rain"
+                                      "attributes" { "title" "Niederschlagswahrscheinlichkeit" }
+                                      "children" [
+                                        { "type" "element" "tag" "x-icon" "text" "♧" "attributes" { "pack" "search" "name" "rain-probability" "size" "14px" "decorative" true "aria-hidden" true } }
+                                        { "type" "element" "tag" "span" "class" "weather-sr-label" "text" "Niederschlagswahrscheinlichkeit: " }
+                                        { "type" "element" "tag" "span" "class" "weather-value" "text" "$item.rain" }
+                                      ]
                                     }
                                   ]
                                 }
@@ -3073,6 +3139,9 @@ template xtend.search {
 }
 
 
+}
+
+    on toggle-changed "#weather-unit-toggle" -> action search.weather.unit { payload value from detail.checked
 }
 
     on change "#feedback-form select" -> action search.feedback.reason { payload value from target.value

@@ -1,7 +1,7 @@
 {
   "ok": true,
-  "frontend": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
-  "previousFrontend": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
+  "frontend": "sha256:c0000cff9f0e835462ff002b26e0e0fc34e7245d9b348c95a3db5360899157ae",
+  "previousFrontend": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
   "health": {
     "ok": true,
     "version": "0.6.0",

@@ -1,4 +1,5 @@
 import {installCategoryTabs} from './category-tabs.mjs';
+import {installWeatherUnitActivation} from './weather-units.mjs';
 import {installFilterMotion} from './filter-motion.mjs';
 import {installMotd} from './motd.mjs';
 import {registerIconPack} from '@ccslabs/xtend/components/xicon.js';
@@ -15,7 +16,12 @@ import {installFilterNavigation} from './filter-navigation.mjs';
 import {installSearchMotion} from './search-motion.mjs';
 // Browser integration only. XTend owns navigation, history, state and all UI commits.
 export function installSearchHost(){
- registerIconPack({id:'search',distribution:'local-build',cdnAllowed:false,viewBox:'0 0 24 24',strokeLinecap:'round',strokeLinejoin:'round',icons:{filter:{nodes:[{tag:'path',attrs:{d:'M3 4h18l-7 8v7l-4 2v-9z'}}]}}});
+ registerIconPack({id:'search',distribution:'local-build',cdnAllowed:false,viewBox:'0 0 24 24',strokeLinecap:'round',strokeLinejoin:'round',icons:{
+  filter:{nodes:[{tag:'path',attrs:{d:'M3 4h18l-7 8v7l-4 2v-9z'}}]},
+  'temperature-low':{nodes:[{tag:'path',attrs:{d:'M12 14.5V5a3 3 0 0 0-6 0v9.5a5 5 0 1 0 6 0z M9 8v9 M19 4v9m-3-3 3 3 3-3'}}]},
+  'temperature-high':{nodes:[{tag:'path',attrs:{d:'M12 14.5V5a3 3 0 0 0-6 0v9.5a5 5 0 1 0 6 0z M9 8v9 M19 13V4m-3 3 3-3 3 3'}}]},
+  'rain-probability':{nodes:[{tag:'path',attrs:{d:'M12 3c-2.5 3-6 7-6 11a6 6 0 0 0 12 0c0-4-3.5-8-6-11z'}}]}
+ }});
  let draft='',revision=0,submittedRevision=0,pending=false;
  const command=(name,payload={})=>window.XTendPage?.getRuntime()?.dispatchCommand(name,payload).catch(()=>{});
  installFeedback();
@@ -23,6 +29,7 @@ export function installSearchHost(){
  installFilterMotion(command);
  const motion=installSearchMotion();
  installCategoryTabs();
+ installWeatherUnitActivation();
  installAbout();installMotd();
  installFavicons();
  installPreferences(command);
