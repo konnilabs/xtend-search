@@ -49,7 +49,7 @@ export function adminView(plane,context,selected='',input={}){
 }
 export class AdminService {
  constructor(plane){this.plane=plane;this.streams=new Map();this.streamCount=0;}
- async snapshot(input,context){requireRole(context,'viewer');await this.plane.motd?.current();await this.plane.refreshHistory();return {...adminView(this.plane,context,input?.id,input),message:''};}
+ async snapshot(input,context){requireRole(context,'viewer');await this.plane.motd?.current();if(this.plane.weather)try{this.plane.weather.budget=await this.plane.store.call('weatherBudget',{time:Date.now()});}catch{}await this.plane.refreshHistory();return {...adminView(this.plane,context,input?.id,input),message:''};}
  async mutate(action,input,context){
   requireRole(context,action==='policy'?'administrator':'operator');
   if(typeof input?.id!=='string')fail('validation');

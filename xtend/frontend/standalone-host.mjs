@@ -1,3 +1,5 @@
+import {installCategoryTabs} from './category-tabs.mjs';
+import {installFilterMotion} from './filter-motion.mjs';
 import {installMotd} from './motd.mjs';
 import {registerIconPack} from '@ccslabs/xtend/components/xicon.js';
 import '@ccslabs/xtend/components/xspinner.js';
@@ -16,21 +18,25 @@ export function installSearchHost(){
  registerIconPack({id:'search',distribution:'local-build',cdnAllowed:false,viewBox:'0 0 24 24',strokeLinecap:'round',strokeLinejoin:'round',icons:{filter:{nodes:[{tag:'path',attrs:{d:'M3 4h18l-7 8v7l-4 2v-9z'}}]}}});
  let draft='',revision=0,submittedRevision=0,pending=false;
  const command=(name,payload={})=>window.XTendPage?.getRuntime()?.dispatchCommand(name,payload).catch(()=>{});
+ installFeedback();
  installFilterNavigation(command);
+ installFilterMotion(command);
  installSearchMotion();
+ installCategoryTabs();
  installAbout();installMotd();
- installFavicons();installFeedback();
+ installFavicons();
  installPreferences(command);
  installImagePreview(command);
  installSearchAlerts(command);
  installResultImages(command);
  installSearchStreaming();
+ const visibility=()=>void command('search.weather.visible',{visible:!document.hidden});document.addEventListener('visibilitychange',visibility);window.addEventListener('xtend-page:ready',visibility);
  let activityQueue=Promise.resolve();
  const activity=(name,payload={})=>activityQueue=activityQueue.catch(()=>{}).then(()=>command(name,payload));
- window.addEventListener('xtend-page:ready',()=>{const streaming=['pending','partial'].includes(window.XTendPage.page.props?.['search.data']?.stream?.phase);void activity('search.streaming',{busy:streaming,message:streaming?'Weitere Suchquellen werden geladen …':''});});
- document.addEventListener('input',event=>{if(event.target.id==='search-input'){draft=event.target.value;revision++;}},true);
+ window.addEventListener('xtend-page:ready',()=>{const streaming=['pending','partial'].includes(window.XTendPage.page.props?.['search.data']?.stream?.phase);void activity('search.streaming',{busy:streaming,message:''});});
+ document.addEventListener('input',event=>{if(event.target.id==='search-input'){draft=event.target.value;revision++;const locationField=document.getElementById('search-form')?.elements.namedItem('location');if(locationField)locationField.value='';}},true);
  window.addEventListener('xtend-page:event',async({detail:event})=>{
-  if(event.type==='ready'){const streaming=['pending','partial'].includes(window.XTendPage?.page?.props?.['search.data']?.stream?.phase);await activity('search.streaming',{busy:streaming,message:streaming?'Weitere Suchquellen werden geladen …':''});}
+  if(event.type==='ready'){const streaming=['pending','partial'].includes(window.XTendPage?.page?.props?.['search.data']?.stream?.phase);await activity('search.streaming',{busy:streaming,message:''});}
   if(event.type==='pending'){pending=true;submittedRevision=revision;await activity('search.pending');}
   if(event.type==='navigate'){
    const newerInput=pending && revision>submittedRevision;
@@ -38,11 +44,11 @@ export function installSearchHost(){
    if(newerInput){await command('search.edit',{value:draft});document.getElementById('search-input')?.focus({preventScroll:true});}
    // The results heading owns the count; this region reports loading and errors.
    const streaming=['pending','partial'].includes(event.page.props?.['search.data']?.stream?.phase);
-   await activity('search.streaming',{busy:streaming,message:streaming?'Weitere Suchquellen werden geladen …':''});
+   await activity('search.streaming',{busy:streaming,message:''});
   }
   if(event.type==='error'){pending=false;await activity('search.ready',{message:'Die Anfrage ist fehlgeschlagen. Bitte erneut suchen.'});}
  });
  window.addEventListener('keydown',event=>{
-  if(!document.querySelector('#search-about[open],#search-feedback[open]') && event.key==='/' && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && !document.activeElement?.isContentEditable){event.preventDefault();document.getElementById('search-input')?.focus();}
+  if(!document.querySelector('#search-about[open],#report-discard-dialog[open]') && event.key==='/' && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && !document.activeElement?.isContentEditable){event.preventDefault();document.getElementById('search-input')?.focus();}
  });
 }

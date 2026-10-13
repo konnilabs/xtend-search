@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "browserFixtureImage": "sha256:0aed0e8f35eaa1fda3ffdb0e0f875c52ec93d83a391f57dcd61e15e2a6644320",
+  "finalImage": "sha256:6048b27d6e3c60cf5eb03586454ba5e98519a55bf44cb36e7a07a25b5926dd43",
+  "assetCount": 96,
+  "reason": "The final UTC month boundary quota correction changes only the two generated server worker copies. All browser UI assets are byte-identical; corrected storage is covered by 112 Node tests and the final image receives a separate Docker smoke.",
+  "browserClientAssetsByteIdentical": true,
+  "changedServerAssets": [
+    "admin/maraca/server/storage-worker.mjs",
+    "standalone/maraca/server/storage-worker.mjs"
+  ]
+}

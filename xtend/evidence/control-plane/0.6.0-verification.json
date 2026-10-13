@@ -1,0 +1,161 @@
+{
+  "schema": "xtend.search.validation.v1",
+  "version": "0.6.0",
+  "ok": true,
+  "completedUtc": "2026-10-13T19:32:02.348520+00:00",
+  "dependency": {
+    "pullRequest": "https://github.com/konnilabs/xtend-search/pull/14",
+    "reviewedBaseCommit": "cf2a90061447cf004e0ce06a5248f672903d6842",
+    "resolutionRequiredBeforeMerge": true
+  },
+  "framework": {
+    "version": "0.9.0",
+    "commit": "dd1917bfeb8f173dde585f743a866c1b0d38e9f1",
+    "sdkSha256": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc",
+    "sdkSourcesRewritten": false,
+    "evidence": "Strict Maraca build; actual AnimationEngine transitions 180ms slide-down / 140ms fade, interrupt replace and reduced-motion instant; SSR report assistant / discard dialog missing-capability nodes 0."
+  },
+  "mcp": {
+    "probe": "Enabled tool metadata: /^mcp__(xtend|maraca)(_|$)/",
+    "matchingNamespaces": [],
+    "frameworkCalls": [],
+    "decisions": [
+      "No XTend MCP is exposed. Use the pinned SDK compiler, App Service contracts and CLI/Node/browser tests; these are not MCP interaction evidence."
+    ],
+    "probeInputsContainUserData": false
+  },
+  "tests": {
+    "controlPlane": {
+      "passed": 112,
+      "failed": 0,
+      "skipped": 0
+    },
+    "application": {
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0
+    },
+    "privateBackendPython": {
+      "passed": 7,
+      "failed": 0
+    },
+    "browserGates": [
+      {
+        "report": "0.6.0-quality-dashboard-browser.json",
+        "sha256": "e9543de1a2e2051712a8a348698da353dcd36dc4fd4d995e947b17782f6e4c8b",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-minor-browser.json",
+        "sha256": "e9e4d2f605bb2df933dfa6295b388719dc00a13265b1e5b8a7a51abc4d086637",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-browser.json",
+        "sha256": "8bbd81238723d9967160fde1fa91bcd5148697f9bf19e89e3441db62e3cbfecd",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-weather-layout.json",
+        "sha256": "6eb5bdb35413ccdb9623ee31378bdd69d57188bfdc524100f27868e59b5a8bf0",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-spinner-stream.json",
+        "sha256": "5f36023244b2b0e80b6ee627cfd1d06c58dc845af24530c45c8e1cc1b136d961",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-cache-browser.json",
+        "sha256": "ba66c592638e1ca97bc50c49980e84976672935216f40270fa0301b2bcc4dc47",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-preferences-browser.json",
+        "sha256": "46bd30c5123cb56ee4ca954c6e0ffe20ddafa73b8f457eafd21ddb880e6dc24b",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-shell-browser.json",
+        "sha256": "4143108550e2a6f0f305df778096bbc7f6a2c0773df13d3f99391894ea660ec9",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-home-browser.json",
+        "sha256": "a9cdc59803afe5cdaed91f927d8c3562f0b41a93f617668546541d2e81da88e9",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-ssr-browser.json",
+        "sha256": "b722b32b13a7d3535464a7e84074a07a2d3ecced511a249bc9a361b853cea24f",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-about-browser.json",
+        "sha256": "97676a5060bfbdf56809cad4e5009af0790646a01e8afde1b66deb87cf536b04",
+        "ok": true
+      },
+      {
+        "report": "0.6.0-edge-browser.json",
+        "sha256": "f32b2fe4d5c3944dd53c7e98e87cf729dc15b3d26a9628c65b3408d41fed92ca",
+        "ok": true
+      }
+    ],
+    "portainerSmoke": "release-0.6.0-portainer-smoke.json",
+    "localUpgrade": "0.6.0-local-upgrade.json"
+  },
+  "images": {
+    "frontend": "sha256:6048b27d6e3c60cf5eb03586454ba5e98519a55bf44cb36e7a07a25b5926dd43",
+    "backend": "sha256:c02cc4c1f30f3609814017876a15d8a3be538e527054f038d8459eb934978f78",
+    "browserFixture": "sha256:0aed0e8f35eaa1fda3ffdb0e0f875c52ec93d83a391f57dcd61e15e2a6644320",
+    "assetEquivalence": "0.6.0-asset-equivalence.json",
+    "sourceMountedIntoBrowserFixture": false
+  },
+  "performance": {
+    "scope": "Offline Docker, identical 100/700/2500ms engine fixtures, ten fresh contexts; no live providers",
+    "comparison": {
+      "baselineVersion": "0.5.1",
+      "baselineFirstMs": 518.4000000003725,
+      "firstMs": 472.09999999962747,
+      "baselineCompleteMs": 2997.9000000003725,
+      "completeMs": 3089.5,
+      "baselineJsGzipBytes": 581911,
+      "jsGzipBytes": 619257,
+      "firstRegressionPercent": -8.931327160631131,
+      "appDeltaGzipBytes": 37346
+    },
+    "clsMax": 0,
+    "normalSearchWeatherAssetRequests": 0,
+    "heapScope": "Chromium performance.memory is coarse, process-dependent; do not infer precise or production RAM savings.",
+    "baselineHeapBytes": [
+      16100000,
+      16100000,
+      16100000,
+      16100000,
+      15200000,
+      15200000,
+      16100000,
+      16100000,
+      16100000,
+      15200000
+    ],
+    "currentHeapBytes": [
+      14300000,
+      14300000,
+      14300000,
+      14300000,
+      14300000,
+      14300000,
+      14300000,
+      14300000,
+      14300000,
+      14300000
+    ],
+    "weatherStreamingLayoutAndRestores": "0.6.0-weather-layout.json"
+  },
+  "limits": [
+    "Offline fixtures validate the UI, contracts and failure handling; they are not a live-provider SLA or measured production latency.",
+    "OAuth roles, CSRF and login use a synthetic Nextcloud fixture. Real local SSO environment and keys are preserved; no new human login was automated.",
+    "Production weather approval remains disabled. No merge, publishing or production deployment."
+  ]
+}

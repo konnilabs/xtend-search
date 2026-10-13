@@ -1,0 +1,27 @@
+{
+  "firstPaintMs": 589.7000000011176,
+  "completeMs": 3331.60000000149,
+  "frames": [
+    {
+      "elapsed": 589.7000000011176,
+      "status": "delta",
+      "n": 4
+    },
+    {
+      "elapsed": 1154.300000000745,
+      "status": "delta",
+      "n": 7
+    },
+    {
+      "elapsed": 3003.60000000149,
+      "status": "delta",
+      "n": 10
+    },
+    {
+      "elapsed": 3331.60000000149,
+      "status": "complete",
+      "n": 10
+    }
+  ],
+  "slowFaviconMs": 4000
+}

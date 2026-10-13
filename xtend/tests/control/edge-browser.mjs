@@ -1,4 +1,5 @@
 import {chromium} from 'playwright';import assert from 'node:assert/strict';import fs from 'node:fs/promises';
+const version=JSON.parse(await fs.readFile(new URL('../../package.json',import.meta.url))).version;
 const browser=await chromium.launch(),base=process.env.TEST_BASE_URL||'http://localhost:8093',checks=[];
 try{
  const context=await browser.newContext(),page=await context.newPage();page.on('pageerror',e=>console.log('pageerror',e.message));page.on('response',r=>{if(r.status()>=400&&!r.url().includes('/media?'))console.log('http',r.status(),r.url());});await page.goto(base+'/');await page.waitForFunction(()=>window.XTendPage);
@@ -14,5 +15,5 @@ try{
   const result=await page.evaluate(()=>window.XTendPage.page.props['search.data']);assert.equal(new Set(result.results.map(r=>r.id)).size,result.results.length);if(fault==='incomplete')assert.equal(result.stream.phase,'error');
   await page.unroute('**/api/xtend/services/search.run');checks.push(fault+' frames settle without duplicate results or automatic retries.');
  }
- console.log(JSON.stringify({ok:true,checks}));await fs.writeFile(new URL('../../evidence/control-plane/edge-browser.json',import.meta.url),JSON.stringify({ok:true,checks},null,2));
+ console.log(JSON.stringify({ok:true,checks}));await fs.writeFile(new URL(`../../evidence/control-plane/${version}-edge-browser.json`,import.meta.url),JSON.stringify({ok:true,checks},null,2));
 }finally{await browser.close();}

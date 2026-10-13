@@ -5,7 +5,7 @@ const version=JSON.parse(await fs.readFile(new URL('../../package.json',import.m
 const base=process.env.TEST_BASE_URL||'http://localhost:8093';
 const out=new URL('../../evidence/control-plane/',import.meta.url),checks=[],errors=[];
 const browser=await chromium.launch();
-async function filters(page,values){await page.locator('#filters').evaluate(e=>e.open=true);for(const [id,value]of Object.entries(values))await page.locator('#'+id).selectOption(value);}
+async function filters(page,values){if(!await page.evaluate(()=>window.XTendPage?.getRuntime()?.model.getState('search.filterUi')?.open??document.querySelector('#filters').open))await page.locator('#filters>summary').click();for(const [id,value]of Object.entries(values))await page.locator('#'+id).selectOption(value);}
 try{
  const context=await browser.newContext({viewport:{width:1600,height:1000},colorScheme:'dark'}),page=await context.newPage();
  page.on('pageerror',e=>errors.push(e.message));
@@ -35,11 +35,10 @@ try{
  await page.waitForFunction(()=>customElements.get('x-icon'));
  assert.ok(await page.getByRole('link',{name:'Über XTend.search',exact:true}).locator('x-icon').evaluate(e=>!!e.shadowRoot?.querySelector('svg')));
  await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].stream?.phase==='complete');
- assert.ok(await page.locator('a[data-report]').count());
- assert.equal(await page.locator('a[data-report]').first().getAttribute('aria-label'),'Ergebnis melden');
- assert.ok(await page.locator('a[data-report] x-icon').first().evaluate(e=>!!e.shadowRoot?.querySelector('svg')));
- await page.locator('a[data-report]').first().focus();await page.keyboard.press('Enter');await page.locator('#feedback-form select').waitFor();await page.keyboard.press('Escape');
- await page.locator('#filters').evaluate(e=>e.open=false);await page.locator('#search-input').focus();
+ assert.equal(await page.locator('a[data-report]').count(),0);
+ assert.ok(await page.locator('#report-start').isVisible());
+ await page.locator('#report-start button').focus();await page.keyboard.press('Enter');await page.locator('#feedback-form select').waitFor();await page.locator('#report-cancel').click();await page.locator('#report-assistant').waitFor({state:'hidden'});
+ if(await page.locator('#filters').evaluate(e=>e.open))await page.locator('#filters>summary').click();await page.locator('#search-input').focus();
  for(const scheme of ['dark','light']){
   await page.emulateMedia({colorScheme:scheme});
   for(const width of [320,390,768,1280,1920,3840]){
@@ -77,6 +76,6 @@ try{
  await np.getByRole('link',{name:'Anmelden mit CCS Account',exact:true}).click();await np.getByRole('link',{name:'viewer',exact:true}).click();await np.getByRole('heading',{name:'Deine Quellen. Unter Kontrolle.'}).waitFor();await native.close();
  checks.push('Real XButton login and native no-JS fallback use the same mock Nextcloud OAuth flow; Observatory shares corporate tokens and restrained corners.');
  assert.deepEqual(errors,[]);
- await fs.writeFile(new URL(version+'-browser.json',out),JSON.stringify({ok:true,checks,errors},null,2));console.log(JSON.stringify({ok:true,checks}));
+ await fs.writeFile(new URL(version+'-shell-browser.json',out),JSON.stringify({ok:true,checks,errors},null,2));console.log(JSON.stringify({ok:true,checks}));
  await context.close();
 }finally{await browser.close();}

@@ -1,0 +1,2 @@
+export const emptyReport=()=>({open:false,busy:false,selected:[],reason:'',includeUrl:false,error:'',toast:'',confirm:false,countLabel:'Bitte bis zu fünf Ergebnisse auswählen.',canSave:false});
+export function decoratedReportData(data,feedback){const selected=new Set((feedback?.selected||[]).map(r=>r.id));return {...data,results:(data.results||[]).map(r=>({...r,reportSelected:selected.has(r.reportKey)})),knowledgeCards:(data.knowledgeCards||[]).map(r=>({...r,reportSelected:selected.has(r.reportKey)}))};}

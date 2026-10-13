@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "checks": [
+    "Web → images → web: one metadata query, zero page queries, zero search streams, zero provider observation changes.",
+    "Back/forward restore both completed resources through PageClient.",
+    "Same search button and Enter always reload.",
+    "Explicit filter apply reloads and captures the canonical filter identity.",
+    "A revised policy invalidates reuse and runs a fresh search.",
+    "Search and Observatory fit 320, 390, 1440, 1920 and 3840 pixels.",
+    "Complete initial SSR results are captured and reused without a search stream.",
+    "Three web engines plus a separate expanded knowledge card; period is disclosed as timeless context.",
+    "Reload starts a fresh tab cache; no resources enter history or persistent browser storage."
+  ],
+  "restores": [
+    {
+      "kind": "mode",
+      "elapsedMs": 188,
+      "metadataRoundtripMs": 5.599999999627471,
+      "maracaCommitMs": 52.70000000111759
+    }
+  ],
+  "cache": {
+    "entries": 2,
+    "bytes": 45119,
+    "hits": 4,
+    "misses": 2,
+    "evictions": 0,
+    "expired": 0
+  },
+  "requests": {
+    "streams": 8,
+    "pages": 8,
+    "metadata": 4
+  },
+  "scope": "Offline Docker fixtures, probes disabled, synthetic OAuth; no live providers or real accounts"
+}

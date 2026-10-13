@@ -11,7 +11,7 @@ import {createNodeAppServiceHost} from '@ccslabs/xtend/maraca/node-app-service-h
 import {parseSearch} from './search.mjs';
 import {preferenceSearchUrl as searchUrl,withPreferences,readPreferences,validatePreferences,preferenceCookie} from './preferences.mjs';
 import {adminView} from './control/admin.mjs';
-import {feedbackHttp} from './control/feedback-http.mjs';
+import {feedbackHttp,feedbackBatchHttp} from './control/feedback-http.mjs';
 import {aboutPage} from './about.mjs';
 import {VERSION} from './control/release.mjs';
 import services,{initialize} from '../public/assets/xtend/standalone/maraca/server/xtend.maraca.services.mjs';
@@ -29,8 +29,9 @@ const pages=createNodePageHost({manifest,ssr:ssrCapabilities,compactResponses:tr
  let state,data,status=200;
  try{
   state=parseSearch(withPreferences(url,context.request.headers.cookie));const stream=process.env.XTEND_STREAMING!=='0'&&state.q.trim()&&context.request.headers['x-xtend-page']==='1'&&context.request.headers['x-xtend-page-wire']==='1'&&context.request.headers['x-xtend-stream']!=='off';
-  data=stream?{...app.search.base(state),skeleton:true,statusLabel:'Suchquellen werden angefragt …',countLabel:'Suche läuft …',stream:{id:randomUUID(),url:searchUrl(state),phase:'pending'}}:await app.search.load(state,{signal:context.signal});
- }catch(error){if(context.signal.aborted)throw error;state||={q:'',category:'general',language:'all',timeRange:'',safeSearch:'1',page:1};status=error.code==='xsearch.query'||error.code==='xsearch.cursor'?400:503;data={...app.search.base(state),view:'results',isSearch:true,error:true,errorMessage:error.expose?error.message:'Die Suchquellen sind derzeit nicht verfügbar.',countLabel:'Suche derzeit nicht verfügbar'};}
+  const executor=state.category==='weather'?app.weather:app.search;
+  data=stream?{...executor.base(state),skeleton:true,statusLabel:'',countLabel:'',stream:{id:randomUUID(),url:searchUrl(state),phase:'pending'}}:await executor.load(state,{signal:context.signal});
+ }catch(error){if(context.signal.aborted)throw error;state||={q:'',category:'general',language:'all',timeRange:'',safeSearch:'1',page:1};status=error.status===400||error.code==='xsearch.query'||error.code==='xsearch.cursor'?400:503;data={...app.search.base(state),view:'results',isSearch:true,error:true,errorMessage:error.expose?error.message:'Die Suchquellen sind derzeit nicht verfügbar.',countLabel:'Suche derzeit nicht verfügbar'};}
  return {page:'Search',url:searchUrl(state),status,props:{'search.motd':await app.motd.current(),'search.data':data,'search.query':state.q,'search.filters':{language:state.language,timeRange:state.timeRange,safeSearch:state.safeSearch}},head:head(state.q?`${state.q} · XTend.search`:'XTend.search — Dein Fenster ins Web','same-origin'),renderOptions};
 },onError:()=>console.error('{"event":"public-page-failed"}')});
 const adminPages=createNodePageHost({manifest:adminManifest,ssr:ssrCapabilities,compactResponses:true,timeoutMs:10000,createContext:req=>({contextKey:'xtend-admin-'+app.auth.context(req).csrf,csrfToken:app.auth.context(req).csrf,origin:app.auth.origin}),resolvePage:async context=>{
@@ -39,15 +40,15 @@ const adminPages=createNodePageHost({manifest:adminManifest,ssr:ssrCapabilities,
  return {page:'Admin',url:data.url,props:{'admin.data':data,'admin.live':data},head:[...head('Observatory · XTend.search','same-origin'),{tag:'meta',attributes:{name:'csrf-token',content:auth.csrf}}],renderOptions};
 },onError:()=>console.error('{"event":"admin-page-failed"}')});
 const publicServiceManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/xtend/standalone/maraca/xtend.maraca.services.json'))),adminServiceManifest=JSON.parse(fs.readFileSync(path.join(root,'public/assets/xtend/admin/maraca/xtend.maraca.services.json')));
-const hosts=new Map();for(const [kind,m]of [['public',publicServiceManifest],['admin',adminServiceManifest]])hosts.set(kind,createNodeAppServiceHost({services,manifest:m,allowedOrigins:[app.auth.origin],pathPrefix:'/api/xtend/services',historyLimit:0,bodyLimit:16384,exposeErrors:false,createContext:req=>kind==='admin'?app.auth.protect(req):(req.feedbackContext||{}),onError:()=>{}}));
+const hosts=new Map();for(const [kind,m]of [['public',publicServiceManifest],['admin',adminServiceManifest]])hosts.set(kind,createNodeAppServiceHost({services,manifest:m,allowedOrigins:[app.auth.origin],pathPrefix:'/api/xtend/services',historyLimit:0,bodyLimit:65536,exposeErrors:false,createContext:req=>kind==='admin'?app.auth.protect(req):(req.feedbackContext||{}),onError:()=>{}}));
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function message(res,title,text,link='/admin',label='Zurück'){res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Content-Security-Policy':"default-src 'self'; style-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"});res.end(`<!doctype html><html lang="de"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)} · XTend.search</title><link rel="icon" href="/assets/xtend/favicon.png" type="image/png" sizes="64x64"><link rel="icon" sizes="any" href="/assets/xtend/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="/assets/xtend/standalone/search.css"><main class="empty-state"><img src="/assets/xtend/mark.svg" alt="" width="48" height="48"><h1>${escape(title)}</h1><p>${escape(text)}</p><a href="${escape(link)}">${escape(label)}</a></main></html>`);}
 let ingressCount=0,ingressReset=0;
 const server=http.createServer(async(req,res)=>{
  res.setHeader('Cache-Control','private, no-store');res.setHeader('Referrer-Policy','no-referrer');res.setHeader('X-Content-Type-Options','nosniff');res.setHeader('X-Frame-Options','DENY');res.setHeader('X-XTend-Version',VERSION);
- const end=res.end;res.end=function(chunk,...args){if(res.statusCode>=400&&typeof chunk==='string'&&String(res.getHeader('Content-Type')).startsWith('application/json')){try{const wire=JSON.parse(chunk);if(wire.schema==='xtend.maraca.app-service-response.v1'){const code=wire.error?.code?.replace(/^xsearch\./,'');res.statusCode=({unauthenticated:401,forbidden:403,csrf:403,validation:400,query:400,cursor:400,conflict:409,readonly:403,audit_unavailable:503,probe_disabled:409,feedback_limit:429,feedback_expired:400})[code]||res.statusCode;}}catch{}}if(typeof chunk==='string'&&String(res.getHeader('Content-Type')).startsWith('text/html')){chunk=chunk.replace('<html>','<html lang="de">');if(chunk.includes('id="xtend-page-data"'))chunk=chunk.replace('<head>','<head>'+faviconLinks);}return end.call(this,chunk,...args);};
+ const end=res.end;res.end=function(chunk,...args){if(res.statusCode>=400&&typeof chunk==='string'&&String(res.getHeader('Content-Type')).startsWith('application/json')){try{const wire=JSON.parse(chunk);if(wire.schema==='xtend.maraca.app-service-response.v1'){const code=wire.error?.code?.replace(/^xsearch\./,'');res.statusCode=({unauthenticated:401,forbidden:403,csrf:403,validation:400,query:400,cursor:400,conflict:409,readonly:403,audit_unavailable:503,probe_disabled:409,feedback_limit:429,feedback_expired:400,feedback_duplicate:409})[code]||res.statusCode;}}catch{}}if(typeof chunk==='string'&&String(res.getHeader('Content-Type')).startsWith('text/html')){chunk=chunk.replace('<html>','<html lang="de">');if(chunk.includes('id="xtend-page-data"'))chunk=chunk.replace('<head>','<head>'+faviconLinks);}return end.call(this,chunk,...args);};
  try{
-  if(req.url.length>15000||Number(req.headers['content-length']||0)>16384){res.writeHead(413);res.end();return;}
+  if(req.url.length>15000||Number(req.headers['content-length']||0)>(req.url.startsWith('/api/xtend/services/search.feedback.batch.submit')||req.url.startsWith('/feedback/batch')?65536:16384)){res.writeHead(413);res.end();return;}
   const url=new URL(req.url,app.auth.origin),pathname=url.pathname;
   if(pathname==='/health/live'||pathname==='/health/ready'){res.writeHead(200,{'Content-Type':'application/json'});res.end(JSON.stringify({ok:true,version:VERSION,storage:app.plane.storeOK?'ready':'unavailable',retrieval:app.adapter.status}));return;}
   if(!['GET','HEAD','POST'].includes(req.method)){res.writeHead(405);res.end();return;}
@@ -85,6 +86,7 @@ const server=http.createServer(async(req,res)=>{
    const stream=fs.createReadStream(file);if(req.method==='HEAD'){stream.destroy();res.end();return;}stream.on('error',()=>res.destroy());if(/gzip/.test(req.headers['accept-encoding']||'')){res.setHeader('Content-Encoding','gzip');res.setHeader('Vary','Accept-Encoding');stream.pipe(createGzip()).pipe(res);}else stream.pipe(res);return;
   }
   if(pathname==='/favicon'){if(req.method!=='GET'){res.writeHead(405);res.end();return;}await app.favicons.handle(req,res,url);return;}
+  if(pathname==='/feedback/batch'){await feedbackBatchHttp(req,res,url,app);return;}
   if(pathname==='/feedback'){await feedbackHttp(req,res,url,app);return;}
   if(pathname==='/media'){if(req.method!=='GET'){res.writeHead(405);res.end();return;}await app.media.handle(req,res,url);return;}
   if(pathname==='/source.tar.gz'){res.setHeader('Content-Type','application/gzip');res.setHeader('Content-Disposition',`attachment; filename="xtend-search-${VERSION}-source.tar.gz"`);const f=path.join(root,'../source.tar.gz');if(!fs.existsSync(f)){res.writeHead(404);res.end();return;}fs.createReadStream(f).pipe(res);return;}
@@ -93,8 +95,8 @@ const server=http.createServer(async(req,res)=>{
    if(req.headers.origin&&req.headers.origin!==app.auth.origin){res.writeHead(403);res.end();return;}
    const id=pathname.slice('/api/xtend/services/'.length),admin=id.startsWith('admin.');
    if(!(admin?adminServiceManifest:publicServiceManifest).services.some(s=>s.id===id&&s.target==='server')){res.writeHead(404);res.end();return;}
-   if(id==='search.feedback.submit')req.feedbackContext=app.quality.protect(req,res,app.auth.origin);
-   if(id==='search.run'){if(ingressReset<Date.now()){ingressReset=Date.now()+60000;ingressCount=0;}if(++ingressCount>120){res.writeHead(429,{'Retry-After':'60'});res.end();return;}}
+   if(['search.feedback.submit','search.feedback.batch.submit'].includes(id))req.feedbackContext=app.quality.protect(req,res,app.auth.origin);
+   if(['search.run','search.weather.run'].includes(id)){if(ingressReset<Date.now()){ingressReset=Date.now()+60000;ingressCount=0;}if(++ingressCount>120){res.writeHead(429,{'Retry-After':'60'});res.end();return;}}
    res.setHeader('X-Accel-Buffering','no');await hosts.get(admin?'admin':'public').handle(req,res);return;
   }
   if(req.method!=='GET'&&req.method!=='HEAD'){res.writeHead(405);res.end();return;}

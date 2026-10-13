@@ -1,11 +1,12 @@
 import {createHash,randomUUID} from 'node:crypto';
 const languages=new Set(['all','de','en']);
 const times=new Set(['','day','week','month','year']);
-const categories=new Set(['general','images','news','videos','music','it','science','files','social media']);
+const categories=new Set(['general','images','news','videos','music','it','science','files','social media','weather']);
 export function parseSearch(url){
  const p=url.searchParams;
  const state={q:p.get('q') || '',category:p.get('categories') || 'general',language:p.get('language') || 'all',timeRange:p.get('time_range') || '',safeSearch:p.get('safesearch') || '1',page:Number(p.get('pageno') || 1),continuation:p.get('cursor') || ''};
  if(state.q.length>2048 || state.continuation.length>4096 || !categories.has(state.category) || !languages.has(state.language) || !times.has(state.timeRange) || !['0','1','2'].includes(state.safeSearch) || !Number.isSafeInteger(state.page) || state.page<1 || state.page>100)throw Object.assign(new Error('Ungültige Suchparameter. Bitte Filter oder Suchbegriff prüfen.'),{status:400});
+ if(state.category==='weather'){state.location=p.get('location')||'';if(p.has('location_q')&&p.get('location_q')!==state.q)state.location='';if(state.q.length>200||state.location&&!/^[1-9]\d{0,9}$/.test(state.location)||state.page!==1||state.continuation)throw Object.assign(new Error('Bitte einen gültigen Ort eingeben.'),{status:400,expose:true});}
  return state;
 }
 export function searchUrl(state,patch={}){
@@ -19,6 +20,7 @@ export function searchUrl(state,patch={}){
   return '/'+(p.size?'?'+p:'');
  }
  const p=new URLSearchParams({q:s.q,categories:s.category,language:s.language,time_range:s.timeRange,safesearch:String(s.safeSearch)});
+ if(s.category==='weather'&&s.location)p.set('location',s.location);
  if(s.page>1)p.set('pageno',String(s.page));
  if(s.continuation)p.set('cursor',s.continuation);
  return '/search?'+p;

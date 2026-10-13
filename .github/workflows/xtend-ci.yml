@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    branches: [main, codex/xtend-search-0.5.1]
   workflow_dispatch:
 
 permissions:
@@ -72,12 +72,12 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Build paired release images
         run: |
-          docker build -f Dockerfile.control -t xtend-search:0.5.1 .
+          docker build -f Dockerfile.control -t xtend-search:0.6.0 .
           docker build -f Dockerfile.searxng -t xtend-search-searxng:0.5.0 .
       - name: Run isolated OAuth, XScaler and responsive UI gates
         env:
           FIXTURE_SETTINGS: xtend/config/settings.control.v05.fixture.yml
-          FIXTURE_DATA_VOLUME: xtend-cp-ci-0.5.1
+          FIXTURE_DATA_VOLUME: xtend-cp-ci-0.6.0
           FIXTURE_PROBES: "0"
         run: |
           sh xtend/tests/control/docker-fixture.sh
@@ -89,6 +89,8 @@ jobs:
           done
           node xtend/tests/control/v04-browser.mjs
           node xtend/tests/control/minor-051-browser.mjs
+          node xtend/tests/control/release-060-browser.mjs
+          node xtend/tests/control/weather-layout-browser.mjs
           node xtend/tests/control/spinner-stream-browser.mjs
           node xtend/tests/control/cache-browser.mjs
           node xtend/tests/control/preferences-browser.mjs

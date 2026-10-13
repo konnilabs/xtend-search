@@ -1,0 +1,76 @@
+import {createHash,randomUUID} from 'node:crypto';
+import {createPageResourceCache} from '@ccslabs/xtend/rmt/page-resource-cache';
+import {weatherCondition,weatherIdentity,WEATHER_BUDGETS} from '../../shared/weather.mjs';
+import {preferenceSearchUrl as searchUrl} from '../preferences.mjs';
+import {requireRole,fail,integer} from '../control/contracts.mjs';
+import {DwdService} from './dwd.mjs';
+import {VERSION} from '../control/release.mjs';
+const CURRENT='temperature_2m,apparent_temperature,relative_humidity_2m,is_day,weather_code,precipitation,wind_speed_10m,wind_direction_10m,wind_gusts_10m';
+const HOURLY='temperature_2m,weather_code,precipitation_probability,is_day';
+const DAILY='weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_gusts_10m_max,sunrise,sunset,uv_index_max';
+const finite=x=>typeof x==='number'&&Number.isFinite(x),value=(x,unit='')=>finite(x)?Math.round(x*10)/10+unit:'–';
+const METRICS=[['wind','Wind'],['gust','Böen'],['humidity','Luftfeuchtigkeit'],['rain','Niederschlag'],['uv','UV-Index'],['sunrise','Sonnenaufgang'],['sunset','Sonnenuntergang']];
+const mergeMetrics=(previous,next)=>previous.map(item=>next.find(metric=>metric.id===item.id)||item);
+const clean=x=>typeof x==='string'?x.replace(/[<>\x00-\x1f]/g,'').slice(0,200):'';
+function place(raw){if(!Number.isSafeInteger(raw?.id)||!finite(raw.latitude)||Math.abs(raw.latitude)>90||!finite(raw.longitude)||Math.abs(raw.longitude)>180||!clean(raw.name))throw Error('schema_invalid');let timezone=raw.timezone||'UTC';try{new Intl.DateTimeFormat('de',{timeZone:timezone});}catch{timezone='UTC';}return {id:raw.id,name:clean(raw.name),label:[clean(raw.name),clean(raw.admin1),clean(raw.country)].filter(Boolean).join(' · '),latitude:raw.latitude,longitude:raw.longitude,countryCode:clean(raw.country_code),timezone};}
+function current(raw){const c=raw?.current;if(!c||!finite(c.temperature_2m)||!Number.isFinite(Date.parse(c.time)))throw Error('schema_invalid');return {temperature:value(c.temperature_2m,'°'),apparent:'Gefühlt '+value(c.apparent_temperature,'°'),...weatherCondition(c.weather_code,c.is_day),time:c.time,metrics:[['wind','Wind',value(c.wind_speed_10m,' km/h')],['gust','Böen',value(c.wind_gusts_10m,' km/h')],['humidity','Luftfeuchtigkeit',value(c.relative_humidity_2m,' %')],['rain','Niederschlag',value(c.precipitation,' mm')]].map(([id,label,value])=>({id,label,value}))};}
+function forecast(raw,p){const h=raw?.hourly,d=raw?.daily;if(!Array.isArray(h?.time)||!Array.isArray(d?.time)||!d.time.length||h.time.length>200||d.time.length>8)throw Error('schema_invalid');
+ const hourly=h.time.slice(0,24).map((time,i)=>{
+  const condition=weatherCondition(h.weather_code?.[i],h.is_day?.[i]);
+  return {...condition,id:String(i),label:time.slice(11,16),conditionLabel:condition.label,temperature:value(h.temperature_2m?.[i],'°'),rain:value(h.precipitation_probability?.[i],' %')};
+ });
+ const daily=d.time.slice(0,7).map((time,i)=>{
+  const condition=weatherCondition(d.weather_code?.[i],1);
+  const label=i===0?'Heute':new Intl.DateTimeFormat('de-DE',{weekday:'long',timeZone:'UTC'}).format(new Date(time+'T12:00:00Z'));
+  return {...condition,id:time,label,conditionLabel:condition.label,low:value(d.temperature_2m_min?.[i],'°'),high:value(d.temperature_2m_max?.[i],'°'),rain:value(d.precipitation_probability_max?.[i],' %')};
+ });
+ if(!hourly.some(h=>h.temperature!=='–')||!daily.some(d=>d.high!=='–'))throw Error('schema_invalid');
+ return {hourly,daily,metrics:[{id:'uv',label:'UV-Index',value:value(d.uv_index_max?.[0])},{id:'sunrise',label:'Sonnenaufgang',value:d.sunrise?.[0]?.slice(11,16)||'–'},{id:'sunset',label:'Sonnenuntergang',value:d.sunset?.[0]?.slice(11,16)||'–'}]};
+}
+export class WeatherService {
+ constructor(plane,search,{fetchImpl=fetch,now=Date.now,dwd,enabled=!['0','off'].includes(process.env.XTEND_WEATHER),api=process.env.XTEND_WEATHER_API_BASE_URL||'https://api.open-meteo.com',geo=process.env.XTEND_WEATHER_GEOCODING_BASE_URL||'https://geocoding-api.open-meteo.com'}={}){
+  this.plane=plane;this.search=search;this.fetch=fetchImpl;this.now=now;this.enabled=enabled;this.api=api;this.geo=geo;this.instance=randomUUID();this.cache=createPageResourceCache({ttlMs:3600000,maxEntries:512,maxBytes:32*1024*1024,now});this.inflight=new Map();this.active=0;this.waiters=[];this.hits=0;this.requests=0;this.lastError='';this.blockedUntil=0;this.budget={minute:0,hour:0,day:0,month:0};this.dwd=dwd||new DwdService({now});if(!['dwd','off'].includes(process.env.XTEND_WEATHER_ALERTS||'dwd'))throw Error('XTEND_WEATHER_ALERTS must be off or dwd');plane.weather=this;
+ }
+ policy(){return {...{enabled:false,paused:false,alerts:true},...WEATHER_BUDGETS,...this.plane.weatherState};}
+ epoch(){return createHash('sha256').update(JSON.stringify([VERSION,this.instance,this.policy(),this.enabled,process.env.XTEND_WEATHER_ALERTS||'dwd'])).digest('hex');}
+ context(){return {schema:'xtend.search.weather-cache-context.v1',enabled:this.enabled&&this.policy().enabled&&!this.policy().paused,epoch:this.epoch(),alertsVersion:this.dwd.snapshot?.version||'none',blockedUntil:this.blockedUntil};}
+ view(){const p=this.policy();return {...p,disabled:!this.enabled,status:!this.enabled?'Über XTEND_WEATHER abgeschaltet':!p.enabled?'Freigabe ausstehend':p.paused?'Administrativ pausiert':this.blockedUntil>this.now()?'Provider-Schutzfrist aktiv':'Verfügbar',lastError:this.lastError||'Keine technischen Fehler',cache:`${this.hits} Cache-Treffer · ${this.cache.stats().entries} RAM-Einträge`,budget:Object.keys(WEATHER_BUDGETS).map(id=>({id,label:({minute:'Minute',hour:'Stunde',day:'Tag (UTC)',month:'Monat (UTC)'})[id],value:String(p[id]),usage:`${this.budget[id]} / ${p[id]} Einheiten`}))};}
+ async mutate(input,context){requireRole(context,'administrator');for(const k of ['enabled','paused','alerts'])if(typeof input[k]!=='boolean')fail('validation','Ungültige Wetterfreigabe.');const weather=Object.fromEntries(['enabled','paused','alerts'].map(k=>[k,input[k]]));for(const k of Object.keys(WEATHER_BUDGETS))weather[k]=integer(input[k],1,WEATHER_BUDGETS[k],k);const result=await this.plane.mutate('weather',{revision:input.revision,requestKey:input.requestKey,reason:'initial_review',weather},context);return result;}
+ base(state){const data=this.search.base(state);return {...data,category:'weather',weather:{places:[],hasPlace:false,hasCurrent:false,hasForecast:false,place:{},current:{},hourly:[],daily:[],metrics:METRICS.map(([id,label])=>({id,label,value:'–'})),alerts:{rows:[],message:'',status:'pending'}},pageLabel:'',countLabel:state.q?'Wetter':''};}
+ async slot(signal){
+  signal.throwIfAborted();
+  if(this.active<2)this.active++;
+  else {if(this.waiters.length>=32)throw Error('overload');await new Promise((resolve,reject)=>{const entry={resolve:null};const abort=()=>{const i=this.waiters.indexOf(entry);if(i>=0){this.waiters.splice(i,1);reject(signal.reason);}};entry.resolve=()=>{signal.removeEventListener('abort',abort);resolve();};this.waiters.push(entry);signal.addEventListener('abort',abort,{once:true});});}
+  let released=false;const release=()=>{if(released)return;released=true;const next=this.waiters.shift();if(next)next.resolve();else this.active--;};
+  if(signal.aborted){release();throw signal.reason;}return release;
+ }
+ async json(url,units,signal){const release=await this.slot(signal);try{signal.throwIfAborted();if(this.blockedUntil>this.now())throw Error('provider_cooldown');const reservation=await this.plane.store.call('weatherReserve',{time:this.now(),units});this.budget=reservation.totals;if(!reservation.ok)throw Error(reservation.reason==='budget'?'weather_budget':'weather_disabled');this.requests++;const res=await this.fetch(url,{signal:AbortSignal.any([signal,AbortSignal.timeout(4000)]),headers:{Accept:'application/json'}});if(res.status===429){const after=res.headers.get('retry-after');this.blockedUntil=this.now()+Math.max(60000,Math.min(3600000,Number(after)*1000||60000));throw Error('provider_cooldown');}if(!res.ok)throw Error('provider_unavailable');const reader=res.body.getReader(),parts=[];let size=0;try{for(;;){const {value,done}=await reader.read();if(done)break;size+=value.length;if(size>512*1024)throw Error('schema_invalid');parts.push(value);}}finally{await reader.cancel().catch(()=>{});}return JSON.parse(Buffer.concat(parts.map(x=>Buffer.from(x))).toString());}finally{release();}}
+ async cached(key,ttl,load,signal){const found=this.cache.get(key);if(found){this.hits++;return found;}let record=this.inflight.get(key);if(record?.controller.signal.aborted){this.inflight.delete(key);record=null;}if(!record){const controller=new AbortController();record={controller,users:0};record.promise=load(controller.signal).then(data=>{controller.signal.throwIfAborted();this.cache.set(key,data,{ttlMs:data?.places?.length===0?600000:ttl});return data;}).finally(()=>{if(this.inflight.get(key)===record)this.inflight.delete(key);});this.inflight.set(key,record);}record.users++;
+  return new Promise((resolve,reject)=>{let done=false;const finish=(fn,value)=>{if(done)return;done=true;signal.removeEventListener('abort',abort);record.users--;if(!record.users)record.controller.abort();fn(value);},abort=()=>finish(reject,signal.reason);signal.addEventListener('abort',abort,{once:true});if(signal.aborted)abort();record.promise.then(v=>finish(resolve,structuredClone(v)),e=>finish(reject,e));});
+ }
+ async *run(state,{signal}={}){
+  const controller=AbortSignal.timeout(12000),combined=signal?AbortSignal.any([signal,controller]):controller,epoch=this.epoch();let data=this.base(state);const w=data.weather;data.stream={phase:'partial'};
+  const failure=(error)=>{const code=error?.message||'provider_unavailable';this.lastError=['schema_invalid','weather_budget','weather_disabled','provider_cooldown','overload'].includes(code)?code:'provider_unavailable';return ({weather_budget:'Das Wetterbudget ist derzeit ausgeschöpft. Bitte später erneut versuchen.',weather_disabled:'Die Wetterquelle ist derzeit nicht freigegeben.',provider_cooldown:'Die Wetterquelle ist vorübergehend pausiert.',schema_invalid:'Die Wetterquelle hat keine verwertbare Antwort geliefert.'})[this.lastError]||'Wetterdaten sind derzeit nicht verfügbar. Bitte später erneut versuchen.';};
+  const snapshot=(complete=false)=>({...data,showSourceStatus:!!data.warnings.length,statusLabel:data.warnings.length?'Hinweise zu den Wetterdaten':'',weather:{...w},stream:{phase:complete?'complete':'partial'},cache:{enabled:process.env.XTEND_SEARCH_CACHE!=='0',cacheable:complete&&!data.error&&epoch===this.epoch()&&(data.empty||w.places.length>1||w.hasCurrent&&w.hasForecast&&!['unavailable','stale','partial','pending'].includes(w.alerts.status)),kind:'weather',epoch,url:searchUrl(state),identity:weatherIdentity(state),expiresAt:Math.min(this.now()+(data.empty?60000:300000),w.alerts.expiresAt||Infinity),alertsVersion:w.alerts.version||'none'}});
+  try{
+   if(!state.q.trim()){yield {event:'weather.summary',data:snapshot(true)};return;}
+   const policy=this.policy();if(!this.enabled||!policy.enabled||policy.paused)throw Error('weather_disabled');
+   const key=state.location?'id:'+state.language+':'+state.location:'name:'+state.language+':'+state.q;
+   const geodata=await this.cached('geo:'+key,3600000,async s=>{const url=new URL(state.location?'/v1/get':'/v1/search',this.geo);url.searchParams.set('language',state.language==='all'?'de':state.language.split('-')[0]);if(state.location)url.searchParams.set('id',state.location);else{url.searchParams.set('name',state.q);url.searchParams.set('count','5');url.searchParams.set('language',state.language==='all'?'de':state.language.split('-')[0]);}const raw=await this.json(url,1,s);return {places:(state.location?[raw]:Array.isArray(raw.results)?raw.results:[]).slice(0,5).map(place)};},combined);
+   if(!geodata.places.length){data.empty=true;data.emptyTitle='Kein passender Ort gefunden';data.emptyMessage='Bitte einen Ortsnamen oder eine Postleitzahl eingeben.';yield {event:'weather.summary',data:snapshot(true)};return;}
+   if(!state.location&&geodata.places.length>1){w.places=geodata.places.map(p=>({...p,url:searchUrl({...state,location:String(p.id)})}));data.countLabel='Bitte einen Ort auswählen';yield {event:'weather.summary',data:snapshot(true)};return;}
+   const p=geodata.places[0];w.place={...p,label:p.label,timeLabel:new Intl.DateTimeFormat('de-DE',{timeZone:p.timezone,dateStyle:'medium',timeStyle:'short'}).format(new Date(this.now()))};w.hasPlace=true;data.countLabel='Wetter für '+p.name;yield {event:'weather.location',data:snapshot()};
+   const endpoint=()=>{const url=new URL('/v1/forecast',this.api);url.searchParams.set('latitude',p.latitude);url.searchParams.set('longitude',p.longitude);url.searchParams.set('timezone',p.timezone);return url;};
+   const tasks=new Map();const add=(id,work)=>tasks.set(id,work.then(value=>({id,value}),error=>({id,error})));
+   add('current',this.cached('current:'+p.id,900000,async s=>{const url=endpoint();url.searchParams.set('current',CURRENT);return current(await this.json(url,1,s));},combined));
+   add('forecast',this.cached('forecast:'+p.id,1800000,async s=>{const url=endpoint();url.searchParams.set('hourly',HOURLY);url.searchParams.set('daily',DAILY);url.searchParams.set('forecast_days','7');url.searchParams.set('forecast_hours','24');return forecast(await this.json(url,2,s),p);},combined));
+   add('alerts',policy.alerts&&process.env.XTEND_WEATHER_ALERTS!=='off'?this.dwd.forLocation(p,combined):Promise.resolve({rows:[],status:'disabled',message:'Amtliche Warnungen sind für diese Instanz abgeschaltet.',version:'off',expiresAt:this.now()+300000}));
+   while(tasks.size){combined.throwIfAborted();const done=await Promise.race(tasks.values());tasks.delete(done.id);if(done.error){if(signal?.aborted)throw signal.reason;const message=failure(done.error);data.warnings=[...data.warnings,{id:'weather-'+done.id,domId:'weather-'+done.id,type:'warning',message}];if(done.id==='alerts')w.alerts={rows:[],status:'unavailable',message:'Der amtliche Warnstand ist derzeit nicht verfügbar.',version:'unavailable',expiresAt:this.now()+60000};}else if(done.id==='current'){w.current=done.value;w.current.dataLabel='Datenstand '+done.value.time.slice(0,10)+' · '+done.value.time.slice(11,16)+' ('+p.timezone+')';w.hasCurrent=true;w.metrics=mergeMetrics(w.metrics,done.value.metrics);}else if(done.id==='forecast'){Object.assign(w,{hourly:done.value.hourly,daily:done.value.daily,hasForecast:true});w.metrics=mergeMetrics(w.metrics,done.value.metrics);}else w.alerts=done.value;
+    yield {event:'weather.'+done.id,data:snapshot()};
+   }
+   if(!w.hasCurrent&&!w.hasForecast){data.error=true;data.errorMessage='Die Wetterquelle hat keine verwertbaren Wetterdaten geliefert.';}
+   yield {event:'weather.summary',data:snapshot(true)};
+  }catch(error){if(signal?.aborted)throw signal.reason;data.error=!w.hasCurrent&&!w.hasForecast;data.errorMessage=failure(error);if(!data.error)data.warnings=[...data.warnings,{id:'weather-timeout',domId:'weather-timeout',type:'warning',message:data.errorMessage}];yield {event:'weather.summary',data:snapshot(true)};}
+ }
+ async load(state,context){let data=this.base(state);for await(const event of this.run(state,context))data=event.data;return data;}
+}
