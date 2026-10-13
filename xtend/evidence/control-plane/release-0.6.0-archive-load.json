@@ -1,0 +1,95 @@
+{
+  "ok": true,
+  "version": "0.6.0",
+  "bundle": "XTend-search-Docker-0.6.0-linux-amd64.tar.gz",
+  "bundleSha256": "bab231a281c13077ee5031990e7790aa1c855b5e8e1a0eb6358d209d430944d6",
+  "bundleBytes": 308124802,
+  "dockerArchivesLoaded": true,
+  "loadedImageIds": {
+    "xtend-search:0.6.0": "sha256:a0f6a5d6b163f83ae825355b85cdd0a8c724d69214a7b15e022599ff0c68755b",
+    "xtend-search-searxng:0.5.0": "sha256:c02cc4c1f30f3609814017876a15d8a3be538e527054f038d8459eb934978f78"
+  },
+  "sourceExcludesSecretsAndRuntimeData": true,
+  "files": [
+    {
+      "file": "IMAGE-IDS.txt",
+      "sha256": "a3d0a03936df9e723a14732fb72e51faea85a1c7c5d12706fa34a518491ddcf6",
+      "bytes": 214
+    },
+    {
+      "file": "LICENSE",
+      "sha256": "57c8ff33c9c0cfc3ef00e650a1cc910d7ee479a8bc509f6c9209a7c2a11399d6",
+      "bytes": 34520
+    },
+    {
+      "file": "SDK-PROVENANCE.json",
+      "sha256": "cb415b188c41e9898d37cd88493a00c261442b10aa0a6d10b276f993314819e8",
+      "bytes": 691
+    },
+    {
+      "file": "SHA256SUMS",
+      "sha256": "fb98b18cebd50a8f7d39c389caeb0c09c0b41608d189a70cd9f606a88636da3d",
+      "bytes": 1427
+    },
+    {
+      "file": "UPGRADE.md",
+      "sha256": "899b29ab5cd66abec6a4d69a25d9de3c3d3bafbe6d96c4364ea4b5d20cda3818",
+      "bytes": 7740
+    },
+    {
+      "file": "XTend-search-0.6.0-IMAGE-ID.txt",
+      "sha256": "e746b12dfc6e287630efd73d49fbc12ecdaa1897e025e10f29ba85bfed801a1f",
+      "bytes": 103
+    },
+    {
+      "file": "XTend-search-Docker-Image-0.6.0-linux-amd64.tar.gz",
+      "sha256": "ffdf812c9e9f5b4af3de9c58b18f692e1badfb798b1d2e12bce44ec0eb3f9039",
+      "bytes": 170430688
+    },
+    {
+      "file": "XTend-search-Docker-Image-0.6.0-linux-amd64.tar.gz.sha256",
+      "sha256": "4029c8e54f8f013c41fe3af0bbdd8ae4071edd35520269ee6880d225b0f6f414",
+      "bytes": 117
+    },
+    {
+      "file": "XTend-search-SearXNG-Image-0.5.0-linux-amd64.tar.gz",
+      "sha256": "e9999f81c42c9a84c1e0f24236939992720822a680bee904e7d91531bbd29807",
+      "bytes": 107214027
+    },
+    {
+      "file": "compose.control.yml",
+      "sha256": "82289da3e5bc298451a14a27a2724ce7324ba923b00d87b993592172155f3e69",
+      "bytes": 2652
+    },
+    {
+      "file": "compose.portainer.yml",
+      "sha256": "56d3e0a3b4305fc769c60f9c5e9e8ec4e969646fb4798f6dce753fbf86ccd9f9",
+      "bytes": 4578
+    },
+    {
+      "file": "load.sh",
+      "sha256": "8f06ac9499be4574a929d37b0068bca3f43b1551a89364847e6760d9f0ccf349",
+      "bytes": 196
+    },
+    {
+      "file": "portainer.env.example",
+      "sha256": "ad33243685341f7922d4f1a1700390a01d7b14fa31c2470f1a2cc8eff0c2e227",
+      "bytes": 1366
+    },
+    {
+      "file": "xtend-search-0.6.0-framework-validation.tar.gz",
+      "sha256": "3b56a304ec18b4bfc58c37ead26815eb929f4a2cb2ae4893a43e1d28af0645c3",
+      "bytes": 621217
+    },
+    {
+      "file": "xtend-search-0.6.0-source.tar.gz",
+      "sha256": "afe4429a4cfe862886e4419d693449fdb64be34be24300d94e0f5bb4a53809cd",
+      "bytes": 31119624
+    },
+    {
+      "file": "xtend-search-0.6.0-verification.tar.gz",
+      "sha256": "9e3337a32f53ec943041c73de9751467917e9727121e00d97052524a85593b86",
+      "bytes": 14142
+    }
+  ]
+}

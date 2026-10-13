@@ -102,10 +102,11 @@
       }
     ],
     "portainerSmoke": "release-0.6.0-portainer-smoke.json",
-    "localUpgrade": "0.6.0-local-upgrade.json"
+    "localUpgrade": "0.6.0-local-upgrade.json",
+    "localFinalImage": "0.6.0-local-image.json"
   },
   "images": {
-    "frontend": "sha256:6048b27d6e3c60cf5eb03586454ba5e98519a55bf44cb36e7a07a25b5926dd43",
+    "frontend": "sha256:a0f6a5d6b163f83ae825355b85cdd0a8c724d69214a7b15e022599ff0c68755b",
     "backend": "sha256:c02cc4c1f30f3609814017876a15d8a3be538e527054f038d8459eb934978f78",
     "browserFixture": "sha256:0aed0e8f35eaa1fda3ffdb0e0f875c52ec93d83a391f57dcd61e15e2a6644320",
     "assetEquivalence": "0.6.0-asset-equivalence.json",
@@ -157,5 +158,6 @@
     "Offline fixtures validate the UI, contracts and failure handling; they are not a live-provider SLA or measured production latency.",
     "OAuth roles, CSRF and login use a synthetic Nextcloud fixture. Real local SSO environment and keys are preserved; no new human login was automated.",
     "Production weather approval remains disabled. No merge, publishing or production deployment."
-  ]
+  ],
+  "implementationCommit": "628d1a199f29de75ca1711a6d2051ad7160f493e"
 }
