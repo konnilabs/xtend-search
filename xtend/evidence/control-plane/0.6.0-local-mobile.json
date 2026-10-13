@@ -1,0 +1,13 @@
+{
+  "version": "0.6.0",
+  "ok": true,
+  "width": 320,
+  "tabs": [
+    "Web",
+    "Bilder",
+    "Nachrichten",
+    "Videos",
+    "Wetter"
+  ],
+  "errors": []
+}

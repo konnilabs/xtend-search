@@ -4,14 +4,14 @@
   "summaries": [
     {
       "folder": "standalone",
-      "version": "55006d0ce131d8a4495475276e040278d301f429325b81785e3291cb4a248c42",
-      "sourceSha256": "b08aa98d459ddb3bffd054118c54212e1a6d7de542e53d6711cdfd3dbbf01760",
+      "version": "f7914e9f6d5d0b082f9496b123094eed284ae2e27b201f5b8cc77d17b215469e",
+      "sourceSha256": "da7d94eef787198ac7daf1b41330fee200254da9dc97f3378cbf55e3775887ab",
       "services": "planned"
     },
     {
       "folder": "admin",
-      "version": "b743f82b61ad7069829aa11a0d6ae7c086753a93c8c647275230d81109a2cbe7",
-      "sourceSha256": "c7c6cfc8338eec226a0265ee4cb3ad119ae1766583c156341b8bdb816f210226",
+      "version": "9746cb65d5270d2c9176afc91f237e5d07d9366fe732454a6e0d9b8c5bb4536a",
+      "sourceSha256": "3232f1e51a07f221f57032e53b4fba75b830751723507af97284cb87e12d320e",
       "services": "planned"
     }
   ]

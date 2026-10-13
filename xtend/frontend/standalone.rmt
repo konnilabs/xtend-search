@@ -1,65 +1,703 @@
 // XTend.search — native forms and links, compiler-owned UI and surface commits.
   datasource search.motd from host search.motd { mode invoke
- contract "xsearch.motd.v1" }
-  action search.motd { effect fetch datasource search.motd }
+ contract "xsearch.motd.v1"
+}
+
+  action search.motd {
+    effect fetch datasource search.motd
+}
+
 template xtend.search {
+  datasource search.weather.run from host search.weather.run { mode stream
+    contract "xsearch.weather.v1"
+}
+
+  action search.weather.run {
+    input url string
+    effect stream datasource search.weather.run
+}
+
+  datasource search.weather.cache.context from host search.weather.cache.context { mode invoke
+    contract "xsearch.weather-cache.v1"
+}
+
+  action search.weather.cache.context {
+    effect fetch datasource search.weather.cache.context
+}
+
+  datasource search.feedback.batch.submit from host search.feedback.batch.submit { mode invoke
+    contract "xsearch.feedback-batch.v1"
+}
+
+  action search.feedback.batch.submit {
+    effect fetch datasource search.feedback.batch.submit
+}
+
+
   datasource search.cache.context from host search.cache.context { mode invoke
-    contract "xsearch.cache-context.v1" }
+    contract "xsearch.cache-context.v1"
+}
+
   datasource search.cache.capture from host search.cache.capture { mode invoke
-    contract "xsearch.cache-capture.v1" }
+    contract "xsearch.cache-capture.v1"
+}
+
   datasource search.cache.restore from host search.cache.restore { mode invoke
-    contract "xsearch.cache-restore.v1" }
+    contract "xsearch.cache-restore.v1"
+}
+
   datasource search.cache.invalidate from host search.cache.invalidate { mode invoke
-    contract "xsearch.cache-invalidate.v1" }
+    contract "xsearch.cache-invalidate.v1"
+}
+
   datasource search.feedback.submit from host search.feedback.submit { mode invoke
- contract "xsearch.feedback.v1" }
-  action search.feedback.submit { effect fetch datasource search.feedback.submit }
+ contract "xsearch.feedback.v1"
+}
+
+  action search.feedback.submit {
+    effect fetch datasource search.feedback.submit
+}
+
   datasource search.run from host search.run { mode stream
- contract "xsearch.search.v1" }
-  action search.run { input url string { trust boundary "xtend.security.sanitizing-boundary.v1"
- sanitize text }
- effect stream datasource search.run }
+ contract "xsearch.search.v1"
+}
+
+  action search.run {
+    input url string { trust boundary "xtend.security.sanitizing-boundary.v1"
+ sanitize text
+}
+
+ effect stream datasource search.run
+}
+
   datasource search.capabilities from host search.capabilities { mode invoke
- contract "xsearch.capabilities.v1" }
-  action search.capabilities { effect fetch datasource search.capabilities }
-  state search.motd type object preserve { initial { message "Neugier braucht Freiraum." } }
-  action search.motd.set { input value object
-    reduce state.search.motd = input.value }
+ contract "xsearch.capabilities.v1"
+}
+
+  action search.capabilities {
+    effect fetch datasource search.capabilities
+}
+
+  state search.motd type object preserve { initial { message "Neugier braucht Freiraum."
+}
+
+}
+
+  action search.motd.set {
+    input value object
+    reduce state.search.motd = input.value
+}
+
   state search.feedback type object preserve { initial {
     open false
+    selected []
+    countLabel "Bitte bis zu fünf Ergebnisse auswählen."
+    canSave false
+    confirm false
     busy false
     url ""
     reason ""
     includeUrl false
     error ""
     toast ""
-  } }
-  action search.feedback.state { input value object
-    reduce state.search.feedback = input.value }
-  action search.feedback.reason { input value string
-    reduce state.search.feedback.reason = input.value }
-  action search.feedback.consent { input value boolean
-    reduce state.search.feedback.includeUrl = input.value }
+
+}
+
+}
+
+  action search.feedback.state {
+    input value object
+    reduce state.search.feedback = input.value
+}
+
+  action search.feedback.reason {
+    input value string
+    reduce state.search.feedback.reason = input.value
+}
+
+  action search.feedback.consent {
+    input value boolean
+    reduce state.search.feedback.includeUrl = input.value
+}
+
+  state search.filterPanel type object preserve {
+    initial {
+      id "search-filter-panel"
+      hidden false
+      viewTemplate {
+        "type" "element"
+        "tag" "div"
+        "class" "filter-panel"
+        "children" [
+          {
+            "type" "element"
+            "tag" "div"
+            "class" "filter-content"
+            "children" [
+              {
+                "type" "element"
+                "tag" "div"
+                "class" "filter-field"
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "label"
+                    "text" "Sprache"
+                    "attributes" {
+                      "for" "language"
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "select"
+                    "attributes" {
+                      "id" "language"
+                      "name" "language"
+                      "value" "$model.search.filters.language"
+                    }
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "option"
+                        "text" "Alle Sprachen"
+                        "properties" {
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "all"
+                          }
+                        }
+                        "attributes" {
+                          "value" "all"
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "all"
+                          }
+                        }
+                      }
+                      {
+                        "type" "element"
+                        "tag" "option"
+                        "text" "Deutsch"
+                        "properties" {
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "de"
+                          }
+                        }
+                        "attributes" {
+                          "value" "de"
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "de"
+                          }
+                        }
+                      }
+                      {
+                        "type" "element"
+                        "tag" "option"
+                        "text" "Englisch"
+                        "properties" {
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "en"
+                          }
+                        }
+                        "attributes" {
+                          "value" "en"
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "en"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+              {
+                "type" "conditional"
+                "test" {
+                  "op" "not"
+                  "value" {
+                    "op" "equals"
+                    "left" "$model.search.data.category"
+                    "right" "weather"
+                  }
+                }
+                "then" {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "filter-field weather-irrelevant-filter"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "label"
+                      "text" "Zeitraum"
+                      "attributes" {
+                        "for" "time-range"
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "select"
+                      "attributes" {
+                        "id" "time-range"
+                        "name" "time_range"
+                        "value" "$model.search.filters.timeRange"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Jederzeit"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" ""
+                            }
+                          }
+                          "attributes" {
+                            "value" ""
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" ""
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Letzte 24 Stunden"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "day"
+                            }
+                          }
+                          "attributes" {
+                            "value" "day"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "day"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Letzte Woche"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "week"
+                            }
+                          }
+                          "attributes" {
+                            "value" "week"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "week"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Letzter Monat"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "month"
+                            }
+                          }
+                          "attributes" {
+                            "value" "month"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "month"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Letztes Jahr"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "year"
+                            }
+                          }
+                          "attributes" {
+                            "value" "year"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "year"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+              {
+                "type" "conditional"
+                "test" {
+                  "op" "not"
+                  "value" {
+                    "op" "equals"
+                    "left" "$model.search.data.category"
+                    "right" "weather"
+                  }
+                }
+                "then" {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "filter-field weather-irrelevant-filter"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "label"
+                      "text" "SafeSearch"
+                      "attributes" {
+                        "for" "safe-search"
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "select"
+                      "attributes" {
+                        "id" "safe-search"
+                        "name" "safesearch"
+                        "value" "$model.search.filters.safeSearch"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Aus"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "0"
+                            }
+                          }
+                          "attributes" {
+                            "value" "0"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "0"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Moderat"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "1"
+                            }
+                          }
+                          "attributes" {
+                            "value" "1"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "1"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Streng"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "2"
+                            }
+                          }
+                          "attributes" {
+                            "value" "2"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "2"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+              {
+                "type" "element"
+                "tag" "p"
+                "text" "Filter gelten für diese Suche. Als Standard speichern übernimmt sie für künftige Besuche in diesem Browser (180 Tage). Links mit eigenen Filtern haben Vorrang."
+                "class" "filter-note"
+              }
+              {
+                "type" "element"
+                "tag" "div"
+                "class" "filter-actions"
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "button"
+                    "text" "Filter anwenden"
+                    "class" "apply-button"
+                    "attributes" {
+                      "type" "submit"
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "button"
+                    "text" "Als Standard speichern"
+                    "class" "preference-button"
+                    "attributes" {
+                      "type" "submit"
+                      "name" "preferenceAction"
+                      "value" "save"
+                      "formaction" "/preferences"
+                      "formmethod" "post"
+                      "formnovalidate" true
+                      "disabled" "$model.search.preferences.busy"
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "button"
+                    "text" "Gespeicherten Standard löschen"
+                    "class" "preference-button"
+                    "attributes" {
+                      "type" "submit"
+                      "name" "preferenceAction"
+                      "value" "delete"
+                      "formaction" "/preferences"
+                      "formmethod" "post"
+                      "formnovalidate" true
+                      "disabled" "$model.search.preferences.busy"
+                    }
+                  }
+                ]
+              }
+              {
+                "type" "element"
+                "tag" "p"
+                "text" "$model.search.preferences.message"
+                "class" "filter-note preference-status"
+                "attributes" {
+                  "role" "status"
+                  "aria-live" "polite"
+                }
+              }
+              {
+                "type" "conditional"
+                "test" {
+                  "op" "equals"
+                  "left" "$model.search.data.category"
+                  "right" "weather"
+                }
+                "then" {
+                  "type" "element"
+                  "tag" "input"
+                  "attributes" {
+                    "type" "hidden"
+                    "name" "time_range"
+                    "value" "$model.search.filters.timeRange"
+                  }
+                }
+              }
+              {
+                "type" "conditional"
+                "test" {
+                  "op" "equals"
+                  "left" "$model.search.data.category"
+                  "right" "weather"
+                }
+                "then" {
+                  "type" "element"
+                  "tag" "input"
+                  "attributes" {
+                    "type" "hidden"
+                    "name" "safesearch"
+                    "value" "$model.search.filters.safeSearch"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+
+    }
+
+  }
+
+  state search.filterClosed type object preserve {
+ initial {
+ id "search-filter-closed"
+ hidden true
+ viewTemplate { class "filter-closed"
+}
+
+}
+
+}
+
+  state search.filterUi type object preserve { initial { open false
+ expanded false
+}
+
+}
+
+  selector search.filterPanel from state search.filterPanel { output SearchView
+}
+
+  selector search.filterClosed from state search.filterClosed { output SearchView
+}
+
+  action search.filters.init {
+    input open boolean
+    input hidden boolean
+    reduce state.search.filterUi.open = input.open
+    reduce state.search.filterUi.expanded = input.open
+    reduce state.search.filterPanel.hidden = input.hidden
+    reduce state.search.filterClosed.hidden = input.open
+}
+
+  action search.filters.settle {
+    input open boolean
+    reduce state.search.filterUi.expanded = input.open
+  }
+
+  action search.filters.open {
+    reduce state.search.filterUi.open = true
+    reduce state.search.filterUi.expanded = true
+    reduce state.search.filterClosed.hidden = true
+    reduce state.search.filterPanel.hidden = false
+}
+
+  action search.filters.close {
+    reduce state.search.filterUi.open = false
+    reduce state.search.filterPanel.hidden = true
+    reduce state.search.filterClosed.hidden = false
+}
+
+  animation search.filters.enter {
+    effect slide-down
+    durationMs 180
+    easing "cubic-bezier(.2,.8,.2,1)"
+    reducedMotion instant
+}
+
+  animation search.filters.exit {
+    effect fade
+    durationMs 140
+    easing "ease-out"
+    reducedMotion instant
+}
+
+  transition search.filters.open { trigger action search.filters.open
+    from surfaces [search.filterClosed]
+    to surfaces [search.filterPanel]
+    use animation search.filters.enter
+    effect slide-down
+    durationMs 180
+    interrupt replace
+    reducedMotion instant
+    lane transition
+}
+
+  transition search.filters.close { trigger action search.filters.close
+    from surfaces [search.filterPanel]
+    to surfaces [search.filterClosed]
+    use animation search.filters.exit
+    effect fade
+    durationMs 140
+    interrupt replace
+    reducedMotion instant
+    lane transition
+}
+
   state search.filters type object preserve { initial {
     language "all"
     timeRange ""
     safeSearch "1"
-  } }
+
+}
+
+}
+
   state search.preferences type object preserve { initial {
     message ""
     busy false
-  } }
+
+}
+
+}
+
+  state search.weatherUi type object preserve { initial { visible true
+}
+
+}
+
+  action search.weather.visible {
+    input visible boolean
+    reduce state.search.weatherUi.visible = input.visible
+}
+
+  action search.report.selection {
+    input value object
+    reduce state.search.feedback = input.value.feedback
+    reduce state.search.data.results = input.value.results
+    reduce state.search.data.knowledgeCards = input.value.cards
+}
+
+  state search.presentation type object preserve { initial { view "" } }
+
   state search.query type string initial ""
   state search.activity type object preserve { initial {
       busy false
       message ""
-    } }
+
+}
+
+}
+
   state search.data type object preserve {
     initial {
       view "home"
       isSearch false
       skeleton false
-      stream {}
+      stream {
+}
+
       q ""
       category "general"
       language "all"
@@ -77,8 +715,12 @@ template xtend.search {
       error false
       fixture false
       classicUrl "/classic/"
-    }
-  }
+
+}
+
+
+}
+
   state search.preview type object preserve {
     initial {
       open false
@@ -98,291 +740,2245 @@ template xtend.search {
       nextDisabled true
       metadata []
       formats []
-    }
-  }
+
+}
+
+
+}
+
   state search.shell type object preserve {
     initial {
       id "search-shell"
       viewTemplate {
-        class "search-shell"
-        attributes { "data-view" "$model.search.data.view" }
-        children [
-          { type "element" tag "a" text "Zu den Ergebnissen" class "skip-link" attributes { href "#results" } }
-          { type "element" tag "header" class "topbar" children [
-            { type "element" tag "div" class "header-backdrop" attributes { "aria-hidden" "true" } }
-            { type "element" tag "a" key "search-brand" class "wordmark" attributes { href "/" "aria-label" "XTend.search Startseite" } children [
-              { type "element" tag "img" class "brand-mark" attributes { id "search-logo" src "/assets/xtend/mark.svg" alt "" width 32 height 32 } }
-              { type "element" tag "span" key "search-wordmark" class "brand-name" attributes { id "search-wordmark" role { op "if" test { op "equals" left "$model.search.data.view" right "home" } then "heading" else null } "aria-level" { op "if" test { op "equals" left "$model.search.data.view" right "home" } then 1 else null } } children [
-                { type "element" tag "span" text "XTend" }
-                { type "element" tag "span" text { op "literal" value ".search" } class "wordmark-suffix" }
-              ] }
-            ] }
-            { type "element" tag "form" key "search-form" class "search-form" attributes { id "search-form" "data-xtend-cache" "reload" action "/search" method "get" role "$model.search.data.searchRole" } children [
-              { type "element" tag "div" class "search-box" children [
-                { type "element" tag "span" class "search-icon" attributes { "aria-hidden" "true" } }
-                { type "element" tag "label" text "Suchbegriff" class "sr-only" attributes { for "search-input" } }
-                { type "element" tag "input" attributes { id "search-input" type "search" name "q" value "$model.search.query" placeholder "Was möchtest du entdecken?" autocomplete "off" autocapitalize "none" spellcheck "false" maxlength 2048 required true } }
-                { type "element" tag "button" class "search-button" attributes { type "submit" "aria-label" "Suchen" title "Suchen" "aria-busy" "$model.search.activity.busy" } children [
-                  { type "conditional" test "$model.search.activity.busy" then { type "element" tag "x-spinner" key "search-spinner" attributes { id "search-spinner" size "20" color "currentColor" "aria-hidden" "true" } } else { type "element" tag "x-icon" key "search-submit-icon" text "⌕" attributes { name "search" pack "core" size "22px" decorative true "aria-hidden" "true" } } }
-                ] }
-              ] }
-              { type "element" tag "input" attributes { type "hidden" name "categories" value "$model.search.data.category" } }
-              { type "element" tag "div" class "search-tools" children [
-                { type "element" tag "nav" class "category-tabs" attributes { "aria-label" "Suchkategorie" } children [
-                  { type "repeat" source "$model.search.data.tabs" key "id" template {
-                    type "element" tag "a" text "$item.label" class "$item.className" attributes { href "$item.url" "aria-current" "$item.current" }
-                  } }
-                ] }
-                { type "element" tag "details" class "filters" attributes { id "filters" } children [
-                  { type "element" tag "summary" children [ { type "element" tag "x-icon" text "▽" attributes { name "filter" pack "search" size "18px" decorative true "aria-hidden" "true" } } { type "element" tag "span" text "Filter" } ] }
-                  { type "element" tag "div" class "filter-panel" children [
-                    { type "element" tag "label" text "Sprache" attributes { for "language" } }
-                    { type "element" tag "select" attributes { id "language" name "language" value "$model.search.filters.language" } children [
-                      { type "element" tag "option" text "Alle Sprachen" properties { selected { op "equals" left "$model.search.filters.language" right "all" } } attributes { value "all" selected { op "equals" left "$model.search.filters.language" right "all" } } }
-                      { type "element" tag "option" text "Deutsch" properties { selected { op "equals" left "$model.search.filters.language" right "de" } } attributes { value "de" selected { op "equals" left "$model.search.filters.language" right "de" } } }
-                      { type "element" tag "option" text "Englisch" properties { selected { op "equals" left "$model.search.filters.language" right "en" } } attributes { value "en" selected { op "equals" left "$model.search.filters.language" right "en" } } }
-                    ] }
-                    { type "element" tag "label" text "Zeitraum" attributes { for "time-range" } }
-                    { type "element" tag "select" attributes { id "time-range" name "time_range" value "$model.search.filters.timeRange" } children [
-                      { type "element" tag "option" text "Jederzeit" properties { selected { op "equals" left "$model.search.filters.timeRange" right "" } } attributes { value "" selected { op "equals" left "$model.search.filters.timeRange" right "" } } }
-                      { type "element" tag "option" text "Letzte 24 Stunden" properties { selected { op "equals" left "$model.search.filters.timeRange" right "day" } } attributes { value "day" selected { op "equals" left "$model.search.filters.timeRange" right "day" } } }
-                      { type "element" tag "option" text "Letzte Woche" properties { selected { op "equals" left "$model.search.filters.timeRange" right "week" } } attributes { value "week" selected { op "equals" left "$model.search.filters.timeRange" right "week" } } }
-                      { type "element" tag "option" text "Letzter Monat" properties { selected { op "equals" left "$model.search.filters.timeRange" right "month" } } attributes { value "month" selected { op "equals" left "$model.search.filters.timeRange" right "month" } } }
-                      { type "element" tag "option" text "Letztes Jahr" properties { selected { op "equals" left "$model.search.filters.timeRange" right "year" } } attributes { value "year" selected { op "equals" left "$model.search.filters.timeRange" right "year" } } }
-                    ] }
-                    { type "element" tag "label" text "SafeSearch" attributes { for "safe-search" } }
-                    { type "element" tag "select" attributes { id "safe-search" name "safesearch" value "$model.search.filters.safeSearch" } children [
-                      { type "element" tag "option" text "Aus" properties { selected { op "equals" left "$model.search.filters.safeSearch" right "0" } } attributes { value "0" selected { op "equals" left "$model.search.filters.safeSearch" right "0" } } }
-                      { type "element" tag "option" text "Moderat" properties { selected { op "equals" left "$model.search.filters.safeSearch" right "1" } } attributes { value "1" selected { op "equals" left "$model.search.filters.safeSearch" right "1" } } }
-                      { type "element" tag "option" text "Streng" properties { selected { op "equals" left "$model.search.filters.safeSearch" right "2" } } attributes { value "2" selected { op "equals" left "$model.search.filters.safeSearch" right "2" } } }
-                    ] }
-                    { type "element" tag "p" text "Filter gelten für diese Suche. Als Standard speichern übernimmt sie für künftige Besuche in diesem Browser (180 Tage). Links mit eigenen Filtern haben Vorrang." class "filter-note" }
-                    { type "element" tag "button" text "Filter anwenden" class "apply-button" attributes { type "submit" } }
-                    { type "element" tag "button" text "Als Standard speichern" class "preference-button" attributes { type "submit" name "preferenceAction" value "save" formaction "/preferences" formmethod "post" formnovalidate true disabled "$model.search.preferences.busy" } }
-                    { type "element" tag "button" text "Gespeicherten Standard löschen" class "preference-button" attributes { type "submit" name "preferenceAction" value "delete" formaction "/preferences" formmethod "post" formnovalidate true disabled "$model.search.preferences.busy" } }
-                    { type "element" tag "p" text "$model.search.preferences.message" class "filter-note preference-status" attributes { role "status" "aria-live" "polite" } }
-                  ] }
-                ] }
-              ] }
-            ] }
-            { type "element" tag "nav" class "top-nav" attributes { "aria-label" "Hauptnavigation" } children [
-              { type "element" tag "a" class "icon-link about-icon" attributes { href "/info/de/about" "data-xtend-native" "" "data-about-link" "" "aria-label" "Über XTend.search" title "Über XTend.search" } children [ { type "element" tag "x-icon" text "ⓘ" attributes { name "info" pack "core" size "20px" decorative true "aria-hidden" "true" } } ] }
-            ] }
-          ] }
-          { type "element" tag "section" class "search-area" children [
-            { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
-              type "element" tag "div" key "home-hero" class "hero" children [
-                { type "element" tag "p" text "$model.search.motd.message" class "hero-subtitle" }
-              ]
-            } }
-            { type "element" tag "p" key "activity" text "$model.search.activity.message" class "activity" attributes { id "search-status" role "status" "aria-live" "polite" } }
-          ] }
-          { type "conditional" test "$model.search.feedback.open" then { type "element" tag "x-dialog" key "search-feedback-dialog" class "search-feedback" attributes { id "search-feedback" title "Ergebnis melden" overlay true open "$model.search.feedback.open" width "min(620px, calc(100vw - 24px))" } children [
-            { type "element" tag "form" attributes { id "feedback-form" "data-xtend-native" "" } children [
-              { type "element" tag "p" text "Was stimmt mit diesem Ergebnis nicht? Die Meldung wird den tatsächlich beteiligten Suchquellen zugeordnet." }
-              { type "element" tag "label" class "field" children [ { type "element" tag "span" text "Meldegrund" } { type "element" tag "select" attributes { name "reason" required true value "$model.search.feedback.reason" disabled "$model.search.feedback.busy" } children [
-                { type "element" tag "option" text "Bitte auswählen" attributes { value "" } }
-                { type "element" tag "option" text "Nicht relevant" attributes { value "irrelevant" selected { op "equals" left "$model.search.feedback.reason" right "irrelevant" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "irrelevant" } } }
-                { type "element" tag "option" text "Spam oder manipulative Inhalte" attributes { value "spam" selected { op "equals" left "$model.search.feedback.reason" right "spam" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "spam" } } }
-                { type "element" tag "option" text "Verdacht auf gefährliche Inhalte" attributes { value "unsafe" selected { op "equals" left "$model.search.feedback.reason" right "unsafe" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "unsafe" } } }
-                { type "element" tag "option" text "Defekter Link beziehungsweise nicht verfügbares Bild" attributes { value "broken" selected { op "equals" left "$model.search.feedback.reason" right "broken" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "broken" } } }
-                { type "element" tag "option" text "Falscher Ergebnistyp" attributes { value "wrong_type" selected { op "equals" left "$model.search.feedback.reason" right "wrong_type" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "wrong_type" } } }
-              ] } ] }
-              { type "element" tag "label" class "check-field" children [ { type "element" tag "input" attributes { type "checkbox" name "includeUrl" disabled "$model.search.feedback.busy" } properties { checked "$model.search.feedback.includeUrl" } } { type "element" tag "span" text "Ergebnislink zur Prüfung mitsenden" } ] }
-              { type "element" tag "p" class "feedback-url" text "$model.search.feedback.url" }
-              { type "element" tag "p" class "muted" text "Ohne Zustimmung speichern wir keinen Ergebnislink. Freiwillige Belege sind nur für Operatoren und Administratoren sichtbar und werden spätestens nach sieben Tagen gelöscht. Suchbegriffe, Titel und Beschreibung werden nicht gespeichert. Ein kurzlebiger Cookie begrenzt wiederholte Meldungen." }
-              { type "element" tag "p" class "feedback-error" text "$model.search.feedback.error" attributes { role "alert" } }
-              { type "element" tag "button" text { op "if" test "$model.search.feedback.busy" then "Wird gesendet …" else "Meldung senden" } attributes { type "submit" disabled "$model.search.feedback.busy" } }
-            ] }
-          ] } }
-          { type "conditional" test "$model.search.feedback.toast" then { type "element" tag "x-toast" key "feedback-toast" class "feedback-toast" text "$model.search.feedback.toast" attributes { type "success" duration "6000" } } }
-          { type "element" tag "div" attributes { id "result-slot" } }
-          { type "element" tag "footer" class "site-footer" children [
-            { type "element" tag "span" text "Deine Suche. Dein Horizont." }
-            { type "element" tag "div" children [
-              { type "element" tag "a" text "Über & Datenschutz" attributes { href "/info/de/about" "data-xtend-native" "" "data-about-link" "" } }
-              { type "element" tag "a" text "Observatory" attributes { href "/admin" "data-xtend-native" "" } }
-            ] }
-          ] }
-        ]
+      "class" "search-shell"
+      "attributes" {
+        "data-presentation" "$model.search.presentation.view"
+        "data-view" {
+          "op" "if"
+          "test" "$model.search.presentation.view"
+          "then" "$model.search.presentation.view"
+          "else" "$model.search.data.view"
+        }
       }
+      "children" [
+        {
+          "type" "element"
+          "tag" "a"
+          "text" "Zu den Ergebnissen"
+          "class" "skip-link"
+          "attributes" {
+            "href" "#results"
+          }
+        }
+        {
+          "type" "element"
+          "tag" "header"
+          "class" "topbar"
+          "children" [
+            {
+              "type" "element"
+              "tag" "div"
+              "class" "header-backdrop"
+              "attributes" {
+                "aria-hidden" "true"
+              }
+            }
+            {
+              "type" "element"
+              "tag" "a"
+              "key" "search-brand"
+              "class" "wordmark"
+              "attributes" {
+                "href" "/"
+                "aria-label" "XTend.search Startseite"
+              }
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "img"
+                  "class" "brand-mark"
+                  "attributes" {
+                    "id" "search-logo"
+                    "src" "/assets/xtend/mark.svg"
+                    "alt" ""
+                    "width" 32
+                    "height" 32
+                  }
+                }
+                {
+                  "type" "element"
+                  "tag" "span"
+                  "key" "search-wordmark"
+                  "class" "brand-name"
+                  "attributes" {
+                    "id" "search-wordmark"
+                    "role" {
+                      "op" "if"
+                      "test" {
+                        "op" "equals"
+                        "left" {
+                          "op" "if"
+                          "test" "$model.search.presentation.view"
+                          "then" "$model.search.presentation.view"
+                          "else" "$model.search.data.view"
+                        }
+                        "right" "home"
+                      }
+                      "then" "heading"
+                      "else" null
+                    }
+                    "aria-level" {
+                      "op" "if"
+                      "test" {
+                        "op" "equals"
+                        "left" {
+                          "op" "if"
+                          "test" "$model.search.presentation.view"
+                          "then" "$model.search.presentation.view"
+                          "else" "$model.search.data.view"
+                        }
+                        "right" "home"
+                      }
+                      "then" 1
+                      "else" null
+                    }
+                  }
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "span"
+                      "text" "XTend"
+                    }
+                    {
+                      "type" "element"
+                      "tag" "span"
+                      "text" {
+                        "op" "literal"
+                        "value" ".search"
+                      }
+                      "class" "wordmark-suffix"
+                    }
+                  ]
+                }
+              ]
+            }
+            {
+              "type" "element"
+              "tag" "form"
+              "key" "search-form"
+              "class" "search-form"
+              "attributes" {
+                "id" "search-form"
+                "data-xtend-cache" "reload"
+                "action" "/search"
+                "method" "get"
+                "role" "$model.search.data.searchRole"
+              }
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "search-box"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "label"
+                      "text" "Suchbegriff"
+                      "class" "sr-only"
+                      "attributes" {
+                        "for" "search-input"
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "input"
+                      "attributes" {
+                        "id" "search-input"
+                        "type" "search"
+                        "name" "q"
+                        "value" "$model.search.query"
+                        "placeholder" {
+                          "op" "if"
+                          "test" {
+                            "op" "equals"
+                            "left" "$model.search.data.category"
+                            "right" "weather"
+                          }
+                          "then" "Standort für Wetter eingeben …"
+                          "else" "Was möchtest du entdecken?"
+                        }
+                        "autocomplete" "off"
+                        "autocapitalize" "none"
+                        "spellcheck" "false"
+                        "maxlength" 2048
+                        "required" true
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "button"
+                      "class" "search-button"
+                      "attributes" {
+                        "type" "submit"
+                        "aria-label" "Suchen"
+                        "title" "Suchen"
+                        "aria-busy" "$model.search.activity.busy"
+                      }
+                      "children" [
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.activity.busy"
+                          "then" {
+                            "type" "element"
+                            "tag" "x-spinner"
+                            "key" "search-spinner"
+                            "attributes" {
+                              "id" "search-spinner"
+                              "size" "20"
+                              "color" "currentColor"
+                              "aria-hidden" "true"
+                            }
+                          }
+                          "else" {
+                            "type" "element"
+                            "tag" "x-icon"
+                            "key" "search-submit-icon"
+                            "text" "⌕"
+                            "attributes" {
+                              "name" "search"
+                              "pack" "core"
+                              "size" "22px"
+                              "decorative" true
+                              "aria-hidden" "true"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+                {
+                  "type" "element"
+                  "tag" "input"
+                  "attributes" {
+                    "type" "hidden"
+                    "name" "categories"
+                    "value" "$model.search.data.category"
+                  }
+                }
+                {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "search-tools"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "nav"
+                      "class" "category-tabs"
+                      "attributes" {
+                        "aria-label" "Suchkategorie"
+                      }
+                      "children" [
+                        {
+                          "type" "repeat"
+                          "source" "$model.search.data.tabs"
+                          "key" "id"
+                          "template" {
+                            "type" "element"
+                            "tag" "a"
+                            "text" "$item.label"
+                            "class" "$item.className"
+                            "attributes" {
+                              "href" "$item.url"
+                              "aria-current" "$item.current"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                    {
+                      "type" "conditional"
+                      "test" "$model.search.data.reportable"
+                      "then" {
+                        "type" "element"
+                        "tag" "x-button"
+                        "attributes" {
+                          "id" "report-start"
+                          "label" "Ergebnis melden"
+                          "icon-name" "warning"
+                          "icon-pack" "core"
+                          "variant" "ghost"
+                        }
+                        "class" "report-start"
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "details"
+                      "class" "filters"
+                      "attributes" {
+                        "id" "filters"
+                      "open" "$model.search.filterUi.expanded"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "summary"
+                          "children" [
+                            {
+                              "type" "element"
+                              "tag" "x-icon"
+                              "text" "▽"
+                              "attributes" {
+                                "name" "filter"
+                                "pack" "search"
+                                "size" "18px"
+                                "decorative" true
+                                "aria-hidden" "true"
+                              }
+                            }
+                            {
+                              "type" "element"
+                              "tag" "span"
+                              "text" "Filter"
+                            }
+                          ]
+                        }
+                        {
+                          "type" "element"
+                          "tag" "div"
+                          "attributes" {
+                            "id" "filter-slot"
+                          }
+                          "class" "filter-slot"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                {
+                  "type" "conditional"
+                  "test" {
+                    "op" "equals"
+                    "left" "$model.search.data.category"
+                    "right" "weather"
+                  }
+                  "then" {
+                    "type" "element"
+                    "tag" "input"
+                    "attributes" {
+                      "type" "hidden"
+                      "name" "location"
+                      "value" "$model.search.data.location"
+                    }
+                  }
+                }
+                {
+                  "type" "conditional"
+                  "test" {
+                    "op" "equals"
+                    "left" "$model.search.data.category"
+                    "right" "weather"
+                  }
+                  "then" {
+                    "type" "element"
+                    "tag" "input"
+                    "attributes" {
+                      "type" "hidden"
+                      "name" "location_q"
+                      "value" "$model.search.data.q"
+                    }
+                  }
+                }
+              ]
+            }
+            {
+              "type" "element"
+              "tag" "nav"
+              "class" "top-nav"
+              "attributes" {
+                "aria-label" "Hauptnavigation"
+              }
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "a"
+                  "class" "icon-link about-icon"
+                  "attributes" {
+                    "href" "/info/de/about"
+                    "data-xtend-native" ""
+                    "data-about-link" ""
+                    "aria-label" "Über XTend.search"
+                    "title" "Über XTend.search"
+                  }
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "x-icon"
+                      "text" "ⓘ"
+                      "attributes" {
+                        "name" "info"
+                        "pack" "core"
+                        "size" "20px"
+                        "decorative" true
+                        "aria-hidden" "true"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+        {
+          "type" "element"
+          "tag" "section"
+          "class" "search-area"
+          "children" [
+            {
+              "type" "conditional"
+              "test" {
+                "op" "equals"
+                "left" {
+                  "op" "if"
+                  "test" "$model.search.presentation.view"
+                  "then" "$model.search.presentation.view"
+                  "else" "$model.search.data.view"
+                }
+                "right" "home"
+              }
+              "then" {
+                "type" "element"
+                "tag" "div"
+                "key" "home-hero"
+                "class" "hero"
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "p"
+                    "text" "$model.search.motd.message"
+                    "class" "hero-subtitle"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+        {
+          "type" "conditional"
+          "test" "$model.search.feedback.toast"
+          "then" {
+            "type" "element"
+            "tag" "x-toast"
+            "key" "feedback-toast"
+            "class" "feedback-toast"
+            "text" "$model.search.feedback.toast"
+            "attributes" {
+              "type" "success"
+              "duration" "6000"
+            }
+          }
+        }
+        {
+          "type" "conditional"
+          "test" "$model.search.feedback.open"
+          "then" {
+            "type" "element"
+            "tag" "x-search-report-assistant"
+            "attributes" {
+              "id" "report-assistant"
+              "role" "region"
+              "aria-label" "Ergebnisse melden"
+            }
+            "class" "report-assistant"
+            "children" [
+              {
+                "type" "element"
+                "tag" "form"
+                "attributes" {
+                  "id" "feedback-form"
+                  "data-xtend-native" ""
+                }
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "h2"
+                    "text" "Ergebnisse melden"
+                  }
+                  {
+                    "type" "element"
+                    "tag" "p"
+                    "text" "$model.search.feedback.countLabel"
+                    "attributes" {
+                      "role" "status"
+                      "aria-live" "polite"
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "label"
+                    "class" "field"
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "span"
+                        "text" "Meldegrund"
+                      }
+                      {
+                        "type" "element"
+                        "tag" "select"
+                        "attributes" {
+                          "id" "report-reason"
+                          "name" "reason"
+                          "required" true
+                          "value" "$model.search.feedback.reason"
+                          "disabled" "$model.search.feedback.busy"
+                        }
+                        "children" [
+                          {
+                            "type" "element"
+                            "tag" "option"
+                            "text" "Bitte auswählen"
+                            "attributes" {
+                              "value" ""
+                            }
+                          }
+                          {
+                            "type" "element"
+                            "tag" "option"
+                            "text" "Nicht relevant"
+                            "attributes" {
+                              "value" "irrelevant"
+                              "selected" {
+                                "op" "equals"
+                                "left" "$model.search.feedback.reason"
+                                "right" "irrelevant"
+                              }
+                            }
+                          }
+                          {
+                            "type" "element"
+                            "tag" "option"
+                            "text" "Spam oder manipulative Inhalte"
+                            "attributes" {
+                              "value" "spam"
+                              "selected" {
+                                "op" "equals"
+                                "left" "$model.search.feedback.reason"
+                                "right" "spam"
+                              }
+                            }
+                          }
+                          {
+                            "type" "element"
+                            "tag" "option"
+                            "text" "Verdacht auf gefährliche Inhalte"
+                            "attributes" {
+                              "value" "unsafe"
+                              "selected" {
+                                "op" "equals"
+                                "left" "$model.search.feedback.reason"
+                                "right" "unsafe"
+                              }
+                            }
+                          }
+                          {
+                            "type" "element"
+                            "tag" "option"
+                            "text" "Defekter Link oder nicht verfügbares Bild"
+                            "attributes" {
+                              "value" "broken"
+                              "selected" {
+                                "op" "equals"
+                                "left" "$model.search.feedback.reason"
+                                "right" "broken"
+                              }
+                            }
+                          }
+                          {
+                            "type" "element"
+                            "tag" "option"
+                            "text" "Falscher Ergebnistyp"
+                            "attributes" {
+                              "value" "wrong_type"
+                              "selected" {
+                                "op" "equals"
+                                "left" "$model.search.feedback.reason"
+                                "right" "wrong_type"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                  {
+                    "type" "element"
+                    "tag" "label"
+                    "class" "check-field"
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "input"
+                        "attributes" {
+                          "type" "checkbox"
+                          "name" "includeUrl"
+                          "disabled" "$model.search.feedback.busy"
+                        }
+                        "properties" {
+                          "checked" "$model.search.feedback.includeUrl"
+                        }
+                      }
+                      {
+                        "type" "element"
+                        "tag" "span"
+                        "text" "Ergebnislinks zur Prüfung mitsenden"
+                      }
+                    ]
+                  }
+                  {
+                    "type" "element"
+                    "tag" "details"
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "summary"
+                        "text" "Ausgewählte Ergebnislinks"
+                      }
+                      {
+                        "type" "element"
+                        "tag" "ul"
+                        "children" [
+                          {
+                            "type" "repeat"
+                            "source" "$model.search.feedback.selected"
+                            "key" "id"
+                            "template" {
+                              "type" "element"
+                              "tag" "li"
+                              "text" "$item.url"
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                  {
+                    "type" "element"
+                    "tag" "p"
+                    "text" "Ohne Zustimmung speichern wir keine Ergebnislinks. Freiwillige Belege bleiben maximal sieben Tage verfügbar."
+                    "class" "filter-note"
+                  }
+                  {
+                    "type" "element"
+                    "tag" "p"
+                    "text" "$model.search.feedback.error"
+                    "attributes" {
+                      "role" "alert"
+                    }
+                    "class" "feedback-error"
+                  }
+                  {
+                    "type" "element"
+                    "tag" "div"
+                    "class" "report-actions"
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "x-button"
+                        "attributes" {
+                          "id" "report-save"
+                          "label" {
+                            "op" "if"
+                            "test" "$model.search.feedback.busy"
+                            "then" "Wird gespeichert …"
+                            "else" "Meldung speichern"
+                          }
+                          "disabled" {
+                            "op" "not"
+                            "value" "$model.search.feedback.canSave"
+                          }
+                          "loading" "$model.search.feedback.busy"
+                        }
+                      }
+                      {
+                        "type" "element"
+                        "tag" "x-button"
+                        "attributes" {
+                          "id" "report-cancel"
+                          "label" "Meldung abbrechen"
+                          "variant" "ghost"
+                          "disabled" "$model.search.feedback.busy"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+        {
+          "type" "conditional"
+          "test" "$model.search.feedback.confirm"
+          "then" {
+            "type" "element"
+            "tag" "x-dialog"
+            "class" "search-feedback"
+            "attributes" {
+              "id" "report-discard-dialog"
+              "title" "Meldung verwerfen?"
+              "overlay" true
+              "open" true
+              "width" "min(440px, calc(100vw - 24px))"
+            }
+            "children" [
+              {
+                "type" "element"
+                "tag" "p"
+                "text" "Die Auswahl und Eingaben wurden noch nicht gespeichert."
+              }
+              {
+                "type" "element"
+                "tag" "div"
+                "class" "report-actions"
+                "attributes" { "slot" "actions" }
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "x-button"
+                    "attributes" {
+                      "id" "report-discard"
+                      "variant" "danger"
+                      "label" "Meldung verwerfen"
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "x-button"
+                    "attributes" {
+                      "id" "report-keep"
+                      "label" "Weiter bearbeiten"
+                      "variant" "ghost"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+        {
+          "type" "element"
+          "tag" "div"
+          "attributes" {
+            "id" "result-slot"
+          }
+        }
+        {
+          "type" "element"
+          "tag" "footer"
+          "class" "site-footer"
+          "children" [
+            {
+              "type" "element"
+              "tag" "span"
+              "text" "Deine Suche. Dein Horizont."
+            }
+            {
+              "type" "element"
+              "tag" "div"
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "a"
+                  "text" "Über & Datenschutz"
+                  "attributes" {
+                    "href" "/info/de/about"
+                    "data-xtend-native" ""
+                    "data-about-link" ""
+                  }
+                }
+                {
+                  "type" "element"
+                  "tag" "a"
+                  "text" "Observatory"
+                  "attributes" {
+                    "href" "/admin"
+                    "data-xtend-native" ""
+                  }
+                }
+              ]
+            }
+          ]
+        }
+        {
+          "type" "conditional"
+          "test" "$model.search.activity.message"
+          "then" {
+            "type" "element"
+            "tag" "x-alert"
+            "text" "$model.search.activity.message"
+            "attributes" {
+              "type" "error"
+              "role" "alert"
+            }
+            "class" "search-warning"
+          }
+        }
+      ]
     }
-  }
+
+
+}
+
+
+}
+
   state search.resultView type object preserve {
     initial {
       id "results"
       viewTemplate {
-        class "result-area"
-        attributes { id "results" tabindex "-1" "aria-busy" "$model.search.activity.busy" "data-category" "$model.search.data.category" "data-has-cards" true "data-standalone" true "data-preview-open" "$model.search.preview.open" }
-        children [
-          { type "conditional" test "$model.search.data.fixture" then { type "element" tag "p" text "Testmodus · Diese Ergebnisse stammen aus reproduzierbaren Testdaten." class "fixture-notice" } }
-          { type "conditional" test "$model.search.data.isSearch" then {
-            type "element" tag "section" class "result-list" attributes { "aria-label" "Suchergebnisse" } children [
-              { type "element" tag "div" class "result-meta" children [
-                { type "element" tag "h1" text "$model.search.data.countLabel" attributes { id "results-heading" tabindex "-1" "aria-live" "polite" "aria-atomic" "true" } }
-                { type "element" tag "span" text "$model.search.data.pageLabel" }
-              ] }
-              { type "conditional" test "$model.search.data.safeSearchNotice" then {
-                type "element" tag "p" class "safe-search-notice" text "$model.search.data.safeSearchNotice" attributes { role "note" }
-              } }
-              { type "element" tag "details" class "source-status" children [
-                { type "element" tag "summary" text "$model.search.data.statusLabel" }
-                { type "element" tag "div" class "source-status-popover" children [
-              { type "repeat" source "$model.search.data.warnings" key "id" template { type "element" tag "x-alert" text "$item.message" class "search-warning" attributes { id "$item.domId" type "$item.type" closable true duration "0" "data-warning-id" "$item.id" "aria-label" "Hinweis zur Suche" } } }
-                ] }
-              ] }
-              { type "conditional" test "$model.search.data.skeleton" then {
-                type "element" tag "div" class "search-skeleton" attributes { "aria-hidden" "true" } children [
-                  { type "element" tag "div" class "skeleton-row" }
-                  { type "element" tag "div" class "skeleton-row" }
-                  { type "element" tag "div" class "skeleton-row" }
-                ]
-              } }
-              { type "conditional" test "$model.search.data.empty" then {
-                type "element" tag "div" class "empty-state" children [
-                  { type "element" tag "span" text "↗" class "empty-symbol" attributes { "aria-hidden" "true" } }
-                  { type "element" tag "h2" text "Noch nichts gefunden." }
-                  { type "element" tag "p" text "Versuche andere Begriffe oder erweitere deine Filter." }
-                ]
-              } }
-              { type "conditional" test "$model.search.data.error" then {
-                type "element" tag "div" class "empty-state" attributes { role "alert" } children [
-                  { type "element" tag "h2" text "Die Suche ist gerade nicht erreichbar." }
-                  { type "element" tag "p" text "$model.search.data.errorMessage" }
-                  { type "element" tag "a" text "Neue Suche starten" attributes { href "/" "data-xtend-native" "" } }
-                ]
-              } }
-              { type "element" tag "div" key "result-layout" class "result-layout" children [
-                { type "element" tag "div" key "result-main" class "result-main" children [
-              { type "element" tag "div" class "$model.search.data.listClass" children [
-                { type "repeat" source "$model.search.data.results" key "id" template {
-                  type "element" tag "article" class "result" attributes { "data-result-id" "$item.id" "data-selected" { op "equals" left "$item.id" right "$model.search.preview.id" } } children [
-                    { type "conditional" test "$item.thumbnail" then { type "element" tag "a" class "result-image" attributes { href "$item.previewHref" "data-preview-id" "$item.previewId" "aria-label" "$item.previewLabel" "data-unavailable" "$item.thumbnailFailed" "data-xtend-native" "" rel "noreferrer" } children [
-                      { type "element" tag "img" key "$item.thumbnailKey" attributes { src "$item.thumbnail" alt "$item.thumbnailAlt" "data-result-image" "$item.id" loading "lazy" width 360 height 220 referrerpolicy "no-referrer" } }
-                      { type "conditional" test "$item.resolution" then { type "element" tag "span" class "image-dimensions" text "$item.resolution" } }
-                    ] } }
-                    { type "element" tag "div" class "result-origin" children [
-                      { type "element" tag "span" text "$item.initial" class "source-icon" attributes { "aria-hidden" "true" "data-favicon" "$item.favicon" } }
-                      { type "element" tag "span" text "$item.displayUrl" }
-                    ] }
-                    { type "element" tag "h2" children [ { type "element" tag "a" text "$item.title" attributes { href "$item.url" "data-xtend-native" "" rel "noreferrer" } } ] }
-                    { type "element" tag "p" text "$item.snippetText" class "snippet" }
-                    { type "element" tag "div" text "$item.sourceLabel" class "result-sources" }
-{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16px" decorative true "aria-hidden" "true" } } ] } }
-                  ]
-                } }
-              ] }
-              { type "element" tag "nav" class "pagination" attributes { "aria-label" "Ergebnisseiten" } children [
-                { type "repeat" source "$model.search.data.pages" key "id" template { type "element" tag "a" text "$item.label" attributes { href "$item.url" rel "$item.rel" } } }
-              ] }                ] }
-                { type "conditional" test "$model.search.data.showKnowledge" then {
-                  type "element" tag "aside" key "knowledge-cards" class "knowledge-cards" attributes { "aria-label" "Wissenswertes zur Suche" } children [
-                    { type "element" tag "h2" class "card-eyebrow" text "WISSENSWERTES" }
-                    { type "element" tag "p" class "knowledge-state" text "$model.search.data.knowledgeMessage" }
-                    { type "repeat" source "$model.search.data.knowledgeCards" key "id" template {
-                      type "element" tag "section" class "knowledge-card" attributes { "aria-label" "$item.title" } children [
-                        { type "element" tag "h2" text "$item.title" }
-{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16px" decorative true "aria-hidden" "true" } } ] } }
-                        { type "conditional" test "$item.image" then { type "element" tag "img" class "knowledge-image" attributes { src "$item.image" alt "$item.title" loading "lazy" width 320 height 220 referrerpolicy "no-referrer" } } }
-                        { type "element" tag "p" class "knowledge-description" text "$item.description" }
-                        { type "element" tag "dl" class "knowledge-facts" children [
-                          { type "repeat" source "$item.facts" key "id" template { type "element" tag "div" children [
-                            { type "element" tag "dt" text "$item.label" }
-                            { type "element" tag "dd" children [
-                              { type "element" tag "span" text "$item.value" }
-                              { type "conditional" test "$item.image" then { type "element" tag "img" attributes { src "$item.image" alt "$item.imageAlt" loading "lazy" width 80 height 60 referrerpolicy "no-referrer" } } }
-                            ] }
-                          ] } }
-                        ] }
-                        { type "element" tag "nav" class "knowledge-sources" attributes { "aria-label" "Quellen und weiterführende Links" } children [
-                          { type "repeat" source "$item.links" key "id" template { type "element" tag "a" text "$item.label" attributes { href "$item.url" rel "noreferrer" "data-xtend-native" "" } } }
-                        ] }
-                        { type "element" tag "div" class "knowledge-related" children [
-                          { type "repeat" source "$item.related" key "id" template { type "element" tag "a" text "$item.label" attributes { href "$item.url" } } }
-                        ] }
-                      ]
-                    } }
-                  ]
-                } }
-                { type "conditional" test "$model.search.preview.open" then {
-                  type "element" tag "aside" key "image-preview" class "image-preview" attributes { id "image-preview" role "region" "aria-label" "Bildvorschau" } children [
-                    { type "element" tag "div" class "preview-toolbar" children [
-                      { type "element" tag "button" class "preview-control" text "×" attributes { id "preview-close" type "button" "data-preview-action" "close" "aria-label" "Bildvorschau schließen" title "Schließen (Escape)" } }
-                      { type "element" tag "span" class "preview-position" text "$model.search.preview.position" attributes { role "status" "aria-live" "polite" } }
-                      { type "element" tag "button" class "preview-control" attributes { type "button" "data-preview-action" "previous" "aria-label" "Vorheriges Bild" disabled "$model.search.preview.previousDisabled" } children [
-                        { type "element" tag "span" class "preview-arrow" attributes { "aria-hidden" "true" } }
-                      ] }
-                      { type "element" tag "button" class "preview-control" attributes { type "button" "data-preview-action" "next" "aria-label" "Nächstes Bild" disabled "$model.search.preview.nextDisabled" } children [
-                        { type "element" tag "span" class "preview-arrow" attributes { "aria-hidden" "true" } }
-                      ] }
-                    ] }
-                    { type "conditional" test "$model.search.preview.imageSrc" then {
-                      type "element" tag "button" class "preview-canvas preview-expand" attributes { id "preview-expand" type "button" "data-preview-action" "expand" "aria-label" "Bild in Vollbild öffnen" title "Vollbild öffnen" } children [
-                        { type "element" tag "span" class "preview-expand-hint" text "Vollbild öffnen" attributes { "aria-hidden" "true" } }
-                        { type "element" tag "img" key "$model.search.preview.imageKey" attributes { id "preview-image" "data-image-request" "$model.search.preview.imageKey" src "$model.search.preview.imageSrc" alt "$model.search.preview.title" referrerpolicy "no-referrer" } }
-                      ]
-                    } }
-                    { type "conditional" test "$model.search.preview.imageUnavailable" then {
-                      type "element" tag "div" class "preview-canvas preview-placeholder" children [
-                        { type "element" tag "img" attributes { src "/assets/xtend/image-placeholder.svg" alt "Bild nicht verfügbar" width 480 height 320 } }
-                      ]
-                    } }
-                    { type "conditional" test "$model.search.preview.imageMessage" then { type "element" tag "p" class "preview-message" text "$model.search.preview.imageMessage" attributes { role "status" } } }
-                    { type "conditional" test "$model.search.preview.expandMessage" then { type "element" tag "p" class "preview-message" text "$model.search.preview.expandMessage" attributes { role "status" } } }
-                    { type "element" tag "div" class "preview-details" children [
-                      { type "conditional" test "$model.search.preview.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$model.search.preview.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16px" decorative true "aria-hidden" "true" } } ] } }
-{ type "element" tag "p" class "preview-domain" text "$model.search.preview.displayUrl" }
-                      { type "element" tag "h2" text "$model.search.preview.title" }
-                      { type "element" tag "p" class "preview-description" text "$model.search.preview.snippetText" }
-                      { type "element" tag "nav" class "preview-links" attributes { "aria-label" "Bild und Quelle öffnen" } children [
-                        { type "element" tag "a" class "preview-primary" text "Seite besuchen ↗" attributes { href "$model.search.preview.url" "data-xtend-native" "" rel "noreferrer" } }
-                        { type "conditional" test "$model.search.preview.imageUrl" then { type "element" tag "a" text "Originalbild öffnen ↗" attributes { href "$model.search.preview.imageUrl" "data-xtend-native" "" rel "noreferrer" } } }
-                      ] }
-                      { type "element" tag "dl" class "preview-metadata" children [
-                        { type "repeat" source "$model.search.preview.metadata" key "id" template { type "element" tag "div" children [
-                          { type "element" tag "dt" text "$item.label" }
-                          { type "element" tag "dd" text "$item.value" }
-                        ] } }
-                      ] }
-                      { type "element" tag "nav" class "preview-formats" attributes { "aria-label" "Weitere Bildformate" } children [
-                        { type "repeat" source "$model.search.preview.formats" key "id" template { type "element" tag "a" text "$item.label" attributes { href "$item.url" "data-xtend-native" "" rel "noreferrer" } } }
-                      ] }
-                    ] }
-                  ]
-                } }
-              ] }
-            ]
-          } }
-        ]
+      "class" "result-area"
+      "attributes" {
+        "id" "results"
+        "tabindex" "-1"
+        "aria-busy" "$model.search.activity.busy"
+        "data-category" "$model.search.data.category"
+        "data-has-cards" true
+        "data-standalone" true
+        "data-preview-open" "$model.search.preview.open"
       }
+      "children" [
+        {
+          "type" "conditional"
+          "test" "$model.search.data.fixture"
+          "then" {
+            "type" "element"
+            "tag" "p"
+            "text" "Testmodus · Diese Ergebnisse stammen aus reproduzierbaren Testdaten."
+            "class" "fixture-notice"
+          }
+        }
+        {
+          "type" "conditional"
+          "test" "$model.search.data.isSearch"
+          "then" {
+            "type" "element"
+            "tag" "section"
+            "class" "result-list"
+            "attributes" {
+              "aria-label" "Suchergebnisse"
+            }
+            "children" [
+              {
+                "type" "element"
+                "tag" "div"
+                "class" "result-meta"
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "h1"
+                    "text" "$model.search.data.countLabel"
+                    "attributes" {
+                      "id" "results-heading"
+                      "tabindex" "-1"
+                      "aria-live" "polite"
+                      "aria-atomic" "true"
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "span"
+                    "text" "$model.search.data.pageLabel"
+                  }
+                ]
+              }
+              {
+                "type" "conditional"
+                "test" "$model.search.data.safeSearchNotice"
+                "then" {
+                  "type" "element"
+                  "tag" "p"
+                  "class" "safe-search-notice"
+                  "text" "$model.search.data.safeSearchNotice"
+                  "attributes" {
+                    "role" "note"
+                  }
+                }
+              }
+              {
+                "type" "conditional"
+                "test" "$model.search.data.showSourceStatus"
+                "then" {
+                  "type" "element"
+                  "tag" "details"
+                  "class" "source-status"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "summary"
+                      "text" "$model.search.data.statusLabel"
+                    }
+                    {
+                      "type" "element"
+                      "tag" "div"
+                      "class" "source-status-popover"
+                      "children" [
+                        {
+                          "type" "repeat"
+                          "source" "$model.search.data.warnings"
+                          "key" "id"
+                          "template" {
+                            "type" "element"
+                            "tag" "x-alert"
+                            "text" "$item.message"
+                            "class" "search-warning"
+                            "attributes" {
+                              "id" "$item.domId"
+                              "type" "$item.type"
+                              "closable" true
+                              "duration" "0"
+                              "data-warning-id" "$item.id"
+                              "aria-label" "Hinweis zur Suche"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+              {
+                "type" "conditional"
+                "test" "$model.search.data.skeleton"
+                "then" {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "search-skeleton"
+                  "attributes" {
+                    "aria-hidden" "true"
+                  }
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "div"
+                      "class" "skeleton-row"
+                    }
+                    {
+                      "type" "element"
+                      "tag" "div"
+                      "class" "skeleton-row"
+                    }
+                    {
+                      "type" "element"
+                      "tag" "div"
+                      "class" "skeleton-row"
+                    }
+                  ]
+                }
+              }
+              {
+                "type" "conditional"
+                "test" "$model.search.data.empty"
+                "then" {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "empty-state"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "span"
+                      "text" "↗"
+                      "class" "empty-symbol"
+                      "attributes" {
+                        "aria-hidden" "true"
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "h2"
+                      "text" {
+                        "op" "if"
+                        "test" "$model.search.data.emptyTitle"
+                        "then" "$model.search.data.emptyTitle"
+                        "else" "Noch nichts gefunden."
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "p"
+                      "text" {
+                        "op" "if"
+                        "test" "$model.search.data.emptyMessage"
+                        "then" "$model.search.data.emptyMessage"
+                        "else" "Versuche andere Begriffe oder erweitere deine Filter."
+                      }
+                    }
+                  ]
+                }
+              }
+              {
+                "type" "conditional"
+                "test" "$model.search.data.error"
+                "then" {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "empty-state"
+                  "attributes" {
+                    "role" "alert"
+                  }
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "h2"
+                      "text" {
+                        "op" "if"
+                        "test" "$model.search.data.emptyTitle"
+                        "then" "$model.search.data.emptyTitle"
+                        "else" "Die Suche ist gerade nicht erreichbar."
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "p"
+                      "text" {
+                        "op" "if"
+                        "test" "$model.search.data.emptyMessage"
+                        "then" "$model.search.data.emptyMessage"
+                        "else" "$model.search.data.errorMessage"
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "a"
+                      "text" "Neue Suche starten"
+                      "attributes" {
+                        "href" "/"
+                        "data-xtend-native" ""
+                      }
+                    }
+                  ]
+                }
+              }
+              {
+                "type" "element"
+                "tag" "div"
+                "key" "result-layout"
+                "class" "result-layout"
+                "children" [
+                  {
+                    "type" "conditional"
+                    "test" {
+                      "op" "not"
+                      "value" {
+                        "op" "equals"
+                        "left" "$model.search.data.category"
+                        "right" "weather"
+                      }
+                    }
+                    "then" {
+                      "type" "element"
+                      "tag" "div"
+                      "key" "result-main"
+                      "class" "result-main"
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "div"
+                          "class" "$model.search.data.listClass"
+                          "children" [
+                            {
+                              "type" "repeat"
+                              "source" "$model.search.data.results"
+                              "key" "id"
+                              "template" {
+                                "type" "element"
+                                "tag" "article"
+                                "class" "result"
+                                "attributes" {
+                                  "data-result-id" "$item.id"
+                                  "data-selected" {
+                                    "op" "equals"
+                                    "left" "$item.id"
+                                    "right" "$model.search.preview.id"
+                                  }
+                                  "data-report-selected" "$item.reportSelected"
+                                }
+                                "children" [
+                                  {
+                                    "type" "conditional"
+                                    "test" "$model.search.feedback.open"
+                                    "then" {
+                                      "type" "conditional"
+                                      "test" "$item.reportTicket"
+                                      "then" {
+                                        "type" "element"
+                                        "tag" "label"
+                                        "class" "report-select"
+                                        "children" [
+                                          {
+                                            "type" "element"
+                                            "tag" "input"
+                                            "attributes" {
+                                              "type" "checkbox"
+                                              "class" "report-checkbox"
+                                              "value" "$item.reportKey"
+                                              "aria-label" "Ergebnis auswählen"
+                                            }
+                                            "properties" {
+                                              "checked" "$item.reportSelected"
+                                            }
+                                          }
+                                          {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "text" "Auswählen"
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                  {
+                                    "type" "conditional"
+                                    "test" "$item.thumbnail"
+                                    "then" {
+                                      "type" "element"
+                                      "tag" "a"
+                                      "class" "result-image"
+                                      "attributes" {
+                                        "href" "$item.previewHref"
+                                        "data-preview-id" "$item.previewId"
+                                        "aria-label" "$item.previewLabel"
+                                        "data-unavailable" "$item.thumbnailFailed"
+                                        "data-xtend-native" ""
+                                        "rel" "noreferrer"
+                                      }
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "img"
+                                          "key" "$item.thumbnailKey"
+                                          "attributes" {
+                                            "src" "$item.thumbnail"
+                                            "alt" "$item.thumbnailAlt"
+                                            "data-result-image" "$item.id"
+                                            "loading" "lazy"
+                                            "width" 360
+                                            "height" 220
+                                            "referrerpolicy" "no-referrer"
+                                          }
+                                        }
+                                        {
+                                          "type" "conditional"
+                                          "test" "$item.resolution"
+                                          "then" {
+                                            "type" "element"
+                                            "tag" "span"
+                                            "class" "image-dimensions"
+                                            "text" "$item.resolution"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "div"
+                                    "class" "result-origin"
+                                    "children" [
+                                      {
+                                        "type" "element"
+                                        "tag" "span"
+                                        "text" "$item.initial"
+                                        "class" "source-icon"
+                                        "attributes" {
+                                          "aria-hidden" "true"
+                                          "data-favicon" "$item.favicon"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "span"
+                                        "text" "$item.displayUrl"
+                                      }
+                                    ]
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "h2"
+                                    "children" [
+                                      {
+                                        "type" "element"
+                                        "tag" "a"
+                                        "text" "$item.title"
+                                        "attributes" {
+                                          "href" "$item.url"
+                                          "data-xtend-native" ""
+                                          "rel" "noreferrer"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "p"
+                                    "text" "$item.snippetText"
+                                    "class" "snippet"
+                                  }
+                                  {
+                                    "type" "element"
+                                    "tag" "div"
+                                    "text" "$item.sourceLabel"
+                                    "class" "result-sources"
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                        {
+                          "type" "element"
+                          "tag" "nav"
+                          "class" "pagination"
+                          "attributes" {
+                            "aria-label" "Ergebnisseiten"
+                          }
+                          "children" [
+                            {
+                              "type" "repeat"
+                              "source" "$model.search.data.pages"
+                              "key" "id"
+                              "template" {
+                                "type" "element"
+                                "tag" "a"
+                                "text" "$item.label"
+                                "attributes" {
+                                  "href" "$item.url"
+                                  "rel" "$item.rel"
+                                }
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                  {
+                    "type" "conditional"
+                    "test" "$model.search.data.showKnowledge"
+                    "then" {
+                      "type" "element"
+                      "tag" "aside"
+                      "key" "knowledge-cards"
+                      "class" "knowledge-cards"
+                      "attributes" {
+                        "aria-label" "Wissenswertes zur Suche"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "h2"
+                          "class" "card-eyebrow"
+                          "text" "WISSENSWERTES"
+                        }
+                        {
+                          "type" "element"
+                          "tag" "p"
+                          "class" "knowledge-state"
+                          "text" "$model.search.data.knowledgeMessage"
+                        }
+                        {
+                          "type" "repeat"
+                          "source" "$model.search.data.knowledgeCards"
+                          "key" "id"
+                          "template" {
+                            "type" "element"
+                            "tag" "section"
+                            "class" "knowledge-card"
+                            "attributes" {
+                              "aria-label" "$item.title"
+                              "data-report-selected" "$item.reportSelected"
+                            }
+                            "children" [
+                              {
+                                "type" "conditional"
+                                "test" "$model.search.feedback.open"
+                                "then" {
+                                  "type" "conditional"
+                                  "test" "$item.reportTicket"
+                                  "then" {
+                                    "type" "element"
+                                    "tag" "label"
+                                    "class" "report-select"
+                                    "children" [
+                                      {
+                                        "type" "element"
+                                        "tag" "input"
+                                        "attributes" {
+                                          "type" "checkbox"
+                                          "class" "report-checkbox"
+                                          "value" "$item.reportKey"
+                                          "aria-label" "Wissenskarte auswählen"
+                                        }
+                                        "properties" {
+                                          "checked" "$item.reportSelected"
+                                        }
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "span"
+                                        "text" "Auswählen"
+                                      }
+                                    ]
+                                  }
+                                }
+                              }
+                              {
+                                "type" "element"
+                                "tag" "h2"
+                                "text" "$item.title"
+                              }
+                              {
+                                "type" "conditional"
+                                "test" "$item.image"
+                                "then" {
+                                  "type" "element"
+                                  "tag" "img"
+                                  "class" "knowledge-image"
+                                  "attributes" {
+                                    "src" "$item.image"
+                                    "alt" "$item.title"
+                                    "loading" "lazy"
+                                    "width" 320
+                                    "height" 220
+                                    "referrerpolicy" "no-referrer"
+                                  }
+                                }
+                              }
+                              {
+                                "type" "element"
+                                "tag" "p"
+                                "class" "knowledge-description"
+                                "text" "$item.description"
+                              }
+                              {
+                                "type" "element"
+                                "tag" "dl"
+                                "class" "knowledge-facts"
+                                "children" [
+                                  {
+                                    "type" "repeat"
+                                    "source" "$item.facts"
+                                    "key" "id"
+                                    "template" {
+                                      "type" "element"
+                                      "tag" "div"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "dt"
+                                          "text" "$item.label"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "dd"
+                                          "children" [
+                                            {
+                                              "type" "element"
+                                              "tag" "span"
+                                              "text" "$item.value"
+                                            }
+                                            {
+                                              "type" "conditional"
+                                              "test" "$item.image"
+                                              "then" {
+                                                "type" "element"
+                                                "tag" "img"
+                                                "attributes" {
+                                                  "src" "$item.image"
+                                                  "alt" "$item.imageAlt"
+                                                  "loading" "lazy"
+                                                  "width" 80
+                                                  "height" 60
+                                                  "referrerpolicy" "no-referrer"
+                                                }
+                                              }
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                              {
+                                "type" "element"
+                                "tag" "nav"
+                                "class" "knowledge-sources"
+                                "attributes" {
+                                  "aria-label" "Quellen und weiterführende Links"
+                                }
+                                "children" [
+                                  {
+                                    "type" "repeat"
+                                    "source" "$item.links"
+                                    "key" "id"
+                                    "template" {
+                                      "type" "element"
+                                      "tag" "a"
+                                      "text" "$item.label"
+                                      "attributes" {
+                                        "href" "$item.url"
+                                        "rel" "noreferrer"
+                                        "data-xtend-native" ""
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                              {
+                                "type" "element"
+                                "tag" "div"
+                                "class" "knowledge-related"
+                                "children" [
+                                  {
+                                    "type" "repeat"
+                                    "source" "$item.related"
+                                    "key" "id"
+                                    "template" {
+                                      "type" "element"
+                                      "tag" "a"
+                                      "text" "$item.label"
+                                      "attributes" {
+                                        "href" "$item.url"
+                                      }
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                  {
+                    "type" "conditional"
+                    "test" "$model.search.preview.open"
+                    "then" {
+                      "type" "element"
+                      "tag" "aside"
+                      "key" "image-preview"
+                      "class" "image-preview"
+                      "attributes" {
+                        "id" "image-preview"
+                        "role" "region"
+                        "aria-label" "Bildvorschau"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "div"
+                          "class" "preview-toolbar"
+                          "children" [
+                            {
+                              "type" "element"
+                              "tag" "button"
+                              "class" "preview-control"
+                              "text" "×"
+                              "attributes" {
+                                "id" "preview-close"
+                                "type" "button"
+                                "data-preview-action" "close"
+                                "aria-label" "Bildvorschau schließen"
+                                "title" "Schließen (Escape)"
+                              }
+                            }
+                            {
+                              "type" "element"
+                              "tag" "span"
+                              "class" "preview-position"
+                              "text" "$model.search.preview.position"
+                              "attributes" {
+                                "role" "status"
+                                "aria-live" "polite"
+                              }
+                            }
+                            {
+                              "type" "element"
+                              "tag" "button"
+                              "class" "preview-control"
+                              "attributes" {
+                                "type" "button"
+                                "data-preview-action" "previous"
+                                "aria-label" "Vorheriges Bild"
+                                "disabled" "$model.search.preview.previousDisabled"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "span"
+                                  "class" "preview-arrow"
+                                  "attributes" {
+                                    "aria-hidden" "true"
+                                  }
+                                }
+                              ]
+                            }
+                            {
+                              "type" "element"
+                              "tag" "button"
+                              "class" "preview-control"
+                              "attributes" {
+                                "type" "button"
+                                "data-preview-action" "next"
+                                "aria-label" "Nächstes Bild"
+                                "disabled" "$model.search.preview.nextDisabled"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "span"
+                                  "class" "preview-arrow"
+                                  "attributes" {
+                                    "aria-hidden" "true"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.preview.imageSrc"
+                          "then" {
+                            "type" "element"
+                            "tag" "button"
+                            "class" "preview-canvas preview-expand"
+                            "attributes" {
+                              "id" "preview-expand"
+                              "type" "button"
+                              "data-preview-action" "expand"
+                              "aria-label" "Bild in Vollbild öffnen"
+                              "title" "Vollbild öffnen"
+                            }
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "span"
+                                "class" "preview-expand-hint"
+                                "text" "Vollbild öffnen"
+                                "attributes" {
+                                  "aria-hidden" "true"
+                                }
+                              }
+                              {
+                                "type" "element"
+                                "tag" "img"
+                                "key" "$model.search.preview.imageKey"
+                                "attributes" {
+                                  "id" "preview-image"
+                                  "data-image-request" "$model.search.preview.imageKey"
+                                  "src" "$model.search.preview.imageSrc"
+                                  "alt" "$model.search.preview.title"
+                                  "referrerpolicy" "no-referrer"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.preview.imageUnavailable"
+                          "then" {
+                            "type" "element"
+                            "tag" "div"
+                            "class" "preview-canvas preview-placeholder"
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "img"
+                                "attributes" {
+                                  "src" "/assets/xtend/image-placeholder.svg"
+                                  "alt" "Bild nicht verfügbar"
+                                  "width" 480
+                                  "height" 320
+                                }
+                              }
+                            ]
+                          }
+                        }
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.preview.imageMessage"
+                          "then" {
+                            "type" "element"
+                            "tag" "p"
+                            "class" "preview-message"
+                            "text" "$model.search.preview.imageMessage"
+                            "attributes" {
+                              "role" "status"
+                            }
+                          }
+                        }
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.preview.expandMessage"
+                          "then" {
+                            "type" "element"
+                            "tag" "p"
+                            "class" "preview-message"
+                            "text" "$model.search.preview.expandMessage"
+                            "attributes" {
+                              "role" "status"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "div"
+                          "class" "preview-details"
+                          "children" [
+                            {
+                              "type" "element"
+                              "tag" "p"
+                              "class" "preview-domain"
+                              "text" "$model.search.preview.displayUrl"
+                            }
+                            {
+                              "type" "element"
+                              "tag" "h2"
+                              "text" "$model.search.preview.title"
+                            }
+                            {
+                              "type" "element"
+                              "tag" "p"
+                              "class" "preview-description"
+                              "text" "$model.search.preview.snippetText"
+                            }
+                            {
+                              "type" "element"
+                              "tag" "nav"
+                              "class" "preview-links"
+                              "attributes" {
+                                "aria-label" "Bild und Quelle öffnen"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "a"
+                                  "class" "preview-primary"
+                                  "text" "Seite besuchen ↗"
+                                  "attributes" {
+                                    "href" "$model.search.preview.url"
+                                    "data-xtend-native" ""
+                                    "rel" "noreferrer"
+                                  }
+                                }
+                                {
+                                  "type" "conditional"
+                                  "test" "$model.search.preview.imageUrl"
+                                  "then" {
+                                    "type" "element"
+                                    "tag" "a"
+                                    "text" "Originalbild öffnen ↗"
+                                    "attributes" {
+                                      "href" "$model.search.preview.imageUrl"
+                                      "data-xtend-native" ""
+                                      "rel" "noreferrer"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                            {
+                              "type" "element"
+                              "tag" "dl"
+                              "class" "preview-metadata"
+                              "children" [
+                                {
+                                  "type" "repeat"
+                                  "source" "$model.search.preview.metadata"
+                                  "key" "id"
+                                  "template" {
+                                    "type" "element"
+                                    "tag" "div"
+                                    "children" [
+                                      {
+                                        "type" "element"
+                                        "tag" "dt"
+                                        "text" "$item.label"
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "dd"
+                                        "text" "$item.value"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                            {
+                              "type" "element"
+                              "tag" "nav"
+                              "class" "preview-formats"
+                              "attributes" {
+                                "aria-label" "Weitere Bildformate"
+                              }
+                              "children" [
+                                {
+                                  "type" "repeat"
+                                  "source" "$model.search.preview.formats"
+                                  "key" "id"
+                                  "template" {
+                                    "type" "element"
+                                    "tag" "a"
+                                    "text" "$item.label"
+                                    "attributes" {
+                                      "href" "$item.url"
+                                      "data-xtend-native" ""
+                                      "rel" "noreferrer"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+              {
+                "type" "conditional"
+                "test" {
+                  "op" "equals"
+                  "left" "$model.search.data.category"
+                  "right" "weather"
+                }
+                "then" {
+                  "type" "element"
+                  "tag" "section"
+                  "attributes" {
+                    "id" "weather-board"
+                    "aria-label" "Wetterübersicht"
+                    "data-visible" "$model.search.weatherUi.visible"
+                    "data-motion-visible" "$model.search.weatherUi.visible"
+                  }
+                  "class" "weather-board"
+                  "children" [
+                    {
+                      "type" "conditional"
+                      "test" "$model.search.data.weather.places"
+                      "then" {
+                        "type" "element"
+                        "tag" "div"
+                        "class" "weather-places"
+                        "children" [
+                          {
+                            "type" "repeat"
+                            "source" "$model.search.data.weather.places"
+                            "key" "id"
+                            "template" {
+                              "type" "element"
+                              "tag" "a"
+                              "text" "$item.label"
+                              "attributes" {
+                                "href" "$item.url"
+                              }
+                              "class" "weather-place"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                    {
+                      "type" "conditional"
+                      "test" "$model.search.data.weather.hasPlace"
+                      "then" {
+                        "type" "element"
+                        "tag" "div"
+                        "class" "weather-content"
+                        "children" [
+                          {
+                            "type" "element"
+                            "tag" "section"
+                            "class" "weather-current"
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "h2"
+                                "text" "$model.search.data.weather.place.label"
+                              }
+                              {
+                                "type" "element"
+                                "tag" "p"
+                                "text" "$model.search.data.weather.place.timeLabel"
+                                "class" "muted"
+                              }
+                              {
+                                "type" "conditional"
+                                "test" "$model.search.data.weather.hasCurrent"
+                                "then" {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "attributes" {
+                                    "data-condition" "$model.search.data.weather.current.kind"
+                                  }
+                                  "class" "weather-now"
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "img"
+                                      "attributes" {
+                                        "src" "$model.search.data.weather.current.icon"
+                                        "alt" "$model.search.data.weather.current.label"
+                                        "width" 80
+                                        "height" 80
+                                      }
+                                      "class" "weather-symbol"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "$model.search.data.weather.current.temperature"
+                                      "class" "weather-temperature"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "$model.search.data.weather.current.label"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "$model.search.data.weather.current.apparent"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "p"
+                                      "text" "$model.search.data.weather.current.dataLabel"
+                                      "class" "filter-note"
+                                    }
+                                  ]
+                                }
+                                "else" {
+                                  "type" "element"
+                                  "tag" "p"
+                                  "text" "Aktuelle Lage wird geladen."
+                                  "class" "weather-placeholder"
+                                }
+                              }
+                              {
+                                "type" "element"
+                                "tag" "p"
+                                "text" "Modellbasierter Wetterstand · Open-Meteo"
+                                "class" "filter-note"
+                              }
+                            ]
+                          }
+                          {
+                            "type" "element"
+                            "tag" "section"
+                            "class" "weather-hourly"
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "h2"
+                                "text" "Nächste 24 Stunden"
+                              }
+                              {
+                                "type" "element"
+                                "tag" "div"
+                                "class" "weather-hours"
+                                "children" [
+                                  {
+                                    "type" "repeat"
+                                    "source" "$model.search.data.weather.hourly"
+                                    "key" "id"
+                                    "template" {
+                                      "type" "element"
+                                      "tag" "div"
+                                      "class" "weather-hour"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "span"
+                                          "text" "$item.label"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "img"
+                                          "attributes" {
+                                            "src" "$item.icon"
+                                            "alt" "$item.conditionLabel"
+                                            "width" 80
+                                            "height" 80
+                                          }
+                                          "class" "weather-small-symbol"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "strong"
+                                          "text" "$item.temperature"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "span"
+                                          "text" "$item.rain"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                          {
+                            "type" "element"
+                            "tag" "section"
+                            "class" "weather-daily"
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "h2"
+                                "text" "Sieben-Tage-Prognose"
+                              }
+                              {
+                                "type" "repeat"
+                                "source" "$model.search.data.weather.daily"
+                                "key" "id"
+                                "template" {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "class" "weather-day"
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "strong"
+                                      "text" "$item.label"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "img"
+                                      "attributes" {
+                                        "src" "$item.icon"
+                                        "alt" "$item.conditionLabel"
+                                        "width" 80
+                                        "height" 80
+                                      }
+                                      "class" "weather-small-symbol"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "span"
+                                      "text" "$item.low"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "strong"
+                                      "text" "$item.high"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "span"
+                                      "text" "$item.rain"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                          {
+                            "type" "element"
+                            "tag" "section"
+                            "class" "weather-metrics"
+                            "children" [
+                              {
+                                "type" "repeat"
+                                "source" "$model.search.data.weather.metrics"
+                                "key" "id"
+                                "template" {
+                                  "type" "element"
+                                  "tag" "div"
+                                  "class" "weather-metric"
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "span"
+                                      "text" "$item.label"
+                                    }
+                                    {
+                                      "type" "element"
+                                      "tag" "strong"
+                                      "text" "$item.value"
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                          {
+                            "type" "element"
+                            "tag" "section"
+                            "class" "weather-warnings"
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "h2"
+                                "text" "Amtliche Warnlage"
+                              }
+                              {
+                                "type" "element"
+                                "tag" "p"
+                                "text" "$model.search.data.weather.alerts.message"
+                                "attributes" {
+                                  "role" "status"
+                                }
+                              }
+                              {
+                                "type" "repeat"
+                                "source" "$model.search.data.weather.alerts.rows"
+                                "key" "id"
+                                "template" {
+                                  "type" "element"
+                                  "tag" "x-alert"
+                                  "attributes" {
+                                    "id" "$item.id"
+                                    "type" "$item.type"
+                                  }
+                                  "children" [
+                                    {
+                                      "type" "element"
+                                      "tag" "div"
+                                      "class" "weather-alert-copy"
+                                      "children" [
+                                        {
+                                          "type" "element"
+                                          "tag" "h3"
+                                          "text" "$item.title"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "text" "$item.severityLabel"
+                                          "class" "filter-note"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "text" "$item.period"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "text" "$item.description"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "p"
+                                          "text" "$item.instruction"
+                                        }
+                                        {
+                                          "type" "element"
+                                          "tag" "a"
+                                          "text" "Quelle: Deutscher Wetterdienst"
+                                          "attributes" {
+                                            "href" "$item.url"
+                                            "target" "_blank"
+                                            "rel" "noopener noreferrer"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                  "class" "search-warning weather-alert"
+                                }
+                              }
+                            ]
+                          }
+                          {
+                            "type" "element"
+                            "tag" "p"
+                            "class" "weather-attribution"
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "a"
+                                "text" "Wetterdaten: Open-Meteo"
+                                "attributes" {
+                                  "href" "https://open-meteo.com/"
+                                  "target" "_blank"
+                                  "rel" "noopener noreferrer"
+                                }
+                              }
+                              {
+                                "type" "element"
+                                "tag" "span"
+                                "text" " · Ortsdaten: GeoNames · Zeiten am gewählten Ort"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              }
+              {
+                "type" "conditional"
+                "test" "$model.search.data.reportable"
+                "then" {
+                  "type" "element"
+                  "tag" "noscript"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "form"
+                      "attributes" {
+                        "action" "/feedback/batch"
+                        "method" "get"
+                      }
+                      "class" "native-report-selection"
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "h2"
+                          "text" "Ergebnisse melden"
+                        }
+                        {
+                          "type" "element"
+                          "tag" "p"
+                          "text" "Bis zu fünf Ergebnisse auswählen."
+                        }
+                        {
+                          "type" "repeat"
+                          "source" "$model.search.data.results"
+                          "key" "id"
+                          "template" {
+                            "type" "conditional"
+                            "test" "$item.reportTicket"
+                            "then" {
+                              "type" "element"
+                              "tag" "label"
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "input"
+                                  "attributes" {
+                                    "type" "checkbox"
+                                    "name" "ticket"
+                                    "value" "$item.reportTicket"
+                                  }
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "span"
+                                  "text" "$item.title"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                        {
+                          "type" "repeat"
+                          "source" "$model.search.data.knowledgeCards"
+                          "key" "id"
+                          "template" {
+                            "type" "conditional"
+                            "test" "$item.reportTicket"
+                            "then" {
+                              "type" "element"
+                              "tag" "label"
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "input"
+                                  "attributes" {
+                                    "type" "checkbox"
+                                    "name" "ticket"
+                                    "value" "$item.reportTicket"
+                                  }
+                                }
+                                {
+                                  "type" "element"
+                                  "tag" "span"
+                                  "text" "$item.title"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "button"
+                          "text" "Weiter zur Meldung"
+                          "attributes" {
+                            "type" "submit"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      ]
     }
-  }
-  selector search.shell from state search.shell { output SearchView }
-  selector search.resultView from state search.resultView { output SearchView }
+
+
+}
+
+
+}
+
+  selector search.shell from state search.shell { output SearchView
+}
+
+  selector search.resultView from state search.resultView { output SearchView
+}
+
   action search.edit {
     input value string
     reduce state.search.query = input.value
-  }
+    reduce state.search.data.location = ""
+
+}
+
   action search.images.set {
     input value object
     reduce state.search.data.results = input.value.results
-  }
+
+}
+
   action search.alerts.set {
     input value object
     reduce state.search.data.warnings = input.value.warnings
-  }
+
+}
+
   action search.preview.open {
     input value object
     reduce state.search.preview = input.value
-  }
+
+}
+
   action search.preview.expansion {
     input message string
     reduce state.search.preview.expandMessage = input.message
-  }
+
+}
+
   action search.preview.close {
     reduce state.search.preview.open = false
     reduce state.search.preview.id = ""
-  }
+
+}
+
   action search.preview.error {
     input unavailable boolean
     input key string
@@ -392,32 +2988,55 @@ template xtend.search {
     reduce state.search.preview.imageKey = input.key
     reduce state.search.preview.imageUnavailable = input.unavailable
     reduce state.search.preview.imageMessage = input.message
-  }
+
+}
+
   action search.preferences.status {
     input message string
     input busy boolean
     reduce state.search.preferences.message = input.message
     reduce state.search.preferences.busy = input.busy
-  }
-  action search.filter.language { input value string
-    reduce state.search.filters.language = input.value }
-  action search.filters.restore { input value object
-    reduce state.search.filters = input.value }
-  action search.filter.time { input value string
-    reduce state.search.filters.timeRange = input.value }
-  action search.filter.safe { input value string
-    reduce state.search.filters.safeSearch = input.value }
+
+}
+
+  action search.filter.language {
+    input value string
+    reduce state.search.filters.language = input.value
+}
+
+  action search.filters.restore {
+    input value object
+    reduce state.search.filters = input.value
+}
+
+  action search.filter.time {
+    input value string
+    reduce state.search.filters.timeRange = input.value
+}
+
+  action search.filter.safe {
+    input value string
+    reduce state.search.filters.safeSearch = input.value
+}
+
   action search.pending {
+    input view string
+    reduce state.search.presentation.view = input.view
     reduce state.search.preview.open = false
     reduce state.search.preview.id = ""
     reduce state.search.activity.busy = true
-    reduce state.search.activity.message = "Suche läuft …"
-  }
+    reduce state.search.activity.message = ""
+
+}
+
   action search.ready {
     input message string
+    reduce state.search.presentation.view = ""
     reduce state.search.activity.busy = false
     reduce state.search.activity.message = input.message
-  }
+
+}
+
   action search.preview.position {
     input position string
     input previousDisabled boolean
@@ -425,13 +3044,18 @@ template xtend.search {
     reduce state.search.preview.position = input.position
     reduce state.search.preview.previousDisabled = input.previousDisabled
     reduce state.search.preview.nextDisabled = input.nextDisabled
-  }
+
+}
+
   action search.streaming {
     input busy boolean
     input message string
+    reduce state.search.presentation.view = ""
     reduce state.search.activity.busy = input.busy
     reduce state.search.activity.message = input.message
-  }
+
+}
+
   portal search.root root "#xtend-page" layer surface
   portal search.results root "#result-slot" layer surface
   surface search.shell kind content component x-section {
@@ -445,22 +3069,66 @@ template xtend.search {
         resumability snapshot surface_state
         resumability event replay intent_queue
         resumability integrity signed_manifest
-      }
-    }
-    on change "#feedback-form select" -> action search.feedback.reason { payload value from target.value }
-    on change "#feedback-form input[type=checkbox]" -> action search.feedback.consent { payload value from target.checked }
-    on change "#language" -> action search.filter.language { payload value from target.value }
-    on change "#time-range" -> action search.filter.time { payload value from target.value }
-    on change "#safe-search" -> action search.filter.safe { payload value from target.value }
+
+}
+
+
+}
+
+    on change "#feedback-form select" -> action search.feedback.reason { payload value from target.value
+}
+
+    on change "#feedback-form input[type=checkbox]" -> action search.feedback.consent { payload value from target.checked
+}
+
+    on change "#language" -> action search.filter.language { payload value from target.value
+}
+
+    on change "#time-range" -> action search.filter.time { payload value from target.value
+}
+
+    on change "#safe-search" -> action search.filter.safe { payload value from target.value
+}
+
     on input "#search-input" -> action search.edit {
       preventDefault false
       payload value from target.value
-    }
-  }
+
+}
+
+
+}
+
   surface search.results kind content component x-section {
     source selector search.resultView
     key resultView.id
     portal search.results
-    lane visible weight 80 { hydrate search-results from selector search.resultView }
-  }
+    lane visible weight 80 { hydrate search-results from selector search.resultView
+}
+
+
+}
+
+  portal search.filterRoot root "#filter-slot" layer surface
+  surface search.filterClosed kind view component x-section {
+    source selector search.filterClosed
+    key filterClosed.id
+    portal search.filterRoot
+    lane visible weight 80 {
+    hydrate search-filter-closed from selector search.filterClosed
+}
+
+}
+
+  surface search.filterPanel kind view component x-section {
+    source selector search.filterPanel
+    key filterPanel.id
+    portal search.filterRoot
+    lane visible weight 80 {
+    hydrate search-filter-panel from selector search.filterPanel
+}
+
+}
+
+
 }

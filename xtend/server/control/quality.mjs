@@ -34,6 +34,33 @@ export class QualityService {
    return {ok:true,message:input.includeUrl?'Meldung aufgenommen. Der freiwillige Beleg wird spätestens nach sieben Tagen gelöscht.':'Meldung ohne Ergebnislink aufgenommen.'};
   });
  }
+ async submitBatch(input,context){
+  if(!context.browser)fail('csrf');
+  if(!Array.isArray(input?.tickets)||input.tickets.length<1||input.tickets.length>5||new Set(input.tickets).size!==input.tickets.length||!Object.hasOwn(FEEDBACK_REASONS,input.reason)||typeof input.includeUrl!=='boolean'||!/^[a-zA-Z0-9_-]{16,100}$/.test(input.requestKey||''))fail('validation','Bitte 1–5 Ergebnisse und einen Meldegrund auswählen.');
+  const claims=input.tickets.map(t=>this.claims(t));if(new Set(claims.map(c=>c.id)).size!==claims.length)fail('validation','Ein Ergebnis wurde mehrfach ausgewählt.');
+  const digest=createHash('sha256').update(JSON.stringify([claims.map(c=>[c.id,c.url,c.capability,c.engines]).sort((a,b)=>a[0].localeCompare(b[0])),input.reason,input.includeUrl])).digest('hex'),id=context.browser+':'+input.requestKey;
+  return this.plane.exclusive(async()=>{
+   this.prune();try{if(await this.plane.store.call('feedbackBatchCheck',{id,digest}))return {ok:true,duplicate:true,message:'Diese Meldung wurde bereits aufgenommen.'};}catch{fail('conflict','Die Aktionskennung wurde bereits anders verwendet.');}
+   if(claims.some(c=>this.used.has(c.id)))fail('feedback_duplicate','Ein ausgewähltes Ergebnis wurde bereits gemeldet. Bitte aus der Auswahl entfernen.');
+   const rows=claims.map(c=>({...c,engines:c.engines.filter(e=>this.plane.adapter.catalog.get(e.id)?.fingerprint===e.fingerprint&&this.plane.adapter.catalog.get(e.id)?.capabilities.includes(c.capability))}));
+   if(rows.some(c=>!c.engines.length))fail('feedback_expired','Eine Quelle wurde geändert. Bitte die Suche aktualisieren.');
+   const charges=[['browser-minute:'+context.browser,5,60000],['browser-day:'+context.browser,20,DAY],['network:'+context.network,60,60000],['global',120,60000]];
+   if(this.used.size+rows.length>20000||this.limits.size+4>20000)fail('overload');
+   for(const [key,max]of charges){const b=this.limits.get(key);if(b&&b.until>this.now()&&b.count+rows.length>max)fail('feedback_limit','Zu viele Meldungen. Bitte später erneut versuchen.');}
+   const votes=[...new Map(rows.flatMap(c=>c.engines.map(e=>[scope(e.id,c.capability),{engine:e.id,capability:c.capability}]))).values()],time=this.now(),entry={time,browser:context.browser,reason:input.reason},proposals=[],files=[],evidence=[];
+   for(const v of votes){const previous=this.state.proposals.filter(p=>p.engine===v.engine&&p.capability===v.capability&&p.kind==='review').sort((a,b)=>b.updated-a.updated)[0],stats=this.stats(v.engine,v.capability,previous&&previous.status!=='pending'?previous.updated:0,false,[entry]);if(stats.count>=5&&stats.contexts>=3&&previous?.status!=='pending')proposals.push({id:randomUUID(),...v,kind:'review',status:'pending',created:time,updated:time});}
+   try{
+    if(input.includeUrl)for(const c of rows){const key=await this.evidence.put(c.url);files.push(key);for(const e of c.engines)evidence.push({engine:e.id,capability:c.capability,evidence:key});}
+    const result=await this.plane.store.call('feedbackBatch',{id,digest,time,proofs:rows.map(c=>c.id),votes,reason:input.reason,evidence,proposals});this.adopt(result.quality);
+    if(result.duplicate){await Promise.all(files.map(f=>this.evidence.remove(f)));return {ok:true,duplicate:true,message:'Diese Meldung wurde bereits aufgenommen.'};}
+   }catch(error){await Promise.all(files.map(f=>this.evidence.remove(f).catch(()=>{})));fail(error.code==='proof_used'?'feedback_duplicate':'audit_unavailable',error.code==='proof_used'?'Ein ausgewähltes Ergebnis wurde bereits gemeldet.':'Die Meldung konnte nicht gespeichert werden. Bitte erneut versuchen.');}
+   for(const c of rows)this.used.set(c.id,c.expires);for(const [key,max,duration]of charges)for(const _ of rows)this.consume(key,max,duration);
+   for(const v of votes){const key=scope(v.engine,v.capability);this.window.set(key,[...(this.window.get(key)||[]),entry]);this.plane.telemetry.emit('feedback.received',{engineId:v.engine,capability:v.capability,origin:'feedback',reason:input.reason});}
+   for(const p of proposals)this.plane.telemetry.emit('quality.proposed',{engineId:p.engine,capability:p.capability,origin:'feedback'});
+   for(const v of votes)await this.evaluate(v.engine,v.capability).catch(()=>{});
+   return {ok:true,count:rows.length,message:input.includeUrl?'Meldung aufgenommen. Freiwillige Belege werden spätestens nach sieben Tagen gelöscht.':'Meldung ohne Ergebnislinks aufgenommen.'};
+  });
+ }
  async commit(action,input,context,extra){const time=this.now(),requestKey=context.actor+':'+input.requestKey,digest=createHash('sha256').update(JSON.stringify([action,input])).digest('hex');let result;
   try{result=await this.plane.store.call('mutation',{revision:integer(input.revision,0,Number.MAX_SAFE_INTEGER),reason:'insufficient_editorial_quality',actor:context.actor,action,target:input.id+':'+input.capability,requestKey,digest,time,...extra});}
   catch(e){fail(e.code==='conflict'?'conflict':'audit_unavailable',e.code==='conflict'?'Der Stand wurde geändert. Bitte aktualisieren und erneut prüfen.':'Änderung und Audit konnten nicht gespeichert werden.');}

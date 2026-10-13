@@ -1,0 +1,184 @@
+{
+  "previousImage": "sha256:a0f6a5d6b163f83ae825355b85cdd0a8c724d69214a7b15e022599ff0c68755b",
+  "image": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
+  "before": {
+    "bytes": 7958160,
+    "gzipBytes": 1546799
+  },
+  "after": {
+    "bytes": 7972731,
+    "gzipBytes": 1548662
+  },
+  "changes": [
+    {
+      "file": "admin/maraca/server/xtend.maraca.services.mjs",
+      "before": {
+        "sha256": "5e3422267f00041506834f022314b5ed2181f957a7dd812d284ada52ed8d84e5",
+        "bytes": 158882,
+        "gzipBytes": 49201
+      },
+      "after": {
+        "sha256": "ee5d6ad577acfa93cfe6a2fbd549e420c20952b9cacd7c378c232d026a4c2cf3",
+        "bytes": 158910,
+        "gzipBytes": 49211
+      }
+    },
+    {
+      "file": "admin/maraca/server/xtend.maraca.services.mjs.map",
+      "before": {
+        "sha256": "e2c8e7d60cc13a6c90502543eb76a91f8cb0c79a00ea3e843571ee5d263e27a6",
+        "bytes": 216749,
+        "gzipBytes": 25625
+      },
+      "after": {
+        "sha256": "8c268d83f2fbaa3f2db8ab75c4c18aca036cc922e26a38e601bf0694f3bd0231",
+        "bytes": 216790,
+        "gzipBytes": 25627
+      }
+    },
+    {
+      "file": "admin/maraca/xtend.maraca.mjs",
+      "before": {
+        "sha256": "817a5922179661c7199c50bb81c6348535bb03463d301ba212a713223a3a4507",
+        "bytes": 704832,
+        "gzipBytes": 135855
+      },
+      "after": {
+        "sha256": "2e8c4aa759b2b56287290a306d2130dad79a53c6886fd6de26d6ef3b3b507313",
+        "bytes": 712051,
+        "gzipBytes": 136667
+      }
+    },
+    {
+      "file": "admin/maraca/xtend.maraca.report.json",
+      "before": {
+        "sha256": "5ed90d478b04767bf31ad7a80145779931ae2c6d119dae35fc12461876defccb",
+        "bytes": 230433,
+        "gzipBytes": 23616
+      },
+      "after": {
+        "sha256": "7479b8543134b23fde2f1924a6808ebdb2710928b439efdbd945272dd1424639",
+        "bytes": 230403,
+        "gzipBytes": 23612
+      }
+    },
+    {
+      "file": "admin/maraca/xtend.maraca.size.json",
+      "before": {
+        "sha256": "c192c756dfbf37aa6a651b61cb07f7a24f8867c0eb94c1545b204efee8b424d9",
+        "bytes": 1839,
+        "gzipBytes": 839
+      },
+      "after": {
+        "sha256": "f99059d005a7a34927f4333505ab405d17b3f8377fa6fa57153ea9ffad5b391f",
+        "bytes": 1839,
+        "gzipBytes": 841
+      }
+    },
+    {
+      "file": "admin/page.mjs",
+      "before": {
+        "sha256": "4b16b71c553af5b1d628daa54950ac1e247c3d0b9dce6390460160def147ffc5",
+        "bytes": 242126,
+        "gzipBytes": 61416
+      },
+      "after": {
+        "sha256": "f6b00379dfe7165f868044eeafb81005ed223725028a105f44aac5bf2688e55f",
+        "bytes": 242694,
+        "gzipBytes": 61627
+      }
+    },
+    {
+      "file": "standalone/maraca/server/xtend.maraca.services.mjs",
+      "before": {
+        "sha256": "5e3422267f00041506834f022314b5ed2181f957a7dd812d284ada52ed8d84e5",
+        "bytes": 158882,
+        "gzipBytes": 49201
+      },
+      "after": {
+        "sha256": "ee5d6ad577acfa93cfe6a2fbd549e420c20952b9cacd7c378c232d026a4c2cf3",
+        "bytes": 158910,
+        "gzipBytes": 49211
+      }
+    },
+    {
+      "file": "standalone/maraca/server/xtend.maraca.services.mjs.map",
+      "before": {
+        "sha256": "e2c8e7d60cc13a6c90502543eb76a91f8cb0c79a00ea3e843571ee5d263e27a6",
+        "bytes": 216749,
+        "gzipBytes": 25625
+      },
+      "after": {
+        "sha256": "8c268d83f2fbaa3f2db8ab75c4c18aca036cc922e26a38e601bf0694f3bd0231",
+        "bytes": 216790,
+        "gzipBytes": 25627
+      }
+    },
+    {
+      "file": "standalone/maraca/xtend.maraca.mjs",
+      "before": {
+        "sha256": "d94ebfe25ad557b10b06d8a52b558152cef29780cc324c7cf4f0703d69e0616b",
+        "bytes": 891619,
+        "gzipBytes": 165090
+      },
+      "after": {
+        "sha256": "cacc7eae8ccb2dbb59003a99716af4eee889781f85d035dfbf05b3685095d234",
+        "bytes": 896677,
+        "gzipBytes": 165573
+      }
+    },
+    {
+      "file": "standalone/maraca/xtend.maraca.report.json",
+      "before": {
+        "sha256": "54490c2de36baece9eb4a3f426a0212482af75a125e13ac5519c958188471882",
+        "bytes": 219296,
+        "gzipBytes": 24189
+      },
+      "after": {
+        "sha256": "e134d6a9f68f5620835ad61d33e4616b0f8609c480df2cd43db01a9bd273ca36",
+        "bytes": 219378,
+        "gzipBytes": 24198
+      }
+    },
+    {
+      "file": "standalone/maraca/xtend.maraca.size.json",
+      "before": {
+        "sha256": "bd5edafd27397f38b6fa531af7e0faa6c8601c6659482edba91774ee6cb98c01",
+        "bytes": 1848,
+        "gzipBytes": 846
+      },
+      "after": {
+        "sha256": "8acd14978c3803f2cb9124889900343dd0fbcec50270d0936acec3d003bbd028",
+        "bytes": 1848,
+        "gzipBytes": 846
+      }
+    },
+    {
+      "file": "standalone/page.mjs",
+      "before": {
+        "sha256": "d3536f59aa7695978b6d41fa42aa774af31ff6057b103698d002c126748cb924",
+        "bytes": 83798,
+        "gzipBytes": 26422
+      },
+      "after": {
+        "sha256": "564faf9b591e100ad6fbbbb5411332dada6739dc497e11072d7eb6cdc508ddcc",
+        "bytes": 84137,
+        "gzipBytes": 26549
+      }
+    },
+    {
+      "file": "standalone/search.css",
+      "before": {
+        "sha256": "117205bb5e0184db33cdf1ea585d2403ec6e93e508b3ced2c87545f3cd6abb18",
+        "bytes": 48420,
+        "gzipBytes": 10602
+      },
+      "after": {
+        "sha256": "cea99c5d3cd077c71b7df7f9fd6ec772877f60fa250860044b522c6ca83a401f",
+        "bytes": 49617,
+        "gzipBytes": 10801
+      }
+    }
+  ],
+  "scope": "Complete generated assets comparison (gzip level 9, each file separately). Asset totals are not transferred-byte totals; fresh browser timing is measured separately."
+}

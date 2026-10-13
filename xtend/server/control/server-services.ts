@@ -2,6 +2,10 @@ import {defineServerServices,service} from '@ccslabs/xtend/maraca/app-services';
 import {application} from './composition.mjs';
 import {parseSearch} from '../search.mjs';
 export default defineServerServices({
+ 'search.weather.run':service({kind:'stream',target:'server',concurrency:'parallel',async *stream(input: {url:string},context){if(typeof input.url!=='string'||!input.url.startsWith('/search?')||input.url.length>12000)throw new Error('Invalid weather');const state=parseSearch(new URL(input.url,'http://localhost'));if(state.category!=='weather')throw new Error('Invalid weather');for await(const payload of application().weather.run(state,context))yield {type:payload.event==='weather.summary'?'complete':'delta',value:payload};}}),
+ 'search.weather.cache.context':service({kind:'query',target:'server',invoke(){return application().weather.context();}}),
+ 'search.feedback.batch.submit':service({kind:'command',target:'server',invoke(input,context){return application().quality.submitBatch(input,context);}}),
+ 'admin.weather.policy.set':service({kind:'command',target:'server',async invoke(input,context){await application().weather.mutate(input,context);return application().admin.snapshot(input,context);}}),
  'search.motd':service({kind:'query',target:'server',invoke(){return application().motd.current();}}),
  'admin.motd.set':service({kind:'command',target:'server',invoke(input,context){return application().admin.motd(input,context);}}),
  'search.run':service({kind:'stream',target:'server',concurrency:'parallel',async *stream(input: {url:string},context){

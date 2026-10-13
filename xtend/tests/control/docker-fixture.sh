@@ -1,7 +1,7 @@
 #!/bin/sh
 # Run as a Docker-authorized user from the repository root. No live credentials.
 set -eu
-fixture_image=${FIXTURE_IMAGE:-xtend-search:0.5.1}
+fixture_image=${FIXTURE_IMAGE:-xtend-search:0.6.0}
 fixture_settings=${FIXTURE_SETTINGS:-xtend/config/settings.control.fixture.yml}
 fixture_data=${FIXTURE_DATA_VOLUME:-xtend-cp-fixture-data}
 repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/../../.." && pwd)
@@ -30,6 +30,7 @@ docker run "$@" -d --name xtend-cp-search-test --network xtend-cp-fixture-net \
  -e PUBLIC_BASE_URL=http://localhost:8093 -e SEARXNG_BASE_URL=http://searxng:8082/ -e SEARXNG_TOKEN=fixture-test-only \
  -e NEXTCLOUD_BASE_URL=http://localhost:8094 -e NEXTCLOUD_CLIENT_ID=fixture -e NEXTCLOUD_CLIENT_SECRET=fixture-only \
  -e 'XTEND_ADMIN_ROLES={"administrator":"administrator","operator":"operator","viewer":"viewer"}' \
+ -e XTEND_WEATHER=1 -e XTEND_WEATHER_API_BASE_URL=http://127.0.0.1:8094 -e XTEND_WEATHER_GEOCODING_BASE_URL=http://127.0.0.1:8094 -e XTEND_DWD_FIXTURE_URL=http://127.0.0.1:8094/dwd.zip \
  -e XTEND_PROBES="${FIXTURE_PROBES:-1}" -e XTEND_TEST_FIXTURE=1 "$fixture_image" >/dev/null
 docker run -d --name xtend-cp-oauth-test --network container:xtend-cp-search-test --read-only --cap-drop ALL \
  -e FIXTURE_BIND=0.0.0.0 --entrypoint node "$fixture_image" xtend/tests/control/oauth-fixture.mjs >/dev/null

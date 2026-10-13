@@ -1,3 +1,4 @@
+import {WeatherService} from '../weather/service.mjs';
 import {MotdService} from './motd.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
@@ -22,7 +23,7 @@ export async function initialize(){
  const evidence=new EvidenceStore(process.env.XTEND_EVIDENCE_DIR||path.resolve('xtend/.evidence'),key);await evidence.initialize();
  const quality=new QualityService(plane,evidence),favicons=new FaviconService(adapter,key,{resolver:process.env.XTEND_FAVICON_RESOLVER||'duckduckgo'});
  const media=new MediaProxy(key),search=new SearchExecutor(plane,media,key,{quality,favicons}),admin=new AdminService(plane),auth=new NextcloudAuth();
- const motd=new MotdService(plane);
- current={motd,store,adapter,plane,media,search,admin,auth,quality,evidence,favicons};await plane.initialize();await motd.current();return current;
+ const motd=new MotdService(plane),weather=new WeatherService(plane,search);
+ current={weather,motd,store,adapter,plane,media,search,admin,auth,quality,evidence,favicons};await plane.initialize();weather.budget=await store.call('weatherBudget',{time:Date.now()});await motd.current();return current;
 }
 export function application(){if(!current)throw new Error('Host lifecycle has not initialized services.');return current;}

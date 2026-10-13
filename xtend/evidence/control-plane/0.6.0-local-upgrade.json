@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "scope": "Local Docker development instance only; no production deployment",
+  "from": "0.5.1",
+  "to": "0.6.0",
+  "frontendBefore": "sha256:b1cd871c8c6e07127ed9cd17c7ad90af85879be4870fec68ebd1eaf48ee5c5d8",
+  "frontendAfter": "sha256:6048b27d6e3c60cf5eb03586454ba5e98519a55bf44cb36e7a07a25b5926dd43",
+  "backendImage": "sha256:c02cc4c1f30f3609814017876a15d8a3be538e527054f038d8459eb934978f78",
+  "schemaBefore": 3,
+  "schemaAfter": 4,
+  "policiesAndGuardsUnchanged": true,
+  "motdUnchanged": true,
+  "persistentKeysUnchanged": true,
+  "ssoEnvironmentUnchanged": true,
+  "weatherApproved": false,
+  "protectedBackup": "/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/work/backups/pre-0.6.0-20261013T192656Z",
+  "health": {
+    "ok": true,
+    "version": "0.6.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  }
+}

@@ -1,6 +1,9 @@
 import {defineAppServices,service} from '@ccslabs/xtend/maraca/app-services';
 import {captureSearchResource,restoreSearchResource,invalidateSearchResource,type CacheScope,type SearchCacheData,type SearchCachedResource} from './cache-service-core.mjs';
 export default defineAppServices({
+ 'search.weather.run':service({kind:'stream',target:'server'}),
+ 'search.weather.cache.context':service({kind:'query',target:'server'}),
+ 'search.feedback.batch.submit':service({kind:'command',target:'server'}),
  'search.motd':service({kind:'query',target:'server'}),
  'search.cache.context':service({kind:'query',target:'server'}),
  'search.cache.capture':service<{data:SearchCacheData;scope:CacheScope},boolean>({kind:'command',target:'local',invoke:input=>captureSearchResource(input)}),

@@ -4,7 +4,7 @@ import {clearSearchResources,searchCacheStats} from './cache-service-core.mjs';
 export function createSearchResourcePolicy(){
  const transport=createHttpAppServiceTransport({pathPrefix:'/api/xtend/services'}),registry=createAppServiceRegistry(services,{transport,historyLimit:0});let disposed=false;
  const scope=page=>({version:page.version,contextKey:page.contextKey});
- const cacheContextQuery=signal=>registry.invoke('search.cache.context',{}, {},{signal,timeoutMs:3000});
+ const cacheContextQuery=(signal,weather)=>registry.invoke(weather?'search.weather.cache.context':'search.cache.context',{}, {},{signal,timeoutMs:3000});
  const capture=page=>{
   if(disposed||!page.props?.['search.data']?.cache?.enabled)return;
   void registry.invoke('search.cache.capture',{data:page.props['search.data'],scope:scope(page)}).catch(()=>{});

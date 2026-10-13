@@ -1,6 +1,6 @@
 {
   "name": "xtend-search",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -19,7 +19,8 @@
     "setup:control": "node scripts/setup-control.mjs"
   },
   "dependencies": {
-    "@ccslabs/xtend": "file:vendor-inputs/ccslabs-xtend-0.9.0-dd1917bfeb8f.tgz"
+    "@ccslabs/xtend": "file:vendor-inputs/ccslabs-xtend-0.9.0-dd1917bfeb8f.tgz",
+    "fast-xml-parser": "5.11.2"
   },
   "devDependencies": {
     "esbuild": "0.28.2",

@@ -1,6 +1,6 @@
 import {AppServiceError} from '@ccslabs/xtend/maraca/app-services';
 export const MODES = ['general','images','news','videos','music','it','science','files','social media'];
-export const LABELS = {general:'Web',images:'Bilder',news:'Nachrichten',videos:'Videos',music:'Musik',it:'IT',science:'Wissenschaft',files:'Dateien','social media':'Soziale Medien'};
+export const LABELS = {general:'Web',images:'Bilder',news:'Nachrichten',videos:'Videos',weather:'Wetter',music:'Musik',it:'IT',science:'Wissenschaft',files:'Dateien','social media':'Soziale Medien'};
 export const REASONS = ['initial_review','maintenance','provider_limit','technical_failure','schema_invalid','wrong_result_type','unsafe_url_scheme','audience_mismatch','insufficient_editorial_quality','recovery_review'];
 export function fail(code,message='Die Aktion konnte nicht ausgeführt werden.') { throw new AppServiceError(message,{code:`xsearch.${code}`,expose:true}); }
 export function integer(value,min,max,name='Wert') { const n=Number(value);if(!Number.isSafeInteger(n)||n<min||n>max)fail('validation',`${name}: ${min} bis ${max} erforderlich.`);return n; }

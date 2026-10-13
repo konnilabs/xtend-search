@@ -1,0 +1,32 @@
+{
+  "source": "Deutscher Wetterdienst",
+  "reviewed": "2026-10-13T17:38:16.420912+00:00",
+  "conversion": "prepare-dwd-geometries.py; exact rings; no simplification",
+  "files": [
+    {
+      "source": "https://www.dwd.de/DE/leistungen/opendata/help/warnungen/cap_gemeinden_shape_zip.zip?__blob=publicationFile&v=11",
+      "sha256": "648a3243b3ee0f7360917078ee1c0ccde0d9e517d05ecff6b4b7746af761746d",
+      "cells": 11214,
+      "crs": "EPSG:4326"
+    },
+    {
+      "source": "https://www.dwd.de/DE/leistungen/opendata/help/warnungen/cap_landkreise_shape_zip.zip?__blob=publicationFile&v=11",
+      "sha256": "5b8ae1db4d3d06190eab44fc71ed03328ec5d7f2f720fbc0f7c2268461ac0af6",
+      "cells": 402,
+      "crs": "EPSG:4326"
+    },
+    {
+      "source": "https://www.dwd.de/DE/leistungen/opendata/help/warnungen/cap_seegebiete_shape_zip.zip?__blob=publicationFile&v=4",
+      "sha256": "ba4671007680c30b07a1f58945bd2e26bed724185ccf4a4d20195e59abd75102",
+      "cells": 20,
+      "crs": "EPSG:4326"
+    },
+    {
+      "source": "https://www.dwd.de/DE/leistungen/opendata/help/warnungen/cap_kueste_shape_zip.zip?__blob=publicationFile&v=6",
+      "sha256": "958a07477e9faffa5ce23c08688a1590633116ff85f5111c6751a4977f4bbffe",
+      "cells": 8,
+      "crs": "EPSG:4326"
+    }
+  ],
+  "outputSha256": "44473971bd0391a588505609ae154f929ff74815c885cebfd13ec4dc4d02a4a7"
+}

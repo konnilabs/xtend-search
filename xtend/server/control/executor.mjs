@@ -19,7 +19,7 @@ export class SearchExecutor {
  sign(plan,state,page){const body=Buffer.from(JSON.stringify({v:1,engines:plan.map(e=>e.id),category:state.category,page,exp:Date.now()+900000})).toString('base64url');return body+'.'+this.mac(body,state);}
  mac(body,state){return createHmac('sha256',this.key).update(JSON.stringify([body,state.q,state.category,state.language,state.safeSearch,state.timeRange])).digest('base64url');}
  continuation(state){if(!state.continuation){if(state.page>1)fail('cursor','Diese Ergebnisseite benötigt einen gültigen Fortsetzungslink. Bitte erneut suchen.');return null;}const [body,signature,...rest]=state.continuation.split('.'),expected=this.mac(body,state);if(rest.length||!signature||signature.length!==expected.length||!timingSafeEqual(Buffer.from(signature),Buffer.from(expected)))fail('cursor','Der Fortsetzungslink ist ungültig.');let c;try{c=JSON.parse(Buffer.from(body,'base64url').toString());}catch{fail('cursor');}if(c.v!==1||c.exp<Date.now()||c.page!==state.page||c.category!==state.category||!Array.isArray(c.engines)||c.engines.length>5||c.engines.some(x=>typeof x!=='string'))fail('cursor','Der Fortsetzungslink ist abgelaufen oder ungültig.');return c.engines;}
- base(state){const data=baseData(state);data.standalone=true;data.searchRole='search';data.classicUrl='/';data.tabs=Object.entries(LABELS).filter(([id])=>['general','images'].includes(id)||[...this.plane.adapter.catalog.values()].some(e=>this.plane.policy(e.id).state==='allowed'&&this.plane.policy(e.id).capabilities.includes(id))).map(([id,label])=>({id,label,url:searchUrl(state,{category:id,page:1,continuation:''}),className:'tab'+(id===state.category?' active':''),current:id===state.category?'page':'false'}));data.statusLabel='';data.knowledgeStatus='not_applicable';data.showKnowledge=false;data.knowledgeMessage='';data.cache=this.cacheMetadata(state);return data;}
+ base(state){const data=baseData(state);data.standalone=true;data.searchRole='search';data.classicUrl='/';data.tabs=Object.entries(LABELS).filter(([id])=>id==='weather'?this.plane.weather?.isEnabled():['general','images'].includes(id)||[...this.plane.adapter.catalog.values()].some(e=>this.plane.policy(e.id).state==='allowed'&&this.plane.policy(e.id).capabilities.includes(id))).map(([id,label])=>({id,label,url:searchUrl(state,{category:id,page:1,continuation:''}),className:'tab'+(id===state.category?' active':''),current:id===state.category?'page':'false'}));data.showSourceStatus=state.category!=='weather';data.statusLabel='';data.knowledgeStatus='not_applicable';data.showKnowledge=false;data.knowledgeMessage='';data.cache=this.cacheMetadata(state);return data;}
  async* run(state,{signal}={}){
   if(!state.q.trim()){yield {event:'search.summary',data:this.base(state)};return;}
   validateQuery(state.q);const pinned=this.continuation(state);
@@ -35,22 +35,25 @@ export class SearchExecutor {
   if(pinned&&plan.length<pinned.length)addWarning('coverage','Ein Teil des ursprünglichen Quellenplans ist derzeit gesperrt oder unterstützt diese Seite nicht.');
   const snapshot=(finished=false)=>{
    const raw={results,infoboxes:boxes,unresponsive_engines:[],xtend:{schema:'searxng-xtend.core.v1',paging:false,fixture:process.env.XTEND_TEST_FIXTURE==='1'}};
-   const data={...normalizeResults(raw,state,{imageGeneration}),...{standalone:true,searchRole:'search',tabs:this.base(state).tabs,classicUrl:'/',knowledgeStatus,safeSearchNotice:warnings.some(w=>w.id.startsWith('safesearch-'))?'SafeSearch gilt nicht für alle Quellen. Administrative Ausnahmen: '+warnings.filter(w=>w.id.startsWith('safesearch-')).map(w=>w.id.slice(11)).join(', ')+'. Ungefilterte Inhalte sind möglich.':'',warnings:[...warnings]}};
+   const data={...normalizeResults(raw,state,{imageGeneration}),...{standalone:true,searchRole:'search',showSourceStatus:true,tabs:this.base(state).tabs,classicUrl:'/',knowledgeStatus,safeSearchNotice:warnings.some(w=>w.id.startsWith('safesearch-'))?'SafeSearch gilt nicht für alle Quellen. Administrative Ausnahmen: '+warnings.filter(w=>w.id.startsWith('safesearch-')).map(w=>w.id.slice(11)).join(', ')+'. Ungefilterte Inhalte sind möglich.':'',warnings:[...warnings]}};
    // This executor owns signed continuations. Drop the legacy normalizer's
    // numeric previous-page link before constructing the standalone controls.
    for(const [index,row]of data.results.entries()){
     const raw=results[index];row.favicon=this.features.favicons?.sign(row.url)||'';
     row.reportTicket=this.features.quality?.ticket(row.url,raw.engines,state.category,imageGeneration+row.id)||'';
+    row.reportKey='r:'+row.id;row.reportSelected=false;
     row.reportUrl=row.reportTicket?'/feedback?ticket='+row.reportTicket:'';
    }
    for(const [index,card]of data.knowledgeCards.entries()){
     card.reportTicket=this.features.quality?.ticket(card.links[0]?.url,boxes[index].xtend_engines||[],'knowledge',imageGeneration+card.id)||'';
+    card.reportKey='k:'+card.id;card.reportSelected=false;
     card.reportUrl=card.reportTicket?'/feedback?ticket='+card.reportTicket:'';
    }
+   data.reportable=data.results.some(r=>r.reportTicket)||data.knowledgeCards.some(r=>r.reportTicket);
    data.pages=[];
    data.skeleton=false;data.hasKnowledge=boxes.length>0;data.showKnowledge=state.category==='general'&&state.page===1&&process.env.XTEND_KNOWLEDGE!=='0';data.knowledgeMessage=({pending:'Zusatzinformationen werden geprüft …',not_found:'Keine gesicherten Zusatzinformationen gefunden.',ambiguous:'Die Anfrage ist mehrdeutig. Es wird keine Zuordnung vermutet.',temporarily_unavailable:'Zusatzinformationen sind vorübergehend nicht verfügbar.',unavailable:'Keine freigegebene, verfügbare Knowledge-Quelle unterstützt diese Filter.',available:'Quellen und Lizenzangaben: siehe verlinkte Originalquelle.'})[knowledgeStatus]||'';if(state.timeRange)data.knowledgeMessage+=' Zeitlose Zusatzinformationen – unabhängig vom gewählten Zeitraum.';const cardSource=boxes[0]?.xtend_engines?.[0];if(cardSource){const notice=this.plane.adapter.catalog.get(cardSource)?.knowledgeLanguageNotice;if(notice)data.knowledgeMessage+=' '+notice;}data.knowledgeDiagnostics=[...this.plane.adapter.catalog.values()].filter(e=>e.capabilities.includes('knowledge')).map(e=>({id:e.id,reason:this.plane.eligible(e,knowledgeState)||'eligible'}));
-   data.statusLabel=finished?`${contributing} von ${fullPlan.length} Quellen mit Treffern${failed?` · ${failed} fehlgeschlagen`:''}${skipped?` · ${skipped} nicht ausgeführt`:''}${excludedSources.length?` · ${excludedSources.length} weitere nicht berücksichtigt`:''}`:`${completed} von ${fullPlan.length} Quellen abgeschlossen · ${contributing} mit Treffern · Suche läuft …`;
-   data.countLabel=`${data.results.length} Ergebnisse${finished?'':' · Suche läuft …'}`;
+   data.statusLabel=finished?`${contributing} von ${fullPlan.length} Quellen mit Treffern${failed?` · ${failed} fehlgeschlagen`:''}${skipped?` · ${skipped} nicht ausgeführt`:''}${excludedSources.length?` · ${excludedSources.length} weitere nicht berücksichtigt`:''}`:`${completed} von ${fullPlan.length} Quellen abgeschlossen · ${contributing} mit Treffern`;
+   data.countLabel=`${data.results.length} Ergebnisse`;
    if(!finished){data.pages=[];data.empty=false;data.error=false;}
    else{
     if(!dispatches||(!results.length&&failed>0)){data.error=true;data.empty=false;data.errorMessage=!dispatches?unavailableMessage(excluded):'Die angefragten Suchquellen haben keine verwertbare Antwort geliefert. Bitte später erneut versuchen.';data.countLabel='Suche derzeit nicht verfügbar';}

@@ -20,27 +20,33 @@ export function installSearchMotion(){
   const transform=`translate(${rect.x-after.x}px,${rect.y-after.y}px) scale(${rect.width/after.width},${rect.height/after.height})`;
   run(target,{effect:'layout-flip',layoutKey,keyframes:[{transform,transformOrigin:'0 0'},{transform:'none',transformOrigin:'0 0'}]});
  };
+ const commit=()=>{
+  const next=document.querySelector('#search-shell')?.dataset.view;
+  if(next===view)return; // Optimistic XScaler commits are not layout changes.
+  if(before&&!motion.matches){
+   flip(document.querySelector('#search-form'),before.form,'xtend-search-form');
+   flip(document.querySelector('#search-wordmark'),before.wordmark,'xtend-search-wordmark');
+   if(next==='results'){
+    run(document.querySelector('.header-backdrop'),{effect:'fade'});
+    run(document.querySelector('#search-logo'),{effect:'fade'});
+   }
+  }
+  view=next;before=null;
+ };
+ // RMT can commit the presentation before PageClient receives its page.
+ // Observe that commit before paint; never mutate framework-owned markup.
+ const observer=new MutationObserver(commit);
+ observer.observe(document.getElementById('xtend-page'),{subtree:true,attributes:true,attributeFilter:['data-view']});
  window.addEventListener('xtend-page:event',({detail:event})=>{
   if(event.type==='pending'){
    stop();
    before={form:document.querySelector('#search-form')?.getBoundingClientRect(),wordmark:document.querySelector('#search-wordmark')?.getBoundingClientRect()};
   }
-  if(event.type==='navigate'){
-   const next=document.querySelector('#search-shell')?.dataset.view;
-   if(next===view)return; // Optimistic XScaler commits are not layout changes.
-   if(before&&!motion.matches){
-    flip(document.querySelector('#search-form'),before.form,'xtend-search-form');
-    flip(document.querySelector('#search-wordmark'),before.wordmark,'xtend-search-wordmark');
-    if(next==='results'){
-     run(document.querySelector('.header-backdrop'),{effect:'fade'});
-     run(document.querySelector('#search-logo'),{effect:'fade'});
-    }
-   }
-   view=next;before=null;
-  }
-  if(event.type==='error'){before=null;stop();}
+  if(event.type==='navigate')commit();
+  if(event.type==='error')stop();
  });
  window.addEventListener('resize',stop,{passive:true});
  motion.addEventListener('change',stop);
- window.addEventListener('pagehide',stop,{once:true});
+ window.addEventListener('pagehide',()=>{observer.disconnect();stop();},{once:true});
+ return {commit};
 }

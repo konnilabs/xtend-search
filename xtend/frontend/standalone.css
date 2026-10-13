@@ -90,3 +90,83 @@
 .search-button x-icon,.search-button x-spinner{animation:search-glyph-enter .12s ease-out}
 @keyframes search-glyph-enter{from{opacity:.3}to{opacity:1}}
 @media(prefers-reduced-motion:reduce){.search-button x-icon,.search-button x-spinner{animation:none}}
+/* A single search-field frame; button radius is derived from the same tokens. */
+.search-shell{--search-radius:16px;--search-inset:6px;--search-height:60px}
+.search-shell .search-box,.search-shell[data-view=results] .topbar .search-box,.search-shell[data-view=home] .search-box{height:var(--search-height);border-radius:var(--search-radius);padding:var(--search-inset);padding-left:18px;gap:12px}
+.search-shell .search-button,.search-shell[data-view=results] .topbar .search-button{height:calc(var(--search-height) - var(--search-inset)*2 - 2px);width:calc(var(--search-height) - var(--search-inset)*2 - 2px);min-width:44px;border-radius:calc(var(--search-radius) - var(--search-inset));min-height:44px}
+.search-shell[data-view=home]{--search-height:66px}
+.search-tools{flex-wrap:wrap;gap:8px}.category-tabs{flex-wrap:wrap;min-width:0}.report-start{margin-left:auto;display:inline-flex;align-items:center;--xtend-button-radius:4px;--xtend-button-background:transparent;--xtend-button-color:var(--muted)}
+.search-tools .filters>summary,.report-start::part(button){height:44px;min-height:44px}
+.report-start{align-self:flex-start;line-height:1}
+/* Returning home must not briefly expose the previous result surface. */
+.search-shell[data-view=home] #result-slot>*{display:none}
+/* Reserve the incoming surface before a slow PageClient response arrives. */
+.search-shell[data-presentation=results] #result-slot{min-height:100dvh}
+#filter-slot x-section[hidden]{display:none}#filter-slot:empty{display:none}.weather-irrelevant-filter{display:contents}
+/* The portal owns the popover width, independent of the narrow summary.
+   XSection's 100% content limit then refers to the panel, not the tool button. */
+.search-shell #filter-slot{position:absolute;right:0;top:calc(100% + 8px);width:min(310px,calc(100vw - 32px));z-index:30}
+.search-shell #filter-slot .filter-panel{position:relative;top:auto;right:auto;width:100%;max-width:100%}
+.filter-content{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;padding:0;min-width:0}
+.filter-content .filter-field{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.filter-content .filter-field label{margin:0}
+.filter-content .filter-note{margin:0}
+.filter-actions{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.filter-actions>button{width:100%;min-height:44px;margin:0}
+.filter-panel::part(container){display:block}
+.filter-panel::part(content){width:100%;min-width:0}
+.report-select{display:flex;align-items:center;gap:10px;min-height:44px;font-size:13px;margin-bottom:8px;color:var(--muted)}.report-checkbox{width:20px;height:20px;accent-color:var(--accent);flex-shrink:0}
+.search-shell{--report-selection-bg:#f7e8e5}
+@media(prefers-color-scheme:dark){.search-shell{--report-selection-bg:#382825}}
+.result[data-report-selected],.image-results .result[data-report-selected],.knowledge-card[data-report-selected]{outline:2px solid var(--accent);outline-offset:8px;background:var(--report-selection-bg)}
+x-search-report-assistant{position:fixed;right:20px;bottom:20px;width:min(390px,calc(100vw - 32px));max-height:calc(100dvh - 40px);overflow:auto;z-index:45;filter:drop-shadow(0 6px 24px #0003)}
+.report-actions{display:flex;gap:12px;flex-wrap:wrap}.report-actions x-button{--xtend-button-background:var(--deep);--xtend-button-color:var(--on-accent);--xtend-button-radius:4px}
+#feedback-form{padding:16px;gap:12px}#feedback-form label{font-size:13px}.feedback-url{margin:0;padding:0 0 0 18px;max-height:100px;overflow:auto}.feedback-url a{display:block;overflow-wrap:anywhere}#feedback-form select{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:4px}.feedback-error:empty{display:none}
+/* Reserve room for the visible keyboard outline without covering the label. */
+#feedback-form .field{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+.weather-board{display:block;width:100%;min-width:0}.weather-content{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}.weather-content section{background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:24px;min-width:0}.weather-content h2{margin:0 0 16px;font-size:19px;font-weight:580}.weather-content p{line-height:1.5}.weather-current{min-height:310px}.weather-now{display:grid;grid-template-columns:100px 1fr;align-items:center;gap:0 18px;min-height:190px}.weather-symbol{grid-row:1/4;width:80px;height:80px;object-fit:contain}.weather-temperature{font-size:64px;margin:0;line-height:1.1!important}.weather-now p{margin:0}.weather-now .filter-note{grid-column:1/-1;margin-top:12px}.weather-placeholder{min-height:190px}.weather-hours{display:flex;gap:14px;overflow-x:auto;scrollbar-width:thin;min-height:230px}.weather-hour{display:flex;flex-direction:column;gap:12px;align-items:center;min-width:60px}.weather-small-symbol{width:40px;height:40px;object-fit:contain}.weather-day{display:grid;grid-template-columns:1fr 40px 1fr 1fr 1fr;gap:12px;align-items:center;min-height:46px}.weather-day>p{margin:0}.weather-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.weather-metric{border-bottom:1px solid var(--line);padding-bottom:10px}.weather-metric p{margin:4px 0}.weather-warnings,.weather-attribution{grid-column:1/-1}.weather-warnings x-alert{display:block;margin:12px 0}.weather-attribution{font-size:12px;color:var(--muted)}.weather-places{display:grid;gap:12px;max-width:740px;margin:24px auto}.weather-place{display:block;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:4px}.weather-place:hover{border-color:var(--accent)}
+@keyframes weather-breathe{50%{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:no-preference){.weather-symbol{animation:weather-breathe 6s ease-in-out infinite}.weather-board[data-motion-visible=false] .weather-symbol{animation-play-state:paused}}
+@media(max-width:700px){.weather-content{grid-template-columns:minmax(0,1fr);gap:14px}.weather-content section{padding:18px}.weather-day{gap:6px;grid-template-columns:1fr 32px 1fr 1fr 1fr;font-size:13px}.weather-day img{width:32px;height:32px}.report-start{font-size:12px}x-search-report-assistant{bottom:8px;right:8px;width:calc(100vw - 16px);max-height:50dvh}.result-area:has(x-search-report-assistant){padding-bottom:240px}}
+.report-start{--xtend-button-surface:transparent;--xtend-button-text:var(--muted);--xtend-button-font-size:13px;--xtend-button-padding-x:10px;--xtend-button-padding-y:10px;animation:search-glyph-enter .16s ease-out}
+.report-actions x-button{--xtend-button-surface:var(--deep);--xtend-button-text:var(--on-accent);--xtend-button-secondary-surface:var(--panel);--xtend-button-secondary-text:var(--ink);--xtend-color-action:var(--deep);--xtend-text-on-action:var(--on-accent)}
+.search-feedback::part(surface){background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:4px;box-shadow:0 12px 48px #0005}.search-feedback::part(title){color:var(--ink)}.search-feedback::part(backdrop){background:#0008;backdrop-filter:blur(3px)}
+.weather-hourly{min-height:310px}.weather-daily{min-height:398px}.weather-metrics{min-height:320px}.weather-warnings{min-height:160px}
+@media(prefers-reduced-motion:reduce){.report-start{animation:none}}
+.source-status[hidden]{display:none}.weather-metric{display:flex;flex-direction:column;gap:8px;justify-content:center}.weather-metric>span{font-size:13px;color:var(--muted)}.weather-hour>span{white-space:nowrap}.weather-alert-copy{display:grid;gap:10px}.weather-alert-copy p{margin:0}.weather-alert-copy h3{margin:0;font-size:17px}
+.weather-warnings{--xtend-feedback-radius:4px;--xtend-feedback-shadow:none}
+.weather-budget-live{padding:0;list-style:none;display:grid;gap:12px}.weather-budget-live li{display:flex;gap:12px;justify-content:space-between}
+/* Readable confirmation copy and equal forecast baselines, including long days. */
+.search-feedback>p,.search-feedback::part(content),.search-feedback::part(title){color:var(--ink)!important}.search-feedback::part(surface){color:var(--ink)!important;background:var(--panel)!important}
+.weather-hour{display:grid;grid-template-rows:24px 40px 24px 24px;align-content:start;justify-items:center;flex:0 0 64px;gap:12px;text-align:center}
+.weather-day{height:48px;grid-template-columns:minmax(96px,1.3fr) 40px repeat(3,minmax(32px,.7fr));align-items:center}.weather-day>:first-child{white-space:nowrap}.weather-day>*{min-width:0;white-space:nowrap}
+@media(max-width:700px){.weather-day{grid-template-columns:minmax(86px,1fr) 28px 28px 28px 38px;gap:6px;font-size:12px}.weather-day img{width:28px;height:28px}}
+
+/* XDialog chrome shares one aligned header row; native close keeps a 44px target. */
+.search-feedback::part(surface){box-sizing:border-box;min-width:0;padding:24px;max-width:calc(100vw - 24px)}
+.search-feedback::part(title){align-self:center;line-height:1.3;text-shadow:none}
+.search-feedback::part(close){align-self:center;justify-self:end;width:44px;height:44px;min-width:44px;min-height:44px;padding:0;font-size:20px;color:var(--ink);background:transparent;box-shadow:none}
+#report-discard::part(button){background:#edd8d3;color:#6a2925}
+#report-discard::part(button):hover{background:#e6c6bf}
+@media(prefers-color-scheme:dark){#report-discard::part(button){background:#49312f;color:#f3d7d2}#report-discard::part(button):hover{background:#593a36}}
+
+#report-discard-dialog>.report-actions{width:100%;justify-content:flex-end}
+
+/* One intentional mobile tab row; tools occupy their own stable row. */
+@media(max-width:700px){
+ .search-tools .category-tabs{flex:1 1 100%;width:100%;flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:none;scroll-padding-inline:4px;gap:4px;padding-block:2px;-webkit-overflow-scrolling:touch}
+ .search-tools .category-tabs::-webkit-scrollbar{display:none}
+ .category-tabs .tab{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 12px}
+ .search-tools .filters{margin-left:auto}
+ .search-tools:has(.report-start) .filters{margin-left:0}
+}
+
+.source-status summary:empty{visibility:hidden;min-height:34px}
+.weather-daily{min-height:430px}
+@media(max-width:700px){.weather-daily{min-height:450px}}
+
+/* Reserve the same current/metric layout before and after streamed values. */
+.weather-now,.weather-current .weather-placeholder{min-height:230px;margin:0}
+/* Empty paging chrome stays reserved while incremental results grow. */
+.pagination:empty{visibility:hidden}
+.search-button>x-icon,.search-button>x-spinner{display:inline-flex;align-items:center;justify-content:center;flex:none;width:22px;height:22px}

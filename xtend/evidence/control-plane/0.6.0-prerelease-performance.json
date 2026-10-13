@@ -1,0 +1,110 @@
+{
+  "version": "0.6.0",
+  "ok": true,
+  "browser": "145.0.7632.6",
+  "cpu": "AMD Ryzen 5 3600 6-Core Processor",
+  "scope": "Offline Docker, identical 100/700/2500ms engine fixtures, ten fresh contexts; no live providers",
+  "runs": [
+    {
+      "firstMs": 476.90000000037253,
+      "completeMs": 3114.5999999996275,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 464.40000000037253,
+      "completeMs": 3087,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 465.40000000037253,
+      "completeMs": 3059.800000000745,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 502.09999999962747,
+      "completeMs": 3105.699999999255,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 487.5,
+      "completeMs": 3091.9000000003725,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 472,
+      "completeMs": 3089.0999999996275,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 468.2000000011176,
+      "completeMs": 3070.9000000003725,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 472.2000000011176,
+      "completeMs": 3094.9000000003725,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 14300000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 482.2000000011176,
+      "completeMs": 3125,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    },
+    {
+      "firstMs": 488.19999999925494,
+      "completeMs": 3097.5999999996275,
+      "cls": 0,
+      "weatherAssetRequests": 0,
+      "cacheSerializedBytes": 21129,
+      "heapUsedBytes": 15200000,
+      "jsGzipBytes": 619892
+    }
+  ],
+  "comparison": {
+    "baselineVersion": "0.5.1",
+    "baselineFirstMs": 527.6000000014901,
+    "firstMs": 476.90000000037253,
+    "baselineCompleteMs": 2979.300000000745,
+    "completeMs": 3094.9000000003725,
+    "baselineJsGzipBytes": 581911,
+    "jsGzipBytes": 619892,
+    "firstRegressionPercent": -9.609552691617584,
+    "appDeltaGzipBytes": 37981
+  }
+}
