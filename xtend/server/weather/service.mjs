@@ -17,12 +17,12 @@ function current(raw){const c=raw?.current;if(!c||!finite(c.temperature_2m)||!Nu
 function forecast(raw,p){const h=raw?.hourly,d=raw?.daily;if(!Array.isArray(h?.time)||!Array.isArray(d?.time)||!d.time.length||h.time.length>200||d.time.length>8)throw Error('schema_invalid');
  const hourly=h.time.slice(0,24).map((time,i)=>{
   const condition=weatherCondition(h.weather_code?.[i],h.is_day?.[i]);
-  return {...condition,id:String(i),label:time.slice(11,16),conditionLabel:condition.label,temperature:weatherTemperature(h.temperature_2m?.[i]).label,temperatureValue:weatherTemperature(h.temperature_2m?.[i]).value,temperatureFahrenheit:weatherTemperature(h.temperature_2m?.[i],true).value,rain:value(h.precipitation_probability?.[i],' %')};
+  return {...condition,id:String(i),label:time.slice(11,16),conditionLabel:condition.label,temperature:weatherTemperature(h.temperature_2m?.[i]).label,temperatureValue:weatherTemperature(h.temperature_2m?.[i]).value,temperatureFahrenheit:weatherTemperature(h.temperature_2m?.[i],true).value,rain:value(h.precipitation_probability?.[i],' %'),rainValue:value(h.precipitation_probability?.[i])};
  });
  const daily=d.time.slice(0,7).map((time,i)=>{
   const condition=weatherCondition(d.weather_code?.[i],1);
   const label=i===0?'Heute':new Intl.DateTimeFormat('de-DE',{weekday:'long',timeZone:'UTC'}).format(new Date(time+'T12:00:00Z'));
-  return {...condition,id:time,label,conditionLabel:condition.label,low:weatherTemperature(d.temperature_2m_min?.[i]).label,lowValue:weatherTemperature(d.temperature_2m_min?.[i]).value,lowFahrenheit:weatherTemperature(d.temperature_2m_min?.[i],true).value,high:weatherTemperature(d.temperature_2m_max?.[i]).label,highValue:weatherTemperature(d.temperature_2m_max?.[i]).value,highFahrenheit:weatherTemperature(d.temperature_2m_max?.[i],true).value,rain:value(d.precipitation_probability_max?.[i],' %')};
+  return {...condition,id:time,label,conditionLabel:condition.label,low:weatherTemperature(d.temperature_2m_min?.[i]).label,lowValue:weatherTemperature(d.temperature_2m_min?.[i]).value,lowFahrenheit:weatherTemperature(d.temperature_2m_min?.[i],true).value,high:weatherTemperature(d.temperature_2m_max?.[i]).label,highValue:weatherTemperature(d.temperature_2m_max?.[i]).value,highFahrenheit:weatherTemperature(d.temperature_2m_max?.[i],true).value,rain:value(d.precipitation_probability_max?.[i],' %'),rainValue:value(d.precipitation_probability_max?.[i])};
  });
  if(!hourly.some(h=>h.temperature!=='–')||!daily.some(d=>d.high!=='–'))throw Error('schema_invalid');
  return {hourly,daily,metrics:[{id:'uv',label:'UV-Index',value:value(d.uv_index_max?.[0])},{id:'sunrise',label:'Sonnenaufgang',value:d.sunrise?.[0]?.slice(11,16)||'–'},{id:'sunset',label:'Sonnenuntergang',value:d.sunset?.[0]?.slice(11,16)||'–'}]};

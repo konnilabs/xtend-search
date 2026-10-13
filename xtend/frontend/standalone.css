@@ -162,15 +162,16 @@ x-search-report-assistant{position:fixed;right:20px;bottom:20px;width:min(390px,
 .weather-apparent{white-space:nowrap;font-size:14px}
 .weather-now .filter-note{grid-column:1/-1;align-self:end}
 .weather-hourly{display:flex;flex-direction:column}
-.weather-hours{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(64px,1fr);grid-template-rows:minmax(136px,1fr);gap:8px;min-height:136px;flex:1;overflow-x:auto;scrollbar-width:thin;overscroll-behavior-inline:contain}
+.weather-hours{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(72px,1fr);grid-template-rows:minmax(136px,1fr);gap:8px;min-height:136px;flex:1;overflow-x:auto;scrollbar-width:thin;overscroll-behavior-inline:contain}
 .weather-hour{display:grid;grid-template-rows:20px 40px 22px 22px;align-content:center;justify-items:center;gap:6px;min-width:0;text-align:center}
 .weather-hour>span{white-space:nowrap}
-.weather-temperature-reading,.weather-reading{display:inline-flex;align-items:center;justify-content:center;gap:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.weather-temperature-reading,.weather-reading{display:inline-grid;grid-template-columns:14px 2.8em 14px;align-items:center;justify-content:center;gap:3px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .weather-reading{position:relative}
-.weather-temperature-reading>.weather-value,.weather-reading>.weather-value{width:5.5ch;text-align:right}
+.weather-temperature-reading>.weather-value,.weather-reading>.weather-value{min-width:0;text-align:right}
 .weather-temperature-unit{display:inline-block;flex:none;width:3ch;text-align:left;font-size:10px;font-weight:500}
+.weather-temperature-reading>.weather-temperature-unit,.weather-reading>.weather-temperature-unit,.weather-reading-unit{width:auto;font-size:10px;font-weight:500;text-align:left}
 .weather-hour .weather-temperature-reading,.weather-hour .weather-reading{font-size:13px}
-.weather-reading x-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:14px;height:14px;color:var(--muted);font-size:14px;--xtend-icon-color:currentColor;--xtend-icon-size:14px}
+.weather-reading x-icon,.weather-temperature-reading x-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;width:14px;height:14px;color:var(--muted);font-size:14px;--xtend-icon-color:currentColor;--xtend-icon-size:14px}
 .weather-sr-label{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
 .weather-small-symbol{width:40px;height:40px;object-fit:contain}
 .weather-daily{min-height:calc(2 * var(--weather-card-padding) + 348px)}
@@ -190,7 +191,7 @@ x-search-report-assistant{position:fixed;right:20px;bottom:20px;width:min(390px,
 .weather-places{display:grid;gap:12px;max-width:740px;margin:24px auto}
 .weather-place{display:block;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:4px}.weather-place:hover{border-color:var(--accent)}
 @container weather-board (min-width:600px){
- .weather-hours{grid-auto-flow:row;grid-template-columns:repeat(12,minmax(64px,1fr));grid-template-rows:repeat(2,minmax(128px,1fr));min-height:264px}
+ .weather-hours{column-gap:4px;grid-auto-flow:row;grid-template-columns:repeat(12,minmax(72px,1fr));grid-template-rows:repeat(2,minmax(128px,1fr));min-height:264px}
  .weather-day{grid-template-columns:minmax(96px,1.3fr) 40px repeat(3,minmax(74px,.7fr));grid-template-rows:44px;gap:12px;font-size:14px}
  .weather-day>:first-child,.weather-day>img{grid-column:auto;grid-row:auto}
  .weather-day>img{justify-self:center;width:40px;height:40px}

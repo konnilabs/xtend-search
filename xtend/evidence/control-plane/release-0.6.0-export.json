@@ -1,7 +1,7 @@
 {
   "version": "0.6.0",
   "tag": "xtend-search:0.6.0",
-  "id": "sha256:c0000cff9f0e835462ff002b26e0e0fc34e7245d9b348c95a3db5360899157ae",
+  "id": "sha256:b1e60b07cf69038a2075da31a85ee725b6a138b60385048fa7cf8c4ec1320269",
   "platform": "linux/amd64",
   "sourceHashes": {
     "version": "0.6.0",
@@ -36,10 +36,10 @@
       "frontend/search.css": "c116dbf893b3e427484054f6aaf96a4e629db40aece7e0e16097e886ec51a4d9",
       "frontend/search.rmt": "2dd22e872959e114819a09154dc2edaa9c7a2e3afd56b47028bf58f7e458a8cc",
       "frontend/services.ts": "2755da47d5b8f8c66634c831f7e241cbeef3ee4c9a388980b0a25ee77b3846f0",
-      "frontend/standalone-host.mjs": "c7a7eb340c8f35668a28caaa5d7067d0cf63013fd57d69be0f3d0aed96964ace",
+      "frontend/standalone-host.mjs": "b94826782592736195ac719bb0c611631e0ac18fb313eebd4e9724fe9b008dcb",
       "frontend/standalone-streaming.mjs": "fe9e02df611f8a4708cb7dc542d2d523b8e90802336684c6b70e200a5f8e6f0e",
-      "frontend/standalone.css": "1e01897cdb1e72637b543757cafab5e89977b9de676a36da7dbb0de9dfdb6cb5",
-      "frontend/standalone.rmt": "d7f284abfc67c323b76f5e9cba5b7edae8ed9e4045090fba6da862229d5a40ed",
+      "frontend/standalone.css": "0dcf7d378e6a40afa7a60aa6d8e56d12ec9b647078e417942dd1484b0d9403d7",
+      "frontend/standalone.rmt": "d81813a963b778fde7c6c0e665cb8c344739071734ab1a501f4243878e12264c",
       "frontend/streaming.mjs": "fa60c0552d1c4c21f729717043e9798961d228ff3cbe05ff8be97db676ffe3e2",
       "frontend/weather-units.mjs": "8c3a3a7f74bf43d121b7ce948639da7431e2c850fae4510adae232baf12907ab",
       "frontend/wordmark.svg": "7616fee743387782d4bd224c2aba8ebcc1eeb04c5d149eae1c7cbdc452a7ddc8",
@@ -106,7 +106,7 @@
       "server/control/store.mjs": "106a0374815cd0fe9b97db0fa9d73cce78de8406510046538f17f8749881ed40",
       "server/control/telemetry.mjs": "a439a5a2e850c91604d30c14ea8b67c9886c67df9b8f303f8b3944f27781469f",
       "server/weather/dwd.mjs": "75e17c1030936a766402e145a92a35e2eddd74b85833c2cf6609d7bbd612c788",
-      "server/weather/service.mjs": "57ee5d6eee015c2fb3ed13ee022daf8a146a1eb86a4ebe5c51ec97bf33329d6c",
+      "server/weather/service.mjs": "72dad1a7ca41103916025428ed2ed8710ba9d24c4957456958be54646f683b5c",
       "server/weather/zip.mjs": "41a6402bf23c886cd920ebc83bbf1ae84fbfa2fc1f92b395bb87ad8586c5d688",
       "shared/about.mjs": "57ab2e8de1640e13e586faf659a929015a9c933255f20111aaa953fcce953b8e",
       "shared/cache-identity.mjs": "0885fcb4bd06fa6b99edc36efefc15c0996824a15aa992c6a551b9a5ead002cd",
@@ -126,11 +126,11 @@
     },
     "bundles": {
       "admin/admin.css": "d4fe530d42c8f39af6913f2348c126550be8cb3df297f98e30a86f8e24877d55",
-      "standalone/search.css": "578efd6fc8a05c434aefa0961b40aa4ed5e72206fe3373c564371c60d7c921e6",
-      "standalone/page.mjs": "19b8001ff9c3cc9ac6a52868e9a6e0eda33ec445be2a7bf850a6a7ced07a4788",
+      "standalone/search.css": "b6f33c7d5b0c6fbdbf843766ddd0295a746a604c08e56e9e52895526d2cbe474",
+      "standalone/page.mjs": "90ae6103a8807569df5991656031f35a044368e760f9c5d4c610a46b13c2d17d",
       "standalone/admin-login.mjs": "8b8058ee97a66bbc4358aaf4059eb9183f17ac4b19784cbcde3504c87dba2b2f"
     }
   },
   "archive": "XTend-search-Docker-Image-0.6.0-linux-amd64.tar.gz",
-  "bytes": 170469147
+  "bytes": 170483750
 }

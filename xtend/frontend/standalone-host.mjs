@@ -18,6 +18,7 @@ import {installSearchMotion} from './search-motion.mjs';
 export function installSearchHost(){
  registerIconPack({id:'search',distribution:'local-build',cdnAllowed:false,viewBox:'0 0 24 24',strokeLinecap:'round',strokeLinejoin:'round',icons:{
   filter:{nodes:[{tag:'path',attrs:{d:'M3 4h18l-7 8v7l-4 2v-9z'}}]},
+  temperature:{nodes:[{tag:'path',attrs:{d:'M12 14.5V5a3 3 0 0 0-6 0v9.5a5 5 0 1 0 6 0z M9 8v9'}}]},
   'temperature-low':{nodes:[{tag:'path',attrs:{d:'M12 14.5V5a3 3 0 0 0-6 0v9.5a5 5 0 1 0 6 0z M9 8v9 M19 4v9m-3-3 3 3 3-3'}}]},
   'temperature-high':{nodes:[{tag:'path',attrs:{d:'M12 14.5V5a3 3 0 0 0-6 0v9.5a5 5 0 1 0 6 0z M9 8v9 M19 13V4m-3 3 3-3 3 3'}}]},
   'rain-probability':{nodes:[{tag:'path',attrs:{d:'M12 3c-2.5 3-6 7-6 11a6 6 0 0 0 12 0c0-4-3.5-8-6-11z'}}]}

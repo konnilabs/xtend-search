@@ -2660,6 +2660,7 @@ template xtend.search {
                                           "tag" "strong"
                                           "class" "weather-temperature-reading"
                                           "children" [
+                                            { "type" "element" "tag" "x-icon" "text" "🌡" "attributes" { "pack" "search" "name" "temperature" "size" "14px" "decorative" true "aria-hidden" true } }
                                             { "type" "element" "tag" "span" "class" "weather-value" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" "$item.temperatureFahrenheit" "else" "$item.temperatureValue" } }
                                             { "type" "element" "tag" "span" "class" "weather-temperature-unit" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" " °F" "else" " °C" } }
                                           ]
@@ -2672,7 +2673,8 @@ template xtend.search {
                                           "children" [
                                             { "type" "element" "tag" "x-icon" "text" "♧" "attributes" { "pack" "search" "name" "rain-probability" "size" "14px" "decorative" true "aria-hidden" true } }
                                             { "type" "element" "tag" "span" "class" "weather-sr-label" "text" "Niederschlagswahrscheinlichkeit: " }
-                                            { "type" "element" "tag" "span" "class" "weather-value" "text" "$item.rain" }
+                                            { "type" "element" "tag" "span" "class" "weather-value" "text" "$item.rainValue" }
+                                            { "type" "element" "tag" "span" "class" "weather-reading-unit" "text" " %" }
                                           ]
                                         }
                                       ]
@@ -2749,7 +2751,8 @@ template xtend.search {
                                       "children" [
                                         { "type" "element" "tag" "x-icon" "text" "♧" "attributes" { "pack" "search" "name" "rain-probability" "size" "14px" "decorative" true "aria-hidden" true } }
                                         { "type" "element" "tag" "span" "class" "weather-sr-label" "text" "Niederschlagswahrscheinlichkeit: " }
-                                        { "type" "element" "tag" "span" "class" "weather-value" "text" "$item.rain" }
+                                        { "type" "element" "tag" "span" "class" "weather-value" "text" "$item.rainValue" }
+                                            { "type" "element" "tag" "span" "class" "weather-reading-unit" "text" " %" }
                                       ]
                                     }
                                   ]

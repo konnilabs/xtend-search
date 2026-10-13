@@ -7,6 +7,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 16,
           "y": 386,
@@ -61,11 +62,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.004587,
+        "recentInputGlyphShifts": 0.004118999999999999,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 1214.3999999985099,
+      "streamAfterLayoutMs": 868.1999999992549,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -79,6 +80,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 16,
           "y": 386,
@@ -133,11 +135,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.0071983125,
+        "recentInputGlyphShifts": 0.006680109375000001,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 949.1000000014901,
+      "streamAfterLayoutMs": 798.7999999970198,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -151,6 +153,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 37,
           "y": 406,
@@ -205,11 +208,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.010632594642857143,
+        "recentInputGlyphShifts": 0.010294741071428571,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 886.3000000007451,
+      "streamAfterLayoutMs": 819.6000000014901,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -223,6 +226,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 48,
           "y": 346,
@@ -277,11 +281,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.0035217562500000003,
+        "recentInputGlyphShifts": 0.00306475625,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 961.6999999992549,
+      "streamAfterLayoutMs": 823.1999999992549,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -295,6 +299,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 53,
           "y": 346,
@@ -349,11 +354,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.0038531992187499997,
+        "recentInputGlyphShifts": 0.00338987359375,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 943.1000000014901,
+      "streamAfterLayoutMs": 826.8999999985099,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -367,6 +372,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 54,
           "y": 346,
@@ -421,11 +427,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.004624411463737488,
+        "recentInputGlyphShifts": 0.004028594493865967,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 984.8999999985099,
+      "streamAfterLayoutMs": 841.6000000014901,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -439,6 +445,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 76,
           "y": 300,
@@ -493,11 +500,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.0047274875217013885,
+        "recentInputGlyphShifts": 0.004276280834056713,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 917.1000000014901,
+      "streamAfterLayoutMs": 816.8000000007451,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -511,6 +518,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 220,
           "y": 300,
@@ -565,11 +573,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.003588935004340278,
+        "recentInputGlyphShifts": 0.0033672281901041662,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 909,
+      "streamAfterLayoutMs": 815,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -583,6 +591,7 @@
       "sectionCls": 0,
       "shifts": [],
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 1180,
           "y": 300,
@@ -637,11 +646,11 @@
       },
       "units": {
         "unitCls": 0,
-        "recentInputGlyphShifts": 0.0008972337510850695,
+        "recentInputGlyphShifts": 0.0008418070475260416,
         "weatherStreams": 0,
         "minTextContrast": 7.570343963096609
       },
-      "streamAfterLayoutMs": 925.5999999977648,
+      "streamAfterLayoutMs": 846.3999999985099,
       "restoredStreams": 0,
       "providerCounterDelta": {
         "geo": 0,
@@ -655,6 +664,7 @@
     {
       "width": 320,
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 16,
           "y": 386,
@@ -711,6 +721,7 @@
     {
       "width": 390,
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 16,
           "y": 386,
@@ -767,6 +778,7 @@
     {
       "width": 1440,
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 76,
           "y": 300,
@@ -823,6 +835,7 @@
     {
       "width": 3840,
       "geometry": {
+        "readingAlignmentErrors": [],
         "board": {
           "x": 1180,
           "y": 300,

@@ -8,17 +8,26 @@ async function layout(page){return page.evaluate(()=>{
  const board=document.querySelector('.weather-content'),hours=[...document.querySelectorAll('.weather-hour')],days=[...document.querySelectorAll('.weather-day')],metrics=[...document.querySelectorAll('.weather-metric')];
  const rows=items=>new Set(items.map(e=>Math.round(e.offsetTop))).size;
  const hourStrip=document.querySelector('.weather-hours');
- return {board:rect(board),sections:[...board.querySelectorAll(':scope>section')].map(e=>({name:e.className,...rect(e)})),hours:hours.length,days:days.length,hourRows:rows(hours),dayRows:rows(days),metricRows:rows(metrics),hourScrollable:hourStrip.scrollWidth>hourStrip.clientWidth+1,overflow:document.documentElement.scrollWidth>innerWidth+1,clippedText:[...board.querySelectorAll('.weather-day>*,.weather-hour>*,.weather-now>p,.weather-metric>*')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.className||e.tagName)};
+ const readingAlignmentErrors=[];
+ for(const [index,cell] of [...hours,...days].entries()){
+  const readings=[...cell.querySelectorAll('.weather-temperature-reading,.weather-reading')];
+  const positions=readings.map(row=>{const left=row.getBoundingClientRect().left;return ['x-icon','.weather-value','.weather-temperature-unit,.weather-reading-unit'].map(selector=>row.querySelector(selector)?.getBoundingClientRect().left-left);});
+  if(positions.some(p=>p.some(n=>!Number.isFinite(n)))||positions.some(p=>p.some((n,i)=>Math.abs(n-positions[0][i])>.5)))readingAlignmentErrors.push(index);
+ }
+
+ return {readingAlignmentErrors,board:rect(board),sections:[...board.querySelectorAll(':scope>section')].map(e=>({name:e.className,...rect(e)})),hours:hours.length,days:days.length,hourRows:rows(hours),dayRows:rows(days),metricRows:rows(metrics),hourScrollable:hourStrip.scrollWidth>hourStrip.clientWidth+1,overflow:document.documentElement.scrollWidth>innerWidth+1,clippedText:[...board.querySelectorAll('.weather-day>*,.weather-hour>*,.weather-now>p,.weather-metric>*')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.className||e.tagName)};
  });}
 function assertLayout(metrics){
  assert.equal(metrics.overflow,false,'Only the hourly strip may scroll horizontally');
  assert.deepEqual(metrics.clippedText,[],'Weather values and long weekday labels must fit');
+ assert.deepEqual(metrics.readingAlignmentErrors,[],'Icons, values and units must use identical column offsets');
  assert.equal(metrics.hours,24);assert.equal(metrics.days,7);
  assert.equal(metrics.hourRows,metrics.board.width>=600?2:1);
  assert.equal(metrics.dayRows,metrics.board.width>=900?1:7);
  assert.equal(metrics.metricRows,metrics.board.width>=1100?1:metrics.board.width>=600?2:4);
  if(metrics.board.width>=800)for(const name of ['weather-daily','weather-metrics'])assert(Math.abs(metrics.sections.find(s=>s.name===name).width-metrics.board.width)<1,'Forecast and metrics must use the full board width');
  if(metrics.board.width<600)assert(metrics.hourScrollable,'Mobile hours remain touch-scrollable');
+ if(metrics.board.width>=1400)assert.equal(metrics.hourScrollable,false,'All twelve hourly slots must fit on wide boards');
 }
 async function assertUnits(page){
  await page.waitForFunction(()=>document.querySelector('#weather-unit-toggle')?.shadowRoot?.querySelector('input'));
@@ -47,6 +56,7 @@ async function assertUnits(page){
   await page.waitForFunction(()=>window.XTendPage.getRuntime().model.getState('search.weatherUi').fahrenheit===false&&!document.querySelector('#weather-unit-tools').hasAttribute('data-fahrenheit')&&document.querySelector('.weather-temperature-unit').textContent===' °C');
  }
  assert(Math.min(...contrasts)>=4.5,'Both unit labels must meet 4.5:1 in both palettes and states: '+JSON.stringify(contrasts));
+ assert.equal(await page.locator('.weather-temperature-reading x-icon[name=temperature]').count(),24);
  assert.equal(await page.locator('.weather-low x-icon[name=temperature-low]').count(),7);assert.equal(await page.locator('.weather-high x-icon[name=temperature-high]').count(),7);assert.equal(await page.locator('.weather-rain x-icon[name=rain-probability]').count(),31);
  // Select Fahrenheit for the subsequent real history/cache round-trip.
  await page.locator('#weather-unit-toggle').click();await page.waitForFunction(()=>window.XTendPage.getRuntime().model.getState('search.weatherUi').fahrenheit===true);
