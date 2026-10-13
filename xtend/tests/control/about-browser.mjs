@@ -19,7 +19,7 @@ try{
  const context=await browser.newContext({viewport:{width:1440,height:1000},colorScheme:'dark'});page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const requests=[];page.on('request',r=>requests.push(r.url()));await page.goto(base+'/');await page.waitForFunction(()=>window.XTendPage?.getRuntime());await icons(page);
  assert.equal(await page.getByRole('link',{name:'Einstellungen',exact:true}).count(),0);
- assert.equal(await page.evaluate(()=>customElements.get('x-dialog')!==undefined),false,'Dialog loads on demand');
+ assert.equal(await page.locator('#search-about').count(),0,'About content loads on demand; RMT feedback may register XDialog earlier');
  const origin=await page.evaluate(()=>performance.timeOrigin),url=page.url();await page.locator('#search-input').fill('ungesendeter Suchbegriff');
  const top=page.getByRole('link',{name:'Über XTend.search',exact:true});await top.click();const dialog=page.getByRole('dialog',{name:'Über XTend.search',exact:true});await dialog.waitFor();
  assert.equal(await page.evaluate(()=>document.getElementById('search-about').constructor.xtendComponentContract.tag),'x-dialog');assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);assert.equal(await page.locator('#search-input').inputValue(),'ungesendeter Suchbegriff');

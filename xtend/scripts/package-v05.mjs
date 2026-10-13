@@ -16,7 +16,7 @@ const archive=`XTend-search-SearXNG-Image-${BACKEND_VERSION}-linux-amd64.tar.gz`
 const saving=spawn('docker',['save',backend],{stdio:['ignore','pipe','inherit']}),complete=new Promise((resolve,reject)=>{saving.on('error',reject);saving.on('close',code=>code===0?resolve():reject(Error('docker save failed')));});
 await Promise.all([complete,pipeline(saving.stdout,createGzip({level:6}),fs.createWriteStream(target,{flags:'wx'}))]);
 for(const file of ['compose.portainer.yml','compose.control.yml','LICENSE'])fs.copyFileSync(path.join(root,file),path.join(directory,file));
-for(const [source,name]of [['xtend/config/portainer.env.example','portainer.env.example'],['xtend/docs/RELEASE-0.5.0.md','UPGRADE.md'],['xtend/vendor-inputs/xtend-0.9.0-provenance.json','SDK-PROVENANCE.json']])fs.copyFileSync(path.join(root,source),path.join(directory,name));
+for(const [source,name]of [['xtend/config/portainer.env.example','portainer.env.example'],[`xtend/docs/RELEASE-${VERSION}.md`,'UPGRADE.md'],['xtend/vendor-inputs/xtend-0.9.0-provenance.json','SDK-PROVENANCE.json']])fs.copyFileSync(path.join(root,source),path.join(directory,name));
 const container=execFileSync('docker',['create',frontend],{encoding:'utf8'}).trim();try{execFileSync('docker',['cp',container+':/app/source.tar.gz',path.join(directory,`xtend-search-${VERSION}-source.tar.gz`)]);}finally{execFileSync('docker',['rm',container],{stdio:'ignore'});}
 const evidence=fs.readdirSync(path.join(root,'xtend/evidence/control-plane')).filter(n=>(n.startsWith(VERSION+'-')||n.startsWith('release-'+VERSION+'-'))&&n.endsWith('.json')).map(n=>'xtend/evidence/control-plane/'+n);
 execFileSync('tar',['-czf',path.join(directory,`xtend-search-${VERSION}-verification.tar.gz`),...evidence],{cwd:root});

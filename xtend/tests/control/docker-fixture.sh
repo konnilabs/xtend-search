@@ -1,7 +1,7 @@
 #!/bin/sh
 # Run as a Docker-authorized user from the repository root. No live credentials.
 set -eu
-fixture_image=${FIXTURE_IMAGE:-xtend-search:0.5.0}
+fixture_image=${FIXTURE_IMAGE:-xtend-search:0.5.1}
 fixture_settings=${FIXTURE_SETTINGS:-xtend/config/settings.control.fixture.yml}
 fixture_data=${FIXTURE_DATA_VOLUME:-xtend-cp-fixture-data}
 repo_dir=$(CDPATH= cd -- "$(dirname -- "$0")/../../.." && pwd)
@@ -33,4 +33,10 @@ docker run "$@" -d --name xtend-cp-search-test --network xtend-cp-fixture-net \
  -e XTEND_PROBES="${FIXTURE_PROBES:-1}" -e XTEND_TEST_FIXTURE=1 "$fixture_image" >/dev/null
 docker run -d --name xtend-cp-oauth-test --network container:xtend-cp-search-test --read-only --cap-drop ALL \
  -e FIXTURE_BIND=0.0.0.0 --entrypoint node "$fixture_image" xtend/tests/control/oauth-fixture.mjs >/dev/null
+frontend_ready=0
+for attempt in $(seq 1 30); do
+ if docker exec xtend-cp-search-test node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))' >/dev/null 2>&1; then frontend_ready=1; break; fi
+ sleep 1
+done
+if [ "$frontend_ready" != 1 ]; then docker logs --tail 30 xtend-cp-search-test; exit 1; fi
 printf '%s\n' 'Fixtures started. Run proxy-fixture.mjs, then browser.mjs and edge-browser.mjs.'

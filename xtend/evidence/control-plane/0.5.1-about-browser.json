@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "checks": [
+    "Existing SVG and PNG favicons load. Settings is removed. A genuine lazy XDialog opens from both About links without changing the document, URL or query draft. Tab/Shift+Tab stay inside; Escape and backdrop return focus and scroll.",
+    "320/390/720px layouts, light/dark colors, internal scrolling and reduced motion work; the About link stays visible on mobile.",
+    "Direct German/English About pages retain favicon and readable sections. No-JS links and a failed lazy import fall back to the standalone page.",
+    "Login and authenticated Observatory retain both favicons. Search streaming continues behind the modal, then leaves all results available; dialog toggles preserve the resumed document and result set."
+  ]
+}

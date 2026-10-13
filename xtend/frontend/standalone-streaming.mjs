@@ -27,7 +27,7 @@ export function installSearchStreaming(){
    }
    throw new Error('Unvollständiger Stream');
   }catch{
-   if(valid())await client().optimistic(props=>({...preserveFilterDraft(props),'search.data':{...props['search.data'],skeleton:false,stream:{...stream,phase:'error'},statusLabel:'Verbindung unterbrochen · bereits geladene Ergebnisse bleiben sichtbar',warnings:[{id:'stream',domId:'search-warning-stream',type:'warning',message:'Die Verbindung wurde unterbrochen. Bitte starte bei Bedarf eine neue Suche.'}]}}),async()=>undefined);
+   if(valid())await client().optimistic(props=>({...preserveFilterDraft(props),'search.data':{...props['search.data'],skeleton:false,countLabel:props['search.data'].skeleton?'Suche unterbrochen':props['search.data'].countLabel,stream:{...stream,phase:'error'},statusLabel:'Verbindung unterbrochen · bereits geladene Ergebnisse bleiben sichtbar',warnings:[{id:'stream',domId:'search-warning-stream',type:'warning',message:'Die Verbindung wurde unterbrochen. Bitte starte bei Bedarf eine neue Suche.'}]}}),async()=>undefined);
   }finally{registry.dispose();transport.dispose?.();if(active===record)active=null;}
  }
  window.addEventListener('popstate',()=>{restoring=positions.get(location.pathname+location.search)||null;},true);

@@ -1,4 +1,4 @@
-# XTend.search 0.5.0 – Standalone Control Plane
+# XTend.search 0.5.1 – Standalone Control Plane
 
 Neu in 0.3.5: getrennte Web- und Wissensquellen, vollständige Quellenangaben bei gemeinsamen Treffern sowie konkrete Fehlermeldungen. [Update-Anleitung](xtend/docs/UPGRADE-0.3.5.md).
 
@@ -6,7 +6,7 @@ In 0.3.4: korrigierte Sprachabdeckung für Quellen mit SearXNG-Regionskatalog, i
 
 In 0.3.3: wiederhergestelltes Favicon, bereinigte Navigation und About als XDialog mit barrierearmem Seiten-Fallback. [Update-Anleitung](xtend/docs/UPGRADE-0.3.3.md).
 
-Aktuelles Frontend und privates Backend: **0.5.0**. Tablokaler Framework-Cache über Maraca App Services, zusätzliche Knowledge-Quelle mit begrenztem Fallback und kontrollierter Wiederanlauf: [Release, Upgrade und Rollback](xtend/docs/RELEASE-0.5.0.md), [Architekturentscheidung](xtend/docs/ADR-XSEARCH-005-Cache-Knowledge-Recovery.md). Grundlage ist das exakt gepinnte XTend-0.9-SDK aus [Framework-PR #110](https://github.com/konnilabs/xtend/pull/110); siehe [Provenienz](xtend/vendor-inputs/xtend-0.9.0-provenance.json).
+Aktuelles Frontend: **0.5.1**, kompatibles privates Backend: **0.5.0**. RMT-Meldedialog, Lupenbutton mit XSpinner, tägliche Observatory-Taglines und spezialisierte XSearchLightbox: [Release und Upgrade](xtend/docs/RELEASE-0.5.1.md). Tablokaler Framework-Cache über Maraca App Services, zusätzliche Knowledge-Quelle mit begrenztem Fallback und kontrollierter Wiederanlauf: [Release, Upgrade und Rollback](xtend/docs/RELEASE-0.5.0.md), [Architekturentscheidung](xtend/docs/ADR-XSEARCH-005-Cache-Knowledge-Recovery.md). Grundlage ist das exakt gepinnte XTend-0.9-SDK aus [Framework-PR #110](https://github.com/konnilabs/xtend/pull/110); siehe [Provenienz](xtend/vendor-inputs/xtend-0.9.0-provenance.json).
 
 Der aktuelle Entwicklungsstand verwendet einen eigenen XTend/Node-Container und einen privaten SearXNG-Container. Die neue Admin-Oberfläche liegt unter `/admin` und verwendet Nextclouds eingebautes OAuth2 mit expliziten Rollen. Quellen bleiben bis zur administrativen Freigabe gesperrt.
 

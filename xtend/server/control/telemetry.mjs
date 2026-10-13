@@ -1,5 +1,5 @@
 import {randomUUID} from 'node:crypto';
-const types=new Set(['engine.observed','engine.transition','policy.changed','capability.changed','backend.changed','budget.exhausted','probe.requested','telemetry.dropped','feedback.received','quality.proposed','quality.changed']);
+const types=new Set(['engine.observed','engine.transition','policy.changed','capability.changed','backend.changed','budget.exhausted','probe.requested','telemetry.dropped','feedback.received','quality.proposed','quality.changed','content.changed']);
 const outcomes=new Set(['success','empty','error','skipped','cancelled','unknown']);
 const errors=new Set(['timeout','captcha','rate_limit','access_denied','schema_invalid','wrong_result_type','unsafe_url_scheme','backend_unavailable','backend_ingress_limit','backend_suspended','network','unknown',null]);
 export function event(type,input={}){
@@ -9,7 +9,7 @@ export function event(type,input={}){
  if(outcomes.has(input.outcome))data.outcome=input.outcome;
  if(errors.has(input.errorClass))data.errorClass=input.errorClass;
  for(const name of ['durationMs','validResultCount','validKnowledgeCount','policyRevision','retryNotBefore','dropped'])if(Number.isFinite(input[name])&&input[name]>=0)data[name]=input[name];
- data.measurementScope=type.startsWith('quality.')||type==='feedback.received'?'quality_feedback':'adapter_round_trip';if(data.measurementScope==='adapter_round_trip')data.providerDurationMs=null;
+ data.measurementScope=type==='content.changed'?'site_content':type.startsWith('quality.')||type==='feedback.received'?'quality_feedback':'adapter_round_trip';if(data.measurementScope==='adapter_round_trip')data.providerDurationMs=null;
  return {specversion:'1.0',id:randomUUID(),source:'urn:xtend:search:control-plane:primary',type:`de.ccs-networks.xtend.search.${type}.v1`,time:new Date().toISOString(),datacontenttype:'application/json',dataschema:'urn:xtend:search:schema:operation:v1',data};
 }
 export class Telemetry {

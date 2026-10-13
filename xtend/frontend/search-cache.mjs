@@ -23,7 +23,7 @@ export function createSearchResourcePolicy(){
   },
   project(resource,{page}){
    const {ssr,csrfToken,...shell}=page,identity=resource.identity;
-   return {...shell,url:resource.requestUrl,props:{'search.data':resource.data,'search.query':identity.q,'search.filters':{language:identity.language,timeRange:identity.timeRange,safeSearch:identity.safeSearch}},head:[...page.head.filter(h=>h.tag!=='title'),{tag:'title',text:`${identity.q} · XTend.search`}],partial:false,once:{},merge:{},deferred:{},errors:{},flash:{}};
+   return {...shell,url:resource.requestUrl,props:{...page.props,'search.data':resource.data,'search.query':identity.q,'search.filters':{language:identity.language,timeRange:identity.timeRange,safeSearch:identity.safeSearch}},head:[...page.head.filter(h=>h.tag!=='title'),{tag:'title',text:`${identity.q} · XTend.search`}],partial:false,once:{},merge:{},deferred:{},errors:{},flash:{}};
   },
   clear(){clearSearchResources();}
  };

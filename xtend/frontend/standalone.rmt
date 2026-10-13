@@ -1,4 +1,7 @@
 // XTend.search — native forms and links, compiler-owned UI and surface commits.
+  datasource search.motd from host search.motd { mode invoke
+ contract "xsearch.motd.v1" }
+  action search.motd { effect fetch datasource search.motd }
 template xtend.search {
   datasource search.cache.context from host search.cache.context { mode invoke
     contract "xsearch.cache-context.v1" }
@@ -19,6 +22,24 @@ template xtend.search {
   datasource search.capabilities from host search.capabilities { mode invoke
  contract "xsearch.capabilities.v1" }
   action search.capabilities { effect fetch datasource search.capabilities }
+  state search.motd type object preserve { initial { message "Neugier braucht Freiraum." } }
+  action search.motd.set { input value object
+    reduce state.search.motd = input.value }
+  state search.feedback type object preserve { initial {
+    open false
+    busy false
+    url ""
+    reason ""
+    includeUrl false
+    error ""
+    toast ""
+  } }
+  action search.feedback.state { input value object
+    reduce state.search.feedback = input.value }
+  action search.feedback.reason { input value string
+    reduce state.search.feedback.reason = input.value }
+  action search.feedback.consent { input value boolean
+    reduce state.search.feedback.includeUrl = input.value }
   state search.filters type object preserve { initial {
     language "all"
     timeRange ""
@@ -101,7 +122,9 @@ template xtend.search {
                 { type "element" tag "span" class "search-icon" attributes { "aria-hidden" "true" } }
                 { type "element" tag "label" text "Suchbegriff" class "sr-only" attributes { for "search-input" } }
                 { type "element" tag "input" attributes { id "search-input" type "search" name "q" value "$model.search.query" placeholder "Was möchtest du entdecken?" autocomplete "off" autocapitalize "none" spellcheck "false" maxlength 2048 required true } }
-                { type "element" tag "button" text "Suchen" class "search-button" attributes { type "submit" } }
+                { type "element" tag "button" class "search-button" attributes { type "submit" "aria-label" "Suchen" title "Suchen" "aria-busy" "$model.search.activity.busy" } children [
+                  { type "conditional" test "$model.search.activity.busy" then { type "element" tag "x-spinner" key "search-spinner" attributes { id "search-spinner" size "20" color "currentColor" "aria-hidden" "true" } } else { type "element" tag "x-icon" key "search-submit-icon" text "⌕" attributes { name "search" pack "core" size "22px" decorative true "aria-hidden" "true" } } }
+                ] }
               ] }
               { type "element" tag "input" attributes { type "hidden" name "categories" value "$model.search.data.category" } }
               { type "element" tag "div" class "search-tools" children [
@@ -111,7 +134,7 @@ template xtend.search {
                   } }
                 ] }
                 { type "element" tag "details" class "filters" attributes { id "filters" } children [
-                  { type "element" tag "summary" text "Filter" }
+                  { type "element" tag "summary" children [ { type "element" tag "x-icon" text "▽" attributes { name "filter" pack "search" size "18px" decorative true "aria-hidden" "true" } } { type "element" tag "span" text "Filter" } ] }
                   { type "element" tag "div" class "filter-panel" children [
                     { type "element" tag "label" text "Sprache" attributes { for "language" } }
                     { type "element" tag "select" attributes { id "language" name "language" value "$model.search.filters.language" } children [
@@ -143,17 +166,36 @@ template xtend.search {
               ] }
             ] }
             { type "element" tag "nav" class "top-nav" attributes { "aria-label" "Hauptnavigation" } children [
-              { type "element" tag "a" class "icon-link about-icon" attributes { href "/info/de/about" "data-xtend-native" "" "data-about-link" "" "aria-label" "Über XTend.search" title "Über XTend.search" } children [ { type "element" tag "x-icon" text "ⓘ" attributes { name "info" pack "core" size "20" decorative true "aria-hidden" "true" } } ] }
+              { type "element" tag "a" class "icon-link about-icon" attributes { href "/info/de/about" "data-xtend-native" "" "data-about-link" "" "aria-label" "Über XTend.search" title "Über XTend.search" } children [ { type "element" tag "x-icon" text "ⓘ" attributes { name "info" pack "core" size "20px" decorative true "aria-hidden" "true" } } ] }
             ] }
           ] }
           { type "element" tag "section" class "search-area" children [
             { type "conditional" test { op "equals" left "$model.search.data.view" right "home" } then {
               type "element" tag "div" key "home-hero" class "hero" children [
-                { type "element" tag "p" text "Neugier braucht Freiraum." class "hero-subtitle" }
+                { type "element" tag "p" text "$model.search.motd.message" class "hero-subtitle" }
               ]
             } }
             { type "element" tag "p" key "activity" text "$model.search.activity.message" class "activity" attributes { id "search-status" role "status" "aria-live" "polite" } }
           ] }
+          { type "conditional" test "$model.search.feedback.open" then { type "element" tag "x-dialog" key "search-feedback-dialog" class "search-feedback" attributes { id "search-feedback" title "Ergebnis melden" overlay true open "$model.search.feedback.open" width "min(620px, calc(100vw - 24px))" } children [
+            { type "element" tag "form" attributes { id "feedback-form" "data-xtend-native" "" } children [
+              { type "element" tag "p" text "Was stimmt mit diesem Ergebnis nicht? Die Meldung wird den tatsächlich beteiligten Suchquellen zugeordnet." }
+              { type "element" tag "label" class "field" children [ { type "element" tag "span" text "Meldegrund" } { type "element" tag "select" attributes { name "reason" required true value "$model.search.feedback.reason" disabled "$model.search.feedback.busy" } children [
+                { type "element" tag "option" text "Bitte auswählen" attributes { value "" } }
+                { type "element" tag "option" text "Nicht relevant" attributes { value "irrelevant" selected { op "equals" left "$model.search.feedback.reason" right "irrelevant" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "irrelevant" } } }
+                { type "element" tag "option" text "Spam oder manipulative Inhalte" attributes { value "spam" selected { op "equals" left "$model.search.feedback.reason" right "spam" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "spam" } } }
+                { type "element" tag "option" text "Verdacht auf gefährliche Inhalte" attributes { value "unsafe" selected { op "equals" left "$model.search.feedback.reason" right "unsafe" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "unsafe" } } }
+                { type "element" tag "option" text "Defekter Link beziehungsweise nicht verfügbares Bild" attributes { value "broken" selected { op "equals" left "$model.search.feedback.reason" right "broken" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "broken" } } }
+                { type "element" tag "option" text "Falscher Ergebnistyp" attributes { value "wrong_type" selected { op "equals" left "$model.search.feedback.reason" right "wrong_type" } } properties { selected { op "equals" left "$model.search.feedback.reason" right "wrong_type" } } }
+              ] } ] }
+              { type "element" tag "label" class "check-field" children [ { type "element" tag "input" attributes { type "checkbox" name "includeUrl" disabled "$model.search.feedback.busy" } properties { checked "$model.search.feedback.includeUrl" } } { type "element" tag "span" text "Ergebnislink zur Prüfung mitsenden" } ] }
+              { type "element" tag "p" class "feedback-url" text "$model.search.feedback.url" }
+              { type "element" tag "p" class "muted" text "Ohne Zustimmung speichern wir keinen Ergebnislink. Freiwillige Belege sind nur für Operatoren und Administratoren sichtbar und werden spätestens nach sieben Tagen gelöscht. Suchbegriffe, Titel und Beschreibung werden nicht gespeichert. Ein kurzlebiger Cookie begrenzt wiederholte Meldungen." }
+              { type "element" tag "p" class "feedback-error" text "$model.search.feedback.error" attributes { role "alert" } }
+              { type "element" tag "button" text { op "if" test "$model.search.feedback.busy" then "Wird gesendet …" else "Meldung senden" } attributes { type "submit" disabled "$model.search.feedback.busy" } }
+            ] }
+          ] } }
+          { type "conditional" test "$model.search.feedback.toast" then { type "element" tag "x-toast" key "feedback-toast" class "feedback-toast" text "$model.search.feedback.toast" attributes { type "success" duration "6000" } } }
           { type "element" tag "div" attributes { id "result-slot" } }
           { type "element" tag "footer" class "site-footer" children [
             { type "element" tag "span" text "Deine Suche. Dein Horizont." }
@@ -226,7 +268,7 @@ template xtend.search {
                     { type "element" tag "h2" children [ { type "element" tag "a" text "$item.title" attributes { href "$item.url" "data-xtend-native" "" rel "noreferrer" } } ] }
                     { type "element" tag "p" text "$item.snippetText" class "snippet" }
                     { type "element" tag "div" text "$item.sourceLabel" class "result-sources" }
-{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16" decorative true "aria-hidden" "true" } } ] } }
+{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16px" decorative true "aria-hidden" "true" } } ] } }
                   ]
                 } }
               ] }
@@ -240,7 +282,7 @@ template xtend.search {
                     { type "repeat" source "$model.search.data.knowledgeCards" key "id" template {
                       type "element" tag "section" class "knowledge-card" attributes { "aria-label" "$item.title" } children [
                         { type "element" tag "h2" text "$item.title" }
-{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16" decorative true "aria-hidden" "true" } } ] } }
+{ type "conditional" test "$item.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$item.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16px" decorative true "aria-hidden" "true" } } ] } }
                         { type "conditional" test "$item.image" then { type "element" tag "img" class "knowledge-image" attributes { src "$item.image" alt "$item.title" loading "lazy" width 320 height 220 referrerpolicy "no-referrer" } } }
                         { type "element" tag "p" class "knowledge-description" text "$item.description" }
                         { type "element" tag "dl" class "knowledge-facts" children [
@@ -288,7 +330,7 @@ template xtend.search {
                     { type "conditional" test "$model.search.preview.imageMessage" then { type "element" tag "p" class "preview-message" text "$model.search.preview.imageMessage" attributes { role "status" } } }
                     { type "conditional" test "$model.search.preview.expandMessage" then { type "element" tag "p" class "preview-message" text "$model.search.preview.expandMessage" attributes { role "status" } } }
                     { type "element" tag "div" class "preview-details" children [
-                      { type "conditional" test "$model.search.preview.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$model.search.preview.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16" decorative true "aria-hidden" "true" } } ] } }
+                      { type "conditional" test "$model.search.preview.reportUrl" then { type "element" tag "a" class "result-report icon-link" attributes { href "$model.search.preview.reportUrl" "data-report" "" "data-xtend-native" "" "aria-label" "Ergebnis melden" title "Ergebnis melden" } children [ { type "element" tag "x-icon" text "⚑" attributes { name "warning" pack "core" size "16px" decorative true "aria-hidden" "true" } } ] } }
 { type "element" tag "p" class "preview-domain" text "$model.search.preview.displayUrl" }
                       { type "element" tag "h2" text "$model.search.preview.title" }
                       { type "element" tag "p" class "preview-description" text "$model.search.preview.snippetText" }
@@ -405,6 +447,8 @@ template xtend.search {
         resumability integrity signed_manifest
       }
     }
+    on change "#feedback-form select" -> action search.feedback.reason { payload value from target.value }
+    on change "#feedback-form input[type=checkbox]" -> action search.feedback.consent { payload value from target.checked }
     on change "#language" -> action search.filter.language { payload value from target.value }
     on change "#time-range" -> action search.filter.time { payload value from target.value }
     on change "#safe-search" -> action search.filter.safe { payload value from target.value }

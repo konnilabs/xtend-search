@@ -62,3 +62,7 @@ x-surface-manager:not(:defined){display:block;height:auto!important;overflow:vis
 .source-panel{--xtend-side-panel-bg:var(--panel);--xtend-surface-panel:var(--panel);--xtend-border-subtle:var(--line);--xtend-radius-panel:3px}
 .source-panel::part(panel),.source-panel::part(surface){background:var(--panel);color:var(--ink);border-color:var(--line);border-radius:3px;box-shadow:none}
 @media(max-width:600px){.admin-header .wordmark{font-size:19px}.admin-header .wordmark img{width:26px;height:26px;margin-right:8px}.admin-nav{gap:18px}}
+
+#appearance{max-width:960px}#appearance form{display:grid;gap:12px;margin:28px 0}#appearance textarea{width:100%;font:inherit;font-size:16px;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:14px;resize:vertical;min-height:140px}#motd-current{margin:24px 0;padding:20px;border-left:3px solid var(--accent);background:var(--panel);font-size:22px}#appearance input{font-size:16px}
+
+#motd-current{overflow-wrap:anywhere}

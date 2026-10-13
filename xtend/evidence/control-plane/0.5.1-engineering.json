@@ -1,0 +1,96 @@
+{
+  "schema": "xtend.search.release-evidence.v1",
+  "version": "0.5.1",
+  "baseCommit": "8dfc7c0e2ed32c0e58f08c04de6cf02f55cf9aee",
+  "sdk": {
+    "commit": "dd1917bfeb8f173dde585f743a866c1b0d38e9f1",
+    "sha256": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc",
+    "packageVersion": "0.9.0"
+  },
+  "mcp": {
+    "available": false,
+    "method": "Enabled tool namespace inventory; no XTend MCP namespace exposed. Unrelated description matches are not treated as XTend capabilities.",
+    "classification": "SDK/CLI evidence"
+  },
+  "contracts": [
+    "Maraca strict RMT state/reducers and conditional DOM descriptors",
+    "PageClient event bridge, actual xtend-page:ready published after client.start",
+    "XIcon registerIconPack, local path nodes and CSS-length size",
+    "XSpinner size numeric, public root part and stable id",
+    "XDialog public overlay/slots/open/close lifecycle",
+    "XSearchLightbox reviewed SDK fork; base hash guard and Apache-2.0 license",
+    "App Services query/command, existing role/CSRF/idempotency checks"
+  ],
+  "htmlAudit": {
+    "applicationWritingSinks": 0,
+    "removed": [
+      "frontend/feedback.mjs",
+      "frontend/about-dialog.mjs",
+      "frontend/lightbox.mjs",
+      "admin/live.mjs"
+    ],
+    "extraStateMigration": [
+      "admin quality evidence list",
+      "admin rule simulation"
+    ],
+    "separateUpstreamTheme": [
+      "client/simple/src/js/main/preferences.ts",
+      "client/simple/src/js/main/results.ts",
+      "client/simple/src/js/main/keyboard.ts"
+    ],
+    "upstreamDecision": "Not loaded by standalone XTend UI; reviewed pin and third-party distributions preserved."
+  },
+  "gates": {
+    "controlNode": {
+      "passed": 93,
+      "failed": 0
+    },
+    "applicationNode": {
+      "passed": 10,
+      "failed": 0
+    },
+    "exactBackendPython": {
+      "passed": 7,
+      "failed": 0
+    },
+    "strictMaraca": true,
+    "browser": [
+      "v04",
+      "minor051",
+      "spinner timeout/early termination",
+      "resource cache",
+      "preferences",
+      "results release regression",
+      "home/morph",
+      "SSR",
+      "About",
+      "edge/image/carousel"
+    ],
+    "portainer": true
+  },
+  "performance": {
+    "baselineVersion": "0.5.0",
+    "baselineFirstMs": 485.3999999994412,
+    "firstMs": 511.9000000022352,
+    "baselineCompleteMs": 2973,
+    "completeMs": 2977.5,
+    "baselineJsGzipBytes": 556093,
+    "jsGzipBytes": 581911,
+    "firstRegressionPercent": 5.459414916115457,
+    "appDeltaGzipBytes": 25818
+  },
+  "privacy": {
+    "evidenceContainsRealSearchQueries": false,
+    "evidenceContainsRealResultUrls": false,
+    "evidenceContainsSecrets": false,
+    "motdStorage": "one shared daily selection and bounded list; no visitor search sessions",
+    "reportSecurity": "signed evidence, explicit URL consent and CSRF unchanged"
+  },
+  "delivery": {
+    "frontend": "0.5.1",
+    "backend": "0.5.0",
+    "searxngPinChanged": false,
+    "ssoConfigurationChanged": false,
+    "productionDeployment": false
+  }
+}

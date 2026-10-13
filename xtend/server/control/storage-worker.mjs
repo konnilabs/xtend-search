@@ -1,3 +1,5 @@
+import {randomInt} from 'node:crypto';
+import {DEFAULT_MOTD,motdDay} from './motd.mjs';
 import {parentPort,workerData} from 'node:worker_threads';
 import {DatabaseSync} from 'node:sqlite';
 const db=new DatabaseSync(workerData.file);
@@ -16,17 +18,22 @@ db.exec(`PRAGMA journal_mode=WAL; PRAGMA busy_timeout=1500; PRAGMA foreign_keys=
  CREATE INDEX IF NOT EXISTS quality_reports_scope ON quality_reports(engine,capability,time);
  CREATE TABLE IF NOT EXISTS quality_proposals (id TEXT PRIMARY KEY, engine TEXT NOT NULL, capability TEXT NOT NULL, kind TEXT NOT NULL, status TEXT NOT NULL, created INTEGER NOT NULL, updated INTEGER NOT NULL);
  CREATE INDEX IF NOT EXISTS quality_proposals_scope ON quality_proposals(engine,capability,status);
- PRAGMA user_version=2;`);
+ CREATE TABLE IF NOT EXISTS site_content (id INTEGER PRIMARY KEY CHECK(id=1), value TEXT NOT NULL);
+ PRAGMA user_version=3;`);
 if(!db.prepare('PRAGMA table_info(audit)').all().some(c=>c.name==='digest'))db.exec('ALTER TABLE audit ADD COLUMN digest TEXT');
 const readQuality=()=>({rules:db.prepare('SELECT * FROM quality_rules').all().map(r=>({...r,value:JSON.parse(r.value)})),pauses:db.prepare('SELECT * FROM quality_pauses').all(),proposals:db.prepare('SELECT * FROM quality_proposals ORDER BY created DESC LIMIT 500').all(),counts:db.prepare(`SELECT engine,capability,reason,count(*) AS total,sum(CASE WHEN evidence IS NOT NULL AND time>strftime('%s','now')*1000-604800000 THEN 1 ELSE 0 END) AS evidenceCount,max(time) AS latest FROM quality_reports WHERE time>? GROUP BY engine,capability,reason`).all(Date.now()-30*86400000)});
 function qualityRotate(time){db.prepare('DELETE FROM quality_reports WHERE time<?').run(time-30*86400000);db.prepare('UPDATE quality_reports SET evidence=NULL WHERE time<?').run(time-7*86400000);db.prepare("UPDATE quality_proposals SET status='expired',updated=? WHERE status='pending' AND created<?").run(time,time-30*86400000);db.prepare("DELETE FROM quality_proposals WHERE status!='pending' AND updated<?").run(time-180*86400000);}
-const read=()=>({meta:db.prepare('SELECT * FROM metadata WHERE id=1').get(),policies:db.prepare('SELECT * FROM policies').all(),guards:db.prepare('SELECT * FROM guards').all(),events:db.prepare('SELECT seq,value FROM events ORDER BY seq DESC LIMIT 100').all().reverse(),audit:db.prepare('SELECT seq,time,actor,action,target,reason,revision FROM audit ORDER BY seq DESC LIMIT 100').all(),aggregates:db.prepare('SELECT minute, sum(total) AS total, sum(errors) AS errors, sum(duration) AS duration FROM aggregates GROUP BY minute ORDER BY minute DESC LIMIT 60').all().reverse(),quality:readQuality()});
+const readMotd=()=>{const row=db.prepare('SELECT value FROM site_content WHERE id=1').get();return row?JSON.parse(row.value):{messages:[DEFAULT_MOTD],message:DEFAULT_MOTD,day:'',manual:false};};
+const writeMotd=value=>{db.prepare('INSERT INTO site_content VALUES (1,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(JSON.stringify(value));return value;};
+const selectMotd=(value,day)=>({...value,day,manual:false,message:value.messages[randomInt(value.messages.length)]});
+const read=()=>({meta:db.prepare('SELECT * FROM metadata WHERE id=1').get(),policies:db.prepare('SELECT * FROM policies').all(),guards:db.prepare('SELECT * FROM guards').all(),events:db.prepare('SELECT seq,value FROM events ORDER BY seq DESC LIMIT 100').all().reverse(),audit:db.prepare('SELECT seq,time,actor,action,target,reason,revision FROM audit ORDER BY seq DESC LIMIT 100').all(),aggregates:db.prepare('SELECT minute, sum(total) AS total, sum(errors) AS errors, sum(duration) AS duration FROM aggregates GROUP BY minute ORDER BY minute DESC LIMIT 60').all().reverse(),quality:readQuality(),motd:readMotd()});
 function transaction(fn){db.exec('BEGIN IMMEDIATE');try{const value=fn();db.exec('COMMIT');return value;}catch(e){db.exec('ROLLBACK');throw e;}}
 function rotate(){const t=Date.now();db.prepare('DELETE FROM events WHERE time < ? OR seq <= (SELECT COALESCE(MAX(seq),0)-10000 FROM events)').run(t-48*3600000);db.prepare('DELETE FROM aggregates WHERE minute < ? OR rowid IN (SELECT rowid FROM aggregates ORDER BY minute DESC LIMIT -1 OFFSET 500000)').run(t-30*86400000);db.prepare('DELETE FROM audit WHERE time < ?').run(t-180*86400000);db.exec('PRAGMA wal_checkpoint(PASSIVE)');}
 parentPort.on('message',({id,op,data})=>{
  try{
   let value;
   if(op==='load')value=read();
+  else if(op==='motdDay')value=transaction(()=>{const current=readMotd();return current.day===data.day?current:writeMotd(selectMotd(current,data.day));});
   else if(op==='feedback')value=transaction(()=>{
    qualityRotate(data.time);
    if(db.prepare('SELECT count(*) AS n FROM quality_reports').get().n>=200000)throw new Error('capacity');
@@ -44,6 +51,13 @@ parentPort.on('message',({id,op,data})=>{
    if(db.prepare('SELECT count(*) AS n FROM audit').get().n>=100000)throw new Error('audit_capacity');
    const revision=data.revision+1;
    for(const [key,guard]of data.recover||[])db.prepare('INSERT INTO guards VALUES (?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(key,JSON.stringify(guard));
+   if(data.motd){const day=motdDay(Date.now());let current=readMotd();if(current.day!==day)current=selectMotd(current,day);
+    const spec=data.motd;
+    if(spec.operation==='list'){current={...current,messages:spec.messages};if(!current.manual&&!current.messages.includes(current.message))current=selectMotd(current,day);}
+    if(spec.operation==='override')current={...current,day,manual:true,message:spec.message};
+    if(spec.operation==='rotate')current=selectMotd(current,day);
+    writeMotd(current);
+   }
    if(data.policy)db.prepare('INSERT INTO policies VALUES (?,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(data.target,JSON.stringify(data.policy));
    if(data.qualityRule){const r=data.qualityRule;db.prepare('INSERT INTO quality_rules VALUES (?,?,?) ON CONFLICT(engine,capability) DO UPDATE SET value=excluded.value').run(r.engine,r.capability,JSON.stringify(r.value));}
    if(data.qualityPause){const p=data.qualityPause;db.prepare('INSERT INTO quality_pauses VALUES (?,?,?,?) ON CONFLICT(engine,capability) DO UPDATE SET until=excluded.until,lastAutoAt=excluded.lastAutoAt').run(p.engine,p.capability,p.until,p.lastAutoAt);}
