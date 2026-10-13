@@ -21,7 +21,7 @@ export function installSearchHost(){
  installFeedback();
  installFilterNavigation(command);
  installFilterMotion(command);
- installSearchMotion();
+ const motion=installSearchMotion();
  installCategoryTabs();
  installAbout();installMotd();
  installFavicons();
@@ -31,13 +31,20 @@ export function installSearchHost(){
  installResultImages(command);
  installSearchStreaming();
  const visibility=()=>void command('search.weather.visible',{visible:!document.hidden});document.addEventListener('visibilitychange',visibility);window.addEventListener('xtend-page:ready',visibility);
- let activityQueue=Promise.resolve();
- const activity=(name,payload={})=>activityQueue=activityQueue.catch(()=>{}).then(()=>command(name,payload));
+ let activityQueue=Promise.resolve(),presentationGeneration=0;
+ const activity=(name,payload={},own=presentationGeneration)=>activityQueue=activityQueue.catch(()=>{}).then(()=>own===presentationGeneration?command(name,payload):undefined);
  window.addEventListener('xtend-page:ready',()=>{const streaming=['pending','partial'].includes(window.XTendPage.page.props?.['search.data']?.stream?.phase);void activity('search.streaming',{busy:streaming,message:''});});
  document.addEventListener('input',event=>{if(event.target.id==='search-input'){draft=event.target.value;revision++;const locationField=document.getElementById('search-form')?.elements.namedItem('location');if(locationField)locationField.value='';}},true);
  window.addEventListener('xtend-page:event',async({detail:event})=>{
   if(event.type==='ready'){const streaming=['pending','partial'].includes(window.XTendPage?.page?.props?.['search.data']?.stream?.phase);await activity('search.streaming',{busy:streaming,message:''});}
-  if(event.type==='pending'){pending=true;submittedRevision=revision;await activity('search.pending');}
+  if(event.type==='pending'){
+   const own=++presentationGeneration;pending=true;submittedRevision=revision;
+   const target=new URL(event.url,location.origin);
+   // Commit only presentation immediately; PageClient still owns data/history.
+   // Slow page/asset responses must not postpone the intentional header move.
+   await activity('search.pending',{view:target.searchParams.get('q')?.trim()?'results':'home'},own);
+   if(own===presentationGeneration)motion.commit();
+  }
   if(event.type==='navigate'){
    const newerInput=pending && revision>submittedRevision;
    pending=false;
@@ -45,8 +52,9 @@ export function installSearchHost(){
    // The results heading owns the count; this region reports loading and errors.
    const streaming=['pending','partial'].includes(event.page.props?.['search.data']?.stream?.phase);
    await activity('search.streaming',{busy:streaming,message:''});
+   motion.commit();
   }
-  if(event.type==='error'){pending=false;await activity('search.ready',{message:'Die Anfrage ist fehlgeschlagen. Bitte erneut suchen.'});}
+  if(event.type==='error'){pending=false;await activity('search.ready',{message:'Die Anfrage ist fehlgeschlagen. Bitte erneut suchen.'});motion.commit();}
  });
  window.addEventListener('keydown',event=>{
   if(!document.querySelector('#search-about[open],#report-discard-dialog[open]') && event.key==='/' && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && !document.activeElement?.isContentEditable){event.preventDefault();document.getElementById('search-input')?.focus();}

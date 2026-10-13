@@ -13,11 +13,31 @@ export function watchObservatory(client,csrf){
  const dirty=new Set();let saving=null,guarding=false,watchController,connected=true,currentUrl=location.href,historyIndex=Number(history.state?.observatoryIndex)||0,suppressPop=false;
  history.replaceState({...history.state,observatoryIndex:historyIndex},'',location.href);
  const input=form=>{const data={...Object.fromEntries(new URL(location.href).searchParams),...Object.fromEntries(new FormData(form))};for(const box of form.querySelectorAll('input[type=checkbox]'))data[box.name]=box.checked;return data;};
- function toast(message,type='success'){const box=document.createElement('x-toast');box.className='admin-toast';box.setAttribute('type',type);box.setAttribute('duration',type==='error'?'0':'6000');box.textContent=message;let region=document.querySelector('.admin-toasts');(region||document.body).append(box);box.addEventListener('toast-dismissed',()=>box.remove(),{once:true});}
+ // Feedback belongs to RMT, separately from live data and form responses.
+ // Serialize changes so dismissal and a concurrent save cannot lose notices.
+ let feedbackQueue=Promise.resolve();
+ function updateFeedback(update){
+  const next=feedbackQueue.then(()=>{if(controller.signal.aborted)return;return command('admin.feedback.set',{value:update(client.getRuntime().model.getState('admin.feedback')||{items:[]})});});
+  feedbackQueue=next.catch(()=>{});return feedbackQueue;
+ }
+ function toast(message,type='success',title='',id='admin-notice-'+crypto.randomUUID()){
+  return updateFeedback(current=>({items:[...current.items,{id,title:title||(type==='error'?'Aktion nicht bestätigt':'Gespeichert'),message,type,duration:type==='error'?'0':'6000'}]}));
+ }
+ document.addEventListener('toast-dismissed',event=>{
+  if(!event.target.matches('x-toast.admin-toast'))return;
+  const id=event.target.id;
+  void updateFeedback(current=>({items:current.items.filter(item=>item.id!==id)}));
+ },{signal:controller.signal});
+ let layoutUpdate=null;
  function surfaces(){
+  if(controller.signal.aborted)return;
   const manager=document.getElementById('observatory-surfaces'),panel=document.getElementById('source-panel');if(!manager||!panel)return;
   const narrow=matchMedia('(max-width: 900px)').matches;
   const mode=narrow?'fullscreen':'docked';
+  if(client.getRuntime().model.getState('admin.layout').mode!==mode){
+   if(!layoutUpdate){layoutUpdate=command('admin.layout.set',{value:{mode,modal:narrow}}).then(()=>{layoutUpdate=null;surfaces();},()=>{layoutUpdate=null;});}
+   return;
+  }
   const signature=mode+':'+innerWidth+':'+manager.clientHeight;if(panel.dataset.geometry===signature)return;panel.dataset.geometry=signature;
   panel.toggleAttribute('modal',narrow);panel.setPanelMode(mode,'right');
   panel.resizePanel({width:narrow?innerWidth:Math.min(680,Math.max(420,innerWidth*.43)),height:manager.clientHeight});
@@ -39,10 +59,11 @@ export function watchObservatory(client,csrf){
     await client.optimistic(props=>({...props,'admin.data':result}),async()=>true);
     for(const draft of otherDrafts){const target=document.getElementById(draft.id);if(!target)continue;for(const field of target.querySelectorAll('input:not([type=hidden]),select,textarea'))if(Object.hasOwn(draft.values,field.name)){if(field.type==='checkbox')field.checked=draft.values[field.name];else field.value=draft.values[field.name];}dirty.add(target);}
     if(serviceFor(form)==='admin.motd.set'&&typeof BroadcastChannel==='function'){const channel=new BroadcastChannel('xtend.search.content');channel.postMessage({changed:true});channel.close();}
-    toast(result.message||'Änderung und Audit gespeichert.');
+    if(result.notices?.length){for(const notice of result.notices)await toast(notice.message,notice.type,notice.title,notice.id);}
+    else await toast(result.message||'Änderung und Audit gespeichert.');
     requestAnimationFrame(()=>{for(const [id,x,y]of positions)document.querySelector('[data-xtend-scroll="'+id+'"]')?.scrollTo(x,y);if(focused)document.getElementById(form.getAttribute('id'))?.elements.namedItem(focused)?.focus({preventScroll:true});surfaces();});
     return true;
-   }catch(error){toast(error.message||'Änderung nicht gespeichert. Eingaben bleiben erhalten.','error');return false;}
+   }catch(error){await toast(error.message||'Änderung nicht gespeichert. Eingaben bleiben erhalten.','error');return false;}
    finally{buttons.forEach(b=>b.disabled=false);saving=null;}
   })();return saving;
  }

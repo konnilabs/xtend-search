@@ -121,422 +121,443 @@ template xtend.search {
 }
 
   state search.filterPanel type object preserve {
- initial {
- id "search-filter-panel"
- hidden false
- viewTemplate {
-      "type" "element"
-      "tag" "div"
-      "class" "filter-panel"
-      "children" [
-        {
-          "type" "element"
-          "tag" "label"
-          "text" "Sprache"
-          "attributes" {
-            "for" "language"
-          }
-        }
-        {
-          "type" "element"
-          "tag" "select"
-          "attributes" {
-            "id" "language"
-            "name" "language"
-            "value" "$model.search.filters.language"
-          }
-          "children" [
-            {
-              "type" "element"
-              "tag" "option"
-              "text" "Alle Sprachen"
-              "properties" {
-                "selected" {
-                  "op" "equals"
-                  "left" "$model.search.filters.language"
-                  "right" "all"
-                }
-              }
-              "attributes" {
-                "value" "all"
-                "selected" {
-                  "op" "equals"
-                  "left" "$model.search.filters.language"
-                  "right" "all"
-                }
-              }
-            }
-            {
-              "type" "element"
-              "tag" "option"
-              "text" "Deutsch"
-              "properties" {
-                "selected" {
-                  "op" "equals"
-                  "left" "$model.search.filters.language"
-                  "right" "de"
-                }
-              }
-              "attributes" {
-                "value" "de"
-                "selected" {
-                  "op" "equals"
-                  "left" "$model.search.filters.language"
-                  "right" "de"
-                }
-              }
-            }
-            {
-              "type" "element"
-              "tag" "option"
-              "text" "Englisch"
-              "properties" {
-                "selected" {
-                  "op" "equals"
-                  "left" "$model.search.filters.language"
-                  "right" "en"
-                }
-              }
-              "attributes" {
-                "value" "en"
-                "selected" {
-                  "op" "equals"
-                  "left" "$model.search.filters.language"
-                  "right" "en"
-                }
-              }
-            }
-          ]
-        }
-        {
-          "type" "conditional"
-          "test" {
-            "op" "not"
-            "value" {
-              "op" "equals"
-              "left" "$model.search.data.category"
-              "right" "weather"
-            }
-          }
-          "then" {
+    initial {
+      id "search-filter-panel"
+      hidden false
+      viewTemplate {
+        "type" "element"
+        "tag" "div"
+        "class" "filter-panel"
+        "children" [
+          {
             "type" "element"
             "tag" "div"
-            "class" "weather-irrelevant-filter"
+            "class" "filter-content"
             "children" [
               {
                 "type" "element"
-                "tag" "label"
-                "text" "Zeitraum"
-                "attributes" {
-                  "for" "time-range"
+                "tag" "div"
+                "class" "filter-field"
+                "children" [
+                  {
+                    "type" "element"
+                    "tag" "label"
+                    "text" "Sprache"
+                    "attributes" {
+                      "for" "language"
+                    }
+                  }
+                  {
+                    "type" "element"
+                    "tag" "select"
+                    "attributes" {
+                      "id" "language"
+                      "name" "language"
+                      "value" "$model.search.filters.language"
+                    }
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "option"
+                        "text" "Alle Sprachen"
+                        "properties" {
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "all"
+                          }
+                        }
+                        "attributes" {
+                          "value" "all"
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "all"
+                          }
+                        }
+                      }
+                      {
+                        "type" "element"
+                        "tag" "option"
+                        "text" "Deutsch"
+                        "properties" {
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "de"
+                          }
+                        }
+                        "attributes" {
+                          "value" "de"
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "de"
+                          }
+                        }
+                      }
+                      {
+                        "type" "element"
+                        "tag" "option"
+                        "text" "Englisch"
+                        "properties" {
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "en"
+                          }
+                        }
+                        "attributes" {
+                          "value" "en"
+                          "selected" {
+                            "op" "equals"
+                            "left" "$model.search.filters.language"
+                            "right" "en"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+              {
+                "type" "conditional"
+                "test" {
+                  "op" "not"
+                  "value" {
+                    "op" "equals"
+                    "left" "$model.search.data.category"
+                    "right" "weather"
+                  }
+                }
+                "then" {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "filter-field weather-irrelevant-filter"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "label"
+                      "text" "Zeitraum"
+                      "attributes" {
+                        "for" "time-range"
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "select"
+                      "attributes" {
+                        "id" "time-range"
+                        "name" "time_range"
+                        "value" "$model.search.filters.timeRange"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Jederzeit"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" ""
+                            }
+                          }
+                          "attributes" {
+                            "value" ""
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" ""
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Letzte 24 Stunden"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "day"
+                            }
+                          }
+                          "attributes" {
+                            "value" "day"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "day"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Letzte Woche"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "week"
+                            }
+                          }
+                          "attributes" {
+                            "value" "week"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "week"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Letzter Monat"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "month"
+                            }
+                          }
+                          "attributes" {
+                            "value" "month"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "month"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Letztes Jahr"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "year"
+                            }
+                          }
+                          "attributes" {
+                            "value" "year"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.timeRange"
+                              "right" "year"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+              {
+                "type" "conditional"
+                "test" {
+                  "op" "not"
+                  "value" {
+                    "op" "equals"
+                    "left" "$model.search.data.category"
+                    "right" "weather"
+                  }
+                }
+                "then" {
+                  "type" "element"
+                  "tag" "div"
+                  "class" "filter-field weather-irrelevant-filter"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "label"
+                      "text" "SafeSearch"
+                      "attributes" {
+                        "for" "safe-search"
+                      }
+                    }
+                    {
+                      "type" "element"
+                      "tag" "select"
+                      "attributes" {
+                        "id" "safe-search"
+                        "name" "safesearch"
+                        "value" "$model.search.filters.safeSearch"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Aus"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "0"
+                            }
+                          }
+                          "attributes" {
+                            "value" "0"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "0"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Moderat"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "1"
+                            }
+                          }
+                          "attributes" {
+                            "value" "1"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "1"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "option"
+                          "text" "Streng"
+                          "properties" {
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "2"
+                            }
+                          }
+                          "attributes" {
+                            "value" "2"
+                            "selected" {
+                              "op" "equals"
+                              "left" "$model.search.filters.safeSearch"
+                              "right" "2"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
                 }
               }
               {
                 "type" "element"
-                "tag" "select"
-                "attributes" {
-                  "id" "time-range"
-                  "name" "time_range"
-                  "value" "$model.search.filters.timeRange"
-                }
+                "tag" "p"
+                "text" "Filter gelten für diese Suche. Als Standard speichern übernimmt sie für künftige Besuche in diesem Browser (180 Tage). Links mit eigenen Filtern haben Vorrang."
+                "class" "filter-note"
+              }
+              {
+                "type" "element"
+                "tag" "div"
+                "class" "filter-actions"
                 "children" [
                   {
                     "type" "element"
-                    "tag" "option"
-                    "text" "Jederzeit"
-                    "properties" {
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" ""
-                      }
-                    }
+                    "tag" "button"
+                    "text" "Filter anwenden"
+                    "class" "apply-button"
                     "attributes" {
-                      "value" ""
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" ""
-                      }
+                      "type" "submit"
                     }
                   }
                   {
                     "type" "element"
-                    "tag" "option"
-                    "text" "Letzte 24 Stunden"
-                    "properties" {
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" "day"
-                      }
-                    }
+                    "tag" "button"
+                    "text" "Als Standard speichern"
+                    "class" "preference-button"
                     "attributes" {
-                      "value" "day"
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" "day"
-                      }
+                      "type" "submit"
+                      "name" "preferenceAction"
+                      "value" "save"
+                      "formaction" "/preferences"
+                      "formmethod" "post"
+                      "formnovalidate" true
+                      "disabled" "$model.search.preferences.busy"
                     }
                   }
                   {
                     "type" "element"
-                    "tag" "option"
-                    "text" "Letzte Woche"
-                    "properties" {
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" "week"
-                      }
-                    }
+                    "tag" "button"
+                    "text" "Gespeicherten Standard löschen"
+                    "class" "preference-button"
                     "attributes" {
-                      "value" "week"
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" "week"
-                      }
-                    }
-                  }
-                  {
-                    "type" "element"
-                    "tag" "option"
-                    "text" "Letzter Monat"
-                    "properties" {
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" "month"
-                      }
-                    }
-                    "attributes" {
-                      "value" "month"
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" "month"
-                      }
-                    }
-                  }
-                  {
-                    "type" "element"
-                    "tag" "option"
-                    "text" "Letztes Jahr"
-                    "properties" {
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" "year"
-                      }
-                    }
-                    "attributes" {
-                      "value" "year"
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.timeRange"
-                        "right" "year"
-                      }
+                      "type" "submit"
+                      "name" "preferenceAction"
+                      "value" "delete"
+                      "formaction" "/preferences"
+                      "formmethod" "post"
+                      "formnovalidate" true
+                      "disabled" "$model.search.preferences.busy"
                     }
                   }
                 ]
               }
-            ]
-          }
-        }
-        {
-          "type" "conditional"
-          "test" {
-            "op" "not"
-            "value" {
-              "op" "equals"
-              "left" "$model.search.data.category"
-              "right" "weather"
-            }
-          }
-          "then" {
-            "type" "element"
-            "tag" "div"
-            "class" "weather-irrelevant-filter"
-            "children" [
               {
                 "type" "element"
-                "tag" "label"
-                "text" "SafeSearch"
+                "tag" "p"
+                "text" "$model.search.preferences.message"
+                "class" "filter-note preference-status"
                 "attributes" {
-                  "for" "safe-search"
+                  "role" "status"
+                  "aria-live" "polite"
                 }
               }
               {
-                "type" "element"
-                "tag" "select"
-                "attributes" {
-                  "id" "safe-search"
-                  "name" "safesearch"
-                  "value" "$model.search.filters.safeSearch"
+                "type" "conditional"
+                "test" {
+                  "op" "equals"
+                  "left" "$model.search.data.category"
+                  "right" "weather"
                 }
-                "children" [
-                  {
-                    "type" "element"
-                    "tag" "option"
-                    "text" "Aus"
-                    "properties" {
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.safeSearch"
-                        "right" "0"
-                      }
-                    }
-                    "attributes" {
-                      "value" "0"
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.safeSearch"
-                        "right" "0"
-                      }
-                    }
+                "then" {
+                  "type" "element"
+                  "tag" "input"
+                  "attributes" {
+                    "type" "hidden"
+                    "name" "time_range"
+                    "value" "$model.search.filters.timeRange"
                   }
-                  {
-                    "type" "element"
-                    "tag" "option"
-                    "text" "Moderat"
-                    "properties" {
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.safeSearch"
-                        "right" "1"
-                      }
-                    }
-                    "attributes" {
-                      "value" "1"
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.safeSearch"
-                        "right" "1"
-                      }
-                    }
+                }
+              }
+              {
+                "type" "conditional"
+                "test" {
+                  "op" "equals"
+                  "left" "$model.search.data.category"
+                  "right" "weather"
+                }
+                "then" {
+                  "type" "element"
+                  "tag" "input"
+                  "attributes" {
+                    "type" "hidden"
+                    "name" "safesearch"
+                    "value" "$model.search.filters.safeSearch"
                   }
-                  {
-                    "type" "element"
-                    "tag" "option"
-                    "text" "Streng"
-                    "properties" {
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.safeSearch"
-                        "right" "2"
-                      }
-                    }
-                    "attributes" {
-                      "value" "2"
-                      "selected" {
-                        "op" "equals"
-                        "left" "$model.search.filters.safeSearch"
-                        "right" "2"
-                      }
-                    }
-                  }
-                ]
+                }
               }
             ]
           }
-        }
-        {
-          "type" "element"
-          "tag" "p"
-          "text" "Filter gelten für diese Suche. Als Standard speichern übernimmt sie für künftige Besuche in diesem Browser (180 Tage). Links mit eigenen Filtern haben Vorrang."
-          "class" "filter-note"
-        }
-        {
-          "type" "element"
-          "tag" "button"
-          "text" "Filter anwenden"
-          "class" "apply-button"
-          "attributes" {
-            "type" "submit"
-          }
-        }
-        {
-          "type" "element"
-          "tag" "button"
-          "text" "Als Standard speichern"
-          "class" "preference-button"
-          "attributes" {
-            "type" "submit"
-            "name" "preferenceAction"
-            "value" "save"
-            "formaction" "/preferences"
-            "formmethod" "post"
-            "formnovalidate" true
-            "disabled" "$model.search.preferences.busy"
-          }
-        }
-        {
-          "type" "element"
-          "tag" "button"
-          "text" "Gespeicherten Standard löschen"
-          "class" "preference-button"
-          "attributes" {
-            "type" "submit"
-            "name" "preferenceAction"
-            "value" "delete"
-            "formaction" "/preferences"
-            "formmethod" "post"
-            "formnovalidate" true
-            "disabled" "$model.search.preferences.busy"
-          }
-        }
-        {
-          "type" "element"
-          "tag" "p"
-          "text" "$model.search.preferences.message"
-          "class" "filter-note preference-status"
-          "attributes" {
-            "role" "status"
-            "aria-live" "polite"
-          }
-        }
-        {
-          "type" "conditional"
-          "test" {
-            "op" "equals"
-            "left" "$model.search.data.category"
-            "right" "weather"
-          }
-          "then" {
-            "type" "element"
-            "tag" "input"
-            "attributes" {
-              "type" "hidden"
-              "name" "time_range"
-              "value" "$model.search.filters.timeRange"
-            }
-          }
-        }
-        {
-          "type" "conditional"
-          "test" {
-            "op" "equals"
-            "left" "$model.search.data.category"
-            "right" "weather"
-          }
-          "then" {
-            "type" "element"
-            "tag" "input"
-            "attributes" {
-              "type" "hidden"
-              "name" "safesearch"
-              "value" "$model.search.filters.safeSearch"
-            }
-          }
-        }
-      ]
+        ]
+      }
+
     }
 
-}
-
-}
+  }
 
   state search.filterClosed type object preserve {
  initial {
@@ -658,6 +679,8 @@ template xtend.search {
     reduce state.search.data.knowledgeCards = input.value.cards
 }
 
+  state search.presentation type object preserve { initial { view "" } }
+
   state search.query type string initial ""
   state search.activity type object preserve { initial {
       busy false
@@ -729,7 +752,13 @@ template xtend.search {
       viewTemplate {
       "class" "search-shell"
       "attributes" {
-        "data-view" "$model.search.data.view"
+        "data-presentation" "$model.search.presentation.view"
+        "data-view" {
+          "op" "if"
+          "test" "$model.search.presentation.view"
+          "then" "$model.search.presentation.view"
+          "else" "$model.search.data.view"
+        }
       }
       "children" [
         {
@@ -787,7 +816,12 @@ template xtend.search {
                       "op" "if"
                       "test" {
                         "op" "equals"
-                        "left" "$model.search.data.view"
+                        "left" {
+                          "op" "if"
+                          "test" "$model.search.presentation.view"
+                          "then" "$model.search.presentation.view"
+                          "else" "$model.search.data.view"
+                        }
                         "right" "home"
                       }
                       "then" "heading"
@@ -797,7 +831,12 @@ template xtend.search {
                       "op" "if"
                       "test" {
                         "op" "equals"
-                        "left" "$model.search.data.view"
+                        "left" {
+                          "op" "if"
+                          "test" "$model.search.presentation.view"
+                          "then" "$model.search.presentation.view"
+                          "else" "$model.search.data.view"
+                        }
                         "right" "home"
                       }
                       "then" 1
@@ -1100,7 +1139,12 @@ template xtend.search {
               "type" "conditional"
               "test" {
                 "op" "equals"
-                "left" "$model.search.data.view"
+                "left" {
+                  "op" "if"
+                  "test" "$model.search.presentation.view"
+                  "then" "$model.search.presentation.view"
+                  "else" "$model.search.data.view"
+                }
                 "right" "home"
               }
               "then" {
@@ -2976,6 +3020,8 @@ template xtend.search {
 }
 
   action search.pending {
+    input view string
+    reduce state.search.presentation.view = input.view
     reduce state.search.preview.open = false
     reduce state.search.preview.id = ""
     reduce state.search.activity.busy = true
@@ -2985,6 +3031,7 @@ template xtend.search {
 
   action search.ready {
     input message string
+    reduce state.search.presentation.view = ""
     reduce state.search.activity.busy = false
     reduce state.search.activity.message = input.message
 
@@ -3003,6 +3050,7 @@ template xtend.search {
   action search.streaming {
     input busy boolean
     input message string
+    reduce state.search.presentation.view = ""
     reduce state.search.activity.busy = input.busy
     reduce state.search.activity.message = input.message
 

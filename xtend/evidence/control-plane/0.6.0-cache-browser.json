@@ -14,14 +14,14 @@
   "restores": [
     {
       "kind": "mode",
-      "elapsedMs": 188,
+      "elapsedMs": 190,
       "metadataRoundtripMs": 5.599999999627471,
-      "maracaCommitMs": 52.70000000111759
+      "maracaCommitMs": 58.90000000037253
     }
   ],
   "cache": {
     "entries": 2,
-    "bytes": 45119,
+    "bytes": 45133,
     "hits": 4,
     "misses": 2,
     "evictions": 0,

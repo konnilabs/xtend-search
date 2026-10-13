@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "image": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
+  "policy": {
+    "approved": true,
+    "paused": false,
+    "rollout": true
+  },
+  "visible": true,
+  "geometry": {
+    "width": 310,
+    "actions": [
+      {
+        "height": 44,
+        "width": 262,
+        "top": 820.3756103515625,
+        "bottom": 864.3756103515625
+      },
+      {
+        "height": 44,
+        "width": 262,
+        "top": 874.3756103515625,
+        "bottom": 918.3756103515625
+      },
+      {
+        "height": 44,
+        "width": 262,
+        "top": 928.3756103515625,
+        "bottom": 972.3756103515625
+      }
+    ]
+  },
+  "errors": [],
+  "checks": [
+    "Local home matches retained weather approval/rollout/pause.",
+    "Local filter panel is 310px with equal ≥44px buttons and 10px gaps.",
+    "Final built UI resumes as home without browser errors; no provider search dispatched."
+  ]
+}

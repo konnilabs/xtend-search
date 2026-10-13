@@ -94,6 +94,21 @@ template xtend.observatory {
 }
 
   state admin.message type string initial ""
+  state admin.feedback type object preserve { initial { items [] } }
+  state admin.layout type object preserve {
+    initial {
+      mode "docked"
+      modal false
+    }
+  }
+  action admin.layout.set {
+    input value object
+    reduce state.admin.layout = input.value
+  }
+  action admin.feedback.set {
+    input value object
+    reduce state.admin.feedback = input.value
+  }
   state admin.connection type string initial ""
   state admin.request type object preserve {
     initial {
@@ -119,15 +134,8 @@ template xtend.observatory {
               "class" "admin-toasts"
               "children" [
                 {
-                  "type" "conditional"
-                  "test" {
-                    "op" "equals"
-                    "left" "$model.admin.request.status"
-                    "right" "success"
-                  }
-                  "then" {
                     "type" "repeat"
-                    "source" "$model.admin.data.notices"
+                    "source" "$model.admin.feedback.items"
                     "key" "id"
                     "template" {
                       "type" "element"
@@ -136,8 +144,8 @@ template xtend.observatory {
                       "attributes" {
                         "id" "$item.id"
                         "type" "$item.type"
-                        "duration" "6000"
-                        "data-notice-kind" "success"
+                        "duration" "$item.duration"
+                        "data-notice-kind" "$item.type"
                       }
                       "children" [
                         {
@@ -152,38 +160,6 @@ template xtend.observatory {
                         }
                       ]
                     }
-                  }
-                }
-                {
-                  "type" "conditional"
-                  "test" {
-                    "op" "equals"
-                    "left" "$model.admin.request.status"
-                    "right" "error"
-                  }
-                  "then" {
-                    "type" "element"
-                    "tag" "x-toast"
-                    "class" "admin-toast"
-                    "attributes" {
-                      "id" "admin-error-toast"
-                      "type" "error"
-                      "duration" "0"
-                      "data-notice-kind" "error"
-                    }
-                    "children" [
-                      {
-                        "type" "element"
-                        "tag" "strong"
-                        "text" "Aktion nicht bestätigt"
-                      }
-                      {
-                        "type" "element"
-                        "tag" "span"
-                        "text" "$model.admin.request.error.message"
-                      }
-                    ]
-                  }
                 }
               ]
             }
@@ -1832,7 +1808,8 @@ template xtend.observatory {
                           "slot" "panels"
                           "label" "$model.admin.data.selected"
                           "open" true
-                          "mode" "docked"
+                          "mode" "$model.admin.layout.mode"
+                          "modal" "$model.admin.layout.modal"
                           "placement" "right"
                           "initial-width" 580
                           "closable" "false"
@@ -3734,6 +3711,7 @@ template xtend.observatory {
 }
 
   action admin.feedback.clear {
+    reduce state.admin.feedback.items = []
     reduce state.admin.data.notices = []
     reduce state.admin.request.status = "idle"
 

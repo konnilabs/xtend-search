@@ -1,0 +1,937 @@
+{
+  "ok": true,
+  "scope": "Built Docker image with offline 100/700/2500ms provider fixtures; 4s favicon delay; synthetic 120ms/1.2Mbit mobile link. CLS excludes recent-input shifts per Web Vitals; all shift values are retained separately. Long tasks include bootstrap. No production latency claim or user queries/URLs retained.",
+  "runs": [
+    {
+      "width": 320,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 44.30000000074506,
+        "domContentLoadedMs": 102,
+        "resumeReadyMs": 557.5999999996275,
+        "fcpMs": 144,
+        "lcpMs": 144,
+        "cls": 0,
+        "jsEncodedBytes": 619892
+      },
+      "stream": {
+        "started": 719,
+        "headerMs": 139.59999999962747,
+        "first": 516.3999999985099,
+        "complete": 3092.5,
+        "bootstrapCls": 0,
+        "lcpMs": 144,
+        "cls": 0,
+        "allShifts": 0.06004593984374999,
+        "shifts": [
+          {
+            "atMs": 165.69999999925494,
+            "value": 0.06004593984374999,
+            "recentInput": true,
+            "nodes": [
+              {
+                "tag": "FOOTER",
+                "id": "",
+                "className": "site-footer",
+                "before": {
+                  "x": 0,
+                  "y": 905.625,
+                  "width": 320,
+                  "height": 94.375,
+                  "top": 905.625,
+                  "right": 320,
+                  "bottom": 1000,
+                  "left": 0
+                },
+                "after": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "height": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                }
+              },
+              {
+                "tag": "A",
+                "id": "",
+                "className": "wordmark",
+                "before": {
+                  "x": 16.28125,
+                  "y": 122,
+                  "width": 287.421875,
+                  "height": 68,
+                  "top": 122,
+                  "right": 303.703125,
+                  "bottom": 190,
+                  "left": 16.28125
+                },
+                "after": {
+                  "x": 16,
+                  "y": 23.5,
+                  "width": 226,
+                  "height": 25,
+                  "top": 23.5,
+                  "right": 242,
+                  "bottom": 48.5,
+                  "left": 16
+                }
+              }
+            ]
+          }
+        ],
+        "longTasks": [
+          {
+            "startMs": 246.89999999850988,
+            "durationMs": 146
+          },
+          {
+            "startMs": 428.69999999925494,
+            "durationMs": 70
+          },
+          {
+            "startMs": 885.2999999988824,
+            "durationMs": 55
+          },
+          {
+            "startMs": 1178.8999999985099,
+            "durationMs": 56
+          },
+          {
+            "startMs": 1741,
+            "durationMs": 56
+          },
+          {
+            "startMs": 3538.5,
+            "durationMs": 52
+          },
+          {
+            "startMs": 3760.699999999255,
+            "durationMs": 51
+          }
+        ],
+        "frames": [
+          {
+            "elapsedMs": 516.3999999985099,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 4
+          },
+          {
+            "elapsedMs": 1078.199999999255,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 7
+          },
+          {
+            "elapsedMs": 2871.5,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 10
+          },
+          {
+            "elapsedMs": 3092.5,
+            "status": "complete",
+            "event": "search.summary",
+            "resultCount": 10
+          }
+        ],
+        "overflow": false,
+        "weatherAssetRequests": 0
+      },
+      "restore": {
+        "elapsedMs": 443,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 50.09999999962747,
+        "domContentLoadedMs": 128.69999999925494,
+        "resumeReadyMs": 569.6999999992549,
+        "fcpMs": 108,
+        "lcpMs": 108,
+        "cls": 0,
+        "jsEncodedBytes": 619892
+      },
+      "stream": {
+        "started": 749,
+        "headerMs": 123.30000000074506,
+        "first": 480.69999999925494,
+        "complete": 3089.699999999255,
+        "bootstrapCls": 0,
+        "lcpMs": 108,
+        "cls": 0,
+        "allShifts": 0.05668803717948718,
+        "shifts": [
+          {
+            "atMs": 140,
+            "value": 0.05668803717948718,
+            "recentInput": true,
+            "nodes": [
+              {
+                "tag": "FOOTER",
+                "id": "",
+                "className": "site-footer",
+                "before": {
+                  "x": 0,
+                  "y": 905.625,
+                  "width": 390,
+                  "height": 94.375,
+                  "top": 905.625,
+                  "right": 390,
+                  "bottom": 1000,
+                  "left": 0
+                },
+                "after": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "height": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                }
+              },
+              {
+                "tag": "A",
+                "id": "",
+                "className": "wordmark",
+                "before": {
+                  "x": 51.28125,
+                  "y": 122,
+                  "width": 287.421875,
+                  "height": 68,
+                  "top": 122,
+                  "right": 338.703125,
+                  "bottom": 190,
+                  "left": 51.28125
+                },
+                "after": {
+                  "x": 16,
+                  "y": 23.5,
+                  "width": 296,
+                  "height": 25,
+                  "top": 23.5,
+                  "right": 312,
+                  "bottom": 48.5,
+                  "left": 16
+                }
+              }
+            ]
+          }
+        ],
+        "longTasks": [
+          {
+            "startMs": 254.19999999925494,
+            "durationMs": 154
+          },
+          {
+            "startMs": 443.59999999962747,
+            "durationMs": 71
+          },
+          {
+            "startMs": 896.8000000007451,
+            "durationMs": 56
+          },
+          {
+            "startMs": 1177.5999999996275,
+            "durationMs": 52
+          },
+          {
+            "startMs": 1754.300000000745,
+            "durationMs": 69
+          },
+          {
+            "startMs": 3553.9000000003725,
+            "durationMs": 58
+          },
+          {
+            "startMs": 3783.300000000745,
+            "durationMs": 55
+          }
+        ],
+        "frames": [
+          {
+            "elapsedMs": 480.69999999925494,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 4
+          },
+          {
+            "elapsedMs": 1074.5999999996275,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 7
+          },
+          {
+            "elapsedMs": 2863.699999999255,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 10
+          },
+          {
+            "elapsedMs": 3089.699999999255,
+            "status": "complete",
+            "event": "search.summary",
+            "resultCount": 10
+          }
+        ],
+        "overflow": false,
+        "weatherAssetRequests": 0
+      },
+      "restore": {
+        "elapsedMs": 431,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 45.79999999888241,
+        "domContentLoadedMs": 111.69999999925494,
+        "resumeReadyMs": 546.9000000003725,
+        "fcpMs": 92,
+        "lcpMs": 92,
+        "cls": 0,
+        "jsEncodedBytes": 619892
+      },
+      "stream": {
+        "started": 700.9000000003725,
+        "headerMs": 117.59999999962747,
+        "first": 470.09999999962747,
+        "complete": 3066.7999999988824,
+        "bootstrapCls": 0,
+        "lcpMs": 92,
+        "cls": 0,
+        "allShifts": 0.03156934576340664,
+        "shifts": [
+          {
+            "atMs": 135.5,
+            "value": 0.03156934576340664,
+            "recentInput": true,
+            "nodes": [
+              {
+                "tag": "FOOTER",
+                "id": "",
+                "className": "site-footer",
+                "before": {
+                  "x": 0,
+                  "y": 930,
+                  "width": 1440,
+                  "height": 70,
+                  "top": 930,
+                  "right": 1440,
+                  "bottom": 1000,
+                  "left": 0
+                },
+                "after": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "height": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                }
+              },
+              {
+                "tag": "A",
+                "id": "",
+                "className": "wordmark",
+                "before": {
+                  "x": 493.609375,
+                  "y": 159,
+                  "width": 452.78125,
+                  "height": 106,
+                  "top": 159,
+                  "right": 946.390625,
+                  "bottom": 265,
+                  "left": 493.609375
+                },
+                "after": {
+                  "x": 76.3125,
+                  "y": 36,
+                  "width": 200,
+                  "height": 32,
+                  "top": 36,
+                  "right": 276.3125,
+                  "bottom": 68,
+                  "left": 76.3125
+                }
+              },
+              {
+                "tag": "NAV",
+                "id": "",
+                "className": "top-nav",
+                "before": {
+                  "x": 1380,
+                  "y": 25,
+                  "width": 40,
+                  "height": 40,
+                  "top": 25,
+                  "right": 1420,
+                  "bottom": 65,
+                  "left": 1380
+                },
+                "after": {
+                  "x": 1380,
+                  "y": 29,
+                  "width": 40,
+                  "height": 40,
+                  "top": 29,
+                  "right": 1420,
+                  "bottom": 69,
+                  "left": 1380
+                }
+              }
+            ]
+          }
+        ],
+        "longTasks": [
+          {
+            "startMs": 233.7999999988824,
+            "durationMs": 148
+          },
+          {
+            "startMs": 421.59999999962747,
+            "durationMs": 67
+          },
+          {
+            "startMs": 845.2999999988824,
+            "durationMs": 56
+          },
+          {
+            "startMs": 1703.0999999996275,
+            "durationMs": 71
+          },
+          {
+            "startMs": 3496.5,
+            "durationMs": 64
+          }
+        ],
+        "frames": [
+          {
+            "elapsedMs": 470.09999999962747,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 4
+          },
+          {
+            "elapsedMs": 1073.8999999985099,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 7
+          },
+          {
+            "elapsedMs": 2859.7999999988824,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 10
+          },
+          {
+            "elapsedMs": 3066.7999999988824,
+            "status": "complete",
+            "event": "search.summary",
+            "resultCount": 10
+          }
+        ],
+        "overflow": false,
+        "weatherAssetRequests": 0
+      },
+      "restore": {
+        "elapsedMs": 447,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 1920,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 47.59999999962747,
+        "domContentLoadedMs": 109.40000000037253,
+        "resumeReadyMs": 547.8000000007451,
+        "fcpMs": 96,
+        "lcpMs": 96,
+        "cls": 0,
+        "jsEncodedBytes": 619892
+      },
+      "stream": {
+        "started": 694.0999999996275,
+        "headerMs": 124.09999999962747,
+        "first": 478.30000000074506,
+        "complete": 3076.800000000745,
+        "bootstrapCls": 0,
+        "lcpMs": 96,
+        "cls": 0,
+        "allShifts": 0.03264743893093533,
+        "shifts": [
+          {
+            "atMs": 143.30000000074506,
+            "value": 0.03264743893093533,
+            "recentInput": true,
+            "nodes": [
+              {
+                "tag": "FOOTER",
+                "id": "",
+                "className": "site-footer",
+                "before": {
+                  "x": 0,
+                  "y": 930,
+                  "width": 1920,
+                  "height": 70,
+                  "top": 930,
+                  "right": 1920,
+                  "bottom": 1000,
+                  "left": 0
+                },
+                "after": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "height": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                }
+              },
+              {
+                "tag": "A",
+                "id": "",
+                "className": "wordmark",
+                "before": {
+                  "x": 733.609375,
+                  "y": 159,
+                  "width": 452.78125,
+                  "height": 106,
+                  "top": 159,
+                  "right": 1186.390625,
+                  "bottom": 265,
+                  "left": 733.609375
+                },
+                "after": {
+                  "x": 101.75,
+                  "y": 36,
+                  "width": 200,
+                  "height": 32,
+                  "top": 36,
+                  "right": 301.75,
+                  "bottom": 68,
+                  "left": 101.75
+                }
+              },
+              {
+                "tag": "NAV",
+                "id": "",
+                "className": "top-nav",
+                "before": {
+                  "x": 1860,
+                  "y": 25,
+                  "width": 40,
+                  "height": 40,
+                  "top": 25,
+                  "right": 1900,
+                  "bottom": 65,
+                  "left": 1860
+                },
+                "after": {
+                  "x": 1860,
+                  "y": 29,
+                  "width": 40,
+                  "height": 40,
+                  "top": 29,
+                  "right": 1900,
+                  "bottom": 69,
+                  "left": 1860
+                }
+              }
+            ]
+          }
+        ],
+        "longTasks": [
+          {
+            "startMs": 235.5,
+            "durationMs": 147
+          },
+          {
+            "startMs": 421.80000000074506,
+            "durationMs": 68
+          },
+          {
+            "startMs": 845.1999999992549,
+            "durationMs": 51
+          },
+          {
+            "startMs": 1694.800000000745,
+            "durationMs": 66
+          },
+          {
+            "startMs": 3495.5999999996275,
+            "durationMs": 72
+          },
+          {
+            "startMs": 3720.4000000003725,
+            "durationMs": 50
+          }
+        ],
+        "frames": [
+          {
+            "elapsedMs": 478.30000000074506,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 4
+          },
+          {
+            "elapsedMs": 1066.800000000745,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 7
+          },
+          {
+            "elapsedMs": 2873.5999999996275,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 10
+          },
+          {
+            "elapsedMs": 3076.800000000745,
+            "status": "complete",
+            "event": "search.summary",
+            "resultCount": 10
+          }
+        ],
+        "overflow": false,
+        "weatherAssetRequests": 0
+      },
+      "restore": {
+        "elapsedMs": 414,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 3840,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 50.80000000074506,
+        "domContentLoadedMs": 113.5,
+        "resumeReadyMs": 557.4000000003725,
+        "fcpMs": 104,
+        "lcpMs": 104,
+        "cls": 0,
+        "jsEncodedBytes": 619892
+      },
+      "stream": {
+        "started": 714.5999999996275,
+        "headerMs": 137.80000000074506,
+        "first": 503.09999999962747,
+        "complete": 3099.800000000745,
+        "bootstrapCls": 0,
+        "lcpMs": 104,
+        "cls": 0,
+        "allShifts": 0.03282943635728624,
+        "shifts": [
+          {
+            "atMs": 156.2000000011176,
+            "value": 0.03282943635728624,
+            "recentInput": true,
+            "nodes": [
+              {
+                "tag": "FOOTER",
+                "id": "",
+                "className": "site-footer",
+                "before": {
+                  "x": 0,
+                  "y": 930,
+                  "width": 3840,
+                  "height": 70,
+                  "top": 930,
+                  "right": 3840,
+                  "bottom": 1000,
+                  "left": 0
+                },
+                "after": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "height": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                }
+              },
+              {
+                "tag": "A",
+                "id": "",
+                "className": "wordmark",
+                "before": {
+                  "x": 1693.609375,
+                  "y": 159,
+                  "width": 452.78125,
+                  "height": 106,
+                  "top": 159,
+                  "right": 2146.390625,
+                  "bottom": 265,
+                  "left": 1693.609375
+                },
+                "after": {
+                  "x": 203.515625,
+                  "y": 36,
+                  "width": 200,
+                  "height": 32,
+                  "top": 36,
+                  "right": 403.515625,
+                  "bottom": 68,
+                  "left": 203.515625
+                }
+              },
+              {
+                "tag": "NAV",
+                "id": "",
+                "className": "top-nav",
+                "before": {
+                  "x": 3780,
+                  "y": 25,
+                  "width": 40,
+                  "height": 40,
+                  "top": 25,
+                  "right": 3820,
+                  "bottom": 65,
+                  "left": 3780
+                },
+                "after": {
+                  "x": 3780,
+                  "y": 29,
+                  "width": 40,
+                  "height": 40,
+                  "top": 29,
+                  "right": 3820,
+                  "bottom": 69,
+                  "left": 3780
+                }
+              }
+            ]
+          }
+        ],
+        "longTasks": [
+          {
+            "startMs": 243.5,
+            "durationMs": 142
+          },
+          {
+            "startMs": 422.90000000037253,
+            "durationMs": 71
+          },
+          {
+            "startMs": 880.3000000007451,
+            "durationMs": 53
+          },
+          {
+            "startMs": 1164.9000000003725,
+            "durationMs": 52
+          },
+          {
+            "startMs": 1731.4000000003725,
+            "durationMs": 55
+          },
+          {
+            "startMs": 3529.199999999255,
+            "durationMs": 76
+          }
+        ],
+        "frames": [
+          {
+            "elapsedMs": 503.09999999962747,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 4
+          },
+          {
+            "elapsedMs": 1072.4000000003725,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 7
+          },
+          {
+            "elapsedMs": 2891.4000000003725,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 10
+          },
+          {
+            "elapsedMs": 3099.800000000745,
+            "status": "complete",
+            "event": "search.summary",
+            "resultCount": 10
+          }
+        ],
+        "overflow": false,
+        "weatherAssetRequests": 0
+      },
+      "restore": {
+        "elapsedMs": 425,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "throttled": true,
+      "initial": {
+        "ttfbMs": 47.90000000037253,
+        "domContentLoadedMs": 1559.800000000745,
+        "resumeReadyMs": 7146.700000001118,
+        "fcpMs": 456,
+        "lcpMs": 456,
+        "cls": 0,
+        "jsEncodedBytes": 619892
+      },
+      "stream": {
+        "started": 7307.300000000745,
+        "headerMs": 140.59999999962747,
+        "first": 959.7999999988824,
+        "complete": 3607.5999999996275,
+        "bootstrapCls": 0,
+        "lcpMs": 456,
+        "cls": 0,
+        "allShifts": 0.05668803717948718,
+        "shifts": [
+          {
+            "atMs": 159.90000000037253,
+            "value": 0.05668803717948718,
+            "recentInput": true,
+            "nodes": [
+              {
+                "tag": "FOOTER",
+                "id": "",
+                "className": "site-footer",
+                "before": {
+                  "x": 0,
+                  "y": 905.625,
+                  "width": 390,
+                  "height": 94.375,
+                  "top": 905.625,
+                  "right": 390,
+                  "bottom": 1000,
+                  "left": 0
+                },
+                "after": {
+                  "x": 0,
+                  "y": 0,
+                  "width": 0,
+                  "height": 0,
+                  "top": 0,
+                  "right": 0,
+                  "bottom": 0,
+                  "left": 0
+                }
+              },
+              {
+                "tag": "A",
+                "id": "",
+                "className": "wordmark",
+                "before": {
+                  "x": 51.28125,
+                  "y": 122,
+                  "width": 287.421875,
+                  "height": 68,
+                  "top": 122,
+                  "right": 338.703125,
+                  "bottom": 190,
+                  "left": 51.28125
+                },
+                "after": {
+                  "x": 16,
+                  "y": 23.5,
+                  "width": 296,
+                  "height": 25,
+                  "top": 23.5,
+                  "right": 312,
+                  "bottom": 48.5,
+                  "left": 16
+                }
+              }
+            ]
+          }
+        ],
+        "longTasks": [
+          {
+            "startMs": 6050.800000000745,
+            "durationMs": 162
+          },
+          {
+            "startMs": 7010.9000000003725,
+            "durationMs": 78
+          },
+          {
+            "startMs": 7944.300000000745,
+            "durationMs": 57
+          },
+          {
+            "startMs": 8821.599999999627,
+            "durationMs": 54
+          },
+          {
+            "startMs": 10636.599999999627,
+            "durationMs": 62
+          },
+          {
+            "startMs": 10861.599999999627,
+            "durationMs": 53
+          }
+        ],
+        "frames": [
+          {
+            "elapsedMs": 959.7999999988824,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 4
+          },
+          {
+            "elapsedMs": 1568.5,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 7
+          },
+          {
+            "elapsedMs": 3391.7999999988824,
+            "status": "delta",
+            "event": "results.batch",
+            "resultCount": 10
+          },
+          {
+            "elapsedMs": 3607.5999999996275,
+            "status": "complete",
+            "event": "search.summary",
+            "resultCount": 10
+          }
+        ],
+        "overflow": false,
+        "weatherAssetRequests": 0
+      },
+      "restore": {
+        "elapsedMs": 473,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    }
+  ]
+}

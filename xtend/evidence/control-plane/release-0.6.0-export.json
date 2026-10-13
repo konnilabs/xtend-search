@@ -1,7 +1,7 @@
 {
   "version": "0.6.0",
   "tag": "xtend-search:0.6.0",
-  "id": "sha256:a0f6a5d6b163f83ae825355b85cdd0a8c724d69214a7b15e022599ff0c68755b",
+  "id": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
   "platform": "linux/amd64",
   "sourceHashes": {
     "version": "0.6.0",
@@ -31,15 +31,15 @@
       "frontend/report-state.mjs": "a5917a4817162577292b2a7acc9d8f91d1c6518ea93d8f5385d8b7d6e10bbfce",
       "frontend/search-cache.mjs": "993589f74f871675b8f759b9af0943c48134997d56118132e4a52fcf8e1bd490",
       "frontend/search-lightbox-controller.mjs": "41c3737178e04e3f9d67cc12f7f2da0dafa9943000ae2d50b7223c19f8fe39a3",
-      "frontend/search-motion.mjs": "addd79f26c66bf6b88c2a0798bcf26212e1eb1f7953388ed7c10093655f7f7ba",
+      "frontend/search-motion.mjs": "bbf7d7536359fb3c9ff11637a30a1226d9e223aed26885df3f76edd4a73e9fd1",
       "frontend/search-remote-adapter.mjs": "c9786d1cda254f7bab8223f02b894f07802e2ac05ebf4ea2e8830f19a27068b8",
       "frontend/search.css": "c116dbf893b3e427484054f6aaf96a4e629db40aece7e0e16097e886ec51a4d9",
       "frontend/search.rmt": "2dd22e872959e114819a09154dc2edaa9c7a2e3afd56b47028bf58f7e458a8cc",
       "frontend/services.ts": "2755da47d5b8f8c66634c831f7e241cbeef3ee4c9a388980b0a25ee77b3846f0",
-      "frontend/standalone-host.mjs": "aef223afbe669b2d8ac5c9d44b1a4e0750ede8801e2a17f8379eda3d5bd5e23f",
+      "frontend/standalone-host.mjs": "af4237d19c9037cd3b070f29c1181a2a539af09fe0215fc34cf14b555ced7c7c",
       "frontend/standalone-streaming.mjs": "fe9e02df611f8a4708cb7dc542d2d523b8e90802336684c6b70e200a5f8e6f0e",
-      "frontend/standalone.css": "2567eab6bc703e81188c211be3c0f8f49a2276252802ab9212c7073d308019a1",
-      "frontend/standalone.rmt": "c7875bde5a15e0130a7d3a3934ad451e679b079ceb0ec66570eda1c3aa6e1c62",
+      "frontend/standalone.css": "f85db8a7582f3e6093e914645b340974535eca93579154f0667acaaec0cb2987",
+      "frontend/standalone.rmt": "da7d94eef787198ac7daf1b41330fee200254da9dc97f3378cbf55e3775887ab",
       "frontend/streaming.mjs": "fa60c0552d1c4c21f729717043e9798961d228ff3cbe05ff8be97db676ffe3e2",
       "frontend/wordmark.svg": "7616fee743387782d4bd224c2aba8ebcc1eeb04c5d149eae1c7cbdc452a7ddc8",
       "frontend/components/LICENSE-XTend": "5c9817c129b98e7bb966bca028c43c19107102ef8e03fe799bffb4354f4ef015",
@@ -61,8 +61,8 @@
       "frontend/weather/unknown.svg": "66deafa5b906bc025290fcf1e8f6b11c0c341cc19c35c814f34c2bafa3e1d5fa",
       "frontend/weather/wind.svg": "6cba2f6798f20b1470fe476265d6bb3ba760cab8c7569e79cffb4415d069a0a6",
       "admin/admin.css": "11026f80b9eee490f983526cba7ced162d837fac2a448e53e2ad58b14a89edbe",
-      "admin/admin.rmt": "adfd5706db53fd11c628c18dbc16db29fb59158929fc0e6f1ecc826ea98a96c2",
-      "admin/live.mjs": "48c7596770abdcaac390061e12d35ee095f385223a988dd4b49b141284421580",
+      "admin/admin.rmt": "3232f1e51a07f221f57032e53b4fba75b830751723507af97284cb87e12d320e",
+      "admin/live.mjs": "accda80922ec850ef30ba5330b907b54178a38dbe5d1514967d0795fb55c5a75",
       "admin/pages.json": "6bae6ca2db05bcf0381e055c020e64d72c66b0c91d287d7dc96c9b71d94b0d34",
       "admin/services.ts": "5c02a021fa137321a343f06287b7e3e4b798ad107b6777d7c8d6d6e40fdd2624",
       "server/about.mjs": "161777c139b95cc92a49cc0959adaa78a9ccd9ae7a80befffaba79e86aed14ab",
@@ -86,7 +86,7 @@
       "server/control/contracts.mjs": "b2d5e60cd36f4a54d14b9264904be8ca99c8d243fc56f4ddcf1870423d4ff13c",
       "server/control/dashboard.mjs": "c54cad01512ec4cf5de05656151028289aebe043c22fba09187914d3362ce831",
       "server/control/evidence.mjs": "5f022df7f4fa31eb549420e67ebbd25f62a90dd863c8b44a8e314f72ef92dd4a",
-      "server/control/executor.mjs": "aa355cac58a03c8b637ad909577f4684f52cbadd3afd77d89d41743a5c688731",
+      "server/control/executor.mjs": "36e7e84a9369f05d969b012d7f8ccb71fff23d94acee75d5baa8817c7539f3f1",
       "server/control/families.mjs": "37a34fd470da998baa6db739f5042a9e34a6e01cbf940ea8a79f964bc0d6a8c1",
       "server/control/family-repair.mjs": "6771f2d1d851a3299b73ee98e88195dfff02a77d83b2df44b011293a69071bf5",
       "server/control/favicons.mjs": "39b0a03b63dc5e860e200e266e3412b33d0b7a2969cd31ed3f166997a18bcca5",
@@ -105,7 +105,7 @@
       "server/control/store.mjs": "106a0374815cd0fe9b97db0fa9d73cce78de8406510046538f17f8749881ed40",
       "server/control/telemetry.mjs": "a439a5a2e850c91604d30c14ea8b67c9886c67df9b8f303f8b3944f27781469f",
       "server/weather/dwd.mjs": "75e17c1030936a766402e145a92a35e2eddd74b85833c2cf6609d7bbd612c788",
-      "server/weather/service.mjs": "8a58ebda416f56f0bd01f7cb486f3337511b84659f870f7794d0969a6a7e4005",
+      "server/weather/service.mjs": "eea9e4e28eaaa564fa899fef3ee49531db43e6805108de2d7559e54b52ddc0d1",
       "server/weather/zip.mjs": "41a6402bf23c886cd920ebc83bbf1ae84fbfa2fc1f92b395bb87ad8586c5d688",
       "shared/about.mjs": "57ab2e8de1640e13e586faf659a929015a9c933255f20111aaa953fcce953b8e",
       "shared/cache-identity.mjs": "0885fcb4bd06fa6b99edc36efefc15c0996824a15aa992c6a551b9a5ead002cd",
@@ -125,11 +125,11 @@
     },
     "bundles": {
       "admin/admin.css": "d4fe530d42c8f39af6913f2348c126550be8cb3df297f98e30a86f8e24877d55",
-      "standalone/search.css": "117205bb5e0184db33cdf1ea585d2403ec6e93e508b3ced2c87545f3cd6abb18",
-      "standalone/page.mjs": "d3536f59aa7695978b6d41fa42aa774af31ff6057b103698d002c126748cb924",
+      "standalone/search.css": "cea99c5d3cd077c71b7df7f9fd6ec772877f60fa250860044b522c6ca83a401f",
+      "standalone/page.mjs": "564faf9b591e100ad6fbbbb5411332dada6739dc497e11072d7eb6cdc508ddcc",
       "standalone/admin-login.mjs": "8b8058ee97a66bbc4358aaf4059eb9183f17ac4b19784cbcde3504c87dba2b2f"
     }
   },
   "archive": "XTend-search-Docker-Image-0.6.0-linux-amd64.tar.gz",
-  "bytes": 170430688
+  "bytes": 170463239
 }

@@ -90,6 +90,7 @@ jobs:
           node xtend/tests/control/v04-browser.mjs
           node xtend/tests/control/minor-051-browser.mjs
           node xtend/tests/control/release-060-browser.mjs
+          node xtend/tests/control/availability-feedback-browser.mjs
           node xtend/tests/control/weather-layout-browser.mjs
           node xtend/tests/control/spinner-stream-browser.mjs
           node xtend/tests/control/cache-browser.mjs
@@ -99,6 +100,7 @@ jobs:
           node xtend/tests/control/ssr-browser.mjs
           node xtend/tests/control/about-browser.mjs
           node xtend/tests/control/edge-browser.mjs
+          node xtend/tests/control/prerelease-audit-browser.mjs
       - name: Fixture diagnostics
         if: failure()
         run: |

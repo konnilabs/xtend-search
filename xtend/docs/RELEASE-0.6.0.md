@@ -5,9 +5,16 @@ Die Entwicklung baut auf dem geprüften 0.5.1-Commit `cf2a90061447cf004e0ce06a52
 
 ## Bedienung
 
-Die Suchleiste zeigt ausschließlich die Aktionslupe beziehungsweise den XSpinner. Die Filter verwenden RMT-Surfaces und AnimationEngine mit ersetzbaren Übergängen; ohne JavaScript bleiben die nativen `details` nutzbar. Rahmen, Einrückung und Radien teilen CSS-Tokens. Auf mobilen Displays bleiben die Modi in einer horizontal scrollbaren Zeile, mit automatisch sichtbarem aktivem Tab und einer getrennten Werkzeugzeile.
+Die Suchleiste zeigt ausschließlich die Aktionslupe beziehungsweise den XSpinner. Die Filter verwenden RMT-Surfaces und AnimationEngine mit ersetzbaren Übergängen; ohne JavaScript bleiben die nativen `details` nutzbar. Der Filter-Portalbereich erhält eine eigene, auf den Viewport begrenzte Panelbreite; der Meldebutton und die schmale Filter-Schaltfläche stauchen ihn nicht zusammen. Rahmen, Einrückung und Radien teilen CSS-Tokens. Auf mobilen Displays bleiben die Modi in einer horizontal scrollbaren Zeile, mit automatisch sichtbarem aktivem Tab und einer getrennten Werkzeugzeile.
+Der Header-Übergang beginnt im RMT-Ladezustand, bevor eine langsame Seitenantwort eintrifft. Ein kurzlebiger Präsentationszustand reserviert die kommende Ergebnisfläche; PageClient behält Daten, History und Navigation. Neue Generationen verwerfen ältere Präsentationsaufträge, Erfolg und Fehler entfernen den Zwischenzustand. Die Werkzeugzeile reserviert 44 Pixel für beide Aktionen, damit das Einblenden des Meldebuttons ihre Höhe nicht verändert.
+
+Observatory-Feedback liegt in eigenem RMT-Zustand, unabhängig von Live-Daten und Formularantworten. Bestätigungen bleiben sechs Sekunden sichtbar, Fehler bis zum Schließen; Live-Aktualisierungen entfernen oder starten vorhandene XToasts nicht neu.
+Auch der responsive Detailpanel-Modus liegt in RMT-Zustand: Live-Updates setzen die mobile Vollbildansicht nicht auf ein angedocktes Desktop-Panel zurück.
+
+Das Filterpanel enthält eigene RMT-Bereiche für Feldpaare und Aktionen. Die drei Buttons stehen untereinander mit einheitlicher Breite, mindestens 44 Pixel Höhe und zehn Pixel Abstand. Das Layout bleibt vor und nach der Wiederaufnahme sowie ohne JavaScript gleich.
 
 „Ergebnis melden“ erscheint bei meldbaren Treffern neben den Filtern. Der nicht modale XSearchReportAssistant erlaubt höchstens fünf Treffer mit einem gemeinsamen Grund. Die Linkzustimmung ist anfangs aus. Abbrechen, Moduswechsel und History fragen bei einem Entwurf nach. Fehlgeschlagene Speicherung erhält den Entwurf; ein Batch wird vollständig oder überhaupt nicht angenommen. Fünf Treffer derselben Quelle zählen als eine Qualitätsstimme; die Annahmegrenze zählt ausgewählte Ergebnisse. Ohne JavaScript führt die Ergebnis-Auswahl zum nativen Batch-Formular.
+Ausgewählte Treffer und Knowledge Cards erhalten zusätzlich zur Checkbox und zum Rahmen eine sanfte rote Hintergrundfläche in beiden Farbschemata; Abwahl und bestätigtes Verwerfen entfernen sie. Der Meldegrund hat ausreichend Abstand zum sichtbaren Tastatur-Fokusrahmen, damit das Label frei bleibt.
 
 „Wetter“ löst Ortsnamen und Postleitzahlen auf. Mehrdeutige Orte werden zur Auswahl angeboten; die gewählte ID ist im URL navigierbar. Neue Eingaben verwerfen die ID. Sprache bleibt verfügbar; Zeitraum und SafeSearch sind für Wetter ausgeblendet und werden für die übrigen Modi beibehalten.
 
@@ -15,7 +22,7 @@ Das Wetterlayout zeigt modellbasierte aktuelle Lage, 24 Stunden, sieben Tage, Wi
 
 ## Freigabe und Grenzen
 
-- `XTEND_WEATHER=1` macht den Modus verfügbar. Neue Wetterfreigaben sind **aus**: im Observatory unter „Wetter“ durch einen Administrator aktivieren.
+- `XTEND_WEATHER=1` erlaubt den Rollout. Der Wetter-Reiter erscheint erst nach ausdrücklicher Freigabe im Observatory und ohne administrative Pause. Neue Wetterfreigaben sind **aus**. Auch direkte Wetter-Links umgehen die Freigabe nicht; ohne Freigabe erfolgen keine Providerabrufe. Vorübergehende Providerfehler oder Budgetgrenzen entfernen einen freigegebenen Reiter nicht.
 - `XTEND_WEATHER=0` deaktiviert den Rollout. `XTEND_WEATHER_ALERTS=dwd|off` steuert den Warnadapter; zusätzlich kann die Administration ihn deaktivieren.
 - Free-API ausschließlich für den bestätigten nichtkommerziellen Betrieb. Geocoding, aktuelle Lage und Prognose zählen konservativ 1, 1 und 2 API-Einheiten. Default: 540/Minute, 4.500/Stunde, 9.000/UTC-Tag und 270.000/UTC-Monat; Werte können im Observatory verringert werden.
 - Budgets werden atomar vor dem Abruf reserviert und bleiben nach Neustarts erhalten. Fehlversuche verbrauchen ihre reservierten Einheiten. Es gibt zwei gleichzeitige Open-Meteo-Abrufe, vier Sekunden je Abruf und zwölf Sekunden je Servicelauf, ohne automatisches Wiederholen.
