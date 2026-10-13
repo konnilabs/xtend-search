@@ -1,6 +1,6 @@
 import {createHash,randomUUID} from 'node:crypto';
 import {createPageResourceCache} from '@ccslabs/xtend/rmt/page-resource-cache';
-import {weatherCondition,weatherIdentity,WEATHER_BUDGETS} from '../../shared/weather.mjs';
+import {weatherCondition,weatherIdentity,weatherTemperature,WEATHER_BUDGETS} from '../../shared/weather.mjs';
 import {preferenceSearchUrl as searchUrl} from '../preferences.mjs';
 import {requireRole,fail,integer} from '../control/contracts.mjs';
 import {DwdService} from './dwd.mjs';
@@ -13,16 +13,16 @@ const METRICS=[['wind','Wind'],['gust','Böen'],['humidity','Luftfeuchtigkeit'],
 const mergeMetrics=(previous,next)=>previous.map(item=>next.find(metric=>metric.id===item.id)||item);
 const clean=x=>typeof x==='string'?x.replace(/[<>\x00-\x1f]/g,'').slice(0,200):'';
 function place(raw){if(!Number.isSafeInteger(raw?.id)||!finite(raw.latitude)||Math.abs(raw.latitude)>90||!finite(raw.longitude)||Math.abs(raw.longitude)>180||!clean(raw.name))throw Error('schema_invalid');let timezone=raw.timezone||'UTC';try{new Intl.DateTimeFormat('de',{timeZone:timezone});}catch{timezone='UTC';}return {id:raw.id,name:clean(raw.name),label:[clean(raw.name),clean(raw.admin1),clean(raw.country)].filter(Boolean).join(' · '),latitude:raw.latitude,longitude:raw.longitude,countryCode:clean(raw.country_code),timezone};}
-function current(raw){const c=raw?.current;if(!c||!finite(c.temperature_2m)||!Number.isFinite(Date.parse(c.time)))throw Error('schema_invalid');return {temperature:value(c.temperature_2m,'°'),apparent:'Gefühlt '+value(c.apparent_temperature,'°'),...weatherCondition(c.weather_code,c.is_day),time:c.time,metrics:[['wind','Wind',value(c.wind_speed_10m,' km/h')],['gust','Böen',value(c.wind_gusts_10m,' km/h')],['humidity','Luftfeuchtigkeit',value(c.relative_humidity_2m,' %')],['rain','Niederschlag',value(c.precipitation,' mm')]].map(([id,label,value])=>({id,label,value}))};}
+function current(raw){const c=raw?.current;if(!c||!finite(c.temperature_2m)||!Number.isFinite(Date.parse(c.time)))throw Error('schema_invalid');return {temperature:weatherTemperature(c.temperature_2m).label,temperatureValue:weatherTemperature(c.temperature_2m).value,temperatureFahrenheit:weatherTemperature(c.temperature_2m,true).value,apparent:'Gefühlt '+weatherTemperature(c.apparent_temperature).label,apparentFahrenheit:'Gefühlt '+weatherTemperature(c.apparent_temperature,true).label,...weatherCondition(c.weather_code,c.is_day),time:c.time,metrics:[['wind','Wind',value(c.wind_speed_10m,' km/h')],['gust','Böen',value(c.wind_gusts_10m,' km/h')],['humidity','Luftfeuchtigkeit',value(c.relative_humidity_2m,' %')],['rain','Niederschlag',value(c.precipitation,' mm')]].map(([id,label,value])=>({id,label,value}))};}
 function forecast(raw,p){const h=raw?.hourly,d=raw?.daily;if(!Array.isArray(h?.time)||!Array.isArray(d?.time)||!d.time.length||h.time.length>200||d.time.length>8)throw Error('schema_invalid');
  const hourly=h.time.slice(0,24).map((time,i)=>{
   const condition=weatherCondition(h.weather_code?.[i],h.is_day?.[i]);
-  return {...condition,id:String(i),label:time.slice(11,16),conditionLabel:condition.label,temperature:value(h.temperature_2m?.[i],'°'),rain:value(h.precipitation_probability?.[i],' %')};
+  return {...condition,id:String(i),label:time.slice(11,16),conditionLabel:condition.label,temperature:weatherTemperature(h.temperature_2m?.[i]).label,temperatureValue:weatherTemperature(h.temperature_2m?.[i]).value,temperatureFahrenheit:weatherTemperature(h.temperature_2m?.[i],true).value,rain:value(h.precipitation_probability?.[i],' %'),rainValue:value(h.precipitation_probability?.[i])};
  });
  const daily=d.time.slice(0,7).map((time,i)=>{
   const condition=weatherCondition(d.weather_code?.[i],1);
   const label=i===0?'Heute':new Intl.DateTimeFormat('de-DE',{weekday:'long',timeZone:'UTC'}).format(new Date(time+'T12:00:00Z'));
-  return {...condition,id:time,label,conditionLabel:condition.label,low:value(d.temperature_2m_min?.[i],'°'),high:value(d.temperature_2m_max?.[i],'°'),rain:value(d.precipitation_probability_max?.[i],' %')};
+  return {...condition,id:time,label,conditionLabel:condition.label,low:weatherTemperature(d.temperature_2m_min?.[i]).label,lowValue:weatherTemperature(d.temperature_2m_min?.[i]).value,lowFahrenheit:weatherTemperature(d.temperature_2m_min?.[i],true).value,high:weatherTemperature(d.temperature_2m_max?.[i]).label,highValue:weatherTemperature(d.temperature_2m_max?.[i]).value,highFahrenheit:weatherTemperature(d.temperature_2m_max?.[i],true).value,rain:value(d.precipitation_probability_max?.[i],' %'),rainValue:value(d.precipitation_probability_max?.[i])};
  });
  if(!hourly.some(h=>h.temperature!=='–')||!daily.some(d=>d.high!=='–'))throw Error('schema_invalid');
  return {hourly,daily,metrics:[{id:'uv',label:'UV-Index',value:value(d.uv_index_max?.[0])},{id:'sunrise',label:'Sonnenaufgang',value:d.sunrise?.[0]?.slice(11,16)||'–'},{id:'sunset',label:'Sonnenuntergang',value:d.sunset?.[0]?.slice(11,16)||'–'}]};
@@ -61,7 +61,7 @@ export class WeatherService {
    if(!geodata.places.length){data.empty=true;data.emptyTitle='Kein passender Ort gefunden';data.emptyMessage='Bitte einen Ortsnamen oder eine Postleitzahl eingeben.';yield {event:'weather.summary',data:snapshot(true)};return;}
    if(!state.location&&geodata.places.length>1){w.places=geodata.places.map(p=>({...p,url:searchUrl({...state,location:String(p.id)})}));data.countLabel='Bitte einen Ort auswählen';yield {event:'weather.summary',data:snapshot(true)};return;}
    const p=geodata.places[0];w.place={...p,label:p.label,timeLabel:new Intl.DateTimeFormat('de-DE',{timeZone:p.timezone,dateStyle:'medium',timeStyle:'short'}).format(new Date(this.now()))};w.hasPlace=true;data.countLabel='Wetter für '+p.name;yield {event:'weather.location',data:snapshot()};
-   const endpoint=()=>{const url=new URL('/v1/forecast',this.api);url.searchParams.set('latitude',p.latitude);url.searchParams.set('longitude',p.longitude);url.searchParams.set('timezone',p.timezone);return url;};
+   const endpoint=()=>{const url=new URL('/v1/forecast',this.api);url.searchParams.set('latitude',p.latitude);url.searchParams.set('longitude',p.longitude);url.searchParams.set('timezone',p.timezone);url.searchParams.set('temperature_unit','celsius');return url;};
    const tasks=new Map();const add=(id,work)=>tasks.set(id,work.then(value=>({id,value}),error=>({id,error})));
    add('current',this.cached('current:'+p.id,900000,async s=>{const url=endpoint();url.searchParams.set('current',CURRENT);return current(await this.json(url,1,s));},combined));
    add('forecast',this.cached('forecast:'+p.id,1800000,async s=>{const url=endpoint();url.searchParams.set('hourly',HOURLY);url.searchParams.set('daily',DAILY);url.searchParams.set('forecast_days','7');url.searchParams.set('forecast_hours','24');return forecast(await this.json(url,2,s),p);},combined));

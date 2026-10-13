@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "scope": "Offline Docker fixtures. Layout shifts after the location surface is painted, including recent-input shifts. Same-tab history restore counts provider requests directly.",
+  "runs": [
+    {
+      "width": 320,
+      "sectionCls": 0,
+      "shifts": [],
+      "streamAfterLayoutMs": 775.7999999988824,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 390,
+      "sectionCls": 0,
+      "shifts": [],
+      "streamAfterLayoutMs": 752.1999999992549,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 1440,
+      "sectionCls": 0,
+      "shifts": [],
+      "streamAfterLayoutMs": 728.5999999996275,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    }
+  ]
+}

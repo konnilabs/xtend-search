@@ -1,7 +1,7 @@
 {
   "version": "0.6.0",
   "tag": "xtend-search:0.6.0",
-  "id": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
+  "id": "sha256:b1e60b07cf69038a2075da31a85ee725b6a138b60385048fa7cf8c4ec1320269",
   "platform": "linux/amd64",
   "sourceHashes": {
     "version": "0.6.0",
@@ -36,11 +36,12 @@
       "frontend/search.css": "c116dbf893b3e427484054f6aaf96a4e629db40aece7e0e16097e886ec51a4d9",
       "frontend/search.rmt": "2dd22e872959e114819a09154dc2edaa9c7a2e3afd56b47028bf58f7e458a8cc",
       "frontend/services.ts": "2755da47d5b8f8c66634c831f7e241cbeef3ee4c9a388980b0a25ee77b3846f0",
-      "frontend/standalone-host.mjs": "af4237d19c9037cd3b070f29c1181a2a539af09fe0215fc34cf14b555ced7c7c",
+      "frontend/standalone-host.mjs": "b94826782592736195ac719bb0c611631e0ac18fb313eebd4e9724fe9b008dcb",
       "frontend/standalone-streaming.mjs": "fe9e02df611f8a4708cb7dc542d2d523b8e90802336684c6b70e200a5f8e6f0e",
-      "frontend/standalone.css": "f85db8a7582f3e6093e914645b340974535eca93579154f0667acaaec0cb2987",
-      "frontend/standalone.rmt": "da7d94eef787198ac7daf1b41330fee200254da9dc97f3378cbf55e3775887ab",
+      "frontend/standalone.css": "0dcf7d378e6a40afa7a60aa6d8e56d12ec9b647078e417942dd1484b0d9403d7",
+      "frontend/standalone.rmt": "d81813a963b778fde7c6c0e665cb8c344739071734ab1a501f4243878e12264c",
       "frontend/streaming.mjs": "fa60c0552d1c4c21f729717043e9798961d228ff3cbe05ff8be97db676ffe3e2",
+      "frontend/weather-units.mjs": "8c3a3a7f74bf43d121b7ce948639da7431e2c850fae4510adae232baf12907ab",
       "frontend/wordmark.svg": "7616fee743387782d4bd224c2aba8ebcc1eeb04c5d149eae1c7cbdc452a7ddc8",
       "frontend/components/LICENSE-XTend": "5c9817c129b98e7bb966bca028c43c19107102ef8e03fe799bffb4354f4ef015",
       "frontend/components/x-search-lightbox-styles.mjs": "955f5156266560a439fe1cfdd3cd6e23008f32c1588da3ed9f11c94ed41e1188",
@@ -105,13 +106,13 @@
       "server/control/store.mjs": "106a0374815cd0fe9b97db0fa9d73cce78de8406510046538f17f8749881ed40",
       "server/control/telemetry.mjs": "a439a5a2e850c91604d30c14ea8b67c9886c67df9b8f303f8b3944f27781469f",
       "server/weather/dwd.mjs": "75e17c1030936a766402e145a92a35e2eddd74b85833c2cf6609d7bbd612c788",
-      "server/weather/service.mjs": "eea9e4e28eaaa564fa899fef3ee49531db43e6805108de2d7559e54b52ddc0d1",
+      "server/weather/service.mjs": "72dad1a7ca41103916025428ed2ed8710ba9d24c4957456958be54646f683b5c",
       "server/weather/zip.mjs": "41a6402bf23c886cd920ebc83bbf1ae84fbfa2fc1f92b395bb87ad8586c5d688",
       "shared/about.mjs": "57ab2e8de1640e13e586faf659a929015a9c933255f20111aaa953fcce953b8e",
       "shared/cache-identity.mjs": "0885fcb4bd06fa6b99edc36efefc15c0996824a15aa992c6a551b9a5ead002cd",
       "shared/feedback-form.mjs": "cd57f7da93875422ce7134cd8bce9ae02716328f641ba79e5aea7e6a172da0da",
       "shared/feedback.mjs": "a786aa4c868ca2f4ebaec2a5311cbe017fb012fdff257ed47b17d93a48f3af8e",
-      "shared/weather.mjs": "730a0b0b620c80822fa2c7c49212248db0e9ffa38023e885dc4ff960bf038ba6",
+      "shared/weather.mjs": "7fc77631737778e876bdb73f8d8fd0d7a6b66b0fd097aea5a77169125f9632a6",
       "vendor-inputs/ccslabs-xtend-0.9.0-dd1917bfeb8f.tgz": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc",
       "vendor-inputs/xtend-0.9.0-provenance.json": "cb415b188c41e9898d37cd88493a00c261442b10aa0a6d10b276f993314819e8",
       "vendor-inputs/dwd/README.md": "ee912a87ad279342e3ebb7e75b42cfafe324689c30c5a98ee75847d4ac303405",
@@ -125,11 +126,11 @@
     },
     "bundles": {
       "admin/admin.css": "d4fe530d42c8f39af6913f2348c126550be8cb3df297f98e30a86f8e24877d55",
-      "standalone/search.css": "cea99c5d3cd077c71b7df7f9fd6ec772877f60fa250860044b522c6ca83a401f",
-      "standalone/page.mjs": "564faf9b591e100ad6fbbbb5411332dada6739dc497e11072d7eb6cdc508ddcc",
+      "standalone/search.css": "b6f33c7d5b0c6fbdbf843766ddd0295a746a604c08e56e9e52895526d2cbe474",
+      "standalone/page.mjs": "90ae6103a8807569df5991656031f35a044368e760f9c5d4c610a46b13c2d17d",
       "standalone/admin-login.mjs": "8b8058ee97a66bbc4358aaf4059eb9183f17ac4b19784cbcde3504c87dba2b2f"
     }
   },
   "archive": "XTend-search-Docker-Image-0.6.0-linux-amd64.tar.gz",
-  "bytes": 170463239
+  "bytes": 170483750
 }
