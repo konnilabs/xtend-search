@@ -1,7 +1,7 @@
 {
   "version": "0.6.0",
   "tag": "xtend-search:0.6.0",
-  "id": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
+  "id": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
   "platform": "linux/amd64",
   "sourceHashes": {
     "version": "0.6.0",
@@ -38,7 +38,7 @@
       "frontend/services.ts": "2755da47d5b8f8c66634c831f7e241cbeef3ee4c9a388980b0a25ee77b3846f0",
       "frontend/standalone-host.mjs": "af4237d19c9037cd3b070f29c1181a2a539af09fe0215fc34cf14b555ced7c7c",
       "frontend/standalone-streaming.mjs": "fe9e02df611f8a4708cb7dc542d2d523b8e90802336684c6b70e200a5f8e6f0e",
-      "frontend/standalone.css": "f85db8a7582f3e6093e914645b340974535eca93579154f0667acaaec0cb2987",
+      "frontend/standalone.css": "17ae254e70ae134d90d2ecb5082e0097771dca7767719eca9f12468bc1ce8890",
       "frontend/standalone.rmt": "da7d94eef787198ac7daf1b41330fee200254da9dc97f3378cbf55e3775887ab",
       "frontend/streaming.mjs": "fa60c0552d1c4c21f729717043e9798961d228ff3cbe05ff8be97db676ffe3e2",
       "frontend/wordmark.svg": "7616fee743387782d4bd224c2aba8ebcc1eeb04c5d149eae1c7cbdc452a7ddc8",
@@ -125,11 +125,11 @@
     },
     "bundles": {
       "admin/admin.css": "d4fe530d42c8f39af6913f2348c126550be8cb3df297f98e30a86f8e24877d55",
-      "standalone/search.css": "cea99c5d3cd077c71b7df7f9fd6ec772877f60fa250860044b522c6ca83a401f",
+      "standalone/search.css": "5f33e6568db4c0af35a891466688c34eb5422c05b377e6cdf15508bbe99e877f",
       "standalone/page.mjs": "564faf9b591e100ad6fbbbb5411332dada6739dc497e11072d7eb6cdc508ddcc",
       "standalone/admin-login.mjs": "8b8058ee97a66bbc4358aaf4059eb9183f17ac4b19784cbcde3504c87dba2b2f"
     }
   },
   "archive": "XTend-search-Docker-Image-0.6.0-linux-amd64.tar.gz",
-  "bytes": 170463239
+  "bytes": 170462599
 }

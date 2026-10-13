@@ -43,7 +43,7 @@
         "sha256": "25735d9732547352a37606a68e245be6ec2fe9576a692d1e19ed0efb7e53b611"
       },
       {
-        "report": "0.6.0-weather-layout.json",
+        "report": "0.6.0-weather-layout-pre-responsive.json",
         "sha256": "d7704607ea30c49d81dc1542cb85b2a89b355ebdf6e50ecc6b6c3a25706d269a"
       },
       {
@@ -79,7 +79,7 @@
         "sha256": "f32b2fe4d5c3944dd53c7e98e87cf729dc15b3d26a9628c65b3408d41fed92ca"
       },
       {
-        "report": "0.6.0-prerelease-audit.json",
+        "report": "0.6.0-prerelease-audit-pre-responsive.json",
         "sha256": "0b27e4b22662bb93ab3d488d18e62d532abef02822cec793b2093daf40051f41"
       }
     ],
@@ -108,7 +108,7 @@
     "method": "SDK/CLI and browser tests, not XTend MCP interactions"
   },
   "previousAcceptance": "0.6.0-verification.json",
-  "scope": "All 14 browser gates rerun against the final built image in a fresh isolated fixture volume. Includes SSR/bootstrap and streamed-layout CLS, slow client network, slow favicon, native forms and synthetic OAuth. No real-provider latency or production deployment claim.",
+  "scope": "Acceptance baseline at commit 0a42e36bf6aa50ef5f81b868361467bb33faf617: All 14 browser gates rerun against the final built image in a fresh isolated fixture volume. Includes SSR/bootstrap and streamed-layout CLS, slow client network, slow favicon, native forms and synthetic OAuth. No real-provider latency or production deployment claim.",
   "performance": {
     "report": "0.6.0-prerelease-performance.json",
     "sha256": "34c068f8dbfd568df530702cf604364e146bd89a486056679e1f92c6d163a44f",
@@ -143,5 +143,6 @@
       "streamCompleteMs": 3607.5999999996275
     },
     "remainingLoadFactor": "Cold JS/bootstrap over the constrained link (~620k encoded JS bytes); SSR is already painted. SDK remains pinned. No weather assets on ordinary searches."
-  }
+  },
+  "supersededBy": "0.6.0-weather-responsive-verification.json (subsequent CSS layout change and exact-image checks)"
 }

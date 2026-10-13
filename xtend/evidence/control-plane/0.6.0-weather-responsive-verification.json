@@ -1,0 +1,118 @@
+{
+  "schema": "xtend.search.validation.v1",
+  "version": "0.6.0",
+  "ok": true,
+  "completedUtc": "2026-10-13T21:49:08.174404+00:00",
+  "scope": "CSS-only weather layout follow-up. Exact built frontend image with no source mount. Offline streaming fixtures, both color schemes, responsive and native SSR geometry, plus normal search/slow-link/spinner regressions. Earlier comprehensive acceptance remains a separately identified baseline; no production deployment or live-provider performance claim.",
+  "baselineCommit": "0a42e36bf6aa50ef5f81b868361467bb33faf617",
+  "frontendImage": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
+  "fixtureImage": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
+  "localImage": "sha256:b61a62986ae97f2df8969e53ce49c834778e8af2044527caa417df7c5639194e",
+  "sourceCssSha256": "17ae254e70ae134d90d2ecb5082e0097771dca7767719eca9f12468bc1ce8890",
+  "sourceMountedIntoFixture": false,
+  "widths": [
+    320,
+    390,
+    700,
+    900,
+    1000,
+    1024,
+    1440,
+    1920,
+    3840
+  ],
+  "noJsWidths": [
+    320,
+    390,
+    1440,
+    3840
+  ],
+  "weatherSectionClsMax": 0,
+  "searchStreamClsMax": 0,
+  "sameTabRestoreProviderCalls": 0,
+  "layoutChanges": [
+    "Container-width based layout, with a narrower current-weather card and expanded hourly forecast.",
+    "Two rows of 12 hours on wider surfaces, one touch-scrollable strip on narrow surfaces.",
+    "Seven aligned day columns and seven metric columns when space permits; compact stacked/2-/4-column fallbacks.",
+    "Same reserved current and forecast geometry before and after streamed values arrive."
+  ],
+  "sameFixtureSsrHeightComparison": [
+    {
+      "width": 320,
+      "beforeHeightPx": 2027.171875,
+      "afterHeightPx": 1843.171875,
+      "reductionPercent": 9.08
+    },
+    {
+      "width": 390,
+      "beforeHeightPx": 2009.171875,
+      "afterHeightPx": 1814.28125,
+      "reductionPercent": 9.7
+    },
+    {
+      "width": 1440,
+      "beforeHeightPx": 1274.28125,
+      "afterHeightPx": 1186.28125,
+      "reductionPercent": 6.91
+    },
+    {
+      "width": 3840,
+      "beforeHeightPx": 1274.28125,
+      "afterHeightPx": 1186.28125,
+      "reductionPercent": 6.91
+    }
+  ],
+  "assetComparison": {
+    "baseline": {
+      "search.css": {
+        "bytes": 49617,
+        "gzipBytes": 10826,
+        "sha256": "cea99c5d3cd077c71b7df7f9fd6ec772877f60fa250860044b522c6ca83a401f"
+      },
+      "page.mjs": {
+        "bytes": 84137,
+        "gzipBytes": 26599,
+        "sha256": "564faf9b591e100ad6fbbbb5411332dada6739dc497e11072d7eb6cdc508ddcc"
+      },
+      "sourceCssSha256": "f85db8a7582f3e6093e914645b340974535eca93579154f0667acaaec0cb2987"
+    },
+    "candidate": {
+      "search.css": {
+        "bytes": 50862,
+        "gzipBytes": 11084,
+        "sha256": "5f33e6568db4c0af35a891466688c34eb5422c05b377e6cdf15508bbe99e877f"
+      },
+      "page.mjs": {
+        "bytes": 84137,
+        "gzipBytes": 26599,
+        "sha256": "564faf9b591e100ad6fbbbb5411332dada6739dc497e11072d7eb6cdc508ddcc"
+      },
+      "sourceCssSha256": "17ae254e70ae134d90d2ecb5082e0097771dca7767719eca9f12468bc1ce8890"
+    },
+    "cssGzipDeltaBytes": 258,
+    "pageEntryUnchanged": true
+  },
+  "reports": [
+    {
+      "report": "0.6.0-weather-layout.json",
+      "sha256": "21e30c2b9a2595962af60d1cbdfca290f1fb22c15f8888f6973b85958f5b9a41"
+    },
+    {
+      "report": "0.6.0-prerelease-audit.json",
+      "sha256": "06e29c1d73c728f94fd84b44873dc96a55fe0de4909e5546587c06ea198b7801"
+    },
+    {
+      "report": "0.6.0-spinner-stream.json",
+      "sha256": "5f36023244b2b0e80b6ee627cfd1d06c58dc845af24530c45c8e1cc1b136d961"
+    },
+    {
+      "report": "0.6.0-ux-local-image.json",
+      "sha256": "976efede78e4735c7006bbdce4689226950f31b08b5b4163f106dc2cbb0ae854"
+    },
+    {
+      "report": "release-0.6.0-portainer-smoke.json",
+      "sha256": "2d223cda0ca8629f9328d73a410ee11438c46ade4af4244ae21fdf7312964592"
+    }
+  ],
+  "previousAcceptance": "0.6.0-ux-verification.json"
+}
