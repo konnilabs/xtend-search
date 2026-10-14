@@ -88,6 +88,7 @@ jobs:
             sleep 1
           done
           node xtend/tests/control/v04-browser.mjs
+          node xtend/tests/control/feedback-readiness-browser.mjs
           node xtend/tests/control/minor-051-browser.mjs
           node xtend/tests/control/release-060-browser.mjs
           node xtend/tests/control/availability-feedback-browser.mjs
