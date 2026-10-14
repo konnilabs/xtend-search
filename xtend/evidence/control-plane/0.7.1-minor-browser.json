@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "checks": [
+    "Centered real XIcons at 320–3840px, 48px action target, About corner, no overflow.",
+    "XSpinner terminates after stream, mode/cache restore, superseded navigation and network failure.",
+    "RMT feedback preserves consent/reason on service failure, retry succeeds, toast and modal teardown restore page.",
+    "Authenticated Observatory edits list and overrides daily selection; open home refreshes via metadata, escaped text, no provider dispatch or persistent client storage."
+  ],
+  "errors": []
+}

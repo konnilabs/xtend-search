@@ -1,0 +1,13 @@
+{
+  "xtend-search-0.7.1-source.tar.gz": {
+    "entries": 1074,
+    "privateRuntimeFiles": false,
+    "unsafePaths": false
+  },
+  "xtend-search-0.7.1-verification.tar.gz": {
+    "entries": 23,
+    "privateRuntimeFiles": false,
+    "unsafePaths": false
+  },
+  "sourceRebuildInputsPresent": true
+}
