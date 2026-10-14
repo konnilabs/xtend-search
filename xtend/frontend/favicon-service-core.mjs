@@ -14,16 +14,24 @@ export const faviconResources=createFaviconResources();
 // One in-flight projection and one boolean recheck, independent of scan count.
 // Model content protects concurrent stream/image commits; equal favicon fields
 // produce no command. This port never renders or holds a View reference.
-export function createFaviconProjection({readResults,project,commit,isCurrent}){
+export function createFaviconProjection({readOwner,readResults,project,commit,isCurrent}){
  let requested=false,running=null,epoch=0,disposed=false;
  const differs=(before,after)=>before.length!==after.length||before.some((row,index)=>row.faviconSrc!==after[index].faviconSrc||row.faviconReady!==after[index].faviconReady);
  function request(own){
   if(disposed)return Promise.resolve();epoch=own;requested=true;if(running)return running;
   running=Promise.resolve().then(async()=>{
    while(requested&&!disposed){requested=false;const own=epoch;if(!isCurrent(own))continue;
-    const before=readResults(),fingerprint=JSON.stringify(before),value=await project(before);if(disposed||!isCurrent(own))continue;
+    const before=readResults(),owner=readOwner?.(),fingerprint=JSON.stringify(before),value=await project(before);if(disposed||!isCurrent(own))continue;
     if(JSON.stringify(readResults())!==fingerprint){requested=true;continue;}
-    if(differs(before,value.results))await commit(value);
+    if(differs(before,value.results)){
+     const outcome=await commit(value,owner);
+     // dispatchCommand can resolve a failure instead of throwing. Never turn
+     // service/command errors into an implicit, unbounded projection retry.
+     if(outcome?.status&&outcome.status!=='success'){requested=false;break;}
+     // A queued CAS can be rejected after the early check. Re-project the
+     // current Model instead of leaving an ignored old snapshot as the last run.
+     if(!disposed&&isCurrent(own)&&JSON.stringify(readResults())!==JSON.stringify(value.results))requested=true;
+    }
    }
   }).finally(()=>{running=null;});return running;
  }

@@ -1,0 +1,193 @@
+{
+  "stage": "PR18 final local validation; remote final-head outcome is maintained only in PR body",
+  "date": "2026-10-14",
+  "baseline": "a1914801c798e04ffb4f8a1e62da60de70cda23b",
+  "local": {
+    "buildControl": "passed",
+    "buildHost": {
+      "ok": true,
+      "services": {
+        "enabled": true,
+        "ok": true,
+        "status": "built",
+        "targets": [
+          "browser"
+        ]
+      },
+      "reportSha256": "db603471889ebae5d4ced0e560b0283142d4a6f29183701165c4e8b1d0f05c7c"
+    },
+    "controlTests": {
+      "command": "node --test --test-isolation=none tests/control/*.test.mjs",
+      "passed": 137,
+      "failed": 0
+    },
+    "v04": "passed on final product-source Docker bundle, fresh fixture volume, CI streaming-gzip proxy; all original assertions including No-JS retained",
+    "feedbackReadiness": {
+      "ok": true,
+      "held": {
+        "open": true,
+        "selected": 1,
+        "reason": "spam",
+        "canSave": false,
+        "busy": false,
+        "nativeDisabled": true
+      },
+      "readyClickAccepted": true
+    },
+    "cacheBrowser": {
+      "ok": true,
+      "checks": [
+        "Web → images → web: one metadata query, zero page queries, zero search streams, zero provider observation changes.",
+        "Back/forward restore both completed resources through PageClient.",
+        "Same search button and Enter always reload.",
+        "Explicit filter apply reloads and captures the canonical filter identity.",
+        "A revised policy invalidates reuse and runs a fresh search.",
+        "Search and Observatory fit 320, 390, 1440, 1920 and 3840 pixels.",
+        "Complete initial SSR results are captured and reused without a search stream.",
+        "Three web engines plus a separate expanded knowledge card; period is disclosed as timeless context.",
+        "Reload starts a fresh tab cache; no resources enter history or persistent browser storage."
+      ],
+      "restores": [
+        {
+          "kind": "mode",
+          "elapsedMs": 237,
+          "metadataRoundtripMs": 6.099999999627471,
+          "maracaCommitMs": 76.40000000037253
+        }
+      ]
+    },
+    "staleReplay": {
+      "chromium": {
+        "ok": true,
+        "oldImagesCount": 4,
+        "rejected": true,
+        "propsCount": 10,
+        "modelCount": 10,
+        "domCount": 10,
+        "streams": 1
+      },
+      "firefox": {
+        "ok": true,
+        "oldImagesCount": 4,
+        "rejected": true,
+        "propsCount": 10,
+        "modelCount": 10,
+        "domCount": 10,
+        "streams": 1
+      }
+    },
+    "hostImageFallback": {
+      "passed": 14,
+      "failed": 0,
+      "browsers": [
+        "chromium",
+        "firefox"
+      ],
+      "origin": "http://127.0.0.1:8114",
+      "environment": "production-built native Host assets served by Node Host + gateway, offline Docker core fixture; no asset overrides",
+      "cases": [
+        {
+          "name": "chromium: early SSR image failures, 403 and invalid image body become local placeholders",
+          "status": "passed"
+        },
+        {
+          "name": "chromium: unavailable sidebar recovers by arrows, another tile and close/reopen",
+          "status": "passed"
+        },
+        {
+          "name": "chromium: late and repeated errors cannot poison the next selection",
+          "status": "passed"
+        },
+        {
+          "name": "chromium: original-to-thumbnail fallback remains valid",
+          "status": "passed"
+        },
+        {
+          "name": "chromium: full-screen skips unavailable images and resets the error state",
+          "status": "passed"
+        },
+        {
+          "name": "chromium: fresh search retries the source, including the same query",
+          "status": "passed"
+        },
+        {
+          "name": "chromium: mobile dark/light placeholder and navigation to a new result set",
+          "status": "passed"
+        },
+        {
+          "name": "firefox: early SSR image failures, 403 and invalid image body become local placeholders",
+          "status": "passed"
+        },
+        {
+          "name": "firefox: unavailable sidebar recovers by arrows, another tile and close/reopen",
+          "status": "passed"
+        },
+        {
+          "name": "firefox: late and repeated errors cannot poison the next selection",
+          "status": "passed"
+        },
+        {
+          "name": "firefox: original-to-thumbnail fallback remains valid",
+          "status": "passed"
+        },
+        {
+          "name": "firefox: full-screen skips unavailable images and resets the error state",
+          "status": "passed"
+        },
+        {
+          "name": "firefox: fresh search retries the source, including the same query",
+          "status": "passed"
+        },
+        {
+          "name": "firefox: mobile dark/light placeholder and navigation to a new result set",
+          "status": "passed"
+        }
+      ]
+    },
+    "hostUnitTests": {
+      "command": "node --test --test-isolation=none tests/*.test.mjs",
+      "passed": 10,
+      "failed": 0
+    },
+    "commandErrorRegression": {
+      "outcome": {
+        "status": "error"
+      },
+      "commits": 1,
+      "running": false,
+      "requested": false,
+      "passed": true
+    }
+  },
+  "mcp": {
+    "checks": 6,
+    "passed": 6,
+    "inputHashes": "all match sourceHash in xtend-mcp-checks.json"
+  },
+  "storage": {
+    "observedFailure": "ENOSPC; overlay 32G,31G used,0 available before cleanup",
+    "afterCleanup": "4.8G available",
+    "inodesUsedPercent": 37,
+    "dockerStorageDriver": "vfs",
+    "cleanup": "own unused diagnosis images + unused builder cache older than 30 minutes; no repository/data volume deletion",
+    "memoryOom": 0,
+    "memoryOomKill": 0,
+    "frontendContainerOomKilled": false,
+    "dockerPhysicalSize": "read-only du: at least 25G in /var/lib/docker/vfs; protected subdirectories unreadable; Docker API logical size is not physical vfs storage",
+    "cgroupMemoryCurrentBytes": 15254581248,
+    "cgroupMemoryMaxBytes": 17179869184,
+    "memoryMaxEventsHistorical": 149194,
+    "afterFinalCleanup": "14G available after removing own unused prior guard images and unused builder cache; final tested image retained"
+  },
+  "remote": {
+    "checkpointRun": 38564175221,
+    "checkpointHead": "b92dabbda9c269c7c60a4eb25851ffed13a92a14",
+    "conclusion": "success",
+    "finalHead": "this final evidence commit; actual final CI result/link only in PR body, no status commits"
+  },
+  "productSourceCheckpoint": "b92dabbda9c269c7c60a4eb25851ffed13a92a14",
+  "limitations": [
+    "Original Main feedback Toast timeout cause not proved; readiness contract is tested independently. Cache stale-commit cause was reproduced and is proved.",
+    "Local focused Docker gates and both-browser Host/replay gates ran; complete remaining Docker suite is checked by final PR CI."
+  ]
+}

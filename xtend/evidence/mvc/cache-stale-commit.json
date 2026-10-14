@@ -1,0 +1,147 @@
+{
+  "schema": "xtend.search.cache-stale-projection-evidence.v1",
+  "baseline": "7ca49e30a0afc9f1b2a7c28b981489c87c3b7551",
+  "environment": "Offline v05 backend + production Docker frontend + CI streaming-gzip proxy; browser-session read-only Model/command/DOM trace",
+  "storedSsrSnapshot": {
+    "category": "general",
+    "count": 10
+  },
+  "searchStreams": 1,
+  "owner": {
+    "command": "search.images.set",
+    "adapter": "frontend/favicons.mjs commit callback",
+    "enqueueStack": [
+      "    at commit (http://localhost:8106/assets/xtend/standalone/page.mjs:118:9598)",
+      "    at http://localhost:8106/assets/xtend/standalone/chunks/chunk-AH7YYRL5.mjs:6:4155"
+    ]
+  },
+  "trace": [
+    {
+      "at": "command-enqueue",
+      "time": 6694,
+      "navigation": 2,
+      "props": {
+        "category": "images",
+        "count": 4,
+        "ids": "91a95ee3",
+        "fingerprint": "12c9148d",
+        "phase": "complete",
+        "stream": "909e4181-a66a-44ef-9732-2a1a8bdcca6c"
+      },
+      "model": {
+        "category": "images",
+        "count": 4,
+        "ids": "91a95ee3",
+        "fingerprint": "b3f1ea27",
+        "phase": "complete",
+        "stream": "909e4181-a66a-44ef-9732-2a1a8bdcca6c"
+      },
+      "dom": 4,
+      "commit": 33,
+      "stateCommit": 32,
+      "name": "search.images.set",
+      "input": {
+        "count": 4,
+        "ids": "91a95ee3",
+        "fingerprint": "42c08923"
+      }
+    },
+    {
+      "at": "navigate",
+      "time": 6892.199999999255,
+      "navigation": 2,
+      "props": {
+        "category": "general",
+        "count": 10,
+        "ids": "294a1a73",
+        "fingerprint": "6ffcd667",
+        "phase": "complete"
+      },
+      "model": {
+        "category": "general",
+        "count": 10,
+        "ids": "294a1a73",
+        "fingerprint": "6ffcd667",
+        "phase": "complete"
+      },
+      "dom": 10,
+      "commit": 35,
+      "stateCommit": 34
+    },
+    {
+      "at": "barrier",
+      "time": 7028.0999999996275,
+      "navigation": 2,
+      "props": {
+        "category": "general",
+        "count": 10,
+        "ids": "294a1a73",
+        "fingerprint": "6ffcd667",
+        "phase": "complete"
+      },
+      "model": {
+        "category": "general",
+        "count": 4,
+        "ids": "91a95ee3",
+        "fingerprint": "42c08923",
+        "phase": "complete"
+      },
+      "dom": 10,
+      "commit": 35,
+      "stateCommit": 34
+    },
+    {
+      "at": "command-done",
+      "time": 7123.4000000003725,
+      "navigation": 2,
+      "props": {
+        "category": "general",
+        "count": 10,
+        "ids": "294a1a73",
+        "fingerprint": "6ffcd667",
+        "phase": "complete"
+      },
+      "model": {
+        "category": "general",
+        "count": 4,
+        "ids": "91a95ee3",
+        "fingerprint": "42c08923",
+        "phase": "complete"
+      },
+      "dom": 4,
+      "commit": 36,
+      "stateCommit": 35,
+      "name": "search.images.set",
+      "input": {
+        "count": 4,
+        "ids": "91a95ee3",
+        "fingerprint": "42c08923"
+      },
+      "status": "success"
+    },
+    {
+      "at": "post-count",
+      "time": 7253.5999999996275,
+      "navigation": 2,
+      "props": {
+        "category": "general",
+        "count": 10,
+        "ids": "294a1a73",
+        "fingerprint": "6ffcd667",
+        "phase": "complete"
+      },
+      "model": {
+        "category": "general",
+        "count": 4,
+        "ids": "91a95ee3",
+        "fingerprint": "42c08923",
+        "phase": "complete"
+      },
+      "dom": 4,
+      "commit": 37,
+      "stateCommit": 36
+    }
+  ],
+  "observation": "An old four-row favicon payload executes after the ten-row Web restore. PageProps and stored cache stay at ten, but the Runtime Model is already four while DOM still ten; the subsequent commit renders four.",
+  "traceSha256": "fef388c927b8456a3ad676abad7baddb6d1a92dc2f7e7ab9e6a21a0519a6f8bf"
+}

@@ -1,8 +1,8 @@
 {
   "ok": true,
   "node": "v24.19.0",
-  "version": "72f1d0b452cb057ce4f9f0069830e93b5c637797a2b9b5a9cfdd7238976bfa52",
-  "sourceSha256": "2dd22e872959e114819a09154dc2edaa9c7a2e3afd56b47028bf58f7e458a8cc",
+  "version": "ed10890b5a17cff226374a970426d26777ec18bd35b91d047b291daff4f3ccbd",
+  "sourceSha256": "30964e757ae9fce8ae29d7ee51b0a50af2512eaf43c2e3f3ef0a1b77fceced3e",
   "compilation": {
     "compilations": 1,
     "hits": 1,

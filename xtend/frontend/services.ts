@@ -5,7 +5,9 @@ import {faviconResources} from './favicon-service-core.mjs';
 import {reduceReport,selectReport,submitReport} from './report-service-core.mjs';
 import {consumeSearchStream,consumeRemoteStream} from './stream-service-core.mjs';
 import {savePreferences} from './preferences-service-core.mjs';
+import {applyResultProjection,readActionSearchData} from './result-projection-core.mjs';
 export default defineAppServices({
+ 'search.images.apply':service<Parameters<typeof applyResultProjection>[0],ReturnType<typeof applyResultProjection>>({kind:'command',target:'local',invoke:(input,context)=>applyResultProjection(input,readActionSearchData(context))}),
  'search.remote.present':service<Parameters<typeof consumeRemoteStream>[0],boolean>({kind:'command',target:'local',concurrency:'latest',invoke:(input,context)=>consumeRemoteStream(input,context as Parameters<typeof consumeRemoteStream>[1])}),
  'search.preferences.save':service<Parameters<typeof savePreferences>[0],Awaited<ReturnType<typeof savePreferences>>>({kind:'command',target:'local',invoke:(input,context)=>savePreferences(input,context)}),
  'search.stream.consume':service<Parameters<typeof consumeSearchStream>[0],boolean>({kind:'command',target:'local',concurrency:'latest',invoke:(input,context)=>consumeSearchStream(input,context as Parameters<typeof consumeSearchStream>[1])}),

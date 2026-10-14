@@ -1,11 +1,12 @@
 import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
 import services from './services.ts';
 import {faviconResources,createFaviconProjection} from './favicon-service-core.mjs';
+import {resultProjectionOwner} from './result-projection-core.mjs';
 // This adapter only reads viewport demand and publishes service results to RMT.
 export function installFavicons(){
  const registry=createAppServiceRegistry(services,{historyLimit:0});let epoch=0,active=0,scheduled=false,observed=new WeakSet();const queue=[],queued=new Set(),controllers=new Set();
  const runtime=()=>window.XTendPage?.getRuntime(),visible=()=>document.querySelectorAll('[data-favicon]');
- const projection=createFaviconProjection({readResults:()=>runtime().model.getState('search.data').results,project:results=>registry.invoke('search.favicons.project',{results}),commit:value=>runtime().dispatchCommand('search.images.set',{value}),isCurrent:own=>own===epoch&&!!runtime()});
+ const projection=createFaviconProjection({readOwner:()=>resultProjectionOwner(runtime().model.getState('search.data')),readResults:()=>runtime().model.getState('search.data').results,project:results=>registry.invoke('search.favicons.project',{results}),commit:(value,owner)=>runtime().dispatchCommand('search.images.set',{value:{...value,owner}}),isCurrent:own=>own===epoch&&!!runtime()});
  const paint=own=>projection.request(own);
  const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){observer.unobserve(entry.target);const src=entry.target.dataset.favicon;if(src&&!queued.has(src)){queued.add(src);queue.push(src);}}pump();},{rootMargin:'100px'});
  function scan(){let cached=false;for(const node of visible()){const src=node.dataset.favicon;if(!src)continue;if(faviconResources.get(src)){cached=true;continue;}if(!observed.has(node)){observed.add(node);observer.observe(node);}}if(cached)void paint(epoch).catch(()=>{});}

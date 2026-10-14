@@ -3362,8 +3362,13 @@ template xtend.search {
 
   action search.images.set {
     input value object
-    reduce state.search.data.results = input.value.results
+    effect fetch datasource search.images.apply
+    reduce state.search.data.results = result.results
 
+}
+
+  datasource search.images.apply from host search.images.apply { mode invoke
+    contract "xsearch.result-projection.v1"
 }
 
   action search.alerts.set {
