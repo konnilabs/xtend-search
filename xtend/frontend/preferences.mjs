@@ -1,7 +1,9 @@
+import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
+import services from './services.ts';
 // Cookie persistence is a browser-host concern. RMT owns controls and feedback;
 // XTend continues to own all search navigation and resumable rendering.
 export function installPreferences(command){
- let epoch=0,busy=false;
+ const registry=createAppServiceRegistry(services,{historyLimit:0});let epoch=0,busy=false;
  window.addEventListener('xtend-page:event',({detail})=>{if(detail.type==='pending')epoch++;if(detail.type==='navigate')void command('search.preferences.status',{message:'',busy});});
  document.addEventListener('submit',async event=>{
   if(event.target.getAttribute('id')!=='search-form'||event.submitter?.name!=='preferenceAction')return;
@@ -13,14 +15,9 @@ export function installPreferences(command){
   await command('search.preferences.status',{message:'Wird gespeichert …',busy:true});
   let message;
   try{
-   const response=await fetch('/preferences',{method:'POST',credentials:'same-origin',headers:{Accept:'application/json'},body,signal:AbortSignal.timeout(8000)});
-   if(!response.ok)throw new Error('save');
-   const check=await fetch('/preferences',{credentials:'same-origin',cache:'no-store',signal:AbortSignal.timeout(8000)});
-   if(!check.ok)throw new Error('verify');const {preferences}=await check.json();
-   const cleared=body.get('preferenceAction')==='delete';
-   if(cleared?preferences!==null:!['language','time_range','safesearch'].every(key=>preferences?.[key]===body.get(key)))throw new Error('cookie blocked');
-   message=cleared?'Gespeicherter Standard gelöscht. Die aktuelle Suche bleibt unverändert.':'Standard für diesen Browser gespeichert.';
+   ({message}=await registry.invoke('search.preferences.save',{values:[...body]}, {}, {timeoutMs:16000}));
   }catch{message='Speichern nicht bestätigt. Bitte Cookies für diese Seite zulassen und erneut versuchen. Die aktuelle Suche bleibt nutzbar.';}
   finally{busy=false;await command('search.preferences.status',{message:ownEpoch===epoch?message:'',busy:false});}
  },true);
+ window.addEventListener('pagehide',()=>{epoch++;registry.dispose();},{once:true});
 }

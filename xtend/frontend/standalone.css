@@ -137,7 +137,7 @@
 .search-shell{--report-selection-bg:#f7e8e5}
 @media(prefers-color-scheme:dark){.search-shell{--report-selection-bg:#382825}}
 .result[data-report-selected],.image-results .result[data-report-selected],.knowledge-card[data-report-selected]{outline:2px solid var(--accent);outline-offset:8px;background:var(--report-selection-bg)}
-x-search-report-assistant{position:fixed;right:20px;bottom:20px;width:min(390px,calc(100vw - 32px));max-height:calc(100dvh - 40px);overflow:auto;z-index:45;filter:drop-shadow(0 6px 24px #0003)}
+#report-assistant{position:fixed;right:20px;bottom:20px;width:min(390px,calc(100vw - 32px));max-height:calc(100dvh - 40px);overflow:auto;z-index:45;filter:drop-shadow(0 6px 24px #0003)}
 .report-actions{display:flex;gap:12px;flex-wrap:wrap}.report-actions x-button{--xtend-button-background:var(--deep);--xtend-button-color:var(--on-accent);--xtend-button-radius:4px}
 #feedback-form{padding:16px;gap:12px}#feedback-form label{font-size:13px}.feedback-url{margin:0;padding:0 0 0 18px;max-height:100px;overflow:auto}.feedback-url a{display:block;overflow-wrap:anywhere}#feedback-form select{background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:4px}.feedback-error:empty{display:none}
 /* Reserve room for the visible keyboard outline without covering the label. */
@@ -212,7 +212,7 @@ x-search-report-assistant{position:fixed;right:20px;bottom:20px;width:min(390px,
 @container weather-board (min-width:1100px){.weather-metrics{grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:68px}}
 @keyframes weather-breathe{50%{transform:translateY(-3px)}}
 @media(prefers-reduced-motion:no-preference){.weather-symbol{animation:weather-breathe 6s ease-in-out infinite}.weather-board[data-motion-visible=false] .weather-symbol{animation-play-state:paused}}
-@media(max-width:700px){.report-start{font-size:12px}x-search-report-assistant{bottom:8px;right:8px;width:calc(100vw - 16px);max-height:50dvh}.result-area:has(x-search-report-assistant){padding-bottom:240px}}
+@media(max-width:700px){.report-start{font-size:12px}#report-assistant{bottom:8px;right:8px;width:calc(100vw - 16px);max-height:50dvh}.result-area:has(#report-assistant){padding-bottom:240px}}
 .report-start{--xtend-button-surface:transparent;--xtend-button-text:var(--muted);--xtend-button-font-size:13px;--xtend-button-padding-x:10px;--xtend-button-padding-y:10px;animation:search-glyph-enter .16s ease-out}
 .report-actions x-button{--xtend-button-surface:var(--deep);--xtend-button-text:var(--on-accent);--xtend-button-secondary-surface:var(--panel);--xtend-button-secondary-text:var(--ink);--xtend-color-action:var(--deep);--xtend-text-on-action:var(--on-accent)}
 .search-feedback::part(surface){background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:4px;box-shadow:0 12px 48px #0005}.search-feedback::part(title){color:var(--ink)}.search-feedback::part(backdrop){background:#0008;backdrop-filter:blur(3px)}
@@ -246,3 +246,7 @@ x-search-report-assistant{position:fixed;right:20px;bottom:20px;width:min(390px,
 /* Empty paging chrome stays reserved while incremental results grow. */
 .pagination:empty{visibility:hidden}
 .search-button>x-icon,.search-button>x-spinner{display:inline-flex;align-items:center;justify-content:center;flex:none;width:22px;height:22px}
+/* Overlay containment is declarative; no host writes overflow or inert. */
+html:has(#search-about[open]),html:has(#search-lightbox[open]),html:has(#report-discard-dialog[open]){overflow:hidden}
+#report-assistant{background:var(--panel);color:var(--ink);border:1px solid var(--line);box-shadow:0 8px 36px #0003;border-radius:4px}
+#ccs-login:not(:defined){display:none}#ccs-login:defined + #ccs-login-fallback{display:none}

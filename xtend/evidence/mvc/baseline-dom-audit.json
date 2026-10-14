@@ -1,0 +1,978 @@
+[
+  {
+    "file": "frontend/category-tabs.mjs",
+    "line": 8,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "scrollLeft="
+    ],
+    "source": "if(next!==nav){observer?.disconnect();nav=next;nav.scrollLeft=left;nav.addEventListener('scroll',()=>{left=nav.scrollLeft;},{passive:true});observer=new ResizeObserver(()=>requestAnimationFrame(align));observer.observe(nav);}"
+  },
+  {
+    "file": "frontend/filter-motion.mjs",
+    "line": 6,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "open="
+    ],
+    "source": "event.preventDefault();const details=summary.parentElement,runtime=window.XTendPage.getRuntime(),open=!(pendingIntent??runtime.model.getState('search.filterUi')?.open),own=++generation;"
+  },
+  {
+    "file": "frontend/filter-motion.mjs",
+    "line": 8,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "open="
+    ],
+    "source": "pendingIntent=open;details.open=true;"
+  },
+  {
+    "file": "frontend/motd.mjs",
+    "line": 9,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "value="
+    ],
+    "source": "try{const value=await registry.invoke('search.motd',{}, {},{signal:active.signal,timeoutMs:5000});if(own===epoch&&home())await window.XTendPage.getRuntime().dispatchCommand('search.motd.set',{value});}catch{/* Last rendered/default text remains readable when offline. */}finally{if(own===epoch)active=null;}"
+  },
+  {
+    "file": "frontend/dom.mjs",
+    "line": 3,
+    "graphs": [
+      "standalone",
+      "admin",
+      "host"
+    ],
+    "hits": [
+      "createElementNS",
+      "createElement"
+    ],
+    "source": "const node=['svg','path','circle','line','polyline','polygon','rect','g'].includes(tag)?document.createElementNS('http://www.w3.org/2000/svg',tag):document.createElement(tag);"
+  },
+  {
+    "file": "frontend/dom.mjs",
+    "line": 4,
+    "graphs": [
+      "standalone",
+      "admin",
+      "host"
+    ],
+    "hits": [
+      "setAttribute("
+    ],
+    "source": "for(const [name,value]of Object.entries(attributes))if(value!==null&&value!==false)node.setAttribute(name,value===true?'':String(value));"
+  },
+  {
+    "file": "frontend/dom.mjs",
+    "line": 5,
+    "graphs": [
+      "standalone",
+      "admin",
+      "host"
+    ],
+    "hits": [
+      "append(",
+      "createTextNode"
+    ],
+    "source": "for(const child of children)node.append(typeof child==='string'?document.createTextNode(child):child);"
+  },
+  {
+    "file": "frontend/components/x-search-report-assistant.mjs",
+    "line": 8,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "constructor(){super();this.attachShadow({mode:'open'});this.shadowRoot.append(el('style',{},[':host{display:block}section{background:var(--panel,#fff);color:var(--ink,#111);border:1px solid var(--line,#999);box-shadow:0 8px 36px #0003;padding:0;border-radius:4px}slot{display:block}']),el('section',{part:'panel'},[el('slot',{},[]),el('slot',{name:'actions'},[])]));}"
+  },
+  {
+    "file": "frontend/feedback.mjs",
+    "line": 27,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "checked="
+    ],
+    "source": "const feedback=model();if(feedback.busy){field.checked=feedback.selected.some(r=>r.id===field.value);return;}"
+  },
+  {
+    "file": "frontend/feedback.mjs",
+    "line": 39,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "const params=new URLSearchParams();tickets.forEach(t=>params.append('ticket',t));"
+  },
+  {
+    "file": "frontend/feedback.mjs",
+    "line": 68,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      ".classList."
+    ],
+    "source": "document.addEventListener('toast-dismissed',event=>{if(event.target.classList.contains('feedback-toast'))void state({toast:''});});"
+  },
+  {
+    "file": "frontend/favicons.mjs",
+    "line": 4,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "src="
+    ],
+    "source": "const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){observer.unobserve(entry.target);const src=entry.target.dataset.favicon;if(src&&!queued.has(src)){queued.add(src);queue.push(src);}}pump();},{rootMargin:'100px'});"
+  },
+  {
+    "file": "frontend/favicons.mjs",
+    "line": 6,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "createElement",
+      "src=",
+      ".classList.",
+      "append("
+    ],
+    "source": "function paint(src,bytes){for(const node of visible())if(node.dataset.favicon===src&&!node.querySelector('img')){const image=document.createElement('img');image.alt='';image.width=24;image.height=24;image.decoding='async';image.src=bytes;image.onload=()=>{if(node.isConnected&&node.dataset.favicon===src){node.classList.add('favicon-ready');}};node.append(image);}}"
+  },
+  {
+    "file": "frontend/favicons.mjs",
+    "line": 7,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "src="
+    ],
+    "source": "function scan(){for(const node of visible()){const src=node.dataset.favicon;if(!src)continue;const hit=cache.get(src);if(hit){paint(src,hit);continue;}if(!observed.has(node)){observed.add(node);observer.observe(node);}}}"
+  },
+  {
+    "file": "frontend/favicons.mjs",
+    "line": 8,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "src="
+    ],
+    "source": "function pump(){while(active<2&&queue.length){const src=queue.shift(),own=epoch,c=new AbortController();controllers.add(c);active++;"
+  },
+  {
+    "file": "shared/about.mjs",
+    "line": 3,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "value="
+    ],
+    "source": "export const escapeHtml=value=>String(value).replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]));"
+  },
+  {
+    "file": "shared/about.mjs",
+    "line": 20,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "src="
+    ],
+    "source": "<div class=\"about-brand\"><img src=\"/assets/xtend/mark.svg\" width=\"48\" height=\"48\" alt=\"\"><div><p class=\"about-wordmark\">XTend<span>.search</span></p><p class=\"about-tagline\">${en?'Your search. Your horizon.':'Deine Suche. Dein Horizont.'}</p></div></div>"
+  },
+  {
+    "file": "shared/about.mjs",
+    "line": 22,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "href=",
+      "hidden="
+    ],
+    "source": "<div class=\"about-credits\"><a href=\"https://github.com/searxng/searxng\" target=\"_blank\" rel=\"noopener noreferrer\" data-xtend-native>Powered by SearXNG <span aria-hidden=\"true\">↗</span></a><span>XTend.search ${escapeHtml(version)}</span></div>"
+  },
+  {
+    "file": "shared/about.mjs",
+    "line": 23,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "href=",
+      "hidden="
+    ],
+    "source": "<nav class=\"about-links\" aria-label=\"${en?'Project links':'Projektlinks'}\"><a href=\"/source.tar.gz\" download data-xtend-native>${en?'Download source & licenses':'Quellcode & Lizenzen herunterladen'} <span aria-hidden=\"true\">↓</span></a></nav>"
+  },
+  {
+    "file": "frontend/about-dialog.mjs",
+    "line": 9,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "createElement"
+    ],
+    "source": "const box=document.createElement('x-dialog'),copy=aboutContent('de',VERSION);"
+  },
+  {
+    "file": "frontend/about-dialog.mjs",
+    "line": 10,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "className=",
+      "setAttribute(",
+      "setAttribute(",
+      "setAttribute("
+    ],
+    "source": "box.id='search-about';box.className='search-about';box.setAttribute('overlay','');box.setAttribute('title',copy.title);box.setAttribute('width','min(680px, calc(100vw - 32px))');"
+  },
+  {
+    "file": "frontend/about-dialog.mjs",
+    "line": 12,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "box.append(el('div',{class:'about-content'},["
+  },
+  {
+    "file": "frontend/about-dialog.mjs",
+    "line": 17,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "]));document.body.append(box);"
+  },
+  {
+    "file": "frontend/about-dialog.mjs",
+    "line": 20,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      ".style.",
+      ".style."
+    ],
+    "source": "active=true;position=[scrollX,scrollY];overflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';"
+  },
+  {
+    "file": "frontend/about-dialog.mjs",
+    "line": 21,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "inert="
+    ],
+    "source": "for(const node of document.body.children){if(node===box)continue;inertStates.set(node,node.inert);node.inert=true;}"
+  },
+  {
+    "file": "frontend/about-dialog.mjs",
+    "line": 24,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "inert=",
+      ".style."
+    ],
+    "source": "active=false;for(const [node,value]of inertStates)node.inert=value;inertStates.clear();document.documentElement.style.overflow=overflow;"
+  },
+  {
+    "file": "frontend/images.mjs",
+    "line": 21,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "src="
+    ],
+    "source": "const src=img.getAttribute('src');"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 17,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "createElement",
+      "className="
+    ],
+    "source": "const controls=document.createElement('div');controls.slot='controls';controls.className='lightbox-controls';"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 18,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "controls.append(...['previous','next'].map(direction=>el('button',{class:'lightbox-step lightbox-'+direction,type:'button','data-lightbox-action':direction,'aria-label':direction==='previous'?'Vorheriges Bild im Vollbild':'Nächstes Bild im Vollbild'},[el('span',{class:'preview-arrow','aria-hidden':'true'})])),"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 21,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "box.append(controls);"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 25,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "inert=",
+      ".style."
+    ],
+    "source": "function unlock(){for(const [node,value] of inertStates)node.inert=value;inertStates.clear();document.documentElement.style.overflow=overflow;}"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 26,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      ".style.",
+      ".style.",
+      "inert="
+    ],
+    "source": "function lock(){overflow=document.documentElement.style.overflow;document.documentElement.style.overflow='hidden';for(const node of document.body.children){if(node===box)continue;inertStates.set(node,node.inert);node.inert=true;}}"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 30,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "removeAttribute(",
+      "setAttribute("
+    ],
+    "source": "activeSrc=entry.previewSrc;fallbackUsed=false;box.removeAttribute('data-image-error');box.setAttribute('data-loading','');"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 31,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "textContent=",
+      "textContent=",
+      "textContent="
+    ],
+    "source": "ui.position.textContent=`Bild ${index+1} von ${entries.length}`;ui.title.textContent=entry.title;ui.message.textContent='Bild wird geladen …';"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 32,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "href=",
+      "hidden=",
+      "href="
+    ],
+    "source": "ui.source.href=entry.url;ui.original.hidden=!entry.imageUrl;ui.original.href=entry.imageUrl || entry.url;"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 33,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "disabled="
+    ],
+    "source": "for(const button of controls.querySelectorAll('.lightbox-step'))button.disabled=entries.length<2;"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 34,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "setAttribute(",
+      "setAttribute("
+    ],
+    "source": "box.setAttribute('alt',entry.title);box.setAttribute('src',activeSrc);"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 50,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "removeAttribute(",
+      "removeAttribute(",
+      "removeAttribute(",
+      "removeAttribute("
+    ],
+    "source": "box.removeAttribute('src');box.removeAttribute('alt');box.removeAttribute('data-loading');box.removeAttribute('data-image-error');"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 61,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "removeAttribute(",
+      "textContent="
+    ],
+    "source": "box.removeAttribute('data-loading');if(box.hasAttribute('data-image-error'))return;ui.message.textContent=fallbackUsed?'Das Original ist nicht erreichbar. Angezeigt wird das Vorschaubild.':'';"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 67,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "setAttribute("
+    ],
+    "source": "if(!fallbackUsed && thumb && thumb!==activeSrc){fallbackUsed=true;activeSrc=thumb;box.setAttribute('src',thumb);return;}"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 68,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "removeAttribute(",
+      "setAttribute("
+    ],
+    "source": "box.removeAttribute('data-loading');box.setAttribute('data-image-error','');"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 69,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "textContent="
+    ],
+    "source": "ui.message.textContent='Dieses Bild ist nicht erreichbar. Du kannst weiterblättern oder die Quelle öffnen.';"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 70,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "setAttribute("
+    ],
+    "source": "activeSrc=IMAGE_PLACEHOLDER;box.setAttribute('src',activeSrc);"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 93,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "textContent="
+    ],
+    "source": "entries=next;index=selected;ui.position.textContent=`Bild ${index+1} von ${entries.length}`;"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 94,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "disabled="
+    ],
+    "source": "for(const button of controls.querySelectorAll('.lightbox-step'))button.disabled=entries.length<2;"
+  },
+  {
+    "file": "frontend/search-lightbox-controller.mjs",
+    "line": 96,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "remove("
+    ],
+    "source": "return {open,close,isOpen,updateEntries,dispose(){close({focus:false});unlock();lifecycle.abort();controls.remove();}};"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 88,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "this.shadowRoot.append(el(\"style\",{},[LIGHTBOX_STYLES]),el(\"span\",{\"class\": \"trigger\", \"part\": \"trigger\"},[el(\"slot\",{\"name\": \"trigger\"},[])]),el(\"div\",{\"class\": \"overlay\", \"part\": \"overlay root\", \"role\": \"dialog\", \"aria-modal\": \"true\", \"aria-hidden\": \"true\", \"aria-label\": \"Lightbox\", \"hidden\": true, \"inert\": true},[el(\"div\",{\"class\": \"content\", \"part\": \"content\"},[el(\"button\",{\"class\": \"close-btn\", \"part\": \"close control\", \"type\": \"button\", \"aria-label\": \"Schliessen\"},[el(\"svg\",{\"part\": \"close-icon control icon\", \"viewBox\": \"0 0 24 24\", \"fill\": \"none\", \"aria-hidden\": \"true\", \"focusable\": \"false\", \"xmlns\": \"http://www.w3.org/2000/svg\"},[el(\"path\",{\"d\": \"M7.75 7.75L16.25 16.25M16.25 7.75L7.75 16.25\", \"stroke-width\": \"2\", \"stroke-linecap\": \"round\", \"stroke-linejoin\": \"round\", \"vector-effect\": \"non-scaling-stroke\"},[])])]),el(\"img\",{\"part\": \"media\", \"src\": \"\", \"alt\": \"\"},[]),el(\"slot\",{\"name\": \"controls\"},[])])]));"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 179,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "src ="
+    ],
+    "source": "open(src = this._src || this.getAttribute('src'), options = {}) {"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 196,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      ".classList.",
+      "remove("
+    ],
+    "source": "this._content.classList.remove('closing');"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 229,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      ".classList."
+    ],
+    "source": "this._content.classList.add('closing');"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 248,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      ".classList.",
+      "remove("
+    ],
+    "source": "this._content.classList.remove('closing');"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 253,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "removeAttribute("
+    ],
+    "source": "this._img.removeAttribute('src');"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 282,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "toggleAttribute("
+    ],
+    "source": "this.toggleAttribute('open', isOpen);"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 288,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "src ="
+    ],
+    "source": "const src = this._src || this.getAttribute('src') || '';"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 290,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "src ="
+    ],
+    "source": "this._img.src = src;"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 297,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "hidden ="
+    ],
+    "source": "this._overlay.hidden = !this._open;"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 298,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "toggleAttribute("
+    ],
+    "source": "this._overlay.toggleAttribute('inert', !this._open);"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 299,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "inert ="
+    ],
+    "source": "this._overlay.inert = !this._open;"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 300,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "setAttribute("
+    ],
+    "source": "this._overlay.setAttribute('aria-hidden', this._open ? 'false' : 'true');"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 308,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "setAttribute("
+    ],
+    "source": "element.setAttribute('aria-expanded', this._open ? 'true' : 'false');"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 309,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "setAttribute("
+    ],
+    "source": "element.setAttribute('aria-controls', `${this.id}-overlay`);"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 360,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "appendChild("
+    ],
+    "source": "document.body.appendChild(this);"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 363,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "setAttribute("
+    ],
+    "source": "this.setAttribute('data-xtend-portal', 'document-body');"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 374,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "insertBefore("
+    ],
+    "source": "parent.insertBefore(this, nextSibling && nextSibling.parentNode === parent ? nextSibling : null);"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 377,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "remove("
+    ],
+    "source": "this.remove();"
+  },
+  {
+    "file": "frontend/components/x-search-lightbox.mjs",
+    "line": 391,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "removeAttribute("
+    ],
+    "source": "this.removeAttribute('data-xtend-portal');"
+  },
+  {
+    "file": "frontend/lightbox.mjs",
+    "line": 3,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "createElement",
+      "className=",
+      "append("
+    ],
+    "source": "const box=document.createElement('x-search-lightbox');box.id='search-lightbox';box.className='search-lightbox';box.configureSearch(options);document.body.append(box);"
+  },
+  {
+    "file": "frontend/alerts.mjs",
+    "line": 9,
+    "graphs": [
+      "standalone",
+      "host"
+    ],
+    "hits": [
+      "removeAttribute("
+    ],
+    "source": "if(event.target.matches?.('x-alert.search-warning'))event.target.shadowRoot?.querySelector('[part~=\"root\"]')?.removeAttribute('tabindex');"
+  },
+  {
+    "file": "frontend/standalone-host.mjs",
+    "line": 45,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "value="
+    ],
+    "source": "document.addEventListener('input',event=>{if(event.target.id==='search-input'){draft=event.target.value;revision++;const locationField=document.getElementById('search-form')?.elements.namedItem('location');if(locationField)locationField.value='';}},true);"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 41,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      ".dataset.geometry="
+    ],
+    "source": "const signature=mode+':'+innerWidth+':'+manager.clientHeight;if(panel.dataset.geometry===signature)return;panel.dataset.geometry=signature;"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 42,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "toggleAttribute("
+    ],
+    "source": "panel.toggleAttribute('modal',narrow);panel.setPanelMode(mode,'right');"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 47,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      ".dataset.hostReady="
+    ],
+    "source": "const observer=new MutationObserver(()=>{const panel=document.getElementById('source-panel');if(panel&&!panel.dataset.hostReady){panel.dataset.hostReady='true';queueMicrotask(surfaces);}});"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 55,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "disabled="
+    ],
+    "source": "saving=(async()=>{const buttons=[...form.querySelectorAll('button[type=submit],button:not([type])')];buttons.forEach(b=>b.disabled=true);"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 60,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "checked=",
+      "value="
+    ],
+    "source": "for(const draft of otherDrafts){const target=document.getElementById(draft.id);if(!target)continue;for(const field of target.querySelectorAll('input:not([type=hidden]),select,textarea'))if(Object.hasOwn(draft.values,field.name)){if(field.type==='checkbox')field.checked=draft.values[field.name];else field.value=draft.values[field.name];}dirty.add(target);}"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 67,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "disabled="
+    ],
+    "source": "finally{buttons.forEach(b=>b.disabled=false);saving=null;}"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 74,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "createElement",
+      "setAttribute(",
+      "setAttribute(",
+      "setAttribute("
+    ],
+    "source": "const dialog=document.createElement('x-dialog');dialog.setAttribute('overlay','');dialog.setAttribute('title','Ungespeicherte Änderungen');dialog.setAttribute('width','min(520px, calc(100vw - 24px))');"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 75,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "dialog.append(el('p',{},['Die Eingaben sind noch nicht gespeichert.']),el('div',{class:'draft-actions'},[['save','Speichern'],['discard','Verwerfen'],['cancel','Abbrechen']].map(([choice,label])=>el('button',{'data-choice':choice,type:'button'},[label]))));"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 76,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "append("
+    ],
+    "source": "document.body.append(dialog);"
+  },
+  {
+    "file": "admin/live.mjs",
+    "line": 77,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "value=",
+      "remove("
+    ],
+    "source": "return new Promise(resolve=>{let done=false;const finish=value=>{if(done)return;done=true;dialog.close();dialog.remove();guarding=false;resolve(value);};"
+  },
+  {
+    "file": "frontend/streaming.mjs",
+    "line": 43,
+    "graphs": [
+      "host"
+    ],
+    "hits": [
+      "value="
+    ],
+    "source": "const value=frame.value ?? frame.delta;"
+  },
+  {
+    "file": "frontend/admin-login.mjs",
+    "line": 7,
+    "graphs": [
+      "login"
+    ],
+    "hits": [
+      "hidden=",
+      "hidden="
+    ],
+    "source": "button.hidden=false;fallback.hidden=true;"
+  }
+]

@@ -1,34 +1,38 @@
-import {element as el} from '../frontend/dom.mjs';
+import {scrollElement,focusElement} from '../frontend/browser-capabilities.mjs';
 import {createAppServiceRegistry,createHttpAppServiceTransport} from '@ccslabs/xtend/maraca/app-services';
 import '@ccslabs/xtend/components/xsurfacemanager.js';
 import '@ccslabs/xtend/components/xsidepanel.js';
 import '@ccslabs/xtend/components/xdialog.js';
 import '@ccslabs/xtend/components/xtoast.js';
 import services from './services.ts';
+import {pauseObservation} from './live-service-core.mjs';
 export function watchObservatory(client,csrf){
  const controller=new AbortController(),transport=createHttpAppServiceTransport({pathPrefix:'/api/xtend/services',headers:{'X-CSRF-Token':csrf}}),registry=createAppServiceRegistry(services,{transport,historyLimit:0});
  const command=(name,payload)=>client.getRuntime().dispatchCommand(name,payload);
  const serviceFor=form=>form.dataset.adminService||({'policy-form':'admin.engine.policy.set','drain-form':'admin.engine.drain','probe-form':'admin.engine.probe.request','routing-form':'admin.routing.mode.set'})[form.getAttribute('id')];
  let readGeneration=0,readController=new AbortController();
- const dirty=new Set();let saving=null,guarding=false,watchController,connected=true,currentUrl=location.href,historyIndex=Number(history.state?.observatoryIndex)||0,suppressPop=false;
+ const dirty=new Set();let draftQueue=Promise.resolve();
+ const drafts=()=>client.getRuntime().model.getState('admin.drafts')||{};
+ const clearDrafts=async()=>command('admin.drafts.set',{value:await registry.invoke('admin.drafts.reduce',{drafts:{},id:'',values:{},reset:true})});
+ const updateDraft=(form,remove=false)=>draftQueue=draftQueue.catch(()=>{}).then(async()=>{const value=await registry.invoke('admin.drafts.reduce',{drafts:drafts(),id:form.getAttribute('id'),values:input(form),remove,budget:client.getRuntime().model.getState('admin.data').weather?.budget||[]});return command('admin.drafts.set',{value});});let saving=null,guarding=false,guardDecision=null,watchController,connected=true,currentUrl=location.href,historyIndex=Number(history.state?.observatoryIndex)||0,suppressPop=false;
  history.replaceState({...history.state,observatoryIndex:historyIndex},'',location.href);
  const input=form=>{const data={...Object.fromEntries(new URL(location.href).searchParams),...Object.fromEntries(new FormData(form))};for(const box of form.querySelectorAll('input[type=checkbox]'))data[box.name]=box.checked;return data;};
  // Feedback belongs to RMT, separately from live data and form responses.
  // Serialize changes so dismissal and a concurrent save cannot lose notices.
  let feedbackQueue=Promise.resolve();
  function updateFeedback(update){
-  const next=feedbackQueue.then(()=>{if(controller.signal.aborted)return;return command('admin.feedback.set',{value:update(client.getRuntime().model.getState('admin.feedback')||{items:[]})});});
+  const next=feedbackQueue.then(()=>{if(controller.signal.aborted)return;return registry.invoke('admin.feedback.reduce',{current:client.getRuntime().model.getState('admin.feedback')||{items:[]},change:update}).then(value=>command('admin.feedback.set',{value}));});
   feedbackQueue=next.catch(()=>{});return feedbackQueue;
  }
  function toast(message,type='success',title='',id='admin-notice-'+crypto.randomUUID()){
-  return updateFeedback(current=>({items:[...current.items,{id,title:title||(type==='error'?'Aktion nicht bestätigt':'Gespeichert'),message,type,duration:type==='error'?'0':'6000'}]}));
+  return updateFeedback({id,title,message,type});
  }
  document.addEventListener('toast-dismissed',event=>{
   if(!event.target.matches('x-toast.admin-toast'))return;
   const id=event.target.id;
-  void updateFeedback(current=>({items:current.items.filter(item=>item.id!==id)}));
+  void updateFeedback({dismiss:true,id});
  },{signal:controller.signal});
- let layoutUpdate=null;
+ let layoutUpdate=null,geometry='',geometryPanel=null;
  function surfaces(){
   if(controller.signal.aborted)return;
   const manager=document.getElementById('observatory-surfaces'),panel=document.getElementById('source-panel');if(!manager||!panel)return;
@@ -38,47 +42,44 @@ export function watchObservatory(client,csrf){
    if(!layoutUpdate){layoutUpdate=command('admin.layout.set',{value:{mode,modal:narrow}}).then(()=>{layoutUpdate=null;surfaces();},()=>{layoutUpdate=null;});}
    return;
   }
-  const signature=mode+':'+innerWidth+':'+manager.clientHeight;if(panel.dataset.geometry===signature)return;panel.dataset.geometry=signature;
-  panel.toggleAttribute('modal',narrow);panel.setPanelMode(mode,'right');
+  if(geometryPanel!==panel){geometryPanel=panel;geometry='';}const signature=mode+':'+innerWidth+':'+manager.clientHeight;if(geometry===signature)return;geometry=signature;
+  panel.setPanelMode(mode,'right');
   panel.resizePanel({width:narrow?innerWidth:Math.min(680,Math.max(420,innerWidth*.43)),height:manager.clientHeight});
   manager.openSurface('source-detail');manager.dockSurface('source-detail','right',mode);
  }
  new ResizeObserver(surfaces).observe(document.documentElement);
- const observer=new MutationObserver(()=>{const panel=document.getElementById('source-panel');if(panel&&!panel.dataset.hostReady){panel.dataset.hostReady='true';queueMicrotask(surfaces);}});
+ const observer=new MutationObserver(()=>queueMicrotask(surfaces));
  observer.observe(document.getElementById('xtend-page'),{subtree:true,childList:true});surfaces();
- document.addEventListener('input',event=>{const form=event.target.closest('form');if(form&&serviceFor(form))dirty.add(form);},{signal:controller.signal});
- document.addEventListener('change',event=>{const form=event.target.closest('form');if(form&&serviceFor(form))dirty.add(form);if(event.target.matches('#pool-filters select'))event.target.form.requestSubmit();},{signal:controller.signal});
+ document.addEventListener('input',event=>{const form=event.target.closest('form');if(form&&serviceFor(form)){dirty.add(form);void updateDraft(form);}},{signal:controller.signal});
+ document.addEventListener('change',event=>{const form=event.target.closest('form');if(form&&serviceFor(form)){dirty.add(form);void updateDraft(form);}if(event.target.matches('#pool-filters select'))event.target.form.requestSubmit();},{signal:controller.signal});
  async function save(form){
   if(saving)return saving;
   if(!form.reportValidity())return false;
   const focused=document.activeElement?.name,positions=[...document.querySelectorAll('[data-xtend-scroll]')].map(n=>[n.dataset.xtendScroll,n.scrollLeft,n.scrollTop]);
-  saving=(async()=>{const buttons=[...form.querySelectorAll('button[type=submit],button:not([type])')];buttons.forEach(b=>b.disabled=true);
-   try{
-    const otherDrafts=[...dirty].filter(f=>f!==form&&f.isConnected).map(f=>({id:f.getAttribute('id'),values:input(f)}));
-    const result=await registry.invoke(serviceFor(form),input(form));dirty.delete(form);
-    await client.optimistic(props=>({...props,'admin.data':result}),async()=>true);
-    for(const draft of otherDrafts){const target=document.getElementById(draft.id);if(!target)continue;for(const field of target.querySelectorAll('input:not([type=hidden]),select,textarea'))if(Object.hasOwn(draft.values,field.name)){if(field.type==='checkbox')field.checked=draft.values[field.name];else field.value=draft.values[field.name];}dirty.add(target);}
-    if(serviceFor(form)==='admin.motd.set'&&typeof BroadcastChannel==='function'){const channel=new BroadcastChannel('xtend.search.content');channel.postMessage({changed:true});channel.close();}
-    if(result.notices?.length){for(const notice of result.notices)await toast(notice.message,notice.type,notice.title,notice.id);}
-    else await toast(result.message||'Änderung und Audit gespeichert.');
-    requestAnimationFrame(()=>{for(const [id,x,y]of positions)document.querySelector('[data-xtend-scroll="'+id+'"]')?.scrollTo(x,y);if(focused)document.getElementById(form.getAttribute('id'))?.elements.namedItem(focused)?.focus({preventScroll:true});surfaces();});
-    return true;
-   }catch(error){await toast(error.message||'Änderung nicht gespeichert. Eingaben bleiben erhalten.','error');return false;}
-   finally{buttons.forEach(b=>b.disabled=false);saving=null;}
-  })();return saving;
+  const own=readGeneration;
+  saving=(async()=>{await draftQueue;const payload=input(form);
+   return registry.invoke('admin.form.save',{serviceId:serviceFor(form),payload},{
+    invokeServer:(name,payload,signal)=>registry.invoke(name,payload,{},{signal}),
+    setBusy:value=>controller.signal.aborted?undefined:command('admin.busy.set',{value}),
+    project:async result=>{if(own!==readGeneration||controller.signal.aborted)return;dirty.delete(form);await updateDraft(form,true);if(own!==readGeneration)return;await client.optimistic(props=>({...props,'admin.data':result}),async()=>true);
+     requestAnimationFrame(()=>{if(own!==readGeneration)return;for(const [id,x,y]of positions)scrollElement(document.querySelector('[data-xtend-scroll="'+id+'"]'), x,y);if(focused)focusElement(document.getElementById(form.getAttribute('id'))?.elements.namedItem(focused), {preventScroll:true});surfaces();});},
+    announce:async notices=>{if(own!==readGeneration||controller.signal.aborted)return;for(const notice of notices)await toast(notice.message,notice.type,notice.title,notice.id);},
+    notify:()=>{if(typeof BroadcastChannel==='function'){const channel=new BroadcastChannel('xtend.search.content');channel.postMessage({changed:true});channel.close();}}
+   },{signal:controller.signal});
+  })().finally(()=>{saving=null;});return saving;
  }
+
  async function confirmLeave(){
   for(const form of [...dirty])if(!form.isConnected)dirty.delete(form);
   if(!dirty.size)return true;if(guarding)return false;guarding=true;
-  await customElements.whenDefined('x-dialog');
-  const dialog=document.createElement('x-dialog');dialog.setAttribute('overlay','');dialog.setAttribute('title','Ungespeicherte Änderungen');dialog.setAttribute('width','min(520px, calc(100vw - 24px))');
-  dialog.append(el('p',{},['Die Eingaben sind noch nicht gespeichert.']),el('div',{class:'draft-actions'},[['save','Speichern'],['discard','Verwerfen'],['cancel','Abbrechen']].map(([choice,label])=>el('button',{'data-choice':choice,type:'button'},[label]))));
-  document.body.append(dialog);
-  return new Promise(resolve=>{let done=false;const finish=value=>{if(done)return;done=true;dialog.close();dialog.remove();guarding=false;resolve(value);};
-   dialog.addEventListener('click',async e=>{const choice=e.target.dataset.choice;if(choice==='cancel')finish(false);if(choice==='discard'){dirty.clear();finish(true);}if(choice==='save'){for(const form of [...dirty])if(!await save(form)){finish(false);return;}finish(true);}});
-   dialog.addEventListener('dialog-closed',()=>finish(false));dialog.open();
+  await client.getRuntime().ensureComponent('x-dialog');
+  await command('admin.guard.set',{value:true});
+  return new Promise(resolve=>{let done=false;const finish=async value=>{if(done)return;done=true;await command('admin.guard.set',{value:false});guarding=false;guardDecision=null;resolve(value);};
+   guardDecision=async choice=>{if(done)return;const ids=[...dirty].filter(form=>form.isConnected).map(form=>form.getAttribute('id'));const value=await registry.invoke('admin.guard.resolve',{choice,ids},{save:id=>{const form=document.getElementById(id);return form?save(form):false;},discard:async()=>{dirty.clear();await clearDrafts();}});return finish(value);};
   });
  }
+ document.addEventListener('dialog-closed',event=>{if(event.target.id==='admin-draft-guard'&&guardDecision)void guardDecision('cancel');},{signal:controller.signal});
+ document.addEventListener('click',event=>{const choice=event.target.closest?.('#admin-draft-guard [data-choice]')?.dataset.choice;if(choice&&guardDecision){event.preventDefault();void guardDecision(choice);}},{signal:controller.signal});
  document.addEventListener('submit',event=>{
   const form=event.target;
   if(form.action?.endsWith('/admin/logout')){dirty.clear();for(const key of Object.keys(sessionStorage))if(key.startsWith('xtend.search.admin')||key.startsWith('observatory'))sessionStorage.removeItem(key);return;}
@@ -87,7 +88,7 @@ export function watchObservatory(client,csrf){
  },{capture:true,signal:controller.signal});
  document.addEventListener('click',event=>{
   if(event.target.closest('#quality-evidence')){event.preventDefault();const own=readGeneration,signal=readController.signal,scope={id:new URL(location.href).searchParams.get('engine'),capability:document.querySelector('[name=capability]')?.value||new URL(location.href).searchParams.get('capability')};
-   void command('admin.evidence.set',{value:{rows:[],message:'Belege werden abgerufen …'}}).then(()=>own===readGeneration?registry.invoke('admin.quality.evidence',scope,{},{signal,timeoutMs:10000}):[]).then(rows=>{if(own===readGeneration)return command('admin.evidence.set',{value:{rows:rows.map((row,index)=>({...row,id:String(index),label:row.reason+' · '+row.url})),message:rows.length?'':'Keine freiwilligen Belege vorhanden.'}});}).catch(error=>{if(own===readGeneration){void command('admin.evidence.set',{value:{rows:[],message:'Belege konnten nicht geladen werden.'}});toast(error.message,'error');}});return;}
+   void command('admin.evidence.set',{value:{rows:[],message:'Belege werden abgerufen …'}}).then(()=>own===readGeneration?registry.invoke('admin.quality.evidence',scope,{},{signal,timeoutMs:10000}):[]).then(async rows=>{if(own!==readGeneration)return;const value=await registry.invoke('admin.evidence.project',{rows});if(own===readGeneration)return command('admin.evidence.set',{value});}).catch(error=>{if(own===readGeneration){void command('admin.evidence.set',{value:{rows:[],message:'Belege konnten nicht geladen werden.'}});toast(error.message,'error');}});return;}
   if(event.target.closest('#quality-simulate')){event.preventDefault();const own=readGeneration;
    void registry.invoke('admin.quality.simulate',input(document.getElementById('quality-rule-form')),{},{signal:readController.signal,timeoutMs:10000}).then(r=>{if(own===readGeneration)return command('admin.simulation.set',{value:r.count+' Meldungen / '+r.contexts+' Kontexte: Schwelle '+(r.wouldMatch?'erreicht. ':'nicht erreicht. ')+r.message});}).catch(error=>{if(own===readGeneration)toast(error.message,'error');});return;}
   const refresh=event.target.closest('#admin-refresh'),link=event.target.closest('a[href]');if(!refresh&&!link)return;
@@ -102,12 +103,12 @@ export function watchObservatory(client,csrf){
   event.stopImmediatePropagation();void confirmLeave().then(ok=>{if(ok){historyIndex=targetIndex;currentUrl=targetUrl;client.visit(targetUrl,{fromHistory:true,preserveScroll:true});}else{const delta=historyIndex-targetIndex;if(delta){suppressPop=true;history.go(delta);}else history.replaceState({...history.state,observatoryIndex:historyIndex},'',currentUrl);}});
  },{capture:true,signal:controller.signal});
  window.addEventListener('beforeunload',event=>{if(dirty.size){event.preventDefault();event.returnValue='';}},{signal:controller.signal});
- const stop=client.subscribe(event=>{if(event.type==='pending'){readGeneration++;readController.abort();readController=new AbortController();void command('admin.evidence.set',{value:{rows:[],message:''}}).catch(()=>{});void command('admin.simulation.set',{value:''}).catch(()=>{});}if(event.type==='navigate'){currentUrl=location.href;if(history.state?.observatoryIndex===undefined)historyIndex++;history.replaceState({...history.state,observatoryIndex:historyIndex},'',location.href);dirty.clear();watchController?.abort();surfaces();}});
- async function watch(){while(!controller.signal.aborted){watchController=new AbortController();try{
-  const watchUrl=location.href,params=Object.fromEntries(new URL(watchUrl).searchParams);params.id=params.engine;
-  const frames=registry.stream('admin.observatory.events',params,{}, {signal:AbortSignal.any([controller.signal,watchController.signal]),timeoutMs:30000});
-  for await(const frame of frames){if(controller.signal.aborted)return;if(watchController.signal.aborted||location.href!==watchUrl)break;if(frame.type==='error'||frame.type==='cancelled')throw Error('connection');if(frame.value?.view){await command('admin.live.set',{value:frame.value.view});await command('admin.connection.set',{message:'Live verbunden · '+frame.value.view.updated});}}
- }catch{if(!controller.signal.aborted&&!watchController.signal.aborted)await command('admin.connection.set',{message:'Live-Verbindung unterbrochen. Angezeigte Daten können veraltet sein.'}).catch(()=>{});}
- if(!controller.signal.aborted&&!watchController.signal.aborted)await new Promise(resolve=>setTimeout(resolve,3000));}}
+ const stop=client.subscribe(event=>{if(event.type==='pending'){readGeneration++;readController.abort();readController=new AbortController();void command('admin.evidence.set',{value:{rows:[],message:''}}).catch(()=>{});void command('admin.simulation.set',{value:''}).catch(()=>{});}if(event.type==='navigate'){const navigated=location.href!==currentUrl;currentUrl=location.href;if(history.state?.observatoryIndex===undefined)historyIndex++;history.replaceState({...history.state,observatoryIndex:historyIndex},'',location.href);if(navigated){dirty.clear();void clearDrafts();watchController?.abort();}surfaces();}});
+ function watch(){return registry.invoke('admin.live.observe',{}, {
+  current:()=>controller.signal.aborted?null:{url:location.href,params:{...Object.fromEntries(new URL(location.href).searchParams),id:new URL(location.href).searchParams.get('engine')}},
+  openFrames:(scope,signal)=>{watchController=new AbortController();const invocationId=crypto.randomUUID();return transport.stream({serviceId:'admin.observatory.events',kind:'stream',target:'server',input:scope.params,signal:AbortSignal.any([signal,watchController.signal,AbortSignal.timeout(30000)]),invocationId,correlationId:invocationId,context:{}});},
+  present:async(update,scope)=>{if(controller.signal.aborted||location.href!==scope.url)return;if(update.value)await command('admin.live.set',{value:update.value});if(!controller.signal.aborted&&location.href===scope.url)await command('admin.connection.set',{message:update.message});},
+  pause:pauseObservation
+ },{signal:controller.signal}).catch(()=>{});}
  void watch();window.addEventListener('pagehide',()=>{readGeneration++;controller.abort();readController.abort();stop();observer.disconnect();registry.dispose();transport.dispose?.();},{once:true});
 }

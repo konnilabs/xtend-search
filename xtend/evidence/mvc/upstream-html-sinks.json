@@ -1,0 +1,87 @@
+{
+  "responsibility": "SearXNG upstream Classic/native fallback; not imported by own XTend application entrypoints",
+  "findings": [
+    {
+      "file": "../searx/static/themes/simple/chunk/D3mcqWOe.min.js",
+      "line": 1,
+      "hits": [
+        "DOMParser"
+      ],
+      "source": "import{t as e}from\"./BuurKv-k.min.js\";import{i as t,t as n}from\"../sxng-core.min.js\";import{t as r}from\"./DK4yUVpy.min.js\";import{t as i}from\"./DcK-mo-Y.min.js\";var a=class extends e{constructor(){super(`infiniteScroll`)}async run(){let e=i(`results`).classList.contains(`only_template_images`),a=`article.result:last-child`,o=document.createElement(`div`);o.className=`loader`;let s=async i=>{let a=document.querySelector(`#search`);r(a);let s=document.querySelector(`#pagination form.next_page`);r("
+    },
+    {
+      "file": "../searx/static/themes/simple/chunk/e2-9fzwE.min.js",
+      "line": 1,
+      "hits": [
+        "innerHTML"
+      ],
+      "source": "import{i as e,n as t,t as n}from\"../sxng-core.min.js\";import{t as r}from\"./DK4yUVpy.min.js\";var i,a=async()=>{if(!i){try{i=await(await n(`GET`,`engine_descriptions.json`)).json()}catch(e){console.error(`Error fetching engineDescriptions:`,e)}if(i)for(let[t,[n,r]]of Object.entries(i)){let i=document.querySelectorAll(`[data-engine-name=\"${t}\"] .engine-description`),a=` (<i>${e.translations?.Source}:&nbsp;${r}</i>)`;for(let e of i)e.innerHTML=n+a}}},o=(e,t)=>{for(let n of t)n.offsetParent&&(n.check"
+    },
+    {
+      "file": "../searx/static/themes/simple/chunk/DT2OB9zd.min.js",
+      "line": 10,
+      "hits": [
+        "innerHTML",
+        "innerHTML"
+      ],
+      "source": "(function(e,t){typeof e.CustomEvent!=`function`&&(e.CustomEvent=function(e,n){n||={bubbles:!1,cancelable:!1,detail:void 0};var r=t.createEvent(`CustomEvent`);return r.initCustomEvent(e,n.bubbles,n.cancelable,n.detail),r},e.CustomEvent.prototype=e.Event.prototype),t.addEventListener(`touchstart`,u,!1),t.addEventListener(`touchmove`,d,!1),t.addEventListener(`touchend`,l,!1);var n=null,r=null,i=null,a=null,o=null,s=null,c=0;function l(e){if(s===e.target){var l=parseInt(f(s,`data-swipe-threshold`,`2"
+    },
+    {
+      "file": "../searx/static/themes/simple/chunk/D8Rqnmnu.min.js",
+      "line": 1,
+      "hits": [
+        "innerHTML"
+      ],
+      "source": "import{i as e,n as t,r as n}from\"../sxng-core.min.js\";import{t as r}from\"./DK4yUVpy.min.js\";var i={Escape:{key:`ESC`,fun:e=>f(e),des:e.translations?.hotkeys_remove_focus,cat:e.translations?.hotkeys_category_control},c:{key:`c`,fun:()=>S(),des:e.translations?.hotkeys_copy_url,cat:e.translations?.hotkeys_category_results},h:{key:`h`,fun:()=>x(o),des:e.translations?.hotkeys_toggle_help,cat:e.translations?.hotkeys_category_other},i:{key:`i`,fun:()=>v(),des:e.translations?.hotkeys_focus_search,cat:e."
+    },
+    {
+      "file": "../searx/static/themes/simple/chunk/CFmKEewG.min.js",
+      "line": 1,
+      "hits": [
+        "innerHTML"
+      ],
+      "source": "import{t as e}from\"./BuurKv-k.min.js\";var t={ADD:`add`,REMOVE:`remove`},n={PROPERTYCHANGE:`propertychange`};function r(e){for(let t in e)delete e[t]}function i(e){let t;for(t in e)return!1;return!t}function a(e,t,n,r,i){if(i){let i=n;n=function(a){return e.removeEventListener(t,n),i.call(r??this,a)}}else r&&r!==e&&(n=n.bind(r));let a={target:e,type:t,listener:n};return e.addEventListener(t,n),a}function o(e,t,n,r){return a(e,t,n,r,!0)}function s(e){e&&e.target&&(e.target.removeEventListener(e.ty"
+    },
+    {
+      "file": "../searx/static/themes/simple/chunk/CFmKEewG.min.js",
+      "line": 6,
+      "hits": [
+        "innerHTML"
+      ],
+      "source": "`){O+=D,D=0,w=u*v+C*d,++A;continue}let i=f[e+1]||s.font;i!==j&&(r&&T.push(`font`,i),n&&E.push(`font`,i),j=i),D=Math.max(D,g[k]);let a=[t,w+C*h[k]+u*(h[k]-_[A]),.5*(d+D)+O];w+=h[k],r&&T.push(`strokeText`,a),n&&E.push(`fillText`,a),++k}return Array.prototype.push.apply(y,T),Array.prototype.push.apply(y,E),this.labels_[i]=S,S}replayTextBackground_(e,t,n,r,i,a,o){e.beginPath(),e.moveTo.apply(e,t),e.lineTo.apply(e,n),e.lineTo.apply(e,r),e.lineTo.apply(e,i),e.lineTo.apply(e,t),a&&(this.alignAndScaleFi"
+    },
+    {
+      "file": "../client/simple/src/js/main/keyboard.ts",
+      "line": 391,
+      "hits": [
+        "innerHTML"
+      ],
+      "source": "divElement.innerHTML = html;"
+    },
+    {
+      "file": "../client/simple/src/js/main/preferences.ts",
+      "line": 23,
+      "hits": [
+        "innerHTML"
+      ],
+      "source": "element.innerHTML = description + sourceText;"
+    },
+    {
+      "file": "../client/simple/src/js/main/results.ts",
+      "line": 111,
+      "hits": [
+        "innerHTML",
+        "innerHTML"
+      ],
+      "source": "this.innerHTML = this.innerHTML.replace(oldLabel, newLabel);"
+    },
+    {
+      "file": "../client/simple/src/js/plugin/InfiniteScroll.ts",
+      "line": 47,
+      "hits": [
+        "DOMParser"
+      ],
+      "source": "const nextPageDoc = new DOMParser().parseFromString(nextPage, \"text/html\");"
+    }
+  ]
+}

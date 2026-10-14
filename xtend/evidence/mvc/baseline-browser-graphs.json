@@ -1,0 +1,1780 @@
+{
+  "standalone": {
+    "inputs": {
+      "frontend/category-tabs.mjs": {
+        "bytes": 1240,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/weather-units.mjs": {
+        "bytes": 849,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/filter-motion.mjs": {
+        "bytes": 1225,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+        "bytes": 1419,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+        "bytes": 45072,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs",
+            "kind": "import-statement",
+            "original": "./trusted-text-sanitizer.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtendrmt/page-resource-cache.mjs": {
+        "bytes": 2888,
+        "imports": [],
+        "format": "esm"
+      },
+      "shared/cache-identity.mjs": {
+        "bytes": 1311,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/cache-service-core.mjs": {
+        "bytes": 3080,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtendrmt/page-resource-cache.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/rmt/page-resource-cache"
+          },
+          {
+            "path": "shared/cache-identity.mjs",
+            "kind": "import-statement",
+            "original": "../shared/cache-identity.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/services.ts": {
+        "bytes": 1308,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/maraca/app-services"
+          },
+          {
+            "path": "frontend/cache-service-core.mjs",
+            "kind": "import-statement",
+            "original": "./cache-service-core.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/motd.mjs": {
+        "bytes": 1834,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/maraca/app-services"
+          },
+          {
+            "path": "frontend/services.ts",
+            "kind": "import-statement",
+            "original": "./services.ts"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js": {
+        "bytes": 487,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js": {
+        "bytes": 16049,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+        "bytes": 5875,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+        "bytes": 4773,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js": {
+        "bytes": 21544,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js",
+            "kind": "import-statement",
+            "original": "./style-nonce.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "import-statement",
+            "original": "./xtend-state.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js",
+            "kind": "import-statement",
+            "original": "./icon-packs/core.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js",
+            "kind": "import-statement",
+            "original": "./icon-packs/lucide.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xspinner.js": {
+        "bytes": 12297,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "import-statement",
+            "original": "./xtend-state.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/filter-navigation.mjs": {
+        "bytes": 2522,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/report-state.mjs": {
+        "bytes": 512,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/dom.mjs": {
+        "bytes": 572,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/components/x-search-report-assistant.mjs": {
+        "bytes": 1306,
+        "imports": [
+          {
+            "path": "frontend/dom.mjs",
+            "kind": "import-statement",
+            "original": "../dom.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/feedback.mjs": {
+        "bytes": 8461,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/maraca/app-services"
+          },
+          {
+            "path": "frontend/services.ts",
+            "kind": "import-statement",
+            "original": "./services.ts"
+          },
+          {
+            "path": "frontend/filter-navigation.mjs",
+            "kind": "import-statement",
+            "original": "./filter-navigation.mjs"
+          },
+          {
+            "path": "frontend/report-state.mjs",
+            "kind": "import-statement",
+            "original": "./report-state.mjs"
+          },
+          {
+            "path": "frontend/components/x-search-report-assistant.mjs",
+            "kind": "import-statement",
+            "original": "./components/x-search-report-assistant.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/favicons.mjs": {
+        "bytes": 3142,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js": {
+        "bytes": 3194,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/overlay-focus.js": {
+        "bytes": 2055,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xdialog.js": {
+        "bytes": 27340,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js",
+            "kind": "dynamic-import",
+            "original": "./style-nonce.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "dynamic-import",
+            "original": "./xtend-state.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js",
+            "kind": "dynamic-import",
+            "original": "./rmt-command.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/overlay-focus.js",
+            "kind": "dynamic-import",
+            "original": "./overlay-focus.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "shared/about.mjs": {
+        "bytes": 5571,
+        "imports": [],
+        "format": "esm"
+      },
+      "server/control/release.mjs": {
+        "bytes": 72,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/about-dialog.mjs": {
+        "bytes": 2749,
+        "imports": [
+          {
+            "path": "frontend/dom.mjs",
+            "kind": "import-statement",
+            "original": "./dom.mjs"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xdialog.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xdialog.js"
+          },
+          {
+            "path": "shared/about.mjs",
+            "kind": "import-statement",
+            "original": "../shared/about.mjs"
+          },
+          {
+            "path": "server/control/release.mjs",
+            "kind": "import-statement",
+            "original": "../server/control/release.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/about.mjs": {
+        "bytes": 969,
+        "imports": [
+          {
+            "path": "frontend/about-dialog.mjs",
+            "kind": "dynamic-import",
+            "original": "./about-dialog.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/preferences.mjs": {
+        "bytes": 2057,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/components/x-search-lightbox-styles.mjs": {
+        "bytes": 5159,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/images.mjs": {
+        "bytes": 2647,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/search-lightbox-controller.mjs": {
+        "bytes": 7254,
+        "imports": [
+          {
+            "path": "frontend/dom.mjs",
+            "kind": "import-statement",
+            "original": "./dom.mjs"
+          },
+          {
+            "path": "frontend/images.mjs",
+            "kind": "import-statement",
+            "original": "./images.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/components/x-search-lightbox.mjs": {
+        "bytes": 13349,
+        "imports": [
+          {
+            "path": "frontend/components/x-search-lightbox-styles.mjs",
+            "kind": "import-statement",
+            "original": "./x-search-lightbox-styles.mjs"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xtend-state.js"
+          },
+          {
+            "path": "frontend/dom.mjs",
+            "kind": "import-statement",
+            "original": "../dom.mjs"
+          },
+          {
+            "path": "frontend/search-lightbox-controller.mjs",
+            "kind": "import-statement",
+            "original": "../search-lightbox-controller.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/lightbox.mjs": {
+        "bytes": 438,
+        "imports": [
+          {
+            "path": "frontend/components/x-search-lightbox.mjs",
+            "kind": "import-statement",
+            "original": "./components/x-search-lightbox.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/preview.mjs": {
+        "bytes": 5750,
+        "imports": [
+          {
+            "path": "frontend/lightbox.mjs",
+            "kind": "dynamic-import",
+            "original": "./lightbox.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/alerts.mjs": {
+        "bytes": 2354,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/standalone-streaming.mjs": {
+        "bytes": 4059,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/maraca/app-services"
+          },
+          {
+            "path": "frontend/services.ts",
+            "kind": "import-statement",
+            "original": "./services.ts"
+          },
+          {
+            "path": "frontend/report-state.mjs",
+            "kind": "import-statement",
+            "original": "./report-state.mjs"
+          },
+          {
+            "path": "frontend/filter-navigation.mjs",
+            "kind": "import-statement",
+            "original": "./filter-navigation.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xutils.js": {
+        "bytes": 29110,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/search-motion.mjs": {
+        "bytes": 2876,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xutils.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xutils.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/standalone-host.mjs": {
+        "bytes": 4953,
+        "imports": [
+          {
+            "path": "frontend/category-tabs.mjs",
+            "kind": "import-statement",
+            "original": "./category-tabs.mjs"
+          },
+          {
+            "path": "frontend/weather-units.mjs",
+            "kind": "import-statement",
+            "original": "./weather-units.mjs"
+          },
+          {
+            "path": "frontend/filter-motion.mjs",
+            "kind": "import-statement",
+            "original": "./filter-motion.mjs"
+          },
+          {
+            "path": "frontend/motd.mjs",
+            "kind": "import-statement",
+            "original": "./motd.mjs"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xicon.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xspinner.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xspinner.js"
+          },
+          {
+            "path": "frontend/feedback.mjs",
+            "kind": "import-statement",
+            "original": "./feedback.mjs"
+          },
+          {
+            "path": "frontend/favicons.mjs",
+            "kind": "import-statement",
+            "original": "./favicons.mjs"
+          },
+          {
+            "path": "frontend/about.mjs",
+            "kind": "import-statement",
+            "original": "./about.mjs"
+          },
+          {
+            "path": "frontend/preferences.mjs",
+            "kind": "import-statement",
+            "original": "./preferences.mjs"
+          },
+          {
+            "path": "frontend/preview.mjs",
+            "kind": "import-statement",
+            "original": "./preview.mjs"
+          },
+          {
+            "path": "frontend/alerts.mjs",
+            "kind": "import-statement",
+            "original": "./alerts.mjs"
+          },
+          {
+            "path": "frontend/images.mjs",
+            "kind": "import-statement",
+            "original": "./images.mjs"
+          },
+          {
+            "path": "frontend/standalone-streaming.mjs",
+            "kind": "import-statement",
+            "original": "./standalone-streaming.mjs"
+          },
+          {
+            "path": "frontend/filter-navigation.mjs",
+            "kind": "import-statement",
+            "original": "./filter-navigation.mjs"
+          },
+          {
+            "path": "frontend/search-motion.mjs",
+            "kind": "import-statement",
+            "original": "./search-motion.mjs"
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "../../baseline-browser/standalone-host.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-KIBRZ6HS.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/chunk-X2BZLAEO.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/chunk-CC765QCZ.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/chunk-DONHEPSX.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/about-dialog-QNMRGEDJ.js",
+            "kind": "dynamic-import"
+          },
+          {
+            "path": "../../baseline-browser/lightbox-PEMMRE5C.js",
+            "kind": "dynamic-import"
+          }
+        ],
+        "exports": [
+          "installSearchHost"
+        ],
+        "entryPoint": "frontend/standalone-host.mjs",
+        "inputs": {
+          "frontend/category-tabs.mjs": {
+            "bytesInOutput": 1371
+          },
+          "frontend/weather-units.mjs": {
+            "bytesInOutput": 629
+          },
+          "frontend/filter-motion.mjs": {
+            "bytesInOutput": 1264
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+            "bytesInOutput": 1296
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+            "bytesInOutput": 43765
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtendrmt/page-resource-cache.mjs": {
+            "bytesInOutput": 3348
+          },
+          "shared/cache-identity.mjs": {
+            "bytesInOutput": 1365
+          },
+          "frontend/cache-service-core.mjs": {
+            "bytesInOutput": 3094
+          },
+          "frontend/services.ts": {
+            "bytesInOutput": 1012
+          },
+          "frontend/motd.mjs": {
+            "bytesInOutput": 1911
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+            "bytesInOutput": 5806
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+            "bytesInOutput": 4779
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js": {
+            "bytesInOutput": 20943
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xspinner.js": {
+            "bytesInOutput": 11908
+          },
+          "frontend/filter-navigation.mjs": {
+            "bytesInOutput": 2646
+          },
+          "frontend/report-state.mjs": {
+            "bytesInOutput": 568
+          },
+          "frontend/components/x-search-report-assistant.mjs": {
+            "bytesInOutput": 1323
+          },
+          "frontend/feedback.mjs": {
+            "bytesInOutput": 9733
+          },
+          "frontend/favicons.mjs": {
+            "bytesInOutput": 3875
+          },
+          "frontend/about.mjs": {
+            "bytesInOutput": 1060
+          },
+          "frontend/preferences.mjs": {
+            "bytesInOutput": 2079
+          },
+          "frontend/preview.mjs": {
+            "bytesInOutput": 6399
+          },
+          "frontend/alerts.mjs": {
+            "bytesInOutput": 2274
+          },
+          "frontend/standalone-streaming.mjs": {
+            "bytesInOutput": 3917
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xutils.js": {
+            "bytesInOutput": 28279
+          },
+          "frontend/search-motion.mjs": {
+            "bytesInOutput": 2811
+          },
+          "frontend/standalone-host.mjs": {
+            "bytesInOutput": 4261
+          }
+        },
+        "bytes": 173260
+      },
+      "../../baseline-browser/style-nonce-RIIA66EP.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-KIBRZ6HS.js",
+            "kind": "import-statement"
+          }
+        ],
+        "exports": [
+          "componentStyleNonce"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js",
+        "inputs": {},
+        "bytes": 95
+      },
+      "../../baseline-browser/chunk-KIBRZ6HS.js": {
+        "imports": [],
+        "exports": [
+          "componentStyleNonce"
+        ],
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js": {
+            "bytesInOutput": 319
+          }
+        },
+        "bytes": 439
+      },
+      "../../baseline-browser/xtend-state-PWHAKJ2M.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-CC765QCZ.js",
+            "kind": "import-statement"
+          }
+        ],
+        "exports": [
+          "XTEND_STATE_BOUNDARY_SCHEMA",
+          "XTEND_STATE_DIAGNOSTICS_SCHEMA",
+          "XTEND_STATE_LIFECYCLE_EVENT_SCHEMA",
+          "XTEND_STATE_RMT_COMPATIBILITY_SCHEMA",
+          "XTEND_STATE_SNAPSHOT_SCHEMA",
+          "XTEND_STATE_STORAGE_KEY",
+          "xtendState"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+        "inputs": {},
+        "bytes": 479
+      },
+      "../../baseline-browser/rmt-command-AY4QQ4PX.js": {
+        "imports": [],
+        "exports": [
+          "XTEND_RMT_COMMAND_SCHEMA",
+          "createXtendButtonPayloadBase",
+          "createXtendRmtCommandDetail",
+          "dispatchXtendRmtCommand"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js",
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js": {
+            "bytesInOutput": 3103
+          }
+        },
+        "bytes": 3317
+      },
+      "../../baseline-browser/overlay-focus-TOQXXMZP.js": {
+        "imports": [],
+        "exports": [
+          "trapOverlayFocus"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/overlay-focus.js",
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/overlay-focus.js": {
+            "bytesInOutput": 1905
+          }
+        },
+        "bytes": 2023
+      },
+      "../../baseline-browser/about-dialog-QNMRGEDJ.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-DONHEPSX.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/style-nonce-RIIA66EP.js",
+            "kind": "dynamic-import"
+          },
+          {
+            "path": "../../baseline-browser/xtend-state-PWHAKJ2M.js",
+            "kind": "dynamic-import"
+          },
+          {
+            "path": "../../baseline-browser/rmt-command-AY4QQ4PX.js",
+            "kind": "dynamic-import"
+          },
+          {
+            "path": "../../baseline-browser/overlay-focus-TOQXXMZP.js",
+            "kind": "dynamic-import"
+          }
+        ],
+        "exports": [
+          "createAboutDialog"
+        ],
+        "entryPoint": "frontend/about-dialog.mjs",
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xdialog.js": {
+            "bytesInOutput": 27200
+          },
+          "shared/about.mjs": {
+            "bytesInOutput": 5578
+          },
+          "server/control/release.mjs": {
+            "bytesInOutput": 23
+          },
+          "frontend/about-dialog.mjs": {
+            "bytesInOutput": 2830
+          }
+        },
+        "bytes": 35876
+      },
+      "../../baseline-browser/lightbox-PEMMRE5C.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-X2BZLAEO.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/chunk-CC765QCZ.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/chunk-DONHEPSX.js",
+            "kind": "import-statement"
+          }
+        ],
+        "exports": [
+          "createSearchLightbox"
+        ],
+        "entryPoint": "frontend/lightbox.mjs",
+        "inputs": {
+          "frontend/components/x-search-lightbox-styles.mjs": {
+            "bytesInOutput": 5152
+          },
+          "frontend/search-lightbox-controller.mjs": {
+            "bytesInOutput": 8164
+          },
+          "frontend/components/x-search-lightbox.mjs": {
+            "bytesInOutput": 12949
+          },
+          "frontend/lightbox.mjs": {
+            "bytesInOutput": 432
+          }
+        },
+        "bytes": 27061
+      },
+      "../../baseline-browser/chunk-X2BZLAEO.js": {
+        "imports": [],
+        "exports": [
+          "IMAGE_PLACEHOLDER",
+          "installResultImages"
+        ],
+        "inputs": {
+          "frontend/images.mjs": {
+            "bytesInOutput": 2639
+          }
+        },
+        "bytes": 2718
+      },
+      "../../baseline-browser/chunk-CC765QCZ.js": {
+        "imports": [],
+        "exports": [
+          "XTEND_STATE_BOUNDARY_SCHEMA",
+          "XTEND_STATE_DIAGNOSTICS_SCHEMA",
+          "XTEND_STATE_LIFECYCLE_EVENT_SCHEMA",
+          "XTEND_STATE_RMT_COMPATIBILITY_SCHEMA",
+          "XTEND_STATE_SNAPSHOT_SCHEMA",
+          "XTEND_STATE_STORAGE_KEY",
+          "xtendState"
+        ],
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js": {
+            "bytesInOutput": 14997
+          }
+        },
+        "bytes": 15309
+      },
+      "../../baseline-browser/chunk-DONHEPSX.js": {
+        "imports": [],
+        "exports": [
+          "element"
+        ],
+        "inputs": {
+          "frontend/dom.mjs": {
+            "bytesInOutput": 537
+          }
+        },
+        "bytes": 580
+      }
+    }
+  },
+  "admin": {
+    "inputs": {
+      "frontend/dom.mjs": {
+        "bytes": 572,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+        "bytes": 1419,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+        "bytes": 45072,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs",
+            "kind": "import-statement",
+            "original": "./trusted-text-sanitizer.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js": {
+        "bytes": 16049,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfacemanager-controller.js": {
+        "bytes": 44648,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfaceoverlay-bridge.js": {
+        "bytes": 11008,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfacemanager.js": {
+        "bytes": 188415,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "import-statement",
+            "original": "./xtend-state.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfacemanager-controller.js",
+            "kind": "import-statement",
+            "original": "./xsurfacemanager-controller.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfaceoverlay-bridge.js",
+            "kind": "import-statement",
+            "original": "./xsurfaceoverlay-bridge.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js": {
+        "bytes": 487,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+        "bytes": 5875,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+        "bytes": 4773,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js": {
+        "bytes": 21544,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js",
+            "kind": "import-statement",
+            "original": "./style-nonce.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "import-statement",
+            "original": "./xtend-state.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js",
+            "kind": "import-statement",
+            "original": "./icon-packs/core.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js",
+            "kind": "import-statement",
+            "original": "./icon-packs/lucide.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsidepanel.js": {
+        "bytes": 40762,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js",
+            "kind": "import-statement",
+            "original": "./xicon.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js": {
+        "bytes": 3194,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/overlay-focus.js": {
+        "bytes": 2055,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xdialog.js": {
+        "bytes": 27340,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js",
+            "kind": "dynamic-import",
+            "original": "./style-nonce.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "dynamic-import",
+            "original": "./xtend-state.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js",
+            "kind": "dynamic-import",
+            "original": "./rmt-command.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/overlay-focus.js",
+            "kind": "dynamic-import",
+            "original": "./overlay-focus.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtoast.js": {
+        "bytes": 12496,
+        "imports": [],
+        "format": "esm"
+      },
+      "admin/services.ts": {
+        "bytes": 1006,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/maraca/app-services"
+          }
+        ],
+        "format": "esm"
+      },
+      "admin/live.mjs": {
+        "bytes": 13050,
+        "imports": [
+          {
+            "path": "frontend/dom.mjs",
+            "kind": "import-statement",
+            "original": "../frontend/dom.mjs"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/maraca/app-services"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfacemanager.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xsurfacemanager.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsidepanel.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xsidepanel.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xdialog.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xdialog.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtoast.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xtoast.js"
+          },
+          {
+            "path": "admin/services.ts",
+            "kind": "import-statement",
+            "original": "./services.ts"
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "../../baseline-browser/live.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-CC765QCZ.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/chunk-KIBRZ6HS.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/style-nonce-RIIA66EP.js",
+            "kind": "dynamic-import"
+          },
+          {
+            "path": "../../baseline-browser/xtend-state-PWHAKJ2M.js",
+            "kind": "dynamic-import"
+          },
+          {
+            "path": "../../baseline-browser/rmt-command-AY4QQ4PX.js",
+            "kind": "dynamic-import"
+          },
+          {
+            "path": "../../baseline-browser/overlay-focus-TOQXXMZP.js",
+            "kind": "dynamic-import"
+          }
+        ],
+        "exports": [
+          "watchObservatory"
+        ],
+        "entryPoint": "admin/live.mjs",
+        "inputs": {
+          "frontend/dom.mjs": {
+            "bytesInOutput": 537
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+            "bytesInOutput": 1296
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+            "bytesInOutput": 43765
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfacemanager-controller.js": {
+            "bytesInOutput": 44890
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfaceoverlay-bridge.js": {
+            "bytesInOutput": 10490
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfacemanager.js": {
+            "bytesInOutput": 186599
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+            "bytesInOutput": 5806
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+            "bytesInOutput": 4779
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js": {
+            "bytesInOutput": 20943
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsidepanel.js": {
+            "bytesInOutput": 40621
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xdialog.js": {
+            "bytesInOutput": 27234
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtoast.js": {
+            "bytesInOutput": 12481
+          },
+          "admin/services.ts": {
+            "bytesInOutput": 1026
+          },
+          "admin/live.mjs": {
+            "bytesInOutput": 15308
+          }
+        },
+        "bytes": 416969
+      },
+      "../../baseline-browser/xtend-state-PWHAKJ2M.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-CC765QCZ.js",
+            "kind": "import-statement"
+          }
+        ],
+        "exports": [
+          "XTEND_STATE_BOUNDARY_SCHEMA",
+          "XTEND_STATE_DIAGNOSTICS_SCHEMA",
+          "XTEND_STATE_LIFECYCLE_EVENT_SCHEMA",
+          "XTEND_STATE_RMT_COMPATIBILITY_SCHEMA",
+          "XTEND_STATE_SNAPSHOT_SCHEMA",
+          "XTEND_STATE_STORAGE_KEY",
+          "xtendState"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+        "inputs": {},
+        "bytes": 479
+      },
+      "../../baseline-browser/chunk-CC765QCZ.js": {
+        "imports": [],
+        "exports": [
+          "XTEND_STATE_BOUNDARY_SCHEMA",
+          "XTEND_STATE_DIAGNOSTICS_SCHEMA",
+          "XTEND_STATE_LIFECYCLE_EVENT_SCHEMA",
+          "XTEND_STATE_RMT_COMPATIBILITY_SCHEMA",
+          "XTEND_STATE_SNAPSHOT_SCHEMA",
+          "XTEND_STATE_STORAGE_KEY",
+          "xtendState"
+        ],
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js": {
+            "bytesInOutput": 14997
+          }
+        },
+        "bytes": 15309
+      },
+      "../../baseline-browser/style-nonce-RIIA66EP.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-KIBRZ6HS.js",
+            "kind": "import-statement"
+          }
+        ],
+        "exports": [
+          "componentStyleNonce"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js",
+        "inputs": {},
+        "bytes": 95
+      },
+      "../../baseline-browser/chunk-KIBRZ6HS.js": {
+        "imports": [],
+        "exports": [
+          "componentStyleNonce"
+        ],
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js": {
+            "bytesInOutput": 319
+          }
+        },
+        "bytes": 439
+      },
+      "../../baseline-browser/rmt-command-AY4QQ4PX.js": {
+        "imports": [],
+        "exports": [
+          "XTEND_RMT_COMMAND_SCHEMA",
+          "createXtendButtonPayloadBase",
+          "createXtendRmtCommandDetail",
+          "dispatchXtendRmtCommand"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js",
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js": {
+            "bytesInOutput": 3103
+          }
+        },
+        "bytes": 3317
+      },
+      "../../baseline-browser/overlay-focus-TOQXXMZP.js": {
+        "imports": [],
+        "exports": [
+          "trapOverlayFocus"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/overlay-focus.js",
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/overlay-focus.js": {
+            "bytesInOutput": 1905
+          }
+        },
+        "bytes": 2023
+      }
+    }
+  },
+  "host": {
+    "inputs": {
+      "frontend/components/x-search-lightbox-styles.mjs": {
+        "bytes": 5159,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js": {
+        "bytes": 16049,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/dom.mjs": {
+        "bytes": 572,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/images.mjs": {
+        "bytes": 2647,
+        "imports": [],
+        "format": "esm"
+      },
+      "frontend/search-lightbox-controller.mjs": {
+        "bytes": 7254,
+        "imports": [
+          {
+            "path": "frontend/dom.mjs",
+            "kind": "import-statement",
+            "original": "./dom.mjs"
+          },
+          {
+            "path": "frontend/images.mjs",
+            "kind": "import-statement",
+            "original": "./images.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/components/x-search-lightbox.mjs": {
+        "bytes": 13349,
+        "imports": [
+          {
+            "path": "frontend/components/x-search-lightbox-styles.mjs",
+            "kind": "import-statement",
+            "original": "./x-search-lightbox-styles.mjs"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xtend-state.js"
+          },
+          {
+            "path": "frontend/dom.mjs",
+            "kind": "import-statement",
+            "original": "../dom.mjs"
+          },
+          {
+            "path": "frontend/search-lightbox-controller.mjs",
+            "kind": "import-statement",
+            "original": "../search-lightbox-controller.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/lightbox.mjs": {
+        "bytes": 438,
+        "imports": [
+          {
+            "path": "frontend/components/x-search-lightbox.mjs",
+            "kind": "import-statement",
+            "original": "./components/x-search-lightbox.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/preview.mjs": {
+        "bytes": 5750,
+        "imports": [
+          {
+            "path": "frontend/lightbox.mjs",
+            "kind": "dynamic-import",
+            "original": "./lightbox.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/alerts.mjs": {
+        "bytes": 2354,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs": {
+        "bytes": 233301,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs": {
+        "bytes": 2397,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs",
+            "kind": "import-statement",
+            "original": "./vendor/acorn.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/protocol.mjs": {
+        "bytes": 13354,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+        "bytes": 46227,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs",
+            "kind": "import-statement",
+            "original": "./verify-adapter.mjs"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+            "kind": "import-statement",
+            "original": "./protocol.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/app-service-transport.mjs": {
+        "bytes": 12475,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs",
+            "kind": "import-statement",
+            "original": "./remote-adapter-loader.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+        "bytes": 1419,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+        "bytes": 45072,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs",
+            "kind": "import-statement",
+            "original": "./trusted-text-sanitizer.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/streaming.mjs": {
+        "bytes": 5561,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/app-service-transport.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/xscaler/app-service-transport"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/xscaler/protocol"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/maraca/app-services"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/host.mjs": {
+        "bytes": 1938,
+        "imports": [
+          {
+            "path": "frontend/preview.mjs",
+            "kind": "import-statement",
+            "original": "./preview.mjs"
+          },
+          {
+            "path": "frontend/alerts.mjs",
+            "kind": "import-statement",
+            "original": "./alerts.mjs"
+          },
+          {
+            "path": "frontend/images.mjs",
+            "kind": "import-statement",
+            "original": "./images.mjs"
+          },
+          {
+            "path": "frontend/streaming.mjs",
+            "kind": "import-statement",
+            "original": "./streaming.mjs"
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "../../baseline-browser/host.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-X2BZLAEO.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/lightbox-6WG6KHVS.js",
+            "kind": "dynamic-import"
+          }
+        ],
+        "exports": [
+          "installSearchHost"
+        ],
+        "entryPoint": "frontend/host.mjs",
+        "inputs": {
+          "frontend/preview.mjs": {
+            "bytesInOutput": 6395
+          },
+          "frontend/alerts.mjs": {
+            "bytesInOutput": 2278
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs": {
+            "bytesInOutput": 202593
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs": {
+            "bytesInOutput": 2339
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/protocol.mjs": {
+            "bytesInOutput": 11564
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+            "bytesInOutput": 44114
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/app-service-transport.mjs": {
+            "bytesInOutput": 11768
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+            "bytesInOutput": 1296
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+            "bytesInOutput": 34755
+          },
+          "frontend/streaming.mjs": {
+            "bytesInOutput": 5742
+          },
+          "frontend/host.mjs": {
+            "bytesInOutput": 1815
+          }
+        },
+        "bytes": 325481
+      },
+      "../../baseline-browser/lightbox-6WG6KHVS.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-X2BZLAEO.js",
+            "kind": "import-statement"
+          }
+        ],
+        "exports": [
+          "createSearchLightbox"
+        ],
+        "entryPoint": "frontend/lightbox.mjs",
+        "inputs": {
+          "frontend/components/x-search-lightbox-styles.mjs": {
+            "bytesInOutput": 5152
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js": {
+            "bytesInOutput": 14997
+          },
+          "frontend/dom.mjs": {
+            "bytesInOutput": 537
+          },
+          "frontend/search-lightbox-controller.mjs": {
+            "bytesInOutput": 8164
+          },
+          "frontend/components/x-search-lightbox.mjs": {
+            "bytesInOutput": 12949
+          },
+          "frontend/lightbox.mjs": {
+            "bytesInOutput": 432
+          }
+        },
+        "bytes": 42601
+      },
+      "../../baseline-browser/chunk-X2BZLAEO.js": {
+        "imports": [],
+        "exports": [
+          "IMAGE_PLACEHOLDER",
+          "installResultImages"
+        ],
+        "inputs": {
+          "frontend/images.mjs": {
+            "bytesInOutput": 2639
+          }
+        },
+        "bytes": 2718
+      }
+    }
+  },
+  "login": {
+    "inputs": {
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js": {
+        "bytes": 487,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js": {
+        "bytes": 16049,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js": {
+        "bytes": 3194,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+        "bytes": 5875,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+        "bytes": 4773,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js": {
+        "bytes": 21544,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js",
+            "kind": "import-statement",
+            "original": "./style-nonce.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "import-statement",
+            "original": "./xtend-state.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js",
+            "kind": "import-statement",
+            "original": "./icon-packs/core.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js",
+            "kind": "import-statement",
+            "original": "./icon-packs/lucide.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xbutton.js": {
+        "bytes": 24574,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js",
+            "kind": "import-statement",
+            "original": "./style-nonce.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js",
+            "kind": "import-statement",
+            "original": "./xtend-state.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js",
+            "kind": "import-statement",
+            "original": "./rmt-command.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js",
+            "kind": "import-statement",
+            "original": "./xicon.js"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js",
+            "kind": "dynamic-import",
+            "original": "./xicon.js"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/admin-login.mjs": {
+        "bytes": 444,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xbutton.js",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/components/xbutton.js"
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "../../baseline-browser/admin-login.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-OJZMCRN7.js",
+            "kind": "import-statement"
+          },
+          {
+            "path": "../../baseline-browser/xicon-5MFWKJRL.js",
+            "kind": "dynamic-import"
+          }
+        ],
+        "exports": [],
+        "entryPoint": "frontend/admin-login.mjs",
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/rmt-command.js": {
+            "bytesInOutput": 2815
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xbutton.js": {
+            "bytesInOutput": 24015
+          },
+          "frontend/admin-login.mjs": {
+            "bytesInOutput": 354
+          }
+        },
+        "bytes": 27456
+      },
+      "../../baseline-browser/xicon-5MFWKJRL.js": {
+        "imports": [
+          {
+            "path": "../../baseline-browser/chunk-OJZMCRN7.js",
+            "kind": "import-statement"
+          }
+        ],
+        "exports": [
+          "XIcon",
+          "XTendIconRegistry",
+          "X_ICON_REGISTRY_SCHEMA",
+          "X_ICON_SOURCE_SCHEMA",
+          "X_ICON_STATE_SCHEMA",
+          "createXTendCoreIconPack",
+          "createXTendLucideIconPack",
+          "getIconRegistrySnapshot",
+          "registerIconPack",
+          "resolveIcon"
+        ],
+        "entryPoint": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js",
+        "inputs": {},
+        "bytes": 491
+      },
+      "../../baseline-browser/chunk-OJZMCRN7.js": {
+        "imports": [],
+        "exports": [
+          "XIcon",
+          "XTendIconRegistry",
+          "X_ICON_REGISTRY_SCHEMA",
+          "X_ICON_SOURCE_SCHEMA",
+          "X_ICON_STATE_SCHEMA",
+          "componentStyleNonce",
+          "createXTendCoreIconPack",
+          "createXTendLucideIconPack",
+          "getIconRegistrySnapshot",
+          "registerIconPack",
+          "resolveIcon",
+          "xtendState"
+        ],
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/style-nonce.js": {
+            "bytesInOutput": 319
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtend-state.js": {
+            "bytesInOutput": 15010
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+            "bytesInOutput": 5806
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+            "bytesInOutput": 4779
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js": {
+            "bytesInOutput": 20941
+          }
+        },
+        "bytes": 47558
+      }
+    }
+  },
+  "xscaler": {
+    "inputs": {
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs": {
+        "bytes": 233301,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs": {
+        "bytes": 2397,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs",
+            "kind": "import-statement",
+            "original": "./vendor/acorn.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/protocol.mjs": {
+        "bytes": 13354,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+        "bytes": 46227,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs",
+            "kind": "import-statement",
+            "original": "./verify-adapter.mjs"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+            "kind": "import-statement",
+            "original": "./protocol.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+        "bytes": 1419,
+        "imports": [],
+        "format": "esm"
+      },
+      "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+        "bytes": 45072,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs",
+            "kind": "import-statement",
+            "original": "./trusted-text-sanitizer.mjs"
+          }
+        ],
+        "format": "esm"
+      },
+      "frontend/search-remote-adapter.mjs": {
+        "bytes": 1951,
+        "imports": [
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/xscaler/remote-adapter-loader"
+          },
+          {
+            "path": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+            "kind": "import-statement",
+            "original": "@ccslabs/xtend/maraca/app-services"
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "../../baseline-browser/search-remote-adapter.js": {
+        "imports": [],
+        "exports": [],
+        "entryPoint": "frontend/search-remote-adapter.mjs",
+        "inputs": {
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+            "bytesInOutput": 1178
+          },
+          "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+            "bytesInOutput": 11424
+          },
+          "frontend/search-remote-adapter.mjs": {
+            "bytesInOutput": 1522
+          }
+        },
+        "bytes": 14346
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "node": "v24.19.0",
+  "summaries": [
+    {
+      "folder": "standalone",
+      "version": "0360ddff679d32b9a96cc1f4f5b653147c95b6adc5d2435270cc1ef26a346f2e",
+      "sourceSha256": "7589a55fc33c777de4d94c313ff7ac451c2ad797aac27a82ad98a104f7c80d60",
+      "services": "planned"
+    },
+    {
+      "folder": "admin",
+      "version": "bd80af81399b7fe63614aa189a5eb764223c709409d47a4eff45ea72a5594cae",
+      "sourceSha256": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
+      "services": "planned"
+    }
+  ]
+}

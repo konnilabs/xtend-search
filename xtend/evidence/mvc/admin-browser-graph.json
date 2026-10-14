@@ -1,0 +1,891 @@
+{
+  "inputs": {
+    "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs": {
+      "bytes": 4189,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/page-initial.mjs": {
+      "bytes": 2878,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs",
+          "kind": "import-statement",
+          "original": "./page-contract.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs",
+          "kind": "import-statement",
+          "original": "./page-wire.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs": {
+      "bytes": 9933,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs",
+          "kind": "import-statement",
+          "original": "./page-wire.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs",
+          "kind": "import-statement",
+          "original": "./page-wire.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-initial.mjs",
+          "kind": "import-statement",
+          "original": "./page-initial.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js": {
+      "bytes": 3011,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-capture-adapter.js": {
+      "bytes": 4815,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js": {
+      "bytes": 151605,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-selector-runtime.js": {
+      "bytes": 46960,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-portable-render.js": {
+      "bytes": 9680,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-selector-runtime.js",
+          "kind": "import-statement",
+          "original": "./rmt-state-selector-runtime.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js",
+          "kind": "import-statement",
+          "original": "./rmt-dom-descriptor-renderer.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-animation-engine-runtime.js": {
+      "bytes": 22338,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-host-adapter.js": {
+      "bytes": 3570,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-adapter.js": {
+      "bytes": 4440,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-controller.js": {
+      "bytes": 16100,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-runtime.js": {
+      "bytes": 2091,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-capture-adapter.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-capture-adapter.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-host-adapter.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-host-adapter.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-adapter.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-command-adapter.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-controller.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-command-controller.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/page-client.mjs": {
+      "bytes": 28446,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs",
+          "kind": "import-statement",
+          "original": "./page-contract.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js",
+          "kind": "import-statement",
+          "original": "./rmt-dom-descriptor-renderer.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-portable-render.js",
+          "kind": "import-statement",
+          "original": "./rmt-portable-render.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-animation-engine-runtime.js",
+          "kind": "import-statement",
+          "original": "./rmt-animation-engine-runtime.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-runtime.js",
+          "kind": "dynamic-import",
+          "original": "./rmt-resume-runtime.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs": {
+      "bytes": 233301,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs": {
+      "bytes": 2397,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs",
+          "kind": "import-statement",
+          "original": "./vendor/acorn.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/protocol.mjs": {
+      "bytes": 13354,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+      "bytes": 46227,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs",
+          "kind": "import-statement",
+          "original": "./verify-adapter.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+          "kind": "import-statement",
+          "original": "./protocol.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+      "bytes": 1419,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+      "bytes": 45072,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs",
+          "kind": "import-statement",
+          "original": "./trusted-text-sanitizer.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/remote-surface.mjs": {
+      "bytes": 12058,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/xscaler/remote-adapter-loader"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/xscaler/protocol"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "./app-services.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/page-client.mjs": {
+      "bytes": 5043,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-client.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/page-client"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/page-contract"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-portable-render.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/portable-render"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/remote-surface.mjs",
+          "kind": "import-statement",
+          "original": "./remote-surface.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/page-bootstrap.mjs": {
+      "bytes": 3107,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/page-contract"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-capture-adapter.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/resume-capture-adapter"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/page-client.mjs",
+          "kind": "dynamic-import",
+          "original": "./page-client.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/browser-capabilities.mjs": {
+      "bytes": 1822,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xtend-state.js": {
+      "bytes": 16049,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xsurfacemanager-controller.js": {
+      "bytes": 44648,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xsurfaceoverlay-bridge.js": {
+      "bytes": 11008,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xsurfacemanager.js": {
+      "bytes": 188415,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xtend-state.js",
+          "kind": "import-statement",
+          "original": "./xtend-state.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xsurfacemanager-controller.js",
+          "kind": "import-statement",
+          "original": "./xsurfacemanager-controller.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xsurfaceoverlay-bridge.js",
+          "kind": "import-statement",
+          "original": "./xsurfaceoverlay-bridge.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/style-nonce.js": {
+      "bytes": 487,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+      "bytes": 5875,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+      "bytes": 4773,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xicon.js": {
+      "bytes": 21544,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/style-nonce.js",
+          "kind": "import-statement",
+          "original": "./style-nonce.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xtend-state.js",
+          "kind": "import-statement",
+          "original": "./xtend-state.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/icon-packs/core.js",
+          "kind": "import-statement",
+          "original": "./icon-packs/core.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/icon-packs/lucide.js",
+          "kind": "import-statement",
+          "original": "./icon-packs/lucide.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xsidepanel.js": {
+      "bytes": 40762,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xicon.js",
+          "kind": "import-statement",
+          "original": "./xicon.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/rmt-command.js": {
+      "bytes": 3194,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/overlay-focus.js": {
+      "bytes": 2055,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xdialog.js": {
+      "bytes": 27340,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/style-nonce.js",
+          "kind": "dynamic-import",
+          "original": "./style-nonce.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xtend-state.js",
+          "kind": "dynamic-import",
+          "original": "./xtend-state.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/rmt-command.js",
+          "kind": "dynamic-import",
+          "original": "./rmt-command.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/overlay-focus.js",
+          "kind": "dynamic-import",
+          "original": "./overlay-focus.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xtoast.js": {
+      "bytes": 12496,
+      "imports": [],
+      "format": "esm"
+    },
+    "admin/draft-service-core.mjs": {
+      "bytes": 2179,
+      "imports": [],
+      "format": "esm"
+    },
+    "admin/live-service-core.mjs": {
+      "bytes": 1276,
+      "imports": [],
+      "format": "esm"
+    },
+    "admin/services.ts": {
+      "bytes": 2331,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/app-services"
+        },
+        {
+          "path": "admin/draft-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./draft-service-core.mjs"
+        },
+        {
+          "path": "admin/live-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./live-service-core.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "admin/live.mjs": {
+      "bytes": 13170,
+      "imports": [
+        {
+          "path": "frontend/browser-capabilities.mjs",
+          "kind": "import-statement",
+          "original": "../frontend/browser-capabilities.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/app-services"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xsurfacemanager.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/components/xsurfacemanager.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xsidepanel.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/components/xsidepanel.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xdialog.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/components/xdialog.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xtoast.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/components/xtoast.js"
+        },
+        {
+          "path": "admin/services.ts",
+          "kind": "import-statement",
+          "original": "./services.ts"
+        },
+        {
+          "path": "admin/live-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./live-service-core.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "page.mjs": {
+      "bytes": 477,
+      "imports": [
+        {
+          "path": "/assets/xtend/resume-key.mjs",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/page-bootstrap.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/page-bootstrap"
+        },
+        {
+          "path": "admin/live.mjs",
+          "kind": "import-statement",
+          "original": "./admin/live.mjs"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "public/assets/xtend/admin/page.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/admin/chunks/chunk-HDGUSJ7J.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/chunk-XFY7NPDA.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/chunk-2BTGNNJC.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/chunk-3EEAOHPX.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "/assets/xtend/resume-key.mjs",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/page-client-ZSOMB7H7.mjs",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/style-nonce-PEYFVPXN.mjs",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/xtend-state-AHYXVNUN.mjs",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/rmt-command-ZYHRXDEK.mjs",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/overlay-focus-6JAROAHJ.mjs",
+          "kind": "dynamic-import"
+        }
+      ],
+      "exports": [],
+      "entryPoint": "page.mjs",
+      "inputs": {
+        "page.mjs": {
+          "bytesInOutput": 266
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/page-bootstrap.mjs": {
+          "bytesInOutput": 1881
+        },
+        "frontend/browser-capabilities.mjs": {
+          "bytesInOutput": 61
+        },
+        "node_modules/@ccslabs/xtend/components/xsurfacemanager-controller.js": {
+          "bytesInOutput": 23321
+        },
+        "node_modules/@ccslabs/xtend/components/xsurfaceoverlay-bridge.js": {
+          "bytesInOutput": 6521
+        },
+        "node_modules/@ccslabs/xtend/components/xsurfacemanager.js": {
+          "bytesInOutput": 117559
+        },
+        "node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+          "bytesInOutput": 4191
+        },
+        "node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+          "bytesInOutput": 3487
+        },
+        "node_modules/@ccslabs/xtend/components/xicon.js": {
+          "bytesInOutput": 12936
+        },
+        "node_modules/@ccslabs/xtend/components/xsidepanel.js": {
+          "bytesInOutput": 31716
+        },
+        "node_modules/@ccslabs/xtend/components/xdialog.js": {
+          "bytesInOutput": 20077
+        },
+        "node_modules/@ccslabs/xtend/components/xtoast.js": {
+          "bytesInOutput": 10133
+        },
+        "admin/draft-service-core.mjs": {
+          "bytesInOutput": 1540
+        },
+        "admin/live-service-core.mjs": {
+          "bytesInOutput": 922
+        },
+        "admin/services.ts": {
+          "bytesInOutput": 1305
+        },
+        "admin/live.mjs": {
+          "bytesInOutput": 8935
+        }
+      },
+      "bytes": 245078
+    },
+    "public/assets/xtend/admin/chunks/rmt-resume-runtime-TDYASBDO.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/admin/chunks/chunk-HDGUSJ7J.mjs",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "RMT_RESUME_ADAPTER_SCHEMA",
+        "RMT_RESUME_ENVELOPE_SCHEMA",
+        "RMT_RESUME_INTENT_SCHEMA",
+        "RMT_RESUME_MAX_INTENTS",
+        "RMT_RESUME_RESULT_SCHEMA",
+        "RMT_RESUME_RUNTIME_SCHEMA",
+        "canonicalizeRmtResumePayload",
+        "createRmtResumeRuntime",
+        "default",
+        "installRmtPrebootIntentCapture",
+        "resumeResponse",
+        "resumeTemplate"
+      ],
+      "entryPoint": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-runtime.js",
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-host-adapter.js": {
+          "bytesInOutput": 2011
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-adapter.js": {
+          "bytesInOutput": 2229
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-controller.js": {
+          "bytesInOutput": 7497
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-runtime.js": {
+          "bytesInOutput": 688
+        }
+      },
+      "bytes": 12928
+    },
+    "public/assets/xtend/admin/chunks/chunk-HDGUSJ7J.mjs": {
+      "imports": [],
+      "exports": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q"
+      ],
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js": {
+          "bytesInOutput": 1408
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-capture-adapter.js": {
+          "bytesInOutput": 2313
+        }
+      },
+      "bytes": 3844
+    },
+    "public/assets/xtend/admin/chunks/page-client-ZSOMB7H7.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/admin/chunks/chunk-XFY7NPDA.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/admin/chunks/rmt-resume-runtime-TDYASBDO.mjs",
+          "kind": "dynamic-import"
+        }
+      ],
+      "exports": [
+        "createMaracaPageClient"
+      ],
+      "entryPoint": "node_modules/@ccslabs/xtend/xtend-maraca/page-client.mjs",
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js": {
+          "bytesInOutput": 69537
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-selector-runtime.js": {
+          "bytesInOutput": 20472
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-portable-render.js": {
+          "bytesInOutput": 2450
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-animation-engine-runtime.js": {
+          "bytesInOutput": 10494
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/page-client.mjs": {
+          "bytesInOutput": 16629
+        },
+        "node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs": {
+          "bytesInOutput": 121654
+        },
+        "node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs": {
+          "bytesInOutput": 1480
+        },
+        "node_modules/@ccslabs/xtend/xscaler/protocol.mjs": {
+          "bytesInOutput": 5952
+        },
+        "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+          "bytesInOutput": 22140
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/remote-surface.mjs": {
+          "bytesInOutput": 4163
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/page-client.mjs": {
+          "bytesInOutput": 2698
+        }
+      },
+      "bytes": 277805
+    },
+    "public/assets/xtend/admin/chunks/chunk-XFY7NPDA.mjs": {
+      "imports": [],
+      "exports": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m"
+      ],
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs": {
+          "bytesInOutput": 1274
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs": {
+          "bytesInOutput": 4334
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/page-initial.mjs": {
+          "bytesInOutput": 865
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+          "bytesInOutput": 703
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+          "bytesInOutput": 22660
+        }
+      },
+      "bytes": 29946
+    },
+    "public/assets/xtend/admin/chunks/xtend-state-AHYXVNUN.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/admin/chunks/chunk-2BTGNNJC.mjs",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "XTEND_STATE_BOUNDARY_SCHEMA",
+        "XTEND_STATE_DIAGNOSTICS_SCHEMA",
+        "XTEND_STATE_LIFECYCLE_EVENT_SCHEMA",
+        "XTEND_STATE_RMT_COMPATIBILITY_SCHEMA",
+        "XTEND_STATE_SNAPSHOT_SCHEMA",
+        "XTEND_STATE_STORAGE_KEY",
+        "xtendState"
+      ],
+      "entryPoint": "node_modules/@ccslabs/xtend/components/xtend-state.js",
+      "inputs": {},
+      "bytes": 286
+    },
+    "public/assets/xtend/admin/chunks/chunk-2BTGNNJC.mjs": {
+      "imports": [],
+      "exports": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g"
+      ],
+      "inputs": {
+        "node_modules/@ccslabs/xtend/components/xtend-state.js": {
+          "bytesInOutput": 7676
+        }
+      },
+      "bytes": 7729
+    },
+    "public/assets/xtend/admin/chunks/style-nonce-PEYFVPXN.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/admin/chunks/chunk-3EEAOHPX.mjs",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "componentStyleNonce"
+      ],
+      "entryPoint": "node_modules/@ccslabs/xtend/components/style-nonce.js",
+      "inputs": {},
+      "bytes": 70
+    },
+    "public/assets/xtend/admin/chunks/chunk-3EEAOHPX.mjs": {
+      "imports": [],
+      "exports": [
+        "a"
+      ],
+      "inputs": {
+        "node_modules/@ccslabs/xtend/components/style-nonce.js": {
+          "bytesInOutput": 210
+        }
+      },
+      "bytes": 226
+    },
+    "public/assets/xtend/admin/chunks/rmt-command-ZYHRXDEK.mjs": {
+      "imports": [],
+      "exports": [
+        "XTEND_RMT_COMMAND_SCHEMA",
+        "createXtendButtonPayloadBase",
+        "createXtendRmtCommandDetail",
+        "dispatchXtendRmtCommand"
+      ],
+      "entryPoint": "node_modules/@ccslabs/xtend/components/rmt-command.js",
+      "inputs": {
+        "node_modules/@ccslabs/xtend/components/rmt-command.js": {
+          "bytesInOutput": 1608
+        }
+      },
+      "bytes": 1743
+    },
+    "public/assets/xtend/admin/chunks/overlay-focus-6JAROAHJ.mjs": {
+      "imports": [],
+      "exports": [
+        "trapOverlayFocus"
+      ],
+      "entryPoint": "node_modules/@ccslabs/xtend/components/overlay-focus.js",
+      "inputs": {
+        "node_modules/@ccslabs/xtend/components/overlay-focus.js": {
+          "bytesInOutput": 1068
+        }
+      },
+      "bytes": 1099
+    }
+  }
+}

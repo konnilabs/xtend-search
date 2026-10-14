@@ -30,8 +30,8 @@ for(const [name,engine] of [['chromium',chromium],['firefox',firefox]]){
  });
  await check(`${name}: dismissed hint stays hidden through preview, full-screen carousel and filter edits`,async()=>{
   const {page,errors}=await setup(browser);await ready(page);await page.evaluate(()=>window.__alertsDocument=document);await close(page).click();await gone(page);
-  await page.locator('a[data-preview-id]').first().click();await page.locator('#preview-expand').click();await page.locator('x-search-lightbox[open]').waitFor();await page.keyboard.press('ArrowRight');await page.keyboard.press('Escape');
-  await page.waitForFunction(()=>!document.querySelector('x-search-lightbox[open]'));assert.equal(await alerts(page).count(),0);await page.keyboard.press('Escape');await page.locator('#filters summary').click();await page.locator('#language').selectOption('de');assert.equal(await alerts(page).count(),0);assert.equal(await page.evaluate(()=>document===window.__alertsDocument),true);assert.deepEqual(errors,[]);await page.close();
+  await page.locator('a[data-preview-id]').first().click();await page.locator('#preview-expand').click();await page.locator('#search-lightbox[open]').waitFor();await page.keyboard.press('ArrowRight');await page.keyboard.press('Escape');
+  await page.waitForFunction(()=>!document.querySelector('#search-lightbox[open]'));assert.equal(await alerts(page).count(),0);await page.keyboard.press('Escape');await page.locator('#filters summary').click();await page.locator('#language').selectOption('de');assert.equal(await alerts(page).count(),0);assert.equal(await page.evaluate(()=>document===window.__alertsDocument),true);assert.deepEqual(errors,[]);await page.close();
  });
  await check(`${name}: new response, same-query submit and history restore notices`,async()=>{
   const {page,errors}=await setup(browser);await ready(page);await page.evaluate(()=>window.__alertsDocument=document);await close(page).click();await gone(page);

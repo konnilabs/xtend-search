@@ -1,0 +1,376 @@
+{
+  "stage": "final current RMT sources: actual HTTP MCP run",
+  "transport": "Streamable HTTP, loopback, token authenticated",
+  "versions": {
+    "package.json": "0.6.0",
+    "node_modules/@ccslabs/xtend/package.json": "0.9.0",
+    "/workspace/xtend/products/xtend-mcp/package.json": "0.1.0"
+  },
+  "contractReads": [
+    {
+      "uri": "xtend://docs/en/maraca-app-services",
+      "query": null,
+      "sha256": "cf1859ee7dd50a10ee2dfacda46f40bad0576dd4866ce5f43ceaea7245c09e04",
+      "error": null
+    },
+    {
+      "uri": "xtend://docs/en/rmt-vnext-authoring",
+      "query": null,
+      "sha256": "a2576489cba7668e3b3e4b04330df37eb28e3716384cf3f79a90a0d6d5e915da",
+      "error": null
+    },
+    {
+      "uri": "xtend://docs/en/api",
+      "query": null,
+      "sha256": "67cfaa55123320aca7590270af544e3bd3fac1173b3be20746a6001040d54ba6",
+      "error": null
+    },
+    {
+      "uri": "xtend://docs/en/xtend-maraca-orchestration",
+      "query": null,
+      "sha256": "52f0a265e9bd0cad6fcb68cf66f1f961bf9c29a21ebfc83cdb6b5a9d22853296",
+      "error": null
+    },
+    {
+      "uri": "xtend://docs/en/ssr-pages",
+      "query": null,
+      "sha256": "c7b1e04d93de381c43f902bd754e6e65713faddad49d832f7c8da1eb6fac74a0",
+      "error": null
+    },
+    {
+      "uri": "xtend://docs/en/rmt-model-binding",
+      "query": null,
+      "sha256": "47c58b957a5309372e88686ac6cd11b6f13da3c30a37eb3a54cf38fbf89f3a2b",
+      "error": "ProtocolError: XTend documentation resource not found: xtend://docs/en/rmt-model-binding"
+    },
+    {
+      "uri": "xtend://docs/en/hydration-policies",
+      "query": null,
+      "sha256": "3e05acb21d98a00c87c590597a6b50fee026c8daa9807341b401f6c53c69b6f4",
+      "error": null
+    },
+    {
+      "uri": null,
+      "query": "MVC model binding PageClient lifecycle capabilities",
+      "sha256": "10801b1d803aec20e8120c59acc6369bdb17ff0beb9031f629c1f672662d05c3",
+      "error": null
+    },
+    {
+      "uri": null,
+      "query": "Resumability Maraca App Services declarative views",
+      "sha256": "9d1e23a32ca1490091e610a8e6a0dbc78770840ce1ef66463cf115c1c297950d",
+      "error": null
+    }
+  ],
+  "checks": [
+    {
+      "path": "xtend-search/xtend/frontend/standalone.rmt",
+      "name": "xtend_rmt_compile_check",
+      "isError": false,
+      "schema": "xtend.mcp.rmt-compile-check.v1",
+      "sourceHash": "7589a55fc33c777de4d94c313ff7ac451c2ad797aac27a82ad98a104f7c80d60",
+      "ok": true,
+      "status": "compiled",
+      "diagnostics": [],
+      "warnings": [],
+      "provenance": [
+        {
+          "uri": "workspace://xtend-search/xtend/frontend/standalone.rmt",
+          "kind": "compile-check",
+          "sourceHash": "7589a55fc33c777de4d94c313ff7ac451c2ad797aac27a82ad98a104f7c80d60"
+        }
+      ],
+      "rawResultSha256": "4f93f3a4b8f98c52f0d44f835a9016f2e3ecc64064ea659b9239a75b38a05ab8",
+      "summary": {
+        "schema": "xtend.rmt.vnext-compiler.v1",
+        "mode": null,
+        "recordCount": null,
+        "outputCount": null
+      }
+    },
+    {
+      "path": "xtend-search/xtend/frontend/standalone.rmt",
+      "name": "xtend_maraca_plan",
+      "isError": false,
+      "schema": "xtend.mcp.maraca-plan.v1",
+      "sourceHash": "7589a55fc33c777de4d94c313ff7ac451c2ad797aac27a82ad98a104f7c80d60",
+      "ok": true,
+      "status": "planned",
+      "diagnostics": [],
+      "warnings": [],
+      "provenance": [
+        {
+          "uri": "workspace://xtend-search/xtend/frontend/standalone.rmt",
+          "kind": "maraca-plan",
+          "sourceHash": "7589a55fc33c777de4d94c313ff7ac451c2ad797aac27a82ad98a104f7c80d60"
+        }
+      ],
+      "rawResultSha256": "d70e075a8e495fa905d383f9af51e1ccff7b0c754b88715aad37231b0c3b41e0",
+      "planSummary": {
+        "schema": "xtend.maraca.build-plan.v1",
+        "keys": [
+          "schema",
+          "ok",
+          "status",
+          "configFingerprint",
+          "source",
+          "sourceHash",
+          "profile",
+          "lazy",
+          "css",
+          "cssBuild",
+          "vendor",
+          "componentMode",
+          "stackMode",
+          "orchestrationMode",
+          "kernelMode",
+          "kernelBootMode",
+          "hydrationMode",
+          "validationMode",
+          "transitionsMode",
+          "sizeBudgetMode",
+          "enablePrewarmWorker",
+          "enableUiCoprocessor",
+          "diagnostics",
+          "loader",
+          "rmt",
+          "components",
+          "surfaces",
+          "events",
+          "lanes",
+          "state",
+          "runtimeModules",
+          "stackModules",
+          "orchestration",
+          "templateArtifacts",
+          "performance",
+          "kernelFeatureAdoption",
+          "policyParity",
+          "panicRecovery",
+          "kernel",
+          "hydration",
+          "warmReentry",
+          "uiCoprocessor",
+          "webAppManifest",
+          "pwa",
+          "validation",
+          "transitions",
+          "lifecycle",
+          "services",
+          "serviceGraphFingerprint",
+          "stack",
+          "fabric",
+          "publicNameReservations",
+          "propertyMangling"
+        ],
+        "sha256": "7d81b23595367f072e5af61d5adf7a34e7082ff98d9a3dcf19f1fb353b82670b"
+      }
+    },
+    {
+      "path": "xtend-search/xtend/frontend/search.rmt",
+      "name": "xtend_rmt_compile_check",
+      "isError": false,
+      "schema": "xtend.mcp.rmt-compile-check.v1",
+      "sourceHash": "e3f1278ebc078c329e9c151a050fe9d3fc872094baccbba26fe952bae3334bd5",
+      "ok": true,
+      "status": "compiled",
+      "diagnostics": [],
+      "warnings": [],
+      "provenance": [
+        {
+          "uri": "workspace://xtend-search/xtend/frontend/search.rmt",
+          "kind": "compile-check",
+          "sourceHash": "e3f1278ebc078c329e9c151a050fe9d3fc872094baccbba26fe952bae3334bd5"
+        }
+      ],
+      "rawResultSha256": "ea8eb9ab58875d7b222da8f5709e5ca0b2ac5b102bd38c39a80dcd2f102ccd30",
+      "summary": {
+        "schema": "xtend.rmt.vnext-compiler.v1",
+        "mode": null,
+        "recordCount": null,
+        "outputCount": null
+      }
+    },
+    {
+      "path": "xtend-search/xtend/frontend/search.rmt",
+      "name": "xtend_maraca_plan",
+      "isError": false,
+      "schema": "xtend.mcp.maraca-plan.v1",
+      "sourceHash": "e3f1278ebc078c329e9c151a050fe9d3fc872094baccbba26fe952bae3334bd5",
+      "ok": true,
+      "status": "planned",
+      "diagnostics": [],
+      "warnings": [],
+      "provenance": [
+        {
+          "uri": "workspace://xtend-search/xtend/frontend/search.rmt",
+          "kind": "maraca-plan",
+          "sourceHash": "e3f1278ebc078c329e9c151a050fe9d3fc872094baccbba26fe952bae3334bd5"
+        }
+      ],
+      "rawResultSha256": "8141216f918037667b3d42eaac314fcad7d259c73f2446cfbaa117f557a40b73",
+      "planSummary": {
+        "schema": "xtend.maraca.build-plan.v1",
+        "keys": [
+          "schema",
+          "ok",
+          "status",
+          "configFingerprint",
+          "source",
+          "sourceHash",
+          "profile",
+          "lazy",
+          "css",
+          "cssBuild",
+          "vendor",
+          "componentMode",
+          "stackMode",
+          "orchestrationMode",
+          "kernelMode",
+          "kernelBootMode",
+          "hydrationMode",
+          "validationMode",
+          "transitionsMode",
+          "sizeBudgetMode",
+          "enablePrewarmWorker",
+          "enableUiCoprocessor",
+          "diagnostics",
+          "loader",
+          "rmt",
+          "components",
+          "surfaces",
+          "events",
+          "lanes",
+          "state",
+          "runtimeModules",
+          "stackModules",
+          "orchestration",
+          "templateArtifacts",
+          "performance",
+          "kernelFeatureAdoption",
+          "policyParity",
+          "panicRecovery",
+          "kernel",
+          "hydration",
+          "warmReentry",
+          "uiCoprocessor",
+          "webAppManifest",
+          "pwa",
+          "validation",
+          "transitions",
+          "lifecycle",
+          "services",
+          "serviceGraphFingerprint",
+          "stack",
+          "fabric",
+          "publicNameReservations",
+          "propertyMangling"
+        ],
+        "sha256": "a40d8952e5783fb8aef30b173dcc4454a16d196708b08d1d106d5db00bccafa5"
+      }
+    },
+    {
+      "path": "xtend-search/xtend/admin/admin.rmt",
+      "name": "xtend_rmt_compile_check",
+      "isError": false,
+      "schema": "xtend.mcp.rmt-compile-check.v1",
+      "sourceHash": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
+      "ok": true,
+      "status": "compiled",
+      "diagnostics": [],
+      "warnings": [],
+      "provenance": [
+        {
+          "uri": "workspace://xtend-search/xtend/admin/admin.rmt",
+          "kind": "compile-check",
+          "sourceHash": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1"
+        }
+      ],
+      "rawResultSha256": "42aa6b077f0ec80257d1068b00e9cc6ad0ae70f03b873cf7ed4427139b5b8b72",
+      "summary": {
+        "schema": "xtend.rmt.vnext-compiler.v1",
+        "mode": null,
+        "recordCount": null,
+        "outputCount": null
+      }
+    },
+    {
+      "path": "xtend-search/xtend/admin/admin.rmt",
+      "name": "xtend_maraca_plan",
+      "isError": false,
+      "schema": "xtend.mcp.maraca-plan.v1",
+      "sourceHash": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
+      "ok": true,
+      "status": "planned",
+      "diagnostics": [],
+      "warnings": [],
+      "provenance": [
+        {
+          "uri": "workspace://xtend-search/xtend/admin/admin.rmt",
+          "kind": "maraca-plan",
+          "sourceHash": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1"
+        }
+      ],
+      "rawResultSha256": "8d69a88e75785e559e33c59ef29b1d82fa33e10bdb668dd9ece02295f7de3b03",
+      "planSummary": {
+        "schema": "xtend.maraca.build-plan.v1",
+        "keys": [
+          "schema",
+          "ok",
+          "status",
+          "configFingerprint",
+          "source",
+          "sourceHash",
+          "profile",
+          "lazy",
+          "css",
+          "cssBuild",
+          "vendor",
+          "componentMode",
+          "stackMode",
+          "orchestrationMode",
+          "kernelMode",
+          "kernelBootMode",
+          "hydrationMode",
+          "validationMode",
+          "transitionsMode",
+          "sizeBudgetMode",
+          "enablePrewarmWorker",
+          "enableUiCoprocessor",
+          "diagnostics",
+          "loader",
+          "rmt",
+          "components",
+          "surfaces",
+          "events",
+          "lanes",
+          "state",
+          "runtimeModules",
+          "stackModules",
+          "orchestration",
+          "templateArtifacts",
+          "performance",
+          "kernelFeatureAdoption",
+          "policyParity",
+          "panicRecovery",
+          "kernel",
+          "hydration",
+          "warmReentry",
+          "uiCoprocessor",
+          "webAppManifest",
+          "pwa",
+          "validation",
+          "transitions",
+          "lifecycle",
+          "services",
+          "serviceGraphFingerprint",
+          "stack",
+          "fabric",
+          "publicNameReservations",
+          "propertyMangling"
+        ],
+        "sha256": "e12990e9474dc28824f9b2d27b187b0544bd77b82700f8cac9ba2266085fe139"
+      }
+    }
+  ]
+}

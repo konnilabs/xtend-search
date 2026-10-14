@@ -1,0 +1,92 @@
+{
+  "inputs": {
+    "node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs": {
+      "bytes": 233301,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs": {
+      "bytes": 2397,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs",
+          "kind": "import-statement",
+          "original": "./vendor/acorn.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/protocol.mjs": {
+      "bytes": 13354,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+      "bytes": 46227,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs",
+          "kind": "import-statement",
+          "original": "./verify-adapter.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+          "kind": "import-statement",
+          "original": "./protocol.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+      "bytes": 1419,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+      "bytes": 45072,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs",
+          "kind": "import-statement",
+          "original": "./trusted-text-sanitizer.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/search-remote-adapter.mjs": {
+      "bytes": 1951,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/xscaler/remote-adapter-loader"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/app-services"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "public/assets/xtend/search-remote-adapter.mjs": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "frontend/search-remote-adapter.mjs",
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+          "bytesInOutput": 544
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+          "bytesInOutput": 5970
+        },
+        "frontend/search-remote-adapter.mjs": {
+          "bytesInOutput": 1035
+        }
+      },
+      "bytes": 7550
+    }
+  }
+}

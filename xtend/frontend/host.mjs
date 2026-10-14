@@ -1,3 +1,4 @@
+import {focusElement} from './browser-capabilities.mjs';
 import {installImagePreview} from './preview.mjs';
 import {installSearchAlerts} from './alerts.mjs';
 import {installResultImages} from './images.mjs';
@@ -16,7 +17,7 @@ export function installSearchHost(){
   if(event.type==='navigate'){
    const newerInput=pending && revision>submittedRevision;
    pending=false;
-   if(newerInput){await command('search.edit',{value:draft});document.getElementById('search-input')?.focus({preventScroll:true});}
+   if(newerInput){await command('search.edit',{value:draft});focusElement(document.getElementById('search-input'), {preventScroll:true});}
    // The results heading owns the count; this region reports loading and errors.
    const streaming=['pending','partial'].includes(event.page.props?.['search.data']?.stream?.phase);
    await command('search.streaming',{busy:streaming,message:streaming?'Weitere Suchquellen werden geladen …':''});
@@ -24,6 +25,6 @@ export function installSearchHost(){
   if(event.type==='error'){pending=false;await command('search.ready',{message:'Die Anfrage ist fehlgeschlagen. Bitte erneut suchen oder die klassische Ansicht öffnen.'});}
  });
  window.addEventListener('keydown',event=>{
-  if(event.key==='/' && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && !document.activeElement?.isContentEditable){event.preventDefault();document.getElementById('search-input')?.focus();}
+  if(event.key==='/' && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && !document.activeElement?.isContentEditable){event.preventDefault();focusElement(document.getElementById('search-input'));}
  });
 }

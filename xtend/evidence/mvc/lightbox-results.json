@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-10-14T09:59:03.799Z",
+  "base": "http://127.0.0.1:8101",
+  "cssOverride": null,
+  "results": [
+    {
+      "name": "chromium: RMT carousel with lazy controller and framework XDialog, current selection, full-page carousel, sidebar sync",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: modal focus, scroll lock, close button, reopen and Escape layers",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: failed originals, thumbnail fallback, failed media can be skipped",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: pending lazy import and active modal cannot survive navigation",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: unavailable optional module preserves sidebar",
+      "status": "passed"
+    },
+    {
+      "name": "chromium: narrow viewport, swipe and no overflow",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: RMT carousel with lazy controller and framework XDialog, current selection, full-page carousel, sidebar sync",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: modal focus, scroll lock, close button, reopen and Escape layers",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: failed originals, thumbnail fallback, failed media can be skipped",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: pending lazy import and active modal cannot survive navigation",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: unavailable optional module preserves sidebar",
+      "status": "passed"
+    },
+    {
+      "name": "firefox: narrow viewport, swipe and no overflow",
+      "status": "passed"
+    }
+  ]
+}

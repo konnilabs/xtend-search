@@ -1,13 +1,10 @@
+import {focusElement,installInlineNoticeFocus} from './browser-capabilities.mjs';
 // The Classic component owns its shadow DOM; RMT owns the current warning list.
 export function installSearchAlerts(command){
+ installInlineNoticeFocus();
  let currentData=null,pending=false,streamId=null;
  const dismissed=new Set();
  const data=()=>window.XTendPage?.page?.props?.['search.data'];
- // Classic 0.8.0 schedules focus on its root after alert-shown. Inline notices
- // are live regions, not focus destinations; retain the native close button.
- document.addEventListener('alert-shown',event=>{
-  if(event.target.matches?.('x-alert.search-warning'))event.target.shadowRoot?.querySelector('[part~="root"]')?.removeAttribute('tabindex');
- });
  window.addEventListener('xtend-page:event',({detail:event})=>{
   if(event.type==='pending')pending=true;
   if(event.type==='navigate'){
@@ -34,6 +31,6 @@ export function installSearchAlerts(command){
   await command('search.alerts.set',{value:{warnings:response.warnings.filter(warning=>!dismissed.has(warning.id))}});
   if(!hadFocus || pending || data()!==response || (document.activeElement!==document.body && document.activeElement!==alert))return;
   const nextAlert=next && document.getElementById(next.id);
-  (nextAlert?.shadowRoot?.querySelector('button[part~="close"]') || document.getElementById('results-heading'))?.focus({preventScroll:true});
+  focusElement((nextAlert?.shadowRoot?.querySelector('button[part~="close"]') || document.getElementById('results-heading')), {preventScroll:true});
  });
 }

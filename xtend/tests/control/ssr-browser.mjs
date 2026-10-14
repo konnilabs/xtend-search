@@ -1,4 +1,4 @@
-import {chromium} from 'playwright';
+import {chromium,firefox} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
 import {gzipSync} from 'node:zlib';
@@ -6,7 +6,9 @@ import {decodePageInitialDocument as decodePageWire} from '@ccslabs/xtend/rmt/pa
 const version=JSON.parse(await fs.readFile(new URL('../../package.json',import.meta.url))).version;
 const base=process.env.TEST_BASE_URL||'http://localhost:8093';
 const baseline=process.env.SSR_BASELINE_URL;
-const checks=[],browser=await chromium.launch();
+const browserName=process.env.TEST_BROWSER||'chromium';
+assert.ok(['chromium','firefox'].includes(browserName));
+const checks=[],browser=await ({chromium,firefox})[browserName].launch();
 const extract=html=>html.match(/id="xtend-page-data"[^>]*>([\s\S]*?)<\/script>/)[1];
 async function measure(url){
  const response=await fetch(url),html=await response.text(),raw=extract(html),page=decodePageWire(JSON.parse(raw));
@@ -46,10 +48,12 @@ try{
   await page.locator('#search-input').fill(tampered?'fallback search':'resumed search');
   await page.getByRole('button',{name:'Suchen',exact:true}).click();
   await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].category==='general'&&window.XTendPage.page.props['search.data'].stream?.phase==='complete');
+  assert.equal(await page.evaluate(()=>window.XTendPage.page.props['search.data'].results.length),10,'Complete stream model retains all results');
+  await page.waitForFunction(()=>document.querySelectorAll('article.result').length===10);
   assert.equal(await page.locator('article.result').count(),10);assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);
   await page.getByRole('link',{name:'Bilder',exact:true}).click();
   await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].category==='images'&&window.XTendPage.page.props['search.data'].stream?.phase==='complete');
-  await page.goBack();await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].category==='general'&&!window.XTendPage.page.props['search.data'].skeleton);
+  await page.goBack();await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].category==='general'&&(!window.XTendPage.page.props['search.data'].stream||window.XTendPage.page.props['search.data'].stream.phase==='complete'));
   assert.equal(await page.locator('article.result').count(),10);
   assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);assert.deepEqual(errors,[]);
   checks.push(tampered?'Invalid signature recovers through descriptors; stream and history work without HTML copy.':'Verified resume preserves the SSR input; stream and history work without document replacement.');
@@ -59,7 +63,7 @@ try{
  await page.goto(base+'/search?q=native&categories=general&language=all&safesearch=1');
  assert.equal(await page.locator('#search-input').getAttribute('type'),'search');
  assert.equal(await page.locator('article.result').count(),10);await nojs.close();checks.push('No-JS direct SSR search keeps the native search input and results.');
- const report={ok:true,date:new Date().toISOString(),checks,metrics,scope:'Local Docker '+version+'; optional baseline URL is measured separately. Signed state, timestamps and signatures vary. Byte/gzip comparison is transport size, not a production latency claim. Marker coverage is not a successful-resume ratio.'};
+ const report={ok:true,browser:browserName,date:new Date().toISOString(),checks,metrics,scope:'Local Docker '+version+'; optional baseline URL is measured separately. Signed state, timestamps and signatures vary. Byte/gzip comparison is transport size, not a production latency claim. Marker coverage is not a successful-resume ratio.'};
  await fs.writeFile(new URL('../../evidence/control-plane/'+version+'-ssr-browser.json',import.meta.url),JSON.stringify(report,null,2));
  console.log(JSON.stringify(report,null,2));
 }finally{await browser.close();}

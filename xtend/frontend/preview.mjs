@@ -1,3 +1,4 @@
+import {focusElement,revealElement} from './browser-capabilities.mjs';
 // Integration events select normalized results; RMT owns the panel and its DOM.
 export function installImagePreview(command){
  let selectedId='',returnId='',imageSrc='',epoch=0,pending=false,viewer=null,viewerPromise=null,expandEpoch=0;
@@ -18,8 +19,8 @@ export function installImagePreview(command){
   selectedId=id;returnId=id;const imageKey=request(result.previewSrc);
   await command('search.preview.open',{value:{...result,open:true,imageSrc,imageKey,imageUnavailable:false,imageMessage:'',expandMessage:'',position:`Bild ${index+1} von ${entries.length}`,previousDisabled:index===0,nextDisabled:index===entries.length-1}});
   if(current!==epoch || !focus)return;
-  document.getElementById('preview-close')?.focus({preventScroll:true});
-  if(matchMedia('(max-width: 960px)').matches)document.getElementById('image-preview')?.scrollIntoView({block:'start'});
+  focusElement(document.getElementById('preview-close'), {preventScroll:true});
+  if(matchMedia('(max-width: 960px)').matches)revealElement(document.getElementById('image-preview'), {block:'start'});
  }
  async function expand(){
   if(pending || !selectedId)return;
@@ -42,7 +43,7 @@ export function installImagePreview(command){
   await command('search.preview.close');
   if(current!==epoch)return;
   const target=Array.from(document.querySelectorAll('a[data-preview-id]')).find(link=>link.dataset.previewId===id);
-  (target || document.getElementById('search-input'))?.focus({preventScroll:false});
+  focusElement((target || document.getElementById('search-input')), {preventScroll:false});
  }
  function move(delta){
   const entries=images(),index=entries.findIndex(result=>result.id===selectedId);
@@ -66,10 +67,13 @@ export function installImagePreview(command){
   const result=images().find(result=>result.id===selectedId);
   const fallback=result?.thumbnail && attempt.src!==result.thumbnail?result.thumbnail:'';
   const imageKey=request(fallback);
-  if(!fallback && document.activeElement?.id==='preview-expand')document.getElementById('preview-close')?.focus({preventScroll:true});
+  if(!fallback && document.activeElement?.id==='preview-expand')focusElement(document.getElementById('preview-close'), {preventScroll:true});
   void command('search.preview.error',{src:fallback,key:imageKey,unavailable:!fallback,message:fallback?'Das große Bild ist nicht erreichbar. Hier siehst du die kleine Vorschau.':'Die Vorschau ist nicht erreichbar. Du kannst die Quellseite oder das Originalbild öffnen.'});
  },true);
  window.addEventListener('keydown',event=>{
+  // XDialog may synchronously close before this bubbling event reaches window.
+  // Its Escape belongs to the modal layer, even after the host is detached.
+  if(event.composedPath().some(node=>node?.id==='search-lightbox'))return;
   if(document.querySelector('#search-about[open],#search-feedback[open]'))return;
   if(event.defaultPrevented || viewer?.isOpen() || !selectedId || event.ctrlKey || event.metaKey || event.altKey || event.isComposing)return;
   if(event.key==='Escape'){event.preventDefault();void close();return;}

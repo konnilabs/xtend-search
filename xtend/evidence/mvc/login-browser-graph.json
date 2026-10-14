@@ -1,0 +1,131 @@
+{
+  "inputs": {
+    "node_modules/@ccslabs/xtend/components/style-nonce.js": {
+      "bytes": 487,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xtend-state.js": {
+      "bytes": 16049,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/rmt-command.js": {
+      "bytes": 3194,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+      "bytes": 5875,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+      "bytes": 4773,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xicon.js": {
+      "bytes": 21544,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/style-nonce.js",
+          "kind": "import-statement",
+          "original": "./style-nonce.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xtend-state.js",
+          "kind": "import-statement",
+          "original": "./xtend-state.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/icon-packs/core.js",
+          "kind": "import-statement",
+          "original": "./icon-packs/core.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/icon-packs/lucide.js",
+          "kind": "import-statement",
+          "original": "./icon-packs/lucide.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/components/xbutton.js": {
+      "bytes": 24574,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/style-nonce.js",
+          "kind": "import-statement",
+          "original": "./style-nonce.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xtend-state.js",
+          "kind": "import-statement",
+          "original": "./xtend-state.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/rmt-command.js",
+          "kind": "import-statement",
+          "original": "./rmt-command.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xicon.js",
+          "kind": "import-statement",
+          "original": "./xicon.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xicon.js",
+          "kind": "dynamic-import",
+          "original": "./xicon.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/admin-login.mjs": {
+      "bytes": 401,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/xbutton.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/components/xbutton.js"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "public/assets/xtend/standalone/admin-login.mjs": {
+      "imports": [],
+      "exports": [],
+      "entryPoint": "frontend/admin-login.mjs",
+      "inputs": {
+        "node_modules/@ccslabs/xtend/components/style-nonce.js": {
+          "bytesInOutput": 226
+        },
+        "node_modules/@ccslabs/xtend/components/xtend-state.js": {
+          "bytesInOutput": 7715
+        },
+        "node_modules/@ccslabs/xtend/components/icon-packs/core.js": {
+          "bytesInOutput": 4199
+        },
+        "node_modules/@ccslabs/xtend/components/icon-packs/lucide.js": {
+          "bytesInOutput": 3467
+        },
+        "node_modules/@ccslabs/xtend/components/xicon.js": {
+          "bytesInOutput": 13194
+        },
+        "node_modules/@ccslabs/xtend/components/xbutton.js": {
+          "bytesInOutput": 19248
+        },
+        "node_modules/@ccslabs/xtend/components/rmt-command.js": {
+          "bytesInOutput": 1478
+        },
+        "frontend/admin-login.mjs": {
+          "bytesInOutput": 222
+        }
+      },
+      "bytes": 49931
+    }
+  }
+}

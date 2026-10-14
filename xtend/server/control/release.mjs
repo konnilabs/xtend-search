@@ -1,2 +1,2 @@
-export const VERSION = '0.6.0';
+export {VERSION} from '../../shared/version.mjs';
 export const BACKEND_VERSION = '0.5.0';

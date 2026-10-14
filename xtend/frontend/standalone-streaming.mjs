@@ -1,6 +1,7 @@
-import {createAppServiceRegistry,createHttpAppServiceTransport} from '@ccslabs/xtend/maraca/app-services';
+import {scrollViewport} from './browser-capabilities.mjs';
+import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
 import services from './services.ts';
-import {decoratedReportData} from './report-state.mjs';
+import {interruptedSearch} from './stream-service-core.mjs';
 import {preserveFilterDraft} from './filter-navigation.mjs';
 // Presentation coordinator for the existing PageClient. The SDK owns framing,
 // sequencing, transport, cancellation and stale invocations. No second router.
@@ -9,30 +10,21 @@ export function installSearchStreaming(){
  const client=()=>window.XTendPage;
  const stop=()=>{epoch++;active?.controller.abort();active=null;};
  async function run(stream){
-  stop();const own=epoch,controller=new AbortController(),transport=createHttpAppServiceTransport({pathPrefix:'/api/xtend/services'}),registry=createAppServiceRegistry(services,{transport,historyLimit:0});
+  stop();const own=epoch,controller=new AbortController(),registry=createAppServiceRegistry(services,{historyLimit:0});
   const record={id:stream.id,controller};active=record;const valid=()=>active===record&&epoch===own&&!controller.signal.aborted&&client()?.page?.props?.['search.data']?.stream?.id===stream.id;
   try{
-   const frames=registry.stream(new URL(stream.url,location.origin).searchParams.get('categories')==='weather'?'search.weather.run':'search.run',{url:stream.url},{},{signal:controller.signal,invocationId:stream.id,correlationId:stream.id,timeoutMs:15000});
-   for await(const frame of frames){
-    if(!valid())return;if(frame.type==='start')continue;
-    if(['error','cancelled'].includes(frame.type))throw new Error('Stream unterbrochen');
-    const payload=frame.value??frame.delta;if(!payload?.data)continue;
-    const final=frame.type==='complete';
-    // The pending PageClient page already renders the search shell/spinner.
-    // Every later frame carries a full snapshot; avoid rendering empty start twice.
-    if(!final&&payload.event==='search.started')continue;
-    // At most one pending commit: await one animation frame and Maraca's commit.
-    // The stream iterator supplies backpressure; there is no unbounded UI queue.
-    await new Promise(resolve=>requestAnimationFrame(resolve));if(!valid())return;
-    await client().optimistic(props=>valid()?{...preserveFilterDraft(props),'search.data':{...decoratedReportData(payload.data,client()?.getRuntime()?.model.getState('search.feedback')),stream:{...stream,phase:final?'complete':'partial'}}}:props,async()=>undefined);
-    window.dispatchEvent(new CustomEvent('xtend-search:stream',{detail:{id:stream.id,status:frame.type,event:payload.event,sequence:frame.sequence}}));
-    if(restoring&&(document.documentElement.scrollHeight-innerHeight>=restoring[1]||final)){scrollTo(...restoring);restoring=null;}
-    if(final)return;
-   }
-   throw new Error('Unvollständiger Stream');
+   await registry.invoke('search.stream.consume',{stream,origin:location.origin},{readFeedback:()=>client()?.getRuntime()?.model.getState('search.feedback'),present:async payload=>{
+    if(!valid())throw new DOMException('Stale page','AbortError');
+    const final=payload.data.stream.phase==='complete';
+    await new Promise(resolve=>requestAnimationFrame(resolve));if(!valid())throw new DOMException('Stale page','AbortError');
+    await client().optimistic(props=>valid()?{...preserveFilterDraft(props),'search.data':payload.data}:props,async()=>undefined);
+    if(!valid())return;
+    window.dispatchEvent(new CustomEvent('xtend-search:stream',{detail:{id:stream.id,status:payload.status,event:payload.event,sequence:payload.sequence}}));
+    if(restoring&&(document.documentElement.scrollHeight-innerHeight>=restoring[1]||final)){scrollViewport(...restoring);restoring=null;}
+   }},{signal:controller.signal,invocationId:stream.id,timeoutMs:15000});
   }catch{
-   if(valid())await client().optimistic(props=>({...preserveFilterDraft(props),'search.data':{...props['search.data'],skeleton:false,countLabel:props['search.data'].skeleton?'Suche unterbrochen':props['search.data'].countLabel,stream:{...stream,phase:'error'},statusLabel:'Verbindung unterbrochen · bereits geladene Ergebnisse bleiben sichtbar',warnings:[{id:'stream',domId:'search-warning-stream',type:'warning',message:'Die Verbindung wurde unterbrochen. Bitte starte bei Bedarf eine neue Suche.'}]}}),async()=>undefined);
-  }finally{registry.dispose();transport.dispose?.();if(active===record)active=null;}
+   if(valid())await client().optimistic(props=>({...preserveFilterDraft(props),'search.data':interruptedSearch(props['search.data'],stream)}),async()=>undefined);
+  }finally{registry.dispose();if(active===record)active=null;}
  }
  window.addEventListener('popstate',()=>{restoring=positions.get(location.pathname+location.search)||null;},true);
  for(const type of ['wheel','touchstart','pointerdown','keydown'])window.addEventListener(type,()=>{restoring=null;},{passive:true});

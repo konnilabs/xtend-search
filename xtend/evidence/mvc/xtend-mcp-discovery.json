@@ -1,0 +1,3039 @@
+{
+  "tools": {
+    "tools": [
+      {
+        "name": "xtend_knowledge_search",
+        "title": "Search XTend knowledge",
+        "description": "First step for XTend/RMT authoring: search canonical Markdown and curated AI Kit records before proposing source.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "locale": {
+              "default": "all",
+              "type": "string",
+              "enum": [
+                "de",
+                "en",
+                "all"
+              ]
+            },
+            "scopes": {
+              "minItems": 1,
+              "maxItems": 2,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "docs",
+                  "rmt-kit"
+                ]
+              }
+            },
+            "limit": {
+              "default": 6,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "domains": {
+              "maxItems": 6,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 64
+              }
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "$schema": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      },
+      {
+        "name": "xtend_knowledge_context",
+        "title": "Build XTend RAG context",
+        "description": "Build bounded, provenance-preserving XTend context. Set scopes to rmt-kit for LLM product parity.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 500
+            },
+            "locale": {
+              "default": "all",
+              "type": "string",
+              "enum": [
+                "de",
+                "en",
+                "all"
+              ]
+            },
+            "scopes": {
+              "minItems": 1,
+              "maxItems": 2,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "docs",
+                  "rmt-kit"
+                ]
+              }
+            },
+            "limit": {
+              "default": 6,
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "domains": {
+              "maxItems": 6,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 64
+              }
+            },
+            "maxChars": {
+              "type": "integer",
+              "minimum": 1000,
+              "maximum": 20000
+            },
+            "maxRecords": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 8
+            },
+            "includeRecipes": {
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "query"
+          ],
+          "$schema": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      },
+      {
+        "name": "xtend_rmt_diagnostics",
+        "title": "Diagnose XTendRMT source",
+        "description": "Run deterministic XTendRMT language diagnostics without executing application code.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "description": "Inline RMT source.",
+              "type": "string",
+              "maxLength": 2000000
+            },
+            "path": {
+              "description": "Workspace-relative RMT file path.",
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          "$schema": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      },
+      {
+        "name": "xtend_rmt_compile_check",
+        "title": "Check XTendRMT compilation",
+        "description": "Required final validation for generated RMT source. Do not call source valid unless this returns ok=true and status=compiled.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "description": "Inline RMT source.",
+              "type": "string",
+              "maxLength": 2000000
+            },
+            "path": {
+              "description": "Workspace-relative RMT file path.",
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          "$schema": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      },
+      {
+        "name": "xtend_maraca_plan",
+        "title": "Plan XTend Maraca build",
+        "description": "Create a deterministic Maraca build plan without writing artifacts.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "description": "Inline RMT source.",
+              "type": "string",
+              "maxLength": 2000000
+            },
+            "path": {
+              "description": "Workspace-relative RMT file path.",
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          "$schema": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      },
+      {
+        "name": "xtend_rmt_repair_plan",
+        "title": "Plan safe XTendRMT repairs",
+        "description": "Produce safe, selectable workspace-edit repairs with source and plan fingerprints.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "description": "Inline RMT source.",
+              "type": "string",
+              "maxLength": 2000000
+            },
+            "path": {
+              "description": "Workspace-relative RMT file path.",
+              "type": "string",
+              "maxLength": 4096
+            }
+          },
+          "$schema": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "annotations": {
+          "readOnlyHint": true,
+          "destructiveHint": false,
+          "idempotentHint": true,
+          "openWorldHint": false
+        }
+      }
+    ]
+  },
+  "resources": {
+    "resources": [
+      {
+        "name": "XTend Docs Catalog (DE)",
+        "title": "XTend Docs Catalog (DE)",
+        "uri": "xtend://docs/catalog/de",
+        "description": "Hash-addressed catalog of canonical XTend DE Markdown resources.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "XTend Docs Catalog (EN)",
+        "title": "XTend Docs Catalog (EN)",
+        "uri": "xtend://docs/catalog/en",
+        "description": "Hash-addressed catalog of canonical XTend EN Markdown resources.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "XTend RMT AI Kit Manifest",
+        "title": "XTend RMT AI Kit Manifest",
+        "uri": "xtend://rmt/kit/manifest",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "XTend RMT AI Kit Compact",
+        "title": "XTend RMT AI Kit Compact",
+        "uri": "xtend://rmt/kit/compact",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "A11y Keyboard Smokes",
+        "title": "A11y Keyboard Smokes",
+        "uri": "xtend://docs/de/a11y-keyboard-smokes",
+        "description": "docs/de/a11y-keyboard-smokes.md · sha256:20eaa4d30ea636ac2a5787fc8f97ecab20e8f7470f1dc771be6951ebd8a8f782",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Über XTend",
+        "title": "Über XTend",
+        "uri": "xtend://docs/de/about",
+        "description": "docs/de/about.md · sha256:1e40fa16da051b87a8faba7481bebc2f17bec65c11a5a05bf4637fd1b1962084",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "API",
+        "title": "API",
+        "uri": "xtend://docs/de/api",
+        "description": "docs/de/api.md · sha256:d5ff629e10a91c18142c243670f19140b4e13e5d476fdbc962ff54dd15c22bcd",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Best Practices",
+        "title": "Best Practices",
+        "uri": "xtend://docs/de/best-practices",
+        "description": "docs/de/best-practices.md · sha256:9d8451ce930dd04ba5c27ace6aee1d2535a8f135ca03e9fdca5f78b5b5959907",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Changelog",
+        "title": "Changelog",
+        "uri": "xtend://docs/de/changelog",
+        "description": "docs/de/changelog.md · sha256:e4bf5bbb9098c9ea106877a2c07fd215a918bcbea300b7c13ad62826f5b05dc3",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Component Long-Tail Migration",
+        "title": "Component Long-Tail Migration",
+        "uri": "xtend://docs/de/component-long-tail-migration",
+        "description": "docs/de/component-long-tail-migration.md · sha256:5bfb0437c5b8299116939fb1ce0d29d20d4402927c5187e6a7ccbfd0c63ae3fa",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-alert",
+        "title": "x-alert",
+        "uri": "xtend://docs/de/components-xalert",
+        "description": "docs/de/components/xalert.md · sha256:d86bd160384fe1ab3ff260621c7b9a3287185e53144775706bb8acb22106a926",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-button",
+        "title": "x-button",
+        "uri": "xtend://docs/de/components-xbutton",
+        "description": "docs/de/components/xbutton.md · sha256:68dbfd6a3a9e1ff4abdd569c12c7840a5e05b47d7a48f5425347f5dd55bee687",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-calendar",
+        "title": "x-calendar",
+        "uri": "xtend://docs/de/components-xcalendar",
+        "description": "docs/de/components/xcalendar.md · sha256:b248d336fc27cad31d3163b69633e551a3dde282cbde82b5a4177878bdd26b87",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-cards",
+        "title": "x-cards",
+        "uri": "xtend://docs/de/components-xcards",
+        "description": "docs/de/components/xcards.md · sha256:cd1fd5c446c674444777bf2126e437a955c48b3f5dd4381d180e187be2a501ed",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-checkbox",
+        "title": "x-checkbox",
+        "uri": "xtend://docs/de/components-xcheckbox",
+        "description": "docs/de/components/xcheckbox.md · sha256:ae876bcaab11cc04af9c10ba246e46fefa1f5baa19dad2dd1af87a562fa7781b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-code",
+        "title": "x-code",
+        "uri": "xtend://docs/de/components-xcode",
+        "description": "docs/de/components/xcode.md · sha256:000c5d5e989a34f4e1e472156150374b164dcd76301390c771e29606c78712c0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-dialog",
+        "title": "x-dialog",
+        "uri": "xtend://docs/de/components-xdialog",
+        "description": "docs/de/components/xdialog.md · sha256:85c4fc9cec408b98c20d25fe1efb37745c6cdf831ec138354fc6b54590c5e290",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-drawer",
+        "title": "x-drawer",
+        "uri": "xtend://docs/de/components-xdrawer",
+        "description": "docs/de/components/xdrawer.md · sha256:73cfe3ef3846c4a90dfc6c101f5d4d5a4f0c4ef7de9dbcd2987b4a8fa7469fcf",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-footer",
+        "title": "x-footer",
+        "uri": "xtend://docs/de/components-xfooter",
+        "description": "docs/de/components/xfooter.md · sha256:b29084bb619a06a9f0fa90b6c7765a376507356ba2b9779eb1797ca5c2c7da30",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-form",
+        "title": "x-form",
+        "uri": "xtend://docs/de/components-xform",
+        "description": "docs/de/components/xform.md · sha256:b32c6639e66d2c3a4b396a9280e87885e48e309de4f2dfb6aac34df17f80e58d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-header",
+        "title": "x-header",
+        "uri": "xtend://docs/de/components-xheader",
+        "description": "docs/de/components/xheader.md · sha256:0fc2ea7dcc73129860b439d52cdf11b6ede0111882781a8c1eda07786afddae5",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-hero",
+        "title": "x-hero",
+        "uri": "xtend://docs/de/components-xhero",
+        "description": "docs/de/components/xhero.md · sha256:894a1bb56f3651632c728004d197ee0bc096951793652399863bfea90d971e74",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-icon",
+        "title": "x-icon",
+        "uri": "xtend://docs/de/components-xicon",
+        "description": "docs/de/components/xicon.md · sha256:3872870b047e6cff9c7c62ca11e3317a4d47b081e5c05af72aa2cf2805c32ab3",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-input",
+        "title": "x-input",
+        "uri": "xtend://docs/de/components-xinput",
+        "description": "docs/de/components/xinput.md · sha256:df1df9019593b28a0d0b48719d3c22ac3cb2a8119cf434b16a71e195e79da9f4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-keymap",
+        "title": "x-keymap",
+        "uri": "xtend://docs/de/components-xkeymap",
+        "description": "docs/de/components/xkeymap.md · sha256:d04def96c4a187e79aa15e328272fe1bdd330611e21ea4c24444f3c7bb38f253",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-lightbox",
+        "title": "x-lightbox",
+        "uri": "xtend://docs/de/components-xlightbox",
+        "description": "docs/de/components/xlightbox.md · sha256:25517b33de8ab20fae7ae6fb8a46ac8e63f5fa427fd74c6cac5f67f8d38ae500",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-link",
+        "title": "x-link",
+        "uri": "xtend://docs/de/components-xlink",
+        "description": "docs/de/components/xlink.md · sha256:23d44376e51cb1440e9e72bd91ac8ae12ce5f870f473d274472e1f542df60adc",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-masonry",
+        "title": "x-masonry",
+        "uri": "xtend://docs/de/components-xmasonry",
+        "description": "docs/de/components/xmasonry.md · sha256:818f956d67c76ded652721d9d52268236a613eecc4637a6529f16b3e9f9048ba",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-menu",
+        "title": "x-menu",
+        "uri": "xtend://docs/de/components-xmenu",
+        "description": "docs/de/components/xmenu.md · sha256:32fb653f4e1f7552dd6ba73e93b25641c71ea3ceeac98faac2b926be3f096b58",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-modal",
+        "title": "x-modal",
+        "uri": "xtend://docs/de/components-xmodal",
+        "description": "docs/de/components/xmodal.md · sha256:0317b70672f006854908bf98b9c177c46d4305b0482b37c40dcdc09ac0eb949b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-player",
+        "title": "x-player",
+        "uri": "xtend://docs/de/components-xplayer",
+        "description": "docs/de/components/xplayer.md · sha256:b5f0c4d61ba620a76016833b0b433b324dbf4185f0147e034d8c0ba2c5021e28",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-popover",
+        "title": "x-popover",
+        "uri": "xtend://docs/de/components-xpopover",
+        "description": "docs/de/components/xpopover.md · sha256:0ba98b7facf7abca3fd44fe083f6f999eabf74757dad0a9ebadfe093f5932fb3",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-progress",
+        "title": "x-progress",
+        "uri": "xtend://docs/de/components-xprogress",
+        "description": "docs/de/components/xprogress.md · sha256:2e684c366ccf05e02b8f312aacc3c00f7c6c5da084322d1581d0ba3bbc17af62",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-radio",
+        "title": "x-radio",
+        "uri": "xtend://docs/de/components-xradio",
+        "description": "docs/de/components/xradio.md · sha256:6a7f799e45dbaf77318bfa6a096521c63d68fe74b2c1524548d2f8171fde1fa8",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-router",
+        "title": "x-router",
+        "uri": "xtend://docs/de/components-xrouter",
+        "description": "docs/de/components/xrouter.md · sha256:36a5dacb2c46574ffbcc86a246702cf28a0c05cf28abab603ed345763e7f2a64",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-section",
+        "title": "x-section",
+        "uri": "xtend://docs/de/components-xsection",
+        "description": "docs/de/components/xsection.md · sha256:f26a3884064808f6ef51a581bbe005e005a9301f85993100aa7db1dceb807183",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-select",
+        "title": "x-select",
+        "uri": "xtend://docs/de/components-xselect",
+        "description": "docs/de/components/xselect.md · sha256:cd8980c09c641fae8ca7683cb8d327ecb7c3ce6b65fcb67fedaef3030ae34241",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-side-panel",
+        "title": "x-side-panel",
+        "uri": "xtend://docs/de/components-xsidepanel",
+        "description": "docs/de/components/xsidepanel.md · sha256:1733798782d5ac5e09701f59a758819e782c4e3933f1253652faaa9a45d592e1",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-spinner",
+        "title": "x-spinner",
+        "uri": "xtend://docs/de/components-xspinner",
+        "description": "docs/de/components/xspinner.md · sha256:bce5d42eb341b40233304edd2c05fff11a750b3f2f4ed3379f483fbe2d94f72f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-status",
+        "title": "x-status",
+        "uri": "xtend://docs/de/components-xstatus",
+        "description": "docs/de/components/xstatus.md · sha256:9769d91d3a8cb84f1bc2469ff75d1df417e16a6736596c81c7c6714e7f495bf7",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-summary",
+        "title": "x-summary",
+        "uri": "xtend://docs/de/components-xsummary",
+        "description": "docs/de/components/xsummary.md · sha256:881d73c8b422ee883aaee66d20d5d9ca87cce15396e54ee4c163ccf75adea964",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-surface-manager",
+        "title": "x-surface-manager",
+        "uri": "xtend://docs/de/components-xsurfacemanager",
+        "description": "docs/de/components/xsurfacemanager.md · sha256:727b4354ecc46652bb9166f97de9bf5650638b4bca225b52d57d0e696a4c08e8",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-surface-portal",
+        "title": "x-surface-portal",
+        "uri": "xtend://docs/de/components-xsurfaceportal",
+        "description": "docs/de/components/xsurfaceportal.md · sha256:87f2d39c2a1f8f931000504015437532d01850028f438c5545bad1518a154068",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-surface-region",
+        "title": "x-surface-region",
+        "uri": "xtend://docs/de/components-xsurfaceregion",
+        "description": "docs/de/components/xsurfaceregion.md · sha256:17879581c05a4b5f4c40d3c9cb566a66c43890b090c9da153aea0f93ae71db10",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-surface-window",
+        "title": "x-surface-window",
+        "uri": "xtend://docs/de/components-xsurfacewindow",
+        "description": "docs/de/components/xsurfacewindow.md · sha256:7104819faf6d1c5fc681f30d3a71a15d46e1d8772b7b855e43291415e457eadb",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-tabs",
+        "title": "x-tabs",
+        "uri": "xtend://docs/de/components-xtabs",
+        "description": "docs/de/components/xtabs.md · sha256:7d7e8a6c3aeeedcc28c77e941ec51622ad90cc9bcf5760d288330fdd912f1cb4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "xtend-i18n",
+        "title": "xtend-i18n",
+        "uri": "xtend://docs/de/components-xtend-i18n",
+        "description": "docs/de/components/xtend-i18n.md · sha256:1858aa62884e902b9aa2a1b23b3e348771bd04a6fb71d419e959722d1e2c67b4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend State",
+        "title": "XTend State",
+        "uri": "xtend://docs/de/components-xtend-state",
+        "description": "docs/de/components/xtend-state.md · sha256:9b8296630ed3c12cfe10c3c2b866d59f648e716a4b8d1973bfd2c9e438bcb9ce",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-textarea",
+        "title": "x-textarea",
+        "uri": "xtend://docs/de/components-xtextarea",
+        "description": "docs/de/components/xtextarea.md · sha256:2313a65252619149273b5f84f7850b13ca67224d2ce0d160a248fef4025bb53e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-theme",
+        "title": "x-theme",
+        "uri": "xtend://docs/de/components-xtheme",
+        "description": "docs/de/components/xtheme.md · sha256:aa8f8408422e3f1863c9f84fbae93198e2e337f90e4100e71aeff08aef5da24e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-toast",
+        "title": "x-toast",
+        "uri": "xtend://docs/de/components-xtoast",
+        "description": "docs/de/components/xtoast.md · sha256:1b5c37c380d47f1662d4a42d2a3605a522178c00890e227ae29564a5b1eb68ca",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-toggle",
+        "title": "x-toggle",
+        "uri": "xtend://docs/de/components-xtoggle",
+        "description": "docs/de/components/xtoggle.md · sha256:99d86bda0403efbb5d5935e5adb9ace3dd79519741bff181408902e6d4a44cb0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-tooltip",
+        "title": "x-tooltip",
+        "uri": "xtend://docs/de/components-xtooltip",
+        "description": "docs/de/components/xtooltip.md · sha256:73661411d0a432045048386bde7e1c6bc3caebcc6a1c870d4cb07d4a31c60cf8",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-type",
+        "title": "x-type",
+        "uri": "xtend://docs/de/components-xtype",
+        "description": "docs/de/components/xtype.md · sha256:eb07efa0db806d4a8cac317a13fd5b527dfac9423c44261c05ba448776972114",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-utils",
+        "title": "x-utils",
+        "uri": "xtend://docs/de/components-xutils",
+        "description": "docs/de/components/xutils.md · sha256:edd1b86f9b2cc3e07d9126b04ca57daad572dc42066565e71fafa28819074c0e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-writer",
+        "title": "x-writer",
+        "uri": "xtend://docs/de/components-xwriter",
+        "description": "docs/de/components/xwriter.md · sha256:5ae219c0b4d5d34438d8243222c6c247b26a9936b1878cb44944d8bb66944060",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Komponenten-Entwicklung",
+        "title": "Komponenten-Entwicklung",
+        "uri": "xtend://docs/de/components",
+        "description": "docs/de/components.md · sha256:0c9102189f299bf6c514b0359aaa7d63d87361cc51559242941b2e103d75f1d7",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Conditional Network Evidence CI",
+        "title": "Conditional Network Evidence CI",
+        "uri": "xtend://docs/de/conditional-network-evidence-ci",
+        "description": "docs/de/conditional-network-evidence-ci.md · sha256:101a0a34f5db01f79ce235a2850748353eb711b59b4203ee9e26ec5c48aa9fc9",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Conditional Network Evidence",
+        "title": "Conditional Network Evidence",
+        "uri": "xtend://docs/de/conditional-network-evidence",
+        "description": "docs/de/conditional-network-evidence.md · sha256:85b4f2867adf529a068cbe505685853e6ddd0812acbcc0a8e48396cd7a175f3a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Design Tokens",
+        "title": "Design Tokens",
+        "uri": "xtend://docs/de/design-tokens",
+        "description": "docs/de/design-tokens.md · sha256:71804a13bd3d3d2263b94b09f2f75b83be4593b167c413f12ced3643f8a30097",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Enterprise Adoption",
+        "title": "Enterprise Adoption",
+        "uri": "xtend://docs/de/enterprise-adoption",
+        "description": "docs/de/enterprise-adoption.md · sha256:2c58cee8d252823e72ba4e6c62476deb834a250c669255093842665c6d341ee0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "ESM-Registry",
+        "title": "ESM-Registry",
+        "uri": "xtend://docs/de/esm-registry",
+        "description": "docs/de/esm-registry.md · sha256:f9e0c65faa172590bed46fa7a1959fc7a2434f0e0273081ee7285dcce32ddcf4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Hydration Policies",
+        "title": "Hydration Policies",
+        "uri": "xtend://docs/de/hydration-policies",
+        "description": "docs/de/hydration-policies.md · sha256:953a4507eab27d198ea257e378d261cf1ece259950171d9d7f7341db9a8fad24",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Actions und Events",
+        "title": "Actions und Events",
+        "uri": "xtend://docs/de/learn-rmt-actions-events",
+        "description": "docs/de/learn-rmt-actions-events.md · sha256:a0a866ebeb036d92756ac74b74fdc8605ab2356b3fbb1e84688bb9975ec85e31",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Daten und Ressourcen",
+        "title": "Daten und Ressourcen",
+        "uri": "xtend://docs/de/learn-rmt-data-resources",
+        "description": "docs/de/learn-rmt-data-resources.md · sha256:964450bed206d58a83cf277d0789c8664b0c83bd485fecc71ac1b3e6e70d52e0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Nächste Schritte",
+        "title": "Nächste Schritte",
+        "uri": "xtend://docs/de/learn-rmt-next-steps",
+        "description": "docs/de/learn-rmt-next-steps.md · sha256:ada67a45499b8f2d462c45d3049b524dede4658c421b5c3967eeedee67e9cc6e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Playground",
+        "title": "RMT Playground",
+        "uri": "xtend://docs/de/learn-rmt-playground",
+        "description": "docs/de/learn-rmt-playground.md · sha256:0557cd9a417e783f8e1cf94aa8a64104af7aaf4950f350cf1a1a09c43516961e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Scheduling und Lanes",
+        "title": "Scheduling und Lanes",
+        "uri": "xtend://docs/de/learn-rmt-scheduling-lanes",
+        "description": "docs/de/learn-rmt-scheduling-lanes.md · sha256:de124a41959e07093670f3272232e0d1ac836b608cf9809e569d04dbb9c8aef2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Sicherheit und Preview",
+        "title": "Sicherheit und Preview",
+        "uri": "xtend://docs/de/learn-rmt-security-preview",
+        "description": "docs/de/learn-rmt-security-preview.md · sha256:c3c2f086220f272df7c13d6ac7e8554b19b7bc70f3da811b5cff77fd011e8e31",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "State und Selectors",
+        "title": "State und Selectors",
+        "uri": "xtend://docs/de/learn-rmt-state-selectors",
+        "description": "docs/de/learn-rmt-state-selectors.md · sha256:128889c9c1746a4d0c304ef101dddf5f6815bec974a14d70e9c9b76b4127ea30",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Syntax-Grundlagen",
+        "title": "Syntax-Grundlagen",
+        "uri": "xtend://docs/de/learn-rmt-syntax-basics",
+        "description": "docs/de/learn-rmt-syntax-basics.md · sha256:f77a19a480a28e46f8abd3b4a7850c524bc42f81604026b2fae44bdb8bf1b2a0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Templates und Surfaces",
+        "title": "Templates und Surfaces",
+        "uri": "xtend://docs/de/learn-rmt-templates-surfaces",
+        "description": "docs/de/learn-rmt-templates-surfaces.md · sha256:292e859bbb8ecbc76f16c28f0de37767fd26c3e6a18965867c6e85cb517bc223",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Learn RMT",
+        "title": "Learn RMT",
+        "uri": "xtend://docs/de/learn-rmt",
+        "description": "docs/de/learn-rmt.md · sha256:7add347a13f5b5d9b862ef7e087a291253534028693eac0ac17fc908a772af5d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Manifest Import Policy",
+        "title": "Manifest Import Policy",
+        "uri": "xtend://docs/de/manifest-import-policy",
+        "description": "docs/de/manifest-import-policy.md · sha256:193bd3277173536ad80e0e4ee7591e87748cd93e347817421eb780348bd3f2cb",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Manifest",
+        "title": "Manifest",
+        "uri": "xtend://docs/de/manifest",
+        "description": "docs/de/manifest.md · sha256:a38314c34fffd26b1d75a5777c497fcc4f446c9b513f10f0859cbe3efbd0d088",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Maraca AppServices und TypeScript",
+        "title": "Maraca AppServices und TypeScript",
+        "uri": "xtend://docs/de/maraca-app-services",
+        "description": "docs/de/maraca-app-services.md · sha256:df08a19ab041a1d729713bd188a3a1634eb682421220d9f4f3b34dbe91d2966b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Maraca FastPass und Abort Boundaries",
+        "title": "Maraca FastPass und Abort Boundaries",
+        "uri": "xtend://docs/de/maraca-fastpass-abort-boundary",
+        "description": "docs/de/maraca-fastpass-abort-boundary.md · sha256:36da2ca972ade3babbad0ecc540f276b26db5d17eb5ce46facbfc3c25103715e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend State 0.7 Migration",
+        "title": "XTend State 0.7 Migration",
+        "uri": "xtend://docs/de/migration-0-7-state",
+        "description": "docs/de/migration-0-7-state.md · sha256:b3f2d073858e19d347daf0149895c8da663d6fcf2e16109b81e83d2087446818",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Motion und Contrast",
+        "title": "Motion und Contrast",
+        "uri": "xtend://docs/de/motion-contrast",
+        "description": "docs/de/motion-contrast.md · sha256:09f90462938f3239a9706d385accca90a39145c508d129c5a06711b1c2fa7657",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native-First Authoring Guide",
+        "title": "Native-First Authoring Guide",
+        "uri": "xtend://docs/de/native-first-authoring-guide",
+        "description": "docs/de/native-first-authoring-guide.md · sha256:7b66a08bb5eeafe9eed5473879094ed7222200a1eb18a1d5da219dacba78045a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native-First Migration Guide",
+        "title": "Native-First Migration Guide",
+        "uri": "xtend://docs/de/native-first-migration-guide",
+        "description": "docs/de/native-first-migration-guide.md · sha256:92cc426bfd8e2116caef3c5f994419525a270508a79882efc3b96737b8c5a658",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native-First Release Review",
+        "title": "Native-First Release Review",
+        "uri": "xtend://docs/de/native-first-release-review",
+        "description": "docs/de/native-first-release-review.md · sha256:1c4eb4a3cd0731ec31f6fd8556f09e835989e03fedf3ed16cf6b4d311c777ed5",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native-First RMT Recipes",
+        "title": "Native-First RMT Recipes",
+        "uri": "xtend://docs/de/native-first-rmt-recipes",
+        "description": "docs/de/native-first-rmt-recipes.md · sha256:9a2520b209cf8dd3d6a20255088d719f9a7a9602c104e48883e9fa3f284b4761",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Package Export Lock",
+        "title": "Package Export Lock",
+        "uri": "xtend://docs/de/package-export-lock",
+        "description": "docs/de/package-export-lock.md · sha256:78eb666ec8e3618d12d3b9aef965ac3cf783c5ed154208374807cb8f56e5832c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Performance",
+        "title": "Performance",
+        "uri": "xtend://docs/de/performance",
+        "description": "docs/de/performance.md · sha256:8b96ab390b7df6037be05e6ce5c257289d3e32010419981da473fcb66eff2ec8",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Public Component Types",
+        "title": "Public Component Types",
+        "uri": "xtend://docs/de/public-component-types",
+        "description": "docs/de/public-component-types.md · sha256:ada6cea4905f0024bff0efd70e47e20010e3f6f2e2dcb64b2395a1a7781e76cf",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Quick Start Guide",
+        "title": "Quick Start Guide",
+        "uri": "xtend://docs/de/quick-start-guide",
+        "description": "docs/de/quick-start-guide.md · sha256:54d5bb659beff48166f8199bbb79df9737d9e04cdcecdb1bc79740e628cd4269",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Developer Center",
+        "title": "XTend Developer Center",
+        "uri": "xtend://docs/de/readme",
+        "description": "docs/de/README.md · sha256:d8fbbcd239a9ee39930ca09388c2af198e51f917990b6be836e24cf182235547",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Release Report und Pack Dry Run Evidence",
+        "title": "Release Report und Pack Dry Run Evidence",
+        "uri": "xtend://docs/de/release-report-pack-dry-run-evidence",
+        "description": "docs/de/release-report-pack-dry-run-evidence.md · sha256:25fd2047732a49dce56451cae6d725e9760be4fd4242f09d6410d1d57af06cb9",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Release-Verifikation",
+        "title": "Release-Verifikation",
+        "uri": "xtend://docs/de/release-verification",
+        "description": "docs/de/release-verification.md · sha256:5a81ec7531542a665a426a3c513055830c7d63792529c43246db1c40e7e21d1a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Action Effect Runtime",
+        "title": "RMT Action Effect Runtime",
+        "uri": "xtend://docs/de/rmt-action-effect-runtime",
+        "description": "docs/de/rmt-action-effect-runtime.md · sha256:525d7ac17ebedd203150dcc3a511e5a6d4f9d1723136348d3eec6eff65575f3c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT AnimationEngine",
+        "title": "RMT AnimationEngine",
+        "uri": "xtend://docs/de/rmt-animation-engine",
+        "description": "docs/de/rmt-animation-engine.md · sha256:4073605fed371aa8df1f49a56f23f1bf4abebc4b09f4f3b057bfac6abd827b1c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT App Platform Fixture",
+        "title": "RMT App Platform Fixture",
+        "uri": "xtend://docs/de/rmt-app-platform-fixture",
+        "description": "docs/de/rmt-app-platform-fixture.md · sha256:0a80c853b4077a48e2ab8c056a484c8f100028c1fd0705d40d9cb2f27c7a27af",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT App Platform Migration Guide",
+        "title": "RMT App Platform Migration Guide",
+        "uri": "xtend://docs/de/rmt-app-platform-migration-guide",
+        "description": "docs/de/rmt-app-platform-migration-guide.md · sha256:a7e82e3a56a3f94e007a7805de71e41a7110b8da3737678dffc98fda058a35f3",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT App Platform Tooling",
+        "title": "RMT App Platform Tooling",
+        "uri": "xtend://docs/de/rmt-app-platform-tooling",
+        "description": "docs/de/rmt-app-platform-tooling.md · sha256:8698fff97901e16876ca3b5073addca3bb3d2ec5f860db7eef7c8c5df3827117",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Component Template Primitives",
+        "title": "RMT Component Template Primitives",
+        "uri": "xtend://docs/de/rmt-component-template-primitives",
+        "description": "docs/de/rmt-component-template-primitives.md · sha256:84b7de7c49fcef2f7bfdbaa000f0c80f8e091ff80d894423950d8f65cf613417",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT DOM Descriptor Renderer",
+        "title": "RMT DOM Descriptor Renderer",
+        "uri": "xtend://docs/de/rmt-dom-descriptor-renderer",
+        "description": "docs/de/rmt-dom-descriptor-renderer.md · sha256:3aae3bbca03d67d1183a36ad66df57ab238f62ef812c97e5c2825c5f26685918",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Event Routing Runtime",
+        "title": "RMT Event Routing Runtime",
+        "uri": "xtend://docs/de/rmt-event-routing-runtime",
+        "description": "docs/de/rmt-event-routing-runtime.md · sha256:ad7f69cc41ed98bd887305e570e8c78da1ea98f4674c967f6b375b28c6476320",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT-first Demo App",
+        "title": "RMT-first Demo App",
+        "uri": "xtend://docs/de/rmt-first-demo-app",
+        "description": "docs/de/rmt-first-demo-app.md · sha256:56dff38a7b637a4e3e6327abfef0d2a059e916575cd59d68dc22d61af907be8e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT-first XTend Apps",
+        "title": "RMT-first XTend Apps",
+        "uri": "xtend://docs/de/rmt-first-xtend-apps",
+        "description": "docs/de/rmt-first-xtend-apps.md · sha256:69fe94046043cc9d40cabda42c1247ba231b29e873598bf284663a7798e5805c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT JIT Compiler Hydrangea",
+        "title": "RMT JIT Compiler Hydrangea",
+        "uri": "xtend://docs/de/rmt-jit-hydrangea",
+        "description": "docs/de/rmt-jit-hydrangea.md · sha256:1766b52f1eb2f3ddaabc48e1f55e42bf5e68ec5b7c1adcc2c7dc65d4fc714f85",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Kernel 0.8 Migration",
+        "title": "RMT Kernel 0.8 Migration",
+        "uri": "xtend://docs/de/rmt-kernel-0-8-migration",
+        "description": "docs/de/rmt-kernel-0-8-migration.md · sha256:ec0f47d60feaf8b3ea0c46f7a0dc1f7f225f5ae2716137cc045b9b0845e031f3",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Kernel Feature Adoption Evaluation",
+        "title": "RMT Kernel Feature Adoption Evaluation",
+        "uri": "xtend://docs/de/rmt-kernel-feature-adoption-evaluation",
+        "description": "docs/de/rmt-kernel-feature-adoption-evaluation.md · sha256:be7487804a1274e01c4cb0f46de84c526b3e35f21a4fcf2bb91cbc69721ca9cb",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Kernel Runtime",
+        "title": "RMT Kernel Runtime",
+        "uri": "xtend://docs/de/rmt-kernel-runtime",
+        "description": "docs/de/rmt-kernel-runtime.md · sha256:2b5f9935627ceee9206890f9bc0a47a82740aee52d77664c4c0f830bfec6147c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Kernel Topography Map",
+        "title": "RMT Kernel Topography Map",
+        "uri": "xtend://docs/de/rmt-kernel-topography-map",
+        "description": "docs/de/rmt-kernel-topography-map.md · sha256:7861ad95a56bc97f790e052a09c369a5f7d5214014f2c2d2afeded7847ee0eda",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Language Server",
+        "title": "RMT Language Server",
+        "uri": "xtend://docs/de/rmt-language-server",
+        "description": "docs/de/rmt-language-server.md · sha256:c54f97805dad4072e0137106b8cdc818d4749ad02cc9a05bde46b870c19272a7",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Lifecycle Demo",
+        "title": "RMT Lifecycle Demo",
+        "uri": "xtend://docs/de/rmt-lifecycle-demo",
+        "description": "docs/de/rmt-lifecycle-demo.md · sha256:d39bcd332849f93abec67dd19cfe8b8819ab865d83cfdb940689385a7e272a33",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Linter",
+        "title": "RMT Linter",
+        "uri": "xtend://docs/de/rmt-linter",
+        "description": "docs/de/rmt-linter.md · sha256:5130c2e5690fa70834d39eaae01bc909e78fc57f17ceb7804bfa500cfa0a4461",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Node SSR Adapter",
+        "title": "RMT Node SSR Adapter",
+        "uri": "xtend://docs/de/rmt-node-ssr-adapter",
+        "description": "docs/de/rmt-node-ssr-adapter.md · sha256:cb79dc3e05fc9f361df6a843a67784b7c0e0dbb13b847a232f87ab78021cc508",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT PHP/Laravel SSR Adapter",
+        "title": "RMT PHP/Laravel SSR Adapter",
+        "uri": "xtend://docs/de/rmt-php-ssr-adapter",
+        "description": "docs/de/rmt-php-ssr-adapter.md · sha256:825110c1b6d5bf0bddddce2fa8b40cc55047bdd06d737e2224f151bfe13710d1",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Actions und Events",
+        "title": "Actions und Events",
+        "uri": "xtend://docs/de/rmt-reference-actions-events",
+        "description": "docs/de/rmt-reference-actions-events.md · sha256:628d7b11c6b9d97dead857c38ae836a3cacb8164a4072e72d4d6b37497509fc4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Conditions und Expressions",
+        "title": "Conditions und Expressions",
+        "uri": "xtend://docs/de/rmt-reference-conditions-expressions",
+        "description": "docs/de/rmt-reference-conditions-expressions.md · sha256:1ad81179d618e903f5894c5d150dc93611f5a5a534679322a8ea0136715dda4a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Document, Template und Import",
+        "title": "Document, Template und Import",
+        "uri": "xtend://docs/de/rmt-reference-document-template-import",
+        "description": "docs/de/rmt-reference-document-template-import.md · sha256:96ed13da92f97e78aad1b33ba434e4d3caf9e443097145ce977f0f5c0126480e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Enums und Catalogs",
+        "title": "Enums und Catalogs",
+        "uri": "xtend://docs/de/rmt-reference-enums-catalogs",
+        "description": "docs/de/rmt-reference-enums-catalogs.md · sha256:414433235ebfd3a000ce0ffea9e3c1e4a5f7d3bec337762175a087c0f4f5bb46",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Primitives",
+        "title": "Primitives",
+        "uri": "xtend://docs/de/rmt-reference-primitives",
+        "description": "docs/de/rmt-reference-primitives.md · sha256:f60d8c9e41c96d1804d49e965edb4c38ca90fc854aa70bd47b539c18e262aa22",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Remote Surfaces",
+        "title": "Remote Surfaces",
+        "uri": "xtend://docs/de/rmt-reference-remote-surfaces",
+        "description": "docs/de/rmt-reference-remote-surfaces.md · sha256:a06011273b4c216fdad658dd85039bf799769b1337eb34d89dab5cf089d301a6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Security und Policies",
+        "title": "Security und Policies",
+        "uri": "xtend://docs/de/rmt-reference-security-policies",
+        "description": "docs/de/rmt-reference-security-policies.md · sha256:29bcea16b0fccbc385065c9886116315f96ee68d1bf95ba0ad8b90cf5582186a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "State, Selectors und Data",
+        "title": "State, Selectors und Data",
+        "uri": "xtend://docs/de/rmt-reference-state-selectors-data",
+        "description": "docs/de/rmt-reference-state-selectors-data.md · sha256:6e3d64c5f34c80f88b1eba397100284d9729aece2371722ea0d759fa02ee7626",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Surfaces, Lanes und Lifecycle",
+        "title": "Surfaces, Lanes und Lifecycle",
+        "uri": "xtend://docs/de/rmt-reference-surfaces-lanes-lifecycle",
+        "description": "docs/de/rmt-reference-surfaces-lanes-lifecycle.md · sha256:8c3ea2d88561fe2746614080d22cb7606a5569f2ab3a9428ebade83f4894521a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Validation und Transitions",
+        "title": "Validation und Transitions",
+        "uri": "xtend://docs/de/rmt-reference-validation-transitions",
+        "description": "docs/de/rmt-reference-validation-transitions.md · sha256:c8f5344a2bc43a857ae0acd234d1a3a11539f5235c6ea6bc090aa7d7ca6cf1b6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Reference",
+        "title": "RMT Reference",
+        "uri": "xtend://docs/de/rmt-reference",
+        "description": "docs/de/rmt-reference.md · sha256:d9be54c299f64384708691004f96d2cb7b1f139e6ca58e744db5848b73b96ab8",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Stack-Topographie",
+        "title": "RMT Stack-Topographie",
+        "uri": "xtend://docs/de/rmt-stack-topography",
+        "description": "docs/de/rmt-stack-topography.md · sha256:98ec2ca2e6157213d614cf53c2ed279bc3ec2cf3f059870f97374e34a395d101",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT State Selector Runtime",
+        "title": "RMT State Selector Runtime",
+        "uri": "xtend://docs/de/rmt-state-selector-runtime",
+        "description": "docs/de/rmt-state-selector-runtime.md · sha256:35e0cbdd1a0628bf1c8100cdcc62653b6db26b9f911f007e92ae65b4b510a1ef",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Surface Resource Graph Runtime",
+        "title": "RMT Surface Resource Graph Runtime",
+        "uri": "xtend://docs/de/rmt-surface-resource-graph-runtime",
+        "description": "docs/de/rmt-surface-resource-graph-runtime.md · sha256:0a6e10845a6b64ca1ae06831bbdd46a261003fc23e9df488e8ccc2ddbbf3c510",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Tooling Release Gates",
+        "title": "RMT Tooling Release Gates",
+        "uri": "xtend://docs/de/rmt-tooling-release-gates",
+        "description": "docs/de/rmt-tooling-release-gates.md · sha256:632e155be406d6fd355a9c2ff2cb8ee0fbb881a91cf50ed911009b9381c51a85",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Authoring Guide",
+        "title": "RMT Authoring Guide",
+        "uri": "xtend://docs/de/rmt-vnext-authoring",
+        "description": "docs/de/rmt-vnext-authoring.md · sha256:008f17692bd660c7045242d3188e6229e253534e1c69775d0f57aea7590925ee",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Component Primitives und XTend UI",
+        "title": "RMT Component Primitives und XTend UI",
+        "uri": "xtend://docs/de/rmt-vnext-component-primitives",
+        "description": "docs/de/rmt-vnext-component-primitives.md · sha256:532cf620906f98f39ade46cf383a7416d5d34db356e5cc2246d6968d03656243",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Cross Surface Events",
+        "title": "RMT Cross Surface Events",
+        "uri": "xtend://docs/de/rmt-vnext-cross-surface-events",
+        "description": "docs/de/rmt-vnext-cross-surface-events.md · sha256:2cac463a331da54fd11c646c24cee4c4de381106ab10f5c28fe63c0f3c1ef112",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT vNext Migration Notes",
+        "title": "RMT vNext Migration Notes",
+        "uri": "xtend://docs/de/rmt-vnext-migration-notes",
+        "description": "docs/de/rmt-vnext-migration-notes.md · sha256:9f8073589443270ff1cd784aaf3c2b4aa3454f7583fa063dc4afd72bf6bf2c74",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Remote Surfaces",
+        "title": "RMT Remote Surfaces",
+        "uri": "xtend://docs/de/rmt-vnext-remote-surfaces",
+        "description": "docs/de/rmt-vnext-remote-surfaces.md · sha256:5ef9eba31aab04deffd989a9af6f7f581b08e0ac1e584a325aa51e7a3c393d5a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT vNext Source-to-Sea",
+        "title": "RMT vNext Source-to-Sea",
+        "uri": "xtend://docs/de/rmt-vnext-source-to-sea-gate",
+        "description": "docs/de/rmt-vnext-source-to-sea-gate.md · sha256:5f2e58da26893323a8646d13547302ae318fe321b6b475b1b872413e14d60287",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT vNext Enterprise Surface Registry",
+        "title": "RMT vNext Enterprise Surface Registry",
+        "uri": "xtend://docs/de/rmt-vnext-surface-registry-enterprise",
+        "description": "docs/de/rmt-vnext-surface-registry-enterprise.md · sha256:0b8434b09e68ca86e0859d368f4a4ad8e9ab230c91d23b958c2f53382e882bce",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Screenreader Signals",
+        "title": "Screenreader Signals",
+        "uri": "xtend://docs/de/screenreader-signals",
+        "description": "docs/de/screenreader-signals.md · sha256:fe6461352c10828a9b22f628c4b2152edef1bc86c7d00298f820befdcac2c34c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Seitenlaufzeit für Node und Laravel",
+        "title": "Seitenlaufzeit für Node und Laravel",
+        "uri": "xtend://docs/de/ssr-pages",
+        "description": "docs/de/ssr-pages.md · sha256:96c6544271884a12b4d579c5eb6c9d89b892b3062761046f85caca53076b82bc",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Supply Chain Checks",
+        "title": "Supply Chain Checks",
+        "uri": "xtend://docs/de/supply-chain-gates",
+        "description": "docs/de/supply-chain-gates.md · sha256:b6883bf95d88d5bcdcb319ab7bff54d70512186f11f9334129a42cfae8f63ca4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Authoring Guide",
+        "title": "SurfaceManager Authoring Guide",
+        "uri": "xtend://docs/de/surface-manager-authoring-guide",
+        "description": "docs/de/surface-manager-authoring-guide.md · sha256:362afe915e53779e4f3423d5e9bb15e371dfbcc2253f65774f8976459f04099e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Controller",
+        "title": "SurfaceManager Controller",
+        "uri": "xtend://docs/de/surface-manager-controller",
+        "description": "docs/de/surface-manager-controller.md · sha256:1020b6b598fd57e46bcaee71d53ae285ba6240c042358b1a5d8ac8012b56156d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Migration Guide",
+        "title": "SurfaceManager Migration Guide",
+        "uri": "xtend://docs/de/surface-manager-migration-guide",
+        "description": "docs/de/surface-manager-migration-guide.md · sha256:b511c9e8022759780a1fc5c265e644fc3b1d950ffe9bba253abe6d5cf99893b7",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Overlay Bridge",
+        "title": "SurfaceManager Overlay Bridge",
+        "uri": "xtend://docs/de/surface-manager-overlay-bridge",
+        "description": "docs/de/surface-manager-overlay-bridge.md · sha256:1a92be80f5a2bf0747a50acb9037fd48a49d8fa1e6bafc539ba0df76e4748000",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Quality Gates",
+        "title": "SurfaceManager Quality Gates",
+        "uri": "xtend://docs/de/surface-manager-quality-gates",
+        "description": "docs/de/surface-manager-quality-gates.md · sha256:70716779c45938b05ed083250840ac37928b77d9b8daec48b7f8ba26865f6d90",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Remote Surfaces",
+        "title": "SurfaceManager Remote Surfaces",
+        "uri": "xtend://docs/de/surface-manager-remote-surfaces",
+        "description": "docs/de/surface-manager-remote-surfaces.md · sha256:121b2a8e3ed93029c1b25f62da537fcb6d65555ef74f228b4396398b98d970c0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Runtime",
+        "title": "SurfaceManager Runtime",
+        "uri": "xtend://docs/de/surface-manager-runtime",
+        "description": "docs/de/surface-manager-runtime.md · sha256:f2f916f47794fcfa7e9981974e34394b3f878cdd15326c4483627b8c3ff719a1",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Side Panel Runtime",
+        "title": "SurfaceManager Side Panel Runtime",
+        "uri": "xtend://docs/de/surface-manager-side-panel-runtime",
+        "description": "docs/de/surface-manager-side-panel-runtime.md · sha256:8759666dae00a39a63e0e23c10c057dd5be33b2781e5fd4b21890a0879e6880d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Stack Policy",
+        "title": "SurfaceManager Stack Policy",
+        "uri": "xtend://docs/de/surface-manager-stack-policy",
+        "description": "docs/de/surface-manager-stack-policy.md · sha256:84c7bd34d24a38804074c3c7c1b45eea7443981d3763b0094011e7a186def835",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Window Runtime",
+        "title": "SurfaceManager Window Runtime",
+        "uri": "xtend://docs/de/surface-manager-window-runtime",
+        "description": "docs/de/surface-manager-window-runtime.md · sha256:3519c089cec6efc2c9b49dba08938aa69a0ca70f985b90839f7f4cab0b6439a6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Workbench Fixture",
+        "title": "SurfaceManager Workbench Fixture",
+        "uri": "xtend://docs/de/surface-manager-workbench-fixture",
+        "description": "docs/de/surface-manager-workbench-fixture.md · sha256:96500db135de6622e0108e7ec91c07e295911e303f260e98ebacd2b52b1223ee",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Trusted DOM Boundary Browser Proof",
+        "title": "Trusted DOM Boundary Browser Proof",
+        "uri": "xtend://docs/de/trusted-dom-boundary-browser-proof",
+        "description": "docs/de/trusted-dom-boundary-browser-proof.md · sha256:08ee79dbe8efb2dbeea3aa1429020bfe7294ac9ee3b65cb3f60d3052589b1054",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Trusted DOM und Sanitizing",
+        "title": "Trusted DOM und Sanitizing",
+        "uri": "xtend://docs/de/trusted-dom-sanitizing",
+        "description": "docs/de/trusted-dom-sanitizing.md · sha256:fbdda310d80538156fbd8f8600977e802b803d9b3252e48a802b512ee790127a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Type Exports",
+        "title": "Type Exports",
+        "uri": "xtend://docs/de/type-exports",
+        "description": "docs/de/type-exports.md · sha256:4eac45e3aa68b4d1360d21be6e3d0176fb257fbd0e02452b58867505b17fb3fb",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "TypeScript Components",
+        "title": "TypeScript Components",
+        "uri": "xtend://docs/de/typescript-components",
+        "description": "docs/de/typescript-components.md · sha256:b29eefe7719816c7d307368bac1d45a6612bf5384251b13c7a152f6f5f4c06f2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Visual Browser Regression",
+        "title": "Visual Browser Regression",
+        "uri": "xtend://docs/de/visual-browser-regression",
+        "description": "docs/de/visual-browser-regression.md · sha256:5b31ee9e91dec27e8ee171df0cff86a37ebf8654cd4c2ffa1da28057aed765cc",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Visual Snapshot Automation",
+        "title": "Visual Snapshot Automation",
+        "uri": "xtend://docs/de/visual-snapshot-automation",
+        "description": "docs/de/visual-snapshot-automation.md · sha256:73fa45e6c6a62dfa3872ae8aff050c1397290e7f7dfb862b4d1322b8b6acec47",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XScaler-Protokoll",
+        "title": "XScaler-Protokoll",
+        "uri": "xtend://docs/de/xscaler-protocol",
+        "description": "docs/de/xscaler-protocol.md · sha256:2163d40075c123147ed7ead002c6d4449c77f5656505d8fbfb8dff5277be2068",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend API Types",
+        "title": "XTend API Types",
+        "uri": "xtend://docs/de/xtend-api-types",
+        "description": "docs/de/xtend-api-types.md · sha256:ef6e716d351a0867091f1b1ecdbb800cd8ae0d6cb9fbdb58ca8a40a8d74c4d49",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Builder Types",
+        "title": "XTend Builder Types",
+        "uri": "xtend://docs/de/xtend-builder-types",
+        "description": "docs/de/xtend-builder-types.md · sha256:129eee2cb9e36354921b21171989a918e8ec79c8c505905fb7b8fc6363348b2f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Catalog Types",
+        "title": "XTend Catalog Types",
+        "uri": "xtend://docs/de/xtend-catalog-types",
+        "description": "docs/de/xtend-catalog-types.md · sha256:9c349544f12e5c21052541b1b31975faa05488af6025b5ceb3f6d66b22f88e73",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Classic",
+        "title": "XTend Classic",
+        "uri": "xtend://docs/de/xtend-classic",
+        "description": "docs/de/xtend-classic.md · sha256:774041f51ab603440dc2d0fa76d8408f32bb8edf56b9d7303bea4eb7a0f3aca2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend DEV API",
+        "title": "XTend DEV API",
+        "uri": "xtend://docs/de/xtend-dev-api",
+        "description": "docs/de/xtend-dev-api.md · sha256:679a3d51b1ede521d8d89723de39c9220bf037fd3638d0f846fb1d39e0a47471",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Dev Surface",
+        "title": "XTend Dev Surface",
+        "uri": "xtend://docs/de/xtend-dev-surface",
+        "description": "docs/de/xtend-dev-surface.md · sha256:3f99a6befea6c4aad5b1f634c29d15b40b1311e0990854d3b0f40d17d9ab3198",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Fabric RMT Lane Mapping",
+        "title": "Fabric RMT Lane Mapping",
+        "uri": "xtend://docs/de/xtend-fabric-rmt-lane-mapping",
+        "description": "docs/de/xtend-fabric-rmt-lane-mapping.md · sha256:4931476fa3758d2767bee5a3f40ae4ca0475ecbcd7bc6bf57782877eef695442",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Fabric Runtime",
+        "title": "XTend Fabric Runtime",
+        "uri": "xtend://docs/de/xtend-fabric-runtime",
+        "description": "docs/de/xtend-fabric-runtime.md · sha256:47a0e1437395e14edc70482e8103bc4d98a2a6b569176d42d4fd000f973e930a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Fabric",
+        "title": "XTend Fabric",
+        "uri": "xtend://docs/de/xtend-fabric",
+        "description": "docs/de/xtend-fabric.md · sha256:9f9ba76b9d34a012da7fb6c97acd18b058030fbeddda91fbe86daf109ec8f5b2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Loader Types",
+        "title": "XTend Loader Types",
+        "uri": "xtend://docs/de/xtend-loader-types",
+        "description": "docs/de/xtend-loader-types.md · sha256:53d630bb1ec6571fde0366edabbb16eafd75d76c3792810fa6c0838a514f61a2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Maraca Orchestrierung",
+        "title": "Maraca Orchestrierung",
+        "uri": "xtend://docs/de/xtend-maraca-orchestration",
+        "description": "docs/de/xtend-maraca-orchestration.md · sha256:bdfa216e33a2835407e5df17f42ec9c08da28c5acf77c22c7df112561d7519ad",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Maraca",
+        "title": "XTend Maraca",
+        "uri": "xtend://docs/de/xtend-maraca",
+        "description": "docs/de/xtend-maraca.md · sha256:c149833e3559578e02d5460350271f3a93bd86134e66d113e609485c474dd796",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend-Material-Migration",
+        "title": "XTend-Material-Migration",
+        "uri": "xtend://docs/de/xtend-material-migration",
+        "description": "docs/de/xtend-material-migration.md · sha256:3e32f999167b8067c9d3ca9310f6545ab4d9f0732b835f6156ce98b6499f545b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Material",
+        "title": "XTend Material",
+        "uri": "xtend://docs/de/xtend-material",
+        "description": "docs/de/xtend-material.md · sha256:490ed3ed00fc0de0819af11de5eedd2f1337a39385d51d1ed717814c1d04402f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend MCP 0.1",
+        "title": "XTend MCP 0.1",
+        "uri": "xtend://docs/de/xtend-mcp",
+        "description": "docs/de/xtend-mcp.md · sha256:e8f25ce568c821f61417730f36d61c7cacb19bcab1edbbed3c644b13abea3c5b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Policy Types",
+        "title": "XTend Policy Types",
+        "uri": "xtend://docs/de/xtend-policy-types",
+        "description": "docs/de/xtend-policy-types.md · sha256:14bf6fdee132516eea0434705bdbbe61a896ea5bf28c4b10b118ffff9d129927",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend UI Runtime-Schicht",
+        "title": "XTend UI Runtime-Schicht",
+        "uri": "xtend://docs/de/xtend-ui-runtime-layer",
+        "description": "docs/de/xtend-ui-runtime-layer.md · sha256:63fb0ed33098b8aa0b755a59386f4988d908674ec6cc2df7f3aa861d4676b048",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Vendor Types",
+        "title": "XTend Vendor Types",
+        "uri": "xtend://docs/de/xtend-vendor-types",
+        "description": "docs/de/xtend-vendor-types.md · sha256:73bda8a9c0656e492eeb4f149e503f471a989dc8e1a8ecde9d052ded5fed699c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTendRMT App DSL",
+        "title": "XTendRMT App DSL",
+        "uri": "xtend://docs/de/xtendrmt-app-dsl",
+        "description": "docs/de/xtendrmt-app-dsl.md · sha256:d50a2aab0a182cafddcd5293b121a78b8b014c31a6dcf5dbbdf73b1454305f41",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTendRMT Migration Guide",
+        "title": "XTendRMT Migration Guide",
+        "uri": "xtend://docs/de/xtendrmt-migration-guide",
+        "description": "docs/de/xtendrmt-migration-guide.md · sha256:5b42488c114320abba179cec099d89d29a4d7cb0f37a3ce0af3678ce17645299",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native RMT Authoring",
+        "title": "Native RMT Authoring",
+        "uri": "xtend://docs/de/xtendrmt-native-authoring",
+        "description": "docs/de/xtendrmt-native-authoring.md · sha256:4cd331cc505c71b38629e2d85f095252db81d5ec4366938ac6e35b4b141a8284",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTendRMT Überblick",
+        "title": "XTendRMT Überblick",
+        "uri": "xtend://docs/de/xtendrmt-overview",
+        "description": "docs/de/xtendrmt-overview.md · sha256:7ddd5840d4675cb766bd2ee51edd3158fed5f5fa02bbd6e09edaf962596e5a86",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Parsedown RMT Scheduling",
+        "title": "Parsedown RMT Scheduling",
+        "uri": "xtend://docs/de/xtendrmt-parsedown-scheduling",
+        "description": "docs/de/xtendrmt-parsedown-scheduling.md · sha256:104710ab7bd358a7ed251a818a791a10d1d2b80946e35673583ab4a17fd0db86",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTendRMT Runtime Bridge",
+        "title": "XTendRMT Runtime Bridge",
+        "uri": "xtend://docs/de/xtendrmt-runtime-bridge",
+        "description": "docs/de/xtendrmt-runtime-bridge.md · sha256:fad5ea57f6f5061b6fbcc9496cadf99558c3e37fea6973bdbc55a0fb9c280334",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTensions Authoring Guide",
+        "title": "XTensions Authoring Guide",
+        "uri": "xtend://docs/de/xtensions-authoring-guide",
+        "description": "docs/de/xtensions-authoring-guide.md · sha256:89f03d0d7571c94e11573b59f3b12db9cd94b1a69dc054b8d7e5595894c0c91f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTensions Migration und Coexistence",
+        "title": "XTensions Migration und Coexistence",
+        "uri": "xtend://docs/de/xtensions-migration-coexistence-guide",
+        "description": "docs/de/xtensions-migration-coexistence-guide.md · sha256:9cd8eb409291aba2b85ae2918533431dd88ee8d9ff6215efd288ae72e44a6bb8",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTensions Security Checklist",
+        "title": "XTensions Security Checklist",
+        "uri": "xtend://docs/de/xtensions-security-checklist",
+        "description": "docs/de/xtensions-security-checklist.md · sha256:daac049807d445f684c2e90acd3f934216c2f8234d10fe7ab1aaa7cfda7a869f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "A11y Keyboard Smokes",
+        "title": "A11y Keyboard Smokes",
+        "uri": "xtend://docs/en/a11y-keyboard-smokes",
+        "description": "docs/en/a11y-keyboard-smokes.md · sha256:bb8b7286b5926cc9136699ed403167b427f66495f9b9314b3d3546a633410f38",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "About XTend",
+        "title": "About XTend",
+        "uri": "xtend://docs/en/about",
+        "description": "docs/en/about.md · sha256:253a913d3e9eab87018d2998c3de81c73097356ed8af35fc61a3c5dcec724e49",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "API",
+        "title": "API",
+        "uri": "xtend://docs/en/api",
+        "description": "docs/en/api.md · sha256:fb0f41aa50d4934419c55b0621d5bd26ffe4d4724b574650540ba9bf5acb02d1",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Best Practices",
+        "title": "Best Practices",
+        "uri": "xtend://docs/en/best-practices",
+        "description": "docs/en/best-practices.md · sha256:0d6879fcfc42e84b32f0919057ec6711581c1553d48389fa24b19c2012ece701",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Changelog",
+        "title": "Changelog",
+        "uri": "xtend://docs/en/changelog",
+        "description": "docs/en/changelog.md · sha256:8004cd7a265ec5350f438ea120471c0b0c28c53d14f2cfcc72bf327528406993",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Component Long-Tail Migration",
+        "title": "Component Long-Tail Migration",
+        "uri": "xtend://docs/en/component-long-tail-migration",
+        "description": "docs/en/component-long-tail-migration.md · sha256:cb07aa4b604cafda5b4496c25db8c8708877247b55dac3f5b7bfb71d104f8182",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-alert",
+        "title": "x-alert",
+        "uri": "xtend://docs/en/components-xalert",
+        "description": "docs/en/components/xalert.md · sha256:efcf3033cfa56632a9db9853d8c30d4960b2f2eaeba3194e81b5c50dec026ccf",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-button",
+        "title": "x-button",
+        "uri": "xtend://docs/en/components-xbutton",
+        "description": "docs/en/components/xbutton.md · sha256:7764354e98b2668979e536037c406ca772e0232f9b9b4252bca1e000ffe4d644",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-calendar",
+        "title": "x-calendar",
+        "uri": "xtend://docs/en/components-xcalendar",
+        "description": "docs/en/components/xcalendar.md · sha256:8b52457efb2d5562353bdf9e8d5fe9fe5dc70fff84a99de8135821bccf8b065c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-cards",
+        "title": "x-cards",
+        "uri": "xtend://docs/en/components-xcards",
+        "description": "docs/en/components/xcards.md · sha256:b33a8cbadd2381c515b91add17f9d8aaa400c0955372be8a10edaca870d00365",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-checkbox",
+        "title": "x-checkbox",
+        "uri": "xtend://docs/en/components-xcheckbox",
+        "description": "docs/en/components/xcheckbox.md · sha256:ebddc6a8d0f041a287d45bed73618a979bac445a2cd35941b58ef52adc950848",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-code",
+        "title": "x-code",
+        "uri": "xtend://docs/en/components-xcode",
+        "description": "docs/en/components/xcode.md · sha256:bc7039f5c77c2af75e04388686844715603e92475ff72c1bb5f8fae89df9d17b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-dialog",
+        "title": "x-dialog",
+        "uri": "xtend://docs/en/components-xdialog",
+        "description": "docs/en/components/xdialog.md · sha256:a4d809ec0ba3c82c1431dcfb6ec5c63c3b9bd5d69ae1f12000d739fa333a6cf6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-drawer",
+        "title": "x-drawer",
+        "uri": "xtend://docs/en/components-xdrawer",
+        "description": "docs/en/components/xdrawer.md · sha256:41fe6d9148f9e4617167895314f93c99a812df037897de892f9cf96ed4fd7d09",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-footer",
+        "title": "x-footer",
+        "uri": "xtend://docs/en/components-xfooter",
+        "description": "docs/en/components/xfooter.md · sha256:ac33457bda565038a83e124262cb72e1a4beca8e7aadaebb15a73d60dbd9a901",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-form",
+        "title": "x-form",
+        "uri": "xtend://docs/en/components-xform",
+        "description": "docs/en/components/xform.md · sha256:55dcaa34d88395c9484027620e3b21a2bb87752eb3f6eded111b7cf280b00f46",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-header",
+        "title": "x-header",
+        "uri": "xtend://docs/en/components-xheader",
+        "description": "docs/en/components/xheader.md · sha256:820c26388259d9d9745d5e66193a1238395961983b6dbeb00d5a1f6574f9485b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-hero",
+        "title": "x-hero",
+        "uri": "xtend://docs/en/components-xhero",
+        "description": "docs/en/components/xhero.md · sha256:0283425c25f13d43aeafdf7d72c58c6540e0054c67e23744e2c767780f083f92",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-icon",
+        "title": "x-icon",
+        "uri": "xtend://docs/en/components-xicon",
+        "description": "docs/en/components/xicon.md · sha256:56cd04de30cd9f0647fa9092bede6449e607ea01979907d00bddb4f35fb07186",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-input",
+        "title": "x-input",
+        "uri": "xtend://docs/en/components-xinput",
+        "description": "docs/en/components/xinput.md · sha256:b8105d7b966e42d5681d76255ac5ea42fba18a5e10972ce2703755ec23cd43ef",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-keymap",
+        "title": "x-keymap",
+        "uri": "xtend://docs/en/components-xkeymap",
+        "description": "docs/en/components/xkeymap.md · sha256:09132675f1a57ce2e07ffc2e7e57c712be38376ca8f68362f1b4bfdf631ea157",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-lightbox",
+        "title": "x-lightbox",
+        "uri": "xtend://docs/en/components-xlightbox",
+        "description": "docs/en/components/xlightbox.md · sha256:851eaeaa063794eee63ecff5fc73d9f16b7999c22566b351b71b7e3e81492562",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-link",
+        "title": "x-link",
+        "uri": "xtend://docs/en/components-xlink",
+        "description": "docs/en/components/xlink.md · sha256:ab902e57424b84c85ec5379ef2a392bf9e743e56e12eb1340c143ef89c7c2bc4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-masonry",
+        "title": "x-masonry",
+        "uri": "xtend://docs/en/components-xmasonry",
+        "description": "docs/en/components/xmasonry.md · sha256:38fe1996fa69507fa61f59de3d3f38be5b2bab173bac54a5240e7c2dfa66a9f7",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-menu",
+        "title": "x-menu",
+        "uri": "xtend://docs/en/components-xmenu",
+        "description": "docs/en/components/xmenu.md · sha256:9f5a79c7bdcdeb8ba0624f33fe4e2c9efa30b34459ee90ca82347417964d953b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-modal",
+        "title": "x-modal",
+        "uri": "xtend://docs/en/components-xmodal",
+        "description": "docs/en/components/xmodal.md · sha256:48089d5c03138f8e7572ba73e5ffa406d2e20bc31697a4afe3096adfa6b24db7",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-player",
+        "title": "x-player",
+        "uri": "xtend://docs/en/components-xplayer",
+        "description": "docs/en/components/xplayer.md · sha256:d18ef54737fbd927891a244e26f72429cdb6d4b6041459d6b1882517606b3525",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-popover",
+        "title": "x-popover",
+        "uri": "xtend://docs/en/components-xpopover",
+        "description": "docs/en/components/xpopover.md · sha256:b2ebc57a4ab186b12c0bb0e349565fd0976825011f9926b4999a07da01201a82",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-progress",
+        "title": "x-progress",
+        "uri": "xtend://docs/en/components-xprogress",
+        "description": "docs/en/components/xprogress.md · sha256:31e05de905d0e150da0c82d742b418bcf98a69d30ce9271b04dc5a80a97d9436",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-radio",
+        "title": "x-radio",
+        "uri": "xtend://docs/en/components-xradio",
+        "description": "docs/en/components/xradio.md · sha256:8885feafe3faabc1d9f014035480b20bbf0271b9ac1331444c0ffd6ad00bd037",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-router",
+        "title": "x-router",
+        "uri": "xtend://docs/en/components-xrouter",
+        "description": "docs/en/components/xrouter.md · sha256:32baf36e6edfe4c2b009eef914cb784bbf22a9c0be4b50d9de7b9fdc63fc7989",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-section",
+        "title": "x-section",
+        "uri": "xtend://docs/en/components-xsection",
+        "description": "docs/en/components/xsection.md · sha256:2fd43f9b352254faabc3edde66d0dee6b4eeeb2d59befda8f7a2391b449b980e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-select",
+        "title": "x-select",
+        "uri": "xtend://docs/en/components-xselect",
+        "description": "docs/en/components/xselect.md · sha256:216f56373ac76312c8caed0b3433b879f5ef32ddb178d69c61201cb96ecdc1f8",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-side-panel",
+        "title": "x-side-panel",
+        "uri": "xtend://docs/en/components-xsidepanel",
+        "description": "docs/en/components/xsidepanel.md · sha256:5bc29d1e12d4ab3400491a82388e30f1ce701f244a125bbc678b63d27068df7f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-spinner",
+        "title": "x-spinner",
+        "uri": "xtend://docs/en/components-xspinner",
+        "description": "docs/en/components/xspinner.md · sha256:d28f8aea331b8a0405cc3e47f6c933984efbeda0e3b0622261f9d900fd2c6517",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-status",
+        "title": "x-status",
+        "uri": "xtend://docs/en/components-xstatus",
+        "description": "docs/en/components/xstatus.md · sha256:8d8bc4611bd701c08d0bc6ba4499b4394ff59568a7851c520c8861ab690c6bfe",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-summary",
+        "title": "x-summary",
+        "uri": "xtend://docs/en/components-xsummary",
+        "description": "docs/en/components/xsummary.md · sha256:05d34ae51c7825f1c9a35b0d65911da89819865a34177cdf42522fd914f97b38",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-surface-manager",
+        "title": "x-surface-manager",
+        "uri": "xtend://docs/en/components-xsurfacemanager",
+        "description": "docs/en/components/xsurfacemanager.md · sha256:5666ab8a510a33ae2fd6fc902d90fbd5d46eca321f2b0a72842783d40d351fab",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-surface-portal",
+        "title": "x-surface-portal",
+        "uri": "xtend://docs/en/components-xsurfaceportal",
+        "description": "docs/en/components/xsurfaceportal.md · sha256:2394730df29329eb3df3d8e87612999dced130059f82b5d1b58c9e7273bb324c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-surface-region",
+        "title": "x-surface-region",
+        "uri": "xtend://docs/en/components-xsurfaceregion",
+        "description": "docs/en/components/xsurfaceregion.md · sha256:0e82c62afe6edcc3f1853ab700e16decb8608488dd0717dc09cfd2e7d3b5259d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-surface-window",
+        "title": "x-surface-window",
+        "uri": "xtend://docs/en/components-xsurfacewindow",
+        "description": "docs/en/components/xsurfacewindow.md · sha256:3f7b6bc49704453a7ea43556ffdb739167d90f2413c3eb75020e3d895194b303",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-tabs",
+        "title": "x-tabs",
+        "uri": "xtend://docs/en/components-xtabs",
+        "description": "docs/en/components/xtabs.md · sha256:14e97ecfaab4015278c2a5f3c86ed73b33e67e83262f30c76a19a513e2e2799e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "xtend-i18n",
+        "title": "xtend-i18n",
+        "uri": "xtend://docs/en/components-xtend-i18n",
+        "description": "docs/en/components/xtend-i18n.md · sha256:729b632eb5b6975117d2a4f86b21876255a3f09628095724b58d431fa72d2f6b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend State",
+        "title": "XTend State",
+        "uri": "xtend://docs/en/components-xtend-state",
+        "description": "docs/en/components/xtend-state.md · sha256:bad62c5e4a8d11d0c31ddd86169d322ba6a381f2a8a5e8389be3fe6965305369",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-textarea",
+        "title": "x-textarea",
+        "uri": "xtend://docs/en/components-xtextarea",
+        "description": "docs/en/components/xtextarea.md · sha256:8289f7cfb339c8bdc14c40b2a54edc954ba948ba907db0e9b78b4fe28ed9ad37",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-theme",
+        "title": "x-theme",
+        "uri": "xtend://docs/en/components-xtheme",
+        "description": "docs/en/components/xtheme.md · sha256:a8a6feb2b18238f00a891cfc5cb7722c6e4d14fd794d45c9eff8a47f154982b2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-toast",
+        "title": "x-toast",
+        "uri": "xtend://docs/en/components-xtoast",
+        "description": "docs/en/components/xtoast.md · sha256:5880b62236ff5d4004975bdc8c298dafd40f3f08bcafd250d6011827ab628628",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-toggle",
+        "title": "x-toggle",
+        "uri": "xtend://docs/en/components-xtoggle",
+        "description": "docs/en/components/xtoggle.md · sha256:f90ebd952550120e2f7008179ea8108eb6333277248b7e509895d448024d2dc2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-tooltip",
+        "title": "x-tooltip",
+        "uri": "xtend://docs/en/components-xtooltip",
+        "description": "docs/en/components/xtooltip.md · sha256:9505335e80ac8538f7881cd560979b05b11ab394c6910db709219b0ecba801f4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-type",
+        "title": "x-type",
+        "uri": "xtend://docs/en/components-xtype",
+        "description": "docs/en/components/xtype.md · sha256:0aaaa7662ec275a6ac61cb85bfc930933f3b5e11a1cf23485813a47c2a0ea46f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-utils",
+        "title": "x-utils",
+        "uri": "xtend://docs/en/components-xutils",
+        "description": "docs/en/components/xutils.md · sha256:9eac2e178549f428cc0de8252dab063a6d17b2c9bef20efc24740fea8bf2ee88",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "x-writer",
+        "title": "x-writer",
+        "uri": "xtend://docs/en/components-xwriter",
+        "description": "docs/en/components/xwriter.md · sha256:38e5df21fb94c6d2ae8ad26b83148a47393c40fd33966f90c148d5240a5eb64b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Component Development",
+        "title": "Component Development",
+        "uri": "xtend://docs/en/components",
+        "description": "docs/en/components.md · sha256:b6a4a50c9e034a62e0f7399bb626d4cce22711ca1226bb8f8953e5edbf24b1aa",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Conditional Network Evidence CI",
+        "title": "Conditional Network Evidence CI",
+        "uri": "xtend://docs/en/conditional-network-evidence-ci",
+        "description": "docs/en/conditional-network-evidence-ci.md · sha256:b2176eec8f68466b78d5308beab51d018f647e3fb22595b79b8393388424af33",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Conditional Network Evidence",
+        "title": "Conditional Network Evidence",
+        "uri": "xtend://docs/en/conditional-network-evidence",
+        "description": "docs/en/conditional-network-evidence.md · sha256:000fb68ef617b245479f11130b93d8605c2642396b95a2848b19f0a71104119d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Design Tokens",
+        "title": "Design Tokens",
+        "uri": "xtend://docs/en/design-tokens",
+        "description": "docs/en/design-tokens.md · sha256:579ad8e756c7ce4e9d23ff6b2c99e0226495f72ee3f34f819859a74c74747915",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Enterprise Adoption",
+        "title": "Enterprise Adoption",
+        "uri": "xtend://docs/en/enterprise-adoption",
+        "description": "docs/en/enterprise-adoption.md · sha256:fdbac488dc959d4ef41f7904b3af21d985144445fad1772dbad6ed74358994c0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "ESM Registry",
+        "title": "ESM Registry",
+        "uri": "xtend://docs/en/esm-registry",
+        "description": "docs/en/esm-registry.md · sha256:6fc12aa4e3b80696935a68e939cbab14fa446d98e395484662d168b4ff8a44cc",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Hydration Policies",
+        "title": "Hydration Policies",
+        "uri": "xtend://docs/en/hydration-policies",
+        "description": "docs/en/hydration-policies.md · sha256:4d6edc4eb7cb69dc432d9fcd831579e0e5d1143ad367b00f8ce0157a1ebda584",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Actions and Events",
+        "title": "Actions and Events",
+        "uri": "xtend://docs/en/learn-rmt-actions-events",
+        "description": "docs/en/learn-rmt-actions-events.md · sha256:27851df33103ba58b9480c3b68372d85b66b0ae006a4ee2cd7d882d7db1eefc2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Data and Resources",
+        "title": "Data and Resources",
+        "uri": "xtend://docs/en/learn-rmt-data-resources",
+        "description": "docs/en/learn-rmt-data-resources.md · sha256:f8644ee98487e9701e3615d4fb79f93d33a640f813a23d45a968b554ac15e34c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Next Steps",
+        "title": "Next Steps",
+        "uri": "xtend://docs/en/learn-rmt-next-steps",
+        "description": "docs/en/learn-rmt-next-steps.md · sha256:585116c65421688eecebce7e945a9176a2560d214194f0c8abde57303bd0ba1e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Playground",
+        "title": "RMT Playground",
+        "uri": "xtend://docs/en/learn-rmt-playground",
+        "description": "docs/en/learn-rmt-playground.md · sha256:1f2be248d0e44e379d3a1689587859850214d44cc751a34a7904726c8c54af22",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Scheduling and Lanes",
+        "title": "Scheduling and Lanes",
+        "uri": "xtend://docs/en/learn-rmt-scheduling-lanes",
+        "description": "docs/en/learn-rmt-scheduling-lanes.md · sha256:9e9079be085b40604d15501bbff43deaf5b75237965f081e2418a3c797bd0aeb",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Security and Preview",
+        "title": "Security and Preview",
+        "uri": "xtend://docs/en/learn-rmt-security-preview",
+        "description": "docs/en/learn-rmt-security-preview.md · sha256:4884fdd73f2dc9055a2aa0bcd269090139b336d20f5c114af4c2a27745f98ddb",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "State and Selectors",
+        "title": "State and Selectors",
+        "uri": "xtend://docs/en/learn-rmt-state-selectors",
+        "description": "docs/en/learn-rmt-state-selectors.md · sha256:7aec1dee01f1fa86df14b442407aa8695cbd036b688e4f4a2e3a3cfb0a47fba2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Syntax Basics",
+        "title": "Syntax Basics",
+        "uri": "xtend://docs/en/learn-rmt-syntax-basics",
+        "description": "docs/en/learn-rmt-syntax-basics.md · sha256:bd19d9597b0403840fc0a714f043d16720cc9cedeb479489d38cc1110a1b5ddb",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Templates and Surfaces",
+        "title": "Templates and Surfaces",
+        "uri": "xtend://docs/en/learn-rmt-templates-surfaces",
+        "description": "docs/en/learn-rmt-templates-surfaces.md · sha256:6da60217aadfa7386ef4a04f8411eaccce201a5a7a23122f5aec7d350eb57f9b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Learn RMT",
+        "title": "Learn RMT",
+        "uri": "xtend://docs/en/learn-rmt",
+        "description": "docs/en/learn-rmt.md · sha256:08f3fca99211cc73eafa41451279ef0f462d6c11fe14c8248c7f36511329b50b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Manifest Import Policy",
+        "title": "Manifest Import Policy",
+        "uri": "xtend://docs/en/manifest-import-policy",
+        "description": "docs/en/manifest-import-policy.md · sha256:d0d89f5e3c3730f511fc7dfdee346488484cfda544642b842485ef023a22bd49",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Manifest",
+        "title": "Manifest",
+        "uri": "xtend://docs/en/manifest",
+        "description": "docs/en/manifest.md · sha256:334c2a13ca50f844588ea0e371631f143f6fd859687500e41aa1c092753e02fb",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Maraca AppServices and TypeScript",
+        "title": "Maraca AppServices and TypeScript",
+        "uri": "xtend://docs/en/maraca-app-services",
+        "description": "docs/en/maraca-app-services.md · sha256:a7cd270815cf5b0fc5304e0055a3ba144b8d4c9644ebb8e386adfe21d4b4b649",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Maraca FastPass and Abort Boundaries",
+        "title": "Maraca FastPass and Abort Boundaries",
+        "uri": "xtend://docs/en/maraca-fastpass-abort-boundary",
+        "description": "docs/en/maraca-fastpass-abort-boundary.md · sha256:cd1bfc0a3895531e03091697bf95cc2facccaae7001a3fa453b252c0e99fbf54",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend State 0.7 Migration",
+        "title": "XTend State 0.7 Migration",
+        "uri": "xtend://docs/en/migration-0-7-state",
+        "description": "docs/en/migration-0-7-state.md · sha256:5fef575e7c45ea0dd888322e822576dac1a148d679a2bd7371df787d0d4961c5",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Motion and Contrast",
+        "title": "Motion and Contrast",
+        "uri": "xtend://docs/en/motion-contrast",
+        "description": "docs/en/motion-contrast.md · sha256:9b0584ce831e1503c8d53b523e4dabc7ddbf035272b7985c3f7a3bdb3178e0dc",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native-First Authoring Guide",
+        "title": "Native-First Authoring Guide",
+        "uri": "xtend://docs/en/native-first-authoring-guide",
+        "description": "docs/en/native-first-authoring-guide.md · sha256:0fe947478ea093476eca0a0ab5e8af22a62ca1242c37b895afcb8b0005ace7f6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native-First Migration Guide",
+        "title": "Native-First Migration Guide",
+        "uri": "xtend://docs/en/native-first-migration-guide",
+        "description": "docs/en/native-first-migration-guide.md · sha256:e7eecd3cf613b7c4dc01a1ff91b9233e7ee5494244e8224a272a9e5124a8cd5f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native-First Release Review",
+        "title": "Native-First Release Review",
+        "uri": "xtend://docs/en/native-first-release-review",
+        "description": "docs/en/native-first-release-review.md · sha256:7a4496f36d00f7a981b28123d9ef75e7b859ec3ec117d9565b51f048a9552237",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native-First RMT Recipes",
+        "title": "Native-First RMT Recipes",
+        "uri": "xtend://docs/en/native-first-rmt-recipes",
+        "description": "docs/en/native-first-rmt-recipes.md · sha256:f24905c59a76c97e4a27780c5fd89ea54d762be542814bc473fb7d5b7055a3a9",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Package Export Lock",
+        "title": "Package Export Lock",
+        "uri": "xtend://docs/en/package-export-lock",
+        "description": "docs/en/package-export-lock.md · sha256:8977540f7ac261c04a4a60e7e4bf030443600faf8dd564cf11f7f9a6550e43c6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Performance",
+        "title": "Performance",
+        "uri": "xtend://docs/en/performance",
+        "description": "docs/en/performance.md · sha256:26c71ccdcef4f5b5b45dc0213f06fec0546be457266dcdab27ae00954a4fd32b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Public Component Types",
+        "title": "Public Component Types",
+        "uri": "xtend://docs/en/public-component-types",
+        "description": "docs/en/public-component-types.md · sha256:ccb1c70a16b7dc1baca345d0746cc079d0853fff0a295e36eab7a65f283643ff",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Quick Start Guide",
+        "title": "Quick Start Guide",
+        "uri": "xtend://docs/en/quick-start-guide",
+        "description": "docs/en/quick-start-guide.md · sha256:537de2e0b2068029538c0e85edb34d176cb3e423ac98ff969828b2b0d7aa4dab",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Developer Center",
+        "title": "XTend Developer Center",
+        "uri": "xtend://docs/en/readme",
+        "description": "docs/en/README.md · sha256:1c9d1bb13057b1e90caed8f65cd806c7dc65383d1ca7220bb203d2c64fea727e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Release Report und Pack Dry Run Evidence",
+        "title": "Release Report und Pack Dry Run Evidence",
+        "uri": "xtend://docs/en/release-report-pack-dry-run-evidence",
+        "description": "docs/en/release-report-pack-dry-run-evidence.md · sha256:dbc14bdf513480e0ba2eb0c1e077ff091e2a7527027bf43a5c8205dcb0bd8567",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Release Verification",
+        "title": "Release Verification",
+        "uri": "xtend://docs/en/release-verification",
+        "description": "docs/en/release-verification.md · sha256:012122ae092de030d6a7bade75faeb9341084054ca44e68bbe817e3d5348f0a0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Action Effect Runtime",
+        "title": "RMT Action Effect Runtime",
+        "uri": "xtend://docs/en/rmt-action-effect-runtime",
+        "description": "docs/en/rmt-action-effect-runtime.md · sha256:357c76898f880c1e9138a3313f154a46e73ce5a952a19508d748b267c9195e1d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT AnimationEngine",
+        "title": "RMT AnimationEngine",
+        "uri": "xtend://docs/en/rmt-animation-engine",
+        "description": "docs/en/rmt-animation-engine.md · sha256:c99dc6b54afd5dfb55a6692bb27858fc01c07f34a5300b95d1eac169f771f434",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT App Platform Fixture",
+        "title": "RMT App Platform Fixture",
+        "uri": "xtend://docs/en/rmt-app-platform-fixture",
+        "description": "docs/en/rmt-app-platform-fixture.md · sha256:ec2627b3e14cd0ace95cac5a96a1cc41c37c29659556362bc72e1e2227e2f6b8",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT App Platform Migration Guide",
+        "title": "RMT App Platform Migration Guide",
+        "uri": "xtend://docs/en/rmt-app-platform-migration-guide",
+        "description": "docs/en/rmt-app-platform-migration-guide.md · sha256:9609d42afb3b837de5c131a0e33333ee11d89bbe0340109bcd11d5c67db92a5a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT App Platform Tooling",
+        "title": "RMT App Platform Tooling",
+        "uri": "xtend://docs/en/rmt-app-platform-tooling",
+        "description": "docs/en/rmt-app-platform-tooling.md · sha256:04f5939a8eac66b0005145519b419e8307b85edec48046e9bfd751f8f4d8f67f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Component Template Primitives",
+        "title": "RMT Component Template Primitives",
+        "uri": "xtend://docs/en/rmt-component-template-primitives",
+        "description": "docs/en/rmt-component-template-primitives.md · sha256:e474e4f76f725029e88582c9149e18734318d085ee4d30409b03beed31d03554",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT DOM Descriptor Renderer",
+        "title": "RMT DOM Descriptor Renderer",
+        "uri": "xtend://docs/en/rmt-dom-descriptor-renderer",
+        "description": "docs/en/rmt-dom-descriptor-renderer.md · sha256:f5ad8fdfad832d4a96dd993829adf79911e4ebcafed00bcf8e5b6e04da310918",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Event Routing Runtime",
+        "title": "RMT Event Routing Runtime",
+        "uri": "xtend://docs/en/rmt-event-routing-runtime",
+        "description": "docs/en/rmt-event-routing-runtime.md · sha256:7e3269098eee59f3811f2e1b0deae54ab22b20334f968d1288315383557d0398",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT-first Demo App",
+        "title": "RMT-first Demo App",
+        "uri": "xtend://docs/en/rmt-first-demo-app",
+        "description": "docs/en/rmt-first-demo-app.md · sha256:a460b40a5b46a5a3549dc2dff7e5047cbd84a017a0de7f3df2d9d0ee86547d49",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT-first XTend Apps",
+        "title": "RMT-first XTend Apps",
+        "uri": "xtend://docs/en/rmt-first-xtend-apps",
+        "description": "docs/en/rmt-first-xtend-apps.md · sha256:b9bfa2cf64caad9edab8deb7cf858c6d5aaf6e2e8fbcebeb2635c371222d4374",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT JIT Compiler Hydrangea",
+        "title": "RMT JIT Compiler Hydrangea",
+        "uri": "xtend://docs/en/rmt-jit-hydrangea",
+        "description": "docs/en/rmt-jit-hydrangea.md · sha256:f1e47415c1454a4dc0167c04e1d7e475b589eece7dc957b3be801df11d019ae1",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Kernel 0.8 Migration",
+        "title": "RMT Kernel 0.8 Migration",
+        "uri": "xtend://docs/en/rmt-kernel-0-8-migration",
+        "description": "docs/en/rmt-kernel-0-8-migration.md · sha256:76b177bb9c8ea5c5852a00a3a3378a4ca4e04575e068dc856e0c7b780ef2ba18",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Kernel Feature Adoption Evaluation",
+        "title": "RMT Kernel Feature Adoption Evaluation",
+        "uri": "xtend://docs/en/rmt-kernel-feature-adoption-evaluation",
+        "description": "docs/en/rmt-kernel-feature-adoption-evaluation.md · sha256:34a2e55496a3c46a19dd369267d3b0988e66f47a904feb917ed30efc771e90dd",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Kernel Runtime",
+        "title": "RMT Kernel Runtime",
+        "uri": "xtend://docs/en/rmt-kernel-runtime",
+        "description": "docs/en/rmt-kernel-runtime.md · sha256:8f1fc68bf11ab6a25cf57c8b715a9a1f3336df74de16841ffd909ad418fb081f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Kernel Topography Map",
+        "title": "RMT Kernel Topography Map",
+        "uri": "xtend://docs/en/rmt-kernel-topography-map",
+        "description": "docs/en/rmt-kernel-topography-map.md · sha256:ab6773e1e1d7d6783514de96611d28364dff60c137bc5384f77d57b15ee0bb88",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Language Server",
+        "title": "RMT Language Server",
+        "uri": "xtend://docs/en/rmt-language-server",
+        "description": "docs/en/rmt-language-server.md · sha256:8841a2b142b17bac10741dcd894b836d02c40f08c3dcb48c3b6757fc5c448a8c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Lifecycle Demo",
+        "title": "RMT Lifecycle Demo",
+        "uri": "xtend://docs/en/rmt-lifecycle-demo",
+        "description": "docs/en/rmt-lifecycle-demo.md · sha256:e9924845a5d68d082a64479aa8882e74c1f79ba076a2fbe81281addd223f2dd3",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Linter",
+        "title": "RMT Linter",
+        "uri": "xtend://docs/en/rmt-linter",
+        "description": "docs/en/rmt-linter.md · sha256:4142875670ebd5464dd77484249dc82a435ef36bd98060d01472070441a077ca",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Node SSR Adapter",
+        "title": "RMT Node SSR Adapter",
+        "uri": "xtend://docs/en/rmt-node-ssr-adapter",
+        "description": "docs/en/rmt-node-ssr-adapter.md · sha256:d1d449cb36468e9891f0ae20d4e9eb86819e5343a430a87102c2482fb72c04c0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT PHP/Laravel SSR Adapter",
+        "title": "RMT PHP/Laravel SSR Adapter",
+        "uri": "xtend://docs/en/rmt-php-ssr-adapter",
+        "description": "docs/en/rmt-php-ssr-adapter.md · sha256:095025c42e4a55f6e62e9d2d8ec026a73152bc8cec938ce502b1fe5d797d8121",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Actions and Events",
+        "title": "Actions and Events",
+        "uri": "xtend://docs/en/rmt-reference-actions-events",
+        "description": "docs/en/rmt-reference-actions-events.md · sha256:8d20998bb1aacc85c6d8d37ed7197e3ef107efc072057360dfdfaa7b405cf054",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Conditions and Expressions",
+        "title": "Conditions and Expressions",
+        "uri": "xtend://docs/en/rmt-reference-conditions-expressions",
+        "description": "docs/en/rmt-reference-conditions-expressions.md · sha256:a93682fd4f2808801ce2b7b3c359cbf433f50fb1e0ec98a15dc9c4ff3409ca6a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Document, Template and Import",
+        "title": "Document, Template and Import",
+        "uri": "xtend://docs/en/rmt-reference-document-template-import",
+        "description": "docs/en/rmt-reference-document-template-import.md · sha256:b45a98cb1cd738d8e832122d2522e6ff4fb8d6dac9fa111f61e36c9beb1b119c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Enums and Catalogs",
+        "title": "Enums and Catalogs",
+        "uri": "xtend://docs/en/rmt-reference-enums-catalogs",
+        "description": "docs/en/rmt-reference-enums-catalogs.md · sha256:9f02c8c3153fa7a2d1b395efdfd6909dce111bdc35d873ba2752f5c6f2e777a0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Primitives",
+        "title": "Primitives",
+        "uri": "xtend://docs/en/rmt-reference-primitives",
+        "description": "docs/en/rmt-reference-primitives.md · sha256:769e1a467db77642e064ae1114be616a131f9890bb5467961c8b6d6f4168a70d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Remote Surfaces",
+        "title": "Remote Surfaces",
+        "uri": "xtend://docs/en/rmt-reference-remote-surfaces",
+        "description": "docs/en/rmt-reference-remote-surfaces.md · sha256:055d79e70c9c4a9d6ef5caa4dddde612a0569521adae5258cda5eb633b37f108",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Security and Policies",
+        "title": "Security and Policies",
+        "uri": "xtend://docs/en/rmt-reference-security-policies",
+        "description": "docs/en/rmt-reference-security-policies.md · sha256:ea81eb43f777e98acbaea8337ffad292f0af29325009ea173e430ba406a5fc27",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "State, Selectors and Data",
+        "title": "State, Selectors and Data",
+        "uri": "xtend://docs/en/rmt-reference-state-selectors-data",
+        "description": "docs/en/rmt-reference-state-selectors-data.md · sha256:b0da161ec84c08ead2ac1de3cb6767f376b8006876af2ec5bb749c66783ef72b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Surfaces, Lanes and Lifecycle",
+        "title": "Surfaces, Lanes and Lifecycle",
+        "uri": "xtend://docs/en/rmt-reference-surfaces-lanes-lifecycle",
+        "description": "docs/en/rmt-reference-surfaces-lanes-lifecycle.md · sha256:f92625732be38b7927572780799199a9d03139cfc5c77c61f1dfdcb3870b4088",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Validation and Transitions",
+        "title": "Validation and Transitions",
+        "uri": "xtend://docs/en/rmt-reference-validation-transitions",
+        "description": "docs/en/rmt-reference-validation-transitions.md · sha256:ae8cb955f74fd0e6541bef2611f71ed37f5301cd9a22aeee6a2216691c820f5a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Reference",
+        "title": "RMT Reference",
+        "uri": "xtend://docs/en/rmt-reference",
+        "description": "docs/en/rmt-reference.md · sha256:dda47db70a63a584a9cc014a5b2209f5fc832f36530045d4762603325c874887",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Stack Topography",
+        "title": "RMT Stack Topography",
+        "uri": "xtend://docs/en/rmt-stack-topography",
+        "description": "docs/en/rmt-stack-topography.md · sha256:e4941682a6c0bca21bcd4c79acb8660af82719dc56965dbe654a9303c77b013f",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT State Selector Runtime",
+        "title": "RMT State Selector Runtime",
+        "uri": "xtend://docs/en/rmt-state-selector-runtime",
+        "description": "docs/en/rmt-state-selector-runtime.md · sha256:791ade3c9cdaebcd6a97c5c3ab20d213440b57ce9720cc70c7c133169056e7a0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Surface Resource Graph Runtime",
+        "title": "RMT Surface Resource Graph Runtime",
+        "uri": "xtend://docs/en/rmt-surface-resource-graph-runtime",
+        "description": "docs/en/rmt-surface-resource-graph-runtime.md · sha256:e39e751ef7e4b7848b7a565f16e51fd72e07591161f7469ff5df315e48caa834",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Tooling Release Gates",
+        "title": "RMT Tooling Release Gates",
+        "uri": "xtend://docs/en/rmt-tooling-release-gates",
+        "description": "docs/en/rmt-tooling-release-gates.md · sha256:0a52b52a737ce8f0caebb767f79458f4f6335006feda7cc677386c084a1bed11",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Authoring Guide",
+        "title": "RMT Authoring Guide",
+        "uri": "xtend://docs/en/rmt-vnext-authoring",
+        "description": "docs/en/rmt-vnext-authoring.md · sha256:9f686f33e5edbb43eb0dc1a1a2d3612e3e7dd49606435acc8d13069d195d2f34",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Component Primitives and XTend UI",
+        "title": "RMT Component Primitives and XTend UI",
+        "uri": "xtend://docs/en/rmt-vnext-component-primitives",
+        "description": "docs/en/rmt-vnext-component-primitives.md · sha256:c5ef296bd4a60fe8090e09b57304e0c80fd680b3bd29cba42b4dc69abe1ba4cd",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Cross Surface Events",
+        "title": "RMT Cross Surface Events",
+        "uri": "xtend://docs/en/rmt-vnext-cross-surface-events",
+        "description": "docs/en/rmt-vnext-cross-surface-events.md · sha256:f524ccf71b21f6b7f6f87ca3f29fb6318ba99d26e9b297cdfdd137b1b5566aa2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT vNext Migration Notes",
+        "title": "RMT vNext Migration Notes",
+        "uri": "xtend://docs/en/rmt-vnext-migration-notes",
+        "description": "docs/en/rmt-vnext-migration-notes.md · sha256:b963ee868a5b4556e5a539385c962f3ae9688f3e459103f34e22b389881396f0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT Remote Surfaces",
+        "title": "RMT Remote Surfaces",
+        "uri": "xtend://docs/en/rmt-vnext-remote-surfaces",
+        "description": "docs/en/rmt-vnext-remote-surfaces.md · sha256:374c23594fb9ab93cd80bba0613c576b0719d43700968f7ce8a1d3640969a112",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT vNext Source-to-Sea",
+        "title": "RMT vNext Source-to-Sea",
+        "uri": "xtend://docs/en/rmt-vnext-source-to-sea-gate",
+        "description": "docs/en/rmt-vnext-source-to-sea-gate.md · sha256:87faff6e473e6a2ee95da006ca36ac696fe2137df7a83cfef32a50db8108d2f7",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "RMT vNext Enterprise Surface Registry",
+        "title": "RMT vNext Enterprise Surface Registry",
+        "uri": "xtend://docs/en/rmt-vnext-surface-registry-enterprise",
+        "description": "docs/en/rmt-vnext-surface-registry-enterprise.md · sha256:ab6b2fcc414d6592e9d67a81a87e0409148863a77bff9d9b1ceeeaac6a249e40",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Screenreader Signals",
+        "title": "Screenreader Signals",
+        "uri": "xtend://docs/en/screenreader-signals",
+        "description": "docs/en/screenreader-signals.md · sha256:d05a2c21ed14cf150e73187856ce68ecb5d144cc1308abb5562d9a0288d6cae1",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Page runtime for Node and Laravel",
+        "title": "Page runtime for Node and Laravel",
+        "uri": "xtend://docs/en/ssr-pages",
+        "description": "docs/en/ssr-pages.md · sha256:425e4f3b2a619d7d1f9e7e075c568293b37aaa3a022fe02c7ba32126e7d58504",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Supply Chain Checks",
+        "title": "Supply Chain Checks",
+        "uri": "xtend://docs/en/supply-chain-gates",
+        "description": "docs/en/supply-chain-gates.md · sha256:1ab992ef953760c804f641abafad054d6221b4ddf007373abd580a7bbad04298",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Authoring Guide",
+        "title": "SurfaceManager Authoring Guide",
+        "uri": "xtend://docs/en/surface-manager-authoring-guide",
+        "description": "docs/en/surface-manager-authoring-guide.md · sha256:ceff0c833d07b6fd6e5d0b221dc987eb043bbf5b0c90f6d41c00bdff1e4ed284",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Controller",
+        "title": "SurfaceManager Controller",
+        "uri": "xtend://docs/en/surface-manager-controller",
+        "description": "docs/en/surface-manager-controller.md · sha256:c7742b4e476e1a42fef75c9c2d85b065994f29407ea3dacab5c853026643e05e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Migration Guide",
+        "title": "SurfaceManager Migration Guide",
+        "uri": "xtend://docs/en/surface-manager-migration-guide",
+        "description": "docs/en/surface-manager-migration-guide.md · sha256:df06711bf476034291a918910d5ad751069affa9771ef28337d69fbf7e33bc9c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Overlay Bridge",
+        "title": "SurfaceManager Overlay Bridge",
+        "uri": "xtend://docs/en/surface-manager-overlay-bridge",
+        "description": "docs/en/surface-manager-overlay-bridge.md · sha256:8067414c8790e22a4dd71b8bb4707571c6145d10262a8ea02152cac51e60011e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Quality Gates",
+        "title": "SurfaceManager Quality Gates",
+        "uri": "xtend://docs/en/surface-manager-quality-gates",
+        "description": "docs/en/surface-manager-quality-gates.md · sha256:650f41774e54525675ac1f43d0442987c366940b10f4fb4f82ba28b972efefc3",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Remote Surfaces",
+        "title": "SurfaceManager Remote Surfaces",
+        "uri": "xtend://docs/en/surface-manager-remote-surfaces",
+        "description": "docs/en/surface-manager-remote-surfaces.md · sha256:9ab89569e5844a7608431dc77313626e58c0fcca07f3795a0123ab31fcf16eb6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Runtime",
+        "title": "SurfaceManager Runtime",
+        "uri": "xtend://docs/en/surface-manager-runtime",
+        "description": "docs/en/surface-manager-runtime.md · sha256:f1861b22df7483f8dddff79e79c8108e2e0cab3b5881fe32eedd2de8ce3ade20",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Side Panel Runtime",
+        "title": "SurfaceManager Side Panel Runtime",
+        "uri": "xtend://docs/en/surface-manager-side-panel-runtime",
+        "description": "docs/en/surface-manager-side-panel-runtime.md · sha256:354ae10353d9d87b61ebbb5373315e9f796dac51c3b061b8d61e40b1620cf5a9",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Stack Policy",
+        "title": "SurfaceManager Stack Policy",
+        "uri": "xtend://docs/en/surface-manager-stack-policy",
+        "description": "docs/en/surface-manager-stack-policy.md · sha256:c0dcb7a317c97aa4ae3b809e2c979ad67539296c8634f2b04879a773ac7cee4e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Window Runtime",
+        "title": "SurfaceManager Window Runtime",
+        "uri": "xtend://docs/en/surface-manager-window-runtime",
+        "description": "docs/en/surface-manager-window-runtime.md · sha256:155539d1561ff2d93cbbc0f020d530c7993de23838fef2513bdeb46cc247ae16",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "SurfaceManager Workbench Fixture",
+        "title": "SurfaceManager Workbench Fixture",
+        "uri": "xtend://docs/en/surface-manager-workbench-fixture",
+        "description": "docs/en/surface-manager-workbench-fixture.md · sha256:0700b3e2cb3be9c3309c4a8327f38e698a08cf245ce92446df2558058c2a7db4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Trusted DOM Boundary Browser Proof",
+        "title": "Trusted DOM Boundary Browser Proof",
+        "uri": "xtend://docs/en/trusted-dom-boundary-browser-proof",
+        "description": "docs/en/trusted-dom-boundary-browser-proof.md · sha256:30b14255a99a861ffa02067a66c438aa702616d875d9d1fca6c1cf4ff01175ab",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Trusted DOM and Sanitizing",
+        "title": "Trusted DOM and Sanitizing",
+        "uri": "xtend://docs/en/trusted-dom-sanitizing",
+        "description": "docs/en/trusted-dom-sanitizing.md · sha256:ec077c6513f79274ea65b95850050a016c914911bfb3cdb03886811520c59f83",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Type Exports",
+        "title": "Type Exports",
+        "uri": "xtend://docs/en/type-exports",
+        "description": "docs/en/type-exports.md · sha256:abf8b5c33d1d91dfd70e3bb58a3681833d6d79bf30f657d4363d2d215662f279",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "TypeScript Components",
+        "title": "TypeScript Components",
+        "uri": "xtend://docs/en/typescript-components",
+        "description": "docs/en/typescript-components.md · sha256:156d456c49b7e7849583238d8c9978f71d8e39e7ba4ca3ab2df221c8ad68958b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Visual Browser Regression",
+        "title": "Visual Browser Regression",
+        "uri": "xtend://docs/en/visual-browser-regression",
+        "description": "docs/en/visual-browser-regression.md · sha256:451383e7622b41cf0af29267e86f87474aba0d7fb8e496b167fc8f4e72b6feb6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Visual Snapshot Automation",
+        "title": "Visual Snapshot Automation",
+        "uri": "xtend://docs/en/visual-snapshot-automation",
+        "description": "docs/en/visual-snapshot-automation.md · sha256:12539b070a2c62e8a90fad52735e83d1def6906098a71d5567e8b4503ec946a4",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XScaler Protocol",
+        "title": "XScaler Protocol",
+        "uri": "xtend://docs/en/xscaler-protocol",
+        "description": "docs/en/xscaler-protocol.md · sha256:4724f792b8769481aac98912d9afc63126ec289571d790a557512cf3f37a0d9d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend API Types",
+        "title": "XTend API Types",
+        "uri": "xtend://docs/en/xtend-api-types",
+        "description": "docs/en/xtend-api-types.md · sha256:dcd1b83751f29318aa5d2857c6c7eb6bd99d8b47d8d0e4e05d728ed0dfbc78a6",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Builder Types",
+        "title": "XTend Builder Types",
+        "uri": "xtend://docs/en/xtend-builder-types",
+        "description": "docs/en/xtend-builder-types.md · sha256:20602d15b11a599b85dfb97dbd1b099ca66ad57491d80c067d1e809c673b4a1d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Catalog Types",
+        "title": "XTend Catalog Types",
+        "uri": "xtend://docs/en/xtend-catalog-types",
+        "description": "docs/en/xtend-catalog-types.md · sha256:4741d6f0c3807df02d9ac87addf0d47ce82208e7a4acd28cb2d88423f3aaae23",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Classic",
+        "title": "XTend Classic",
+        "uri": "xtend://docs/en/xtend-classic",
+        "description": "docs/en/xtend-classic.md · sha256:740b545210bd639f25cc3709ec9dfc8252e90f3cf82b081ada8e5c508af8e53b",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend DEV API",
+        "title": "XTend DEV API",
+        "uri": "xtend://docs/en/xtend-dev-api",
+        "description": "docs/en/xtend-dev-api.md · sha256:e234a58ab78c1906825e20a0828e58c98b68b6cf79dc98e9895f3b49c32ead56",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Dev Surface",
+        "title": "XTend Dev Surface",
+        "uri": "xtend://docs/en/xtend-dev-surface",
+        "description": "docs/en/xtend-dev-surface.md · sha256:c92c3654c0d52bb4c93330800b5fa012dce7121131963c532ca4d1281b7cbfe0",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Fabric RMT Lane Mapping",
+        "title": "Fabric RMT Lane Mapping",
+        "uri": "xtend://docs/en/xtend-fabric-rmt-lane-mapping",
+        "description": "docs/en/xtend-fabric-rmt-lane-mapping.md · sha256:ae2bc1cd55e08efa951844f0773f0dd3aa4dd37048dd1b35cac3821bf05e7374",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Fabric Runtime",
+        "title": "XTend Fabric Runtime",
+        "uri": "xtend://docs/en/xtend-fabric-runtime",
+        "description": "docs/en/xtend-fabric-runtime.md · sha256:a8a994e306aeddfe03db8b3089fe7768e5762243234f4a3438fd0d64081d4c3d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Fabric",
+        "title": "XTend Fabric",
+        "uri": "xtend://docs/en/xtend-fabric",
+        "description": "docs/en/xtend-fabric.md · sha256:4629a976ed982a16d305e6b6c12ac0aa511ecc35469d3fad8082fa47a7e6150a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Loader Types",
+        "title": "XTend Loader Types",
+        "uri": "xtend://docs/en/xtend-loader-types",
+        "description": "docs/en/xtend-loader-types.md · sha256:e143f61746cceaf05f5c2c9319ab60a2d1e8513ae0f8031a9f73fb78c5ad50e7",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Maraca Orchestration",
+        "title": "Maraca Orchestration",
+        "uri": "xtend://docs/en/xtend-maraca-orchestration",
+        "description": "docs/en/xtend-maraca-orchestration.md · sha256:14c1c2bb3725606da4260d88aeaad670ec6e441be943c9d51e9e9e9b676cd22a",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Maraca",
+        "title": "XTend Maraca",
+        "uri": "xtend://docs/en/xtend-maraca",
+        "description": "docs/en/xtend-maraca.md · sha256:d1b68f08dd75ccbc96341f6c2c653dc802516388b5fde0d9d35648aa69f5e955",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Material Migration",
+        "title": "XTend Material Migration",
+        "uri": "xtend://docs/en/xtend-material-migration",
+        "description": "docs/en/xtend-material-migration.md · sha256:bb15b60ac24ab748262372b8e3649d57a41eba2635a1b205f6bc92b1e86cfa28",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Material",
+        "title": "XTend Material",
+        "uri": "xtend://docs/en/xtend-material",
+        "description": "docs/en/xtend-material.md · sha256:be461148750502ca7989823a39785d2b5288adfe418db9e9098efae97c97d482",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend MCP 0.1",
+        "title": "XTend MCP 0.1",
+        "uri": "xtend://docs/en/xtend-mcp",
+        "description": "docs/en/xtend-mcp.md · sha256:ad8751dfae6ee9a71a4aa95f4bec1272d5ddfda0a9184e04d48e0bf879647c87",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Policy Types",
+        "title": "XTend Policy Types",
+        "uri": "xtend://docs/en/xtend-policy-types",
+        "description": "docs/en/xtend-policy-types.md · sha256:8ec3762fafd1504f7842c3c208b4463a3454135e128ea3f23b14ca6d964f7c9d",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend UI Runtime Layer",
+        "title": "XTend UI Runtime Layer",
+        "uri": "xtend://docs/en/xtend-ui-runtime-layer",
+        "description": "docs/en/xtend-ui-runtime-layer.md · sha256:e8accb502eb32220c1eeec1b4d6db3f488d5b402855ba2065f015131e345b3ff",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend Vendor Types",
+        "title": "XTend Vendor Types",
+        "uri": "xtend://docs/en/xtend-vendor-types",
+        "description": "docs/en/xtend-vendor-types.md · sha256:00f2f28df4c085dfa58d4b672dfe5619da37bae967c33850266a76729340649c",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTendRMT App DSL",
+        "title": "XTendRMT App DSL",
+        "uri": "xtend://docs/en/xtendrmt-app-dsl",
+        "description": "docs/en/xtendrmt-app-dsl.md · sha256:e982c2d02f6528cdd47a0c1d1788f6b17d7c92bf0d8544ac7d4f205d4b5a0d32",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTendRMT Migration Guide",
+        "title": "XTendRMT Migration Guide",
+        "uri": "xtend://docs/en/xtendrmt-migration-guide",
+        "description": "docs/en/xtendrmt-migration-guide.md · sha256:e6a7e2f91f0b9157f1d266b0fdbfe3d3e178739d824e767c2c6424ba9a48226e",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Native RMT Authoring",
+        "title": "Native RMT Authoring",
+        "uri": "xtend://docs/en/xtendrmt-native-authoring",
+        "description": "docs/en/xtendrmt-native-authoring.md · sha256:d0d497377da327911ff199f0c15c31ad7287b94c276c677804f939b00dcfe832",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTendRMT Overview",
+        "title": "XTendRMT Overview",
+        "uri": "xtend://docs/en/xtendrmt-overview",
+        "description": "docs/en/xtendrmt-overview.md · sha256:ecea58b129b43dc03e93b81d48caa78aa24f39b7fbd73f294dca3f326330fda2",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "Parsedown RMT Scheduling",
+        "title": "Parsedown RMT Scheduling",
+        "uri": "xtend://docs/en/xtendrmt-parsedown-scheduling",
+        "description": "docs/en/xtendrmt-parsedown-scheduling.md · sha256:57317b7e0a73944d85b2b40ad3a0e447971b120008e80fb32dad87e283418f01",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTendRMT Runtime Bridge",
+        "title": "XTendRMT Runtime Bridge",
+        "uri": "xtend://docs/en/xtendrmt-runtime-bridge",
+        "description": "docs/en/xtendrmt-runtime-bridge.md · sha256:58a2dc6672a00aae077bd8719105f6426dd53535b546b8297af313703acfa5da",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTensions Authoring Guide",
+        "title": "XTensions Authoring Guide",
+        "uri": "xtend://docs/en/xtensions-authoring-guide",
+        "description": "docs/en/xtensions-authoring-guide.md · sha256:405f16f0055af726b89e2dfe25ed518a57846d89b3a1f8c4ba99a4f1abb5c4bc",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTensions Migration and Coexistence",
+        "title": "XTensions Migration and Coexistence",
+        "uri": "xtend://docs/en/xtensions-migration-coexistence-guide",
+        "description": "docs/en/xtensions-migration-coexistence-guide.md · sha256:68e820e280fdd8027d2440570efe09df30a1e21147c31f0e0d58720f2f479a00",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTensions Security Checklist",
+        "title": "XTensions Security Checklist",
+        "uri": "xtend://docs/en/xtensions-security-checklist",
+        "description": "docs/en/xtensions-security-checklist.md · sha256:0fd89b9a28150bd3d63940f1565ef8786c561f0d747bf948d531341f6536ec40",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "template",
+        "title": "template",
+        "uri": "xtend://rmt/kit/reference/operator%3Atemplate",
+        "description": "Groups RMT declarations into one app or feature source of truth.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "import",
+        "title": "import",
+        "uri": "xtend://rmt/kit/reference/operator%3Aimport",
+        "description": "Loads static RMT source only; no dynamic expressions.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "state",
+        "title": "state",
+        "uri": "xtend://rmt/kit/reference/operator%3Astate",
+        "description": "Declares owned application state.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "selector",
+        "title": "selector",
+        "uri": "xtend://rmt/kit/reference/operator%3Aselector",
+        "description": "Derives view-models without host JavaScript.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "datasource",
+        "title": "datasource",
+        "uri": "xtend://rmt/kit/reference/operator%3Adatasource",
+        "description": "Declares host-owned data access.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "resource",
+        "title": "resource",
+        "uri": "xtend://rmt/kit/reference/operator%3Aresource",
+        "description": "Declares owner-scoped resources with cleanup.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "portal",
+        "title": "portal",
+        "uri": "xtend://rmt/kit/reference/operator%3Aportal",
+        "description": "Binds surfaces to host roots without manual shell code.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "surface",
+        "title": "surface",
+        "uri": "xtend://rmt/kit/reference/operator%3Asurface",
+        "description": "Declares UI surfaces and their component capability.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "bounds",
+        "title": "bounds",
+        "uri": "xtend://rmt/kit/reference/operator%3Abounds",
+        "description": "Declares fixed pixel or opt-in CSS-native responsive surface geometry.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "lane",
+        "title": "lane",
+        "uri": "xtend://rmt/kit/reference/operator%3Alane",
+        "description": "Groups scheduled render/hydration work.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "hydrate",
+        "title": "hydrate",
+        "uri": "xtend://rmt/kit/reference/operator%3Ahydrate",
+        "description": "Hydrates existing or planned UI from a static source.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "mount",
+        "title": "mount",
+        "uri": "xtend://rmt/kit/reference/operator%3Amount",
+        "description": "Materializes UI work and may contain policy blocks.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "on",
+        "title": "on",
+        "uri": "xtend://rmt/kit/reference/operator%3Aon",
+        "description": "Binds host events to declarative actions.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "payload",
+        "title": "payload",
+        "uri": "xtend://rmt/kit/reference/operator%3Apayload",
+        "description": "Maps event context into action input.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "preventDefault",
+        "title": "preventDefault",
+        "uri": "xtend://rmt/kit/reference/operator%3ApreventDefault",
+        "description": "Declares host default-prevention for event adapters.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "action",
+        "title": "action",
+        "uri": "xtend://rmt/kit/reference/operator%3Aaction",
+        "description": "Declares state changes, effects and emitted events.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "execution fastpass",
+        "title": "execution fastpass",
+        "uri": "xtend://rmt/kit/reference/operator%3Aexecution%20fastpass",
+        "description": "Runs urgent navigation, focus or named-surface close on the shared user-blocking lane without a Model transaction.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "emit",
+        "title": "emit",
+        "uri": "xtend://rmt/kit/reference/operator%3Aemit",
+        "description": "Publishes typed RMT events.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "when",
+        "title": "when",
+        "uri": "xtend://rmt/kit/reference/operator%3Awhen",
+        "description": "Adds small declarative boolean conditions.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "slot",
+        "title": "slot",
+        "uri": "xtend://rmt/kit/reference/operator%3Aslot",
+        "description": "Composes nested lifecycle work inside component slots.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "stream",
+        "title": "stream",
+        "uri": "xtend://rmt/kit/reference/operator%3Astream",
+        "description": "Declares incremental rendering input.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "trust boundary",
+        "title": "trust boundary",
+        "uri": "xtend://rmt/kit/reference/operator%3Atrust%20boundary",
+        "description": "Declares explicit trust context.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "sanitize",
+        "title": "sanitize",
+        "uri": "xtend://rmt/kit/reference/operator%3Asanitize",
+        "description": "Declares sanitizer intent for trusted output adapters.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "validation",
+        "title": "validation",
+        "uri": "xtend://rmt/kit/reference/operator%3Avalidation",
+        "description": "Declares action gates and field rules for Maraca validation.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "transition",
+        "title": "transition",
+        "uri": "xtend://rmt/kit/reference/operator%3Atransition",
+        "description": "Declares surface transitions for Maraca orchestration.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "diagnostic:rmt.template.inline-script.refused",
+        "title": "diagnostic:rmt.template.inline-script.refused",
+        "uri": "xtend://rmt/kit/reference/diagnostic%3Armt.template.inline-script.refused",
+        "description": "reference diagnostic:rmt.template.inline-script.refused",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "diagnostic:rmt.ref.schedule.unresolved",
+        "title": "diagnostic:rmt.ref.schedule.unresolved",
+        "uri": "xtend://rmt/kit/reference/diagnostic%3Armt.ref.schedule.unresolved",
+        "description": "reference diagnostic:rmt.ref.schedule.unresolved",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "diagnostic:rmt.syntax.invalid-json",
+        "title": "diagnostic:rmt.syntax.invalid-json",
+        "uri": "xtend://rmt/kit/reference/diagnostic%3Armt.syntax.invalid-json",
+        "description": "reference diagnostic:rmt.syntax.invalid-json",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "diagnostic:rmt.app.no-manual-shell.html-sink",
+        "title": "diagnostic:rmt.app.no-manual-shell.html-sink",
+        "uri": "xtend://rmt/kit/reference/diagnostic%3Armt.app.no-manual-shell.html-sink",
+        "description": "reference diagnostic:rmt.app.no-manual-shell.html-sink",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "xt rmt lint app.rmt --agent",
+        "title": "xt rmt lint app.rmt --agent",
+        "uri": "xtend://rmt/kit/reference/cli%3Axt%20rmt%20lint%20app.rmt%20--agent",
+        "description": "Machine-readable repair plan with deterministic fix order.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "xt maraca plan app.rmt --orchestration strict --kernel strict --hydration strict --validation strict --transitions strict --json",
+        "title": "xt maraca plan app.rmt --orchestration strict --kernel strict --hydration strict --validation strict --transitions strict --json",
+        "uri": "xtend://rmt/kit/reference/cli%3Axt%20maraca%20plan%20app.rmt%20--orchestration%20strict%20--kernel%20strict%20--hydration%20strict%20--validation%20strict%20--transitions%20strict%20--json",
+        "description": "Strict production planning without writing bundle files.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "xt maraca build app.rmt --orchestration strict --kernel strict --hydration strict --validation strict --transitions strict --css external --json",
+        "title": "xt maraca build app.rmt --orchestration strict --kernel strict --hydration strict --validation strict --transitions strict --css external --json",
+        "uri": "xtend://rmt/kit/reference/cli%3Axt%20maraca%20build%20app.rmt%20--orchestration%20strict%20--kernel%20strict%20--hydration%20strict%20--validation%20strict%20--transitions%20strict%20--css%20external%20--json",
+        "description": "Build loaderless ESM app bundle and Maraca reports.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "Minimal RMT App",
+        "title": "Minimal RMT App",
+        "uri": "xtend://rmt/kit/recipe/minimal-rmt-app",
+        "description": "Smallest useful agent-authored RMT source.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "Action and Event Payload",
+        "title": "Action and Event Payload",
+        "uri": "xtend://rmt/kit/recipe/actions-events-payload",
+        "description": "Bind host events to RMT actions without function calls.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "DataSource, Resource and Fallback",
+        "title": "DataSource, Resource and Fallback",
+        "uri": "xtend://rmt/kit/recipe/data-resource-fallback",
+        "description": "Use the canonical primitive fixture for data and owned cleanup patterns.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "Validation and Transition for Maraca Strict",
+        "title": "Validation and Transition for Maraca Strict",
+        "uri": "xtend://rmt/kit/recipe/validation-transition-maraca-strict",
+        "description": "Use the production orchestration fixture when agents need a complete strict-mode source.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "Agent Repair Loop",
+        "title": "Agent Repair Loop",
+        "uri": "xtend://rmt/kit/recipe/agent-repair-loop",
+        "description": "Repair with deterministic linter reports, then re-run lint after each applied fix.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "Maraca Plan and Build",
+        "title": "Maraca Plan and Build",
+        "uri": "xtend://rmt/kit/recipe/maraca-plan-build",
+        "description": "Plan first, build second; use strict mode for production hardening.",
+        "mimeType": "application/json"
+      }
+    ]
+  },
+  "templates": {
+    "resourceTemplates": [
+      {
+        "name": "XTend Docs Catalog Page",
+        "title": "XTend Docs Catalog Page",
+        "uriTemplate": "xtend://docs/catalog/{locale}{?cursor}",
+        "description": "Cursor-addressable page of the canonical bilingual XTend documentation catalog.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "XTend Documentation",
+        "title": "XTend Documentation",
+        "uriTemplate": "xtend://docs/{locale}/{slug}",
+        "description": "Canonical bilingual XTend Markdown documentation.",
+        "mimeType": "text/markdown"
+      },
+      {
+        "name": "XTend RMT AI Kit reference",
+        "title": "XTend RMT AI Kit reference",
+        "uriTemplate": "xtend://rmt/kit/reference/{id}",
+        "description": "Curated XTendRMT AI Developer Kit reference records.",
+        "mimeType": "application/json"
+      },
+      {
+        "name": "XTend RMT AI Kit recipe",
+        "title": "XTend RMT AI Kit recipe",
+        "uriTemplate": "xtend://rmt/kit/recipe/{id}",
+        "description": "Curated XTendRMT AI Developer Kit recipe records.",
+        "mimeType": "application/json"
+      }
+    ]
+  }
+}

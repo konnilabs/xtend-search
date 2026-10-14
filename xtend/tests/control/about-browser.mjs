@@ -13,13 +13,15 @@ async function inside(p){return p.evaluate(()=>{const box=document.getElementByI
 async function close(p,how='escape'){
  const modal=p.getByRole('dialog',{name:'Über XTend.search',exact:true});
  if(how==='button')await modal.getByRole('button',{name:'Schliessen',exact:true}).click();else await p.keyboard.press('Escape');
- await modal.waitFor({state:'hidden'});await p.waitForFunction(()=>!document.getElementById('xtend-page-container')?.inert&&document.documentElement.style.overflow!=='hidden');
+ await modal.waitFor({state:'hidden'});await p.waitForFunction(()=>!document.getElementById('search-shell')?.inert&&getComputedStyle(document.documentElement).overflow!=='hidden');
 }
 try{
  const context=await browser.newContext({viewport:{width:1440,height:1000},colorScheme:'dark'});page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const requests=[];page.on('request',r=>requests.push(r.url()));await page.goto(base+'/');await page.waitForFunction(()=>window.XTendPage?.getRuntime());await icons(page);
  assert.equal(await page.getByRole('link',{name:'Einstellungen',exact:true}).count(),0);
- assert.equal(await page.locator('#search-about').count(),0,'About content loads on demand; RMT feedback may register XDialog earlier');
+ assert.equal(await page.locator('#search-about').count(),1,'RMT declares the persistent About dialog');
+ assert.equal(await page.locator('#search-about').isVisible(),false,'Closed About reserves no visible surface');
+ assert.equal(await page.locator('#search-about .about-sections section').count(),0,'About content remains on demand');
  const origin=await page.evaluate(()=>performance.timeOrigin),url=page.url();await page.locator('#search-input').fill('ungesendeter Suchbegriff');
  const top=page.getByRole('link',{name:'Über XTend.search',exact:true});await top.click();const dialog=page.getByRole('dialog',{name:'Über XTend.search',exact:true});await dialog.waitFor();
  assert.equal(await page.evaluate(()=>document.getElementById('search-about').constructor.xtendComponentContract.tag),'x-dialog');assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);assert.equal(await page.locator('#search-input').inputValue(),'ungesendeter Suchbegriff');
@@ -28,7 +30,7 @@ try{
  const y=await page.evaluate(()=>scrollY);await page.mouse.wheel(0,500);await page.waitForTimeout(80);assert.equal(await page.evaluate(()=>scrollY),y);await page.keyboard.press('/');assert.equal(await inside(page),true);
  await page.screenshot({path:new URL(version+'-about-desktop.png',out).pathname});await close(page);assert.equal(await top.evaluate(e=>document.activeElement===e),true);
  const footer=page.getByRole('link',{name:'Über & Datenschutz',exact:true});await footer.scrollIntoViewIfNeeded();const footerY=await page.evaluate(()=>scrollY);await footer.click();await dialog.waitFor();await page.mouse.click(5,5);await dialog.waitFor({state:'hidden'});await page.waitForFunction(()=>document.activeElement?.textContent==='Über & Datenschutz');assert.equal(await page.evaluate(()=>scrollY),footerY);
- checks.push('Existing SVG and PNG favicons load. Settings is removed. A genuine lazy XDialog opens from both About links without changing the document, URL or query draft. Tab/Shift+Tab stay inside; Escape and backdrop return focus and scroll.');
+ checks.push('Existing SVG and PNG favicons load. Settings is removed. RMT-owned content in a framework XDialog opens from both About links without changing the document, URL or query draft. Tab/Shift+Tab stay inside; Escape and backdrop return focus and scroll.');
  for(const [width,scheme]of [[320,'light'],[390,'dark'],[720,'light']]){
   await page.setViewportSize({width,height:844});await page.emulateMedia({colorScheme:scheme,reducedMotion:'reduce'});await top.click();await dialog.waitFor();
   const rect=await dialog.boundingBox();assert.ok(rect.x>=0&&rect.x+rect.width<=width+1);assert.ok(rect.y>=0&&rect.y+rect.height<=844+1);assert.equal(await dialog.evaluate(e=>getComputedStyle(e).animationName),'none');
@@ -42,7 +44,7 @@ try{
  checks.push('320/390/720px layouts, light/dark colors, internal scrolling and reduced motion work; the About link stays visible on mobile.');
  await page.setViewportSize({width:1440,height:1000});await page.goto(base+'/info/de/about');await icons(page);assert.equal(await page.locator('h1').textContent(),'Über XTend.search');assert.ok(await page.locator('.about-sections section').count()>=5);await page.screenshot({path:new URL(version+'-about-page.png',out).pathname,fullPage:true});
  const nj=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}}),np=await nj.newPage();await np.goto(base+'/');await np.getByRole('link',{name:'Über XTend.search',exact:true}).click();await np.waitForURL(base+'/info/de/about');assert.ok(await np.getByRole('link',{name:/Powered by SearXNG/}).isVisible());assert.match(await np.locator('.about-sections').textContent(),/zehn Minuten im Arbeitsspeicher dieses Tabs/);assert.ok(await np.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await np.goto(base+'/info/en/about');assert.equal(await np.locator('h1').textContent(),'About XTend.search');await icons(np);await nj.close();
- const failed=await browser.newContext(),fp=await failed.newPage();await fp.goto(base+'/');await fp.waitForFunction(()=>window.XTendPage?.getRuntime());await fp.route('**/chunks/*',r=>r.abort());await fp.getByRole('link',{name:'Über XTend.search',exact:true}).click();await fp.waitForURL(base+'/info/de/about');await failed.close();
+ const failed=await browser.newContext(),fp=await failed.newPage();await fp.route('**/maraca/chunks/x-dialog-*.mjs',r=>r.abort());await fp.goto(base+'/');await fp.getByRole('link',{name:'Über XTend.search',exact:true}).click();await fp.waitForURL(base+'/info/de/about');await failed.close();
  checks.push('Direct German/English About pages retain favicon and readable sections. No-JS links and a failed lazy import fall back to the standalone page.');
  // Exercise the dialog while XScaler continues committing search results.
  await page.goto(base+'/admin');await icons(page);await page.getByRole('button',{name:'Anmelden mit CCS Account',exact:true}).or(page.getByRole('link',{name:'Anmelden mit CCS Account',exact:true})).click();await page.getByRole('link',{name:'administrator',exact:true}).click();await page.waitForFunction(()=>window.XTendPage?.getRuntime());await icons(page);
