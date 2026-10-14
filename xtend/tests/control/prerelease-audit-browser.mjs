@@ -1,3 +1,4 @@
+import {VERSION} from '../../shared/version.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -33,5 +34,5 @@ try{
   assert.deepEqual(errors,[]);runs.push({width,throttled,initial,stream,restore,errors});await context.close();
  }
  const report={ok:true,scope:'Built Docker image with offline 100/700/2500ms provider fixtures; 4s favicon delay; synthetic 120ms/1.2Mbit mobile link. CLS excludes recent-input shifts per Web Vitals; all shift values are retained separately. Long tasks include bootstrap. No production latency claim or user queries/URLs retained.',runs};
- await fs.writeFile(new URL('../../evidence/control-plane/0.6.0-prerelease-audit.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({ok:true,runs:runs.map(r=>({width:r.width,throttled:r.throttled,firstMs:r.stream.first,completeMs:r.stream.complete,cls:r.stream.cls,restore:r.restore,longTaskCount:r.stream.longTasks.length}))}));
+ await fs.writeFile(new URL(`../../evidence/control-plane/${VERSION}-prerelease-audit.json`,import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({ok:true,runs:runs.map(r=>({width:r.width,throttled:r.throttled,firstMs:r.stream.first,completeMs:r.stream.complete,cls:r.stream.cls,restore:r.restore,longTaskCount:r.stream.longTasks.length}))}));
 }finally{await browser.close();}

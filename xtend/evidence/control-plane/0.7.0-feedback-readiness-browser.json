@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "held": {
+    "open": true,
+    "selected": 1,
+    "reason": "spam",
+    "canSave": false,
+    "busy": false,
+    "nativeDisabled": true
+  },
+  "readyClickAccepted": true,
+  "scope": "Offline final-image Docker fixtures; synthetic feedback and controlled old-resource replay."
+}

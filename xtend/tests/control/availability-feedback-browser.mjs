@@ -1,3 +1,4 @@
+import {VERSION} from '../../shared/version.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -34,7 +35,7 @@ async function filterGeometry(page,width,mode='resume'){
  const actions=await page.locator('.filter-actions>button').evaluateAll(buttons=>buttons.map(button=>{const r=button.getBoundingClientRect();return {width:r.width,height:r.height,top:r.top,bottom:r.bottom,left:r.left};}));
  assert.equal(actions.length,3);assert.ok(actions.every(button=>button.height>=44&&Math.abs(button.width-actions[0].width)<1&&Math.abs(button.left-actions[0].left)<1));
  assert.ok(actions.slice(1).every((button,i)=>button.top-actions[i].bottom>=9.5),'Action slots need consistent 10px gaps: '+JSON.stringify(actions));
- if(width===320||width===1308)await page.screenshot({path:new URL('../../evidence/control-plane/0.6.0-filter-panel-'+width+'-'+mode+'.png',import.meta.url).pathname});
+ if(width===320||width===1308)await page.screenshot({path:new URL(`../../evidence/control-plane/${VERSION}-filter-panel-`+width+'-'+mode+'.png',import.meta.url).pathname});
  await page.locator('#filters>summary').click();await page.locator('#language').waitFor({state:'hidden'});return {...geometry,mode,actions};
 }
 async function reportAppearance(category,colorScheme,width,knowledge=false){
@@ -54,7 +55,7 @@ async function reportAppearance(category,colorScheme,width,knowledge=false){
  const reason=search.locator('#report-reason');await reason.focus();await search.keyboard.press('Tab');await search.keyboard.press('Shift+Tab');
  const focus=await reason.evaluate(element=>{const label=element.parentElement.querySelector('span').getBoundingClientRect(),box=element.getBoundingClientRect(),css=getComputedStyle(element);return {visible:element.matches(':focus-visible'),clearance:box.top-parseFloat(css.outlineWidth)-parseFloat(css.outlineOffset)-label.bottom,outline:css.outlineStyle};});
  assert.equal(focus.visible,true);assert.equal(focus.outline,'solid');assert.ok(focus.clearance>=4,'Keyboard outline overlaps label: '+JSON.stringify(focus));
- if(category==='general'&&!knowledge&&width===320)await search.locator('#report-assistant').screenshot({path:new URL('../../evidence/control-plane/0.6.0-report-assistant-'+colorScheme+'.png',import.meta.url).pathname});
+ if(category==='general'&&!knowledge&&width===320)await search.locator('#report-assistant').screenshot({path:new URL(`../../evidence/control-plane/${VERSION}-report-assistant-`+colorScheme+'.png',import.meta.url).pathname});
  await checkbox.uncheck();await search.waitForFunction(selector=>document.querySelector(selector)?.hasAttribute('data-report-selected')===false,knowledge?'.knowledge-card':'.result');
  assert.equal(await target.evaluate(element=>getComputedStyle(element).backgroundColor),original);
  await checkbox.check();await search.locator('#report-reason').selectOption('spam');await search.locator('#report-cancel').click();await search.locator('#report-discard').click();await search.locator('#report-assistant').waitFor({state:'detached'});
@@ -119,7 +120,7 @@ try{
  }
  checks.push('Checked results and Knowledge cards have a pastel-red surface in both themes, including an open image preview; uncheck and discard clear it. Keyboard focus never covers the reason label at 320–1440px.');
  await saveWeather(original.enabled,original.paused);await dismissAll();assert.deepEqual(errors,[]);
- await fs.writeFile(new URL('../../evidence/control-plane/0.6.0-availability-feedback-browser.json',import.meta.url),JSON.stringify({ok:true,checks,visibleMs,filters,reports,errors,scope:'Offline Docker fixtures, synthetic OAuth; no production policies or real providers'},null,2));
+ await fs.writeFile(new URL(`../../evidence/control-plane/${VERSION}-availability-feedback-browser.json`,import.meta.url),JSON.stringify({ok:true,checks,visibleMs,filters,reports,errors,scope:'Offline Docker fixtures, synthetic OAuth; no production policies or real providers'},null,2));
  console.log(JSON.stringify({ok:true,checks,visibleMs}));
 }catch(error){await admin.screenshot({path:'/tmp/xtend060-availability-feedback-failure.png',fullPage:true}).catch(()=>{});console.error(error);process.exitCode=1;}
 finally{await browser.close();}

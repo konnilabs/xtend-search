@@ -1,3 +1,4 @@
+import {VERSION} from '../../shared/version.mjs';
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
@@ -111,6 +112,6 @@ try{
   const geometry=await layout(page);assertLayout(geometry);assert.equal(await page.locator('.weather-temperature-unit').first().textContent(),' °C');noJs.push({width,geometry});await context.close();
  }
  const result={ok:runs.every(r=>r.sectionCls<0.001),scope:'Offline Docker fixtures. Responsive card geometry in light/dark schemes and without JavaScript. Layout shifts after the location surface is painted, including recent-input shifts. Same-tab history restore counts provider requests directly.',runs,noJs};
- await fs.writeFile(new URL('../../evidence/control-plane/0.6.0-weather-layout.json',import.meta.url),JSON.stringify(result,null,2)+'\n');
+ await fs.writeFile(new URL(`../../evidence/control-plane/${VERSION}-weather-layout.json`,import.meta.url),JSON.stringify(result,null,2)+'\n');
  console.log(JSON.stringify(result));assert(result.ok,'Weather sections must retain their geometry during streaming');
 }finally{await browser.close();}

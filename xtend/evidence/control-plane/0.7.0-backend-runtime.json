@@ -1,0 +1,33 @@
+{
+  "ok": true,
+  "backendVersion": "0.5.1",
+  "searxngPin": "9f042d2f67666f86204d6874488880a23ba81a8f",
+  "reviewedCoreAndAdapterUnchanged": true,
+  "requirementsSha256": "19b17d9b070901d0332f9aaa42bdb34a61c3fbc61c6db3961ba390110b69410c",
+  "installedPinCount": 33,
+  "installedPinsMatchMainLock": true,
+  "changesFromPreviousImage": {
+    "MarkupSafe": {
+      "previous": "3.0.3",
+      "current": "3.0.4"
+    },
+    "pytz": {
+      "previous": "2026.3.post1",
+      "current": "2026.5"
+    },
+    "setproctitle": {
+      "previous": "1.3.7",
+      "current": "1.3.8"
+    },
+    "typer": {
+      "previous": "0.27.2",
+      "current": "0.27.3"
+    },
+    "Werkzeug": {
+      "previous": "3.1.8",
+      "current": "3.1.9"
+    }
+  },
+  "upstreamContractTestsPassed": 7,
+  "scope": "Actual installed image packages, not just labels or repository pins. Backend code and SearXNG upstream pin remain unchanged."
+}
