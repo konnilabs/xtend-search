@@ -1,0 +1,117 @@
+{
+  "run": 38546996053,
+  "commit": "124ebdbc0f883af9302594a7227a1ebe9cb99256",
+  "weatherLayout": {
+    "ok": true,
+    "runs": [
+      {
+        "width": 320,
+        "sectionCls": 0,
+        "boardY": 383,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      },
+      {
+        "width": 390,
+        "sectionCls": 0,
+        "boardY": 383,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      },
+      {
+        "width": 700,
+        "sectionCls": 0,
+        "boardY": 403,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      },
+      {
+        "width": 900,
+        "sectionCls": 0,
+        "boardY": 343,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      },
+      {
+        "width": 1000,
+        "sectionCls": 0,
+        "boardY": 343,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      },
+      {
+        "width": 1024,
+        "sectionCls": 0,
+        "boardY": 343,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      },
+      {
+        "width": 1440,
+        "sectionCls": 0,
+        "boardY": 297,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      },
+      {
+        "width": 1920,
+        "sectionCls": 0,
+        "boardY": 297,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      },
+      {
+        "width": 3840,
+        "sectionCls": 0,
+        "boardY": 297,
+        "restoredStreams": 0,
+        "providerCounterDelta": {
+          "geo": 0,
+          "current": 0,
+          "forecast": 0,
+          "dwd": 0
+        }
+      }
+    ]
+  }
+}

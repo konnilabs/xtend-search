@@ -1,5 +1,5 @@
 {
-  "date": "2026-10-14T10:02:54.026936+00:00",
+  "date": "2026-10-14T10:15:33.654245+00:00",
   "baseline": "51a30470f6c7edbe5e8dfddc6589284ae6c83c0c",
   "branch": "codex/xtend-search-mvc-0.6.0",
   "node": "v24.19.0",
@@ -59,7 +59,7 @@
     {
       "gate": "cache",
       "status": "passed",
-      "logSha256": "fe4867ef22f249710647f53496af3dfb94c5f0d8be3158a737748eae4d28ea9f"
+      "logSha256": "8ca4a4b73fbf755b243f147e83dd76d52cc68d9dcf583d8bf40657f18280b0d7"
     },
     {
       "gate": "preferences",
@@ -147,8 +147,21 @@
       ]
     }
   ],
-  "sourceTreeSha256": "711f0590241855e1fbebd42a0f6ed79698c452e59d576d5190c0b6dc312e74f7",
-  "ci": "final pushed commit: verification pending; no claim of green remote CI yet",
+  "sourceTreeSha256": "e68a7d6129a673e070fd5019815ca674d30197e408980f07fca2a9882da49e82",
+  "ci": {
+    "authority": "GitHub PR #17 status checks for the current head",
+    "localReportClaimsRemoteSuccess": false,
+    "priorRun": {
+      "id": 38546996053,
+      "sourceCommit": "124ebdbc0f883af9302594a7227a1ebe9cb99256",
+      "buildAndTest": "SUCCESS",
+      "searxngBoundary": "SUCCESS",
+      "dockerBrowser": "FAILURE",
+      "weatherLayout": "passed: every sectionCls=0, 320px board y=383",
+      "failure": "cache-browser.mjs warm SSR reentry asserted 10 DOM results after waiting only for category; observed the previous 4-image View before its new commit",
+      "correction": "Wait for terminal complete cached model with 10 results AND its 10-result declarative View; unchanged zero-new-stream assertion"
+    }
+  },
   "limitations": [
     "Local Control browser gates use the current built Node host with offline Docker SearXNG and loopback OAuth/weather fixtures; they are not a production deployment.",
     "The time-budget prerelease test initially failed under parallel browser load and passed in isolation with unchanged assertions. No timing/CLS threshold was relaxed.",
