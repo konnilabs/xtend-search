@@ -6,7 +6,9 @@ export function parseSearch(url){
  const p=url.searchParams;
  const state={q:p.get('q') || '',category:p.get('categories') || 'general',language:p.get('language') || 'all',timeRange:p.get('time_range') || '',safeSearch:p.get('safesearch') || '1',page:Number(p.get('pageno') || 1),continuation:p.get('cursor') || ''};
  if(state.q.length>2048 || state.continuation.length>4096 || !categories.has(state.category) || !languages.has(state.language) || !times.has(state.timeRange) || !['0','1','2'].includes(state.safeSearch) || !Number.isSafeInteger(state.page) || state.page<1 || state.page>100)throw Object.assign(new Error('Ungültige Suchparameter. Bitte Filter oder Suchbegriff prüfen.'),{status:400});
- if(state.category==='weather'){state.location=p.get('location')||'';if(p.has('location_q')&&p.get('location_q')!==state.q)state.location='';if(state.q.length>200||state.location&&!/^[1-9]\d{0,9}$/.test(state.location)||state.page!==1||state.continuation)throw Object.assign(new Error('Bitte einen gültigen Ort eingeben.'),{status:400,expose:true});}
+ // location_q identifies an explicit native form submission. A new search
+ // resolves the input again; deep links, tabs and history retain their chosen ID.
+ if(state.category==='weather'){state.location=p.has('location_q')?'':p.get('location')||'';if(state.q.length>200||state.location&&!/^[1-9]\d{0,9}$/.test(state.location)||state.page!==1||state.continuation)throw Object.assign(new Error('Bitte einen gültigen Ort eingeben.'),{status:400,expose:true});}
  return state;
 }
 export function searchUrl(state,patch={}){

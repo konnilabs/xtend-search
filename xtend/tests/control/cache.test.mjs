@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {captureSearchResource as capture,restoreSearchResource as restore,invalidateSearchResource as invalidate,clearSearchResources as clear,searchCacheStats as stats} from '../../frontend/cache-service-core.mjs';
+import {captureSearchResource as capture,restoreSearchResource as restore,invalidateSearchResource as invalidate,clearSearchResources as clear,searchCacheStats as stats,weatherTabUrl} from '../../frontend/cache-service-core.mjs';
 import {identityFromUrl,searchResourceKey} from '../../shared/cache-identity.mjs';
 const scope={version:'fixture-build',contextKey:'public-fixture'},epoch='a'.repeat(64);
 const url=(q='fixture',category='general')=>'http://localhost/search?'+new URLSearchParams({q,categories:category,language:'all',time_range:'',safesearch:'1'});
@@ -24,4 +24,20 @@ test('ten-entry LRU and non-sliding empty TTL survive repeated reads and context
 });
 test('ambiguous, unknown and cookie-dependent URLs cannot alias a cache key',()=>{
  assert.equal(identityFromUrl('/search?q=fixture'),null);assert.equal(identityFromUrl(url()+'&q=other'),null);assert.equal(identityFromUrl(url()+'&engine=foreign'),null);assert.equal(identityFromUrl('/admin'),null);const a=identityFromUrl(url('GNU/ Linux'));assert.notEqual(searchResourceKey(a,scope,epoch),searchResourceKey({...a,q:'GNU/Linux'},scope,epoch));
+});
+test('weather tabs reuse the selected city only for the exact query, filters and live cache scope',async()=>{
+ clear();const start=Date.now(),realNow=Date.now,weatherUrl=url('ambiguous','weather'),selected=weatherUrl+'&location=2';
+ const weather={weather:{hasCurrent:true,hasForecast:true,place:{id:2,countryCode:'DE'}},stream:{phase:'complete'},cache:{enabled:true,cacheable:true,kind:'weather',url:selected,identity:identityFromUrl(selected),epoch,expiresAt:start+300000,alertsVersion:'dwd-fixture'}};
+ const ctx={cacheContextQuery:async()=>({schema:'xtend.search.weather-cache-context.v1',enabled:true,epoch,alertsVersion:'dwd-fixture'})};
+ try{
+  Date.now=()=>start;assert(capture({data:weather,scope}));
+  const target=weatherTabUrl(weatherUrl,scope);assert.equal(new URL(target,'http://localhost').searchParams.get('location'),'2');
+  assert.equal((await restore({url:target,scope},ctx)).data.weather.place.id,2);
+  assert.equal(weatherTabUrl(url('different','weather'),scope),url('different','weather'));
+  assert.equal(weatherTabUrl(weatherUrl.replace('language=all','language=en'),scope),weatherUrl.replace('language=all','language=en'));
+  assert.equal(weatherTabUrl(weatherUrl,{...scope,contextKey:'other'}),weatherUrl);
+  assert.equal(weatherTabUrl(weatherUrl+'&location=3',scope),weatherUrl+'&location=3');
+  invalidate({url:weatherUrl,scope});assert.equal(weatherTabUrl(weatherUrl,scope),weatherUrl);assert.equal(await restore({url:selected,scope},ctx),null);
+  assert(capture({data:weather,scope}));Date.now=()=>start+300001;assert.equal(weatherTabUrl(weatherUrl,scope),weatherUrl);assert.equal(stats().entries,0);
+ }finally{Date.now=realNow;clear();}
 });

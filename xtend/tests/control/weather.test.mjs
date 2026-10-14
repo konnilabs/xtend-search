@@ -1,7 +1,23 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs/promises';import os from 'node:os';import path from 'node:path';import {randomUUID,createHash} from 'node:crypto';
 import {WeatherService} from '../../server/weather/service.mjs';import {DwdService,parseDwd,pointInGeometry} from '../../server/weather/dwd.mjs';import {readZip} from '../../server/weather/zip.mjs';import {weatherCondition,weatherTemperature,WEATHER_BUDGETS} from '../../shared/weather.mjs';import {Store} from '../../server/control/store.mjs';import {ControlPlane} from '../../server/control/plane.mjs';import {zip,cap,place,weatherReply} from './weather-fixture.mjs';
 import {SearchExecutor} from '../../server/control/executor.mjs';
+import {parseSearch} from '../../server/search.mjs';
 const admin={actor:'admin',role:'administrator'};
+test('explicit weather forms resolve the input afresh while tab/deep-link URLs retain the city',()=>{
+ const url='http://fixture/search?q=ambiguous&categories=weather&language=all&time_range=&safesearch=1&location=2';
+ assert.equal(parseSearch(new URL(url)).location,'2');
+ assert.equal(parseSearch(new URL(url+'&location_q=ambiguous')).location,'');
+ assert.equal(parseSearch(new URL(url+'&location_q=other')).location,'');
+});
+test('complete forecasts with a fresh partially mapped warning snapshot remain reusable until warning expiry',async()=>{
+ const h=await harness();try{
+  await h.approve();h.w.dwd={snapshot:{version:'partial-fixture'},async forLocation(){return {status:'partial',rows:[],message:'Nur teilweise zuordenbar.',version:'partial-fixture',expiresAt:h.now+60000};}};
+  const result=await h.w.load(state('ambiguous','2'));
+  assert.equal(result.cache.cacheable,true);assert.equal(result.cache.expiresAt,h.now+60000);assert.equal(result.weather.alerts.status,'partial');
+  assert.equal(result.cache.alertsVersion,h.w.context().alertsVersion);
+  for(const status of ['stale','unavailable']){h.w.dwd.forLocation=async()=>({status,rows:[],version:'partial-fixture',expiresAt:h.now+60000});assert.equal((await h.w.load(state('ambiguous','2'))).cache.cacheable,false);}
+ }finally{await h.close();}
+});
 test('temperature conversion retains precision, handles negatives and missing values, and labels both units',()=>{
  for(const [c,f] of [[0,32],[-40,-40],[100,212],[18,64.4],[1.04,33.9],[-12.5,9.5]]){
   assert.equal(weatherTemperature(c,true).label,f+' °F');

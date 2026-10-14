@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "checks": [
+    "Dialog save persists two drafts before navigation; independent document reload verifies stored values.",
+    "Failed dialog save keeps dialog and inputs; retry persists without an extra manual form save.",
+    "Engine policy values saved through the guard are verified in a fresh document.",
+    "Weather → Web → Weather tab and Back/Forward restore the chosen city with zero page requests, zero weather streams and zero provider calls.",
+    "Explicit same-query search starts a new service run and offers location selection again."
+  ],
+  "errors": [],
+  "restoredWeatherStreams": 0,
+  "restoredProviderCalls": 0
+}
