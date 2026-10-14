@@ -42,7 +42,7 @@ export function installSearchHost(){
  let activityQueue=Promise.resolve(),presentationGeneration=0;
  const activity=(name,payload={},own=presentationGeneration)=>activityQueue=activityQueue.catch(()=>{}).then(()=>own===presentationGeneration?command(name,payload):undefined);
  window.addEventListener('xtend-page:ready',()=>{const streaming=['pending','partial'].includes(window.XTendPage.page.props?.['search.data']?.stream?.phase);void activity('search.streaming',{busy:streaming,message:''});});
- document.addEventListener('input',event=>{if(event.target.id==='search-input'){draft=event.target.value;revision++;const locationField=document.getElementById('search-form')?.elements.namedItem('location');if(locationField)locationField.value='';}},true);
+ document.addEventListener('input',event=>{if(event.target.id==='search-input'){draft=event.target.value;revision++;}},true);
  window.addEventListener('xtend-page:event',async({detail:event})=>{
   if(event.type==='ready'){const streaming=['pending','partial'].includes(window.XTendPage?.page?.props?.['search.data']?.stream?.phase);await activity('search.streaming',{busy:streaming,message:''});}
   if(event.type==='pending'){

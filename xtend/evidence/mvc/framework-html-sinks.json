@@ -1,0 +1,139 @@
+[
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js",
+    "line": 261,
+    "graphs": [
+      "standalone",
+      "admin",
+      "login"
+    ],
+    "hits": [
+      "DOMParser"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js",
+    "line": 262,
+    "graphs": [
+      "standalone",
+      "admin",
+      "login"
+    ],
+    "hits": [
+      "DOMParser"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xicon.js",
+    "line": 465,
+    "graphs": [
+      "standalone",
+      "admin",
+      "login"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xspinner.js",
+    "line": 332,
+    "graphs": [
+      "standalone"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xdialog.js",
+    "line": 463,
+    "graphs": [
+      "standalone",
+      "admin"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsurfacemanager.js",
+    "line": 797,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xsidepanel.js",
+    "line": 261,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xtoast.js",
+    "line": 278,
+    "graphs": [
+      "admin"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xbutton.js",
+    "line": 166,
+    "graphs": [
+      "login"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xbutton.js",
+    "line": 394,
+    "graphs": [
+      "login"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xbutton.js",
+    "line": 397,
+    "graphs": [
+      "login"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xbutton.js",
+    "line": 400,
+    "graphs": [
+      "login"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  },
+  {
+    "file": "../../../xtend-search/xtend/node_modules/@ccslabs/xtend/components/xbutton.js",
+    "line": 428,
+    "graphs": [
+      "login"
+    ],
+    "hits": [
+      "innerHTML"
+    ]
+  }
+]

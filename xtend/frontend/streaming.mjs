@@ -1,6 +1,8 @@
 import {createXScalerAppServiceTransport} from '@ccslabs/xtend/xscaler/app-service-transport';
 import {createXScalerRemoteSurfacePlan} from '@ccslabs/xtend/xscaler/protocol';
-import {createAppServiceRegistry,defineAppServices,service} from '@ccslabs/xtend/maraca/app-services';
+import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
+
+import services from './services.ts';
 
 // XTend owns URL/history and every DOM commit. This adapter only connects the
 // preflighted result surface to its AppService and publishes props through the
@@ -29,28 +31,21 @@ export function installSearchStreaming(){
  }
  async function run(stream){
   stop();const current=epoch,controller=new AbortController(),transport=transportFor(stream.id);
-  const registry=createAppServiceRegistry(defineAppServices({'search.results':service({kind:'stream',target:'remote-surface',concurrency:'latest'})}),{transport,historyLimit:1});
+  const registry=createAppServiceRegistry(services,{historyLimit:0});
   const record={controller,id:stream.id};active=record;
   const valid=()=>active===record && epoch===current && !controller.signal.aborted && data()?.stream?.id===stream.id;
   let delivered=false;
   try{
-   const frames=registry.stream('search.results',{url:stream.url},{},{signal:controller.signal,invocationId:stream.id,correlationId:stream.id,timeoutMs:15000});
-   for await(const frame of frames){
+   await registry.invoke('search.remote.present',{stream},{createFrames:signal=>transport.stream({serviceId:'search.results',kind:'stream',target:'remote-surface',input:{url:stream.url},signal,invocationId:stream.id,correlationId:stream.id,context:{}}),present:async payload=>{
+    if(!valid())throw new DOMException('Stale page','AbortError');
+    if(payload.redirect){location.assign(payload.redirect);return;}
+    const value=payload.data,final=value.stream.phase==='complete';
+    await new Promise(resolve=>requestAnimationFrame(resolve));if(!valid())throw new DOMException('Stale page','AbortError');
+    await client().optimistic(props=>valid()?{...props,'search.data':value}:props,async()=>undefined);
     if(!valid())return;
-    publish({id:stream.id,status:frame.type,sequence:frame.sequence});
-    if(frame.type==='start')continue;
-    if(frame.type==='error' || frame.type==='cancelled')throw new Error('Search stream failed.');
-    const value=frame.value ?? frame.delta;
-    if(!value || !['delta','complete'].includes(frame.type))continue;
-    if(value.redirect){const target=new URL(value.redirect);if(!['https:','http:'].includes(target.protocol))throw new Error('Invalid redirect.');location.assign(target.href);return;}
-    const final=frame.type==='complete';
-    await client().optimistic(props=>valid()?{...props,'search.data':{...value,skeleton:false,stream:{...stream,phase:final?'complete':'partial'}}}:props,async()=>undefined);
-    if(!valid())return;
-    delivered=delivered || value.results?.length>0 || value.hasKnowledge;
-    restoreScroll(final);
-    if(final)return;
-   }
-   throw new Error('Search ended without final results.');
+    publish({id:stream.id,status:payload.status,sequence:payload.sequence});
+    delivered=delivered||value.results?.length>0||value.hasKnowledge;restoreScroll(final);
+   }},{signal:controller.signal,invocationId:stream.id,correlationId:stream.id,timeoutMs:15000});
   }catch(error){
    if(!valid())return;
    publish({id:stream.id,status:'failed',code:error.code || error.name});

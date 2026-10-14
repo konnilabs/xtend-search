@@ -1,5 +1,326 @@
 // XTend.search — native forms and links, compiler-owned UI and surface commits.
 template xtend.search {
+ datasource search.remote.present from host search.remote.present { mode invoke
+ contract "xsearch.remote-presentation.v1"
+ }
+  datasource search.about.content from host search.about.content { mode invoke
+ contract "xsearch.ui.v1"
+ }
+  datasource search.overlay.reduce from host search.overlay.reduce { mode invoke
+ contract "xsearch.ui.v1"
+ }
+  datasource search.media.select from host search.media.select { mode invoke
+ contract "xsearch.ui.v1"
+ }
+  datasource search.media.move from host search.media.move { mode invoke
+ contract "xsearch.ui.v1"
+ }
+  datasource search.media.failure from host search.media.failure { mode invoke
+ contract "xsearch.ui.v1"
+ }
+  datasource search.favicons.load from host search.favicons.load { mode invoke
+ contract "xsearch.ui.v1"
+ }
+  datasource search.favicons.project from host search.favicons.project { mode invoke
+ contract "xsearch.ui.v1"
+ }
+  state search.overlay type object preserve { initial {
+ about false
+ active false
+ lightbox false
+ copy {}
+ media {}
+ } }
+  action search.overlay.set { input value object
+ reduce state.search.overlay = input.value }
+  state search.overlays type object preserve { initial {
+ id "search-overlays"
+ viewTemplate {
+  "children" [
+    {
+      "type" "element"
+      "tag" "x-dialog"
+      "attributes" {
+        "id" "search-about"
+        "overlay" true
+        "open" "$model.search.overlay.about"
+        "title" "Über XTend.search"
+        "width" "min(680px, calc(100vw - 32px))"
+      }
+      "children" [
+        {
+          "type" "element"
+          "tag" "div"
+          "children" [
+            {
+              "type" "element"
+              "tag" "div"
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "img"
+                  "attributes" {
+                    "src" "/assets/xtend/mark.svg"
+                    "width" 48
+                    "height" 48
+                    "alt" ""
+                  }
+                }
+                {
+                  "type" "element"
+                  "tag" "div"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "p"
+                      "text" "XTend.search"
+                      "class" "about-wordmark"
+                    }
+                    {
+                      "type" "element"
+                      "tag" "p"
+                      "text" "Deine Suche. Dein Horizont."
+                      "class" "about-tagline"
+                    }
+                  ]
+                }
+              ]
+              "class" "about-brand"
+            }
+            {
+              "type" "element"
+              "tag" "div"
+              "children" [
+                {
+                  "type" "repeat"
+                  "source" "$model.search.overlay.copy.blocks"
+                  "key" "id"
+                  "template" {
+                    "type" "element"
+                    "tag" "section"
+                    "children" [
+                      {
+                        "type" "element"
+                        "tag" "h2"
+                        "text" "$item.heading"
+                      }
+                      {
+                        "type" "element"
+                        "tag" "p"
+                        "text" "$item.text"
+                      }
+                    ]
+                  }
+                }
+              ]
+              "class" "about-sections"
+            }
+            {
+              "type" "element"
+              "tag" "div"
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "a"
+                  "attributes" {
+                    "href" "https://github.com/searxng/searxng"
+                    "target" "_blank"
+                    "rel" "noopener noreferrer"
+                    "data-xtend-native" true
+                  }
+                  "text" "Powered by SearXNG ↗"
+                }
+                {
+                  "type" "element"
+                  "tag" "span"
+                  "text" "$model.search.overlay.copy.versionLabel"
+                }
+              ]
+              "class" "about-credits"
+            }
+            {
+              "type" "element"
+              "tag" "nav"
+              "attributes" {
+                "aria-label" "Projektlinks"
+              }
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "a"
+                  "attributes" {
+                    "href" "/source.tar.gz"
+                    "download" true
+                    "data-xtend-native" true
+                  }
+                  "text" "Quellcode & Lizenzen herunterladen ↓"
+                }
+              ]
+              "class" "about-links"
+            }
+          ]
+          "class" "about-content"
+        }
+      ]
+      "class" "search-about"
+      "key" "search-about"
+    }
+    { "type" "conditional" "test" "$model.search.overlay.lightbox" "then" {
+      "type" "element"
+      "tag" "x-dialog"
+      "attributes" {
+        "id" "search-lightbox"
+        "data-loading" "$model.search.overlay.media.loading"
+        "data-image-error" "$model.search.overlay.media.imageError"
+        "overlay" true
+        "open" "$model.search.overlay.lightbox"
+        "title" "$model.search.overlay.media.title"
+        "width" "min(1200px, calc(100vw - 24px))"
+      }
+      "children" [
+        {
+          "type" "element"
+          "tag" "img"
+          "attributes" {
+            "id" "lightbox-image"
+          "part" "media"
+            "src" "$model.search.overlay.media.src"
+            "alt" "$model.search.overlay.media.title"
+            "data-image-request" "$model.search.overlay.media.key"
+          }
+          "class" "lightbox-media"
+          "key" "$model.search.overlay.media.key"
+        }
+        {
+          "type" "element"
+          "tag" "div"
+          "children" [
+            {
+              "type" "element"
+              "tag" "button"
+              "attributes" {
+                "type" "button"
+                "data-lightbox-action" "previous"
+                "aria-label" "Vorheriges Bild im Vollbild"
+                "disabled" "$model.search.overlay.media.stepsDisabled"
+              }
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "span"
+                  "attributes" {
+                    "aria-hidden" true
+                  }
+                  "class" "preview-arrow"
+                }
+              ]
+              "class" "lightbox-step lightbox-previous"
+            }
+            {
+              "type" "element"
+              "tag" "button"
+              "attributes" {
+                "type" "button"
+                "data-lightbox-action" "next"
+                "aria-label" "Nächstes Bild im Vollbild"
+                "disabled" "$model.search.overlay.media.stepsDisabled"
+              }
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "span"
+                  "attributes" {
+                    "aria-hidden" true
+                  }
+                  "class" "preview-arrow"
+                }
+              ]
+              "class" "lightbox-step lightbox-next"
+            }
+            {
+              "type" "element"
+              "tag" "div"
+              "children" [
+                {
+                  "type" "element"
+                  "tag" "p"
+                  "attributes" {
+                    "role" "status"
+                    "aria-live" "polite"
+                    "aria-atomic" true
+                  }
+                  "text" "$model.search.overlay.media.position"
+                  "class" "lightbox-position"
+                }
+                {
+                  "type" "element"
+                  "tag" "h2"
+                  "text" "$model.search.overlay.media.title"
+                  "class" "lightbox-title"
+                }
+                {
+                  "type" "element"
+                  "tag" "p"
+                  "attributes" {
+                    "role" "status"
+                    "aria-live" "polite"
+                  }
+                  "text" "$model.search.overlay.media.message"
+                  "class" "lightbox-message"
+                }
+                {
+                  "type" "element"
+                  "tag" "div"
+                  "children" [
+                    {
+                      "type" "element"
+                      "tag" "a"
+                      "attributes" {
+                        "href" "$model.search.overlay.media.url"
+                        "data-xtend-native" true
+                        "rel" "noreferrer"
+                      }
+                      "text" "Seite besuchen ↗"
+                      "class" "lightbox-source"
+                    }
+                    {
+                      "type" "element"
+                      "tag" "a"
+                      "attributes" {
+                        "href" "$model.search.overlay.media.imageUrl"
+                        "hidden" {
+                          "op" "not"
+                          "value" "$model.search.overlay.media.imageUrl"
+                        }
+                        "data-xtend-native" true
+                        "rel" "noreferrer"
+                      }
+                      "text" "Originalbild öffnen ↗"
+                      "class" "lightbox-original"
+                    }
+                  ]
+                  "class" "lightbox-links"
+                }
+              ]
+              "class" "lightbox-caption"
+            }
+          ]
+          "class" "lightbox-controls"
+        }
+      ]
+      "class" "search-lightbox"
+      "key" "search-lightbox"
+    } }
+  ]
+} } }
+  selector search.overlays from state search.overlays { output SearchView }
+  portal search.overlayRoot root "#xtend-page" layer surface
+  surface search.overlays kind content component x-section {
+    source selector search.overlays
+ key overlays.id
+ portal search.overlayRoot
+    lane visible weight 70 { hydrate search-overlays from selector search.overlays }
+  }
   state search.query type string initial ""
   state search.activity type object preserve { initial {
       busy false
@@ -56,6 +377,7 @@ template xtend.search {
       id "search-shell"
       viewTemplate {
         class "search-shell"
+ attributes { inert "$model.search.overlay.active" }
         attributes { "data-view" "$model.search.data.view" }
         children [
           { type "element" tag "a" text "Zu den Ergebnissen" class "skip-link" attributes { href "#results" } }

@@ -3,11 +3,6 @@ export function installSearchAlerts(command){
  let currentData=null,pending=false,streamId=null;
  const dismissed=new Set();
  const data=()=>window.XTendPage?.page?.props?.['search.data'];
- // Classic 0.8.0 schedules focus on its root after alert-shown. Inline notices
- // are live regions, not focus destinations; retain the native close button.
- document.addEventListener('alert-shown',event=>{
-  if(event.target.matches?.('x-alert.search-warning'))event.target.shadowRoot?.querySelector('[part~="root"]')?.removeAttribute('tabindex');
- });
  window.addEventListener('xtend-page:event',({detail:event})=>{
   if(event.type==='pending')pending=true;
   if(event.type==='navigate'){

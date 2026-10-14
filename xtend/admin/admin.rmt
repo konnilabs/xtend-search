@@ -1,4 +1,54 @@
 template xtend.observatory {
+ datasource admin.drafts.reduce from host admin.drafts.reduce { mode invoke
+ contract "xsearch.admin-drafts.v1"
+ }
+  state admin.drafts type object preserve { initial {
+weather-policy-form false
+motd-list-form false
+motd-override-form false
+motd-rotate-form false
+routing-form false
+policy-form false
+drain-form false
+probe-form false
+quality-decision-form false
+quality-rule-form false
+} }
+  state admin.busy type boolean initial false
+  state admin.guard type boolean initial false
+  action admin.drafts.set { input value object
+    reduce state.admin.drafts = input.value
+  }
+  action admin.busy.set { input value boolean
+    reduce state.admin.busy = input.value
+  }
+  action admin.guard.set { input value boolean
+    reduce state.admin.guard = input.value
+  }
+  state admin.guardView type object preserve { initial {
+    id "admin-guard-view"
+    viewTemplate { children [ {
+      type "element"
+      tag "x-dialog"
+      key "admin-draft-guard"
+      attributes { id "admin-draft-guard" overlay true open "$model.admin.guard" title "Ungespeicherte Änderungen" width "min(520px, calc(100vw - 24px))" }
+      children [ { type "element" tag "p" text "Die Eingaben sind noch nicht gespeichert." }
+        { type "element" tag "div" class "draft-actions" children [
+          { type "element" tag "button" text "Speichern" attributes { type "button" data-choice "save" disabled "$model.admin.busy" } }
+          { type "element" tag "button" text "Verwerfen" attributes { type "button" data-choice "discard" disabled "$model.admin.busy" } }
+          { type "element" tag "button" text "Abbrechen" attributes { type "button" data-choice "cancel" disabled "$model.admin.busy" } }
+        ] }
+      ]
+    } ] }
+  } }
+  selector admin.guardView from state admin.guardView { output AdminView }
+  surface admin.guardView kind content component x-section {
+    source selector admin.guardView
+    key guardView.id
+    portal admin.root
+    lane visible weight 70 { hydrate admin-guard from selector admin.guardView }
+  }
+
   datasource admin.weather.policy.set from host admin.weather.policy.set { mode invoke
     contract "xsearch.weather-policy.v1"
 }
@@ -127,6 +177,7 @@ template xtend.observatory {
           "type" "element"
           "tag" "div"
           "class" "observatory"
+ "attributes" { "inert" "$model.admin.guard" }
           "children" [
             {
               "type" "element"
@@ -392,10 +443,10 @@ template xtend.observatory {
                                         "attributes" {
                                           "type" "checkbox"
                                           "name" "enabled"
-                                          "disabled" "$model.admin.data.readOnly"
+                                          "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                         }
                                         "properties" {
-                                          "checked" "$model.admin.data.weather.enabled"
+                                          "checked" { "op" "if" "test" "$model.admin.drafts.weather-policy-form" "then" "$model.admin.drafts.weather-policy-form.enabled" "else" "$model.admin.data.weather.enabled" }
                                         }
                                       }
                                       {
@@ -416,10 +467,10 @@ template xtend.observatory {
                                         "attributes" {
                                           "type" "checkbox"
                                           "name" "paused"
-                                          "disabled" "$model.admin.data.readOnly"
+                                          "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                         }
                                         "properties" {
-                                          "checked" "$model.admin.data.weather.paused"
+                                          "checked" { "op" "if" "test" "$model.admin.drafts.weather-policy-form" "then" "$model.admin.drafts.weather-policy-form.paused" "else" "$model.admin.data.weather.paused" }
                                         }
                                       }
                                       {
@@ -440,10 +491,10 @@ template xtend.observatory {
                                         "attributes" {
                                           "type" "checkbox"
                                           "name" "alerts"
-                                          "disabled" "$model.admin.data.readOnly"
+                                          "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                         }
                                         "properties" {
-                                          "checked" "$model.admin.data.weather.alerts"
+                                          "checked" { "op" "if" "test" "$model.admin.drafts.weather-policy-form" "then" "$model.admin.drafts.weather-policy-form.alerts" "else" "$model.admin.data.weather.alerts" }
                                         }
                                       }
                                       {
@@ -474,9 +525,9 @@ template xtend.observatory {
                                             "name" "$item.id"
                                             "type" "number"
                                             "min" 1
-                                            "value" "$item.value"
+                                            "value" { "op" "if" "test" "$model.admin.drafts.weather-policy-form" "then" "$model.admin.drafts.weather-policy-form.$item.id" "else" "$item.value" }
                                             "required" true
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                           }
                                         }
                                         {
@@ -493,7 +544,7 @@ template xtend.observatory {
                                     "text" "Wetterkonfiguration speichern"
                                     "attributes" {
                                       "type" "submit"
-                                      "disabled" "$model.admin.data.readOnly"
+                                      "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                     }
                                   }
                                 ]
@@ -618,7 +669,7 @@ template xtend.observatory {
                                       "rows" 8
                                       "required" true
                                       "maxlength" 8192
-                                      "disabled" "$model.admin.data.readOnly"
+                                      "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                     }
                                   }
                                   {
@@ -627,7 +678,7 @@ template xtend.observatory {
                                     "text" "Liste speichern"
                                     "attributes" {
                                       "type" "submit"
-                                      "disabled" "$model.admin.data.readOnly"
+                                      "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                     }
                                   }
                                 ]
@@ -682,10 +733,10 @@ template xtend.observatory {
                                       "id" "motd-override"
                                       "name" "message"
                                       "type" "text"
-                                      "value" "$model.admin.data.motd.message"
+                                      "value" { "op" "if" "test" "$model.admin.drafts.motd-override-form" "then" "$model.admin.drafts.motd-override-form.message" "else" "$model.admin.data.motd.message" }
                                       "required" true
                                       "maxlength" 160
-                                      "disabled" "$model.admin.data.readOnly"
+                                      "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                     }
                                   }
                                   {
@@ -694,7 +745,7 @@ template xtend.observatory {
                                     "text" "Heute sofort anzeigen"
                                     "attributes" {
                                       "type" "submit"
-                                      "disabled" "$model.admin.data.readOnly"
+                                      "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                     }
                                   }
                                 ]
@@ -740,7 +791,7 @@ template xtend.observatory {
                                     "text" "Neue Tagesauswahl aus der Liste"
                                     "attributes" {
                                       "type" "submit"
-                                      "disabled" "$model.admin.data.readOnly"
+                                      "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                     }
                                   }
                                 ]
@@ -1541,8 +1592,8 @@ template xtend.observatory {
                                         "tag" "select"
                                         "attributes" {
                                           "name" "mode"
-                                          "value" "$model.admin.data.mode"
-                                          "disabled" "$model.admin.data.operatorDisabled"
+                                          "value" { "op" "if" "test" "$model.admin.drafts.routing-form" "then" "$model.admin.drafts.routing-form.mode" "else" "$model.admin.data.mode" }
+                                          "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.operatorDisabled" }
                                         }
                                         "children" [
                                           {
@@ -1553,7 +1604,7 @@ template xtend.observatory {
                                               "value" "conservative"
                                               "selected" {
                                                 "op" "equals"
-                                                "left" "$model.admin.data.mode"
+                                                "left" { "op" "if" "test" "$model.admin.drafts.routing-form" "then" "$model.admin.drafts.routing-form.mode" "else" "$model.admin.data.mode" }
                                                 "right" "conservative"
                                               }
                                             }
@@ -1566,7 +1617,7 @@ template xtend.observatory {
                                               "value" "adaptive"
                                               "selected" {
                                                 "op" "equals"
-                                                "left" "$model.admin.data.mode"
+                                                "left" { "op" "if" "test" "$model.admin.drafts.routing-form" "then" "$model.admin.drafts.routing-form.mode" "else" "$model.admin.data.mode" }
                                                 "right" "adaptive"
                                               }
                                             }
@@ -1581,7 +1632,7 @@ template xtend.observatory {
                                     "text" "Betriebsmodus speichern"
                                     "attributes" {
                                       "type" "submit"
-                                      "disabled" "$model.admin.data.operatorDisabled"
+                                      "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.operatorDisabled" }
                                     }
                                   }
                                   {
@@ -2038,8 +2089,8 @@ template xtend.observatory {
                                           "tag" "select"
                                           "attributes" {
                                             "name" "state"
-                                            "value" "$model.admin.data.form.state"
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "value" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.state" "else" "$model.admin.data.form.state" }
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                           }
                                           "children" [
                                             {
@@ -2050,7 +2101,7 @@ template xtend.observatory {
                                                 "value" "disabled"
                                                 "selected" {
                                                   "op" "equals"
-                                                  "left" "$model.admin.data.form.state"
+                                                  "left" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.state" "else" "$model.admin.data.form.state" }
                                                   "right" "disabled"
                                                 }
                                               }
@@ -2063,7 +2114,7 @@ template xtend.observatory {
                                                 "value" "allowed"
                                                 "selected" {
                                                   "op" "equals"
-                                                  "left" "$model.admin.data.form.state"
+                                                  "left" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.state" "else" "$model.admin.data.form.state" }
                                                   "right" "allowed"
                                                 }
                                               }
@@ -2089,8 +2140,8 @@ template xtend.observatory {
                                             "aria-describedby" "available-capabilities"
                                             "name" "capabilities"
                                             "type" "text"
-                                            "value" "$model.admin.data.form.capabilities"
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "value" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.capabilities" "else" "$model.admin.data.form.capabilities" }
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             "required" false
                                           }
                                         }
@@ -2125,10 +2176,10 @@ template xtend.observatory {
                                           "attributes" {
                                             "name" "rpm"
                                             "type" "number"
-                                            "value" "$model.admin.data.form.rpm"
+                                            "value" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.rpm" "else" "$model.admin.data.form.rpm" }
                                             "min" 1
                                             "max" 600
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             "required" true
                                           }
                                         }
@@ -2150,10 +2201,10 @@ template xtend.observatory {
                                           "attributes" {
                                             "name" "concurrency"
                                             "type" "number"
-                                            "value" "$model.admin.data.form.concurrency"
+                                            "value" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.concurrency" "else" "$model.admin.data.form.concurrency" }
                                             "min" 1
                                             "max" 4
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             "required" true
                                           }
                                         }
@@ -2175,8 +2226,8 @@ template xtend.observatory {
                                           "attributes" {
                                             "name" "family"
                                             "type" "text"
-                                            "value" "$model.admin.data.form.family"
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "value" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.family" "else" "$model.admin.data.form.family" }
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             "required" true
                                           }
                                         }
@@ -2196,13 +2247,13 @@ template xtend.observatory {
                                           "type" "element"
                                           "tag" "input"
                                           "properties" {
-                                            "checked" "$model.admin.data.form.safeSearchBypass"
+                                            "checked" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.safeSearchBypass" "else" "$model.admin.data.form.safeSearchBypass" }
                                           }
                                           "attributes" {
                                             "name" "safeSearchBypass"
                                             "type" "checkbox"
-                                            "checked" "$model.admin.data.form.safeSearchBypass"
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "checked" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.safeSearchBypass" "else" "$model.admin.data.form.safeSearchBypass" }
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                           }
                                         }
                                         {
@@ -2234,8 +2285,8 @@ template xtend.observatory {
                                           "attributes" {
                                             "name" "pagingVerified"
                                             "type" "checkbox"
-                                            "checked" "$model.admin.data.form.pagingVerified"
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "checked" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.pagingVerified" "else" "$model.admin.data.form.pagingVerified" }
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                           }
                                         }
                                         {
@@ -2256,8 +2307,8 @@ template xtend.observatory {
                                           "attributes" {
                                             "name" "quarantine"
                                             "type" "checkbox"
-                                            "checked" "$model.admin.data.form.quarantine"
-                                            "disabled" "$model.admin.data.readOnly"
+                                            "checked" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.quarantine" "else" "$model.admin.data.form.quarantine" }
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                           }
                                         }
                                         {
@@ -2290,7 +2341,7 @@ template xtend.observatory {
                                               "tag" "option"
                                               "text" "initial_review"
                                               "attributes" {
-                                                "value" "initial_review"
+                                                "value" { "op" "if" "test" "$model.admin.drafts.policy-form" "then" "$model.admin.drafts.policy-form.reason" "else" "initial_review" }
                                                 "selected" {
                                                   "op" "equals"
                                                   "left" "initial_review"
@@ -2425,7 +2476,7 @@ template xtend.observatory {
                                       "text" "Policy verbindlich speichern"
                                       "attributes" {
                                         "type" "submit"
-                                        "disabled" "$model.admin.data.readOnly"
+                                        "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                       }
                                     }
                                     {
@@ -2541,10 +2592,10 @@ template xtend.observatory {
                                               "attributes" {
                                                 "name" "minutes"
                                                 "type" "number"
-                                                "value" "15"
+                                                "value" { "op" "if" "test" "$model.admin.drafts.drain-form" "then" "$model.admin.drafts.drain-form.minutes" "else" "15" }
                                                 "min" 1
                                                 "max" 1440
-                                                "disabled" "$model.admin.data.operatorDisabled"
+                                                "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.operatorDisabled" }
                                               }
                                             }
                                           ]
@@ -2555,7 +2606,7 @@ template xtend.observatory {
                                           "text" "Drain anfordern"
                                           "attributes" {
                                             "type" "submit"
-                                            "disabled" "$model.admin.data.operatorDisabled"
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.operatorDisabled" }
                                           }
                                         }
                                         {
@@ -2671,7 +2722,7 @@ template xtend.observatory {
                                               "tag" "select"
                                               "attributes" {
                                                 "name" "capability"
-                                                "disabled" "$model.admin.data.probeDisabled"
+                                                "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.probeDisabled" }
                                               }
                                               "children" [
                                                 {
@@ -2686,7 +2737,7 @@ template xtend.observatory {
                                                       "selected" "$item.selected"
                                                     }
                                                     "attributes" {
-                                                      "value" "$item.id"
+                                                      "value" { "op" "if" "test" "$model.admin.drafts.probe-form" "then" "$model.admin.drafts.probe-form.capability" "else" "$item.id" }
                                                       "selected" "$item.selected"
                                                     }
                                                   }
@@ -2701,7 +2752,7 @@ template xtend.observatory {
                                           "text" "Budgetierte Probe vormerken"
                                           "attributes" {
                                             "type" "submit"
-                                            "disabled" "$model.admin.data.probeDisabled"
+                                            "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.probeDisabled" }
                                           }
                                         }
                                         {
@@ -3163,8 +3214,8 @@ template xtend.observatory {
                                             "attributes" {
                                               "name" "enabled"
                                               "type" "checkbox"
-                                              "checked" "$model.admin.data.qualityRule.enabled"
-                                              "disabled" "$model.admin.data.readOnly"
+                                              "checked" { "op" "if" "test" "$model.admin.drafts.quality-rule-form" "then" "$model.admin.drafts.quality-rule-form.enabled" "else" "$model.admin.data.qualityRule.enabled" }
+                                              "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             }
                                           }
                                           {
@@ -3190,11 +3241,11 @@ template xtend.observatory {
                                             "attributes" {
                                               "name" "threshold"
                                               "type" "number"
-                                              "value" "$model.admin.data.qualityRule.threshold"
+                                              "value" { "op" "if" "test" "$model.admin.drafts.quality-rule-form" "then" "$model.admin.drafts.quality-rule-form.threshold" "else" "$model.admin.data.qualityRule.threshold" }
                                               "min" 5
                                               "max" 1000
                                               "required" true
-                                              "disabled" "$model.admin.data.readOnly"
+                                              "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             }
                                           }
                                         ]
@@ -3215,11 +3266,11 @@ template xtend.observatory {
                                             "attributes" {
                                               "name" "contexts"
                                               "type" "number"
-                                              "value" "$model.admin.data.qualityRule.contexts"
+                                              "value" { "op" "if" "test" "$model.admin.drafts.quality-rule-form" "then" "$model.admin.drafts.quality-rule-form.contexts" "else" "$model.admin.data.qualityRule.contexts" }
                                               "min" 3
                                               "max" 100
                                               "required" true
-                                              "disabled" "$model.admin.data.readOnly"
+                                              "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             }
                                           }
                                         ]
@@ -3240,11 +3291,11 @@ template xtend.observatory {
                                             "attributes" {
                                               "name" "windowMinutes"
                                               "type" "number"
-                                              "value" "$model.admin.data.qualityRule.windowMinutes"
+                                              "value" { "op" "if" "test" "$model.admin.drafts.quality-rule-form" "then" "$model.admin.drafts.quality-rule-form.windowMinutes" "else" "$model.admin.data.qualityRule.windowMinutes" }
                                               "min" 10
                                               "max" 60
                                               "required" true
-                                              "disabled" "$model.admin.data.readOnly"
+                                              "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             }
                                           }
                                         ]
@@ -3265,11 +3316,11 @@ template xtend.observatory {
                                             "attributes" {
                                               "name" "cooldownMinutes"
                                               "type" "number"
-                                              "value" "$model.admin.data.qualityRule.cooldownMinutes"
+                                              "value" { "op" "if" "test" "$model.admin.drafts.quality-rule-form" "then" "$model.admin.drafts.quality-rule-form.cooldownMinutes" "else" "$model.admin.data.qualityRule.cooldownMinutes" }
                                               "min" 5
                                               "max" 60
                                               "required" true
-                                              "disabled" "$model.admin.data.readOnly"
+                                              "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                             }
                                           }
                                         ]
@@ -3280,7 +3331,7 @@ template xtend.observatory {
                                         "text" "Regel speichern"
                                         "attributes" {
                                           "type" "submit"
-                                          "disabled" "$model.admin.data.readOnly"
+                                          "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                         }
                                       }
                                       {

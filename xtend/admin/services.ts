@@ -1,5 +1,7 @@
 import {defineAppServices,service} from '@ccslabs/xtend/maraca/app-services';
+import {updateDrafts} from './draft-service-core.mjs';
 export default defineAppServices({
+ 'admin.drafts.reduce':service<Parameters<typeof updateDrafts>[0],ReturnType<typeof updateDrafts>>({kind:'command',target:'local',invoke:input=>updateDrafts(input)}),
  'admin.weather.policy.set':service({kind:'command',target:'server'}),
  'admin.motd.set':service({kind:'command',target:'server'}),
  'admin.quality.rule.set':service({kind:'command',target:'server'}),

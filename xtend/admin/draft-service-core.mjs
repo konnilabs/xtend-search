@@ -1,0 +1,3 @@
+export const emptyAdminDrafts=()=>Object.fromEntries(['weather-policy-form','motd-list-form','motd-override-form','motd-rotate-form','routing-form','policy-form','drain-form','probe-form','quality-decision-form','quality-rule-form'].map(id=>[id,false]));
+export function updateDrafts({drafts,id,values,remove=false,reset=false}){if(reset)return emptyAdminDrafts();const next={...emptyAdminDrafts(),...drafts};if(remove)next[id]=false;else next[id]={...values};return next;}
+export function adminFeedback(current,item){return {...current,items:item.dismiss?current.items.filter(row=>row.id!==item.id):[...current.items,item]};}

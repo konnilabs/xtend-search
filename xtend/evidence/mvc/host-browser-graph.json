@@ -1,0 +1,880 @@
+{
+  "inputs": {
+    "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs": {
+      "bytes": 4189,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/page-initial.mjs": {
+      "bytes": 2878,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs",
+          "kind": "import-statement",
+          "original": "./page-contract.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs",
+          "kind": "import-statement",
+          "original": "./page-wire.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs": {
+      "bytes": 9933,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs",
+          "kind": "import-statement",
+          "original": "./page-wire.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs",
+          "kind": "import-statement",
+          "original": "./page-wire.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-initial.mjs",
+          "kind": "import-statement",
+          "original": "./page-initial.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js": {
+      "bytes": 3011,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-capture-adapter.js": {
+      "bytes": 4815,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js": {
+      "bytes": 151605,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-selector-runtime.js": {
+      "bytes": 46960,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-portable-render.js": {
+      "bytes": 9680,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-selector-runtime.js",
+          "kind": "import-statement",
+          "original": "./rmt-state-selector-runtime.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js",
+          "kind": "import-statement",
+          "original": "./rmt-dom-descriptor-renderer.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-animation-engine-runtime.js": {
+      "bytes": 22338,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-host-adapter.js": {
+      "bytes": 3570,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-adapter.js": {
+      "bytes": 4440,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-controller.js": {
+      "bytes": 16100,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-runtime.js": {
+      "bytes": 2091,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-protocol.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-capture-adapter.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-capture-adapter.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-host-adapter.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-host-adapter.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-adapter.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-command-adapter.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-controller.js",
+          "kind": "import-statement",
+          "original": "./rmt-resume-command-controller.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/page-client.mjs": {
+      "bytes": 28446,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs",
+          "kind": "import-statement",
+          "original": "./page-contract.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js",
+          "kind": "import-statement",
+          "original": "./rmt-dom-descriptor-renderer.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-portable-render.js",
+          "kind": "import-statement",
+          "original": "./rmt-portable-render.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-animation-engine-runtime.js",
+          "kind": "import-statement",
+          "original": "./rmt-animation-engine-runtime.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-runtime.js",
+          "kind": "dynamic-import",
+          "original": "./rmt-resume-runtime.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs": {
+      "bytes": 233301,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs": {
+      "bytes": 2397,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs",
+          "kind": "import-statement",
+          "original": "./vendor/acorn.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/protocol.mjs": {
+      "bytes": 13354,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+      "bytes": 46227,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs",
+          "kind": "import-statement",
+          "original": "./verify-adapter.mjs"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+          "kind": "import-statement",
+          "original": "./protocol.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+      "bytes": 1419,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+      "bytes": 45072,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs",
+          "kind": "import-statement",
+          "original": "./trusted-text-sanitizer.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/remote-surface.mjs": {
+      "bytes": 12058,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/xscaler/remote-adapter-loader"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/xscaler/protocol"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "./app-services.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/page-client.mjs": {
+      "bytes": 5043,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-client.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/page-client"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/page-contract"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-portable-render.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/portable-render"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/remote-surface.mjs",
+          "kind": "import-statement",
+          "original": "./remote-surface.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtend-maraca/page-bootstrap.mjs": {
+      "bytes": 3107,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/page-contract"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-capture-adapter.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/resume-capture-adapter"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/page-client.mjs",
+          "kind": "dynamic-import",
+          "original": "./page-client.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xtendrmt/page-resource-cache.mjs": {
+      "bytes": 2888,
+      "imports": [],
+      "format": "esm"
+    },
+    "shared/cache-identity.mjs": {
+      "bytes": 1311,
+      "imports": [],
+      "format": "esm"
+    },
+    "frontend/cache-service-core.mjs": {
+      "bytes": 3080,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtendrmt/page-resource-cache.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/rmt/page-resource-cache"
+        },
+        {
+          "path": "shared/cache-identity.mjs",
+          "kind": "import-statement",
+          "original": "../shared/cache-identity.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "shared/about.mjs": {
+      "bytes": 5571,
+      "imports": [],
+      "format": "esm"
+    },
+    "shared/version.mjs": {
+      "bytes": 32,
+      "imports": [],
+      "format": "esm"
+    },
+    "frontend/images.mjs": {
+      "bytes": 2647,
+      "imports": [],
+      "format": "esm"
+    },
+    "frontend/overlay-service-core.mjs": {
+      "bytes": 1759,
+      "imports": [
+        {
+          "path": "shared/about.mjs",
+          "kind": "import-statement",
+          "original": "../shared/about.mjs"
+        },
+        {
+          "path": "shared/version.mjs",
+          "kind": "import-statement",
+          "original": "../shared/version.mjs"
+        },
+        {
+          "path": "frontend/images.mjs",
+          "kind": "import-statement",
+          "original": "./images.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/favicon-service-core.mjs": {
+      "bytes": 1346,
+      "imports": [],
+      "format": "esm"
+    },
+    "frontend/report-state.mjs": {
+      "bytes": 512,
+      "imports": [],
+      "format": "esm"
+    },
+    "frontend/report-service-core.mjs": {
+      "bytes": 2635,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/app-services"
+        },
+        {
+          "path": "frontend/report-state.mjs",
+          "kind": "import-statement",
+          "original": "./report-state.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/stream-service-core.mjs": {
+      "bytes": 2800,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/app-services"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/preferences-service-core.mjs": {
+      "bytes": 833,
+      "imports": [],
+      "format": "esm"
+    },
+    "frontend/services.ts": {
+      "bytes": 3888,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/app-services"
+        },
+        {
+          "path": "frontend/cache-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./cache-service-core.mjs"
+        },
+        {
+          "path": "frontend/overlay-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./overlay-service-core.mjs"
+        },
+        {
+          "path": "frontend/favicon-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./favicon-service-core.mjs"
+        },
+        {
+          "path": "frontend/report-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./report-service-core.mjs"
+        },
+        {
+          "path": "frontend/stream-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./stream-service-core.mjs"
+        },
+        {
+          "path": "frontend/preferences-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./preferences-service-core.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/lightbox.mjs": {
+      "bytes": 3584,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/app-services"
+        },
+        {
+          "path": "frontend/services.ts",
+          "kind": "import-statement",
+          "original": "./services.ts"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/preview.mjs": {
+      "bytes": 5750,
+      "imports": [
+        {
+          "path": "frontend/lightbox.mjs",
+          "kind": "dynamic-import",
+          "original": "./lightbox.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/alerts.mjs": {
+      "bytes": 2000,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@ccslabs/xtend/xscaler/app-service-transport.mjs": {
+      "bytes": 12475,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs",
+          "kind": "import-statement",
+          "original": "./remote-adapter-loader.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/streaming.mjs": {
+      "bytes": 5313,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/app-service-transport.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/xscaler/app-service-transport"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xscaler/protocol.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/xscaler/protocol"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/app-services"
+        },
+        {
+          "path": "frontend/services.ts",
+          "kind": "import-statement",
+          "original": "./services.ts"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/host.mjs": {
+      "bytes": 1938,
+      "imports": [
+        {
+          "path": "frontend/preview.mjs",
+          "kind": "import-statement",
+          "original": "./preview.mjs"
+        },
+        {
+          "path": "frontend/alerts.mjs",
+          "kind": "import-statement",
+          "original": "./alerts.mjs"
+        },
+        {
+          "path": "frontend/images.mjs",
+          "kind": "import-statement",
+          "original": "./images.mjs"
+        },
+        {
+          "path": "frontend/streaming.mjs",
+          "kind": "import-statement",
+          "original": "./streaming.mjs"
+        }
+      ],
+      "format": "esm"
+    },
+    "page.mjs": {
+      "bytes": 841,
+      "imports": [
+        {
+          "path": "/assets/xtend/resume-key.mjs",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/xtend-maraca/page-bootstrap.mjs",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/maraca/page-bootstrap"
+        },
+        {
+          "path": "frontend/host.mjs",
+          "kind": "import-statement",
+          "original": "./frontend/host.mjs"
+        }
+      ],
+      "format": "esm"
+    }
+  },
+  "outputs": {
+    "public/assets/xtend/page.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/chunks/chunk-HDGUSJ7J.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/chunks/chunk-GWYEVPPC.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/chunks/chunk-5RJ3NKDB.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/chunks/chunk-Q5OUVVO3.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "/assets/xtend/resume-key.mjs",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "public/assets/xtend/chunks/page-client-XWSNNG45.mjs",
+          "kind": "dynamic-import"
+        },
+        {
+          "path": "public/assets/xtend/chunks/lightbox-A7FEOEMQ.mjs",
+          "kind": "dynamic-import"
+        }
+      ],
+      "exports": [],
+      "entryPoint": "page.mjs",
+      "inputs": {
+        "page.mjs": {
+          "bytesInOutput": 584
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/page-bootstrap.mjs": {
+          "bytesInOutput": 1878
+        },
+        "frontend/preview.mjs": {
+          "bytesInOutput": 3786
+        },
+        "frontend/alerts.mjs": {
+          "bytesInOutput": 1181
+        },
+        "node_modules/@ccslabs/xtend/xscaler/app-service-transport.mjs": {
+          "bytesInOutput": 5890
+        },
+        "frontend/streaming.mjs": {
+          "bytesInOutput": 3458
+        },
+        "frontend/host.mjs": {
+          "bytesInOutput": 1082
+        }
+      },
+      "bytes": 18080
+    },
+    "public/assets/xtend/chunks/rmt-resume-runtime-TDYASBDO.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/chunks/chunk-HDGUSJ7J.mjs",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "RMT_RESUME_ADAPTER_SCHEMA",
+        "RMT_RESUME_ENVELOPE_SCHEMA",
+        "RMT_RESUME_INTENT_SCHEMA",
+        "RMT_RESUME_MAX_INTENTS",
+        "RMT_RESUME_RESULT_SCHEMA",
+        "RMT_RESUME_RUNTIME_SCHEMA",
+        "canonicalizeRmtResumePayload",
+        "createRmtResumeRuntime",
+        "default",
+        "installRmtPrebootIntentCapture",
+        "resumeResponse",
+        "resumeTemplate"
+      ],
+      "entryPoint": "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-runtime.js",
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-host-adapter.js": {
+          "bytesInOutput": 2011
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-adapter.js": {
+          "bytesInOutput": 2229
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-command-controller.js": {
+          "bytesInOutput": 7497
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-runtime.js": {
+          "bytesInOutput": 688
+        }
+      },
+      "bytes": 12928
+    },
+    "public/assets/xtend/chunks/chunk-HDGUSJ7J.mjs": {
+      "imports": [],
+      "exports": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m",
+        "n",
+        "o",
+        "p",
+        "q"
+      ],
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-protocol.js": {
+          "bytesInOutput": 1408
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-resume-capture-adapter.js": {
+          "bytesInOutput": 2313
+        }
+      },
+      "bytes": 3844
+    },
+    "public/assets/xtend/chunks/page-client-XWSNNG45.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/chunks/chunk-GWYEVPPC.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/chunks/chunk-Q5OUVVO3.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/chunks/rmt-resume-runtime-TDYASBDO.mjs",
+          "kind": "dynamic-import"
+        }
+      ],
+      "exports": [
+        "createMaracaPageClient"
+      ],
+      "entryPoint": "node_modules/@ccslabs/xtend/xtend-maraca/page-client.mjs",
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js": {
+          "bytesInOutput": 69336
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-selector-runtime.js": {
+          "bytesInOutput": 20381
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-portable-render.js": {
+          "bytesInOutput": 2480
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/rmt-animation-engine-runtime.js": {
+          "bytesInOutput": 10514
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/page-client.mjs": {
+          "bytesInOutput": 16599
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/remote-surface.mjs": {
+          "bytesInOutput": 4213
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/page-client.mjs": {
+          "bytesInOutput": 2710
+        }
+      },
+      "bytes": 126414
+    },
+    "public/assets/xtend/chunks/chunk-GWYEVPPC.mjs": {
+      "imports": [],
+      "exports": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f",
+        "g",
+        "h",
+        "i",
+        "j",
+        "k",
+        "l",
+        "m"
+      ],
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/page-wire.mjs": {
+          "bytesInOutput": 1283
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/page-contract.mjs": {
+          "bytesInOutput": 4341
+        },
+        "node_modules/@ccslabs/xtend/xtendrmt/page-initial.mjs": {
+          "bytesInOutput": 866
+        },
+        "node_modules/@ccslabs/xtend/xscaler/protocol.mjs": {
+          "bytesInOutput": 5929
+        },
+        "node_modules/@ccslabs/xtend/xscaler/vendor/acorn.mjs": {
+          "bytesInOutput": 121141
+        },
+        "node_modules/@ccslabs/xtend/xscaler/verify-adapter.mjs": {
+          "bytesInOutput": 1464
+        },
+        "node_modules/@ccslabs/xtend/xscaler/remote-adapter-loader.mjs": {
+          "bytesInOutput": 21946
+        }
+      },
+      "bytes": 157082
+    },
+    "public/assets/xtend/chunks/lightbox-A7FEOEMQ.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/chunks/chunk-5RJ3NKDB.mjs",
+          "kind": "import-statement"
+        },
+        {
+          "path": "public/assets/xtend/chunks/chunk-Q5OUVVO3.mjs",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "createSearchLightbox"
+      ],
+      "entryPoint": "frontend/lightbox.mjs",
+      "inputs": {
+        "frontend/lightbox.mjs": {
+          "bytesInOutput": 2459
+        }
+      },
+      "bytes": 2576
+    },
+    "public/assets/xtend/chunks/chunk-5RJ3NKDB.mjs": {
+      "imports": [
+        {
+          "path": "public/assets/xtend/chunks/chunk-Q5OUVVO3.mjs",
+          "kind": "import-statement"
+        }
+      ],
+      "exports": [
+        "a",
+        "b"
+      ],
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtendrmt/page-resource-cache.mjs": {
+          "bytesInOutput": 1921
+        },
+        "shared/cache-identity.mjs": {
+          "bytesInOutput": 989
+        },
+        "frontend/cache-service-core.mjs": {
+          "bytesInOutput": 1784
+        },
+        "shared/about.mjs": {
+          "bytesInOutput": 5300
+        },
+        "shared/version.mjs": {
+          "bytesInOutput": 14
+        },
+        "frontend/images.mjs": {
+          "bytesInOutput": 1401
+        },
+        "frontend/overlay-service-core.mjs": {
+          "bytesInOutput": 1179
+        },
+        "frontend/favicon-service-core.mjs": {
+          "bytesInOutput": 859
+        },
+        "frontend/report-state.mjs": {
+          "bytesInOutput": 239
+        },
+        "frontend/report-service-core.mjs": {
+          "bytesInOutput": 1756
+        },
+        "frontend/stream-service-core.mjs": {
+          "bytesInOutput": 1562
+        },
+        "frontend/preferences-service-core.mjs": {
+          "bytesInOutput": 668
+        },
+        "frontend/services.ts": {
+          "bytesInOutput": 1808
+        }
+      },
+      "bytes": 19567
+    },
+    "public/assets/xtend/chunks/chunk-Q5OUVVO3.mjs": {
+      "imports": [],
+      "exports": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "inputs": {
+        "node_modules/@ccslabs/xtend/xtend-maraca/trusted-text-sanitizer.mjs": {
+          "bytesInOutput": 703
+        },
+        "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs": {
+          "bytesInOutput": 22642
+        }
+      },
+      "bytes": 23386
+    }
+  }
+}
