@@ -35,7 +35,15 @@ test('favicon projection rechecks after a rejected queued CAS and decorates the 
  const gate=new Promise(resolve=>release=resolve),queued=new Promise(resolve=>reached=resolve),accepted=[];
  const projection=createFaviconProjection({readOwner:()=>resultProjectionOwner(current),readResults:()=>structuredClone(current.results),
   project:async rows=>({results:rows.map(row=>({...row,faviconSrc:'blob:'+row.id,faviconReady:true}))}),isCurrent:()=>true,
-  commit:async(value,owner)=>{if(!accepted.length){reached();await gate;}const result=applyResultProjection({value:{...value,owner}},current);accepted.push(result.accepted);current={...current,results:result.results};}});
+  commit:async(value,owner)=>{if(!accepted.length){reached();await gate;}const result=applyResultProjection({value:{...value,owner}},current);accepted.push(result.accepted);current={...current,results:result.results};return {status:'success',data:result};}});
  const work=projection.request(1);await queued;current=data('general',10);release();await work;
  assert.deepEqual(accepted,[false,true]);assert.equal(current.results.length,10);assert.ok(current.results.every(row=>row.id.startsWith('general')&&row.faviconReady));projection.dispose();
+});
+test('an error command outcome terminates favicon projection without retrying an unchanged Model',async()=>{
+ const current=data('general',10);let commits=0;
+ const projection=createFaviconProjection({readOwner:()=>resultProjectionOwner(current),readResults:()=>structuredClone(current.results),
+  project:async rows=>({results:rows.map(row=>({...row,faviconSrc:'blob:cached',faviconReady:true}))}),isCurrent:()=>true,
+  commit:async()=>{assert.equal(++commits,1,'Service errors must not be retried');return {status:'error'};}});
+ await projection.request(1);assert.equal(commits,1);assert.equal(projection.snapshot().running,false);assert.equal(projection.snapshot().requested,false);
+ assert.ok(current.results.every(row=>row.faviconSrc===''));projection.dispose();
 });

@@ -12,9 +12,10 @@ async function build(){
  const streamIntegrity=createHash('sha256').update(fs.readFileSync(path.join(out,'search-remote-adapter.mjs'))).digest('base64');
  const session=createRmtCompilationSession({root});
  try {
- const built=await buildMaracaBundleAsync({source:'frontend/search.rmt',out:'public/assets/xtend/maraca',profile:'production',lazy:'component',orchestration:'strict',kernel:'strict',kernelBootMode:'direct',hydration:'strict',validation:'auto',transitions:'auto',componentMode:'document',stackMode:'plan',css:'external'},{rootDir:root,compileSource:session.compileSource});
+ const built=await buildMaracaBundleAsync({source:'frontend/search.rmt',out:'public/assets/xtend/maraca',profile:'production',lazy:'component',orchestration:'strict',kernel:'strict',kernelBootMode:'direct',hydration:'strict',validation:'auto',transitions:'auto',componentMode:'document',stackMode:'plan',css:'external',services:{clientEntry:'frontend/services.ts',targets:['browser'],strict:true,budgets:{clientBytes:20000},transport:{kind:'http-ndjson',basePath:'/api/xtend/services'}}},{rootDir:root,compileSource:session.compileSource});
  if(!built.ok)throw Object.assign(new Error('Maraca-Build fehlgeschlagen'),{details:built.plan?.diagnostics || built});
  const report=JSON.parse(fs.readFileSync(path.join(out,'maraca/xtend.maraca.report.json')));
+ if(!report.services?.enabled||!report.services.ok)throw new Error('Search requires its registered Maraca App Services.');
  if(!report.toolchain.rollup.available || !report.toolchain.terser.available)throw new Error('Production requires Rollup and Terser; local importgraph fallback is not deployable.');
  const configuration={applicationKey:'xtend.search',viewTransitions:false,events:built.plan.orchestration?.artifact?.events || []};
  const entry=`import publicKey from '/assets/xtend/resume-key.mjs';import {startMaracaPageApplication} from '@ccslabs/xtend/maraca/page-bootstrap';import {installSearchHost} from './frontend/host.mjs';installSearchHost();startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey}).catch(()=>{});`;

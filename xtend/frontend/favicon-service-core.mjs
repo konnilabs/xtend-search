@@ -24,7 +24,10 @@ export function createFaviconProjection({readOwner,readResults,project,commit,is
     const before=readResults(),owner=readOwner?.(),fingerprint=JSON.stringify(before),value=await project(before);if(disposed||!isCurrent(own))continue;
     if(JSON.stringify(readResults())!==fingerprint){requested=true;continue;}
     if(differs(before,value.results)){
-     await commit(value,owner);
+     const outcome=await commit(value,owner);
+     // dispatchCommand can resolve a failure instead of throwing. Never turn
+     // service/command errors into an implicit, unbounded projection retry.
+     if(outcome?.status&&outcome.status!=='success'){requested=false;break;}
      // A queued CAS can be rejected after the early check. Re-project the
      // current Model instead of leaving an ignored old snapshot as the last run.
      if(!disposed&&isCurrent(own)&&JSON.stringify(readResults())!==JSON.stringify(value.results))requested=true;

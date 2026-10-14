@@ -117,7 +117,11 @@ TEST_BASE_URL=http://localhost:8093 TEST_BROWSER=firefox node xtend/tests/contro
 
 Fünf gezielte Unit-Regressionen decken queued Reentry, Wachstum innerhalb eines
 Streams, andere Ressourcen, fehlende Owner und die Favicon-Neuprojektion nach
-einem abgelehnten queued CAS ab. Die finalen tatsächlichen XTend-MCP-Compile- und
+einem abgelehnten queued CAS ab. Eine weitere Regression verlangt bei einem
+Command-Outcome `{status:'error'}` genau einen Commit und danach `running=false`.
+Service-/Commandfehler lösen ausdrücklich keine erneute Projektion aus;
+erfolgreich verworfene CAS und echte neue Model-Snapshots werden weiter geprüft.
+Die finalen tatsächlichen XTend-MCP-Compile- und
 Plan-Checks für alle drei RMT-Dateien stehen kompakt mit Input-SHA-256 und
 SDK-Vertragsquell-Hashes in `evidence/mvc/xtend-mcp-checks.json`.
 
@@ -128,8 +132,11 @@ Docker-v04, Feedback-Readiness, unveränderter Cache-Gate und gezieltes spätes
 Images-Replay in Chromium/Firefox bestanden. Die neue PR-CI ist noch offen.
 Die lokalen Legacy-Host-Thumbnail-Checks sind ausdrücklich **nicht grün**:
 `search.images.set` liefert dort Status `error`, und der Host-Buildreport zeigt
-`services.enabled=false`. Diese Service-Anbindung wird noch abgeschlossen;
-der Befund wird nicht dem Speicherengpass zugeschrieben.
+`services.enabled=false`. Der folgende kleine Fixstand aktiviert die native
+Browser-App-Service-Konfiguration auch im Host-Build und verlangt einen aktiven,
+erfolgreichen Service-Buildreport. Die Host-Thumbnail-Gates werden damit erneut
+ausgeführt; bis zu ihrem tatsächlichen Ergebnis bleiben sie offen. Der Befund
+wird nicht dem Speicherengpass zugeschrieben.
 
 Der separate Infrastrukturblocker war belegtes `ENOSPC`: Das 32-GiB-Overlay
 meldete 31 GiB belegt und null freien Blockspeicher. Nach Entfernung eigener
