@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "frontend": "sha256:b1e60b07cf69038a2075da31a85ee725b6a138b60385048fa7cf8c4ec1320269",
+  "previousFrontend": "sha256:ad59a228b70f7e07b80408152b0627e2aaa588d977408590bf1b7d8ecb642882",
+  "health": {
+    "ok": true,
+    "version": "0.6.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "preserved": {
+    "metadata": true,
+    "policies": true,
+    "guards": true,
+    "weather_policy": true,
+    "quality_rules": true,
+    "quality_pauses": true,
+    "signingKeys": true,
+    "environmentAndSSO": true,
+    "image": true
+  },
+  "scope": "Local Docker instance, existing data and protected configuration; no policy mutations"
+}

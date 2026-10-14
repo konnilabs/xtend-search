@@ -1,8 +1,11 @@
 import http from 'node:http';
 import {randomUUID} from 'node:crypto';
+import {installWeatherFixture} from './weather-fixture.mjs';
+const weather=installWeatherFixture({on(){}});
 const codes=new Map();
 http.createServer(async(req,res)=>{
  const url=new URL(req.url,'http://localhost:8094');res.setHeader('Cache-Control','no-store');
+ if(await weather(req,res,url))return;
  if(url.pathname==='/apps/oauth2/authorize'){
   res.setHeader('Content-Type','text/html');res.end('<h1>Local Nextcloud OAuth2 protocol fixture</h1>'+['administrator','operator','viewer','outsider'].map(role=>`<a href="/grant?state=${encodeURIComponent(url.searchParams.get('state'))}&role=${role}">${role}</a>`).join('<br>'));return;
  }

@@ -1,0 +1,238 @@
+{
+  "ok": true,
+  "runs": [
+    {
+      "mode": "baseline",
+      "status": "failed",
+      "toggleChecks": [
+        {
+          "name": "toggle property writes stay silent",
+          "passed": true,
+          "details": {}
+        },
+        {
+          "name": "toggle native activations emit exactly once",
+          "passed": false,
+          "details": {
+            "events": []
+          }
+        },
+        {
+          "name": "toggle duplicate changes and property writes stay silent",
+          "passed": false,
+          "details": {}
+        },
+        {
+          "name": "toggle public actions emit exactly once",
+          "passed": false,
+          "details": {}
+        },
+        {
+          "name": "toggle disabled prevents native and public changes",
+          "passed": false,
+          "details": {}
+        },
+        {
+          "name": "toggle busy prevents native and public changes",
+          "passed": false,
+          "details": {}
+        }
+      ],
+      "errors": [
+        "toggle native activations emit exactly once",
+        "toggle duplicate changes and property writes stay silent",
+        "toggle public actions emit exactly once",
+        "toggle disabled prevents native and public changes",
+        "toggle busy prevents native and public changes"
+      ]
+    },
+    {
+      "mode": "fixed",
+      "status": "passed",
+      "toggleChecks": [
+        {
+          "name": "toggle property writes stay silent",
+          "passed": true,
+          "details": {}
+        },
+        {
+          "name": "toggle native activations emit exactly once",
+          "passed": true,
+          "details": {
+            "events": [
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "name": "toggle duplicate changes and property writes stay silent",
+          "passed": true,
+          "details": {}
+        },
+        {
+          "name": "toggle public actions emit exactly once",
+          "passed": true,
+          "details": {}
+        },
+        {
+          "name": "toggle disabled prevents native and public changes",
+          "passed": true,
+          "details": {}
+        },
+        {
+          "name": "toggle busy prevents native and public changes",
+          "passed": true,
+          "details": {}
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "scope": "Standalone upstream browser fixture against original generated component and the fixed component. Expected baseline failure; native pointer/change and keyboard Space exercised. SDK remains pinned in Search; a public toggle() activation adapter is used until the reviewed framework fix is consumed.",
+  "upstreamPullRequest": "https://github.com/konnilabs/xtend/pull/111",
+  "upstreamHead": "e1a6f7666a11ab7d0430c3906ce78414ff8f7532",
+  "frameworkTargetedGate": "test:component-ux-browser-smokes passed",
+  "keyboardSpaceExpectedEvents": [
+    false,
+    true
+  ],
+  "keyboardSpacePassed": true,
+  "githubChecks": [
+    {
+      "conclusion": "skipped",
+      "name": "Publish npm latest with provenance (Node 24.18.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "RMT vNext and Native-First RMT Owned gates (Node 24.18.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "RMT vNext and Native-First RMT Owned gates (Node 26.5.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "laravel-release-gates",
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Full release gates (Node ${{ matrix.node_version }})",
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "Conditional network evidence (Node ${{ matrix.node_version }})",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Node native toolchain smoke (windows-2025-x64, Node 26.5.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Node native toolchain smoke (macos-15-arm64, Node 26.5.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Node native toolchain smoke (windows-2025-x64, Node 24.18.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Package structure dry runs (Node 24.18.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Node native toolchain smoke (macos-15-arm64, Node 24.18.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "XTend MCP VSIX smoke (ubuntu-latest)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Package structure dry runs (Node 26.5.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Node native toolchain smoke (ubuntu-24.04-x64, Node 24.18.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "PR fast gates (Node 24.18.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "XTend MCP VSIX smoke (windows-latest)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Node native toolchain smoke (ubuntu-24.04-x64, Node 26.5.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "XTend MCP VSIX smoke (macos-latest)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "PR fast gates (Node 26.5.0)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Laravel 12 / PHP 8.3",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Laravel 12 / PHP 8.4",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Laravel 12 / PHP 8.2",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Laravel 12 / PHP 8.5",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Laravel 13 / PHP 8.3",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Laravel 13 / PHP 8.5",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "regression",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "Laravel 13 / PHP 8.4",
+      "status": "completed"
+    }
+  ]
+}

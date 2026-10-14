@@ -4,6 +4,7 @@ export function categoryDraftUrl(href, values, origin){
  const url=new URL(href,origin);
  if(url.origin!==origin||!['/','/search'].includes(url.pathname))throw new Error('Invalid category link');
  for(const name of ['q','language','time_range','safesearch'])url.searchParams.set(name,String(values.get(name)??''));
+ url.searchParams.delete('location');
  url.searchParams.delete('pageno');url.searchParams.delete('cursor');
  url.pathname=url.searchParams.get('q')?.trim()?'/search':'/';
  return url.pathname+url.search;

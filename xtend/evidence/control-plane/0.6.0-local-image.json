@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "version": "0.6.0",
+  "fromImage": "sha256:6048b27d6e3c60cf5eb03586454ba5e98519a55bf44cb36e7a07a25b5926dd43",
+  "finalImage": "sha256:a0f6a5d6b163f83ae825355b85cdd0a8c724d69214a7b15e022599ff0c68755b",
+  "sourceLockfileExact": true,
+  "policiesGuardsMotdWeatherAndKeysUnchanged": true,
+  "ssoEnvironmentUnchanged": true,
+  "scope": "Local development only; existing pre-0.6.0 backup retained",
+  "health": {
+    "ok": true,
+    "version": "0.6.0",
+    "storage": "ready",
+    "retrieval": "compatible"
+  }
+}

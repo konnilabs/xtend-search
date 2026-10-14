@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.control
-    image: xtend-search:0.5.1
+    image: xtend-search:0.6.0
     depends_on:
       searxng:
         condition: service_healthy
@@ -21,6 +21,8 @@ services:
       XTEND_ADMIN_ROLES: ${XTEND_ADMIN_ROLES:-{}}
       XTEND_SEARCH_CACHE: ${XTEND_SEARCH_CACHE:-1}
       XTEND_DEMAND_RECOVERY: ${XTEND_DEMAND_RECOVERY:-1}
+      XTEND_WEATHER: ${XTEND_WEATHER:-1}
+      XTEND_WEATHER_ALERTS: ${XTEND_WEATHER_ALERTS:-dwd}
       XTEND_PROBES: ${XTEND_PROBES:-0}
       XTEND_ADMIN_MUTATIONS: ${XTEND_ADMIN_MUTATIONS:-1}
       XTEND_STREAMING: ${XTEND_STREAMING:-1}

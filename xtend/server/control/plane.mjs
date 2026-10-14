@@ -11,7 +11,7 @@ export class ControlPlane {
  constructor({store,adapter,probeEnabled=false}){this.store=store;this.adapter=adapter;this.telemetry=new Telemetry(store);this.policies=new Map();this.health=new Map();this.buckets=new Map();this.inflight=new Map();this.revision=0;this.mode='conservative';this.storeOK=false;this.stopping=false;this.serial=Promise.resolve();this.probeEnabled=probeEnabled;this.demandRecovery=process.env.XTEND_DEMAND_RECOVERY!=='0';this.knowledgeRotation={family:0,engines:new Map()};this.probes=new Map();this.backendUntil=0;this.skips={};this.lastDispatch=0;this.probeController=new AbortController();this.tickPromise=null;}
  exclusive(fn){const p=this.serial.then(fn);this.serial=p.catch(()=>{});return p;}
  async initialize(){try{this.adopt(await this.store.call('load'));this.storeOK=true;}catch{this.storeOK=false;}void this.refresh();this.timer=setTimeout(()=>void this.scheduleTick(),30000);this.timer.unref();}
- adopt(state){this.motdState=state.motd;this.revision=state.meta.revision;this.mode=state.meta.mode;this.policies=new Map(state.policies.map(p=>[p.id,JSON.parse(p.value)]));if(!this.loaded){for(const row of state.guards){const value=JSON.parse(row.value);if(row.id.startsWith('health:'))this.health.set(row.id.slice(7),{...defaultHealth(),...value,health:'unknown',samples:[]});else if(row.id==='backend')this.backendUntil=value.until;else this.buckets.set(row.id,value);}this.telemetry.restore(state.events||[]);this.loaded=true;}this.audit=state.audit;this.history=state.aggregates;this.quality?.adopt(state.quality);}
+ adopt(state){this.motdState=state.motd;this.weatherState=state.weather;this.revision=state.meta.revision;this.mode=state.meta.mode;this.policies=new Map(state.policies.map(p=>[p.id,JSON.parse(p.value)]));if(!this.loaded){for(const row of state.guards){const value=JSON.parse(row.value);if(row.id.startsWith('health:'))this.health.set(row.id.slice(7),{...defaultHealth(),...value,health:'unknown',samples:[]});else if(row.id==='backend')this.backendUntil=value.until;else this.buckets.set(row.id,value);}this.telemetry.restore(state.events||[]);this.loaded=true;}this.audit=state.audit;this.history=state.aggregates;this.quality?.adopt(state.quality);}
  async refresh(){try{await this.adapter.discover();this.telemetry.emit('capability.changed',{backendId:'searxng-primary',policyRevision:this.revision});}catch{this.telemetry.emit('backend.changed',{backendId:'searxng-primary',outcome:'error',errorClass:'backend_unavailable'});}}
  policy(id){return this.policies.get(id)||defaultPolicy(id);}
  healthFor(id,capability){const key=`${id}:${capability}`;if(!this.health.has(key))this.health.set(key,defaultHealth());return this.health.get(key);}
@@ -102,11 +102,12 @@ export class ControlPlane {
   try{await this.store.call('guards',guards);}catch{this.storeOK=false;}
  });}
  async mutate(action,input,context){return this.exclusive(async()=>{
-  requireRole(context,['policy','motd'].includes(action)?'administrator':'operator');if(process.env.XTEND_ADMIN_MUTATIONS==='0')fail('readonly','Änderungen sind im Betriebsmodus gesperrt.');
+  requireRole(context,['policy','motd','weather'].includes(action)?'administrator':'operator');if(process.env.XTEND_ADMIN_MUTATIONS==='0')fail('readonly','Änderungen sind im Betriebsmodus gesperrt.');
   const revision=integer(input.revision,0,Number.MAX_SAFE_INTEGER,'Revision');const reason=enumValue(input.reason,REASONS);
   if(typeof input.requestKey!=='string'||!/^[a-zA-Z0-9_-]{16,100}$/.test(input.requestKey))fail('validation','Ungültige Aktionskennung.');
   const mutation={revision,reason,actor:context.actor,action,target:'routing',requestKey:context.actor+':'+input.requestKey,digest:createHash('sha256').update(JSON.stringify([action,Object.keys(input).sort().map(k=>[k,input[k]])])).digest('hex')};
-  if(action==='motd'){mutation.target='home.motd';mutation.motd=input.motd;}
+  if(action==='weather'){mutation.target='weather.open-meteo';mutation.weather=input.weather;}
+  else if(action==='motd'){mutation.target='home.motd';mutation.motd=input.motd;}
   else if(action==='routing'){mutation.mode=enumValue(input.mode,['conservative','adaptive']);}
   else{
    const engine=this.adapter.catalog.get(input.id);if(!engine)fail('validation','Quelle ist nicht im aktuellen Katalog.');const policy={...this.policy(engine.id)};mutation.target=engine.id;

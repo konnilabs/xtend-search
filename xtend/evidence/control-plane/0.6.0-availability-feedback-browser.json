@@ -1,0 +1,458 @@
+{
+  "ok": true,
+  "checks": [
+    "RMT-owned adaptive source panel stays fullscreen during mobile live renders and returns to docked on desktop.",
+    "Unapproved Weather is absent in SSR and resumed home/deep-link tabs; direct links make zero provider calls.",
+    "Success XToast keeps the same DOM node through live renders, stays readable for six seconds and expires without resurrection.",
+    "Approval shows the tab; administrative pause hides it; resuming restores it.",
+    "Error XToast remains visible beyond six seconds and live updates, until explicitly dismissed.",
+    "Filter portal retains its own readable width and three equal 44px action slots with 10px gaps at 320–1920px, with report button, weather/home layouts, Reduced Motion and native no-JS details.",
+    "Checked results and Knowledge cards have a pastel-red surface in both themes, including an open image preview; uncheck and discard clear it. Keyboard focus never covers the reason label at 320–1440px."
+  ],
+  "visibleMs": 5969,
+  "filters": [
+    {
+      "width": 288,
+      "left": 12,
+      "right": 300,
+      "fieldWidth": 240,
+      "viewport": 320,
+      "mode": "resume",
+      "actions": [
+        {
+          "width": 240,
+          "height": 44,
+          "top": 593,
+          "bottom": 637,
+          "left": 36
+        },
+        {
+          "width": 240,
+          "height": 44,
+          "top": 647,
+          "bottom": 691,
+          "left": 36
+        },
+        {
+          "width": 240,
+          "height": 44,
+          "top": 701,
+          "bottom": 745,
+          "left": 36
+        }
+      ]
+    },
+    {
+      "width": 310,
+      "left": 60,
+      "right": 370,
+      "fieldWidth": 262,
+      "viewport": 390,
+      "mode": "resume",
+      "actions": [
+        {
+          "width": 262,
+          "height": 44,
+          "top": 593,
+          "bottom": 637,
+          "left": 84
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 647,
+          "bottom": 691,
+          "left": 84
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 701,
+          "bottom": 745,
+          "left": 84
+        }
+      ]
+    },
+    {
+      "width": 310,
+      "left": 370,
+      "right": 680,
+      "fieldWidth": 262,
+      "viewport": 700,
+      "mode": "resume",
+      "actions": [
+        {
+          "width": 262,
+          "height": 44,
+          "top": 607,
+          "bottom": 651,
+          "left": 394
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 661,
+          "bottom": 705,
+          "left": 394
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 715,
+          "bottom": 759,
+          "left": 394
+        }
+      ]
+    },
+    {
+      "width": 310,
+      "left": 827.3125,
+      "right": 1137.3125,
+      "fieldWidth": 262,
+      "viewport": 1308,
+      "mode": "resume",
+      "actions": [
+        {
+          "width": 262,
+          "height": 44,
+          "top": 495,
+          "bottom": 539,
+          "left": 851.3125
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 549,
+          "bottom": 593,
+          "left": 851.3125
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 603,
+          "bottom": 647,
+          "left": 851.3125
+        }
+      ]
+    },
+    {
+      "width": 310,
+      "left": 859.75,
+      "right": 1169.75,
+      "fieldWidth": 262,
+      "viewport": 1920,
+      "mode": "resume",
+      "actions": [
+        {
+          "width": 262,
+          "height": 44,
+          "top": 495,
+          "bottom": 539,
+          "left": 883.75
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 549,
+          "bottom": 593,
+          "left": 883.75
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 603,
+          "bottom": 647,
+          "left": 883.75
+        }
+      ]
+    },
+    {
+      "width": 310,
+      "left": 60,
+      "right": 370,
+      "fieldWidth": 262,
+      "viewport": 390,
+      "mode": "resume",
+      "actions": [
+        {
+          "width": 262,
+          "height": 44,
+          "top": 431,
+          "bottom": 475,
+          "left": 84
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 485,
+          "bottom": 529,
+          "left": 84
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 539,
+          "bottom": 583,
+          "left": 84
+        }
+      ]
+    },
+    {
+      "width": 310,
+      "left": 61,
+      "right": 371,
+      "fieldWidth": 262,
+      "viewport": 390,
+      "mode": "resume",
+      "actions": [
+        {
+          "width": 262,
+          "height": 44,
+          "top": 785,
+          "bottom": 829,
+          "left": 85
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 839,
+          "bottom": 883,
+          "left": 85
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 893,
+          "bottom": 937,
+          "left": 85
+        }
+      ]
+    },
+    {
+      "width": 288,
+      "left": 12,
+      "right": 300,
+      "fieldWidth": 240,
+      "viewport": 320,
+      "mode": "native",
+      "actions": [
+        {
+          "width": 240,
+          "height": 44,
+          "top": 593,
+          "bottom": 637,
+          "left": 36
+        },
+        {
+          "width": 240,
+          "height": 44,
+          "top": 647,
+          "bottom": 691,
+          "left": 36
+        },
+        {
+          "width": 240,
+          "height": 44,
+          "top": 701,
+          "bottom": 745,
+          "left": 36
+        }
+      ]
+    },
+    {
+      "width": 310,
+      "left": 827.3125,
+      "right": 1137.3125,
+      "fieldWidth": 262,
+      "viewport": 1308,
+      "mode": "native",
+      "actions": [
+        {
+          "width": 262,
+          "height": 44,
+          "top": 495,
+          "bottom": 539,
+          "left": 851.3125
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 549,
+          "bottom": 593,
+          "left": 851.3125
+        },
+        {
+          "width": 262,
+          "height": 44,
+          "top": 603,
+          "bottom": 647,
+          "left": 851.3125
+        }
+      ]
+    }
+  ],
+  "reports": [
+    {
+      "category": "general",
+      "colorScheme": "light",
+      "width": 320,
+      "knowledge": false,
+      "appearance": {
+        "background": "rgb(247, 232, 229)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "general",
+      "colorScheme": "light",
+      "width": 1440,
+      "knowledge": true,
+      "appearance": {
+        "background": "rgb(247, 232, 229)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "images",
+      "colorScheme": "light",
+      "width": 390,
+      "knowledge": false,
+      "appearance": {
+        "background": "rgb(247, 232, 229)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "news",
+      "colorScheme": "light",
+      "width": 390,
+      "knowledge": false,
+      "appearance": {
+        "background": "rgb(247, 232, 229)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "videos",
+      "colorScheme": "light",
+      "width": 390,
+      "knowledge": false,
+      "appearance": {
+        "background": "rgb(247, 232, 229)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "general",
+      "colorScheme": "dark",
+      "width": 320,
+      "knowledge": false,
+      "appearance": {
+        "background": "rgb(56, 40, 37)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "general",
+      "colorScheme": "dark",
+      "width": 1440,
+      "knowledge": true,
+      "appearance": {
+        "background": "rgb(56, 40, 37)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "images",
+      "colorScheme": "dark",
+      "width": 390,
+      "knowledge": false,
+      "appearance": {
+        "background": "rgb(56, 40, 37)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "news",
+      "colorScheme": "dark",
+      "width": 390,
+      "knowledge": false,
+      "appearance": {
+        "background": "rgb(56, 40, 37)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    },
+    {
+      "category": "videos",
+      "colorScheme": "dark",
+      "width": 390,
+      "knowledge": false,
+      "appearance": {
+        "background": "rgb(56, 40, 37)",
+        "outline": "solid",
+        "checked": true
+      },
+      "focus": {
+        "visible": true,
+        "clearance": 5,
+        "outline": "solid"
+      }
+    }
+  ],
+  "errors": [],
+  "scope": "Offline Docker fixtures, synthetic OAuth; no production policies or real providers"
+}

@@ -1,0 +1,93 @@
+{
+  "schema": "xtend.search.validation.v1",
+  "version": "0.6.0",
+  "ok": true,
+  "completedUtc": "2026-10-13T23:32:33.241825+00:00",
+  "scope": "Forecast measurement layout follow-up; offline Docker fixtures against the exact image, no source mounts. Previous comprehensive and unit acceptance retained as historical baselines. No production or live-provider performance claim.",
+  "baselineCommit": "965bf34129bae5bbb591d28276d5923495792323",
+  "frontendImage": "sha256:b1e60b07cf69038a2075da31a85ee725b6a138b60385048fa7cf8c4ec1320269",
+  "fixtureImage": "sha256:b1e60b07cf69038a2075da31a85ee725b6a138b60385048fa7cf8c4ec1320269",
+  "localImage": "sha256:b1e60b07cf69038a2075da31a85ee725b6a138b60385048fa7cf8c4ec1320269",
+  "backendUnchanged": true,
+  "sdkUnchanged": true,
+  "sourceMountedIntoFixture": false,
+  "changes": [
+    "24 hourly temperature readings have a local monochrome thermometer XIcon.",
+    "Hourly and daily values use common icon, numeric and unit grid columns; percentage is a separate unit.",
+    "Same normalized resource and provider cache; no additional provider calls."
+  ],
+  "tests": {
+    "strictMaracaBuild": true,
+    "controlPlanePass": 116,
+    "controlPlaneFail": 0,
+    "weatherBrowserGate": true,
+    "portainerSmoke": true,
+    "measurementColumnOffsetsWithinPx": 0.5,
+    "timeDependentTest": "Coalescing/cache budget fixture starts at a fixed UTC noon. It no longer accidentally crosses a daily reset during its simulated 47-minute run; separate boundary test remains intact."
+  },
+  "widths": [
+    320,
+    390,
+    700,
+    900,
+    1000,
+    1024,
+    1440,
+    1920,
+    3840
+  ],
+  "noJsWidths": [
+    320,
+    390,
+    1440,
+    3840
+  ],
+  "weatherStreamClsMax": 0,
+  "unitWebVitalsClsMax": 0,
+  "minimumToggleContrast": 7.570343963096609,
+  "restoredProviderRequests": 0,
+  "colorSchemes": [
+    "light",
+    "dark"
+  ],
+  "temperatureUnits": [
+    "Celsius",
+    "Fahrenheit"
+  ],
+  "screenshots": [
+    {
+      "file": "0.6.0-weather-reading-layout-mobile.png",
+      "sha256": "bc631b84b437c4d3eccc53bd24391faf03bc7ec37b6c6fa411ee7667cc083f51"
+    },
+    {
+      "file": "0.6.0-weather-reading-layout-desktop.png",
+      "sha256": "9d5307d4896e63ffcb6086c62d78bdd92f31b6cd504c223203b503899e2387df"
+    }
+  ],
+  "reports": [
+    {
+      "report": "0.6.0-weather-layout.json",
+      "sha256": "aeb0d403b9fbf21e90d13bf745c6d9810331740e41592f6a81bc307459e3daf4"
+    },
+    {
+      "report": "0.6.0-ux-local-image.json",
+      "sha256": "2fa9764b754109441fb1584711a4c62a6e691e71ddf846eefa810415533f334f"
+    },
+    {
+      "report": "release-0.6.0-portainer-smoke.json",
+      "sha256": "2d223cda0ca8629f9328d73a410ee11438c46ade4af4244ae21fdf7312964592"
+    }
+  ],
+  "previousAcceptance": "0.6.0-weather-units-verification.json",
+  "localStatePreserved": {
+    "metadata": true,
+    "policies": true,
+    "guards": true,
+    "weather_policy": true,
+    "quality_rules": true,
+    "quality_pauses": true,
+    "signingKeys": true,
+    "environmentAndSSO": true,
+    "image": true
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "xtend.search.validation.v1",
+  "version": "0.6.0",
+  "ok": true,
+  "completedUtc": "2026-10-13T21:00:37.128657+00:00",
+  "fixes": [
+    "Weather requires rollout and Observatory approval, with no administrative pause.",
+    "Independent RMT toasts survive live updates for six seconds; errors wait for dismissal.",
+    "Filter portal width and field/action slots remain readable before and after resume.",
+    "RMT owns adaptive source-panel mode through live changes.",
+    "Real boolean selection markers apply a pastel-red surface; reason focus clears its label.",
+    "RMT presents the header within the interaction; reserves incoming results and toolbar geometry before slow page responses. Canonical PageClient data/history/cache remain separate."
+  ],
+  "tests": {
+    "strictMaracaBuild": true,
+    "controlPlane": {
+      "pass": 113,
+      "fail": 0
+    },
+    "application": {
+      "pass": 10,
+      "fail": 0
+    },
+    "privateBackendPython": {
+      "pass": 7,
+      "fail": 0
+    },
+    "browserGates": [
+      {
+        "report": "0.6.0-quality-dashboard-browser.json",
+        "sha256": "e9543de1a2e2051712a8a348698da353dcd36dc4fd4d995e947b17782f6e4c8b"
+      },
+      {
+        "report": "0.6.0-minor-browser.json",
+        "sha256": "e9e4d2f605bb2df933dfa6295b388719dc00a13265b1e5b8a7a51abc4d086637"
+      },
+      {
+        "report": "0.6.0-browser.json",
+        "sha256": "8bbd81238723d9967160fde1fa91bcd5148697f9bf19e89e3441db62e3cbfecd"
+      },
+      {
+        "report": "0.6.0-availability-feedback-browser-pre-units.json",
+        "sha256": "25735d9732547352a37606a68e245be6ec2fe9576a692d1e19ed0efb7e53b611"
+      },
+      {
+        "report": "0.6.0-weather-layout-pre-responsive.json",
+        "sha256": "d7704607ea30c49d81dc1542cb85b2a89b355ebdf6e50ecc6b6c3a25706d269a"
+      },
+      {
+        "report": "0.6.0-spinner-stream.json",
+        "sha256": "5f36023244b2b0e80b6ee627cfd1d06c58dc845af24530c45c8e1cc1b136d961"
+      },
+      {
+        "report": "0.6.0-cache-browser.json",
+        "sha256": "0db7c2cbfd7ab43387fdc18009b729a9ecc26b8d77729f5673522a86105aba26"
+      },
+      {
+        "report": "0.6.0-preferences-browser.json",
+        "sha256": "46bd30c5123cb56ee4ca954c6e0ffe20ddafa73b8f457eafd21ddb880e6dc24b"
+      },
+      {
+        "report": "0.6.0-shell-browser.json",
+        "sha256": "4143108550e2a6f0f305df778096bbc7f6a2c0773df13d3f99391894ea660ec9"
+      },
+      {
+        "report": "0.6.0-home-browser.json",
+        "sha256": "c502c244f930ac94c6c19a0a42408936b684f06831d104e3e4a67d111946c241"
+      },
+      {
+        "report": "0.6.0-ssr-browser.json",
+        "sha256": "04a3ac1aca40f432cd8dc70d2898bfed21575a7b8349d134022a133abaf0edc1"
+      },
+      {
+        "report": "0.6.0-about-browser.json",
+        "sha256": "97676a5060bfbdf56809cad4e5009af0790646a01e8afde1b66deb87cf536b04"
+      },
+      {
+        "report": "0.6.0-edge-browser.json",
+        "sha256": "f32b2fe4d5c3944dd53c7e98e87cf729dc15b3d26a9628c65b3408d41fed92ca"
+      },
+      {
+        "report": "0.6.0-prerelease-audit-pre-responsive.json",
+        "sha256": "0b27e4b22662bb93ab3d488d18e62d532abef02822cec793b2093daf40051f41"
+      }
+    ],
+    "portainerSmoke": "release-0.6.0-portainer-smoke.json"
+  },
+  "frontendImage": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
+  "fixtureImage": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
+  "sourceMountedIntoFixture": false,
+  "freshFixtureVolume": "xtend-cp-fixture-060-release-audit",
+  "localStatePreserved": {
+    "metadata": true,
+    "policies": true,
+    "guards": true,
+    "weather_policy": true,
+    "quality_rules": true,
+    "quality_pauses": true,
+    "signingKeys": true,
+    "environmentAndSSO": true,
+    "image": true
+  },
+  "bundleComparison": "0.6.0-ux-bundles.json",
+  "mcp": {
+    "probe": "Enabled tool metadata /^mcp__(xtend|maraca)(_|$)/",
+    "matchingNamespaces": [],
+    "calls": [],
+    "method": "SDK/CLI and browser tests, not XTend MCP interactions"
+  },
+  "previousAcceptance": "0.6.0-verification.json",
+  "scope": "Acceptance baseline at commit 0a42e36bf6aa50ef5f81b868361467bb33faf617: All 14 browser gates rerun against the final built image in a fresh isolated fixture volume. Includes SSR/bootstrap and streamed-layout CLS, slow client network, slow favicon, native forms and synthetic OAuth. No real-provider latency or production deployment claim.",
+  "performance": {
+    "report": "0.6.0-prerelease-performance.json",
+    "sha256": "34c068f8dbfd568df530702cf604364e146bd89a486056679e1f92c6d163a44f",
+    "comparison": {
+      "baselineVersion": "0.5.1",
+      "baselineFirstMs": 527.6000000014901,
+      "firstMs": 476.90000000037253,
+      "baselineCompleteMs": 2979.300000000745,
+      "completeMs": 3094.9000000003725,
+      "baselineJsGzipBytes": 581911,
+      "jsGzipBytes": 619892,
+      "firstRegressionPercent": -9.609552691617584,
+      "appDeltaGzipBytes": 37981
+    },
+    "baselineImage": "sha256:b1cd871c8c6e07127ed9cd17c7ad90af85879be4870fec68ebd1eaf48ee5c5d8",
+    "candidateImage": "sha256:0a62cc51e4a2d3c08cf453a62df9a0ce4861f6f2481cdf4c915f490eea21d2cf",
+    "runsPerImage": 10,
+    "separateFreshVolumes": true,
+    "parallelBuildsOrBrowserGates": false
+  },
+  "observations": {
+    "initialClsMax": 0,
+    "streamClsMax": 0,
+    "weatherSectionClsMax": 0,
+    "coldSlowLink": {
+      "latencyMs": 120,
+      "downloadBytesPerSecond": 150000,
+      "fcpMs": 456,
+      "resumeReadyMs": 7146.700000001118,
+      "headerMs": 140.59999999962747,
+      "firstResultMs": 959.7999999988824,
+      "streamCompleteMs": 3607.5999999996275
+    },
+    "remainingLoadFactor": "Cold JS/bootstrap over the constrained link (~620k encoded JS bytes); SSR is already painted. SDK remains pinned. No weather assets on ordinary searches."
+  },
+  "supersededBy": "0.6.0-weather-responsive-verification.json (subsequent CSS layout change and exact-image checks)"
+}

@@ -1,9 +1,10 @@
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
 import fs from 'node:fs/promises';
+const version=JSON.parse(await fs.readFile(new URL('../../package.json',import.meta.url))).version;
 const base=process.env.TEST_BASE_URL||'http://localhost:8093',out=new URL('../../evidence/control-plane/',import.meta.url),checks=[];
 const browser=await chromium.launch();let page;
-async function filters(p,values){await p.locator('#filters').evaluate(e=>e.open=true);for(const [id,value]of Object.entries(values))await p.locator('#'+id).selectOption(value);}
+async function filters(p,values){if(!await p.evaluate(()=>window.XTendPage?.getRuntime()?.model.getState('search.filterUi')?.open??document.querySelector('#filters').open))await p.locator('#filters>summary').click();for(const [id,value]of Object.entries(values))await p.locator('#'+id).selectOption(value);}
 async function expectFilters(p,values){for(const [id,value]of Object.entries(values))assert.equal(await p.locator('#'+id).inputValue(),value,id);}
 try{
  const context=await browser.newContext({viewport:{width:1440,height:1050},colorScheme:'dark'});page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -37,13 +38,13 @@ try{
  const search=await context.newPage();await search.goto(base+'/search?q=media+only&language=all&time_range=&safesearch=2');assert.equal(await search.locator('.knowledge-card').count(),0);
  await toggle.check();await save();await page.reload();await page.waitForFunction(()=>window.XTendPage?.getRuntime());assert.equal(await toggle.isChecked(),true);
  await select('fixture fast');assert.equal(await toggle.isChecked(),false);await select('wikipedia');assert.equal(await toggle.isChecked(),true);
- await page.screenshot({path:new URL('release-0.3.2-safesearch-admin.png',out).pathname,fullPage:true});
+ await page.screenshot({path:new URL(`${version}-safesearch-admin.png`,out).pathname,fullPage:true});
  await search.goto(base+'/');await search.waitForFunction(()=>window.XTendPage?.getRuntime());const searchOrigin=await search.evaluate(()=>performance.timeOrigin);
  await search.locator('#search-input').fill('media only');await search.getByRole('button',{name:'Suchen',exact:true}).click();await search.waitForFunction(()=>window.XTendPage.page.props['search.data'].stream?.phase==='complete');
  assert.equal(await search.evaluate(()=>performance.timeOrigin),searchOrigin);assert.ok(await search.locator('.knowledge-card').isVisible());assert.ok(await search.locator('.knowledge-description').isVisible());assert.equal(await search.locator('details.knowledge-cards').count(),0);assert.ok(await search.locator('.safe-search-notice').isVisible());assert.match(await search.locator('.safe-search-notice').textContent(),/wikipedia/);assert.equal(await search.locator('#safe-search').inputValue(),'1');
- await search.screenshot({path:new URL('release-0.3.2-knowledge-desktop.png',out).pathname,fullPage:true});await search.setViewportSize({width:390,height:844});assert.ok(await search.locator('.knowledge-description').isVisible());assert.equal(await search.locator('.knowledge-cards').evaluate(e=>getComputedStyle(e).position),'static');assert.ok(await search.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await search.screenshot({path:new URL('release-0.3.2-knowledge-mobile.png',out).pathname,fullPage:true});
+ await search.screenshot({path:new URL(`${version}-knowledge-desktop.png`,out).pathname,fullPage:true});await search.setViewportSize({width:390,height:844});assert.ok(await search.locator('.knowledge-description').isVisible());assert.equal(await search.locator('.knowledge-cards').evaluate(e=>getComputedStyle(e).position),'static');assert.ok(await search.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await search.screenshot({path:new URL(`${version}-knowledge-mobile.png`,out).pathname,fullPage:true});
  const nc=await browser.newContext({javaScriptEnabled:false}),ssr=await nc.newPage();await ssr.goto(base+'/search?q=media+only&language=all&time_range=&safesearch=2');assert.ok(await ssr.locator('.knowledge-description').isVisible());assert.ok(await ssr.locator('.safe-search-notice').isVisible());await nc.close();
  await toggle.uncheck();await save();await search.goto(base+'/search?q=media+only&language=all&time_range=&safesearch=2');assert.equal(await search.locator('.knowledge-card').count(),0);assert.equal(await search.locator('.safe-search-notice').count(),0);
  checks.push('Per-source SafeSearch exception survives reload and source selection, enables an offline Wikipedia knowledge fixture, and can be revoked. Streaming and no-JS SSR show the card expanded plus the exception notice; mobile uses document flow without overflow.');
- assert.deepEqual(errors,[]);const result={ok:true,checks};await fs.writeFile(new URL('release-0.3.2-preferences-browser.json',out),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
-}catch(e){console.error(e);await page?.screenshot({path:new URL('release-0.3.2-preferences-failure.png',out).pathname,fullPage:true}).catch(()=>{});process.exitCode=1;}finally{await browser.close();}
+ assert.deepEqual(errors,[]);const result={ok:true,checks};await fs.writeFile(new URL(`${version}-preferences-browser.json`,out),JSON.stringify(result,null,2));console.log(JSON.stringify(result));
+}catch(e){console.error(e);await page?.screenshot({path:new URL(`${version}-preferences-failure.png`,out).pathname,fullPage:true}).catch(()=>{});process.exitCode=1;}finally{await browser.close();}
