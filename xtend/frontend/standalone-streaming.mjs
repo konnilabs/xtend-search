@@ -1,3 +1,4 @@
+import {scrollViewport} from './browser-capabilities.mjs';
 import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
 import services from './services.ts';
 import {decoratedReportData} from './report-state.mjs';
@@ -20,8 +21,8 @@ export function installSearchStreaming(){
     await client().optimistic(props=>valid()?{...preserveFilterDraft(props),'search.data':decoratedReportData(payload.data,client()?.getRuntime()?.model.getState('search.feedback'))}:props,async()=>undefined);
     if(!valid())return;
     window.dispatchEvent(new CustomEvent('xtend-search:stream',{detail:{id:stream.id,status:payload.status,event:payload.event,sequence:payload.sequence}}));
-    if(restoring&&(document.documentElement.scrollHeight-innerHeight>=restoring[1]||final)){scrollTo(...restoring);restoring=null;}
-   }},{signal:controller.signal,invocationId:stream.id,timeoutMs:18000});
+    if(restoring&&(document.documentElement.scrollHeight-innerHeight>=restoring[1]||final)){scrollViewport(...restoring);restoring=null;}
+   }},{signal:controller.signal,invocationId:stream.id,timeoutMs:15000});
   }catch{
    if(valid())await client().optimistic(props=>({...preserveFilterDraft(props),'search.data':interruptedSearch(props['search.data'],stream)}),async()=>undefined);
   }finally{registry.dispose();if(active===record)active=null;}

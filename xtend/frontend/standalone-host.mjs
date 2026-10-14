@@ -1,3 +1,4 @@
+import {focusElement} from './browser-capabilities.mjs';
 import {installCategoryTabs} from './category-tabs.mjs';
 import {installWeatherUnitActivation} from './weather-units.mjs';
 import {installFilterMotion} from './filter-motion.mjs';
@@ -56,7 +57,7 @@ export function installSearchHost(){
   if(event.type==='navigate'){
    const newerInput=pending && revision>submittedRevision;
    pending=false;
-   if(newerInput){await command('search.edit',{value:draft});document.getElementById('search-input')?.focus({preventScroll:true});}
+   if(newerInput){await command('search.edit',{value:draft});focusElement(document.getElementById('search-input'), {preventScroll:true});}
    // The results heading owns the count; this region reports loading and errors.
    const streaming=['pending','partial'].includes(event.page.props?.['search.data']?.stream?.phase);
    await activity('search.streaming',{busy:streaming,message:''});
@@ -65,6 +66,6 @@ export function installSearchHost(){
   if(event.type==='error'){pending=false;await activity('search.ready',{message:'Die Anfrage ist fehlgeschlagen. Bitte erneut suchen.'});motion.commit();}
  });
  window.addEventListener('keydown',event=>{
-  if(!document.querySelector('#search-about[open],#report-discard-dialog[open]') && event.key==='/' && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && !document.activeElement?.isContentEditable){event.preventDefault();document.getElementById('search-input')?.focus();}
+  if(!document.querySelector('#search-about[open],#report-discard-dialog[open]') && event.key==='/' && !event.ctrlKey && !event.metaKey && !/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName) && !document.activeElement?.isContentEditable){event.preventDefault();focusElement(document.getElementById('search-input'));}
  });
 }

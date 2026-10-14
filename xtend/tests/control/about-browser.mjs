@@ -13,7 +13,7 @@ async function inside(p){return p.evaluate(()=>{const box=document.getElementByI
 async function close(p,how='escape'){
  const modal=p.getByRole('dialog',{name:'Über XTend.search',exact:true});
  if(how==='button')await modal.getByRole('button',{name:'Schliessen',exact:true}).click();else await p.keyboard.press('Escape');
- await modal.waitFor({state:'hidden'});await p.waitForFunction(()=>!document.getElementById('xtend-page-container')?.inert&&document.documentElement.style.overflow!=='hidden');
+ await modal.waitFor({state:'hidden'});await p.waitForFunction(()=>!document.getElementById('search-shell')?.inert&&getComputedStyle(document.documentElement).overflow!=='hidden');
 }
 try{
  const context=await browser.newContext({viewport:{width:1440,height:1000},colorScheme:'dark'});page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
@@ -42,7 +42,7 @@ try{
  checks.push('320/390/720px layouts, light/dark colors, internal scrolling and reduced motion work; the About link stays visible on mobile.');
  await page.setViewportSize({width:1440,height:1000});await page.goto(base+'/info/de/about');await icons(page);assert.equal(await page.locator('h1').textContent(),'Über XTend.search');assert.ok(await page.locator('.about-sections section').count()>=5);await page.screenshot({path:new URL(version+'-about-page.png',out).pathname,fullPage:true});
  const nj=await browser.newContext({javaScriptEnabled:false,viewport:{width:390,height:844}}),np=await nj.newPage();await np.goto(base+'/');await np.getByRole('link',{name:'Über XTend.search',exact:true}).click();await np.waitForURL(base+'/info/de/about');assert.ok(await np.getByRole('link',{name:/Powered by SearXNG/}).isVisible());assert.match(await np.locator('.about-sections').textContent(),/zehn Minuten im Arbeitsspeicher dieses Tabs/);assert.ok(await np.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await np.goto(base+'/info/en/about');assert.equal(await np.locator('h1').textContent(),'About XTend.search');await icons(np);await nj.close();
- const failed=await browser.newContext(),fp=await failed.newPage();await fp.goto(base+'/');await fp.waitForFunction(()=>window.XTendPage?.getRuntime());await fp.route('**/chunks/*',r=>r.abort());await fp.getByRole('link',{name:'Über XTend.search',exact:true}).click();await fp.waitForURL(base+'/info/de/about');await failed.close();
+ const failed=await browser.newContext(),fp=await failed.newPage();await fp.route('**/maraca/chunks/x-dialog-*.mjs',r=>r.abort());await fp.goto(base+'/');await fp.getByRole('link',{name:'Über XTend.search',exact:true}).click();await fp.waitForURL(base+'/info/de/about');await failed.close();
  checks.push('Direct German/English About pages retain favicon and readable sections. No-JS links and a failed lazy import fall back to the standalone page.');
  // Exercise the dialog while XScaler continues committing search results.
  await page.goto(base+'/admin');await icons(page);await page.getByRole('button',{name:'Anmelden mit CCS Account',exact:true}).or(page.getByRole('link',{name:'Anmelden mit CCS Account',exact:true})).click();await page.getByRole('link',{name:'administrator',exact:true}).click();await page.waitForFunction(()=>window.XTendPage?.getRuntime());await icons(page);

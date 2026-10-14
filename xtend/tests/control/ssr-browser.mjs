@@ -49,7 +49,7 @@ try{
   assert.equal(await page.locator('article.result').count(),10);assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);
   await page.getByRole('link',{name:'Bilder',exact:true}).click();
   await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].category==='images'&&window.XTendPage.page.props['search.data'].stream?.phase==='complete');
-  await page.goBack();await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].category==='general'&&!window.XTendPage.page.props['search.data'].skeleton);
+  await page.goBack();await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].category==='general'&&(!window.XTendPage.page.props['search.data'].stream||window.XTendPage.page.props['search.data'].stream.phase==='complete'));
   assert.equal(await page.locator('article.result').count(),10);
   assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);assert.deepEqual(errors,[]);
   checks.push(tampered?'Invalid signature recovers through descriptors; stream and history work without HTML copy.':'Verified resume preserves the SSR input; stream and history work without document replacement.');

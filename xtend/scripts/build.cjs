@@ -25,6 +25,7 @@ async function build(){
  fs.writeFileSync(path.join(root,'evidence/mvc/host-browser-graph.json'),JSON.stringify(browserGraph.metafile,null,2));
  fs.writeFileSync(path.join(root,'evidence/mvc/xscaler-browser-graph.json'),JSON.stringify(remoteGraph.metafile,null,2));
  const pages=await buildPages({root,target:'node',compileSource:session.compileSource});
+ fs.copyFileSync(path.join(root,'.xtend-build/pages.json'),path.join(root,'.xtend-build/pages-host.json'));
  fs.mkdirSync(path.join(root,'evidence/builds'),{recursive:true});
  const summary={ok:true,node:process.version,version:pages.manifest.version,sourceSha256:createHash('sha256').update(fs.readFileSync(path.join(root,'frontend/search.rmt'))).digest('hex'),compilation:session.snapshot()};
  fs.writeFileSync(path.join(root,'evidence/builds/build.json'),JSON.stringify(summary,null,2)+'\n');

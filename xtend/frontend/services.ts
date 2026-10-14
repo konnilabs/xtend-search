@@ -12,6 +12,7 @@ export default defineAppServices({
  'search.report.reduce':service<Parameters<typeof reduceReport>[0],ReturnType<typeof reduceReport>>({kind:'command',target:'local',invoke:input=>reduceReport(input)}),
  'search.report.select':service<Parameters<typeof selectReport>[0],ReturnType<typeof selectReport>>({kind:'command',target:'local',invoke:input=>selectReport(input)}),
  'search.report.submit':service<Parameters<typeof submitReport>[0],Awaited<ReturnType<typeof submitReport>>>({kind:'command',target:'local',invoke:(input,context)=>submitReport(input,context)}),
+ 'search.favicons.ready':service<{src:string;url:string},boolean>({kind:'command',target:'local',invoke:({src,url})=>faviconResources.markReady(src,url)}),
  'search.favicons.load':service<{src:string},string|null>({kind:'query',target:'local',concurrency:'parallel',invoke:(input,{signal})=>faviconResources.load(input.src,signal)}),
  'search.favicons.project':service({kind:'query',target:'local',invoke:({results})=>({results:faviconResources.decorate(results)})}),
  'search.about.content':service({kind:'query',target:'local',invoke:()=>aboutModel()}),

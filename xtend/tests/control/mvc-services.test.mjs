@@ -50,3 +50,36 @@ test('stream presentation supplies pull backpressure and aborts before the next 
  const partial=interruptedSearch({skeleton:false,results:[{id:'first'}],countLabel:'1 Ergebnis'},{id:'stream'});assert.equal(partial.results.length,1);assert.equal(partial.stream.phase,'error');
  await assert.rejects(presentSearchFrames((async function*(){})(),{signal:new AbortController().signal,present:async()=>{}},{id:'stream'}),/Unvollständiger/);
 });
+import {createFaviconProjection} from '../../frontend/favicon-service-core.mjs';
+test('a fresh favicon owner does not reuse an aborted pending request or lose its pending slot',async()=>{
+ const calls=[],oldOwner=new AbortController(),newOwner=new AbortController();
+ const resources=createFaviconResources({fetchImage:async(_src,{signal})=>new Promise(resolve=>calls.push({signal,resolve})),createUrl:()=> 'blob:fresh',revokeUrl:()=>{}});
+ const src='/favicon?domain=reentry.test',old=resources.load(src,oldOwner.signal);oldOwner.abort();
+ const fresh=resources.load(src,newOwner.signal);assert.equal(calls.length,2);
+ calls[0].resolve({ok:true,blob:async()=>({type:'image/png'})});await assert.rejects(old,{name:'AbortError'});
+ const reused=resources.load(src,newOwner.signal);assert.equal(calls.length,2,'Old finally must not delete the fresh owner slot');
+ calls[1].resolve({ok:true,blob:async()=>({type:'image/png'})});assert.equal(await fresh,'blob:fresh');assert.equal(await reused,'blob:fresh');resources.dispose();
+});
+test('favicon cache scans coalesce and equal projections do not grow a commit chain',async()=>{
+ let rows=[{id:'result',faviconSrc:'',faviconReady:false}],projects=0,commits=0,release;
+ const gate=new Promise(resolve=>release=resolve);
+ const projection=createFaviconProjection({readResults:()=>rows,project:async before=>{projects++;if(projects===1)await gate;return {results:before.map(row=>({...row,faviconSrc:'blob:cached',faviconReady:true}))};},commit:async value=>{commits++;rows=value.results;},isCurrent:()=>true});
+ const requests=Array.from({length:200},()=>projection.request(1));await new Promise(resolve=>setImmediate(resolve));assert.equal(projects,1);assert.equal(commits,0);release();await Promise.all(requests);assert.equal(commits,1);
+ for(let i=0;i<20;i++)await projection.request(1);assert.equal(commits,1);assert.deepEqual(projection.snapshot(),{running:false,requested:false,disposed:false});projection.dispose();
+});
+test('favicon projection cannot overwrite a result snapshot replaced during service work',async()=>{
+ let rows=[{id:'old',faviconSrc:'',faviconReady:false}],release,commits=0;
+ const gate=new Promise(resolve=>release=resolve);let first=true;
+ const projection=createFaviconProjection({readResults:()=>rows,project:async before=>{if(first){first=false;await gate;}return {results:before.map(row=>({...row,faviconSrc:'blob:'+row.id,faviconReady:true}))};},commit:async value=>{commits++;rows=value.results;},isCurrent:()=>true});
+ const work=projection.request(1);await new Promise(resolve=>setImmediate(resolve));rows=[{id:'new',faviconSrc:'',faviconReady:false}];release();await work;assert.equal(rows[0].id,'new');assert.equal(rows[0].faviconSrc,'blob:new');assert.equal(commits,1);projection.dispose();
+});
+test('weather repeat rows project typed draft values without dynamic model paths',()=>{
+ const value=updateDrafts({drafts:emptyAdminDrafts(),id:'weather-policy-form',values:{rpm:'17',concurrency:'3'},budget:[{id:'rpm',value:'60'},{id:'concurrency',value:'4'}]});
+ assert.deepEqual(value['weather-policy-form'].budget.map(row=>row.value),['17','3']);
+ assert.throws(()=>updateDrafts({drafts:{},id:'__proto__',values:{}}),/Unknown admin form/);
+});
+test('favicon projections compare immutable Model clones by content, not object identity',async()=>{
+ let rows=[{id:'result',faviconSrc:'',faviconReady:false}],commits=0,projects=0;
+ const projection=createFaviconProjection({readResults:()=>structuredClone(rows),project:async before=>{assert.ok(++projects<5,'Projection must terminate with cloned Model reads');return {results:before.map(row=>({...row,faviconSrc:'blob:cached',faviconReady:true}))};},commit:async value=>{commits++;rows=value.results;},isCurrent:()=>true});
+ await projection.request(1);await projection.request(1);assert.equal(commits,1);assert.equal(projects,2);projection.dispose();
+});

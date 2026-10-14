@@ -8,7 +8,7 @@ import {createNodePageHost} from '@ccslabs/xtend/rmt/node-page-host';
 import {parseSearch,baseData,loadSearch,searchUrl} from './search.mjs';
 import {createSearchStreamHost} from './stream.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
-const manifest=JSON.parse(fs.readFileSync(path.join(root,'.xtend-build/pages.json')));
+const manifest=JSON.parse(fs.readFileSync(path.join(root,fs.existsSync(path.join(root,'.xtend-build/pages-host.json'))?'.xtend-build/pages-host.json':'.xtend-build/pages.json')));
 const secretDir=process.env.XTEND_SECRET_DIR || path.join(root,'.secrets');
 const key=fs.readFileSync(path.join(secretDir,'resume-private.pem'));
 const publicKey=JSON.parse(fs.readFileSync(path.join(secretDir,'resume-public.json')));

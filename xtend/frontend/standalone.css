@@ -248,11 +248,5 @@
 .search-button>x-icon,.search-button>x-spinner{display:inline-flex;align-items:center;justify-content:center;flex:none;width:22px;height:22px}
 /* Overlay containment is declarative; no host writes overflow or inert. */
 html:has(#search-about[open]),html:has(#search-lightbox[open]),html:has(#report-discard-dialog[open]){overflow:hidden}
-.source-icon img{opacity:1}
-.search-lightbox::part(dialog){max-height:calc(100dvh - 24px);overflow:auto}
-.lightbox-media{display:block;max-width:100%;max-height:68dvh;object-fit:contain;margin:auto}
-.lightbox-controls{display:flex;gap:16px;align-items:center;padding:12px}
-.lightbox-step{min-width:44px;min-height:44px}.lightbox-caption{flex:1;min-width:0}
-.lightbox-links{display:flex;gap:16px;flex-wrap:wrap}.lightbox-caption h2{overflow-wrap:anywhere}
 #report-assistant{background:var(--panel);color:var(--ink);border:1px solid var(--line);box-shadow:0 8px 36px #0003;border-radius:4px}
 #ccs-login:not(:defined){display:none}#ccs-login:defined + #ccs-login-fallback{display:none}

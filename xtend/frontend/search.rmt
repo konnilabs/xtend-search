@@ -174,7 +174,7 @@ template xtend.search {
         "data-image-error" "$model.search.overlay.media.imageError"
         "overlay" true
         "open" "$model.search.overlay.lightbox"
-        "title" "$model.search.overlay.media.title"
+        "title" "Bildansicht"
         "width" "min(1200px, calc(100vw - 24px))"
       }
       "children" [

@@ -67,3 +67,4 @@ x-surface-manager:not(:defined){display:block;height:auto!important;overflow:vis
 
 #motd-current{overflow-wrap:anywhere}
 html:has(#admin-draft-guard[open]){overflow:hidden}
+#admin-draft-guard:not([open]){display:none}

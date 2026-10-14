@@ -305,6 +305,11 @@
       ],
       "format": "esm"
     },
+    "frontend/browser-capabilities.mjs": {
+      "bytes": 1335,
+      "imports": [],
+      "format": "esm"
+    },
     "node_modules/@ccslabs/xtend/components/xtend-state.js": {
       "bytes": 16049,
       "imports": [],
@@ -435,7 +440,7 @@
       "format": "esm"
     },
     "admin/draft-service-core.mjs": {
-      "bytes": 627,
+      "bytes": 816,
       "imports": [],
       "format": "esm"
     },
@@ -456,8 +461,13 @@
       "format": "esm"
     },
     "admin/live.mjs": {
-      "bytes": 13013,
+      "bytes": 13179,
       "imports": [
+        {
+          "path": "frontend/browser-capabilities.mjs",
+          "kind": "import-statement",
+          "original": "../frontend/browser-capabilities.mjs"
+        },
         {
           "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
           "kind": "import-statement",
@@ -567,6 +577,9 @@
         "node_modules/@ccslabs/xtend/xtend-maraca/page-bootstrap.mjs": {
           "bytesInOutput": 1881
         },
+        "frontend/browser-capabilities.mjs": {
+          "bytesInOutput": 61
+        },
         "node_modules/@ccslabs/xtend/components/xsurfacemanager-controller.js": {
           "bytesInOutput": 23321
         },
@@ -595,16 +608,16 @@
           "bytesInOutput": 10133
         },
         "admin/draft-service-core.mjs": {
-          "bytesInOutput": 356
+          "bytesInOutput": 511
         },
         "admin/services.ts": {
           "bytesInOutput": 871
         },
         "admin/live.mjs": {
-          "bytesInOutput": 8981
+          "bytesInOutput": 9041
         }
       },
-      "bytes": 242523
+      "bytes": 242799
     },
     "public/assets/xtend/admin/chunks/rmt-resume-runtime-TDYASBDO.mjs": {
       "imports": [

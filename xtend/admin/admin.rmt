@@ -506,7 +506,7 @@ quality-rule-form false
                                   }
                                   {
                                     "type" "repeat"
-                                    "source" "$model.admin.data.weather.budget"
+                                    "source" { "op" "if" "test" "$model.admin.drafts.weather-policy-form" "then" "$model.admin.drafts.weather-policy-form.budget" "else" "$model.admin.data.weather.budget" }
                                     "key" "id"
                                     "template" {
                                       "type" "element"
@@ -525,7 +525,7 @@ quality-rule-form false
                                             "name" "$item.id"
                                             "type" "number"
                                             "min" 1
-                                            "value" { "op" "if" "test" "$model.admin.drafts.weather-policy-form" "then" "$model.admin.drafts.weather-policy-form.$item.id" "else" "$item.value" }
+                                            "value" "$item.value"
                                             "required" true
                                             "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.readOnly" }
                                           }
@@ -662,9 +662,10 @@ quality-rule-form false
                                   {
                                     "type" "element"
                                     "tag" "textarea"
-                                    "text" "$model.admin.data.motd.messagesText"
+                                    "text" { "op" "if" "test" "$model.admin.drafts.motd-list-form" "then" "$model.admin.drafts.motd-list-form.messages" "else" "$model.admin.data.motd.messagesText" }
                                     "attributes" {
                                       "id" "motd-messages"
+                                      "value" { "op" "if" "test" "$model.admin.drafts.motd-list-form" "then" "$model.admin.drafts.motd-list-form.messages" "else" "$model.admin.data.motd.messagesText" }
                                       "name" "messages"
                                       "rows" 8
                                       "required" true
@@ -2722,6 +2723,7 @@ quality-rule-form false
                                               "tag" "select"
                                               "attributes" {
                                                 "name" "capability"
+                                                "value" { "op" "if" "test" "$model.admin.drafts.probe-form" "then" "$model.admin.drafts.probe-form.capability" "else" "$model.admin.data.probeDefault" }
                                                 "disabled" { "op" "if" "test" "$model.admin.busy" "then" true "else" "$model.admin.data.probeDisabled" }
                                               }
                                               "children" [
@@ -2734,11 +2736,11 @@ quality-rule-form false
                                                     "tag" "option"
                                                     "text" "$item.label"
                                                     "properties" {
-                                                      "selected" "$item.selected"
+                                                      "selected" { "op" "if" "test" "$model.admin.drafts.probe-form" "then" { "op" "equals" "left" "$model.admin.drafts.probe-form.capability" "right" "$item.id" } "else" "$item.selected" }
                                                     }
                                                     "attributes" {
-                                                      "value" { "op" "if" "test" "$model.admin.drafts.probe-form" "then" "$model.admin.drafts.probe-form.capability" "else" "$item.id" }
-                                                      "selected" "$item.selected"
+                                                      "value" "$item.id"
+                                                      "selected" { "op" "if" "test" "$model.admin.drafts.probe-form" "then" { "op" "equals" "left" "$model.admin.drafts.probe-form.capability" "right" "$item.id" } "else" "$item.selected" }
                                                     }
                                                   }
                                                 }
@@ -2937,6 +2939,7 @@ quality-rule-form false
                                             "tag" "select"
                                             "attributes" {
                                               "name" "decision"
+                                              "value" { "op" "if" "test" "$model.admin.drafts.quality-decision-form" "then" "$model.admin.drafts.quality-decision-form.decision" "else" "confirm" }
                                             }
                                             "children" [
                                               {

@@ -1,3 +1,4 @@
+import {focusElement} from './browser-capabilities.mjs';
 import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
 import services from './services.ts';
 import {categoryDraftUrl} from './filter-navigation.mjs';
@@ -16,7 +17,7 @@ export function installFeedback(){
  document.addEventListener('click',event=>{
   const id=event.target.closest?.('#report-start,#report-cancel,#report-save,#report-discard,#report-keep')?.id;if(!id||!runtime())return;
   event.preventDefault();event.stopImmediatePropagation();
-  if(id==='report-start'){if(!model().open){requestKey=crypto.randomUUID();void state({...emptyReport(),open:true}).then(()=>document.getElementById('report-reason')?.focus({preventScroll:true}));}}
+  if(id==='report-start'){if(!model().open){requestKey=crypto.randomUUID();void state({...emptyReport(),open:true}).then(()=>focusElement(document.getElementById('report-reason'), {preventScroll:true}));}}
   if(id==='report-cancel')void confirm();
   if(id==='report-save')document.getElementById('feedback-form')?.requestSubmit();
   if(id==='report-discard'&&guard)void guard(true);
@@ -37,7 +38,7 @@ export function installFeedback(){
   try{
    const data=runtime().model.getState('search.data');
    const result=await registry.invoke('search.report.submit',{feedback,data,requestKey},{},{signal:request.signal,timeoutMs:20000});
-   if(own!==epoch)return;await runtime().ensureComponent('x-toast');await reset(result.message||'Meldung aufgenommen.');document.getElementById('report-start')?.focus({preventScroll:true});
+   if(own!==epoch)return;await runtime().ensureComponent('x-toast');await reset(result.message||'Meldung aufgenommen.');focusElement(document.getElementById('report-start'), {preventScroll:true});
   }catch(error){if(own===epoch)await state({busy:false,error:error.message||'Meldung konnte nicht gespeichert werden. Eingaben bleiben erhalten.'},own);}
   finally{saving=false;}
  },true);

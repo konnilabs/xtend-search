@@ -1,3 +1,4 @@
+import {scrollViewport} from './browser-capabilities.mjs';
 import {createXScalerAppServiceTransport} from '@ccslabs/xtend/xscaler/app-service-transport';
 import {createXScalerRemoteSurfacePlan} from '@ccslabs/xtend/xscaler/protocol';
 import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
@@ -16,7 +17,7 @@ export function installSearchStreaming(){
  function stop(){epoch++;active?.controller.abort();active=null;}
  function restoreScroll(final){
   if(!restoring)return;
-  if(document.documentElement.scrollHeight-innerHeight>=restoring[1] || final){scrollTo(...restoring);restoring=null;}
+  if(document.documentElement.scrollHeight-innerHeight>=restoring[1] || final){scrollViewport(...restoring);restoring=null;}
  }
  function transportFor(id){
   const origin=location.origin,sessionId=`search:${id}`;
