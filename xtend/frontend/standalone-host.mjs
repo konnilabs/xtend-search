@@ -1,6 +1,5 @@
 import {focusElement} from './browser-capabilities.mjs';
 import {installCategoryTabs} from './category-tabs.mjs';
-import {installWeatherUnitActivation} from './weather-units.mjs';
 import {installFilterMotion} from './filter-motion.mjs';
 import {installMotd} from './motd.mjs';
 import {registerIconPack} from '@ccslabs/xtend/components/xicon.js';
@@ -31,7 +30,6 @@ export function installSearchHost(){
  installFilterMotion(command);
  const motion=installSearchMotion();
  installCategoryTabs();
- installWeatherUnitActivation();
  installAbout();installMotd();
  installFavicons();
  installPreferences(command);

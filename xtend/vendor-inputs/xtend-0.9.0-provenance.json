@@ -1,13 +1,13 @@
 {
   "schema": "xtend.search.sdk-provenance.v1",
   "repository": "https://github.com/konnilabs/xtend",
-  "pullRequest": "https://github.com/konnilabs/xtend/pull/110",
-  "baseCommit": "d4912deb30fe8d85d8e442e34d74ec6050f0fe09",
-  "commit": "dd1917bfeb8f173dde585f743a866c1b0d38e9f1",
+  "pullRequest": "https://github.com/konnilabs/xtend/pull/112",
+  "baseCommit": "c31e380f13dfb3b64456f2b149b504efe4d81dfa",
+  "commit": "66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3",
   "packageVersion": "0.9.0",
-  "artifact": "ccslabs-xtend-0.9.0-dd1917bfeb8f.tgz",
-  "sha256": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc",
+  "artifact": "ccslabs-xtend-0.9.0-66ffa8fa4423.tgz",
+  "sha256": "55ba9f39f183225a26e6eef366a549805f2fb3e3ef40b42ea679a0db55b68264",
   "cacheModuleGzipBytes": 1009,
   "mcpAvailable": false,
-  "validation": "Final ci-pr 189/189, zero failures/skips, 53 documented inventory warnings on pinned head; SSR/PageClient/browser/AppServices and MCP CLI contracts/package smoke passed"
+  "validation": "38 Chromium component checks with HTML setters disabled, 24 syntax/build audit checks; all 189 ci-pr suite IDs passed across the full profile and targeted reruns after native-source evidence, older Docs syntax and schema-inventory corrections (53 inherited inventory warnings). Eight strict-CSP component styles checks passed; no raw HTML setters."
 }

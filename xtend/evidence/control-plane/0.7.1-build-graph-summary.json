@@ -1,0 +1,40 @@
+{
+  "graphs": {
+    "0.7.1-admin-browser-graph-graph.json": {
+      "sourceModules": 44,
+      "outputFiles": 11,
+      "totalOutputBytes": 581526
+    },
+    "0.7.1-admin-browser-graph.json": {
+      "sourceModules": 44,
+      "outputFiles": 11,
+      "totalOutputBytes": 581526
+    },
+    "0.7.1-host-browser-graph-graph.json": {
+      "sourceModules": 46,
+      "outputFiles": 8,
+      "totalOutputBytes": 366684
+    },
+    "0.7.1-login-browser-graph-graph.json": {
+      "sourceModules": 9,
+      "outputFiles": 1,
+      "totalOutputBytes": 50285
+    },
+    "0.7.1-login-browser-graph.json": {
+      "sourceModules": 9,
+      "outputFiles": 1,
+      "totalOutputBytes": 50285
+    },
+    "0.7.1-standalone-browser-graph-graph.json": {
+      "sourceModules": 63,
+      "outputFiles": 8,
+      "totalOutputBytes": 435069
+    },
+    "0.7.1-standalone-browser-graph.json": {
+      "sourceModules": 63,
+      "outputFiles": 8,
+      "totalOutputBytes": 435069
+    }
+  },
+  "scope": "Full graph artifacts remain in the exported verification archive; Git keeps this bounded summary."
+}
