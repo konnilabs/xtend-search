@@ -1,0 +1,58 @@
+{
+  "stage": "PR18 review checkpoint; local Host thumbnail integration still open",
+  "date": "2026-10-14",
+  "baseline": "a1914801c798e04ffb4f8a1e62da60de70cda23b",
+  "local": {
+    "buildControl": "passed",
+    "buildHost": "passed but service build report enabled=false; new datasource binding still open",
+    "controlTests": {
+      "command": "node --test --test-isolation=none tests/control/*.test.mjs",
+      "passed": 136,
+      "failed": 0
+    },
+    "v04": "passed on product-guard Docker bundle",
+    "feedbackReadiness": "passed",
+    "cacheBrowser": "passed with unchanged SSR-Reentry assertion",
+    "staleReplay": {
+      "chromium": {
+        "ok": true,
+        "oldImagesCount": 4,
+        "rejected": true,
+        "propsCount": 10,
+        "modelCount": 10,
+        "domCount": 10,
+        "streams": 1
+      },
+      "firefox": {
+        "ok": true,
+        "oldImagesCount": 4,
+        "rejected": true,
+        "propsCount": 10,
+        "modelCount": 10,
+        "domCount": 10,
+        "streams": 1
+      }
+    },
+    "hostImageFallback": "OPEN: search.images.set returns status error; Host service plan disabled; not attributed to storage"
+  },
+  "mcp": {
+    "checks": 6,
+    "passed": 6,
+    "inputHashes": "all match sourceHash in xtend-mcp-checks.json"
+  },
+  "storage": {
+    "observedFailure": "ENOSPC; overlay 32G,31G used,0 available before cleanup",
+    "afterCleanup": "4.8G available",
+    "inodesUsedPercent": 37,
+    "dockerStorageDriver": "vfs",
+    "cleanup": "own unused diagnosis images + unused builder cache older than 30 minutes; no repository/data volume deletion",
+    "memoryOom": 0,
+    "memoryOomKill": 0,
+    "frontendContainerOomKilled": false,
+    "dockerPhysicalSize": "read-only du: at least 25G in /var/lib/docker/vfs; protected subdirectories unreadable; Docker API logical size is not physical vfs storage",
+    "cgroupMemoryCurrentBytes": 15254581248,
+    "cgroupMemoryMaxBytes": 17179869184,
+    "memoryMaxEventsHistorical": 149194
+  },
+  "remote": "new checkpoint CI not yet started; prior head 7ca49e30a CI failed later at unchanged cache-browser.mjs:25:834"
+}

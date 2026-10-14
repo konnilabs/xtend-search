@@ -1,19 +1,22 @@
 export const IMAGE_PLACEHOLDER='/assets/xtend/image-placeholder.svg';
+import {resultProjection,restoreResultThumbnails} from './result-projection-core.mjs';
 
 // Failed thumbnails are presentation state. Keep original page data/links intact.
 export function installResultImages(command){
  let pending=false,scheduled=false,generation=0,streamId=null;
  const failed=new Set();
  let errors=new WeakMap();
- const data=()=>window.XTendPage?.page?.props?.['search.data'];
+ const data=()=>window.XTendPage?.getRuntime()?.model.getState('search.data');
  const present=results=>results.map(result=>failed.has(result.thumbnail)?{...result,thumbnail:IMAGE_PLACEHOLDER,thumbnailKey:result.thumbnailKey+':unavailable',thumbnailAlt:'Bild nicht verfügbar',thumbnailFailed:true}:result);
  function flush(){
   if(scheduled || pending || !data() || !failed.size)return;
   scheduled=true;const current=generation;
   requestAnimationFrame(()=>{
    scheduled=false;if(pending)return;if(current!==generation){flush();return;}
-   const results=data()?.results;if(!results)return;
-   void command('search.images.set',{value:{results:present(results)}});
+   const snapshot=data();if(!snapshot?.results)return;
+   void command('search.images.set',{value:resultProjection(snapshot,present(snapshot.results))}).then(result=>{
+    if(current===generation&&!pending&&result?.data?.accepted===false)flush();
+   });
   });
  }
  function unavailable(img){
@@ -44,7 +47,10 @@ export function installResultImages(command){
    if(!nextStream || nextStream!==streamId)failed.clear();
    streamId=nextStream;
    // Equal page props can be skipped by Maraca: a new search must retry images.
-   await command('search.images.set',{value:{results:present(data()?.results || [])}});
+   const snapshot=data();
+   const canonical=window.XTendPage?.page?.props?.['search.data']?.results;
+   const rows=restoreResultThumbnails(snapshot?.results,canonical);
+   await command('search.images.set',{value:resultProjection(snapshot,present(rows))});
    if(current===generation && !pending)scan();
   }
   if(event.type==='error'){pending=false;scan();}

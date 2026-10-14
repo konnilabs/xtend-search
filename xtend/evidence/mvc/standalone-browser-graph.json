@@ -367,9 +367,20 @@
       "imports": [],
       "format": "esm"
     },
-    "frontend/images.mjs": {
-      "bytes": 2647,
+    "frontend/result-projection-core.mjs": {
+      "bytes": 1584,
       "imports": [],
+      "format": "esm"
+    },
+    "frontend/images.mjs": {
+      "bytes": 3047,
+      "imports": [
+        {
+          "path": "frontend/result-projection-core.mjs",
+          "kind": "import-statement",
+          "original": "./result-projection-core.mjs"
+        }
+      ],
       "format": "esm"
     },
     "frontend/overlay-service-core.mjs": {
@@ -394,7 +405,7 @@
       "format": "esm"
     },
     "frontend/favicon-service-core.mjs": {
-      "bytes": 2874,
+      "bytes": 3193,
       "imports": [],
       "format": "esm"
     },
@@ -441,7 +452,7 @@
       "format": "esm"
     },
     "frontend/services.ts": {
-      "bytes": 4044,
+      "bytes": 4367,
       "imports": [
         {
           "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
@@ -477,6 +488,11 @@
           "path": "frontend/preferences-service-core.mjs",
           "kind": "import-statement",
           "original": "./preferences-service-core.mjs"
+        },
+        {
+          "path": "frontend/result-projection-core.mjs",
+          "kind": "import-statement",
+          "original": "./result-projection-core.mjs"
         }
       ],
       "format": "esm"
@@ -596,7 +612,7 @@
       "format": "esm"
     },
     "frontend/favicons.mjs": {
-      "bytes": 3282,
+      "bytes": 3452,
       "imports": [
         {
           "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
@@ -612,6 +628,11 @@
           "path": "frontend/favicon-service-core.mjs",
           "kind": "import-statement",
           "original": "./favicon-service-core.mjs"
+        },
+        {
+          "path": "frontend/result-projection-core.mjs",
+          "kind": "import-statement",
+          "original": "./result-projection-core.mjs"
         }
       ],
       "format": "esm"
@@ -925,7 +946,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "public/assets/xtend/standalone/chunks/chunk-AH7YYRL5.mjs",
+          "path": "public/assets/xtend/standalone/chunks/chunk-MNQ6U73E.mjs",
           "kind": "import-statement"
         },
         {
@@ -942,7 +963,7 @@
           "kind": "dynamic-import"
         },
         {
-          "path": "public/assets/xtend/standalone/chunks/lightbox-CBOIYDYM.mjs",
+          "path": "public/assets/xtend/standalone/chunks/lightbox-7EXE3EXK.mjs",
           "kind": "dynamic-import"
         }
       ],
@@ -992,7 +1013,7 @@
           "bytesInOutput": 4521
         },
         "frontend/favicons.mjs": {
-          "bytesInOutput": 2081
+          "bytesInOutput": 2150
         },
         "frontend/about.mjs": {
           "bytesInOutput": 939
@@ -1022,7 +1043,7 @@
           "bytesInOutput": 1532
         }
       },
-      "bytes": 83842
+      "bytes": 83919
     },
     "public/assets/xtend/standalone/chunks/rmt-resume-runtime-TDYASBDO.mjs": {
       "imports": [
@@ -1175,10 +1196,10 @@
       },
       "bytes": 6507
     },
-    "public/assets/xtend/standalone/chunks/lightbox-CBOIYDYM.mjs": {
+    "public/assets/xtend/standalone/chunks/lightbox-7EXE3EXK.mjs": {
       "imports": [
         {
-          "path": "public/assets/xtend/standalone/chunks/chunk-AH7YYRL5.mjs",
+          "path": "public/assets/xtend/standalone/chunks/chunk-MNQ6U73E.mjs",
           "kind": "import-statement"
         },
         {
@@ -1197,7 +1218,7 @@
       },
       "bytes": 2598
     },
-    "public/assets/xtend/standalone/chunks/chunk-AH7YYRL5.mjs": {
+    "public/assets/xtend/standalone/chunks/chunk-MNQ6U73E.mjs": {
       "imports": [
         {
           "path": "public/assets/xtend/standalone/chunks/chunk-Q5OUVVO3.mjs",
@@ -1219,7 +1240,8 @@
         "l",
         "m",
         "n",
-        "o"
+        "o",
+        "p"
       ],
       "inputs": {
         "frontend/browser-capabilities.mjs": {
@@ -1240,20 +1262,23 @@
         "shared/version.mjs": {
           "bytesInOutput": 14
         },
+        "frontend/result-projection-core.mjs": {
+          "bytesInOutput": 888
+        },
         "frontend/images.mjs": {
-          "bytesInOutput": 1401
+          "bytesInOutput": 1535
         },
         "frontend/overlay-service-core.mjs": {
-          "bytesInOutput": 1179
+          "bytesInOutput": 1181
         },
         "frontend/favicon-service-core.mjs": {
-          "bytesInOutput": 1626
+          "bytesInOutput": 1716
         },
         "frontend/report-state.mjs": {
           "bytesInOutput": 405
         },
         "frontend/report-service-core.mjs": {
-          "bytesInOutput": 1822
+          "bytesInOutput": 1825
         },
         "frontend/stream-service-core.mjs": {
           "bytesInOutput": 2004
@@ -1262,13 +1287,13 @@
           "bytesInOutput": 669
         },
         "frontend/services.ts": {
-          "bytesInOutput": 1911
+          "bytesInOutput": 1997
         },
         "frontend/overlay-controller.mjs": {
           "bytesInOutput": 443
         }
       },
-      "bytes": 22478
+      "bytes": 23688
     },
     "public/assets/xtend/standalone/chunks/chunk-Q5OUVVO3.mjs": {
       "imports": [],

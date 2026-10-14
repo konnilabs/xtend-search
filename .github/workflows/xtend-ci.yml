@@ -95,6 +95,7 @@ jobs:
           node xtend/tests/control/weather-layout-browser.mjs
           node xtend/tests/control/spinner-stream-browser.mjs
           node xtend/tests/control/cache-browser.mjs
+          node xtend/tests/control/cache-stale-projection-browser.mjs
           node xtend/tests/control/preferences-browser.mjs
           node xtend/tests/control/release-0.4.2-browser.mjs
           node xtend/tests/control/home-browser.mjs
