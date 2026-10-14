@@ -1,0 +1,181 @@
+{
+  "schema": "xtend.search.validation.v1",
+  "version": "0.7.0",
+  "backendVersion": "0.5.1",
+  "ok": true,
+  "completedUtc": "2026-10-14T18:15:41.126602+00:00",
+  "baseMain": "389239284609a422f0f9d1263a5eae88bafa07d3",
+  "mergedFeatures": [
+    17,
+    18
+  ],
+  "frontendImage": "sha256:06d5e74e91cbb0ed5ae6d7fdc04934f09bbb87ae6fe0829bf078f0ad53566160",
+  "backendImage": "sha256:1699b4531c24be1cfabcdd4cb269c793c4760ad68f668aa45c019c469ef4b8fd",
+  "sourceMountedIntoFixture": false,
+  "fixtureVolume": "xtend-cp-fixture-070-release",
+  "tests": {
+    "strictMaracaControlBuild": true,
+    "nativeHostBuild": true,
+    "control": {
+      "passed": 137,
+      "failed": 0
+    },
+    "application": {
+      "passed": 10,
+      "failed": 0
+    },
+    "privateBackend": {
+      "passed": 7,
+      "failed": 0
+    },
+    "browserGates": 16,
+    "portainerSmoke": true
+  },
+  "observations": {
+    "searchClsMax": 0,
+    "initialClsMax": 0,
+    "weatherStreamClsMax": 0,
+    "weatherRestoreProviderRequests": 0,
+    "searchRestoreStreamDeltaMax": 0,
+    "staleImagesRejected": true,
+    "feedbackReadinessControlled": true,
+    "weatherWidths": [
+      320,
+      390,
+      700,
+      900,
+      1000,
+      1024,
+      1440,
+      1920,
+      3840
+    ],
+    "noJsWeatherWidths": [
+      320,
+      390,
+      1440,
+      3840
+    ]
+  },
+  "localStatePreserved": {
+    "metadata": true,
+    "policies": true,
+    "guards": true,
+    "weather_policy": true,
+    "weather_budget": true,
+    "quality_rules": true,
+    "quality_pauses": true,
+    "site_content": true,
+    "feedback_batches": true,
+    "feedback_proofs": true,
+    "signingKeys": true,
+    "environmentAndSSO": true,
+    "envFile": true,
+    "frontendImage": true,
+    "backendImage": true
+  },
+  "mainCheckoutUpdated": true,
+  "sdkUnchanged": true,
+  "searxngCoreAndAdaptersUnchanged": true,
+  "backendRuntimeLockVerified": true,
+  "mcp": {
+    "availableXtendMaracaTools": [],
+    "calls": [],
+    "method": "SDK/CLI; inherited Cloud evidence is historical."
+  },
+  "reports": [
+    {
+      "report": "0.7.0-about-browser.json",
+      "sha256": "592bb0d09c8c3b25b02565bc202ddd590893b7fd6b2bd086e813b16dc6efc9a3"
+    },
+    {
+      "report": "0.7.0-availability-feedback-browser.json",
+      "sha256": "7f9fd5532e884d993f2b19866c04fc9d9a92d4e91beb96fafa3d1e46637b8792"
+    },
+    {
+      "report": "0.7.0-backend-runtime.json",
+      "sha256": "2e03af912c8f3fce69f96580fdea82116d39b0c9d49815ec6f4d311a0f4426ef"
+    },
+    {
+      "report": "0.7.0-browser.json",
+      "sha256": "8bbd81238723d9967160fde1fa91bcd5148697f9bf19e89e3441db62e3cbfecd"
+    },
+    {
+      "report": "0.7.0-cache-browser.json",
+      "sha256": "83661d53c309dfffcea5732344b8ca4a773365fb9a04128ade3d63f53cb62d45"
+    },
+    {
+      "report": "0.7.0-cache-stale-projection-browser.json",
+      "sha256": "5c72d590562a18f486858baf5a4db56d616da303fd576bfbec1822f934ebd9dd"
+    },
+    {
+      "report": "0.7.0-edge-browser.json",
+      "sha256": "a93e389aba5791e204d3ed25fb3ab5ac70753d3c4527cd586d503f4761a63db5"
+    },
+    {
+      "report": "0.7.0-feedback-readiness-browser.json",
+      "sha256": "44ead10c3060c7cab9286bb93d3c7109d310bba8fe74d750d412f04d3307ec96"
+    },
+    {
+      "report": "0.7.0-home-browser.json",
+      "sha256": "c502c244f930ac94c6c19a0a42408936b684f06831d104e3e4a67d111946c241"
+    },
+    {
+      "report": "0.7.0-host-browser-graph.json",
+      "sha256": "747e10642ed72d5714e667b86f332325727a68b457b37a8fe456fc6ffe70d559"
+    },
+    {
+      "report": "0.7.0-local-upgrade.json",
+      "sha256": "bb15c0c70aa557b6a401aa2155d0d9a8913497676b3b7be059bfd00f90d91897"
+    },
+    {
+      "report": "0.7.0-main-provenance.json",
+      "sha256": "f3076216951f97ce36a29d4e807cfdb814fb1cc3b5fbbbfb7f8cba2f819d0569"
+    },
+    {
+      "report": "0.7.0-minor-browser.json",
+      "sha256": "e9e4d2f605bb2df933dfa6295b388719dc00a13265b1e5b8a7a51abc4d086637"
+    },
+    {
+      "report": "0.7.0-preferences-browser.json",
+      "sha256": "46bd30c5123cb56ee4ca954c6e0ffe20ddafa73b8f457eafd21ddb880e6dc24b"
+    },
+    {
+      "report": "0.7.0-prerelease-audit.json",
+      "sha256": "9afb128a0e6816bb6641074a9de804ed655e5d758c9ac9c3a113e23fe3736509"
+    },
+    {
+      "report": "0.7.0-quality-dashboard-browser.json",
+      "sha256": "e9543de1a2e2051712a8a348698da353dcd36dc4fd4d995e947b17782f6e4c8b"
+    },
+    {
+      "report": "0.7.0-shell-browser.json",
+      "sha256": "4143108550e2a6f0f305df778096bbc7f6a2c0773df13d3f99391894ea660ec9"
+    },
+    {
+      "report": "0.7.0-spinner-stream.json",
+      "sha256": "5f36023244b2b0e80b6ee627cfd1d06c58dc845af24530c45c8e1cc1b136d961"
+    },
+    {
+      "report": "0.7.0-ssr-browser.json",
+      "sha256": "ce60727666b72dc5bdc0ddab61c125dc45b73871c9ff37410d0a37c9003cdfc2"
+    },
+    {
+      "report": "0.7.0-standalone-browser-graph.json",
+      "sha256": "0388303ce620ffd9288d94874bb91c34eec0c28a02356c217f2f086c78b46a9e"
+    },
+    {
+      "report": "0.7.0-stream-performance.json",
+      "sha256": "b28d3ac14e04ddf7652a71c7ef9ada1483156556469b62c76a33a3a78570d864"
+    },
+    {
+      "report": "0.7.0-weather-layout.json",
+      "sha256": "79122abf81921cb152f77ea1f56f149cd5b155a851ebbfbd85d39fef192b827e"
+    },
+    {
+      "report": "release-0.7.0-portainer-smoke.json",
+      "sha256": "a1b1f8772baec9ceb520767c2df66bb276dd0a414a96a7f8c0cf67586e80c0a0"
+    }
+  ],
+  "scope": "Exact final Linux/amd64 images with offline provider/OAuth fixtures, streaming gzip proxy, slow favicons and constrained mobile link. No real-provider performance, real Nextcloud login, production deployment or framework-publishing assertion. Source archive is the build-time snapshot; current verification is packaged separately."
+}

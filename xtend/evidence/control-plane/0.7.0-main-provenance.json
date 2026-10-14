@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "mainCommit": "389239284609a422f0f9d1263a5eae88bafa07d3",
+  "mergedPullRequests": [
+    17,
+    18
+  ],
+  "mainChecks": [
+    {
+      "name": "build-and-test",
+      "conclusion": "success"
+    },
+    {
+      "name": "docker-browser",
+      "conclusion": "success"
+    },
+    {
+      "name": "searxng-boundary",
+      "conclusion": "success"
+    }
+  ],
+  "protectedConfigurationPreserved": true,
+  "mcp": {
+    "enabledXtendOrMaracaTools": [],
+    "calls": [],
+    "method": "SDK/CLI and browser verification; inherited Cloud MCP evidence stays separate."
+  },
+  "sdkArtifactSha256": "47bdc5445e037bfcf98d61db4906ff9bf4303f3c1123ecd548d90a805821cfcc"
+}

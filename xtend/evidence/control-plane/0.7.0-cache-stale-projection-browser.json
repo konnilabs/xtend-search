@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "oldImagesCount": 4,
+  "rejected": true,
+  "propsCount": 10,
+  "modelCount": 10,
+  "domCount": 10,
+  "streams": 1,
+  "scope": "Offline final-image Docker fixtures; synthetic feedback and controlled old-resource replay."
+}

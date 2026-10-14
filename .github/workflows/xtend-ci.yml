@@ -72,12 +72,12 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Build paired release images
         run: |
-          docker build -f Dockerfile.control -t xtend-search:0.6.0 .
-          docker build -f Dockerfile.searxng -t xtend-search-searxng:0.5.0 .
+          docker build -f Dockerfile.control -t xtend-search:0.7.0 .
+          docker build -f Dockerfile.searxng -t xtend-search-searxng:0.5.1 .
       - name: Run isolated OAuth, XScaler and responsive UI gates
         env:
           FIXTURE_SETTINGS: xtend/config/settings.control.v05.fixture.yml
-          FIXTURE_DATA_VOLUME: xtend-cp-ci-0.6.0
+          FIXTURE_DATA_VOLUME: xtend-cp-ci-0.7.0
           FIXTURE_PROBES: "0"
         run: |
           sh xtend/tests/control/docker-fixture.sh
