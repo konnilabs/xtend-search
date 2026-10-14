@@ -12,12 +12,20 @@ export function installInlineNoticeFocus(){
  const lifetime=new AbortController();
  document.addEventListener('alert-shown',event=>{
   const notice=event.target;if(!notice.matches?.('x-alert.search-warning'))return;
-  const previous=document.activeElement;
+  const previous=document.activeElement,position=[scrollX,scrollY];
   queueMicrotask(()=>queueMicrotask(()=>{
    if(!notice.isConnected||document.activeElement!==notice)return;
    const target=previous?.isConnected&&previous!==document.body?previous:document.getElementById('search-input');
    focusElement(target,{preventScroll:true});
+   scrollViewport(...position);
   }));
  },{signal:lifetime.signal});
  window.addEventListener('pagehide',()=>lifetime.abort(),{once:true});
+}
+
+// RMT may replace a focused light-DOM control during a model projection.
+// Return focus to the framework-owned accessible dialog container, not the page.
+export function focusOverlayIfLost(id){
+ const host=document.getElementById(id);
+ if(host?.hasAttribute('open')&&document.activeElement!==host&&!host.contains(document.activeElement))focusElement(host.shadowRoot?.querySelector('[role="dialog"]'),{preventScroll:true});
 }

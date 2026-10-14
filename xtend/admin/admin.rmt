@@ -1,4 +1,20 @@
 template xtend.observatory {
+ datasource admin.live.observe from host admin.live.observe { mode invoke
+ contract "xsearch.observatory-live.v1"
+ }
+ datasource admin.evidence.project from host admin.evidence.project { mode invoke
+ contract "xsearch.observatory-evidence.v1"
+ }
+ datasource admin.feedback.reduce from host admin.feedback.reduce { mode invoke
+ contract "xsearch.admin-ui.v1"
+ }
+ datasource admin.form.save from host admin.form.save { mode invoke
+ contract "xsearch.admin-ui.v1"
+ }
+ datasource admin.guard.resolve from host admin.guard.resolve { mode invoke
+ contract "xsearch.admin-ui.v1"
+ }
+
  datasource admin.drafts.reduce from host admin.drafts.reduce { mode invoke
  contract "xsearch.admin-drafts.v1"
  }

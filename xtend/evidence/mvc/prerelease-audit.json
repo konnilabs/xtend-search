@@ -1,0 +1,294 @@
+{
+  "ok": true,
+  "scope": "Built Docker image with offline 100/700/2500ms provider fixtures; 4s favicon delay; synthetic 120ms/1.2Mbit mobile link. CLS excludes recent-input shifts per Web Vitals; all shift values are retained separately. Long tasks include bootstrap. No production latency claim or user queries/URLs retained.",
+  "runs": [
+    {
+      "width": 320,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 56.59999999962747,
+        "domContentLoadedMs": 148.20000000018626,
+        "resumeReadyMs": 621.7000000001863,
+        "fcpMs": 132,
+        "lcpMs": 132,
+        "cls": 0,
+        "jsEncodedBytes": 644423
+      },
+      "firstMs": 599.4000000003725,
+      "completeMs": 3157.9000000003725,
+      "cls": 0,
+      "frames": [
+        {
+          "elapsedMs": 599.4000000003725,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 4
+        },
+        {
+          "elapsedMs": 1122.4000000003725,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 7
+        },
+        {
+          "elapsedMs": 2914.9000000003725,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 10
+        },
+        {
+          "elapsedMs": 3157.9000000003725,
+          "status": "complete",
+          "event": "search.summary",
+          "resultCount": 10
+        }
+      ],
+      "restore": {
+        "elapsedMs": 636,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 74.8999999994412,
+        "domContentLoadedMs": 130.8999999994412,
+        "resumeReadyMs": 547,
+        "fcpMs": 176,
+        "lcpMs": 176,
+        "cls": 0,
+        "jsEncodedBytes": 644423
+      },
+      "firstMs": 483.09999999962747,
+      "completeMs": 3072.2999999998137,
+      "cls": 0,
+      "frames": [
+        {
+          "elapsedMs": 483.09999999962747,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 4
+        },
+        {
+          "elapsedMs": 1050.5,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 7
+        },
+        {
+          "elapsedMs": 2852.2000000001863,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 10
+        },
+        {
+          "elapsedMs": 3072.2999999998137,
+          "status": "complete",
+          "event": "search.summary",
+          "resultCount": 10
+        }
+      ],
+      "restore": {
+        "elapsedMs": 594,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 1440,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 59.40000000037253,
+        "domContentLoadedMs": 99.79999999981374,
+        "resumeReadyMs": 550.9000000003725,
+        "fcpMs": 140,
+        "lcpMs": 140,
+        "cls": 0,
+        "jsEncodedBytes": 644423
+      },
+      "firstMs": 585,
+      "completeMs": 3127.7999999998137,
+      "cls": 0,
+      "frames": [
+        {
+          "elapsedMs": 585,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 4
+        },
+        {
+          "elapsedMs": 1149.4000000003725,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 7
+        },
+        {
+          "elapsedMs": 2893.2999999998137,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 10
+        },
+        {
+          "elapsedMs": 3127.7999999998137,
+          "status": "complete",
+          "event": "search.summary",
+          "resultCount": 10
+        }
+      ],
+      "restore": {
+        "elapsedMs": 658,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 1920,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 60.60000000055879,
+        "domContentLoadedMs": 128.20000000018626,
+        "resumeReadyMs": 561.6000000005588,
+        "fcpMs": 108,
+        "lcpMs": 108,
+        "cls": 0,
+        "jsEncodedBytes": 644423
+      },
+      "firstMs": 577.3999999994412,
+      "completeMs": 3171.699999999255,
+      "cls": 0,
+      "frames": [
+        {
+          "elapsedMs": 577.3999999994412,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 4
+        },
+        {
+          "elapsedMs": 1124.7999999998137,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 7
+        },
+        {
+          "elapsedMs": 2928.199999999255,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 10
+        },
+        {
+          "elapsedMs": 3171.699999999255,
+          "status": "complete",
+          "event": "search.summary",
+          "resultCount": 10
+        }
+      ],
+      "restore": {
+        "elapsedMs": 729,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 3840,
+      "throttled": false,
+      "initial": {
+        "ttfbMs": 73.3999999994412,
+        "domContentLoadedMs": 190.79999999981374,
+        "resumeReadyMs": 728.9000000003725,
+        "fcpMs": 192,
+        "lcpMs": 192,
+        "cls": 0,
+        "jsEncodedBytes": 644423
+      },
+      "firstMs": 729.9000000003725,
+      "completeMs": 3306,
+      "cls": 0,
+      "frames": [
+        {
+          "elapsedMs": 729.9000000003725,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 4
+        },
+        {
+          "elapsedMs": 1228,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 7
+        },
+        {
+          "elapsedMs": 3030.4000000003725,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 10
+        },
+        {
+          "elapsedMs": 3306,
+          "status": "complete",
+          "event": "search.summary",
+          "resultCount": 10
+        }
+      ],
+      "restore": {
+        "elapsedMs": 723,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    },
+    {
+      "width": 390,
+      "throttled": true,
+      "initial": {
+        "ttfbMs": 56.59999999962747,
+        "domContentLoadedMs": 1702.1000000005588,
+        "resumeReadyMs": 7545.100000000559,
+        "fcpMs": 480,
+        "lcpMs": 480,
+        "cls": 0,
+        "jsEncodedBytes": 644423
+      },
+      "firstMs": 1113.7999999998137,
+      "completeMs": 3771.2000000001863,
+      "cls": 0,
+      "frames": [
+        {
+          "elapsedMs": 1113.7999999998137,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 4
+        },
+        {
+          "elapsedMs": 1702.2999999998137,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 7
+        },
+        {
+          "elapsedMs": 3552.9000000003725,
+          "status": "delta",
+          "event": "results.batch",
+          "resultCount": 10
+        },
+        {
+          "elapsedMs": 3771.2000000001863,
+          "status": "complete",
+          "event": "search.summary",
+          "resultCount": 10
+        }
+      ],
+      "restore": {
+        "elapsedMs": 654,
+        "searchStreamDelta": 0,
+        "metadataDelta": 1
+      },
+      "errors": []
+    }
+  ]
+}

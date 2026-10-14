@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "node": "v24.19.0",
+  "version": "c224e63cbbd104b989c102ea8f92f4ffdb684fcbd292e87c9474735b1f3395b9",
+  "sourceSha256": "e3f1278ebc078c329e9c151a050fe9d3fc872094baccbba26fe952bae3334bd5",
+  "compilation": {
+    "compilations": 1,
+    "hits": 1,
+    "documents": 1
+  }
+}

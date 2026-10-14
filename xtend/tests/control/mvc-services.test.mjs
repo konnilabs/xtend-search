@@ -83,3 +83,22 @@ test('favicon projections compare immutable Model clones by content, not object 
  const projection=createFaviconProjection({readResults:()=>structuredClone(rows),project:async before=>{assert.ok(++projects<5,'Projection must terminate with cloned Model reads');return {results:before.map(row=>({...row,faviconSrc:'blob:cached',faviconReady:true}))};},commit:async value=>{commits++;rows=value.results;},isCurrent:()=>true});
  await projection.request(1);await projection.request(1);assert.equal(commits,1);assert.equal(projects,2);projection.dispose();
 });
+import {saveAdminForm,resolveAdminGuard,feedbackModel} from '../../admin/draft-service-core.mjs';
+test('admin save failure leaves draft projection untouched and releases busy state',async()=>{
+ const busy=[],notices=[];let projected=false;
+ const ok=await saveAdminForm({serviceId:'admin.engine.policy.set',payload:{rpm:'17'}},{signal:new AbortController().signal,invokeServer:async()=>{throw Error('offline');},project:async()=>projected=true,announce:async values=>notices.push(...values),setBusy:async value=>busy.push(value)});
+ assert.equal(ok,false);assert.equal(projected,false);assert.deepEqual(busy,[true,false]);assert.equal(notices[0].type,'error');
+});
+test('admin guard saves in order and stops before discarding a failed draft',async()=>{
+ const saved=[];let discarded=false;
+ assert.equal(await resolveAdminGuard({choice:'save',ids:['policy-form','routing-form']},{save:async id=>{saved.push(id);return false;},discard:async()=>discarded=true}),false);
+ assert.deepEqual(saved,['policy-form']);assert.equal(discarded,false);
+ assert.equal(await resolveAdminGuard({choice:'cancel',ids:[]},{save:async()=>true,discard:async()=>discarded=true}),false);
+ const feedback=feedbackModel({current:{items:[]},change:{id:'notice',message:'offline',type:'error'}});assert.equal(feedback.items[0].duration,'0');assert.equal(feedbackModel({current:feedback,change:{dismiss:true,id:'notice'}}).items.length,0);
+});
+import {observeAdmin,evidenceModel} from '../../admin/live-service-core.mjs';
+test('Observatory service drops stale scopes and awaits its presentation port',async()=>{
+ const controller=new AbortController();let reads=0,url='/admin?engine=one';const seen=[];
+ await observeAdmin({}, {signal:controller.signal,current:()=>({url}),openFrames:async function*(){reads++;yield {type:'delta',value:{view:{updated:'now'}}};reads++;yield {type:'delta',value:{view:{updated:'stale'}}};},present:async(update)=>{seen.push(update);assert.equal(reads,1);url='/admin?engine=two';},pause:async()=>controller.abort()});
+ assert.equal(seen.length,1);assert.equal(seen[0].value.updated,'now');assert.equal(evidenceModel([]).rows.length,0);
+});

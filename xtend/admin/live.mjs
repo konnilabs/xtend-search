@@ -5,6 +5,7 @@ import '@ccslabs/xtend/components/xsidepanel.js';
 import '@ccslabs/xtend/components/xdialog.js';
 import '@ccslabs/xtend/components/xtoast.js';
 import services from './services.ts';
+import {pauseObservation} from './live-service-core.mjs';
 export function watchObservatory(client,csrf){
  const controller=new AbortController(),transport=createHttpAppServiceTransport({pathPrefix:'/api/xtend/services',headers:{'X-CSRF-Token':csrf}}),registry=createAppServiceRegistry(services,{transport,historyLimit:0});
  const command=(name,payload)=>client.getRuntime().dispatchCommand(name,payload);
@@ -20,16 +21,16 @@ export function watchObservatory(client,csrf){
  // Serialize changes so dismissal and a concurrent save cannot lose notices.
  let feedbackQueue=Promise.resolve();
  function updateFeedback(update){
-  const next=feedbackQueue.then(()=>{if(controller.signal.aborted)return;return command('admin.feedback.set',{value:update(client.getRuntime().model.getState('admin.feedback')||{items:[]})});});
+  const next=feedbackQueue.then(()=>{if(controller.signal.aborted)return;return registry.invoke('admin.feedback.reduce',{current:client.getRuntime().model.getState('admin.feedback')||{items:[]},change:update}).then(value=>command('admin.feedback.set',{value}));});
   feedbackQueue=next.catch(()=>{});return feedbackQueue;
  }
  function toast(message,type='success',title='',id='admin-notice-'+crypto.randomUUID()){
-  return updateFeedback(current=>({items:[...current.items,{id,title:title||(type==='error'?'Aktion nicht bestätigt':'Gespeichert'),message,type,duration:type==='error'?'0':'6000'}]}));
+  return updateFeedback({id,title,message,type});
  }
  document.addEventListener('toast-dismissed',event=>{
   if(!event.target.matches('x-toast.admin-toast'))return;
   const id=event.target.id;
-  void updateFeedback(current=>({items:current.items.filter(item=>item.id!==id)}));
+  void updateFeedback({dismiss:true,id});
  },{signal:controller.signal});
  let layoutUpdate=null,geometry='',geometryPanel=null;
  function surfaces(){
@@ -55,28 +56,26 @@ export function watchObservatory(client,csrf){
   if(saving)return saving;
   if(!form.reportValidity())return false;
   const focused=document.activeElement?.name,positions=[...document.querySelectorAll('[data-xtend-scroll]')].map(n=>[n.dataset.xtendScroll,n.scrollLeft,n.scrollTop]);
-  saving=(async()=>{await draftQueue;const payload=input(form);await command('admin.busy.set',{value:true});
-   try{
-
-    const result=await registry.invoke(serviceFor(form),payload);dirty.delete(form);await updateDraft(form,true);
-    await client.optimistic(props=>({...props,'admin.data':result}),async()=>true);
-
-    if(serviceFor(form)==='admin.motd.set'&&typeof BroadcastChannel==='function'){const channel=new BroadcastChannel('xtend.search.content');channel.postMessage({changed:true});channel.close();}
-    if(result.notices?.length){for(const notice of result.notices)await toast(notice.message,notice.type,notice.title,notice.id);}
-    else await toast(result.message||'Änderung und Audit gespeichert.');
-    requestAnimationFrame(()=>{for(const [id,x,y]of positions)scrollElement(document.querySelector('[data-xtend-scroll="'+id+'"]'), x, y);if(focused)focusElement(document.getElementById(form.getAttribute('id'))?.elements.namedItem(focused), {preventScroll:true});surfaces();});
-    return true;
-   }catch(error){await toast(error.message||'Änderung nicht gespeichert. Eingaben bleiben erhalten.','error');return false;}
-   finally{await command('admin.busy.set',{value:false});saving=null;}
-  })();return saving;
+  const own=readGeneration;
+  saving=(async()=>{await draftQueue;const payload=input(form);
+   return registry.invoke('admin.form.save',{serviceId:serviceFor(form),payload},{
+    invokeServer:(name,payload,signal)=>registry.invoke(name,payload,{},{signal}),
+    setBusy:value=>controller.signal.aborted?undefined:command('admin.busy.set',{value}),
+    project:async result=>{if(own!==readGeneration||controller.signal.aborted)return;dirty.delete(form);await updateDraft(form,true);if(own!==readGeneration)return;await client.optimistic(props=>({...props,'admin.data':result}),async()=>true);
+     requestAnimationFrame(()=>{if(own!==readGeneration)return;for(const [id,x,y]of positions)scrollElement(document.querySelector('[data-xtend-scroll="'+id+'"]'), x,y);if(focused)focusElement(document.getElementById(form.getAttribute('id'))?.elements.namedItem(focused), {preventScroll:true});surfaces();});},
+    announce:async notices=>{if(own!==readGeneration||controller.signal.aborted)return;for(const notice of notices)await toast(notice.message,notice.type,notice.title,notice.id);},
+    notify:()=>{if(typeof BroadcastChannel==='function'){const channel=new BroadcastChannel('xtend.search.content');channel.postMessage({changed:true});channel.close();}}
+   },{signal:controller.signal});
+  })().finally(()=>{saving=null;});return saving;
  }
+
  async function confirmLeave(){
   for(const form of [...dirty])if(!form.isConnected)dirty.delete(form);
   if(!dirty.size)return true;if(guarding)return false;guarding=true;
   await client.getRuntime().ensureComponent('x-dialog');
   await command('admin.guard.set',{value:true});
   return new Promise(resolve=>{let done=false;const finish=async value=>{if(done)return;done=true;await command('admin.guard.set',{value:false});guarding=false;guardDecision=null;resolve(value);};
-   guardDecision=async choice=>{if(choice==='cancel')return finish(false);if(choice==='discard'){dirty.clear();await clearDrafts();return finish(true);}if(choice==='save'){for(const form of [...dirty])if(!await save(form))return finish(false);return finish(true);}};
+   guardDecision=async choice=>{if(done)return;const ids=[...dirty].filter(form=>form.isConnected).map(form=>form.getAttribute('id'));const value=await registry.invoke('admin.guard.resolve',{choice,ids},{save:id=>{const form=document.getElementById(id);return form?save(form):false;},discard:async()=>{dirty.clear();await clearDrafts();}});return finish(value);};
   });
  }
  document.addEventListener('dialog-closed',event=>{if(event.target.id==='admin-draft-guard'&&guardDecision)void guardDecision('cancel');},{signal:controller.signal});
@@ -89,7 +88,7 @@ export function watchObservatory(client,csrf){
  },{capture:true,signal:controller.signal});
  document.addEventListener('click',event=>{
   if(event.target.closest('#quality-evidence')){event.preventDefault();const own=readGeneration,signal=readController.signal,scope={id:new URL(location.href).searchParams.get('engine'),capability:document.querySelector('[name=capability]')?.value||new URL(location.href).searchParams.get('capability')};
-   void command('admin.evidence.set',{value:{rows:[],message:'Belege werden abgerufen …'}}).then(()=>own===readGeneration?registry.invoke('admin.quality.evidence',scope,{},{signal,timeoutMs:10000}):[]).then(rows=>{if(own===readGeneration)return command('admin.evidence.set',{value:{rows:rows.map((row,index)=>({...row,id:String(index),label:row.reason+' · '+row.url})),message:rows.length?'':'Keine freiwilligen Belege vorhanden.'}});}).catch(error=>{if(own===readGeneration){void command('admin.evidence.set',{value:{rows:[],message:'Belege konnten nicht geladen werden.'}});toast(error.message,'error');}});return;}
+   void command('admin.evidence.set',{value:{rows:[],message:'Belege werden abgerufen …'}}).then(()=>own===readGeneration?registry.invoke('admin.quality.evidence',scope,{},{signal,timeoutMs:10000}):[]).then(async rows=>{if(own!==readGeneration)return;const value=await registry.invoke('admin.evidence.project',{rows});if(own===readGeneration)return command('admin.evidence.set',{value});}).catch(error=>{if(own===readGeneration){void command('admin.evidence.set',{value:{rows:[],message:'Belege konnten nicht geladen werden.'}});toast(error.message,'error');}});return;}
   if(event.target.closest('#quality-simulate')){event.preventDefault();const own=readGeneration;
    void registry.invoke('admin.quality.simulate',input(document.getElementById('quality-rule-form')),{},{signal:readController.signal,timeoutMs:10000}).then(r=>{if(own===readGeneration)return command('admin.simulation.set',{value:r.count+' Meldungen / '+r.contexts+' Kontexte: Schwelle '+(r.wouldMatch?'erreicht. ':'nicht erreicht. ')+r.message});}).catch(error=>{if(own===readGeneration)toast(error.message,'error');});return;}
   const refresh=event.target.closest('#admin-refresh'),link=event.target.closest('a[href]');if(!refresh&&!link)return;
@@ -105,11 +104,11 @@ export function watchObservatory(client,csrf){
  },{capture:true,signal:controller.signal});
  window.addEventListener('beforeunload',event=>{if(dirty.size){event.preventDefault();event.returnValue='';}},{signal:controller.signal});
  const stop=client.subscribe(event=>{if(event.type==='pending'){readGeneration++;readController.abort();readController=new AbortController();void command('admin.evidence.set',{value:{rows:[],message:''}}).catch(()=>{});void command('admin.simulation.set',{value:''}).catch(()=>{});}if(event.type==='navigate'){const navigated=location.href!==currentUrl;currentUrl=location.href;if(history.state?.observatoryIndex===undefined)historyIndex++;history.replaceState({...history.state,observatoryIndex:historyIndex},'',location.href);if(navigated){dirty.clear();void clearDrafts();watchController?.abort();}surfaces();}});
- async function watch(){while(!controller.signal.aborted){watchController=new AbortController();try{
-  const watchUrl=location.href,params=Object.fromEntries(new URL(watchUrl).searchParams);params.id=params.engine;
-  const frames=registry.stream('admin.observatory.events',params,{}, {signal:AbortSignal.any([controller.signal,watchController.signal]),timeoutMs:30000});
-  for await(const frame of frames){if(controller.signal.aborted)return;if(watchController.signal.aborted||location.href!==watchUrl)break;if(frame.type==='error'||frame.type==='cancelled')throw Error('connection');if(frame.value?.view){await command('admin.live.set',{value:frame.value.view});await command('admin.connection.set',{message:'Live verbunden · '+frame.value.view.updated});}}
- }catch{if(!controller.signal.aborted&&!watchController.signal.aborted)await command('admin.connection.set',{message:'Live-Verbindung unterbrochen. Angezeigte Daten können veraltet sein.'}).catch(()=>{});}
- if(!controller.signal.aborted&&!watchController.signal.aborted)await new Promise(resolve=>setTimeout(resolve,3000));}}
+ function watch(){return registry.invoke('admin.live.observe',{}, {
+  current:()=>controller.signal.aborted?null:{url:location.href,params:{...Object.fromEntries(new URL(location.href).searchParams),id:new URL(location.href).searchParams.get('engine')}},
+  openFrames:(scope,signal)=>{watchController=new AbortController();const invocationId=crypto.randomUUID();return transport.stream({serviceId:'admin.observatory.events',kind:'stream',target:'server',input:scope.params,signal:AbortSignal.any([signal,watchController.signal,AbortSignal.timeout(30000)]),invocationId,correlationId:invocationId,context:{}});},
+  present:async(update,scope)=>{if(controller.signal.aborted||location.href!==scope.url)return;if(update.value)await command('admin.live.set',{value:update.value});if(!controller.signal.aborted&&location.href===scope.url)await command('admin.connection.set',{message:update.message});},
+  pause:pauseObservation
+ },{signal:controller.signal}).catch(()=>{});}
  void watch();window.addEventListener('pagehide',()=>{readGeneration++;controller.abort();readController.abort();stop();observer.disconnect();registry.dispose();transport.dispose?.();},{once:true});
 }

@@ -1,7 +1,6 @@
 import {scrollViewport} from './browser-capabilities.mjs';
 import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
 import services from './services.ts';
-import {decoratedReportData} from './report-state.mjs';
 import {interruptedSearch} from './stream-service-core.mjs';
 import {preserveFilterDraft} from './filter-navigation.mjs';
 // Presentation coordinator for the existing PageClient. The SDK owns framing,
@@ -14,11 +13,11 @@ export function installSearchStreaming(){
   stop();const own=epoch,controller=new AbortController(),registry=createAppServiceRegistry(services,{historyLimit:0});
   const record={id:stream.id,controller};active=record;const valid=()=>active===record&&epoch===own&&!controller.signal.aborted&&client()?.page?.props?.['search.data']?.stream?.id===stream.id;
   try{
-   await registry.invoke('search.stream.consume',{stream,origin:location.origin},{present:async payload=>{
+   await registry.invoke('search.stream.consume',{stream,origin:location.origin},{readFeedback:()=>client()?.getRuntime()?.model.getState('search.feedback'),present:async payload=>{
     if(!valid())throw new DOMException('Stale page','AbortError');
     const final=payload.data.stream.phase==='complete';
     await new Promise(resolve=>requestAnimationFrame(resolve));if(!valid())throw new DOMException('Stale page','AbortError');
-    await client().optimistic(props=>valid()?{...preserveFilterDraft(props),'search.data':decoratedReportData(payload.data,client()?.getRuntime()?.model.getState('search.feedback'))}:props,async()=>undefined);
+    await client().optimistic(props=>valid()?{...preserveFilterDraft(props),'search.data':payload.data}:props,async()=>undefined);
     if(!valid())return;
     window.dispatchEvent(new CustomEvent('xtend-search:stream',{detail:{id:stream.id,status:payload.status,event:payload.event,sequence:payload.sequence}}));
     if(restoring&&(document.documentElement.scrollHeight-innerHeight>=restoring[1]||final)){scrollViewport(...restoring);restoring=null;}

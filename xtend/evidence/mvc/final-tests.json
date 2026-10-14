@@ -1,0 +1,160 @@
+{
+  "date": "2026-10-14T10:02:54.026936+00:00",
+  "baseline": "51a30470f6c7edbe5e8dfddc6589284ae6c83c0c",
+  "branch": "codex/xtend-search-mvc-0.6.0",
+  "node": "v24.19.0",
+  "browsers": [
+    "Chromium (Playwright 1.64.0)",
+    "Firefox (Playwright 1.64.0)"
+  ],
+  "builds": [
+    "npm run build",
+    "npm run build:control"
+  ],
+  "unit": {
+    "controlFiles": 19,
+    "controlFailures": 0,
+    "hostFiles": 1,
+    "hostFailures": 0,
+    "architectureGate": "passed; static computed calls and simple aliases included"
+  },
+  "boundary": {
+    "tests": 7,
+    "status": "passed",
+    "network": "none",
+    "filesystem": "read-only",
+    "image": "xtend-search-searxng:0.5.0; unchanged Python backend from baseline"
+  },
+  "browserGates": [
+    {
+      "gate": "v04",
+      "status": "passed",
+      "logSha256": "dd93920ca15d58010ddce598fbeef4b5621dc3656b3dda3afadbc4c279c6a254"
+    },
+    {
+      "gate": "minor",
+      "status": "passed",
+      "logSha256": "7ce0c382ea6783c26e20c8123c5d94dc5b5fb2a993f3f25c643b395e454586fe"
+    },
+    {
+      "gate": "release",
+      "status": "passed",
+      "logSha256": "f09b78129ef77728da48b9967a9866446e5a7bde317c963f6f879fb7d3aa5d3a"
+    },
+    {
+      "gate": "availability-feedback",
+      "status": "passed",
+      "logSha256": "8b9072f66b06b8333ebc3d66d740c40e605580c01aec407bc161a1ecd670791c"
+    },
+    {
+      "gate": "weather-layout",
+      "status": "passed",
+      "logSha256": "a3b2053a4beeddcef0a35516099fe027c8e88d24432fe5aa3277c96980cd0eb5"
+    },
+    {
+      "gate": "spinner-stream",
+      "status": "passed",
+      "logSha256": "363ad5c97d32ca48ae2c83eb846da78b9088f783421afdd87aa9d46f5f1c02f2"
+    },
+    {
+      "gate": "cache",
+      "status": "passed",
+      "logSha256": "fe4867ef22f249710647f53496af3dfb94c5f0d8be3158a737748eae4d28ea9f"
+    },
+    {
+      "gate": "preferences",
+      "status": "passed",
+      "logSha256": "a2f104131eda9eb3c14849ce93083e805054bf4e4b7e935c5aab85ad402895b9"
+    },
+    {
+      "gate": "release-0.4.2",
+      "status": "passed",
+      "logSha256": "2483f448ae6c26ff5094a8952172d42e546cc4b94de6080095aa0b40e67469d7"
+    },
+    {
+      "gate": "home",
+      "status": "passed",
+      "logSha256": "0b8d11cab63f36b9fb0db6f5178776bec1f123a697a0d769dedc07daaef47ae9"
+    },
+    {
+      "gate": "ssr",
+      "status": "passed",
+      "logSha256": "319e994f84a04e101877700fed09db6c6faf2f72e5122b206ad92bb36c46fbff"
+    },
+    {
+      "gate": "about",
+      "status": "passed",
+      "logSha256": "df3953a871be3e2029a3bb1d9b7699562466bcc86baaf6a5af162f20551e43d6"
+    },
+    {
+      "gate": "edge",
+      "status": "passed",
+      "logSha256": "d1fa3fb92f86286b8a32159291e86d6e55cb84331e463f00f6ebb3d2ac5fc2e7"
+    },
+    {
+      "gate": "prerelease-audit",
+      "status": "passed",
+      "logSha256": "62cd274a9d19f66929b30174c55837c28c6e31ab362d81ac551ba9c46dbadd43"
+    },
+    {
+      "gate": "ssr-firefox",
+      "status": "passed",
+      "logSha256": "1ddee1318a235b971d1a74edae4e2c5b09952428544074b848deade79e9ceb24"
+    },
+    {
+      "gate": "lightbox",
+      "status": "passed",
+      "cases": 12,
+      "browsers": [
+        "chromium",
+        "firefox"
+      ]
+    },
+    {
+      "gate": "alerts",
+      "status": "passed",
+      "cases": 14,
+      "browsers": [
+        "chromium",
+        "firefox"
+      ]
+    },
+    {
+      "gate": "image-fallback",
+      "status": "passed",
+      "cases": 14,
+      "browsers": [
+        "chromium",
+        "firefox"
+      ]
+    },
+    {
+      "gate": "host-browser",
+      "status": "passed",
+      "cases": 17,
+      "browsers": [
+        "chromium",
+        "firefox"
+      ]
+    },
+    {
+      "gate": "XScaler-streaming",
+      "status": "passed",
+      "cases": 21,
+      "browsers": [
+        "chromium",
+        "firefox"
+      ]
+    }
+  ],
+  "sourceTreeSha256": "711f0590241855e1fbebd42a0f6ed79698c452e59d576d5190c0b6dc312e74f7",
+  "ci": "final pushed commit: verification pending; no claim of green remote CI yet",
+  "limitations": [
+    "Local Control browser gates use the current built Node host with offline Docker SearXNG and loopback OAuth/weather fixtures; they are not a production deployment.",
+    "The time-budget prerelease test initially failed under parallel browser load and passed in isolation with unchanged assertions. No timing/CLS threshold was relaxed.",
+    "Live-provider *-live.mjs gates were not run; paired offline fixtures cover both browsers and security/fallback behavior.",
+    "No AGENTS.md found in the repository, /workspace parent or available .agents/.codex directories.",
+    "No registered XTend tool appeared in the chat tool list. The available local XTend MCP was actually invoked over authenticated HTTP; failed stdio and nonexistent URI diagnostics remain recorded.",
+    "npm on the local host is 11.9.0; Node matches pinned 24.19.0. Docker/CI use pinned npm 11.17.0."
+  ]
+}

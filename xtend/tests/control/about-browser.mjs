@@ -19,7 +19,9 @@ try{
  const context=await browser.newContext({viewport:{width:1440,height:1000},colorScheme:'dark'});page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const requests=[];page.on('request',r=>requests.push(r.url()));await page.goto(base+'/');await page.waitForFunction(()=>window.XTendPage?.getRuntime());await icons(page);
  assert.equal(await page.getByRole('link',{name:'Einstellungen',exact:true}).count(),0);
- assert.equal(await page.locator('#search-about').count(),0,'About content loads on demand; RMT feedback may register XDialog earlier');
+ assert.equal(await page.locator('#search-about').count(),1,'RMT declares the persistent About dialog');
+ assert.equal(await page.locator('#search-about').isVisible(),false,'Closed About reserves no visible surface');
+ assert.equal(await page.locator('#search-about .about-sections section').count(),0,'About content remains on demand');
  const origin=await page.evaluate(()=>performance.timeOrigin),url=page.url();await page.locator('#search-input').fill('ungesendeter Suchbegriff');
  const top=page.getByRole('link',{name:'Über XTend.search',exact:true});await top.click();const dialog=page.getByRole('dialog',{name:'Über XTend.search',exact:true});await dialog.waitFor();
  assert.equal(await page.evaluate(()=>document.getElementById('search-about').constructor.xtendComponentContract.tag),'x-dialog');assert.equal(page.url(),url);assert.equal(await page.evaluate(()=>performance.timeOrigin),origin);assert.equal(await page.locator('#search-input').inputValue(),'ungesendeter Suchbegriff');
@@ -28,7 +30,7 @@ try{
  const y=await page.evaluate(()=>scrollY);await page.mouse.wheel(0,500);await page.waitForTimeout(80);assert.equal(await page.evaluate(()=>scrollY),y);await page.keyboard.press('/');assert.equal(await inside(page),true);
  await page.screenshot({path:new URL(version+'-about-desktop.png',out).pathname});await close(page);assert.equal(await top.evaluate(e=>document.activeElement===e),true);
  const footer=page.getByRole('link',{name:'Über & Datenschutz',exact:true});await footer.scrollIntoViewIfNeeded();const footerY=await page.evaluate(()=>scrollY);await footer.click();await dialog.waitFor();await page.mouse.click(5,5);await dialog.waitFor({state:'hidden'});await page.waitForFunction(()=>document.activeElement?.textContent==='Über & Datenschutz');assert.equal(await page.evaluate(()=>scrollY),footerY);
- checks.push('Existing SVG and PNG favicons load. Settings is removed. A genuine lazy XDialog opens from both About links without changing the document, URL or query draft. Tab/Shift+Tab stay inside; Escape and backdrop return focus and scroll.');
+ checks.push('Existing SVG and PNG favicons load. Settings is removed. RMT-owned content in a framework XDialog opens from both About links without changing the document, URL or query draft. Tab/Shift+Tab stay inside; Escape and backdrop return focus and scroll.');
  for(const [width,scheme]of [[320,'light'],[390,'dark'],[720,'light']]){
   await page.setViewportSize({width,height:844});await page.emulateMedia({colorScheme:scheme,reducedMotion:'reduce'});await top.click();await dialog.waitFor();
   const rect=await dialog.boundingBox();assert.ok(rect.x>=0&&rect.x+rect.width<=width+1);assert.ok(rect.y>=0&&rect.y+rect.height<=844+1);assert.equal(await dialog.evaluate(e=>getComputedStyle(e).animationName),'none');

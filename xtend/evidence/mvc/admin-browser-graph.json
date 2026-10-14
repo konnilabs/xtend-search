@@ -306,7 +306,7 @@
       "format": "esm"
     },
     "frontend/browser-capabilities.mjs": {
-      "bytes": 1335,
+      "bytes": 1822,
       "imports": [],
       "format": "esm"
     },
@@ -440,12 +440,17 @@
       "format": "esm"
     },
     "admin/draft-service-core.mjs": {
-      "bytes": 816,
+      "bytes": 2179,
+      "imports": [],
+      "format": "esm"
+    },
+    "admin/live-service-core.mjs": {
+      "bytes": 1276,
       "imports": [],
       "format": "esm"
     },
     "admin/services.ts": {
-      "bytes": 1228,
+      "bytes": 2331,
       "imports": [
         {
           "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
@@ -456,12 +461,17 @@
           "path": "admin/draft-service-core.mjs",
           "kind": "import-statement",
           "original": "./draft-service-core.mjs"
+        },
+        {
+          "path": "admin/live-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./live-service-core.mjs"
         }
       ],
       "format": "esm"
     },
     "admin/live.mjs": {
-      "bytes": 13179,
+      "bytes": 13170,
       "imports": [
         {
           "path": "frontend/browser-capabilities.mjs",
@@ -497,6 +507,11 @@
           "path": "admin/services.ts",
           "kind": "import-statement",
           "original": "./services.ts"
+        },
+        {
+          "path": "admin/live-service-core.mjs",
+          "kind": "import-statement",
+          "original": "./live-service-core.mjs"
         }
       ],
       "format": "esm"
@@ -608,16 +623,19 @@
           "bytesInOutput": 10133
         },
         "admin/draft-service-core.mjs": {
-          "bytesInOutput": 511
+          "bytesInOutput": 1540
+        },
+        "admin/live-service-core.mjs": {
+          "bytesInOutput": 922
         },
         "admin/services.ts": {
-          "bytesInOutput": 871
+          "bytesInOutput": 1305
         },
         "admin/live.mjs": {
-          "bytesInOutput": 9041
+          "bytesInOutput": 8935
         }
       },
-      "bytes": 242799
+      "bytes": 245078
     },
     "public/assets/xtend/admin/chunks/rmt-resume-runtime-TDYASBDO.mjs": {
       "imports": [

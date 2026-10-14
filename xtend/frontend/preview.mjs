@@ -71,6 +71,9 @@ export function installImagePreview(command){
   void command('search.preview.error',{src:fallback,key:imageKey,unavailable:!fallback,message:fallback?'Das große Bild ist nicht erreichbar. Hier siehst du die kleine Vorschau.':'Die Vorschau ist nicht erreichbar. Du kannst die Quellseite oder das Originalbild öffnen.'});
  },true);
  window.addEventListener('keydown',event=>{
+  // XDialog may synchronously close before this bubbling event reaches window.
+  // Its Escape belongs to the modal layer, even after the host is detached.
+  if(event.composedPath().some(node=>node?.id==='search-lightbox'))return;
   if(document.querySelector('#search-about[open],#search-feedback[open]'))return;
   if(event.defaultPrevented || viewer?.isOpen() || !selectedId || event.ctrlKey || event.metaKey || event.altKey || event.isComposing)return;
   if(event.key==='Escape'){event.preventDefault();void close();return;}

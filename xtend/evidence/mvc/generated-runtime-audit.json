@@ -1,0 +1,1808 @@
+{
+  "reports": [
+    {
+      "source": "frontend/search.rmt",
+      "ok": true,
+      "status": "built",
+      "configFingerprint": null,
+      "vendor": false,
+      "toolchain": {
+        "rollup": {
+          "requested": true,
+          "available": true,
+          "version": "4.64.2",
+          "mode": "rollup-js-api"
+        },
+        "terser": {
+          "requested": true,
+          "available": true,
+          "version": "5.51.2",
+          "mode": "terser-js-api"
+        },
+        "typescript": {
+          "requested": true,
+          "available": true,
+          "version": "5.9.3",
+          "mode": "typescript-program-and-rollup-transform"
+        },
+        "active": "rollup-terser",
+        "warnings": [
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-host-adapter.js (159:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-binding-view-projector.js (579:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-maraca-view-projection-adapter.js (242:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-presentation-effect-adapter.js (597:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-surface-resource-graph-runtime.js (1744:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js (3642:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          }
+        ],
+        "nameCache": null
+      },
+      "runtimeModules": [
+        "components/xsurfacemanager-controller.js",
+        "xtendrmt/rmt-action-effect-runtime.js",
+        "xtendrmt/rmt-app-runtime.js",
+        "xtendrmt/rmt-dom-descriptor-renderer.js",
+        "xtendrmt/rmt-event-routing-runtime.js",
+        "xtendrmt/rmt-kernel-orchestration-controller.js",
+        "xtendrmt/rmt-maraca-view-projection-adapter.js",
+        "xtendrmt/rmt-presentation-effect-adapter.js",
+        "xtendrmt/rmt-resume-runtime.js",
+        "xtendrmt/rmt-runtime.esm.js",
+        "xtendrmt/rmt-state-binding-view-projector.js",
+        "xtendrmt/rmt-state-host-adapter.js",
+        "xtendrmt/rmt-state-selector-runtime.js",
+        "xtendrmt/rmt-surface-resource-graph-runtime.js"
+      ],
+      "stackModules": [
+        {
+          "id": "components/xsurfacemanager-controller.js",
+          "source": "components/xsurfacemanager-controller.js"
+        },
+        {
+          "id": "xtendrmt/rmt-action-effect-runtime.js",
+          "source": "xtendrmt/rmt-action-effect-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-app-runtime.js",
+          "source": "xtendrmt/rmt-app-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-dom-descriptor-renderer.js",
+          "source": "xtendrmt/rmt-dom-descriptor-renderer.js"
+        },
+        {
+          "id": "xtendrmt/rmt-event-routing-runtime.js",
+          "source": "xtendrmt/rmt-event-routing-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-kernel-orchestration-controller.js",
+          "source": "xtendrmt/rmt-kernel-orchestration-controller.js"
+        },
+        {
+          "id": "xtendrmt/rmt-maraca-view-projection-adapter.js",
+          "source": "xtendrmt/rmt-maraca-view-projection-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-presentation-effect-adapter.js",
+          "source": "xtendrmt/rmt-presentation-effect-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-resume-runtime.js",
+          "source": "xtendrmt/rmt-resume-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-runtime.esm.js",
+          "source": "xtendrmt/rmt-runtime.esm.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-binding-view-projector.js",
+          "source": "xtendrmt/rmt-state-binding-view-projector.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-host-adapter.js",
+          "source": "xtendrmt/rmt-state-host-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-selector-runtime.js",
+          "source": "xtendrmt/rmt-state-selector-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-surface-resource-graph-runtime.js",
+          "source": "xtendrmt/rmt-surface-resource-graph-runtime.js"
+        }
+      ],
+      "components": {
+        "selected": [
+          {
+            "tag": "a",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "article",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "aside",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "button",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "div",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "footer",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "form",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "header",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "img",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "input",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "label",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "nav",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "option",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "p",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "section",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "select",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "span",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "x-alert",
+            "source": "node_modules/@ccslabs/xtend/components/xalert.js",
+            "importPath": "../../../../node_modules/@ccslabs/xtend/components/xalert.js",
+            "native": false
+          },
+          {
+            "tag": "x-dialog",
+            "source": "node_modules/@ccslabs/xtend/components/xdialog.js",
+            "importPath": "../../../../node_modules/@ccslabs/xtend/components/xdialog.js",
+            "native": false
+          },
+          {
+            "tag": "x-section",
+            "source": "node_modules/@ccslabs/xtend/components/xsection.js",
+            "importPath": "../../../../node_modules/@ccslabs/xtend/components/xsection.js",
+            "native": false
+          }
+        ],
+        "unknown": []
+      },
+      "forbiddenRuntimeDependencies": {
+        "componentManifestJson": false,
+        "dataManifestAttribute": false,
+        "xtendLoader": false
+      }
+    },
+    {
+      "source": "admin/admin.rmt",
+      "ok": true,
+      "status": "built",
+      "configFingerprint": null,
+      "vendor": false,
+      "toolchain": {
+        "rollup": {
+          "requested": true,
+          "available": true,
+          "version": "4.64.2",
+          "mode": "rollup-js-api"
+        },
+        "terser": {
+          "requested": true,
+          "available": true,
+          "version": "5.51.2",
+          "mode": "terser-js-api"
+        },
+        "typescript": {
+          "requested": true,
+          "available": true,
+          "version": "5.9.3",
+          "mode": "typescript-program-and-rollup-transform"
+        },
+        "active": "rollup-terser",
+        "warnings": [
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-host-adapter.js (159:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-binding-view-projector.js (579:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-maraca-view-projection-adapter.js (242:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-presentation-effect-adapter.js (597:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-surface-resource-graph-runtime.js (1744:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js (3642:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          }
+        ],
+        "nameCache": null
+      },
+      "runtimeModules": [
+        "components/xsurfacemanager-controller.js",
+        "xtendrmt/rmt-action-effect-runtime.js",
+        "xtendrmt/rmt-app-runtime.js",
+        "xtendrmt/rmt-dom-descriptor-renderer.js",
+        "xtendrmt/rmt-event-routing-runtime.js",
+        "xtendrmt/rmt-kernel-orchestration-controller.js",
+        "xtendrmt/rmt-maraca-view-projection-adapter.js",
+        "xtendrmt/rmt-presentation-effect-adapter.js",
+        "xtendrmt/rmt-resume-runtime.js",
+        "xtendrmt/rmt-runtime.esm.js",
+        "xtendrmt/rmt-state-binding-view-projector.js",
+        "xtendrmt/rmt-state-host-adapter.js",
+        "xtendrmt/rmt-state-selector-runtime.js",
+        "xtendrmt/rmt-surface-resource-graph-runtime.js"
+      ],
+      "stackModules": [
+        {
+          "id": "components/xsurfacemanager-controller.js",
+          "source": "components/xsurfacemanager-controller.js"
+        },
+        {
+          "id": "xtendrmt/rmt-action-effect-runtime.js",
+          "source": "xtendrmt/rmt-action-effect-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-app-runtime.js",
+          "source": "xtendrmt/rmt-app-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-dom-descriptor-renderer.js",
+          "source": "xtendrmt/rmt-dom-descriptor-renderer.js"
+        },
+        {
+          "id": "xtendrmt/rmt-event-routing-runtime.js",
+          "source": "xtendrmt/rmt-event-routing-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-kernel-orchestration-controller.js",
+          "source": "xtendrmt/rmt-kernel-orchestration-controller.js"
+        },
+        {
+          "id": "xtendrmt/rmt-maraca-view-projection-adapter.js",
+          "source": "xtendrmt/rmt-maraca-view-projection-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-presentation-effect-adapter.js",
+          "source": "xtendrmt/rmt-presentation-effect-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-resume-runtime.js",
+          "source": "xtendrmt/rmt-resume-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-runtime.esm.js",
+          "source": "xtendrmt/rmt-runtime.esm.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-binding-view-projector.js",
+          "source": "xtendrmt/rmt-state-binding-view-projector.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-host-adapter.js",
+          "source": "xtendrmt/rmt-state-host-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-selector-runtime.js",
+          "source": "xtendrmt/rmt-state-selector-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-surface-resource-graph-runtime.js",
+          "source": "xtendrmt/rmt-surface-resource-graph-runtime.js"
+        }
+      ],
+      "components": {
+        "selected": [
+          {
+            "tag": "a",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "article",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "button",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "div",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "footer",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "form",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "header",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "img",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "input",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "label",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "li",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "main",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "nav",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "ol",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "option",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "p",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "section",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "select",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "span",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "strong",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "textarea",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "ul",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "x-dialog",
+            "source": "node_modules/@ccslabs/xtend/components/xdialog.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xdialog.js",
+            "native": false
+          },
+          {
+            "tag": "x-section",
+            "source": "node_modules/@ccslabs/xtend/components/xsection.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xsection.js",
+            "native": false
+          },
+          {
+            "tag": "x-side-panel",
+            "source": "node_modules/@ccslabs/xtend/components/xsidepanel.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xsidepanel.js",
+            "native": false
+          },
+          {
+            "tag": "x-surface-manager",
+            "source": "node_modules/@ccslabs/xtend/components/xsurfacemanager.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xsurfacemanager.js",
+            "native": false
+          },
+          {
+            "tag": "x-toast",
+            "source": "node_modules/@ccslabs/xtend/components/xtoast.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xtoast.js",
+            "native": false
+          }
+        ],
+        "unknown": []
+      },
+      "forbiddenRuntimeDependencies": {
+        "componentManifestJson": false,
+        "dataManifestAttribute": false,
+        "xtendLoader": false
+      }
+    },
+    {
+      "source": "frontend/standalone.rmt",
+      "ok": true,
+      "status": "built",
+      "configFingerprint": null,
+      "vendor": false,
+      "toolchain": {
+        "rollup": {
+          "requested": true,
+          "available": true,
+          "version": "4.64.2",
+          "mode": "rollup-js-api"
+        },
+        "terser": {
+          "requested": true,
+          "available": true,
+          "version": "5.51.2",
+          "mode": "terser-js-api"
+        },
+        "typescript": {
+          "requested": true,
+          "available": true,
+          "version": "5.9.3",
+          "mode": "typescript-program-and-rollup-transform"
+        },
+        "active": "rollup-terser",
+        "warnings": [
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-surface-transition-runtime.js (780:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-host-adapter.js (159:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-state-binding-view-projector.js (579:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-presentation-effect-adapter.js (597:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-surface-resource-graph-runtime.js (1744:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-maraca-view-projection-adapter.js (242:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-animation-engine-runtime.js (581:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          },
+          {
+            "code": "THIS_IS_UNDEFINED",
+            "message": "node_modules/@ccslabs/xtend/xtendrmt/rmt-dom-descriptor-renderer.js (3642:94): The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten"
+          }
+        ],
+        "nameCache": null
+      },
+      "runtimeModules": [
+        "components/xsurfacemanager-controller.js",
+        "components/xtend-state.js",
+        "components/xutils.js",
+        "xtendrmt/rmt-action-effect-runtime.js",
+        "xtendrmt/rmt-animation-engine-runtime.js",
+        "xtendrmt/rmt-app-runtime.js",
+        "xtendrmt/rmt-dom-descriptor-renderer.js",
+        "xtendrmt/rmt-event-routing-runtime.js",
+        "xtendrmt/rmt-kernel-orchestration-controller.js",
+        "xtendrmt/rmt-maraca-view-projection-adapter.js",
+        "xtendrmt/rmt-presentation-effect-adapter.js",
+        "xtendrmt/rmt-resume-runtime.js",
+        "xtendrmt/rmt-runtime.esm.js",
+        "xtendrmt/rmt-state-binding-view-projector.js",
+        "xtendrmt/rmt-state-host-adapter.js",
+        "xtendrmt/rmt-state-selector-runtime.js",
+        "xtendrmt/rmt-surface-resource-graph-runtime.js",
+        "xtendrmt/rmt-surface-transition-runtime.js"
+      ],
+      "stackModules": [
+        {
+          "id": "components/xsurfacemanager-controller.js",
+          "source": "components/xsurfacemanager-controller.js"
+        },
+        {
+          "id": "components/xtend-state.js",
+          "source": "components/xtend-state.js"
+        },
+        {
+          "id": "components/xutils.js",
+          "source": "components/xutils.js"
+        },
+        {
+          "id": "xtendrmt/rmt-action-effect-runtime.js",
+          "source": "xtendrmt/rmt-action-effect-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-animation-engine-runtime.js",
+          "source": "xtendrmt/rmt-animation-engine-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-app-runtime.js",
+          "source": "xtendrmt/rmt-app-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-dom-descriptor-renderer.js",
+          "source": "xtendrmt/rmt-dom-descriptor-renderer.js"
+        },
+        {
+          "id": "xtendrmt/rmt-event-routing-runtime.js",
+          "source": "xtendrmt/rmt-event-routing-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-kernel-orchestration-controller.js",
+          "source": "xtendrmt/rmt-kernel-orchestration-controller.js"
+        },
+        {
+          "id": "xtendrmt/rmt-maraca-view-projection-adapter.js",
+          "source": "xtendrmt/rmt-maraca-view-projection-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-presentation-effect-adapter.js",
+          "source": "xtendrmt/rmt-presentation-effect-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-resume-runtime.js",
+          "source": "xtendrmt/rmt-resume-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-runtime.esm.js",
+          "source": "xtendrmt/rmt-runtime.esm.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-binding-view-projector.js",
+          "source": "xtendrmt/rmt-state-binding-view-projector.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-host-adapter.js",
+          "source": "xtendrmt/rmt-state-host-adapter.js"
+        },
+        {
+          "id": "xtendrmt/rmt-state-selector-runtime.js",
+          "source": "xtendrmt/rmt-state-selector-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-surface-resource-graph-runtime.js",
+          "source": "xtendrmt/rmt-surface-resource-graph-runtime.js"
+        },
+        {
+          "id": "xtendrmt/rmt-surface-transition-runtime.js",
+          "source": "xtendrmt/rmt-surface-transition-runtime.js"
+        }
+      ],
+      "components": {
+        "selected": [
+          {
+            "tag": "a",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "article",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "aside",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "button",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "div",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "footer",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "form",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "header",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "img",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "input",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "label",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "li",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "nav",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "option",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "p",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "section",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "select",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "span",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "strong",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "ul",
+            "source": "browser-native-element",
+            "importPath": null,
+            "native": true
+          },
+          {
+            "tag": "x-alert",
+            "source": "node_modules/@ccslabs/xtend/components/xalert.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xalert.js",
+            "native": false
+          },
+          {
+            "tag": "x-button",
+            "source": "node_modules/@ccslabs/xtend/components/xbutton.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xbutton.js",
+            "native": false
+          },
+          {
+            "tag": "x-dialog",
+            "source": "node_modules/@ccslabs/xtend/components/xdialog.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xdialog.js",
+            "native": false
+          },
+          {
+            "tag": "x-icon",
+            "source": "node_modules/@ccslabs/xtend/components/xicon.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xicon.js",
+            "native": false
+          },
+          {
+            "tag": "x-section",
+            "source": "node_modules/@ccslabs/xtend/components/xsection.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xsection.js",
+            "native": false
+          },
+          {
+            "tag": "x-spinner",
+            "source": "node_modules/@ccslabs/xtend/components/xspinner.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xspinner.js",
+            "native": false
+          },
+          {
+            "tag": "x-toast",
+            "source": "node_modules/@ccslabs/xtend/components/xtoast.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xtoast.js",
+            "native": false
+          },
+          {
+            "tag": "x-toggle",
+            "source": "node_modules/@ccslabs/xtend/components/xtoggle.js",
+            "importPath": "../../../../../node_modules/@ccslabs/xtend/components/xtoggle.js",
+            "native": false
+          }
+        ],
+        "unknown": []
+      },
+      "forbiddenRuntimeDependencies": {
+        "componentManifestJson": false,
+        "dataManifestAttribute": false,
+        "xtendLoader": false
+      }
+    }
+  ],
+  "bundledFrameworkHtmlSinks": [
+    {
+      "file": "public/assets/xtend/maraca/xtend.maraca.mjs",
+      "sha256": "cb159081edecb04f327c4ccc439e6f60669db77aca6e1305d9ed0f40e5d79d11",
+      "sinks": {
+        "innerHTML": 8,
+        "outerHTML": 4,
+        "insertAdjacentHTML": 2,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 1,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/maraca/chunks/x-alert-DbiHyYOK.mjs",
+      "sha256": "f9d1ccf8dc4428c7185db795d6d4ef83872b9a52d3ac330f4668ca933703aec6",
+      "sinks": {
+        "innerHTML": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/maraca/chunks/x-dialog-DTlln_fI.mjs",
+      "sha256": "9248d7908d1ca77b8b28a5cd5931742651ba639bff485246f9433bb7210b9700",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/maraca/chunks/x-section-DK8C6-Bl.mjs",
+      "sha256": "0ef8a77def811e4c04e3ae217d2a799f3349207f7200b20a599ae64fc9ec15ec",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/maraca/runtime/rmt-resume-host-adapter.mjs",
+      "sha256": "9342aa0c769c514bf664d955cf12cde5a70767b809c93e776ff1dd166bb34ba5",
+      "sinks": {
+        "outerHTML": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 66,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 69,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/maraca/runtime/xtendrmt-runtime.esm.mjs",
+      "sha256": "e2d466e1db8a25be9fe2b132f402f23631266834341266589bae56c39fb8a1b4",
+      "sinks": {
+        "innerHTML": 21,
+        "outerHTML": 3,
+        "insertAdjacentHTML": 2,
+        "DOMParser": 3,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 8792,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8793,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8794,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8795,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8796,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 8797,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 8799,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 19885,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 20576,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 20581,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20621,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20625,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20720,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20872,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 21234,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 21234,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 22181,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22182,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22245,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22461,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22527,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22662,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22673,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/chunks/rmt-resume-runtime-TDYASBDO.mjs",
+      "sha256": "a52357de83c02958ed5cb7f83c35935ca742a94db5d6f2d75663ca0c3ad10117",
+      "sinks": {
+        "outerHTML": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/chunks/page-client-XWSNNG45.mjs",
+      "sha256": "0710ad23a0fd67e0a4663bd56501b073645b495800f96bfd1907ce6be190050f",
+      "sinks": {
+        "innerHTML": 8,
+        "outerHTML": 2,
+        "insertAdjacentHTML": 2,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 1,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/page.mjs",
+      "sha256": "c934a49cb1ad6ec1237cd3e8a13a5fe1e3f3e1b7175d179edd92b159a703e87e",
+      "sinks": {
+        "innerHTML": 5,
+        "DOMParser": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 251,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 251,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 293,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 563,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 776,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/maraca/xtend.maraca.mjs",
+      "sha256": "9b36761f7bf4d0bdea206552e024de540a57c57a2cc074f77c06f53d7533f595",
+      "sinks": {
+        "innerHTML": 8,
+        "outerHTML": 4,
+        "insertAdjacentHTML": 2,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 1,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/maraca/chunks/x-dialog-_EZvedfK.mjs",
+      "sha256": "fd0393ef2cbb686c7743ed113732a4e77cdcdf5e81891fb121a4c79bfb1985e7",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/maraca/chunks/x-section-B2DvIwCd.mjs",
+      "sha256": "a54a91e1c87497def3473390c2c97748c95821cf5145faad92daef1bbf13f686",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/maraca/chunks/x-toast-i7zYMWqJ.mjs",
+      "sha256": "7f31258eb8d41276958eb978399e0cb8dc66ebfc566bbb03299487f3b910fcc7",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/maraca/chunks/x-side-panel-JeoxTDIZ.mjs",
+      "sha256": "24eb939ba1fd9be161338390ddde620bcb1c3f686e05cc75cc07186d14630be7",
+      "sinks": {
+        "innerHTML": 2,
+        "DOMParser": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/maraca/chunks/x-surface-manager-2PjxdZRv.mjs",
+      "sha256": "590cec52b7981aa6f0c2b872297facd130cb408212b7a614e31d286730e5d460",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/maraca/runtime/rmt-resume-host-adapter.mjs",
+      "sha256": "9342aa0c769c514bf664d955cf12cde5a70767b809c93e776ff1dd166bb34ba5",
+      "sinks": {
+        "outerHTML": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 66,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 69,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/maraca/runtime/xtendrmt-runtime.esm.mjs",
+      "sha256": "e2d466e1db8a25be9fe2b132f402f23631266834341266589bae56c39fb8a1b4",
+      "sinks": {
+        "innerHTML": 21,
+        "outerHTML": 3,
+        "insertAdjacentHTML": 2,
+        "DOMParser": 3,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 8792,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8793,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8794,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8795,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8796,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 8797,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 8799,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 19885,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 20576,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 20581,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20621,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20625,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20720,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20872,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 21234,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 21234,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 22181,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22182,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22245,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22461,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22527,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22662,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22673,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/chunks/page-client-ZSOMB7H7.mjs",
+      "sha256": "20bd7110b7c67a85fe3e8474060aeb9d5b846c46c3c638fc94a3d60a0abe95db",
+      "sinks": {
+        "innerHTML": 8,
+        "outerHTML": 2,
+        "insertAdjacentHTML": 2,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 1,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/admin/chunks/rmt-resume-runtime-TDYASBDO.mjs",
+      "sha256": "a52357de83c02958ed5cb7f83c35935ca742a94db5d6f2d75663ca0c3ad10117",
+      "sinks": {
+        "outerHTML": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/admin-login.mjs",
+      "sha256": "286c72c1b89d1230366c38d9b22713cffba0bf07f6f89ace0e1c77065befaf17",
+      "sinks": {
+        "innerHTML": 6,
+        "DOMParser": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 43,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 191,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/page.mjs",
+      "sha256": "f6f1e84a93143e0ac5fd0b6a30a21eb88a40becce8f7970e9bb7617b498cf544",
+      "sinks": {
+        "innerHTML": 2,
+        "DOMParser": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 118,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/xtend.maraca.mjs",
+      "sha256": "105d6e9095614e795be126d5dddea197c54b6b39e65e0d7cc557b928a73aa7ed",
+      "sinks": {
+        "innerHTML": 8,
+        "outerHTML": 4,
+        "insertAdjacentHTML": 2,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 1,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/chunks/x-dialog-DkhjFaIs.mjs",
+      "sha256": "21c588a823ff9dbbe2b41cf5e6b2d477816abb6abf0f84aac0fb8aa942d1a844",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/chunks/x-spinner-BjZaACTb.mjs",
+      "sha256": "90f8dd2132f28e9813cee59e4cb5916629cf30417b5e7e6c93ae2f63e451dca6",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/chunks/x-toast-i7zYMWqJ.mjs",
+      "sha256": "83562fdecef2b205fea627dfd915c87166cdfcc68c383e8b97d64f9888e902c1",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/chunks/x-alert-BQMs99-e.mjs",
+      "sha256": "465876692eb5632a2f3036641b03b188e8f6001857c6acfb1365525affce1bd0",
+      "sinks": {
+        "innerHTML": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/chunks/x-icon-BYp7BS11.mjs",
+      "sha256": "fc345d25b92e67947b975cda06821bd93976f88e487f38ddcc8b0df01f37b4a1",
+      "sinks": {
+        "innerHTML": 1,
+        "DOMParser": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/chunks/x-toggle-hlVO6p28.mjs",
+      "sha256": "cac8517e7a3ff2f3fdd6802ae8bdf5d69b980e974387c3a5a72f4fb798e319d7",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/chunks/x-button-Dmj-4MF-.mjs",
+      "sha256": "039b61fd5ab52b356c4a6f5824f76fd82fd972d1a46257787e8af526b187f65b",
+      "sinks": {
+        "innerHTML": 5
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/chunks/x-section-CUOf01i3.mjs",
+      "sha256": "f9c8b74fa4a3ba75f22a3c69f9c790d6861dc3c6f37d69b9112c0c3c2de85977",
+      "sinks": {
+        "innerHTML": 1
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/runtime/rmt-resume-host-adapter.mjs",
+      "sha256": "9342aa0c769c514bf664d955cf12cde5a70767b809c93e776ff1dd166bb34ba5",
+      "sinks": {
+        "outerHTML": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 66,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 69,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/maraca/runtime/xtendrmt-runtime.esm.mjs",
+      "sha256": "e2d466e1db8a25be9fe2b132f402f23631266834341266589bae56c39fb8a1b4",
+      "sinks": {
+        "innerHTML": 21,
+        "outerHTML": 3,
+        "insertAdjacentHTML": 2,
+        "DOMParser": 3,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 8792,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8793,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8794,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8795,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 8796,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 8797,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 8799,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 19885,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 20576,
+          "sink": "DOMParser"
+        },
+        {
+          "line": 20581,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20621,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20625,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20720,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 20872,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 21234,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 21234,
+          "sink": "outerHTML"
+        },
+        {
+          "line": 22181,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22182,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22245,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22461,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22527,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22662,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 22673,
+          "sink": "innerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/chunks/page-client-2BMFVTVB.mjs",
+      "sha256": "79cd1182b9a890bd910e2c8ae7cb7f233d50fd72ec0ee4500939b8d83f0141f1",
+      "sinks": {
+        "innerHTML": 8,
+        "outerHTML": 2,
+        "insertAdjacentHTML": 2,
+        "createContextualFragment": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "createContextualFragment"
+        },
+        {
+          "line": 1,
+          "sink": "innerHTML"
+        },
+        {
+          "line": 1,
+          "sink": "insertAdjacentHTML"
+        },
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    },
+    {
+      "file": "public/assets/xtend/standalone/chunks/rmt-resume-runtime-TDYASBDO.mjs",
+      "sha256": "a52357de83c02958ed5cb7f83c35935ca742a94db5d6f2d75663ca0c3ad10117",
+      "sinks": {
+        "outerHTML": 2
+      },
+      "responsibility": "Bundled XTend framework renderer/component; own application sources independently pass the no-DOM-write AST gate",
+      "locations": [
+        {
+          "line": 1,
+          "sink": "outerHTML"
+        }
+      ]
+    }
+  ]
+}

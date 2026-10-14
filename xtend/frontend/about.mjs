@@ -9,7 +9,7 @@ export function installAbout(){
  const state=patch=>{const own=epoch;return updateOverlay(patch,()=>own===epoch);};
  const reset=()=>{epoch++;if(runtime())void state({about:false}).catch(()=>{});};
  window.addEventListener('xtend-page:event',({detail})=>{if(detail.type==='pending')reset();});
- document.addEventListener('dialog-closed',event=>{if(event.target.id==='search-about'){void state({about:false}).catch(()=>{});queueMicrotask(()=>opener?.isConnected&&focusElement(opener, {preventScroll:true}));}});
+ document.addEventListener('dialog-closed',event=>{if(event.target.id==='search-about'){void state({about:false}).then(()=>{if(opener?.isConnected)focusElement(opener,{preventScroll:true});}).catch(()=>{});}});
  document.addEventListener('click',async event=>{
   const link=event.target.closest?.('a[data-about-link]');
   if(!link||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey||!runtime())return;

@@ -377,8 +377,7 @@ template xtend.search {
       id "search-shell"
       viewTemplate {
         class "search-shell"
- attributes { inert "$model.search.overlay.active" }
-        attributes { "data-view" "$model.search.data.view" }
+        attributes { "data-view" "$model.search.data.view" inert "$model.search.overlay.active" }
         children [
           { type "element" tag "a" text "Zu den Ergebnissen" class "skip-link" attributes { href "#results" } }
           { type "element" tag "header" class "topbar" children [
