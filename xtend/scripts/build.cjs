@@ -11,8 +11,9 @@ async function build(){
  const remoteGraph=await esbuild.build({metafile:true,entryPoints:[path.join(root,'frontend/search-remote-adapter.mjs')],bundle:true,minify:true,format:'esm',platform:'browser',target:'es2022',outfile:path.join(out,'search-remote-adapter.mjs')});
  const streamIntegrity=createHash('sha256').update(fs.readFileSync(path.join(out,'search-remote-adapter.mjs'))).digest('base64');
  const session=createRmtCompilationSession({root});
+ const sources=['frontend','admin'].flatMap(folder=>fs.readdirSync(path.join(root,folder),{recursive:true}).filter(file=>/\.(mjs|ts)$/.test(file)).map(file=>folder+'/'+file));
  try {
- const built=await buildMaracaBundleAsync({source:'frontend/search.rmt',out:'public/assets/xtend/maraca',profile:'production',lazy:'component',orchestration:'strict',kernel:'strict',kernelBootMode:'direct',hydration:'strict',validation:'auto',transitions:'auto',componentMode:'document',stackMode:'plan',css:'external',services:{clientEntry:'frontend/services.ts',targets:['browser'],strict:true,budgets:{clientBytes:20000},transport:{kind:'http-ndjson',basePath:'/api/xtend/services'}}},{rootDir:root,compileSource:session.compileSource});
+ const built=await buildMaracaBundleAsync({source:'frontend/search.rmt',out:'public/assets/xtend/maraca',profile:'production',lazy:'component',orchestration:'strict',kernel:'strict',kernelBootMode:'direct',hydration:'strict',validation:'auto',transitions:'auto',componentMode:'document',stackMode:'plan',css:'external',services:{clientEntry:'frontend/services.ts',targets:['browser'],strict:true,budgets:{clientBytes:20000},transport:{kind:'http-ndjson',basePath:'/api/xtend/services'}}},{rootDir:root,compileSource:session.compileSource,htmlSecurity:{sources}});
  if(!built.ok)throw Object.assign(new Error('Maraca-Build fehlgeschlagen'),{details:built.plan?.diagnostics || built});
  const report=JSON.parse(fs.readFileSync(path.join(out,'maraca/xtend.maraca.report.json')));
  if(!report.services?.enabled||!report.services.ok)throw new Error('Search requires its registered Maraca App Services.');

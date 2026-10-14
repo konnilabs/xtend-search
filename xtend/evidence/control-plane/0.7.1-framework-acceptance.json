@@ -1,0 +1,346 @@
+{
+  "frameworkCommit": "66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3",
+  "scope": "Full ci-pr profile plus targeted reruns of the seven corrected suite IDs; not a single uninterrupted full run.",
+  "suiteCount": 189,
+  "passedCount": 189,
+  "failedCount": 0,
+  "skippedCount": 0,
+  "inventoryWarnings": 53,
+  "runs": [
+    {
+      "path": "/tmp/xtend-icon-ci-final.json",
+      "status": "failed"
+    },
+    {
+      "path": "/tmp/xtend-icon-corrections.json",
+      "status": "passed"
+    },
+    {
+      "path": "/tmp/xtend-icon-inventory-reviewed.json",
+      "status": "passed"
+    }
+  ],
+  "correctedSuites": [
+    "screenreader-signals",
+    "feedback-status-ux",
+    "overlay-interaction-ux",
+    "layout-display-media-ux",
+    "rmt-playground-security",
+    "rmt-ai-developer-kit",
+    "schema-inventory",
+    "rmt-ai-developer-kit"
+  ],
+  "browser": {
+    "browser": "145.0.7632.6",
+    "baseline": {
+      "status": "failed",
+      "errors": [
+        "Cannot read properties of null (reading 'querySelector')",
+        "Uncaught Error: HTML sink forbidden"
+      ],
+      "htmlWrites": 1
+    },
+    "fixed": {
+      "status": "passed",
+      "checks": [
+        {
+          "name": "XIcon constructs a native shell with the public root and SVG parts",
+          "passed": true
+        },
+        {
+          "name": "SVG geometry survives, executable and external nodes do not",
+          "passed": true
+        },
+        {
+          "name": "labeled icons preserve image semantics",
+          "passed": true
+        },
+        {
+          "name": "decorative icons retain their stable root and hide from assistive tech",
+          "passed": true
+        },
+        {
+          "name": "XIcon refuses unsafe URL javascript",
+          "passed": true
+        },
+        {
+          "name": "XIcon refuses unsafe URL  java\nscript",
+          "passed": true
+        },
+        {
+          "name": "XIcon refuses unsafe URL vbscript",
+          "passed": true
+        },
+        {
+          "name": "XIcon refuses unsafe URL data",
+          "passed": true
+        },
+        {
+          "name": "legacy button SVG uses the same geometry allowlist",
+          "passed": true
+        },
+        {
+          "name": "fallback button labels stay literal text",
+          "passed": true
+        },
+        {
+          "name": "URL quotes cannot create additional image attributes",
+          "passed": true
+        },
+        {
+          "name": "XButton refuses unsafe URL javascript",
+          "passed": true
+        },
+        {
+          "name": "XButton refuses unsafe URL vbscript",
+          "passed": true
+        },
+        {
+          "name": "XButton refuses unsafe URL data",
+          "passed": true
+        },
+        {
+          "name": "malformed SVG contributes no geometry",
+          "passed": true
+        },
+        {
+          "name": "DTD and entity markup contributes no geometry",
+          "passed": true
+        },
+        {
+          "name": "rapid name and pack changes commit only the current icon",
+          "passed": true
+        },
+        {
+          "name": "non-icon updates preserve icon, native control and slot identity",
+          "passed": true
+        },
+        {
+          "name": "variant updates preserve keyboard focus",
+          "passed": true
+        },
+        {
+          "name": "default slot still projects host content",
+          "passed": true
+        },
+        {
+          "name": "native button activation remains available",
+          "passed": true
+        },
+        {
+          "name": "disabled button cannot activate",
+          "passed": true
+        },
+        {
+          "name": "reconnected button uses its current icon",
+          "passed": true
+        },
+        {
+          "name": "dots spinner materializes without an HTML sink",
+          "passed": true
+        },
+        {
+          "name": "spinner transitions clear prior geometry and release paused state",
+          "passed": true
+        },
+        {
+          "name": "component stylesheet nonces remain host-issued",
+          "passed": true
+        },
+        {
+          "name": "invalid nonce values are not authorized",
+          "passed": true
+        },
+        {
+          "name": "native SVG nodes belong to the supplied document",
+          "passed": true
+        },
+        {
+          "name": "icon payloads never execute",
+          "passed": true
+        },
+        {
+          "name": "section labels remain an attribute value",
+          "passed": true
+        },
+        {
+          "name": "dialog titles remain literal text",
+          "passed": true
+        },
+        {
+          "name": "dialog content and actions remain public slots",
+          "passed": true
+        },
+        {
+          "name": "dialog close releases its open state",
+          "passed": true
+        },
+        {
+          "name": "toast retains accessible status and native close SVG",
+          "passed": true
+        },
+        {
+          "name": "toast close dismisses without HTML writes",
+          "passed": true
+        },
+        {
+          "name": "alert retains live semantics and native close SVG",
+          "passed": true
+        },
+        {
+          "name": "native toggle activation emits once per change",
+          "passed": true
+        },
+        {
+          "name": "toggle on/off labels and helper slots remain present",
+          "passed": true
+        }
+      ],
+      "errors": [],
+      "htmlWrites": 0
+    },
+    "csp": {
+      "status": "passed",
+      "checks": [
+        {
+          "name": "x-icon uses the host stylesheet nonce",
+          "passed": true
+        },
+        {
+          "name": "x-button uses the host stylesheet nonce",
+          "passed": true
+        },
+        {
+          "name": "x-spinner uses the host stylesheet nonce",
+          "passed": true
+        },
+        {
+          "name": "x-toggle uses the host stylesheet nonce",
+          "passed": true
+        },
+        {
+          "name": "x-section uses the host stylesheet nonce",
+          "passed": true
+        },
+        {
+          "name": "x-toast uses the host stylesheet nonce",
+          "passed": true
+        },
+        {
+          "name": "x-dialog uses the host stylesheet nonce",
+          "passed": true
+        },
+        {
+          "name": "x-alert uses the host stylesheet nonce",
+          "passed": true
+        }
+      ],
+      "errors": [],
+      "htmlWrites": 0
+    }
+  },
+  "syntax": {
+    "status": "passed",
+    "checks": [
+      {
+        "name": "syntax gate rejects node.innerHTML=data",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects node[\"innerHTML\"] = data",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects node['inner'+'HTML'] += data",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects node.outerHTML=data",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects frame.srcdoc=data",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects const insert=node.insertAdjacentHTML;insert(\"beforeend\",data)",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects const insert=node[\"insertAdjacentHTML\"].bind(node);insert(\"beforeend\",data)",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects const {insertAdjacentHTML:insert}=node;insert(\"beforeend\",data)",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects let insert;insert=node.insertAdjacentHTML;const copy=insert;copy.call(node,\"beforeend\",data)",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects document.writeln(data)",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects range.createContextualFragment(data)",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects node.setHTMLUnsafe(data)",
+        "passed": true
+      },
+      {
+        "name": "syntax gate rejects node.setAttribute(\"srcdoc\",data)",
+        "passed": true
+      },
+      {
+        "name": "syntax gate accepts inert source // node.innerHTML=data\nnode.textContent=data",
+        "passed": true
+      },
+      {
+        "name": "syntax gate accepts inert source const literal=\"node.innerHTML = data\"",
+        "passed": true
+      },
+      {
+        "name": "syntax gate accepts inert source const html=node.innerHTML",
+        "passed": true
+      },
+      {
+        "name": "syntax gate accepts inert source const value: string=\"text\";",
+        "passed": true
+      },
+      {
+        "name": "legacy boundary filename cannot implicitly bypass syntax mode",
+        "passed": true
+      },
+      {
+        "name": "invalid source fails closed",
+        "passed": true
+      },
+      {
+        "name": "Maraca audit accepts clean owned source and records its hash",
+        "passed": true
+      },
+      {
+        "name": "Maraca blocks unsafe source before rendering artifacts",
+        "passed": true
+      },
+      {
+        "name": "Maraca audit is compatible when not configured",
+        "passed": true
+      },
+      {
+        "name": "empty audit and missing source fail closed",
+        "passed": true
+      },
+      {
+        "name": "sources and symlinks outside the application root fail closed",
+        "passed": true
+      }
+    ],
+    "errors": []
+  },
+  "followup": "Packaged MCP knowledge refreshed and HTML auditing loads lazily; syntax/build checks repeated.",
+  "cspChecks": 8
+}

@@ -15,3 +15,16 @@ test('day boundary uses Berlin including daylight saving; input stays bounded pl
 test('source scan rejects browser HTML parsing sinks while diagnostic reads remain allowed',async()=>{for(const folder of ['frontend','admin'])for(const name of await fs.readdir(new URL('../../'+folder+'/',import.meta.url),{recursive:true})){if(!/\.(mjs|ts)$/.test(name))continue;const source=await fs.readFile(new URL('../../'+folder+'/'+name,import.meta.url),'utf8');assert.doesNotMatch(source,/\.(?:innerHTML|outerHTML)\s*=|\.insertAdjacentHTML\s*\(/,name);}});
 
 test('worker restart retains manual selection, pool, revision and audit',async()=>{const h=await harness();let restarted;try{await h.motd.mutate(h.command('list',{messages:'A\nB'}),admin);await h.motd.mutate(h.command('override',{message:'Bleibt heute.'}),admin);const revision=h.plane.revision;await h.plane.close();const store=new Store(h.dir),plane=new ControlPlane({store,adapter:h.plane.adapter});await plane.initialize();restarted=plane;const motd=new MotdService(plane);assert.equal((await motd.current()).message,'Bleibt heute.');assert.deepEqual(plane.motdState.messages,['A','B']);assert.equal(plane.revision,revision);assert.equal(plane.audit.filter(x=>x.action==='motd').length,2);}finally{await restarted?.close();await h.close();}});
+test('backend tick rotates across Berlin midnight without a page request or same-message repeat',async()=>{
+ const h=await harness();try{
+  await h.motd.mutate(h.command('list',{messages:'A\nB'}),admin);
+  let now=Date.parse('2030-10-11T21:59:59Z');const service=new MotdService(h.plane,{now:()=>now});
+  const before=await service.current(),revision=h.plane.revision,audit=(await h.store.call('load')).audit;
+  now+=1000;await h.plane.tick();
+  assert.equal(h.plane.motdState.day,'2030-10-12');assert.notEqual(h.plane.motdState.message,before.message);
+  assert.equal(h.plane.motdState.manual,false);assert.equal(h.plane.revision,revision);
+  assert.deepEqual((await h.store.call('load')).audit,audit);
+  const shared=await Promise.all(Array.from({length:20},()=>service.current()));assert(shared.every(v=>v.message===shared[0].message));
+  now+=43200000;for(let i=0;i<20;i++){const previous=await service.current();now+=86400000;assert.notEqual((await service.current()).message,previous.message);}
+ }finally{await h.close();}
+});

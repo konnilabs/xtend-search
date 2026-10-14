@@ -7,4 +7,5 @@ export function captureSearchResource(input:{data:SearchCacheData;scope:CacheSco
 export function restoreSearchResource(input:{url:string;scope:CacheScope},context:unknown):Promise<SearchCachedResource|null>;
 export function invalidateSearchResource(input?:{url?:string;scope?:CacheScope}):boolean;
 export function clearSearchResources():void;
+export function weatherTabUrl(url:string,scope:CacheScope):string;
 export function searchCacheStats():Readonly<{entries:number;bytes:number;hits:number;misses:number;evictions:number;expired:number}>;

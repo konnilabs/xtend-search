@@ -17,7 +17,10 @@ export class MotdService {
  constructor(plane,{now=Date.now}={}){this.plane=plane;this.now=now;plane.motd=this;}
  async current(){return this.plane.exclusive(async()=>{
   const day=motdDay(this.now());
-  try{if(this.plane.motdState?.day!==day)this.plane.motdState=await this.plane.store.call('motdDay',{day});}
+  try{if(this.plane.motdState?.day!==day){
+   this.plane.motdState=await this.plane.store.call('motdDay',{day});
+   this.plane.telemetry.emit('content.changed',{engineId:'home.motd',policyRevision:this.plane.revision});
+  }}
   catch{return {message:DEFAULT_MOTD,day,timezone:MOTD_TIMEZONE};}
   return {message:this.plane.motdState.message,day,timezone:MOTD_TIMEZONE};
  });}

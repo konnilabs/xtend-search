@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "version": "0.7.2",
+  "package": "XTend-search-Docker-0.7.2-linux-amd64.tar.gz",
+  "packageSha256": "986edb72957de3913624a92c2095691e71aa782eb9d6748e665fd170a5845e60",
+  "internalChecksums": "all passed",
+  "loadedImages": [
+    {
+      "id": "sha256:9128fc13fb4a55abdd77540750fc08b1c88f57f596a7d5be2f992a60f0411ae4",
+      "os": "linux",
+      "architecture": "amd64"
+    },
+    {
+      "id": "sha256:1699b4531c24be1cfabcdd4cb269c793c4760ad68f668aa45c019c469ef4b8fd",
+      "os": "linux",
+      "architecture": "amd64"
+    }
+  ],
+  "scope": "Own exported archives loaded and compared to the validated images. Production unaffected."
+}

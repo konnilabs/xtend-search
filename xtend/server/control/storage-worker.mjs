@@ -32,7 +32,11 @@ const readWeather=()=>{const row=db.prepare('SELECT value FROM weather_policy WH
 function weatherBudget(time){const d=new Date(time),day=Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),d.getUTCDate()),month=Date.UTC(d.getUTCFullYear(),d.getUTCMonth(),1);const rows=db.prepare('SELECT minute,units FROM weather_budget WHERE minute>=?').all(Math.min(month,Math.floor((time-3600000)/60000)*60000));const sum=since=>rows.filter(r=>r.minute>=Math.floor(since/60000)*60000).reduce((n,r)=>n+r.units,0);return {minute:sum(time-60000),hour:sum(time-3600000),day:sum(day),month:sum(month)};}
 const readMotd=()=>{const row=db.prepare('SELECT value FROM site_content WHERE id=1').get();return row?JSON.parse(row.value):{messages:[DEFAULT_MOTD],message:DEFAULT_MOTD,day:'',manual:false};};
 const writeMotd=value=>{db.prepare('INSERT INTO site_content VALUES (1,?) ON CONFLICT(id) DO UPDATE SET value=excluded.value').run(JSON.stringify(value));return value;};
-const selectMotd=(value,day)=>({...value,day,manual:false,message:value.messages[randomInt(value.messages.length)]});
+const selectMotd=(value,day)=>{
+ const alternatives=value.messages.filter(message=>message!==value.message);
+ const candidates=alternatives.length?alternatives:value.messages;
+ return {...value,day,manual:false,message:candidates[randomInt(candidates.length)]};
+};
 const read=()=>({meta:db.prepare('SELECT * FROM metadata WHERE id=1').get(),policies:db.prepare('SELECT * FROM policies').all(),guards:db.prepare('SELECT * FROM guards').all(),events:db.prepare('SELECT seq,value FROM events ORDER BY seq DESC LIMIT 100').all().reverse(),audit:db.prepare('SELECT seq,time,actor,action,target,reason,revision FROM audit ORDER BY seq DESC LIMIT 100').all(),aggregates:db.prepare('SELECT minute, sum(total) AS total, sum(errors) AS errors, sum(duration) AS duration FROM aggregates GROUP BY minute ORDER BY minute DESC LIMIT 60').all().reverse(),quality:readQuality(),motd:readMotd(),weather:readWeather()});
 function transaction(fn){db.exec('BEGIN IMMEDIATE');try{const value=fn();db.exec('COMMIT');return value;}catch(e){db.exec('ROLLBACK');throw e;}}
 function rotate(){const t=Date.now();db.prepare('DELETE FROM events WHERE time < ? OR seq <= (SELECT COALESCE(MAX(seq),0)-10000 FROM events)').run(t-48*3600000);db.prepare('DELETE FROM aggregates WHERE minute < ? OR rowid IN (SELECT rowid FROM aggregates ORDER BY minute DESC LIMIT -1 OFFSET 500000)').run(t-30*86400000);db.prepare('DELETE FROM audit WHERE time < ?').run(t-180*86400000);db.exec('PRAGMA wal_checkpoint(PASSIVE)');}

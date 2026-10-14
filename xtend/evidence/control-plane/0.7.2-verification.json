@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "version": "0.7.2",
+  "frontendImage": "sha256:9128fc13fb4a55abdd77540750fc08b1c88f57f596a7d5be2f992a60f0411ae4",
+  "backendVersion": "0.5.1",
+  "sdk": {
+    "schema": "xtend.search.sdk-provenance.v1",
+    "repository": "https://github.com/konnilabs/xtend",
+    "pullRequest": "https://github.com/konnilabs/xtend/pull/112",
+    "baseCommit": "c31e380f13dfb3b64456f2b149b504efe4d81dfa",
+    "commit": "66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3",
+    "packageVersion": "0.9.0",
+    "artifact": "ccslabs-xtend-0.9.0-66ffa8fa4423.tgz",
+    "sha256": "55ba9f39f183225a26e6eef366a549805f2fb3e3ef40b42ea679a0db55b68264",
+    "cacheModuleGzipBytes": 1009,
+    "mcpAvailable": false,
+    "validation": "38 Chromium component checks with HTML setters disabled, 24 syntax/build audit checks; all 189 ci-pr suite IDs passed across the full profile and targeted reruns after native-source evidence, older Docs syntax and schema-inventory corrections (53 inherited inventory warnings). Eight strict-CSP component styles checks passed; no raw HTML setters."
+  },
+  "tests": {
+    "control": 143,
+    "application": 10,
+    "failures": 0,
+    "skips": 0
+  },
+  "browserGates": [
+    "v04-browser",
+    "shell-recovery-browser",
+    "cache-browser",
+    "weather-layout-browser",
+    "minor-051-browser",
+    "prerelease-audit-browser"
+  ],
+  "builds": [
+    "Strict Maraca classic",
+    "Strict Maraca standalone and Observatory (Docker)"
+  ],
+  "htmlAudit": "36 own browser sources; zero diagnostics",
+  "mcp": "No XTend/Maraca MCP provider is exposed; SDK/CLI and offline Docker browser evidence only.",
+  "cacheRestore": {
+    "weatherStreams": 0,
+    "pageRequests": 0,
+    "providerCalls": 0,
+    "metadataValidationRequired": true,
+    "selectedLocationKept": true
+  },
+  "weatherLayoutCls": 0,
+  "searchCls": 0,
+  "localUpgrade": {
+    "ok": true,
+    "allPreserved": true,
+    "health": {
+      "ok": true,
+      "version": "0.7.2",
+      "storage": "ready",
+      "retrieval": "compatible"
+    }
+  },
+  "limitations": [
+    "The default single-form guard save succeeded in the baseline fixture; the patch hardens queued input capture, stable form identity, sequential multiple-draft saves and conflicting guard decisions.",
+    "Daily selection requires at least two configured texts to display a change.",
+    "Weather misses, expiry and policy changes fall back to the normal service path. Fresh partial DWD mapping remains visibly limited and never asserts a clear warning state.",
+    "Offline fixture performance does not establish production latency; no live SSO login assertion or production deployment."
+  ]
+}

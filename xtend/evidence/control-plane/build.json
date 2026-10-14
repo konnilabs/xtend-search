@@ -4,15 +4,317 @@
   "summaries": [
     {
       "folder": "standalone",
-      "version": "82a9494f1e964dcd09db7afd598b95071fce7a2d799c2c678325ecdf5092fb5e",
+      "version": "f75eca3efe63c247a519ead1eed3b4ceff1c05a60ff9c8b5cf61a045bd9a79ac",
       "sourceSha256": "0c5637b190297032896c772b30511a8de64ef7e475734cf9326cd3388b8a4f7e",
-      "services": "planned"
+      "services": "planned",
+      "htmlSecurity": {
+        "schema": "xtend.maraca.html-security-report.v1",
+        "ok": true,
+        "sources": [
+          {
+            "file": "frontend/about.mjs",
+            "sha256": "48ecda7545b6d06d87c1344655ad02e107f2372d90e5854a72d9304aed1b39c2"
+          },
+          {
+            "file": "frontend/admin-login.mjs",
+            "sha256": "22cc9c3d8423d058e9de27d9a583b1cfdc164a39bb225b44753566b1d11d01ba"
+          },
+          {
+            "file": "frontend/alerts.mjs",
+            "sha256": "ecf0bf9920ff48d849367531083fdc392de3da0f22457da35227652688551cc3"
+          },
+          {
+            "file": "frontend/browser-capabilities.mjs",
+            "sha256": "ceada71b6e219448eff6a486d75f553555a6eb4d0179e7da4bd4f6c416e46b19"
+          },
+          {
+            "file": "frontend/cache-service-core.mjs",
+            "sha256": "b1b1c1e28e34ae150ce25ee965b4487a641d5f1ec25fdb22b150c37afd3e746b"
+          },
+          {
+            "file": "frontend/category-tabs.mjs",
+            "sha256": "bec084c38d3854e084aeb6e1914c473a5b444df613bacfe08bb521d9baea8177"
+          },
+          {
+            "file": "frontend/favicon-service-core.mjs",
+            "sha256": "7bb1aa611106041955bd9b5b076725927e255eb65f4dc534484ca166151e63ca"
+          },
+          {
+            "file": "frontend/favicons.mjs",
+            "sha256": "2354d13f4690f20c03675f1994d31d3ecd28d70211ba3cd2cdf8b24a4c04402b"
+          },
+          {
+            "file": "frontend/feedback.mjs",
+            "sha256": "70c7087b9a3c8374dfe9041fff76b444971ca86004aa8ac2527fbae248ef9432"
+          },
+          {
+            "file": "frontend/filter-motion.mjs",
+            "sha256": "83b2afdccd68e07b6ab28f43b3997a8797d47a73eaf46ca199b79201eecec59f"
+          },
+          {
+            "file": "frontend/filter-navigation.mjs",
+            "sha256": "8ce5e17a243b5d4643707bcafdea69b2c4c458f9b47debe5327d14ad9326ea19"
+          },
+          {
+            "file": "frontend/host.mjs",
+            "sha256": "0566ff093c5a414ae464954aa085ba071b269c6fb446c6e4a677a83a34260e8b"
+          },
+          {
+            "file": "frontend/images.mjs",
+            "sha256": "660f9ed0acec023a5104d310f4bc681bc0e089559e0efa65658b1e992b6e06b1"
+          },
+          {
+            "file": "frontend/lightbox.mjs",
+            "sha256": "3d065bd67de6cbfeb16636b69145b9867484311e443f36c3de54262ec23b3a7c"
+          },
+          {
+            "file": "frontend/motd.mjs",
+            "sha256": "fd6d9bf3150ccd35360159b80c227b866af5f378183817e653f566557d6fbf35"
+          },
+          {
+            "file": "frontend/overlay-controller.mjs",
+            "sha256": "559036da5d2e4e39c5f06d39500ff69da42a7fa391b3c7f82837de36aa63be5e"
+          },
+          {
+            "file": "frontend/overlay-service-core.mjs",
+            "sha256": "aaa01f2ff2cc244de5fdbc3b57a2d3f5721b5ef68073db80c0c4b93d1ff1a816"
+          },
+          {
+            "file": "frontend/preferences-service-core.mjs",
+            "sha256": "f98d7d59b75d864fd53081009dcf7193b020ff9c11bb6bb75b0d06d6f0ee93cf"
+          },
+          {
+            "file": "frontend/preferences.mjs",
+            "sha256": "3ed31e1abd9152ea405455b83a469b9c7d7cbe64865d8abe7336e029885bf55e"
+          },
+          {
+            "file": "frontend/preview.mjs",
+            "sha256": "70326e9f48fdf6a11565559dbed9d04b0954c4ff7d1e6b0c443905d240e1743d"
+          },
+          {
+            "file": "frontend/report-service-core.mjs",
+            "sha256": "f1b2235b62599e9542b930ef0293289d25faec562752b8a348a5ace65d6beecf"
+          },
+          {
+            "file": "frontend/report-state.mjs",
+            "sha256": "a5917a4817162577292b2a7acc9d8f91d1c6518ea93d8f5385d8b7d6e10bbfce"
+          },
+          {
+            "file": "frontend/result-projection-core.mjs",
+            "sha256": "08d9f91e1e846a0903ab0dc6a82387808e5f939e4f2f7a47ec208035a425e5df"
+          },
+          {
+            "file": "frontend/search-cache.mjs",
+            "sha256": "993589f74f871675b8f759b9af0943c48134997d56118132e4a52fcf8e1bd490"
+          },
+          {
+            "file": "frontend/search-motion.mjs",
+            "sha256": "bbf7d7536359fb3c9ff11637a30a1226d9e223aed26885df3f76edd4a73e9fd1"
+          },
+          {
+            "file": "frontend/search-remote-adapter.mjs",
+            "sha256": "c9786d1cda254f7bab8223f02b894f07802e2ac05ebf4ea2e8830f19a27068b8"
+          },
+          {
+            "file": "frontend/services.ts",
+            "sha256": "db218485a602a889e70fb9b77e5c455d9d5d7d690d68a5e3b75a5ab83cec10a8"
+          },
+          {
+            "file": "frontend/standalone-host.mjs",
+            "sha256": "c84cb708fdac903fdf4ed303cbf20e81d32ec11c04c9c1b244d67b125739f130"
+          },
+          {
+            "file": "frontend/standalone-streaming.mjs",
+            "sha256": "9f2a7d7aead352a544c07516866af7c4f5c66a316ef3b35318894b7bdc1438db"
+          },
+          {
+            "file": "frontend/stream-service-core.mjs",
+            "sha256": "bcca799ef7ae6b20137cfab95b0535cce06695aaaf2db4babbcced3af4ce8aba"
+          },
+          {
+            "file": "frontend/streaming.mjs",
+            "sha256": "30ab8304f1b1eec0a8c2866c80436e2efaddab55405282f278d3a8b13f9d6609"
+          },
+          {
+            "file": "frontend/components/x-search-lightbox-styles.mjs",
+            "sha256": "955f5156266560a439fe1cfdd3cd6e23008f32c1588da3ed9f11c94ed41e1188"
+          },
+          {
+            "file": "admin/draft-service-core.mjs",
+            "sha256": "fa84f560031901a331b003c40d35fce705e2716be17ec168984b12c9bbbe6de6"
+          },
+          {
+            "file": "admin/live-service-core.mjs",
+            "sha256": "be3cba734e42e6af3d25e6387bebbacd96cedfd87caa23ecbded1287ce968f77"
+          },
+          {
+            "file": "admin/live.mjs",
+            "sha256": "67d0b30c34cf73714edb155f3ce507ab2154ab2c2ace88a63bb5f11a0562cb0d"
+          },
+          {
+            "file": "admin/services.ts",
+            "sha256": "f60a86d30d064356baff59867f72c2cb27aa548e16e1778127d71ca393e6a019"
+          }
+        ],
+        "diagnostics": []
+      }
     },
     {
       "folder": "admin",
-      "version": "dbf947587ce8e140d4f44322896d0e6f7f4e55a543294f84ad98a39ca98b6810",
+      "version": "39abfb017cb822b8a9bebfbe959dd186531bec0d05623164c668a89ac4eb9f36",
       "sourceSha256": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
-      "services": "planned"
+      "services": "planned",
+      "htmlSecurity": {
+        "schema": "xtend.maraca.html-security-report.v1",
+        "ok": true,
+        "sources": [
+          {
+            "file": "frontend/about.mjs",
+            "sha256": "48ecda7545b6d06d87c1344655ad02e107f2372d90e5854a72d9304aed1b39c2"
+          },
+          {
+            "file": "frontend/admin-login.mjs",
+            "sha256": "22cc9c3d8423d058e9de27d9a583b1cfdc164a39bb225b44753566b1d11d01ba"
+          },
+          {
+            "file": "frontend/alerts.mjs",
+            "sha256": "ecf0bf9920ff48d849367531083fdc392de3da0f22457da35227652688551cc3"
+          },
+          {
+            "file": "frontend/browser-capabilities.mjs",
+            "sha256": "ceada71b6e219448eff6a486d75f553555a6eb4d0179e7da4bd4f6c416e46b19"
+          },
+          {
+            "file": "frontend/cache-service-core.mjs",
+            "sha256": "b1b1c1e28e34ae150ce25ee965b4487a641d5f1ec25fdb22b150c37afd3e746b"
+          },
+          {
+            "file": "frontend/category-tabs.mjs",
+            "sha256": "bec084c38d3854e084aeb6e1914c473a5b444df613bacfe08bb521d9baea8177"
+          },
+          {
+            "file": "frontend/favicon-service-core.mjs",
+            "sha256": "7bb1aa611106041955bd9b5b076725927e255eb65f4dc534484ca166151e63ca"
+          },
+          {
+            "file": "frontend/favicons.mjs",
+            "sha256": "2354d13f4690f20c03675f1994d31d3ecd28d70211ba3cd2cdf8b24a4c04402b"
+          },
+          {
+            "file": "frontend/feedback.mjs",
+            "sha256": "70c7087b9a3c8374dfe9041fff76b444971ca86004aa8ac2527fbae248ef9432"
+          },
+          {
+            "file": "frontend/filter-motion.mjs",
+            "sha256": "83b2afdccd68e07b6ab28f43b3997a8797d47a73eaf46ca199b79201eecec59f"
+          },
+          {
+            "file": "frontend/filter-navigation.mjs",
+            "sha256": "8ce5e17a243b5d4643707bcafdea69b2c4c458f9b47debe5327d14ad9326ea19"
+          },
+          {
+            "file": "frontend/host.mjs",
+            "sha256": "0566ff093c5a414ae464954aa085ba071b269c6fb446c6e4a677a83a34260e8b"
+          },
+          {
+            "file": "frontend/images.mjs",
+            "sha256": "660f9ed0acec023a5104d310f4bc681bc0e089559e0efa65658b1e992b6e06b1"
+          },
+          {
+            "file": "frontend/lightbox.mjs",
+            "sha256": "3d065bd67de6cbfeb16636b69145b9867484311e443f36c3de54262ec23b3a7c"
+          },
+          {
+            "file": "frontend/motd.mjs",
+            "sha256": "fd6d9bf3150ccd35360159b80c227b866af5f378183817e653f566557d6fbf35"
+          },
+          {
+            "file": "frontend/overlay-controller.mjs",
+            "sha256": "559036da5d2e4e39c5f06d39500ff69da42a7fa391b3c7f82837de36aa63be5e"
+          },
+          {
+            "file": "frontend/overlay-service-core.mjs",
+            "sha256": "aaa01f2ff2cc244de5fdbc3b57a2d3f5721b5ef68073db80c0c4b93d1ff1a816"
+          },
+          {
+            "file": "frontend/preferences-service-core.mjs",
+            "sha256": "f98d7d59b75d864fd53081009dcf7193b020ff9c11bb6bb75b0d06d6f0ee93cf"
+          },
+          {
+            "file": "frontend/preferences.mjs",
+            "sha256": "3ed31e1abd9152ea405455b83a469b9c7d7cbe64865d8abe7336e029885bf55e"
+          },
+          {
+            "file": "frontend/preview.mjs",
+            "sha256": "70326e9f48fdf6a11565559dbed9d04b0954c4ff7d1e6b0c443905d240e1743d"
+          },
+          {
+            "file": "frontend/report-service-core.mjs",
+            "sha256": "f1b2235b62599e9542b930ef0293289d25faec562752b8a348a5ace65d6beecf"
+          },
+          {
+            "file": "frontend/report-state.mjs",
+            "sha256": "a5917a4817162577292b2a7acc9d8f91d1c6518ea93d8f5385d8b7d6e10bbfce"
+          },
+          {
+            "file": "frontend/result-projection-core.mjs",
+            "sha256": "08d9f91e1e846a0903ab0dc6a82387808e5f939e4f2f7a47ec208035a425e5df"
+          },
+          {
+            "file": "frontend/search-cache.mjs",
+            "sha256": "993589f74f871675b8f759b9af0943c48134997d56118132e4a52fcf8e1bd490"
+          },
+          {
+            "file": "frontend/search-motion.mjs",
+            "sha256": "bbf7d7536359fb3c9ff11637a30a1226d9e223aed26885df3f76edd4a73e9fd1"
+          },
+          {
+            "file": "frontend/search-remote-adapter.mjs",
+            "sha256": "c9786d1cda254f7bab8223f02b894f07802e2ac05ebf4ea2e8830f19a27068b8"
+          },
+          {
+            "file": "frontend/services.ts",
+            "sha256": "db218485a602a889e70fb9b77e5c455d9d5d7d690d68a5e3b75a5ab83cec10a8"
+          },
+          {
+            "file": "frontend/standalone-host.mjs",
+            "sha256": "c84cb708fdac903fdf4ed303cbf20e81d32ec11c04c9c1b244d67b125739f130"
+          },
+          {
+            "file": "frontend/standalone-streaming.mjs",
+            "sha256": "9f2a7d7aead352a544c07516866af7c4f5c66a316ef3b35318894b7bdc1438db"
+          },
+          {
+            "file": "frontend/stream-service-core.mjs",
+            "sha256": "bcca799ef7ae6b20137cfab95b0535cce06695aaaf2db4babbcced3af4ce8aba"
+          },
+          {
+            "file": "frontend/streaming.mjs",
+            "sha256": "30ab8304f1b1eec0a8c2866c80436e2efaddab55405282f278d3a8b13f9d6609"
+          },
+          {
+            "file": "frontend/components/x-search-lightbox-styles.mjs",
+            "sha256": "955f5156266560a439fe1cfdd3cd6e23008f32c1588da3ed9f11c94ed41e1188"
+          },
+          {
+            "file": "admin/draft-service-core.mjs",
+            "sha256": "fa84f560031901a331b003c40d35fce705e2716be17ec168984b12c9bbbe6de6"
+          },
+          {
+            "file": "admin/live-service-core.mjs",
+            "sha256": "be3cba734e42e6af3d25e6387bebbacd96cedfd87caa23ecbded1287ce968f77"
+          },
+          {
+            "file": "admin/live.mjs",
+            "sha256": "67d0b30c34cf73714edb155f3ce507ab2154ab2c2ace88a63bb5f11a0562cb0d"
+          },
+          {
+            "file": "admin/services.ts",
+            "sha256": "f60a86d30d064356baff59867f72c2cb27aa548e16e1778127d71ca393e6a019"
+          }
+        ],
+        "diagnostics": []
+      }
     }
   ]
 }

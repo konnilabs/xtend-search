@@ -321,7 +321,7 @@
       "format": "esm"
     },
     "frontend/cache-service-core.mjs": {
-      "bytes": 3080,
+      "bytes": 4609,
       "imports": [
         {
           "path": "node_modules/@ccslabs/xtend/xtendrmt/page-resource-cache.mjs",
@@ -652,7 +652,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "public/assets/xtend/chunks/chunk-WBQTGT53.mjs",
+          "path": "public/assets/xtend/chunks/chunk-SJV57VDP.mjs",
           "kind": "import-statement"
         },
         {
@@ -669,7 +669,7 @@
           "kind": "dynamic-import"
         },
         {
-          "path": "public/assets/xtend/chunks/lightbox-IHL3ZWOX.mjs",
+          "path": "public/assets/xtend/chunks/lightbox-6YY4Y3QF.mjs",
           "kind": "dynamic-import"
         }
       ],
@@ -855,10 +855,10 @@
       },
       "bytes": 157082
     },
-    "public/assets/xtend/chunks/lightbox-IHL3ZWOX.mjs": {
+    "public/assets/xtend/chunks/lightbox-6YY4Y3QF.mjs": {
       "imports": [
         {
-          "path": "public/assets/xtend/chunks/chunk-WBQTGT53.mjs",
+          "path": "public/assets/xtend/chunks/chunk-SJV57VDP.mjs",
           "kind": "import-statement"
         },
         {
@@ -880,7 +880,7 @@
       },
       "bytes": 3029
     },
-    "public/assets/xtend/chunks/chunk-WBQTGT53.mjs": {
+    "public/assets/xtend/chunks/chunk-SJV57VDP.mjs": {
       "imports": [
         {
           "path": "public/assets/xtend/chunks/chunk-Q5OUVVO3.mjs",
@@ -907,7 +907,7 @@
           "bytesInOutput": 989
         },
         "frontend/cache-service-core.mjs": {
-          "bytesInOutput": 1784
+          "bytesInOutput": 2144
         },
         "shared/about.mjs": {
           "bytesInOutput": 5300
@@ -922,7 +922,7 @@
           "bytesInOutput": 1535
         },
         "frontend/overlay-service-core.mjs": {
-          "bytesInOutput": 1179
+          "bytesInOutput": 1181
         },
         "frontend/favicon-service-core.mjs": {
           "bytesInOutput": 1046
@@ -940,10 +940,10 @@
           "bytesInOutput": 669
         },
         "frontend/services.ts": {
-          "bytesInOutput": 1995
+          "bytesInOutput": 1997
         }
       },
-      "bytes": 21869
+      "bytes": 22233
     },
     "public/assets/xtend/chunks/chunk-Q5OUVVO3.mjs": {
       "imports": [],

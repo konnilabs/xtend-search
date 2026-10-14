@@ -1,0 +1,67 @@
+{
+  "version": "0.7.1",
+  "ok": true,
+  "frontendImage": "sha256:090b16916c9e75d3f07b89e3f77e4687da807076424b4c0f103838a76666efff",
+  "backendVersion": "0.5.1",
+  "framework": {
+    "pr": 112,
+    "commit": "66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3",
+    "suiteCount": 189,
+    "passedCount": 189,
+    "sourceAuditChecks": 24,
+    "browserCases": 38,
+    "scope": "Full ci-pr profile plus targeted reruns of the seven corrected suite IDs; not a single uninterrupted full run.",
+    "cspChecks": 8
+  },
+  "search": {
+    "controlTests": 139,
+    "applicationTests": 10,
+    "strictMaraca": true,
+    "sourceAuditFiles": 36,
+    "htmlSinkViolations": 0,
+    "browserGates": 9,
+    "exactFinalImageReruns": 5,
+    "weatherWidths": [
+      320,
+      390,
+      700,
+      900,
+      1000,
+      1024,
+      1440,
+      1920,
+      3840
+    ],
+    "weatherClsMax": 0,
+    "searchClsMax": 0,
+    "nativeTemperatureToggle": true,
+    "minToggleTextContrast": 7.570343963096609,
+    "aboutModal": true,
+    "reportAssistant": true,
+    "staleProjectionRejected": true,
+    "portainer": true,
+    "finalCspReruns": [
+      "about-browser",
+      "spinner-stream-browser",
+      "prerelease-audit-browser"
+    ]
+  },
+  "preserved": {
+    "metadata": true,
+    "policies": true,
+    "guards": true,
+    "weather_policy": true,
+    "weather_budget": true,
+    "quality_rules": true,
+    "quality_pauses": true,
+    "site_content": true,
+    "feedback_batches": true,
+    "feedback_proofs": true,
+    "signingKeys": true,
+    "environmentAndSSO": true,
+    "envFile": true,
+    "frontendImage": true,
+    "backendImage": true
+  },
+  "scope": "Offline fixture/OAuth/provider tests and local Docker update only; no production deployment, real OAuth login, framework publishing or merge."
+}

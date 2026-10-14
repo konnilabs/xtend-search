@@ -139,6 +139,7 @@ export class ControlPlane {
  async refreshHistory(){try{const s=await this.store.call('load');this.audit=s.audit;this.history=s.aggregates;}catch{this.storeOK=false;}}
  scheduleTick(){this.tickPromise=this.tick().catch(()=>{this.telemetry.emit('backend.changed',{outcome:'error',errorClass:'unknown'});}).finally(()=>{this.tickPromise=null;});return this.tickPromise;}
  async tick(){if(this.stopping)return;try{
+  await this.motd?.current();
   if(Date.now()-this.adapter.lastRefresh>300000)await this.refresh();
   if(this.quality)await this.exclusive(()=>this.quality.tick());
   if(this.probeEnabled){

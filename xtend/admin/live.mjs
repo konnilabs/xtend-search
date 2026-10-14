@@ -14,7 +14,11 @@ export function watchObservatory(client,csrf){
  const dirty=new Set();let draftQueue=Promise.resolve();
  const drafts=()=>client.getRuntime().model.getState('admin.drafts')||{};
  const clearDrafts=async()=>command('admin.drafts.set',{value:await registry.invoke('admin.drafts.reduce',{drafts:{},id:'',values:{},reset:true})});
- const updateDraft=(form,remove=false)=>draftQueue=draftQueue.catch(()=>{}).then(async()=>{const value=await registry.invoke('admin.drafts.reduce',{drafts:drafts(),id:form.getAttribute('id'),values:input(form),remove,budget:client.getRuntime().model.getState('admin.data').weather?.budget||[]});return command('admin.drafts.set',{value});});let saving=null,guarding=false,guardDecision=null,watchController,connected=true,currentUrl=location.href,historyIndex=Number(history.state?.observatoryIndex)||0,suppressPop=false;
+ const updateDraft=(form,remove=false)=>{
+  // Read at the event boundary, before a queued RMT render can replace or reset controls.
+  const id=form.getAttribute('id'),values=input(form),budget=client.getRuntime().model.getState('admin.data').weather?.budget||[];
+  return draftQueue=draftQueue.catch(()=>{}).then(async()=>{const value=await registry.invoke('admin.drafts.reduce',{drafts:drafts(),id,values,remove,budget});return command('admin.drafts.set',{value});});
+ };let saving=null,guarding=false,guardDecision=null,watchController,connected=true,currentUrl=location.href,historyIndex=Number(history.state?.observatoryIndex)||0,suppressPop=false;
  history.replaceState({...history.state,observatoryIndex:historyIndex},'',location.href);
  const input=form=>{const data={...Object.fromEntries(new URL(location.href).searchParams),...Object.fromEntries(new FormData(form))};for(const box of form.querySelectorAll('input[type=checkbox]'))data[box.name]=box.checked;return data;};
  // Feedback belongs to RMT, separately from live data and form responses.
@@ -50,18 +54,19 @@ export function watchObservatory(client,csrf){
  new ResizeObserver(surfaces).observe(document.documentElement);
  const observer=new MutationObserver(()=>queueMicrotask(surfaces));
  observer.observe(document.getElementById('xtend-page'),{subtree:true,childList:true});surfaces();
- document.addEventListener('input',event=>{const form=event.target.closest('form');if(form&&serviceFor(form)){dirty.add(form);void updateDraft(form);}},{signal:controller.signal});
- document.addEventListener('change',event=>{const form=event.target.closest('form');if(form&&serviceFor(form)){dirty.add(form);void updateDraft(form);}if(event.target.matches('#pool-filters select'))event.target.form.requestSubmit();},{signal:controller.signal});
+ document.addEventListener('input',event=>{const form=event.target.closest('form');if(form&&serviceFor(form)){dirty.add(form.getAttribute('id'));void updateDraft(form);}},{signal:controller.signal});
+ document.addEventListener('change',event=>{const form=event.target.closest('form');if(form&&serviceFor(form)){dirty.add(form.getAttribute('id'));void updateDraft(form);}if(event.target.matches('#pool-filters select'))event.target.form.requestSubmit();},{signal:controller.signal});
  async function save(form){
   if(saving)return saving;
   if(!form.reportValidity())return false;
   const focused=document.activeElement?.name,positions=[...document.querySelectorAll('[data-xtend-scroll]')].map(n=>[n.dataset.xtendScroll,n.scrollLeft,n.scrollTop]);
   const own=readGeneration;
-  saving=(async()=>{await draftQueue;const payload=input(form);
+  saving=(async()=>{await draftQueue;const current=document.getElementById(form.getAttribute('id'));if(!current)return false;
+   const live=input(current),payload={...live,...drafts()[form.getAttribute('id')],revision:live.revision,requestKey:live.requestKey};
    return registry.invoke('admin.form.save',{serviceId:serviceFor(form),payload},{
     invokeServer:(name,payload,signal)=>registry.invoke(name,payload,{},{signal}),
     setBusy:value=>controller.signal.aborted?undefined:command('admin.busy.set',{value}),
-    project:async result=>{if(own!==readGeneration||controller.signal.aborted)return;dirty.delete(form);await updateDraft(form,true);if(own!==readGeneration)return;await client.optimistic(props=>({...props,'admin.data':result}),async()=>true);
+    project:async result=>{if(own!==readGeneration||controller.signal.aborted)return;dirty.delete(form.getAttribute('id'));await updateDraft(current,true);if(own!==readGeneration)return;await client.optimistic(props=>({...props,'admin.data':result}),async()=>true);
      requestAnimationFrame(()=>{if(own!==readGeneration)return;for(const [id,x,y]of positions)scrollElement(document.querySelector('[data-xtend-scroll="'+id+'"]'), x,y);if(focused)focusElement(document.getElementById(form.getAttribute('id'))?.elements.namedItem(focused), {preventScroll:true});surfaces();});},
     announce:async notices=>{if(own!==readGeneration||controller.signal.aborted)return;for(const notice of notices)await toast(notice.message,notice.type,notice.title,notice.id);},
     notify:()=>{if(typeof BroadcastChannel==='function'){const channel=new BroadcastChannel('xtend.search.content');channel.postMessage({changed:true});channel.close();}}
@@ -70,12 +75,17 @@ export function watchObservatory(client,csrf){
  }
 
  async function confirmLeave(){
-  for(const form of [...dirty])if(!form.isConnected)dirty.delete(form);
+  await draftQueue;
+  for(const id of [...dirty])if(!document.getElementById(id))dirty.delete(id);
   if(!dirty.size)return true;if(guarding)return false;guarding=true;
   await client.getRuntime().ensureComponent('x-dialog');
   await command('admin.guard.set',{value:true});
-  return new Promise(resolve=>{let done=false;const finish=async value=>{if(done)return;done=true;await command('admin.guard.set',{value:false});guarding=false;guardDecision=null;resolve(value);};
-   guardDecision=async choice=>{if(done)return;const ids=[...dirty].filter(form=>form.isConnected).map(form=>form.getAttribute('id'));const value=await registry.invoke('admin.guard.resolve',{choice,ids},{save:id=>{const form=document.getElementById(id);return form?save(form):false;},discard:async()=>{dirty.clear();await clearDrafts();}});return finish(value);};
+  return new Promise(resolve=>{let done=false,resolving=false;const finish=async value=>{if(done)return;done=true;await command('admin.guard.set',{value:false});guarding=false;guardDecision=null;resolve(value);};
+   guardDecision=async choice=>{if(done||resolving)return;resolving=true;
+    try{const ids=[...dirty];const value=await registry.invoke('admin.guard.resolve',{choice,ids},{save:id=>{const form=document.getElementById(id);return form?save(form):false;},discard:async()=>{dirty.clear();await clearDrafts();}});
+     if(choice==='save'&&!value)return;return finish(value);
+    }finally{resolving=false;}
+   };
   });
  }
  document.addEventListener('dialog-closed',event=>{if(event.target.id==='admin-draft-guard'&&guardDecision)void guardDecision('cancel');},{signal:controller.signal});

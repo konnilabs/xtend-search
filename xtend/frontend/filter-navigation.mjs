@@ -1,4 +1,5 @@
 // Read native controls; XTend remains responsible for state and navigation.
+import {weatherTabUrl} from './cache-service-core.mjs';
 let draft=null;
 export function categoryDraftUrl(href, values, origin){
  const url=new URL(href,origin);
@@ -21,7 +22,8 @@ export function installFilterNavigation(command){
   const link=event.target.closest?.('.category-tabs a');
   if(!link||event.defaultPrevented||event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey||!window.XTendPage?.getRuntime())return;
   const form=document.getElementById('search-form');if(!form)return;
-  const url=categoryDraftUrl(link.href,new FormData(form),location.origin);
+  const page=window.XTendPage.page;
+  const url=weatherTabUrl(categoryDraftUrl(link.href,new FormData(form),location.origin),{version:page.version,contextKey:page.contextKey});
   event.preventDefault();event.stopImmediatePropagation();
   void window.XTendPage.visit(url,{cache:'reuse'}).catch(()=>{});
  },true);

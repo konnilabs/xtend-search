@@ -6,10 +6,11 @@ const esbuild=require('esbuild');
 async function main(){
  const root=path.resolve(__dirname,'..'),out=path.join(root,'public/assets/xtend');fs.mkdirSync(out,{recursive:true});
  const session=createRmtCompilationSession({root});const summaries=[];
+ const sources=['frontend','admin'].flatMap(folder=>fs.readdirSync(path.join(root,folder),{recursive:true}).filter(file=>/\.(mjs|ts)$/.test(file)).map(file=>folder+'/'+file));
  try{for(const admin of [false,true]){
   const folder=admin?'admin':'standalone',source=admin?'admin/admin.rmt':'frontend/standalone.rmt',entry=admin?'admin/services.ts':'frontend/services.ts';
   const options={source,out:`public/assets/xtend/${folder}/maraca`,profile:'production',sizeBudget:'warn',lazy:'component',orchestration:'strict',kernel:'strict',kernelBootMode:'direct',hydration:'strict',validation:'auto',transitions:admin?'auto':'strict',componentMode:'document',stackMode:'plan',css:'external',services:{clientEntry:entry,serverEntry:'server/control/server-services.ts',targets:['browser','node'],strict:true,budgets:{clientBytes:20000,serverBytes:300000},transport:{kind:'http-ndjson',basePath:'/api/xtend/services'}}};
-  const built=await buildMaracaBundleAsync(options,{rootDir:root,compileSource:session.compileSource});
+  const built=await buildMaracaBundleAsync(options,{rootDir:root,compileSource:session.compileSource,htmlSecurity:{sources}});
   if(!built.ok)throw Object.assign(new Error('Maraca control build failed: '+folder),{details:built.plan?.diagnostics||built});
   const configuration={applicationKey:admin?'xtend.search.admin':'xtend.search',viewTransitions:false,events:built.plan.orchestration?.artifact?.events||[]};
   const bootstrap=admin?
@@ -21,7 +22,7 @@ async function main(){
   const pages=await buildPages({root,target:'node',config:admin?'admin/pages.json':'standalone.pages.json',compileSource:session.compileSource});
   fs.copyFileSync(path.join(root,'.xtend-build/pages.json'),path.join(root,'.xtend-build',admin?'pages-admin.json':'pages-standalone.json'));
   await esbuild.build({entryPoints:[path.join(root,'server/control/storage-worker.mjs')],bundle:true,format:'esm',platform:'node',target:'node24',outfile:path.join(out,folder,'maraca/server/storage-worker.mjs')});
-  summaries.push({folder,version:pages.manifest.version,sourceSha256:createHash('sha256').update(fs.readFileSync(path.join(root,source))).digest('hex'),services:built.plan.services?.status});
+  summaries.push({folder,version:pages.manifest.version,sourceSha256:createHash('sha256').update(fs.readFileSync(path.join(root,source))).digest('hex'),services:built.plan.services?.status,htmlSecurity:built.plan.htmlSecurity});
  }
  fs.cpSync(path.join(root,'frontend/weather'),path.join(out,'weather'),{recursive:true});
  for(const file of ['mark.svg','image-placeholder.svg','favicon.png'])fs.copyFileSync(path.join(root,'frontend',file),path.join(out,file));
