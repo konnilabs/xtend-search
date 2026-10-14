@@ -405,7 +405,7 @@
       "format": "esm"
     },
     "frontend/favicon-service-core.mjs": {
-      "bytes": 3193,
+      "bytes": 3439,
       "imports": [],
       "format": "esm"
     },
@@ -946,7 +946,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "public/assets/xtend/standalone/chunks/chunk-MNQ6U73E.mjs",
+          "path": "public/assets/xtend/standalone/chunks/chunk-JBLYC5KK.mjs",
           "kind": "import-statement"
         },
         {
@@ -963,7 +963,7 @@
           "kind": "dynamic-import"
         },
         {
-          "path": "public/assets/xtend/standalone/chunks/lightbox-7EXE3EXK.mjs",
+          "path": "public/assets/xtend/standalone/chunks/lightbox-L444N6AR.mjs",
           "kind": "dynamic-import"
         }
       ],
@@ -1196,10 +1196,10 @@
       },
       "bytes": 6507
     },
-    "public/assets/xtend/standalone/chunks/lightbox-7EXE3EXK.mjs": {
+    "public/assets/xtend/standalone/chunks/lightbox-L444N6AR.mjs": {
       "imports": [
         {
-          "path": "public/assets/xtend/standalone/chunks/chunk-MNQ6U73E.mjs",
+          "path": "public/assets/xtend/standalone/chunks/chunk-JBLYC5KK.mjs",
           "kind": "import-statement"
         },
         {
@@ -1218,7 +1218,7 @@
       },
       "bytes": 2598
     },
-    "public/assets/xtend/standalone/chunks/chunk-MNQ6U73E.mjs": {
+    "public/assets/xtend/standalone/chunks/chunk-JBLYC5KK.mjs": {
       "imports": [
         {
           "path": "public/assets/xtend/standalone/chunks/chunk-Q5OUVVO3.mjs",
@@ -1272,7 +1272,7 @@
           "bytesInOutput": 1181
         },
         "frontend/favicon-service-core.mjs": {
-          "bytesInOutput": 1716
+          "bytesInOutput": 1771
         },
         "frontend/report-state.mjs": {
           "bytesInOutput": 405
@@ -1293,7 +1293,7 @@
           "bytesInOutput": 443
         }
       },
-      "bytes": 23688
+      "bytes": 23743
     },
     "public/assets/xtend/standalone/chunks/chunk-Q5OUVVO3.mjs": {
       "imports": [],
