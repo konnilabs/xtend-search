@@ -56,7 +56,7 @@ export function normalizeInfoboxes(raw,state){
 }
 export function baseData(state){
  const isSearch=Boolean(state.q.trim());
- return {...state,skeleton:false,stream:null,view:isSearch?'results':'home',isSearch,results:[],knowledgeCards:[],hasKnowledge:false,warnings:[],pages:[],tabs:[['general','Web'],['images','Bilder']].map(([id,label])=>({id,label,url:searchUrl(state,{category:id,page:1}),className:'tab'+(state.category===id?' active':''),current:state.category===id?'page':'false'})),countLabel:'',pageLabel:`Seite ${state.page}`,empty:false,error:false,errorMessage:'',fixture:false,listClass:state.category==='images'?'image-results':'web-results',classicUrl:'/classic'+searchUrl(state)};
+ return {...state,skeleton:false,stream:null,view:isSearch?'results':'home',isSearch,results:[],knowledgeCards:[],hasKnowledge:false,warnings:[],pages:[],tabs:[['general','Web'],['images','Bilder']].map(([id,label])=>({id,label,url:searchUrl(state,{category:id,page:1}),className:'tab'+(state.category===id?' active':''),current:state.category===id?'page':'false'})),countLabel:'',pageLabel:`Seite ${state.page}`,empty:false,emptyTitle:'',emptyMessage:'',error:false,errorMessage:'',fixture:false,listClass:state.category==='images'?'image-results':'web-results',classicUrl:'/classic'+searchUrl(state)};
 }
 export function normalizeResults(raw,state,{imageGeneration=randomUUID()}={}){
  // Firefox may retain failed image requests even with HTTP no-store. A fresh

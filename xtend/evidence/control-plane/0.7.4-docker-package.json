@@ -1,0 +1,11 @@
+{
+  "version": "0.7.4",
+  "archive": "XTend-search-Docker-0.7.4-linux-amd64.tar.gz",
+  "bytes": 377020815,
+  "sha256": "032e3e186b849d657f1eae8841b0c231fa463d74fff73ad26d8285edacdbd6d4",
+  "frontendImage": "sha256:4a1872b8ef36968e085c609252e17a5bcdedc1aedbf9ea5eaad3c986dba158e1",
+  "backendImage": "sha256:1699b4531c24be1cfabcdd4cb269c793c4760ad68f668aa45c019c469ef4b8fd",
+  "frontendArchiveSha256": "27818beadde3f52fc5a0f747fd2e37f60139bce80f581fef1e78bec839fb7d99",
+  "backendArchiveSha256": "95a023d77d73d38ad1365af7ccfb83de7e7f55303d17f432f1ee26c13610665e",
+  "loadedAndVerified": true
+}

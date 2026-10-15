@@ -2072,20 +2072,18 @@ template xtend.search {
                       "type" "element"
                       "tag" "h2"
                       "text" {
-                        "op" "if"
-                        "test" "$model.search.data.emptyTitle"
-                        "then" "$model.search.data.emptyTitle"
-                        "else" "Noch nichts gefunden."
+                        "op" "fallback"
+                        "value" { "op" "path" "path" "$model.search.data.emptyTitle" }
+                        "fallback" "Noch nichts gefunden."
                       }
                     }
                     {
                       "type" "element"
                       "tag" "p"
                       "text" {
-                        "op" "if"
-                        "test" "$model.search.data.emptyMessage"
-                        "then" "$model.search.data.emptyMessage"
-                        "else" "Versuche andere Begriffe oder erweitere deine Filter."
+                        "op" "fallback"
+                        "value" { "op" "path" "path" "$model.search.data.emptyMessage" }
+                        "fallback" "Versuche andere Begriffe oder erweitere deine Filter."
                       }
                     }
                   ]
@@ -2106,20 +2104,18 @@ template xtend.search {
                       "type" "element"
                       "tag" "h2"
                       "text" {
-                        "op" "if"
-                        "test" "$model.search.data.emptyTitle"
-                        "then" "$model.search.data.emptyTitle"
-                        "else" "Die Suche ist gerade nicht erreichbar."
+                        "op" "fallback"
+                        "value" { "op" "path" "path" "$model.search.data.emptyTitle" }
+                        "fallback" "Die Suche ist gerade nicht erreichbar."
                       }
                     }
                     {
                       "type" "element"
                       "tag" "p"
                       "text" {
-                        "op" "if"
-                        "test" "$model.search.data.emptyMessage"
-                        "then" "$model.search.data.emptyMessage"
-                        "else" "$model.search.data.errorMessage"
+                        "op" "fallback"
+                        "value" { "op" "path" "path" "$model.search.data.emptyMessage" }
+                        "fallback" { "op" "fallback" "value" { "op" "path" "path" "$model.search.data.errorMessage" } "fallback" "Bitte versuche es später erneut." }
                       }
                     }
                     {

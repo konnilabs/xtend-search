@@ -1,0 +1,43 @@
+{
+  "ok": true,
+  "version": "0.7.4",
+  "frontend": "sha256:4a1872b8ef36968e085c609252e17a5bcdedc1aedbf9ea5eaad3c986dba158e1",
+  "backend": "sha256:1699b4531c24be1cfabcdd4cb269c793c4760ad68f668aa45c019c469ef4b8fd",
+  "previousFrontend": "sha256:9bfadba7348978286c7e54950405a984304be2ff4dd70ec7e5c846f58c80afdc",
+  "previousBackend": "sha256:1699b4531c24be1cfabcdd4cb269c793c4760ad68f668aa45c019c469ef4b8fd",
+  "health": {
+    "ok": true,
+    "version": "0.7.4",
+    "storage": "ready",
+    "retrieval": "compatible"
+  },
+  "preserved": {
+    "metadata": true,
+    "policies": true,
+    "guards": true,
+    "weather_policy": true,
+    "weather_budget": true,
+    "quality_rules": true,
+    "quality_pauses": true,
+    "site_content": true,
+    "feedback_batches": true,
+    "feedback_proofs": true,
+    "signingKeys": true,
+    "environmentAndSSO": true,
+    "envFile": true,
+    "frontendImage": true,
+    "backendImage": true
+  },
+  "backupDirectory": "/home/konni/Documents/Codex/2026-09-19/referenced-chatgpt-conversation-this-is-an/work/backups/local-0.7.3-before-0.7.4-20261015T223746Z",
+  "backupFiles": [
+    "control.tar.gz",
+    "evidence.tar.gz",
+    "backend.tar.gz"
+  ],
+  "backupBytes": {
+    "control.tar.gz": 213792,
+    "evidence.tar.gz": 363,
+    "backend.tar.gz": 96412
+  },
+  "scope": "Local instance only; consistent stopped-volume backups, protected environment retained. No production deployment or real OAuth login assertion."
+}

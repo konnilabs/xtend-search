@@ -1,0 +1,12 @@
+{
+  "ok": true,
+  "version": "0.7.4",
+  "images": {
+    "xtend-search:0.7.4": "sha256:4a1872b8ef36968e085c609252e17a5bcdedc1aedbf9ea5eaad3c986dba158e1",
+    "xtend-search-searxng:0.5.1": "sha256:1699b4531c24be1cfabcdd4cb269c793c4760ad68f668aa45c019c469ef4b8fd"
+  },
+  "archiveChecksumsVerified": true,
+  "dockerLoadVerified": true,
+  "correspondingSourceVersion": "0.7.4",
+  "scope": "Local image import only. Running containers retain their validated IDs; no registry push or production deployment."
+}

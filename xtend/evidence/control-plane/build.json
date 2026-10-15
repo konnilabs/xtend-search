@@ -4,8 +4,8 @@
   "summaries": [
     {
       "folder": "standalone",
-      "version": "d9540200aff080476e8e11a5fe2fbff4677c8fa4de962ef82063eaa8f950637d",
-      "sourceSha256": "7bc5bdf903f4eff3d68640130078c3dd760c6f672ee1799e0d6f24a4b7eca64c",
+      "version": "761e6e55e4269741a3349df2f7580b5ca682b7e387a519253dc3466e49e0db51",
+      "sourceSha256": "fbec52bf1da3501c73e9ca559d0dd6dbe49767764f0afec8e6504fc0e0be7023",
       "services": "planned",
       "htmlSecurity": {
         "schema": "xtend.maraca.html-security-report.v1",
@@ -169,7 +169,7 @@
     },
     {
       "folder": "admin",
-      "version": "623de8d0a7711606763dfe0f676abe0d92e7d79827c8ba2823e17837a15d796c",
+      "version": "58f54787df83f27a3a1dba3b4c2f902e624367c67ce3d0e18447831a77885e17",
       "sourceSha256": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
       "services": "planned",
       "htmlSecurity": {

@@ -106,6 +106,7 @@ jobs:
           node xtend/tests/control/edge-browser.mjs
           node xtend/tests/control/lightbox-resilience-browser.mjs
           node xtend/tests/control/prerelease-audit-browser.mjs
+          node xtend/tests/control/empty-state-browser.mjs
       - name: Fixture diagnostics
         if: failure()
         run: |
