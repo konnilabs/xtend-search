@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "version": "0.7.4",
+  "baseMain": "1af310a90",
+  "frontendImage": "sha256:4a1872b8ef36968e085c609252e17a5bcdedc1aedbf9ea5eaad3c986dba158e1",
+  "backendVersion": "0.5.1",
+  "sdkCommit": "66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3",
+  "sdkChanged": false,
+  "tests": {
+    "control": 152,
+    "application": 10,
+    "failures": 0,
+    "skips": 0
+  },
+  "browserGates": [
+    "v04-browser",
+    "release-060-browser",
+    "edge-browser",
+    "lightbox-resilience-browser",
+    "empty-state-browser"
+  ],
+  "builds": [
+    "Strict Maraca classic",
+    "Strict Maraca standalone and Observatory (Docker)"
+  ],
+  "diagnosis": {
+    "type": "Missing optional binding treated as a truthy literal reference; no JavaScript exception",
+    "callPath": [
+      "SearchExecutor.run/snapshot",
+      "normalizeResults/baseData",
+      "projectPortableRender",
+      "renderer.resolveValue",
+      "evaluateExpression(if)",
+      "rendered text"
+    ],
+    "missingFields": [
+      "emptyTitle",
+      "emptyMessage"
+    ],
+    "beforeFixTests": "Three new regression tests failed against the previous template/data contract",
+    "afterFix": "Explicit RMT path/fallback expressions and complete base-data defaults; readable copy with missing, null or empty overrides",
+    "providerTimeouts": "Observed separately in the local UI; no provider policies or guards changed"
+  },
+  "privacy": "Only offline fixture data is retained in test evidence; no real query or result URL captured. Protected environment and persisted volume backups are kept outside Git.",
+  "localUpgrade": {
+    "ok": true,
+    "allPreserved": true,
+    "health": {
+      "ok": true,
+      "version": "0.7.4",
+      "storage": "ready",
+      "retrieval": "compatible"
+    }
+  },
+  "manualBrowserVerification": {
+    "originalLocalPageReloaded": true,
+    "visibleModelReferences": false,
+    "isolatedErrorMessageVerifiedAfterBootstrap": true,
+    "consoleErrorsDuringInitialInspection": 0
+  },
+  "upstreamPullRequest": "https://github.com/konnilabs/xtend/pull/114"
+}

@@ -724,7 +724,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "public/assets/xtend/chunks/chunk-TR5EIYS7.mjs",
+          "path": "public/assets/xtend/chunks/chunk-VZQC3VFM.mjs",
           "kind": "import-statement"
         },
         {
@@ -741,7 +741,7 @@
           "kind": "dynamic-import"
         },
         {
-          "path": "public/assets/xtend/chunks/lightbox-NG2TTQJB.mjs",
+          "path": "public/assets/xtend/chunks/lightbox-FEPIKL56.mjs",
           "kind": "dynamic-import"
         }
       ],
@@ -927,10 +927,10 @@
       },
       "bytes": 157082
     },
-    "public/assets/xtend/chunks/lightbox-NG2TTQJB.mjs": {
+    "public/assets/xtend/chunks/lightbox-FEPIKL56.mjs": {
       "imports": [
         {
-          "path": "public/assets/xtend/chunks/chunk-TR5EIYS7.mjs",
+          "path": "public/assets/xtend/chunks/chunk-VZQC3VFM.mjs",
           "kind": "import-statement"
         },
         {
@@ -964,7 +964,7 @@
       },
       "bytes": 7399
     },
-    "public/assets/xtend/chunks/chunk-TR5EIYS7.mjs": {
+    "public/assets/xtend/chunks/chunk-VZQC3VFM.mjs": {
       "imports": [
         {
           "path": "public/assets/xtend/chunks/chunk-Q5OUVVO3.mjs",
