@@ -72,12 +72,14 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Build paired release images
         run: |
-          docker build -f Dockerfile.control -t xtend-search:0.7.0 .
+          fixture_image="xtend-search:$(node -p "require('./xtend/package.json').version")"
+          docker build -f Dockerfile.control -t "$fixture_image" .
           docker build -f Dockerfile.searxng -t xtend-search-searxng:0.5.1 .
+          echo "FIXTURE_IMAGE=$fixture_image" >> "$GITHUB_ENV"
       - name: Run isolated OAuth, XScaler and responsive UI gates
         env:
           FIXTURE_SETTINGS: xtend/config/settings.control.v05.fixture.yml
-          FIXTURE_DATA_VOLUME: xtend-cp-ci-0.7.0
+          FIXTURE_DATA_VOLUME: xtend-cp-ci
           FIXTURE_PROBES: "0"
         run: |
           sh xtend/tests/control/docker-fixture.sh
@@ -102,6 +104,7 @@ jobs:
           node xtend/tests/control/ssr-browser.mjs
           node xtend/tests/control/about-browser.mjs
           node xtend/tests/control/edge-browser.mjs
+          node xtend/tests/control/lightbox-resilience-browser.mjs
           node xtend/tests/control/prerelease-audit-browser.mjs
       - name: Fixture diagnostics
         if: failure()
