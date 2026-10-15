@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "version": "0.7.3",
+  "frontendImage": "sha256:9bfadba7348978286c7e54950405a984304be2ff4dd70ec7e5c846f58c80afdc",
+  "backendVersion": "0.5.1",
+  "sdk": {
+    "schema": "xtend.search.sdk-provenance.v1",
+    "repository": "https://github.com/konnilabs/xtend",
+    "pullRequest": "https://github.com/konnilabs/xtend/pull/112",
+    "baseCommit": "c31e380f13dfb3b64456f2b149b504efe4d81dfa",
+    "commit": "66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3",
+    "packageVersion": "0.9.0",
+    "artifact": "ccslabs-xtend-0.9.0-66ffa8fa4423.tgz",
+    "sha256": "55ba9f39f183225a26e6eef366a549805f2fb3e3ef40b42ea679a0db55b68264",
+    "cacheModuleGzipBytes": 1009,
+    "mcpAvailable": false,
+    "validation": "38 Chromium component checks with HTML setters disabled, 24 syntax/build audit checks; all 189 ci-pr suite IDs passed across the full profile and targeted reruns after native-source evidence, older Docs syntax and schema-inventory corrections (53 inherited inventory warnings). Eight strict-CSP component styles checks passed; no raw HTML setters."
+  },
+  "tests": {
+    "control": 149,
+    "application": 10,
+    "failures": 0,
+    "skips": 0
+  },
+  "builds": [
+    "Strict Maraca classic",
+    "Strict Maraca standalone and Observatory (Docker)"
+  ],
+  "browserGates": [
+    "v04-browser",
+    "lightbox-resilience-browser",
+    "edge-browser",
+    "release-060-browser",
+    "shell-recovery-browser",
+    "cache-browser",
+    "weather-layout-browser",
+    "minor-051-browser",
+    "prerelease-audit-browser"
+  ],
+  "htmlAudit": {
+    "ownBrowserSources": 38,
+    "diagnostics": 0,
+    "nativeLightboxConstructorOnly": true,
+    "dynamicViewOwner": "RMT",
+    "sdkRewrites": false,
+    "htmlInjection": false,
+    "legacySdkXLightboxInBundle": false,
+    "lightboxLazyChunk": {
+      "bytes": 6690,
+      "gzipBytes": 2928
+    }
+  },
+  "mcp": {
+    "available": true,
+    "transport": "Authenticated loopback HTTP",
+    "purpose": "Read-only documentation and component contracts",
+    "snapshot": "c31e380f13dfb3b64456f2b149b504efe4d81dfa",
+    "evidence": "xtend/evidence/mcp/0.7.3-lightbox-context.json",
+    "buildValidation": "Separate pinned SDK/CLI builds and Docker browser gates"
+  },
+  "performance": {
+    "scope": "Built Docker image with offline 100/700/2500ms provider fixtures; 4s favicon delay; synthetic 120ms/1.2Mbit mobile link. CLS excludes recent-input shifts per Web Vitals; all shift values are retained separately. Long tasks include bootstrap. No production latency claim or user queries/URLs retained.",
+    "searchCls": 0,
+    "initialCls": 0,
+    "weatherSectionCls": 0,
+    "meanFirstResultMs": 548.82,
+    "baseline072MeanFirstResultMs": 577.26,
+    "firstResultChangePercent": -4.93,
+    "meanCompleteMs": 3149.42,
+    "cacheRestoreNewSearchStreams": 0,
+    "cacheRestoreMetadataRequests": 6
+  },
+  "limitations": [
+    "Broken, expired or provider-blocked originals can still fail; one signed alternate and no automatic retry loop.",
+    "Fixture measurements do not establish production latency or live provider availability.",
+    "No production deployment, real OAuth login assertion, SDK publishing or GitHub merge."
+  ],
+  "localUpgrade": {
+    "ok": true,
+    "allPreserved": true,
+    "health": {
+      "ok": true,
+      "version": "0.7.3",
+      "storage": "ready",
+      "retrieval": "compatible"
+    }
+  },
+  "browserFixtureIsolation": "Quality dashboard uses a fresh disposable volume; replaying its one-evidence assertion against the shared populated fixture sees prior evidence. The final clean-volume run is authoritative."
+}

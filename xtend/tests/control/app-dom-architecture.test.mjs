@@ -35,7 +35,11 @@ export function violations(text,file='frontend/probe.mjs'){
    const access=member(node.expression);
    if(access){const {name,receiver}=access;
     if(['focus','scrollTo','scrollIntoView'].includes(name)&&file!=='frontend/browser-capabilities.mjs')report(node,'Browser capability outside adapter');
-    if(methods.has(name)&&!(name==='append'&&urlParams.has(receiver)))report(node,'DOM mutation '+name);
+    // A Custom Element may construct its private static shell once. Images,
+    // controls and open state remain RMT-owned. No blanket component exclusion.
+    let owner=node.parent;while(owner&&!ts.isConstructorDeclaration(owner))owner=owner.parent;
+    const privateShell=file==='frontend/components/x-search-lightbox.mjs'&&owner&&(name==='attachShadow'&&receiver==='this'||name==='append'&&receiver.startsWith('this.attachShadow('));
+    if(methods.has(name)&&!(name==='append'&&urlParams.has(receiver))&&!privateShell)report(node,'DOM mutation '+name);
     if(/\.classList$/.test(receiver)&&['add','remove','toggle','replace'].includes(name))report(node,'classList mutation');
     if(['call','apply'].includes(name)&&aliases.has(receiver))report(node,'Aliased DOM mutation '+aliases.get(receiver));
    }else if(ts.isIdentifier(node.expression)&&aliases.has(node.expression.text))report(node,'Aliased DOM mutation '+aliases.get(node.expression.text));
@@ -72,4 +76,10 @@ test('architecture check rejects static computed sinks and simple local method a
  assert.deepEqual(violations('const params=new URLSearchParams();params.append("q","text")'),[]);
  assert.ok(violations('node.scrollLeft=12').length);
  assert.deepEqual(violations('nav.scrollLeft=12','frontend/category-tabs.mjs'),[]);
+});
+test('native lightbox shell allowance does not permit body portals, dynamic writes or later mutations',()=>{
+ const file='frontend/components/x-search-lightbox.mjs';
+ assert.deepEqual(violations("class X{constructor(){this.attachShadow({mode:'open'}).append(shell)}}",file),[]);
+ for(const source of ["class X{constructor(){document.body.append(view)}}","class X{render(){this.attachShadow({mode:'open'}).append(view)}}","class X{constructor(){this.shadowRoot.innerHTML=html}}","class X{constructor(){image.src=model.src}}"])
+  assert(violations(source,file).length,source);
 });

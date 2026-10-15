@@ -1,7 +1,7 @@
 {
   "ok": true,
   "node": "v24.19.0",
-  "version": "02ce8ffa312bf7a4a92be8ea3b27d596fb8af2b596e2f6f5cda6ae0f8e2519e1",
+  "version": "4b597b9abfba91b3824fc630f247fc6c74d35ad61693f7799de37db479beb6c1",
   "sourceSha256": "30964e757ae9fce8ae29d7ee51b0a50af2512eaf43c2e3f3ef0a1b77fceced3e",
   "compilation": {
     "compilations": 1,

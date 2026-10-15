@@ -27,3 +27,11 @@ test('weather units use the native XToggle contract with complete SSR/resume cov
  const rendered=await adapter.render({descriptor:projected.descriptor},{model:projected.model,nativeForms:true,executionMode:'server_prerender_resume',resume:{state:projected.model,sign:()=>({keyId:'fixture',signature:'fixture'})}});
  assert.equal(rendered.ok,true);assert.match(rendered.html,/<x-toggle[^>]*id="weather-unit-toggle"/);assert.doesNotMatch(rendered.html,/id="report-start"/);assert.equal(getRmtSsrCoverage(rendered).missingCapabilityNodes,0);
 });
+test('XSearchLightbox retains RMT-owned media/controls slots and complete SSR/resume metadata',async()=>{
+ const manifest=JSON.parse(fs.readFileSync(new URL('../../.xtend-build/pages-standalone.json',import.meta.url))),artifact=structuredClone(manifest.pages.Search.artifact);
+ const overlay={active:true,lightbox:true,about:false,media:{id:'fixture',src:'/media?fixture',url:'https://example.test/',imageUrl:'https://example.test/image.png',title:'Fixture image',key:'fixture',position:'Bild 1 von 2'}};
+ artifact.defaults['search.overlay']=overlay;
+ const projected=projectPortableRender(artifact,{'search.overlay':overlay,'search.data':{view:'results',category:'images',results:[],tabs:[],warnings:[],knowledgeCards:[]}}),adapter=createRmtNodeSsrAdapter(ssrCapabilities);
+ const rendered=await adapter.render({descriptor:projected.descriptor},{model:projected.model,nativeForms:true,executionMode:'server_prerender_resume',resume:{state:projected.model,sign:()=>({keyId:'fixture',signature:'fixture'})}});
+ assert.equal(rendered.ok,true);assert.match(rendered.html,/<x-search-lightbox[^>]*id="search-lightbox"/);assert.match(rendered.html,/slot="media"/);assert.match(rendered.html,/slot="controls"/);assert.match(rendered.html,/slot="close"/);assert.equal(getRmtSsrCoverage(rendered).missingCapabilityNodes,0);
+});

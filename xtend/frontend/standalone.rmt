@@ -871,22 +871,23 @@ template xtend.search {
     }
     { "type" "conditional" "test" "$model.search.overlay.lightbox" "then" {
       "type" "element"
-      "tag" "x-dialog"
+      "tag" "x-search-lightbox"
       "attributes" {
         "id" "search-lightbox"
         "data-loading" "$model.search.overlay.media.loading"
         "data-image-error" "$model.search.overlay.media.imageError"
-        "overlay" true
         "open" "$model.search.overlay.lightbox"
         "title" "Bildansicht"
-        "width" "min(1200px, calc(100vw - 24px))"
       }
       "children" [
+        { type "element" tag "button" class "lightbox-close" text "×" attributes { id "lightbox-close" slot "close" type "button" data-lightbox-action "close" aria-label "Bildansicht schließen" autofocus true } }
         {
           "type" "element"
           "tag" "img"
           "attributes" {
             "id" "lightbox-image"
+            "fetchpriority" "high"
+            "slot" "media"
           "part" "media"
             "src" "$model.search.overlay.media.src"
             "alt" "$model.search.overlay.media.title"
@@ -982,7 +983,7 @@ template xtend.search {
                       "attributes" {
                         "href" "$model.search.overlay.media.url"
                         "data-xtend-native" true
-                        "rel" "noreferrer"
+                        "rel" "noreferrer noopener"
                       }
                       "text" "Seite besuchen ↗"
                       "class" "lightbox-source"
@@ -997,7 +998,7 @@ template xtend.search {
                           "value" "$model.search.overlay.media.imageUrl"
                         }
                         "data-xtend-native" true
-                        "rel" "noreferrer"
+                        "rel" "noreferrer noopener"
                       }
                       "text" "Originalbild öffnen ↗"
                       "class" "lightbox-original"
@@ -1009,6 +1010,7 @@ template xtend.search {
               "class" "lightbox-caption"
             }
           ]
+          "attributes" { "slot" "controls" }
           "class" "lightbox-controls"
         }
       ]
@@ -2235,6 +2237,7 @@ template xtend.search {
                                             "src" "$item.thumbnail"
                                             "alt" "$item.thumbnailAlt"
                                             "data-result-image" "$item.id"
+                                            "fetchpriority" "low"
                                             "loading" "lazy"
                                             "width" 360
                                             "height" 220
