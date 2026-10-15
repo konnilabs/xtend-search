@@ -4,8 +4,8 @@
   "summaries": [
     {
       "folder": "standalone",
-      "version": "f75eca3efe63c247a519ead1eed3b4ceff1c05a60ff9c8b5cf61a045bd9a79ac",
-      "sourceSha256": "0c5637b190297032896c772b30511a8de64ef7e475734cf9326cd3388b8a4f7e",
+      "version": "d9540200aff080476e8e11a5fe2fbff4677c8fa4de962ef82063eaa8f950637d",
+      "sourceSha256": "7bc5bdf903f4eff3d68640130078c3dd760c6f672ee1799e0d6f24a4b7eca64c",
       "services": "planned",
       "htmlSecurity": {
         "schema": "xtend.maraca.html-security-report.v1",
@@ -60,12 +60,16 @@
             "sha256": "0566ff093c5a414ae464954aa085ba071b269c6fb446c6e4a677a83a34260e8b"
           },
           {
+            "file": "frontend/image-resilience.mjs",
+            "sha256": "3830ab0d4d0622442220884f188eeabc356cad6af4a277774dd54fc43cd38266"
+          },
+          {
             "file": "frontend/images.mjs",
-            "sha256": "660f9ed0acec023a5104d310f4bc681bc0e089559e0efa65658b1e992b6e06b1"
+            "sha256": "6aa5f7427b2aa6ceeacfa112a6a586db507bce3e4b4e23000147c048021d80ab"
           },
           {
             "file": "frontend/lightbox.mjs",
-            "sha256": "3d065bd67de6cbfeb16636b69145b9867484311e443f36c3de54262ec23b3a7c"
+            "sha256": "bb6e2fc0c938eb41d373e8a11528216ba508e6e8606d80eb05078b18bac805a6"
           },
           {
             "file": "frontend/motd.mjs",
@@ -137,7 +141,11 @@
           },
           {
             "file": "frontend/components/x-search-lightbox-styles.mjs",
-            "sha256": "955f5156266560a439fe1cfdd3cd6e23008f32c1588da3ed9f11c94ed41e1188"
+            "sha256": "d77cd3654c40b189e62a4539c09448ca3adac47e7e73ca513aa750bb887f198e"
+          },
+          {
+            "file": "frontend/components/x-search-lightbox.mjs",
+            "sha256": "aaaf54ae6c1423f2d432fe4d6c221953bed0763fc836f478a44e8ef582d7db9d"
           },
           {
             "file": "admin/draft-service-core.mjs",
@@ -149,7 +157,7 @@
           },
           {
             "file": "admin/live.mjs",
-            "sha256": "67d0b30c34cf73714edb155f3ce507ab2154ab2c2ace88a63bb5f11a0562cb0d"
+            "sha256": "19b754cfb69411437ff65b77628092c14047017d3ca56b7d4213ad494f3537c4"
           },
           {
             "file": "admin/services.ts",
@@ -161,7 +169,7 @@
     },
     {
       "folder": "admin",
-      "version": "39abfb017cb822b8a9bebfbe959dd186531bec0d05623164c668a89ac4eb9f36",
+      "version": "623de8d0a7711606763dfe0f676abe0d92e7d79827c8ba2823e17837a15d796c",
       "sourceSha256": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
       "services": "planned",
       "htmlSecurity": {
@@ -217,12 +225,16 @@
             "sha256": "0566ff093c5a414ae464954aa085ba071b269c6fb446c6e4a677a83a34260e8b"
           },
           {
+            "file": "frontend/image-resilience.mjs",
+            "sha256": "3830ab0d4d0622442220884f188eeabc356cad6af4a277774dd54fc43cd38266"
+          },
+          {
             "file": "frontend/images.mjs",
-            "sha256": "660f9ed0acec023a5104d310f4bc681bc0e089559e0efa65658b1e992b6e06b1"
+            "sha256": "6aa5f7427b2aa6ceeacfa112a6a586db507bce3e4b4e23000147c048021d80ab"
           },
           {
             "file": "frontend/lightbox.mjs",
-            "sha256": "3d065bd67de6cbfeb16636b69145b9867484311e443f36c3de54262ec23b3a7c"
+            "sha256": "bb6e2fc0c938eb41d373e8a11528216ba508e6e8606d80eb05078b18bac805a6"
           },
           {
             "file": "frontend/motd.mjs",
@@ -294,7 +306,11 @@
           },
           {
             "file": "frontend/components/x-search-lightbox-styles.mjs",
-            "sha256": "955f5156266560a439fe1cfdd3cd6e23008f32c1588da3ed9f11c94ed41e1188"
+            "sha256": "d77cd3654c40b189e62a4539c09448ca3adac47e7e73ca513aa750bb887f198e"
+          },
+          {
+            "file": "frontend/components/x-search-lightbox.mjs",
+            "sha256": "aaaf54ae6c1423f2d432fe4d6c221953bed0763fc836f478a44e8ef582d7db9d"
           },
           {
             "file": "admin/draft-service-core.mjs",
@@ -306,7 +322,7 @@
           },
           {
             "file": "admin/live.mjs",
-            "sha256": "67d0b30c34cf73714edb155f3ce507ab2154ab2c2ace88a63bb5f11a0562cb0d"
+            "sha256": "19b754cfb69411437ff65b77628092c14047017d3ca56b7d4213ad494f3537c4"
           },
           {
             "file": "admin/services.ts",

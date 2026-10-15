@@ -1,0 +1,20 @@
+{
+  "ok": true,
+  "repository": "https://github.com/konnilabs/xtend-search",
+  "reviewedMain": "b84816c41479a55e50d847078ef6e207fda791b3",
+  "primaryCheckoutBefore": "389239284",
+  "primaryCheckoutAfter": "b84816c41479a55e50d847078ef6e207fda791b3",
+  "method": "git fetch origin; reviewed upstream history; git merge --ff-only origin/main in the primary checkout",
+  "preservedUntracked": [
+    ".devcontainer/devcontainer-lock.json"
+  ],
+  "featureBranch": "codex/lightbox-image-resilience",
+  "framework": {
+    "repository": "https://github.com/konnilabs/xtend",
+    "pullRequest": "https://github.com/konnilabs/xtend/pull/112",
+    "state": "OPEN",
+    "sdkCommit": "66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3",
+    "changed": false
+  },
+  "scope": "Local main synchronized; application patch kept on its own branch. No GitHub merge or production deployment."
+}

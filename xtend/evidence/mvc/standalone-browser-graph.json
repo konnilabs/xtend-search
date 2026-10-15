@@ -356,14 +356,29 @@
       "imports": [],
       "format": "esm"
     },
+    "frontend/image-resilience.mjs": {
+      "bytes": 778,
+      "imports": [],
+      "format": "esm"
+    },
     "frontend/result-projection-core.mjs": {
       "bytes": 1584,
       "imports": [],
       "format": "esm"
     },
     "frontend/images.mjs": {
-      "bytes": 3047,
+      "bytes": 3482,
       "imports": [
+        {
+          "path": "frontend/image-resilience.mjs",
+          "kind": "import-statement",
+          "original": "./image-resilience.mjs"
+        },
+        {
+          "path": "frontend/image-resilience.mjs",
+          "kind": "import-statement",
+          "original": "./image-resilience.mjs"
+        },
         {
           "path": "frontend/result-projection-core.mjs",
           "kind": "import-statement",
@@ -705,13 +720,60 @@
       ],
       "format": "esm"
     },
+    "node_modules/@ccslabs/xtend/components/component-dom.js": {
+      "bytes": 1185,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/icon-dom.js",
+          "kind": "import-statement",
+          "original": "./icon-dom.js"
+        },
+        {
+          "path": "node_modules/@ccslabs/xtend/components/style-nonce.js",
+          "kind": "import-statement",
+          "original": "./style-nonce.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "frontend/components/x-search-lightbox-styles.mjs": {
+      "bytes": 1274,
+      "imports": [],
+      "format": "esm"
+    },
+    "frontend/components/x-search-lightbox.mjs": {
+      "bytes": 3574,
+      "imports": [
+        {
+          "path": "node_modules/@ccslabs/xtend/components/component-dom.js",
+          "kind": "import-statement",
+          "original": "@ccslabs/xtend/components/component-dom.js"
+        },
+        {
+          "path": "frontend/components/x-search-lightbox-styles.mjs",
+          "kind": "import-statement",
+          "original": "./x-search-lightbox-styles.mjs"
+        },
+        {
+          "path": "frontend/browser-capabilities.mjs",
+          "kind": "import-statement",
+          "original": "../browser-capabilities.mjs"
+        }
+      ],
+      "format": "esm"
+    },
     "frontend/lightbox.mjs": {
-      "bytes": 3791,
+      "bytes": 3896,
       "imports": [
         {
           "path": "frontend/browser-capabilities.mjs",
           "kind": "import-statement",
           "original": "./browser-capabilities.mjs"
+        },
+        {
+          "path": "frontend/components/x-search-lightbox.mjs",
+          "kind": "import-statement",
+          "original": "./components/x-search-lightbox.mjs"
         },
         {
           "path": "node_modules/@ccslabs/xtend/xtend-maraca/app-services.mjs",
@@ -951,7 +1013,7 @@
           "kind": "import-statement"
         },
         {
-          "path": "public/assets/xtend/standalone/chunks/chunk-KCSDDVFJ.mjs",
+          "path": "public/assets/xtend/standalone/chunks/chunk-PZS2J4GS.mjs",
           "kind": "import-statement"
         },
         {
@@ -968,7 +1030,7 @@
           "kind": "dynamic-import"
         },
         {
-          "path": "public/assets/xtend/standalone/chunks/lightbox-AI72UZGY.mjs",
+          "path": "public/assets/xtend/standalone/chunks/lightbox-CSRUU4XB.mjs",
           "kind": "dynamic-import"
         }
       ],
@@ -990,12 +1052,6 @@
         "frontend/motd.mjs": {
           "bytesInOutput": 1226
         },
-        "node_modules/@ccslabs/xtend/components/style-nonce.js": {
-          "bytesInOutput": 292
-        },
-        "node_modules/@ccslabs/xtend/components/icon-dom.js": {
-          "bytesInOutput": 2534
-        },
         "node_modules/@ccslabs/xtend/components/xtend-state.js": {
           "bytesInOutput": 7700
         },
@@ -1006,7 +1062,7 @@
           "bytesInOutput": 3457
         },
         "node_modules/@ccslabs/xtend/components/xicon.js": {
-          "bytesInOutput": 10933
+          "bytesInOutput": 10930
         },
         "node_modules/@ccslabs/xtend/components/xspinner.js": {
           "bytesInOutput": 9303
@@ -1036,7 +1092,7 @@
           "bytesInOutput": 1715
         },
         "node_modules/@ccslabs/xtend/components/xutils.js": {
-          "bytesInOutput": 14507
+          "bytesInOutput": 14497
         },
         "frontend/search-motion.mjs": {
           "bytesInOutput": 1817
@@ -1048,7 +1104,7 @@
           "bytesInOutput": 1532
         }
       },
-      "bytes": 84288
+      "bytes": 81480
     },
     "public/assets/xtend/standalone/chunks/rmt-resume-runtime-TDYASBDO.mjs": {
       "imports": [
@@ -1201,10 +1257,10 @@
       },
       "bytes": 6507
     },
-    "public/assets/xtend/standalone/chunks/lightbox-AI72UZGY.mjs": {
+    "public/assets/xtend/standalone/chunks/lightbox-CSRUU4XB.mjs": {
       "imports": [
         {
-          "path": "public/assets/xtend/standalone/chunks/chunk-KCSDDVFJ.mjs",
+          "path": "public/assets/xtend/standalone/chunks/chunk-PZS2J4GS.mjs",
           "kind": "import-statement"
         },
         {
@@ -1217,13 +1273,22 @@
       ],
       "entryPoint": "frontend/lightbox.mjs",
       "inputs": {
+        "node_modules/@ccslabs/xtend/components/component-dom.js": {
+          "bytesInOutput": 214
+        },
+        "frontend/components/x-search-lightbox-styles.mjs": {
+          "bytesInOutput": 1167
+        },
+        "frontend/components/x-search-lightbox.mjs": {
+          "bytesInOutput": 2661
+        },
         "frontend/lightbox.mjs": {
-          "bytesInOutput": 2460
+          "bytesInOutput": 2503
         }
       },
-      "bytes": 2598
+      "bytes": 6690
     },
-    "public/assets/xtend/standalone/chunks/chunk-KCSDDVFJ.mjs": {
+    "public/assets/xtend/standalone/chunks/chunk-PZS2J4GS.mjs": {
       "imports": [
         {
           "path": "public/assets/xtend/standalone/chunks/chunk-Q5OUVVO3.mjs",
@@ -1247,7 +1312,11 @@
         "n",
         "o",
         "p",
-        "q"
+        "q",
+        "r",
+        "s",
+        "t",
+        "u"
       ],
       "inputs": {
         "frontend/browser-capabilities.mjs": {
@@ -1268,14 +1337,17 @@
         "shared/version.mjs": {
           "bytesInOutput": 14
         },
-        "frontend/result-projection-core.mjs": {
-          "bytesInOutput": 888
+        "frontend/image-resilience.mjs": {
+          "bytesInOutput": 436
         },
         "frontend/images.mjs": {
-          "bytesInOutput": 1535
+          "bytesInOutput": 1741
+        },
+        "frontend/result-projection-core.mjs": {
+          "bytesInOutput": 893
         },
         "frontend/overlay-service-core.mjs": {
-          "bytesInOutput": 1183
+          "bytesInOutput": 1184
         },
         "frontend/favicon-service-core.mjs": {
           "bytesInOutput": 1771
@@ -1293,13 +1365,19 @@
           "bytesInOutput": 669
         },
         "frontend/services.ts": {
-          "bytesInOutput": 1999
+          "bytesInOutput": 2002
         },
         "frontend/overlay-controller.mjs": {
           "bytesInOutput": 443
+        },
+        "node_modules/@ccslabs/xtend/components/style-nonce.js": {
+          "bytesInOutput": 293
+        },
+        "node_modules/@ccslabs/xtend/components/icon-dom.js": {
+          "bytesInOutput": 2532
         }
       },
-      "bytes": 24399
+      "bytes": 27908
     },
     "public/assets/xtend/standalone/chunks/chunk-Q5OUVVO3.mjs": {
       "imports": [],

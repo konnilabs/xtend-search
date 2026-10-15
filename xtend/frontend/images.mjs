@@ -1,4 +1,5 @@
-export const IMAGE_PLACEHOLDER='/assets/xtend/image-placeholder.svg';
+export {IMAGE_PLACEHOLDER} from './image-resilience.mjs';
+import {projectResultThumbnails} from './image-resilience.mjs';
 import {resultProjection,restoreResultThumbnails} from './result-projection-core.mjs';
 
 // Failed thumbnails are presentation state. Keep original page data/links intact.
@@ -7,15 +8,15 @@ export function installResultImages(command){
  const failed=new Set();
  let errors=new WeakMap();
  const data=()=>window.XTendPage?.getRuntime()?.model.getState('search.data');
- const present=results=>results.map(result=>failed.has(result.thumbnail)?{...result,thumbnail:IMAGE_PLACEHOLDER,thumbnailKey:result.thumbnailKey+':unavailable',thumbnailAlt:'Bild nicht verfügbar',thumbnailFailed:true}:result);
- function flush(){
-  if(scheduled || pending || !data() || !failed.size)return;
+ const present=results=>projectResultThumbnails(restoreResultThumbnails(results,window.XTendPage?.page?.props?.['search.data']?.results),failed);
+ function flush(force=false){
+  if(scheduled || pending || !data() || !force&&!failed.size)return;
   scheduled=true;const current=generation;
   requestAnimationFrame(()=>{
-   scheduled=false;if(pending)return;if(current!==generation){flush();return;}
+   scheduled=false;if(pending)return;if(current!==generation){flush(force);return;}
    const snapshot=data();if(!snapshot?.results)return;
    void command('search.images.set',{value:resultProjection(snapshot,present(snapshot.results))}).then(result=>{
-    if(current===generation&&!pending&&result?.data?.accepted===false)flush();
+    if(current===generation&&!pending&&result?.data?.accepted===false)flush(force);
    });
   });
  }
@@ -30,7 +31,8 @@ export function installResultImages(command){
    // Firefox can briefly report complete/zero width before a newly inserted
    // lazy image starts loading. Only initial SSR may have missed error events;
    // subsequent commits must use an observed error for this node and source.
-   if(initial || errors.get(img)===img.getAttribute('src'))unavailable(img);
+   const fetched=initial&&img.currentSrc&&performance.getEntriesByName(img.currentSrc).some(entry=>entry.responseEnd>0);
+   if(fetched || errors.get(img)===img.getAttribute('src'))unavailable(img);
   }
   flush();
  }
@@ -38,6 +40,12 @@ export function installResultImages(command){
   const img=event.target;
   if(!img.matches?.('img[data-result-image]') || !img.complete || img.naturalWidth>0)return;
   errors.set(img,img.getAttribute('src'));unavailable(img);
+ },true);
+ document.addEventListener('load',event=>{
+  const img=event.target;
+  if(pending||!['preview-image','lightbox-image'].includes(img.id)||!img.isConnected||!img.naturalWidth)return;
+  const src=img.getAttribute('src');
+  if(data()?.results?.some(row=>row.previewSrc===src)&&failed.delete(src))flush(true);
  },true);
  window.addEventListener('xtend-page:ready',()=>scan(true));
  window.addEventListener('xtend-page:event',async({detail:event})=>{

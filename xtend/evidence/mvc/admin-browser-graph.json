@@ -503,7 +503,7 @@
       "format": "esm"
     },
     "admin/live.mjs": {
-      "bytes": 13550,
+      "bytes": 13646,
       "imports": [
         {
           "path": "frontend/browser-capabilities.mjs",
@@ -664,10 +664,10 @@
           "bytesInOutput": 1305
         },
         "admin/live.mjs": {
-          "bytesInOutput": 9083
+          "bytesInOutput": 9179
         }
       },
-      "bytes": 242661
+      "bytes": 242757
     },
     "public/assets/xtend/admin/chunks/rmt-resume-runtime-TDYASBDO.mjs": {
       "imports": [

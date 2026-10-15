@@ -1,15 +1,11 @@
-/* RMT supplies the content. The existing XDialog owns its focus trap/chrome. */
+/* RMT supplies the media and controls. XSearchLightbox owns its viewport shell. */
 .search-lightbox,.search-about:not([open]){display:none}
 .search-lightbox[open]{display:block;position:fixed;inset:0;z-index:2147483646;color:var(--ink,#edf7fc);font-family:inherit}
 html:has(#search-lightbox[open]),html:has(#search-about[open]){overflow:hidden}
-.search-lightbox{--dialog-surface:var(--panel,#102d3e);--dialog-text:var(--ink,#edf7fc);--dialog-backdrop:#07131ded;--dialog-radius:8px;--dialog-focus-outline:2px solid var(--accent,#70deec)}
-.search-lightbox::part(surface){box-sizing:border-box;width:min(1200px,calc(100vw - 24px));height:calc(100dvh - 24px);max-height:calc(100dvh - 24px);padding:20px;display:flex;flex-direction:column}
-.search-lightbox::part(content){flex:1;min-height:0;overflow:auto;padding:0}
-.search-lightbox::part(title){font-size:18px;margin:0 44px 12px;overflow-wrap:anywhere}
-.search-lightbox::part(close){min-width:44px;min-height:44px}
-.lightbox-media{display:block;max-width:100%;width:auto;height:auto;max-height:calc(100dvh - 230px);object-fit:contain;margin:auto;user-select:none;touch-action:pan-y}
+.lightbox-close{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:var(--panel);color:var(--ink);font-size:28px;line-height:1;padding:0}
+.lightbox-media{position:absolute;inset:0;display:block;max-width:100%;width:100%;height:100%;min-height:0;object-fit:contain;margin:0;user-select:none;touch-action:pan-y}
 .search-lightbox[data-loading] .lightbox-media{opacity:.35}
-.search-lightbox[data-image-error] .lightbox-media{opacity:1;max-width:480px}
+.search-lightbox[data-image-error] .lightbox-media{opacity:1}
 .lightbox-controls{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:16px;align-items:center;margin-top:16px}
 .lightbox-step{display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid var(--line,#557481);border-radius:50%;background:var(--panel,#203b4d);color:var(--ink,#edf7fc)}
 .lightbox-step:hover{filter:brightness(1.12)}.lightbox-step:disabled{opacity:.35;cursor:default}
@@ -21,7 +17,7 @@ html:has(#search-lightbox[open]),html:has(#search-about[open]){overflow:hidden}
 .lightbox-message{font-size:12px;line-height:1.5;color:var(--muted,#b6d2de);margin:7px 0}.lightbox-message:empty{display:none}
 .lightbox-links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--accent,#79d9ec)}
 .lightbox-links a{text-decoration:underline;text-underline-offset:4px}
-@media(max-width:600px){.search-lightbox::part(surface){padding:12px}.lightbox-controls{gap:8px}.lightbox-title{font-size:15px}.lightbox-links{gap:12px}.lightbox-media{max-height:calc(100dvh - 260px)}}
+@media(max-width:600px){.lightbox-controls{gap:8px}.lightbox-title{font-size:15px}.lightbox-links{gap:12px}}
 
 /* Overlay portals reserve no document-flow space while their dialogs are closed. */
 #search-overlays{--section-padding:0}
