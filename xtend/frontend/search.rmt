@@ -361,6 +361,9 @@ template xtend.search {
       imageUnavailable false
       imageMessage ""
       expandMessage ""
+      imageLoading false
+      expansionLoading false
+      expansionToken ""
       url ""
       imageUrl ""
       snippetText ""
@@ -560,7 +563,12 @@ template xtend.search {
                     { type "element" tag "div" class "preview-toolbar" children [
                       { type "element" tag "button" class "preview-control" text "×" attributes { id "preview-close" type "button" "data-preview-action" "close" "aria-label" "Bildvorschau schließen" title "Schließen (Escape)" } }
                       { type "element" tag "span" class "preview-position" text "$model.search.preview.position" attributes { role "status" "aria-live" "polite" } }
-                      { type "element" tag "button" class "preview-control" attributes { type "button" "data-preview-action" "previous" "aria-label" "Vorheriges Bild" disabled "$model.search.preview.previousDisabled" } children [
+                      { type "element" tag "span" class "preview-busy-slot" attributes { role "status" "aria-live" "polite" } children [
+ { type "conditional" test { op "if" test "$model.search.preview.expansionLoading" then true else "$model.search.preview.imageLoading" } then {
+  type "component" component "x-spinner" attributes { "aria-label" "Bildansicht wird geladen" } }
+ }
+] }
+{ type "element" tag "button" class "preview-control" attributes { type "button" "data-preview-action" "previous" "aria-label" "Vorheriges Bild" disabled "$model.search.preview.previousDisabled" } children [
                         { type "element" tag "span" class "preview-arrow" attributes { "aria-hidden" "true" } }
                       ] }
                       { type "element" tag "button" class "preview-control" attributes { type "button" "data-preview-action" "next" "aria-label" "Nächstes Bild" disabled "$model.search.preview.nextDisabled" } children [
@@ -637,6 +645,8 @@ template xtend.search {
   action search.preview.close {
     reduce state.search.preview.open = false
     reduce state.search.preview.id = ""
+    reduce state.search.preview.imageLoading = false
+    reduce state.search.preview.expansionLoading = false
   }
   action search.preview.error {
     input unavailable boolean
@@ -651,6 +661,8 @@ template xtend.search {
   action search.pending {
     reduce state.search.preview.open = false
     reduce state.search.preview.id = ""
+    reduce state.search.preview.imageLoading = false
+    reduce state.search.preview.expansionLoading = false
     reduce state.search.activity.busy = true
     reduce state.search.activity.message = "Suche läuft …"
   }
@@ -700,3 +712,12 @@ template xtend.search {
     lane visible weight 80 { hydrate search-results from selector search.resultView }
   }
 }
+
+  datasource search.preview.apply from host search.preview.apply { mode invoke
+    contract "xsearch.preview.v1"
+  }
+  action search.preview.update {
+    input value object
+    effect fetch datasource search.preview.apply
+    reduce state.search.preview = result.value
+  }

@@ -7,8 +7,12 @@ export async function presentSearchFrames(frames,{signal,present,readFeedback=()
  for await(const frame of frames){
   signal.throwIfAborted();if(frame.type==='start')continue;
   if(['error','cancelled'].includes(frame.type))throw Error('Stream unterbrochen');
-  const payload=frame.value??frame.delta;if(!payload?.data)continue;
-  const final=frame.type==='complete';if(!final&&payload.event==='search.started')continue;
+  if(!['delta','complete'].includes(frame.type))continue;
+  const payload=frame.value??frame.delta;
+  if(!payload?.data||!Array.isArray(payload.data.results))throw Error('Ungültiger Suchstream');
+  const final=frame.type==='complete',summary=['search.summary','weather.summary'].includes(payload.event);
+  if(final!==summary)throw Error('Ungültiger Suchabschluss');
+  if(!final&&payload.event==='search.started')continue;
   await present({data:{...decoratedReportData(payload.data,readFeedback()),stream:{...stream,phase:final?'complete':'partial'}},status:frame.type,event:payload.event,sequence:frame.sequence});
   signal.throwIfAborted();if(final)return true;
  }
@@ -21,7 +25,7 @@ export async function consumeSearchStream({stream,origin},{signal,present,readFe
   return await presentSearchFrames(transport.stream({serviceId,kind:'stream',target:'server',input:{url:stream.url},signal,invocationId:stream.id,correlationId:stream.id,context:{}}),{signal,present,readFeedback},stream);
  }finally{transport.dispose?.();}
 }
-export function interruptedSearch(data,stream){return {...data,skeleton:false,countLabel:data.skeleton?'Suche unterbrochen':data.countLabel,stream:{...stream,phase:'error'},statusLabel:'Verbindung unterbrochen · bereits geladene Ergebnisse bleiben sichtbar',warnings:[{id:'stream',domId:'search-warning-stream',type:'warning',message:'Die Verbindung wurde unterbrochen. Bitte starte bei Bedarf eine neue Suche.'}]};}
+export function interruptedSearch(data,stream){return {...data,skeleton:false,cache:{...data.cache,cacheable:false},countLabel:data.skeleton?'Suche unterbrochen':data.countLabel,stream:{...stream,phase:'error'},statusLabel:'Verbindung unterbrochen · bereits geladene Ergebnisse bleiben sichtbar',warnings:[...(data.warnings||[]).filter(w=>w.id!=='stream'),{id:'stream',domId:'search-warning-stream',type:'warning',message:'Die Verbindung wurde unterbrochen. Bitte starte bei Bedarf eine neue Suche.'}]};}
 export async function consumeRemoteStream({stream},{signal,createFrames,present}){
  for await(const frame of createFrames(signal)){
   signal.throwIfAborted();if(frame.type==='start')continue;

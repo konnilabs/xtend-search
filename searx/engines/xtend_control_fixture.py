@@ -20,6 +20,9 @@ def search(query, params):
     results = EngineResults()
     if query == 'empty':
         return results
+    if query == 'knowledge-first-web-failure' and fixture_kind != 'knowledge':
+        time.sleep(0.35)
+        raise RuntimeError('synthetic web failure after knowledge')
     if query.startswith('error'):
         raise RuntimeError('synthetic failure')
     if fixture_kind == 'knowledge':
