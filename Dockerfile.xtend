@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-ARG NODE_IMAGE=node:24.19.0-bookworm-slim@sha256:a9f5f7c91a432850b2a8a7797adf5eadb6c733ceed61167806cee7ea7fbc29df
+ARG NODE_IMAGE=node:24.22.1-bookworm-slim@sha256:55fb5f5a527ea2c5c4a95f963e48ef90aa38c7b346054fdc8ee9957a2b55d205
 ARG PYTHON_IMAGE=python:3.12-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e
 FROM ${NODE_IMAGE} AS frontend
 WORKDIR /build/xtend
@@ -30,7 +30,7 @@ COPY searx /app/searx
 COPY LICENSE /app/LICENSE
 COPY --from=frontend /build/xtend /app/xtend
 COPY --from=frontend /source.tar.gz /app/source.tar.gz
-RUN python -c 'from pathlib import Path; Path("searx/version_frozen.py").write_text("VERSION_STRING = \"2026.10.9+9f042d2f6+xtend.0.2.1\"\nVERSION_TAG = \"2026.10.9+9f042d2f6\"\nDOCKER_TAG = \"xtend-search-0.2.1\"\nGIT_URL = \"/source.tar.gz\"\nGIT_BRANCH = \"xtend-search\"\n")'
+RUN python -c 'from pathlib import Path; Path("searx/version_frozen.py").write_text("VERSION_STRING = \"2026.10.23+629368e40+xtend.0.2.1\"\nVERSION_TAG = \"2026.10.23+629368e40\"\nDOCKER_TAG = \"xtend-search-0.2.1\"\nGIT_URL = \"/source.tar.gz\"\nGIT_BRANCH = \"xtend-search\"\n")'
 USER 10001:10001
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 CMD node -e 'fetch("http://127.0.0.1:8080/health/ready").then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))'

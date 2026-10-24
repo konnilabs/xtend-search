@@ -2,11 +2,14 @@ import {defineAppServices,service} from '@ccslabs/xtend/maraca/app-services';
 import {captureSearchResource,restoreSearchResource,invalidateSearchResource,type CacheScope,type SearchCacheData,type SearchCachedResource} from './cache-service-core.mjs';
 import {aboutModel,overlayState,carouselModel,carouselMove,carouselFailure} from './overlay-service-core.mjs';
 import {faviconResources} from './favicon-service-core.mjs';
-import {reduceReport,selectReport,submitReport} from './report-service-core.mjs';
+import {reduceReport,selectReport,submitReport,applyReportAction} from './report-service-core.mjs';
+import {applyPreviewAction} from './preview-service-core.mjs';
 import {consumeSearchStream,consumeRemoteStream} from './stream-service-core.mjs';
 import {savePreferences} from './preferences-service-core.mjs';
 import {applyResultProjection,readActionSearchData} from './result-projection-core.mjs';
 export default defineAppServices({
+ 'search.report.apply':service<Parameters<typeof applyReportAction>[0],ReturnType<typeof applyReportAction>>({kind:'command',target:'local',invoke:(input,context)=>applyReportAction(input,context)}),
+ 'search.preview.apply':service<Parameters<typeof applyPreviewAction>[0],ReturnType<typeof applyPreviewAction>>({kind:'command',target:'local',invoke:(input,context)=>applyPreviewAction(input,context)}),
  'search.images.apply':service<Parameters<typeof applyResultProjection>[0],ReturnType<typeof applyResultProjection>>({kind:'command',target:'local',invoke:(input,context)=>applyResultProjection(input,readActionSearchData(context))}),
  'search.remote.present':service<Parameters<typeof consumeRemoteStream>[0],boolean>({kind:'command',target:'local',concurrency:'latest',invoke:(input,context)=>consumeRemoteStream(input,context as Parameters<typeof consumeRemoteStream>[1])}),
  'search.preferences.save':service<Parameters<typeof savePreferences>[0],Awaited<ReturnType<typeof savePreferences>>>({kind:'command',target:'local',invoke:(input,context)=>savePreferences(input,context)}),

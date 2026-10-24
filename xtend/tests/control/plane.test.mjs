@@ -21,6 +21,34 @@ async function harness(ids=['one','two','three']){
 }
 async function approve(h,id,patch={}){return h.plane.mutate('policy',{id,revision:h.plane.revision,reason:'initial_review',requestKey:randomUUID(),state:'allowed',rpm:20,concurrency:2,family:id,capabilities:['general'],pagingVerified:true,...patch},admin);}
 const state={q:'open source',category:'general',language:'all',safeSearch:'1',timeRange:'',page:1,continuation:''};
+test('an early Knowledge Card survives three later web failures, including a rejected adapter',async()=>{
+ const h=await harness(['one','two','three','knowledge']);try{
+  for(const id of ['one','two','three'])await approve(h,id);
+  h.adapter.catalog.get('knowledge').capabilities=['knowledge'];await approve(h,'knowledge',{capabilities:['knowledge']});
+  h.adapter.execute=async engine=>{
+   if(engine.id==='knowledge')return {outcome:'success',results:[],infoboxes:[{infobox:'Preserved entity',content:'Verified context',urls:[{url:'https://example.org/entity'}]}],durationMs:1};
+   await new Promise(resolve=>setTimeout(resolve,15));if(engine.id==='one')throw Error('Unexpected adapter rejection');
+   return {outcome:'error',errorClass:'timeout',results:[],infoboxes:[],durationMs:15};
+  };
+  const frames=[];for await(const frame of new SearchExecutor(h.plane,new MediaProxy('fixture'),'fixture').run(state,{}))frames.push(frame);
+  const first=frames.findIndex(frame=>frame.data.knowledgeCards.length===1);assert(first>0);
+  const id=frames[first].data.knowledgeCards[0].id;
+  for(const frame of frames.slice(first)){assert.equal(frame.data.knowledgeCards[0]?.id,id);assert.equal(frame.data.error,false);assert.equal(frame.data.empty,false);}
+  const final=frames.at(-1);assert.equal(final.event,'search.summary');assert.match(final.data.webMessage,/Webquellen.*Zusatzinformationen/);assert.equal(final.data.countLabel,'Informationen zur Suche');assert.equal(final.data.normalResultCount,0);assert.equal(final.data.knowledgeCardCount,1);
+ }finally{await h.close();}
+});
+test('a failed Knowledge primary does not mislabel valid empty web responses',async()=>{
+ const h=await harness(['one','knowledge-a','knowledge-b']);try{
+  await approve(h,'one');for(const id of ['knowledge-a','knowledge-b']){h.adapter.catalog.get(id).capabilities=['knowledge'];await approve(h,id,{capabilities:['knowledge']});}
+  let first=true;h.adapter.execute=async engine=>{
+   if(engine.id==='one')return {outcome:'empty',results:[],infoboxes:[],durationMs:1};
+   if(first){first=false;return {outcome:'error',errorClass:'timeout',results:[],infoboxes:[],durationMs:1};}
+   return {outcome:'success',results:[],infoboxes:[{infobox:'Fallback entity',content:'Context',urls:[{url:'https://example.org/entity'}]}],durationMs:1};
+  };
+  const final=await new SearchExecutor(h.plane,new MediaProxy('fixture'),'fixture').load(state,{});
+  assert.equal(final.knowledgeCards.length,1);assert.equal(final.error,false);assert.match(final.webMessage,/^Keine Webtreffer gefunden/);
+ }finally{await h.close();}
+});
 test('reviewed defaults isolate unrelated providers while preserving sibling CAPTCHA restrictions',async()=>{
  const h=await harness(['duckduckgo','duckduckgo images','bing images','brave','unknown']);try{
   assert.equal(h.plane.policy('unknown').family,'');assert.equal(h.plane.policy('unknown').state,'disabled');
