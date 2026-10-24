@@ -1,0 +1,23 @@
+{
+  "checkedOn": "2026-10-24",
+  "scope": "upstream-client",
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 28,
+      "dev": 313,
+      "optional": 109,
+      "peer": 1,
+      "peerOptional": 0,
+      "total": 348
+    }
+  },
+  "vulnerabilities": {}
+}

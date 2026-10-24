@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "node": "v24.19.0",
+  "node": "v24.22.1",
   "summaries": [
     {
       "folder": "standalone",
-      "version": "761e6e55e4269741a3349df2f7580b5ca682b7e387a519253dc3466e49e0db51",
-      "sourceSha256": "fbec52bf1da3501c73e9ca559d0dd6dbe49767764f0afec8e6504fc0e0be7023",
+      "version": "78c8370385a63ba4e256c7631958d1e40e4e0069af198faafa42a179e0b95548",
+      "sourceSha256": "117dc54225199be35a488c1d80cd5fca433c5c814ac9d8a53484c199104675cb",
       "services": "planned",
       "htmlSecurity": {
         "schema": "xtend.maraca.html-security-report.v1",
@@ -45,7 +45,7 @@
           },
           {
             "file": "frontend/feedback.mjs",
-            "sha256": "70c7087b9a3c8374dfe9041fff76b444971ca86004aa8ac2527fbae248ef9432"
+            "sha256": "0eac6473c9db77261767d75d4572e5b4038b97a2b308249d0114f148834aee26"
           },
           {
             "file": "frontend/filter-motion.mjs",
@@ -92,16 +92,20 @@
             "sha256": "3ed31e1abd9152ea405455b83a469b9c7d7cbe64865d8abe7336e029885bf55e"
           },
           {
+            "file": "frontend/preview-service-core.mjs",
+            "sha256": "42c5cb189cab0defb66ab8a68ab461e6f8c4ce7e4cbfe35b2b07db06a3e26f9b"
+          },
+          {
             "file": "frontend/preview.mjs",
-            "sha256": "70326e9f48fdf6a11565559dbed9d04b0954c4ff7d1e6b0c443905d240e1743d"
+            "sha256": "41db65f3ff0d1847ac9a526c88794852955d4ce7584d079425a57e736d167aff"
           },
           {
             "file": "frontend/report-service-core.mjs",
-            "sha256": "f1b2235b62599e9542b930ef0293289d25faec562752b8a348a5ace65d6beecf"
+            "sha256": "1d0d48d8f89056b527c06b906ddce089b0e01146831e6f43bb1451c6ae43a5b7"
           },
           {
             "file": "frontend/report-state.mjs",
-            "sha256": "a5917a4817162577292b2a7acc9d8f91d1c6518ea93d8f5385d8b7d6e10bbfce"
+            "sha256": "bb1c37f595966927968b782e8b11d6b2674948a7e7cb9d960efeb2be02adb770"
           },
           {
             "file": "frontend/result-projection-core.mjs",
@@ -121,7 +125,7 @@
           },
           {
             "file": "frontend/services.ts",
-            "sha256": "db218485a602a889e70fb9b77e5c455d9d5d7d690d68a5e3b75a5ab83cec10a8"
+            "sha256": "547d960b545b7e223be9fb7292d945c69dca089f93add2e38936d8475648b5ec"
           },
           {
             "file": "frontend/standalone-host.mjs",
@@ -133,7 +137,7 @@
           },
           {
             "file": "frontend/stream-service-core.mjs",
-            "sha256": "bcca799ef7ae6b20137cfab95b0535cce06695aaaf2db4babbcced3af4ce8aba"
+            "sha256": "9b7b8d5c021acab12514e892e1987fa639200a42b8801da43ff7436cb59f384a"
           },
           {
             "file": "frontend/streaming.mjs",
@@ -169,7 +173,7 @@
     },
     {
       "folder": "admin",
-      "version": "58f54787df83f27a3a1dba3b4c2f902e624367c67ce3d0e18447831a77885e17",
+      "version": "2b2c76921c5f4d349502a1b4797753facbad8d4111377ee1ba3937894908748b",
       "sourceSha256": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
       "services": "planned",
       "htmlSecurity": {
@@ -210,7 +214,7 @@
           },
           {
             "file": "frontend/feedback.mjs",
-            "sha256": "70c7087b9a3c8374dfe9041fff76b444971ca86004aa8ac2527fbae248ef9432"
+            "sha256": "0eac6473c9db77261767d75d4572e5b4038b97a2b308249d0114f148834aee26"
           },
           {
             "file": "frontend/filter-motion.mjs",
@@ -257,16 +261,20 @@
             "sha256": "3ed31e1abd9152ea405455b83a469b9c7d7cbe64865d8abe7336e029885bf55e"
           },
           {
+            "file": "frontend/preview-service-core.mjs",
+            "sha256": "42c5cb189cab0defb66ab8a68ab461e6f8c4ce7e4cbfe35b2b07db06a3e26f9b"
+          },
+          {
             "file": "frontend/preview.mjs",
-            "sha256": "70326e9f48fdf6a11565559dbed9d04b0954c4ff7d1e6b0c443905d240e1743d"
+            "sha256": "41db65f3ff0d1847ac9a526c88794852955d4ce7584d079425a57e736d167aff"
           },
           {
             "file": "frontend/report-service-core.mjs",
-            "sha256": "f1b2235b62599e9542b930ef0293289d25faec562752b8a348a5ace65d6beecf"
+            "sha256": "1d0d48d8f89056b527c06b906ddce089b0e01146831e6f43bb1451c6ae43a5b7"
           },
           {
             "file": "frontend/report-state.mjs",
-            "sha256": "a5917a4817162577292b2a7acc9d8f91d1c6518ea93d8f5385d8b7d6e10bbfce"
+            "sha256": "bb1c37f595966927968b782e8b11d6b2674948a7e7cb9d960efeb2be02adb770"
           },
           {
             "file": "frontend/result-projection-core.mjs",
@@ -286,7 +294,7 @@
           },
           {
             "file": "frontend/services.ts",
-            "sha256": "db218485a602a889e70fb9b77e5c455d9d5d7d690d68a5e3b75a5ab83cec10a8"
+            "sha256": "547d960b545b7e223be9fb7292d945c69dca089f93add2e38936d8475648b5ec"
           },
           {
             "file": "frontend/standalone-host.mjs",
@@ -298,7 +306,7 @@
           },
           {
             "file": "frontend/stream-service-core.mjs",
-            "sha256": "bcca799ef7ae6b20137cfab95b0535cce06695aaaf2db4babbcced3af4ce8aba"
+            "sha256": "9b7b8d5c021acab12514e892e1987fa639200a42b8801da43ff7436cb59f384a"
           },
           {
             "file": "frontend/streaming.mjs",

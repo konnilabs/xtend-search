@@ -11,10 +11,11 @@ try{
  await admin.getByRole('link',{name:'administrator',exact:true}).click();await admin.waitForFunction(()=>window.XTendPage?.getRuntime());
  for(const [id,capability] of [['fixture fast','general'],['fixture medium','general'],['fixture slow','general'],['wikipedia','knowledge']]){
   await admin.evaluate(id=>window.XTendPage.visit('/admin?view=sources&engine='+encodeURIComponent(id)),id);
+  const family=capability==='knowledge'?'wikimedia':id.replaceAll(' ','-');
   const form=admin.locator('#policy-form');await form.waitFor();const revision=await form.locator('[name=revision]').inputValue();
-  if(await form.locator('[name=state]').inputValue()==='allowed'&&await form.locator('[name=capabilities]').inputValue()===capability&&await form.locator('[name=family]').inputValue()===id.replaceAll(' ','-')&&await form.locator('[name=rpm]').inputValue()==='60'&&await form.locator('[name=concurrency]').inputValue()==='4')continue;
+  if(await form.locator('[name=state]').inputValue()==='allowed'&&await form.locator('[name=capabilities]').inputValue()===capability&&await form.locator('[name=family]').inputValue()===family&&await form.locator('[name=rpm]').inputValue()==='60'&&await form.locator('[name=concurrency]').inputValue()==='4')continue;
   await form.locator('[name=state]').selectOption('allowed');await form.locator('[name=capabilities]').fill(capability);
-  await form.locator('[name=rpm]').fill('60');await form.locator('[name=concurrency]').fill('4');await form.locator('[name=family]').fill(id.replaceAll(' ','-'));
+  await form.locator('[name=rpm]').fill('60');await form.locator('[name=concurrency]').fill('4');await form.locator('[name=family]').fill(family);
   await form.locator('button[type=submit]').click();await admin.waitForFunction(rev=>document.querySelector('#policy-form [name=revision]')?.value!==rev,revision);
  }
  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));

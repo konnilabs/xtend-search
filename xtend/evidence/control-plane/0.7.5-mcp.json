@@ -103,5 +103,15 @@
     "Use RMT actions and local App Services for correlated preview loading and report-selection intents; no DOM injection.",
     "MCP exposes knowledge tools only, no compiler or rendering tools. Build, SSR/resume, HTML-safety and browser proofs are SDK/CLI results.",
     "MCP knowledge main commit is newer than the unchanged installed SDK. Verify all used APIs against pinned SDK 0.9.0 / 66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3; do not silently migrate."
-  ]
+  ],
+  "initializeInput": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {},
+    "clientInfo": {
+      "name": "xtend-search-release-review",
+      "version": "0.7.5"
+    }
+  },
+  "toolsListInput": {},
+  "initializedInput": {}
 }

@@ -90,6 +90,24 @@ try{
  await page.locator('#search-input').fill('current-generation-fixture');await page.locator('.search-button').click();await complete();await idle();
  assert.ok((await page.locator('article.result h2').allTextContents()).every(title=>title.includes('current-generation-fixture')));
  checks.push('A newer direct search cancels stale frames; all final results belong to the current generation.');
+ // A stalled lazy import must settle on its own, and a later completion
+ // may not reopen a lightbox for a different image selection.
+ const faultPage=await context.newPage();faultPage.on('pageerror',e=>errors.push(e.message));let releaseStalled;
+ const stalled=new Promise(resolve=>releaseStalled=resolve);
+ await faultPage.route('**/media?*',r=>r.fulfill({status:200,contentType:'image/png',body:png}));
+ await faultPage.route('**/chunks/lightbox-*.mjs',async r=>{await stalled;await r.abort().catch(()=>{});});
+ await faultPage.goto(base+'/search?q=preview-timeout-fixture&categories=images');await faultPage.waitForFunction(()=>window.XTendPage?.getRuntime());
+ await faultPage.locator('[data-preview-id]').first().click();await faultPage.locator('#preview-expand').click();
+ await faultPage.locator('.preview-busy-slot x-spinner').waitFor();
+ await faultPage.waitForFunction(()=>!window.XTendPage.getRuntime().model.getState('search.preview').expansionLoading&&!!window.XTendPage.getRuntime().model.getState('search.preview').expandMessage,null,{timeout:12000});
+ await faultPage.waitForFunction(()=>!window.XTendPage.getRuntime().model.getState('search.preview').imageLoading);
+ assert.equal(await faultPage.locator('.preview-busy-slot x-spinner').count(),0);
+ assert.match(await faultPage.locator('.preview-message').textContent(),/konnte nicht geladen werden/);
+ await faultPage.locator('#preview-expand').click();await faultPage.locator('.preview-busy-slot x-spinner').waitFor();await faultPage.locator('[data-preview-action=next]').click();
+ await faultPage.waitForFunction(()=>!window.XTendPage.getRuntime().model.getState('search.preview').expansionLoading&&document.querySelector('.preview-position').textContent.includes('2 von'));
+ releaseStalled();await faultPage.waitForFunction(()=>!document.querySelector('.preview-busy-slot x-spinner'));
+ assert.equal(await faultPage.locator('#search-lightbox').count(),0);await faultPage.close();
+ checks.push('An eight-second lazy-import deadline clears the spinner; image navigation invalidates the old import and cannot reopen a stale fullscreen view.');
  assert.deepEqual(errors,[]);const result={ok:true,checks,previewCls,scope:'Built candidate with isolated offline providers; explicit stream fault injection; no live queries or production settings.'};
  await fs.writeFile(new URL(`${VERSION}-stream-preview-browser.json`,out),JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify(result));
 }finally{await context.close();await browser.close();}

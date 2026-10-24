@@ -31,6 +31,20 @@ Der private `engine-json-v1`-/`engine-health-v1`-Vertrag, authentifizierte Route
 
 Der tatsächlich verwendete lokale XTend-MCP liefert versioniertes Wissen über zwei Lese-Tools. Request, relevante Antwort und Entscheidungen stehen in `evidence/control-plane/0.7.5-mcp.json`. Compiler-, Build- und Browsernachweise stammen getrennt vom gepinnten SDK/CLI. Das SDK bleibt 0.9.0 aus Commit `66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3`; siehe `vendor-inputs/xtend-0.9.0-provenance.json`.
 
+## Lokaler Vergleich mit 0.7.4
+
+Je fünf Läufe pro Version am selben Host mit frischen, getrennten Fixture-Volumes und identischen 100/700/2500-ms-Providern. Mediane; kleine lokale Stichprobe:
+
+| Messung | 0.7.4 | 0.7.5 |
+| --- | ---: | ---: |
+| Erster Ergebnis-Paint | 611,7 ms | 638,8 ms |
+| Streamabschluss | 3209,3 ms | 3238,3 ms |
+| Cache-Wiederherstellung | 749 ms | 784 ms |
+| Gesamter Search-Browsergraph, gzip | 136759 Byte | 137368 Byte |
+| Grob gerundeter Chromium-JS-Heap | 18,2 MB | 19,3 MB |
+
+Der erste Paint liegt damit 4,4 % höher, innerhalb des 10-%-Budgets. Der Browsergraph wächst um 609 Byte gzip; diese Summe enthält auch dessen Lazy-Chunks. Das ist von den tatsächlich übertragenen, im Browser gemessenen Modulbytes getrennt. Die Heap-Messung ist eine grobe Diagnose und kein Nachweis über langfristig gehaltenen Speicher. Alle Vergleichsläufe erreichen CLS 0 und restaurieren ohne neuen Suchstream. Vollständige Einzelwerte, Graphgrößen und methodische Grenzen: `evidence/control-plane/0.7.5-performance-comparison.json`. Auch das gesonderte Profil mit verzögerten Favicons und langsamer Mobilverbindung besteht bei CLS 0.
+
 ## Upgrade und Rollback
 
 Frontend **und** Backend gemeinsam auf `xtend-search:0.7.5` und `xtend-search-searxng:0.7.5` aktualisieren. Vorher beide Datenvolumes und die geschützte Env-Konfiguration sichern. Compose-/Portainer-Vorlagen enthalten das geprüfte Paar. Keine Datenmigration; Freigaben, SSO und persistierte Schutzfristen bleiben erhalten. Falls Upstream Eigenschaften einer Engine ändert, verlangt die bestehende Katalogprüfung weiterhin eine erneute Freigabe statt eine alte Freigabe stillschweigend zu erweitern. Browser-Tabs anschließend neu laden.
