@@ -30,8 +30,8 @@ async function tabs(url,shown){
 async function filterGeometry(page,width,mode='resume'){
  await page.setViewportSize({width,height:1000});await page.locator('#filters>summary').click();await page.locator('#language').waitFor({state:'visible'});
  await page.locator('#search-filter-panel').evaluate(element=>Promise.all(element.getAnimations({subtree:true}).map(animation=>animation.finished.catch(()=>{}))));
- const geometry=await page.locator('#search-filter-panel').evaluate(element=>{const box=element.getBoundingClientRect(),field=document.getElementById('language').getBoundingClientRect();return {width:box.width,left:box.left,right:box.right,fieldWidth:field.width,viewport:innerWidth};});
- assert.ok(Math.abs(geometry.width-Math.min(310,width-32))<1,JSON.stringify(geometry));assert.ok(geometry.left>=-1&&geometry.right<=width+1);assert.ok(geometry.fieldWidth>=230,'select is readable: '+JSON.stringify(geometry));
+ const geometry=await page.locator('#search-filter-panel').evaluate(element=>{const box=element.getBoundingClientRect(),field=document.getElementById('language').getBoundingClientRect();return {width:box.width,left:box.left,right:box.right,fieldWidth:field.width,viewport:innerWidth,formWidth:document.getElementById('search-form').getBoundingClientRect().width};});
+ assert.ok(Math.abs(geometry.width-Math.min(680,width>600?geometry.formWidth:width-32))<1,JSON.stringify(geometry));assert.ok(geometry.left>=-1&&geometry.right<=width+1);assert.ok(geometry.fieldWidth>=230,'select is readable: '+JSON.stringify(geometry));
  const actions=await page.locator('.filter-actions>button').evaluateAll(buttons=>buttons.map(button=>{const r=button.getBoundingClientRect();return {width:r.width,height:r.height,top:r.top,bottom:r.bottom,left:r.left};}));
  assert.equal(actions.length,3);assert.ok(actions.every(button=>button.height>=44&&Math.abs(button.width-actions[0].width)<1&&Math.abs(button.left-actions[0].left)<1));
  assert.ok(actions.slice(1).every((button,i)=>button.top-actions[i].bottom>=9.5),'Action slots need consistent 10px gaps: '+JSON.stringify(actions));
@@ -112,7 +112,7 @@ try{
  await search.emulateMedia({reducedMotion:'reduce'});await search.goto(base+'/');await search.waitForFunction(()=>window.XTendPage?.getRuntime());filters.push(await filterGeometry(search,390));
  const native=await browser.newContext({javaScriptEnabled:false,colorScheme:'dark'}),page=await native.newPage();
  try{await page.goto(base+'/search?q=filter-native-fixture&categories=news');for(const width of [320,1308])filters.push(await filterGeometry(page,width,'native'));}finally{await native.close();}
- checks.push('Filter portal retains its own readable width and three equal 44px action slots with 10px gaps at 320–1920px, with report button, weather/home layouts, Reduced Motion and native no-JS details.');
+ checks.push('Filter portal retains its own readable width and three equal 44px action slots with at least 10px gaps at 320–1920px, with report button, weather/home layouts, Reduced Motion and native no-JS details.');
  const reports=[];for(const colorScheme of ['light','dark']){
   reports.push(await reportAppearance('general',colorScheme,320));
   reports.push(await reportAppearance('general',colorScheme,1440,true));

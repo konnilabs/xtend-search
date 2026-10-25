@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, codex/xtend-search-0.5.1]
+    branches: [main, codex/xtend-search-0.5.1, codex/release-0.7.5]
   workflow_dispatch:
 
 permissions:
@@ -94,6 +94,7 @@ jobs:
           node xtend/tests/control/minor-051-browser.mjs
           node xtend/tests/control/release-060-browser.mjs
           node xtend/tests/control/release-075-browser.mjs
+          node xtend/tests/control/release-076-browser.mjs
           node xtend/tests/control/availability-feedback-browser.mjs
           node xtend/tests/control/weather-layout-browser.mjs
           node xtend/tests/control/spinner-stream-browser.mjs

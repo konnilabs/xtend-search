@@ -8,6 +8,7 @@ import {preserveFilterDraft} from './filter-navigation.mjs';
 export function installSearchStreaming(){
  let active=null,epoch=0;const positions=new Map();let restoring=null;
  const client=()=>window.XTendPage;
+ const preserveDraft=props=>({...preserveFilterDraft(props),'search.query':client()?.getRuntime()?.model.getState('search.query')??props['search.query']});
  const stop=()=>{epoch++;active?.controller.abort();active=null;};
  async function run(stream){
   stop();const own=epoch,controller=new AbortController(),registry=createAppServiceRegistry(services,{historyLimit:0});
@@ -17,13 +18,13 @@ export function installSearchStreaming(){
     if(!valid())throw new DOMException('Stale page','AbortError');
     const final=payload.data.stream.phase==='complete';
     await new Promise(resolve=>requestAnimationFrame(resolve));if(!valid())throw new DOMException('Stale page','AbortError');
-    await client().optimistic(props=>valid()?{...preserveFilterDraft(props),'search.data':payload.data}:props,async()=>undefined);
+    await client().optimistic(props=>valid()?{...preserveDraft(props),'search.data':payload.data}:props,async()=>undefined);
     if(!valid())return;
     window.dispatchEvent(new CustomEvent('xtend-search:stream',{detail:{id:stream.id,status:payload.status,event:payload.event,sequence:payload.sequence}}));
     if(restoring&&(document.documentElement.scrollHeight-innerHeight>=restoring[1]||final)){scrollViewport(...restoring);restoring=null;}
    }},{signal:controller.signal,invocationId:stream.id,timeoutMs:15000});
   }catch{
-   if(valid())await client().optimistic(props=>({...preserveFilterDraft(props),'search.data':interruptedSearch(props['search.data'],stream)}),async()=>undefined);
+   if(valid())await client().optimistic(props=>({...preserveDraft(props),'search.data':interruptedSearch(props['search.data'],stream)}),async()=>undefined);
   }finally{registry.dispose();if(active===record)active=null;}
  }
  window.addEventListener('popstate',()=>{restoring=positions.get(location.pathname+location.search)||null;},true);

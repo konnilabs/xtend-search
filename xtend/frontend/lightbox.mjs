@@ -4,13 +4,14 @@ import './components/x-search-lightbox.mjs';
 import {createAppServiceRegistry} from '@ccslabs/xtend/maraca/app-services';
 import services from './services.ts';
 import {updateOverlay} from './overlay-controller.mjs';
+import {capturePreviewMedia,createMediaMotion} from './media-motion.mjs';
 export function createSearchLightbox({onSelect}){
- const registry=createAppServiceRegistry(services,{historyLimit:0});let entries=[],active=false,revision=0,touch=null;
+ const motion=createMediaMotion(),registry=createAppServiceRegistry(services,{historyLimit:0});let entries=[],active=false,revision=0,touch=null;
  const runtime=()=>window.XTendPage.getRuntime(),state=()=>runtime().model.getState('search.overlay');
  const commit=patch=>{const own=revision;return updateOverlay(patch,()=>own===revision);};
- async function show(id,initial=false){const own=++revision;const media=await registry.invoke('search.media.select',{items:entries,id,key:String(own)});if(!media||own!==revision||!active)return;if(!initial){await onSelect(id);if(own!==revision||!active)return;}await commit({lightbox:true,media});if(own===revision&&active)focusOverlayIfLost('search-lightbox');}
- async function open(items,id){entries=items;active=true;if(active)await show(id,true);}
- function close({focus=true}={}){if(!active)return;active=false;revision++;void commit({lightbox:false,media:{}}).then(()=>{if(focus)focusElement(document.getElementById('preview-expand')||document.getElementById('preview-close'), {preventScroll:true});}).catch(()=>{});}
+ async function show(id,initial=false,source=null){motion.stop();const own=++revision;const media=await registry.invoke('search.media.select',{items:entries,id,key:String(own)});if(!media||own!==revision||!active)return;if(!initial){await onSelect(id);if(own!==revision||!active)return;}await commit({lightbox:true,media});if(own===revision&&active){motion.expand(source,document.getElementById('lightbox-image'));focusOverlayIfLost('search-lightbox');}}
+ async function open(items,id){const source=active?null:capturePreviewMedia();entries=items;active=true;await show(id,true,source);}
+ function close({focus=true}={}){motion.stop();if(!active)return;active=false;revision++;void commit({lightbox:false,media:{}}).then(()=>{if(focus)focusElement(document.getElementById('preview-expand')||document.getElementById('preview-close'), {preventScroll:true});}).catch(()=>{});}
  async function move(delta){if(!active)return;const id=await registry.invoke('search.media.move',{items:entries,id:state().media.id,delta});if(id)await show(id);}
  document.addEventListener('click',event=>{const button=event.target.closest?.('#search-lightbox [data-lightbox-action]');if(!button||!active)return;event.preventDefault();if(button.dataset.lightboxAction==='close')close();else void move(button.dataset.lightboxAction==='next'?1:-1);});
  document.addEventListener('lightbox-close-request',event=>{if(event.target.id==='search-lightbox')close();});
@@ -19,6 +20,6 @@ export function createSearchLightbox({onSelect}){
  document.addEventListener('pointerdown',event=>{if(active&&event.pointerType==='touch'&&event.target.closest?.('#search-lightbox')&&!event.target.closest('button,a'))touch={x:event.clientX,y:event.clientY};});
  document.addEventListener('pointerup',event=>{if(!touch||!active)return;const dx=event.clientX-touch.x,dy=event.clientY-touch.y;touch=null;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.3)void move(dx<0?1:-1);});
  document.addEventListener('pointercancel',()=>touch=null);
- window.addEventListener('pagehide',()=>{active=false;revision++;registry.dispose();},{once:true});
+ window.addEventListener('pagehide',()=>{motion.stop();active=false;revision++;registry.dispose();},{once:true});
  return {open,close,isOpen:()=>active,updateEntries(items){entries=items;if(active){const id=state().media.id;if(!entries.some(item=>item.id===id))close();else void show(id,true);}}};
 }

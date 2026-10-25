@@ -276,3 +276,38 @@ html:has(#search-about[open]),html:has(#search-lightbox[open]),html:has(#report-
 }
 
 .web-source-notice{margin:0 0 20px;padding:16px;border-left:2px solid var(--accent);background:var(--panel);color:var(--ink);font-size:14px;line-height:1.6}
+
+/* 0.7.6: one form-sized popover, with fields and actions in parallel columns. */
+.search-shell .filters{position:static}
+.search-shell #filter-slot{left:50%;right:auto;top:calc(100% + 8px);width:min(680px,100%);transform:translateX(-50%)}
+.filter-content{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px 24px}
+.filter-content>.filter-field,.filter-content>.weather-irrelevant-filter{grid-column:1}
+.filter-actions{grid-column:2;grid-row:1/4;align-self:stretch;grid-template-rows:repeat(3,minmax(44px,1fr));align-items:end;gap:14px}
+.filter-content>.filter-note{grid-column:1/-1}
+.filter-content>.preference-status:empty{display:none}
+.search-shell #filter-slot .filter-panel{max-height:calc(100dvh - 32px)}
+#image-preview-slot{display:contents}
+#search-preview-panel:not([hidden]){display:block;position:sticky;top:18px;align-self:start;min-width:0}
+#search-preview-panel .image-preview{position:relative;top:0}
+@media(max-width:960px){#search-preview-panel:not([hidden]){grid-row:1;position:static}}
+#search-preview-panel[hidden],#search-preview-closed{display:none}
+@media(max-width:600px),(max-height:760px){
+ .search-shell #filter-slot{position:fixed;top:auto;bottom:max(16px,env(safe-area-inset-bottom));width:min(680px,calc(100vw - 32px))}
+}
+@media(max-width:600px){
+ .filter-content{grid-template-columns:minmax(0,1fr);gap:12px}
+ .filter-content>.filter-field,.filter-content>.weather-irrelevant-filter,.filter-actions,.filter-content>.filter-note{grid-column:1;grid-row:auto}
+ .filter-actions{grid-template-rows:none;gap:10px}
+ .search-shell #filter-slot .filter-panel{padding:18px}
+}
+@media(max-height:760px){
+ #search-shell[data-view=home]:not(:defined),#search-shell[data-view=home]::part(content){grid-template-rows:60px auto auto auto auto minmax(0,1fr) auto}
+ .search-shell[data-view=home] .topbar>.wordmark{margin-top:24px}
+ .search-shell[data-view=home] .hero{padding-bottom:24px}
+}
+/* Compact popovers keep their native toggle reachable, including without JS. */
+@media(max-width:600px),(max-height:760px){
+ .search-shell .filters[open]>summary{position:fixed;right:max(16px,env(safe-area-inset-right));top:12px;z-index:31;background:var(--panel);border:1px solid var(--line);border-radius:8px}
+ .search-shell #filter-slot{top:64px;bottom:auto}
+ .search-shell #filter-slot .filter-panel{max-height:calc(100dvh - 80px)}
+}

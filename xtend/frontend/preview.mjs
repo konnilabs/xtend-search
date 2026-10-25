@@ -2,7 +2,8 @@ import {focusElement,revealElement} from './browser-capabilities.mjs';
 // Integration events select normalized results; RMT owns the panel and its DOM.
 export function installImagePreview(command){
  let selectedId='',returnId='',imageSrc='',epoch=0,pending=false,viewer=null,viewerPromise=null,expandEpoch=0;
- let imageRequest=null,requestId=0,imageTimer=null;
+ let imageRequest=null,requestId=0,imageTimer=null,transitions=Promise.resolve();
+ const present=(isCurrent,run)=>{const work=transitions.catch(()=>{}).then(()=>isCurrent()?run():undefined);transitions=work;return work;};
  function request(src){
   clearTimeout(imageTimer);imageTimer=null;
   imageSrc=src;
@@ -19,7 +20,10 @@ export function installImagePreview(command){
   const entries=images(),index=entries.findIndex(result=>result.id===id);if(index<0)return;
   const result=entries[index],current=++epoch;expandEpoch++;
   selectedId=id;returnId=id;const imageKey=request(result.previewSrc);
-  await command('search.preview.open',{value:{...result,open:true,imageSrc,imageKey,imageLoading:!!imageSrc,expansionLoading:false,expansionToken:'',imageUnavailable:false,imageMessage:'',expandMessage:'',position:`Bild ${index+1} von ${entries.length}`,previousDisabled:index===0,nextDisabled:index===entries.length-1}});
+  await present(()=>current===epoch&&!pending,()=>{
+   const action=window.XTendPage.getRuntime().model.getState('search.preview')?.open?'search.preview.select':'search.preview.open';
+   return command(action,{value:{...result,open:true,imageSrc,imageKey,imageLoading:!!imageSrc,expansionLoading:false,expansionToken:'',imageUnavailable:false,imageMessage:'',expandMessage:'',position:`Bild ${index+1} von ${entries.length}`,previousDisabled:index===0,nextDisabled:index===entries.length-1}});
+  });
   if(current!==epoch || !focus)return;
   focusElement(document.getElementById('preview-close'), {preventScroll:true});
   if(matchMedia('(max-width: 960px)').matches)revealElement(document.getElementById('image-preview'), {block:'start'});
@@ -41,7 +45,7 @@ export function installImagePreview(command){
  async function close(){
   expandEpoch++;viewer?.close({focus:false});
   const id=returnId,current=++epoch;selectedId='';request('');
-  await command('search.preview.close');
+  await present(()=>current===epoch,()=>command('search.preview.close'));
   if(current!==epoch)return;
   const target=Array.from(document.querySelectorAll('a[data-preview-id]')).find(link=>link.dataset.previewId===id);
   focusElement((target || document.getElementById('search-input')), {preventScroll:false});
