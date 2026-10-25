@@ -96,6 +96,7 @@ jobs:
           node xtend/tests/control/release-075-browser.mjs
           node xtend/tests/control/release-076-browser.mjs
           node xtend/tests/control/image-grid-layout-browser.mjs
+          PREVIEW_SIZE_BASELINE=xtend/evidence/control-plane/0.7.6-preview-size-baseline-0.7.5.json node xtend/tests/control/preview-size-browser.mjs
           node xtend/tests/control/availability-feedback-browser.mjs
           node xtend/tests/control/weather-layout-browser.mjs
           node xtend/tests/control/spinner-stream-browser.mjs

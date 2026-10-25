@@ -289,8 +289,12 @@ html:has(#search-about[open]),html:has(#search-lightbox[open]),html:has(#report-
 /* The reserved Knowledge lane must not narrow images while the preview is closed. */
 #results[data-category=images]:not([data-preview-open]) .result-layout{grid-template-columns:minmax(0,1fr)}
 #image-preview-slot{display:contents}
-#search-preview-panel:not([hidden]){display:block;position:sticky;top:18px;align-self:start;min-width:0}
-#search-preview-panel .image-preview{position:relative;top:0}
+#search-preview-panel:not([hidden]){display:block;position:sticky;top:18px;align-self:start;min-width:0;width:100%}
+/* Match the former grid-child aside: media dimensions never size the surface chrome. */
+#search-preview-panel::part(container){display:block;width:100%}
+#search-preview-panel::part(content){width:100%;min-width:0}
+#search-preview-panel .preview-surface{width:100%;min-width:0}
+#search-preview-panel .image-preview{position:relative;top:0;width:100%}
 @media(max-width:960px){#search-preview-panel:not([hidden]){grid-row:1;position:static}}
 #search-preview-panel[hidden],#search-preview-closed{display:none}
 @media(max-width:600px),(max-height:840px){
