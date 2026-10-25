@@ -1,0 +1,75 @@
+{
+  "ok": true,
+  "revision": "0.7.6-r2",
+  "date": "2026-10-25T15:19:38.475822+00:00",
+  "sourceCommit": "bf45f16990cceb672ff6e2a4fa371fcbc005444b",
+  "frontendImage": "sha256:2bbc8e181b83b60cc152f5dcdbc4201d9fa869734afc35fca773d882a39918fa",
+  "backendImage": "sha256:d4addc901aedab078c9de675e7c8cb883f7f0b8c3f4d3b4c7ced5c8ab4f6632f",
+  "backendUnchanged": true,
+  "checks": {
+    "strictMaracaAndHtmlSecurity": true,
+    "controlNodeTests": 163,
+    "browserGates": [
+      {
+        "name": "image-grid-layout-browser",
+        "ok": true,
+        "durationMs": 17365
+      },
+      {
+        "name": "release-076-browser",
+        "ok": true,
+        "durationMs": 32594
+      },
+      {
+        "name": "release-075-browser",
+        "ok": true,
+        "durationMs": 31989
+      },
+      {
+        "name": "ssr-browser",
+        "ok": true,
+        "durationMs": 14755
+      },
+      {
+        "name": "lightbox-resilience-browser",
+        "ok": true,
+        "durationMs": 16949
+      }
+    ],
+    "imageGeometrySamples": 41,
+    "newCIGate": "image-grid-layout-browser.mjs"
+  },
+  "closedGridAt1122": {
+    "beforeWidth": 627.0625,
+    "afterWidths": [
+      1003.0625,
+      1003.0625,
+      1003.0625
+    ],
+    "availableWidth": 1003.0625
+  },
+  "localUpgrade": {
+    "health": {
+      "ok": true,
+      "version": "0.7.6",
+      "storage": "ready",
+      "retrieval": "compatible"
+    },
+    "sameEnvironment": true,
+    "sameVolumes": true,
+    "backendContainerUnchanged": true,
+    "dataPreserved": {
+      "policies": true,
+      "guards": true,
+      "quality_rules": true,
+      "quality_pauses": true,
+      "weather_policy": true,
+      "site_content": true,
+      "metadata": true,
+      "weather_budget": true
+    }
+  },
+  "localCssSha256": "cb73edd07f9422b316c14229145b95ce23562018dabd27d7f5605d8bac344885",
+  "baseline": "Original full 21 browser gates and performance figures refer to the R1 image in 0.7.6-validation.json; R2 checks are recorded separately.",
+  "scope": "Actual rebuilt Docker frontend, offline provider fixtures, native SSR and resumed layout; no live searches, result URLs or credentials retained."
+}

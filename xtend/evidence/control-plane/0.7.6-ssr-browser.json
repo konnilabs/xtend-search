@@ -1,7 +1,7 @@
 {
   "ok": true,
   "browser": "chromium",
-  "date": "2026-10-25T15:03:49.447Z",
+  "date": "2026-10-25T15:18:37.920Z",
   "checks": [
     "Initial wire is measured and bounded; input literal, registry coverage and absence of duplicate HTML are asserted.",
     "Verified resume preserves the SSR input; stream and history work without document replacement.",
@@ -11,11 +11,11 @@
   "metrics": {
     "baseline": null,
     "patched": {
-      "htmlBytes": 138200,
-      "htmlGzipBytes": 24967,
-      "wireBytes": 119884,
-      "wireGzipBytes": 22157,
-      "snapshotStateBytes": 100630,
+      "htmlBytes": 135685,
+      "htmlGzipBytes": 24636,
+      "wireBytes": 118134,
+      "wireGzipBytes": 21938,
+      "snapshotStateBytes": 99814,
       "duplicateHtmlFields": 0,
       "uniqueDuplicateHtmlBytes": 0,
       "inputTypeBytes": 6,

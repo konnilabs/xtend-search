@@ -19,7 +19,7 @@ Das geprüfte Paar ist **Frontend `xtend-search:0.7.6` / Backend `xtend-search-s
 
 Bei einem bestehenden Portainer-Stack `XTEND_SEARCH_IMAGE` auf `xtend-search:0.7.6` ändern; `XTEND_BACKEND_IMAGE` bleibt `xtend-search-searxng:0.7.5`. Anschließend Browser-Tabs neu laden. Rollback verwendet das bisherige Frontend 0.7.5 mit demselben Backend 0.7.5; vorhandene Datenvolumes werden weiterverwendet. Bei zusätzlicher externer Datenänderung gilt der vorab gesicherte Datenstand. Merge und Produktionsdeployment sind getrennte Schritte.
 
-## Abnahme und Performance
+## Ursprüngliche Abnahme und Performance (R1)
 
 Strict-Maraca und HTML-Sicherheitsprüfung, **163 Control-Node-Tests**, **10 Legacy-Node-Tests**, **8 Python-Vertragstests** und **21 Docker-Browsergates** haben bestanden. Der neue Gate deckt 320–3840 Pixel, niedrige Viewports, No-JS, schnelle Aktionen, Reduced Motion, Fokus-Rückgabe, native Bildgeometrie und verspätete Startseiten-/Streamantworten ab.
 
@@ -28,3 +28,11 @@ Identische Offline-Fixtures auf demselben Host, je fünf Durchläufe: Median bis
 CLS beträgt in den geprüften normalen und gedrosselten Browserfixtures **0**. Gewollte Bewegungen nach Nutzereingaben werden vom Web-Vitals-CLS-Maß ausgenommen; die Rohdaten weisen diese separat aus. Der komprimierte Browser-Modulgraph wächst bei gleicher gzip-Methode um **896 Byte**; CSS und das generierte Maraca-Artefakt werden getrennt in `0.7.6-bundle-sizes.json` ausgewiesen.
 
 Der laufende XTend-MCP lieferte Knowledge-Kontext zur AnimationEngine. Diese Dokumentation ist ausdrücklich von den Nachweisen des tatsächlich gepinnten SDKs, des lokalen Compilers und des gebauten Docker-Images getrennt (`0.7.6-mcp.json`). Die lokale Aktualisierung erhielt alle Umgebungswerte, Volumenamen, Freigaben, Schutzfristen und die Backend-Containeridentität; Sicherung und Datenprüfsummen bleiben geschützt außerhalb des Release-Pakets.
+
+## Nachprüfung des Bilderrasters (R2)
+
+Zwischen 961 und 1199 Pixeln reservierte das gemeinsame Knowledge-Layout eine zweite Spalte auch bei geschlossener Bildvorschau. Eine auf geschlossene Bildansichten begrenzte CSS-Regel gibt dem Raster jetzt die gesamte Ergebnisbreite zurück. Das RMT-gesteuerte Vorschauattribut und die vorhandenen Öffnungs-/Schließanimationen bleiben maßgeblich; es gibt keine zusätzlichen DOM-Eingriffe.
+
+Der neue Browsergate prüft 41 Geometrien für SSR/No-JS, XScaler/Resume, Öffnen, Schließen und die Rückkehr zu gecachten Bildtreffern bei 320–3840 Pixeln. Bei 1122 Pixeln wächst das geschlossene Raster nachweislich von 627 auf alle 1003 verfügbaren Pixel. Gezielte R2-Abnahme: Strict-Maraca/HTML-Sicherheit, erneut 163 Control-Node-Tests sowie fünf Browsergates für Raster, Shell/Motion, Stream-/Spinnerzustände, SSR und native Lightbox-Resilienz. Die ursprünglichen vollständigen R1- und Performancenachweise bleiben separat zugeordnet; R2-Nachweise stehen in `0.7.6-r2-validation.json` und `0.7.6-r2-browser-gates.json`.
+
+Die Frontendversion bleibt vor dem Release 0.7.6; das aktualisierte Docker-Paket ist separat als R2 abgelegt. Image-ID und SHA-256 aus diesem Paket verwenden. Das Backend bleibt unverändert 0.7.5. Die lokale R2-Aktualisierung erfolgte nach erneuter geschützter Sicherung und erhielt wiederum die gespeicherten Daten und Umgebungswerte.

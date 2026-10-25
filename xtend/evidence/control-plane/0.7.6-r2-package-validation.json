@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "revision": "0.7.6-r2",
+  "scope": "All package checksums and the outer bundle checksum passed; both Docker archives loaded and reproduced the validated linux/amd64 image IDs. This independent report is outside the package it verifies.",
+  "frontend": {
+    "file": "XTend-search-Docker-Image-0.7.6-linux-amd64.tar.gz",
+    "sha256": "94165bdc4f752a9a71a61e320e5f7ff8e4d1357123226d0b610f13f6276cafe8",
+    "id": "sha256:2bbc8e181b83b60cc152f5dcdbc4201d9fa869734afc35fca773d882a39918fa"
+  },
+  "backend": {
+    "file": "XTend-search-SearXNG-Image-0.7.5-linux-amd64.tar.gz",
+    "sha256": "17c8a7d9b831edec61bb9208ecdc0578bdb588e619327d6d11e92983982f9df3",
+    "id": "sha256:d4addc901aedab078c9de675e7c8cb883f7f0b8c3f4d3b4c7ced5c8ab4f6632f"
+  },
+  "bundle": {
+    "file": "XTend-search-Docker-0.7.6-linux-amd64.tar.gz",
+    "sha256": "35bbc5ffa6aa7510164292a18d597d1bb766add38963ec8ca73c7db5b5f33646",
+    "bytes": 378668119
+  },
+  "filesChecked": 15,
+  "runtimeSourceCommit": "bf45f16990cceb672ff6e2a4fa371fcbc005444b"
+}
