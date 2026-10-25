@@ -4,8 +4,8 @@
   "summaries": [
     {
       "folder": "standalone",
-      "version": "78c8370385a63ba4e256c7631958d1e40e4e0069af198faafa42a179e0b95548",
-      "sourceSha256": "117dc54225199be35a488c1d80cd5fca433c5c814ac9d8a53484c199104675cb",
+      "version": "e7342a8a780f93a1401b3823e350ce452db45e87c97496132d1e84ec58fba175",
+      "sourceSha256": "a5253f7fef1764b341ed28ae96baec139f17d9bbe61d86f735f40531c80c7863",
       "services": "planned",
       "htmlSecurity": {
         "schema": "xtend.maraca.html-security-report.v1",
@@ -69,7 +69,15 @@
           },
           {
             "file": "frontend/lightbox.mjs",
-            "sha256": "bb6e2fc0c938eb41d373e8a11528216ba508e6e8606d80eb05078b18bac805a6"
+            "sha256": "347c26dcdbd253fa40dc1bf688d98810bb03566c328660760076a6768f1ccedd"
+          },
+          {
+            "file": "frontend/media-motion-core.mjs",
+            "sha256": "cc4ddcd6ff01916b63fabbc25edf031d7b6abd4f0e163e7ac58aef3f30aec8e0"
+          },
+          {
+            "file": "frontend/media-motion.mjs",
+            "sha256": "7f1f21e187df0d5780b8cd126a5375cdd08a368bef215758454247d2b772266b"
           },
           {
             "file": "frontend/motd.mjs",
@@ -97,7 +105,7 @@
           },
           {
             "file": "frontend/preview.mjs",
-            "sha256": "41db65f3ff0d1847ac9a526c88794852955d4ce7584d079425a57e736d167aff"
+            "sha256": "c4138de3701de55365c4e6c569a23194ec223d73bdafbd273616bafb14d3e7ea"
           },
           {
             "file": "frontend/report-service-core.mjs",
@@ -129,7 +137,7 @@
           },
           {
             "file": "frontend/standalone-host.mjs",
-            "sha256": "c84cb708fdac903fdf4ed303cbf20e81d32ec11c04c9c1b244d67b125739f130"
+            "sha256": "30f5a31d84af825f27a8f5a0def2753c55fda1d5b5c8fb6357be8126d2d34955"
           },
           {
             "file": "frontend/standalone-streaming.mjs",
@@ -173,7 +181,7 @@
     },
     {
       "folder": "admin",
-      "version": "2b2c76921c5f4d349502a1b4797753facbad8d4111377ee1ba3937894908748b",
+      "version": "35f8e13751c7cc73c33f438e9a10ed3d3365af93df5953416204c10a90b166be",
       "sourceSha256": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
       "services": "planned",
       "htmlSecurity": {
@@ -238,7 +246,15 @@
           },
           {
             "file": "frontend/lightbox.mjs",
-            "sha256": "bb6e2fc0c938eb41d373e8a11528216ba508e6e8606d80eb05078b18bac805a6"
+            "sha256": "347c26dcdbd253fa40dc1bf688d98810bb03566c328660760076a6768f1ccedd"
+          },
+          {
+            "file": "frontend/media-motion-core.mjs",
+            "sha256": "cc4ddcd6ff01916b63fabbc25edf031d7b6abd4f0e163e7ac58aef3f30aec8e0"
+          },
+          {
+            "file": "frontend/media-motion.mjs",
+            "sha256": "7f1f21e187df0d5780b8cd126a5375cdd08a368bef215758454247d2b772266b"
           },
           {
             "file": "frontend/motd.mjs",
@@ -266,7 +282,7 @@
           },
           {
             "file": "frontend/preview.mjs",
-            "sha256": "41db65f3ff0d1847ac9a526c88794852955d4ce7584d079425a57e736d167aff"
+            "sha256": "c4138de3701de55365c4e6c569a23194ec223d73bdafbd273616bafb14d3e7ea"
           },
           {
             "file": "frontend/report-service-core.mjs",
@@ -298,7 +314,7 @@
           },
           {
             "file": "frontend/standalone-host.mjs",
-            "sha256": "c84cb708fdac903fdf4ed303cbf20e81d32ec11c04c9c1b244d67b125739f130"
+            "sha256": "30f5a31d84af825f27a8f5a0def2753c55fda1d5b5c8fb6357be8126d2d34955"
           },
           {
             "file": "frontend/standalone-streaming.mjs",

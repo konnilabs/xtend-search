@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "scope": "Exact built images; gzip each esbuild browser-graph module, CSS and generated Maraca entry separately. This is separate from browser transfer and lazy-load timings.",
+  "versions": {
+    "0.7.5": {
+      "browserGraphGzipBytes": 138144,
+      "moduleCount": 8,
+      "cssGzipBytes": 11948,
+      "maracaEntryGzipBytes": 183947
+    },
+    "0.7.6": {
+      "browserGraphGzipBytes": 139040,
+      "moduleCount": 8,
+      "cssGzipBytes": 12286,
+      "maracaEntryGzipBytes": 191323
+    }
+  },
+  "browserGraphDeltaBytes": 896
+}

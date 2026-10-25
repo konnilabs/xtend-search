@@ -12,6 +12,13 @@ async function main(){
   const options={source,out:`public/assets/xtend/${folder}/maraca`,profile:'production',sizeBudget:'warn',lazy:'component',orchestration:'strict',kernel:'strict',kernelBootMode:'direct',hydration:'strict',validation:'auto',transitions:admin?'auto':'strict',componentMode:'document',stackMode:'plan',css:'external',services:{clientEntry:entry,serverEntry:'server/control/server-services.ts',targets:['browser','node'],strict:true,budgets:{clientBytes:20000,serverBytes:300000},transport:{kind:'http-ndjson',basePath:'/api/xtend/services'}}};
   const built=await buildMaracaBundleAsync(options,{rootDir:root,compileSource:session.compileSource,htmlSecurity:{sources}});
   if(!built.ok)throw Object.assign(new Error('Maraca control build failed: '+folder),{details:built.plan?.diagnostics||built});
+  if(!admin){
+   const compiled=session.compileSource({text:fs.readFileSync(path.join(root,source),'utf8'),filePath:source});
+   const preset=compiled.orchestrationArtifacts?.animationEngine?.animations.find(record=>record.id==='search.media.expand');
+   if(!preset)throw Error('Compiled media animation preset missing');
+   fs.mkdirSync(path.join(root,'.xtend-build'),{recursive:true});
+   fs.writeFileSync(path.join(root,'.xtend-build/media-motion.mjs'),'export const mediaMotionPreset='+JSON.stringify(preset)+';\n');
+  }
   const configuration={applicationKey:admin?'xtend.search.admin':'xtend.search',viewTransitions:false,events:built.plan.orchestration?.artifact?.events||[]};
   const bootstrap=admin?
    `import {watchObservatory} from './admin/live.mjs';const csrf=document.querySelector('meta[name="csrf-token"]').content;startMaracaPageApplication({...${JSON.stringify(configuration)},publicKey}).then(client=>watchObservatory(client,csrf)).catch(error=>console.error("observatory-boot",error.message));`:

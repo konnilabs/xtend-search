@@ -1,0 +1,11 @@
+{
+  "ok": true,
+  "checks": [
+    "Weather approved through authenticated, revision-bound Observatory form.",
+    "Native fallback plus rapid RMT/AnimationEngine filter toggles settle without hidden focusable controls.",
+    "Multi-result report state, default URL opt-out, cancel-navigation preserves draft, failed save retries atomically.",
+    "Place ambiguity, URL location, current/24h/7d/DWD sections, weather cache/back and responsive 320–3840px.",
+    "Shared adapters render weather SSR; native multi-result report works without JavaScript."
+  ],
+  "errors": []
+}

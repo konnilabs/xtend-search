@@ -1,0 +1,1696 @@
+{
+  "ok": true,
+  "scope": "Offline Docker fixtures. Responsive card geometry in light/dark schemes and without JavaScript. Layout shifts after the location surface is painted, including recent-input shifts. Same-tab history restore counts provider requests directly.",
+  "runs": [
+    {
+      "width": 320,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 254,
+        "legends": [
+          886
+        ],
+        "hourRowOffsets": [
+          886
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 16,
+          "y": 386,
+          "width": 288,
+          "height": 1855.171875
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 16,
+            "y": 386,
+            "width": 288,
+            "height": 428.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 16,
+            "y": 831,
+            "width": 288,
+            "height": 176
+          },
+          {
+            "name": "weather-daily",
+            "x": 16,
+            "y": 1023,
+            "width": 288,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 16,
+            "y": 1419,
+            "width": 288,
+            "height": 342
+          },
+          {
+            "name": "weather-warnings",
+            "x": 16,
+            "y": 1777,
+            "width": 288,
+            "height": 388.671875
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 1,
+        "dayRows": 7,
+        "metricRows": 4,
+        "hourScrollable": true,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0018688769531250001,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 872.7999999998137,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 390,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 324,
+        "legends": [
+          860
+        ],
+        "hourRowOffsets": [
+          860
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 16,
+          "y": 386,
+          "width": 358,
+          "height": 1568.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 16,
+            "y": 386,
+            "width": 358,
+            "height": 402.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 16,
+            "y": 805,
+            "width": 358,
+            "height": 176
+          },
+          {
+            "name": "weather-daily",
+            "x": 16,
+            "y": 997,
+            "width": 358,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 16,
+            "y": 1393,
+            "width": 358,
+            "height": 342
+          },
+          {
+            "name": "weather-warnings",
+            "x": 16,
+            "y": 1751,
+            "width": 358,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 1,
+        "dayRows": 7,
+        "metricRows": 4,
+        "hourScrollable": true,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.002428262419871795,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 879,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 480,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 414,
+        "legends": [
+          860
+        ],
+        "hourRowOffsets": [
+          860
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 16,
+          "y": 386,
+          "width": 448,
+          "height": 1550.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 16,
+            "y": 386,
+            "width": 448,
+            "height": 402.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 16,
+            "y": 805,
+            "width": 448,
+            "height": 176
+          },
+          {
+            "name": "weather-daily",
+            "x": 16,
+            "y": 997,
+            "width": 448,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 16,
+            "y": 1393,
+            "width": 448,
+            "height": 342
+          },
+          {
+            "name": "weather-warnings",
+            "x": 16,
+            "y": 1751,
+            "width": 448,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 1,
+        "dayRows": 7,
+        "metricRows": 4,
+        "hourScrollable": true,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.00324048681640625,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 857.5,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 520,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 454,
+        "legends": [
+          860,
+          972,
+          1084,
+          1196
+        ],
+        "hourRowOffsets": [
+          860,
+          972,
+          1084,
+          1196
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 16,
+          "y": 386,
+          "width": 488,
+          "height": 1886.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 16,
+            "y": 386,
+            "width": 488,
+            "height": 402.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 16,
+            "y": 805,
+            "width": 488,
+            "height": 512
+          },
+          {
+            "name": "weather-daily",
+            "x": 16,
+            "y": 1333,
+            "width": 488,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 16,
+            "y": 1729,
+            "width": 488,
+            "height": 342
+          },
+          {
+            "name": "weather-warnings",
+            "x": 16,
+            "y": 2087,
+            "width": 488,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 4,
+        "dayRows": 7,
+        "metricRows": 4,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0031693389423076922,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 869.9000000003725,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 560,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 494,
+        "legends": [
+          860,
+          972,
+          1084,
+          1196
+        ],
+        "hourRowOffsets": [
+          860,
+          972,
+          1084,
+          1196
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 16,
+          "y": 386,
+          "width": 528,
+          "height": 1886.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 16,
+            "y": 386,
+            "width": 528,
+            "height": 402.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 16,
+            "y": 805,
+            "width": 528,
+            "height": 512
+          },
+          {
+            "name": "weather-daily",
+            "x": 16,
+            "y": 1333,
+            "width": 528,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 16,
+            "y": 1729,
+            "width": 528,
+            "height": 342
+          },
+          {
+            "name": "weather-warnings",
+            "x": 16,
+            "y": 2087,
+            "width": 528,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 4,
+        "dayRows": 7,
+        "metricRows": 4,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0030072232142857144,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 834.5,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 640,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 538,
+        "legends": [
+          854,
+          966,
+          1078,
+          1190
+        ],
+        "hourRowOffsets": [
+          854,
+          966,
+          1078,
+          1190
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 34,
+          "y": 406,
+          "width": 572.15625,
+          "height": 1860.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 34,
+            "y": 406,
+            "width": 572.15625,
+            "height": 376.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 34,
+            "y": 799,
+            "width": 572.15625,
+            "height": 512
+          },
+          {
+            "name": "weather-daily",
+            "x": 34,
+            "y": 1327,
+            "width": 572.15625,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 34,
+            "y": 1723,
+            "width": 572.15625,
+            "height": 342
+          },
+          {
+            "name": "weather-warnings",
+            "x": 34,
+            "y": 2081,
+            "width": 572.15625,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 4,
+        "dayRows": 7,
+        "metricRows": 4,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.002725041015625,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 856.9000000003725,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 700,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 592,
+        "legends": [
+          854,
+          966,
+          1078
+        ],
+        "hourRowOffsets": [
+          854,
+          966,
+          1078
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 37,
+          "y": 406,
+          "width": 625.796875,
+          "height": 1588.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 37,
+            "y": 406,
+            "width": 625.796875,
+            "height": 376.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 37,
+            "y": 799,
+            "width": 625.796875,
+            "height": 400
+          },
+          {
+            "name": "weather-daily",
+            "x": 37,
+            "y": 1215,
+            "width": 625.796875,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 37,
+            "y": 1611,
+            "width": 625.796875,
+            "height": 182
+          },
+          {
+            "name": "weather-warnings",
+            "x": 37,
+            "y": 1809,
+            "width": 625.796875,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 3,
+        "dayRows": 7,
+        "metricRows": 2,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0032830553571428574,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 830.5999999996275,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 800,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 681,
+        "legends": [
+          794,
+          906,
+          1018
+        ],
+        "hourRowOffsets": [
+          794,
+          906,
+          1018
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 42,
+          "y": 346,
+          "width": 715.1875,
+          "height": 1588.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 42,
+            "y": 346,
+            "width": 715.1875,
+            "height": 376.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 42,
+            "y": 739,
+            "width": 715.1875,
+            "height": 400
+          },
+          {
+            "name": "weather-daily",
+            "x": 42,
+            "y": 1155,
+            "width": 715.1875,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 42,
+            "y": 1551,
+            "width": 715.1875,
+            "height": 182
+          },
+          {
+            "name": "weather-warnings",
+            "x": 42,
+            "y": 1749,
+            "width": 715.1875,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 3,
+        "dayRows": 7,
+        "metricRows": 2,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0053276203125,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 895.7999999998137,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 860,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 732,
+        "legends": [
+          797,
+          909,
+          1021
+        ],
+        "hourRowOffsets": [
+          797,
+          909,
+          1021
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 46,
+          "y": 346,
+          "width": 768.828125,
+          "height": 1598.015625
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 46,
+            "y": 346,
+            "width": 768.828125,
+            "height": 378.875
+          },
+          {
+            "name": "weather-hourly",
+            "x": 46,
+            "y": 741,
+            "width": 768.828125,
+            "height": 402.375
+          },
+          {
+            "name": "weather-daily",
+            "x": 46,
+            "y": 1159,
+            "width": 768.828125,
+            "height": 382.390625
+          },
+          {
+            "name": "weather-metrics",
+            "x": 46,
+            "y": 1558,
+            "width": 768.828125,
+            "height": 184.375
+          },
+          {
+            "name": "weather-warnings",
+            "x": 46,
+            "y": 1758,
+            "width": 768.828125,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 3,
+        "dayRows": 7,
+        "metricRows": 2,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.004914078488372093,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 883.8999999994412,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 900,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 485,
+        "legends": [
+          403,
+          515,
+          627,
+          739
+        ],
+        "hourRowOffsets": [
+          403,
+          515,
+          627,
+          739
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 48,
+          "y": 346,
+          "width": 804.59375,
+          "height": 1336
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 48,
+            "y": 346,
+            "width": 261.53125,
+            "height": 516
+          },
+          {
+            "name": "weather-hourly",
+            "x": 329,
+            "y": 346,
+            "width": 523.0625,
+            "height": 516
+          },
+          {
+            "name": "weather-daily",
+            "x": 48,
+            "y": 882,
+            "width": 804.59375,
+            "height": 384
+          },
+          {
+            "name": "weather-metrics",
+            "x": 48,
+            "y": 1286,
+            "width": 804.59375,
+            "height": 186
+          },
+          {
+            "name": "weather-warnings",
+            "x": 48,
+            "y": 1492,
+            "width": 804.59375,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 4,
+        "dayRows": 7,
+        "metricRows": 2,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.003671987673611111,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 833,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 1000,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 541,
+        "legends": [
+          405,
+          517,
+          629,
+          741
+        ],
+        "hourRowOffsets": [
+          405,
+          517,
+          629,
+          741
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 53,
+          "y": 346,
+          "width": 894,
+          "height": 1348
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 53,
+            "y": 346,
+            "width": 291.328125,
+            "height": 520
+          },
+          {
+            "name": "weather-hourly",
+            "x": 364,
+            "y": 346,
+            "width": 582.671875,
+            "height": 520
+          },
+          {
+            "name": "weather-daily",
+            "x": 53,
+            "y": 886,
+            "width": 894,
+            "height": 388
+          },
+          {
+            "name": "weather-metrics",
+            "x": 53,
+            "y": 1294,
+            "width": 894,
+            "height": 190
+          },
+          {
+            "name": "weather-warnings",
+            "x": 53,
+            "y": 1504,
+            "width": 894,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 4,
+        "dayRows": 7,
+        "metricRows": 2,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0036364250000000004,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 884.7999999998137,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 1024,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 554,
+        "legends": [
+          405,
+          517,
+          629,
+          741
+        ],
+        "hourRowOffsets": [
+          405,
+          517,
+          629,
+          741
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 54,
+          "y": 346,
+          "width": 915.453125,
+          "height": 1174.8125
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 54,
+            "y": 346,
+            "width": 298.484375,
+            "height": 520.9375
+          },
+          {
+            "name": "weather-hourly",
+            "x": 373,
+            "y": 346,
+            "width": 596.96875,
+            "height": 520.9375
+          },
+          {
+            "name": "weather-daily",
+            "x": 54,
+            "y": 887,
+            "width": 915.453125,
+            "height": 212.9375
+          },
+          {
+            "name": "weather-metrics",
+            "x": 54,
+            "y": 1120,
+            "width": 915.453125,
+            "height": 190.9375
+          },
+          {
+            "name": "weather-warnings",
+            "x": 54,
+            "y": 1331,
+            "width": 915.453125,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 4,
+        "dayRows": 1,
+        "metricRows": 2,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0032949268817901614,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 825.1000000005588,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 1034,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 560,
+        "legends": [
+          406,
+          518,
+          630,
+          742
+        ],
+        "hourRowOffsets": [
+          406,
+          518,
+          630,
+          742
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 55,
+          "y": 346,
+          "width": 924.390625,
+          "height": 1176.03125
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 55,
+            "y": 346,
+            "width": 301.453125,
+            "height": 521.34375
+          },
+          {
+            "name": "weather-hourly",
+            "x": 376,
+            "y": 346,
+            "width": 602.9375,
+            "height": 521.34375
+          },
+          {
+            "name": "weather-daily",
+            "x": 55,
+            "y": 887,
+            "width": 924.390625,
+            "height": 213.34375
+          },
+          {
+            "name": "weather-metrics",
+            "x": 55,
+            "y": 1121,
+            "width": 924.390625,
+            "height": 191.34375
+          },
+          {
+            "name": "weather-warnings",
+            "x": 55,
+            "y": 1332,
+            "width": 924.390625,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 4,
+        "dayRows": 1,
+        "metricRows": 2,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.003276808631644961,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 897.7000000001863,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 1186,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 644,
+        "legends": [
+          363,
+          476,
+          588
+        ],
+        "hourRowOffsets": [
+          363,
+          476,
+          588
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 63,
+          "y": 300,
+          "width": 1060.28125,
+          "height": 1084.8125
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 63,
+            "y": 300,
+            "width": 346.75,
+            "height": 417.9375
+          },
+          {
+            "name": "weather-hourly",
+            "x": 430,
+            "y": 300,
+            "width": 693.53125,
+            "height": 417.9375
+          },
+          {
+            "name": "weather-daily",
+            "x": 63,
+            "y": 738,
+            "width": 1060.28125,
+            "height": 219.4375
+          },
+          {
+            "name": "weather-metrics",
+            "x": 63,
+            "y": 977,
+            "width": 1060.28125,
+            "height": 197.4375
+          },
+          {
+            "name": "weather-warnings",
+            "x": 63,
+            "y": 1195,
+            "width": 1060.28125,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 3,
+        "dayRows": 1,
+        "metricRows": 2,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.004348671144735233,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 877.6000000005588,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 1440,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 795,
+        "legends": [
+          363,
+          476,
+          589
+        ],
+        "hourRowOffsets": [
+          363,
+          476,
+          589
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 76,
+          "y": 300,
+          "width": 1287.359375,
+          "height": 1006.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 76,
+            "y": 300,
+            "width": 422.453125,
+            "height": 418.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 519,
+            "y": 300,
+            "width": 844.90625,
+            "height": 418.5
+          },
+          {
+            "name": "weather-daily",
+            "x": 76,
+            "y": 739,
+            "width": 1287.359375,
+            "height": 220
+          },
+          {
+            "name": "weather-metrics",
+            "x": 76,
+            "y": 979,
+            "width": 1287.359375,
+            "height": 118
+          },
+          {
+            "name": "weather-warnings",
+            "x": 76,
+            "y": 1117,
+            "width": 1287.359375,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 3,
+        "dayRows": 1,
+        "metricRows": 1,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.003701072334948881,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 837.7000000001863,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 1920,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 923,
+        "legends": [
+          363,
+          532
+        ],
+        "hourRowOffsets": [
+          363,
+          532
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 220,
+          "y": 300,
+          "width": 1480,
+          "height": 1006.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 220,
+            "y": 300,
+            "width": 486.65625,
+            "height": 418.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 727,
+            "y": 300,
+            "width": 973.34375,
+            "height": 418.5
+          },
+          {
+            "name": "weather-daily",
+            "x": 220,
+            "y": 739,
+            "width": 1480,
+            "height": 220
+          },
+          {
+            "name": "weather-metrics",
+            "x": 220,
+            "y": 979,
+            "width": 1480,
+            "height": 118
+          },
+          {
+            "name": "weather-warnings",
+            "x": 220,
+            "y": 1117,
+            "width": 1480,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 2,
+        "dayRows": 1,
+        "metricRows": 1,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0023975640190972225,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 858.7000000001863,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    },
+    {
+      "width": 3840,
+      "sectionCls": 0,
+      "shifts": [],
+      "geometry": {
+        "hourWidth": 923,
+        "legends": [
+          363,
+          532
+        ],
+        "hourRowOffsets": [
+          363,
+          532
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 1180,
+          "y": 300,
+          "width": 1480,
+          "height": 1006.5
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 1180,
+            "y": 300,
+            "width": 486.65625,
+            "height": 418.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 1687,
+            "y": 300,
+            "width": 973.34375,
+            "height": 418.5
+          },
+          {
+            "name": "weather-daily",
+            "x": 1180,
+            "y": 739,
+            "width": 1480,
+            "height": 220
+          },
+          {
+            "name": "weather-metrics",
+            "x": 1180,
+            "y": 979,
+            "width": 1480,
+            "height": 118
+          },
+          {
+            "name": "weather-warnings",
+            "x": 1180,
+            "y": 1117,
+            "width": 1480,
+            "height": 128
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 2,
+        "dayRows": 1,
+        "metricRows": 1,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      },
+      "units": {
+        "unitCls": 0,
+        "recentInputGlyphShifts": 0.0005993910047743056,
+        "weatherStreams": 0,
+        "minTextContrast": 7.570343963096609
+      },
+      "streamAfterLayoutMs": 880.4000000003725,
+      "restoredStreams": 0,
+      "providerCounterDelta": {
+        "geo": 0,
+        "current": 0,
+        "forecast": 0,
+        "dwd": 0
+      }
+    }
+  ],
+  "noJs": [
+    {
+      "width": 320,
+      "geometry": {
+        "hourWidth": 254,
+        "legends": [
+          860
+        ],
+        "hourRowOffsets": [
+          860
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 16,
+          "y": 386,
+          "width": 288,
+          "height": 1811.171875
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 16,
+            "y": 386,
+            "width": 288,
+            "height": 402.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 16,
+            "y": 805,
+            "width": 288,
+            "height": 176
+          },
+          {
+            "name": "weather-daily",
+            "x": 16,
+            "y": 997,
+            "width": 288,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 16,
+            "y": 1393,
+            "width": 288,
+            "height": 342
+          },
+          {
+            "name": "weather-warnings",
+            "x": 16,
+            "y": 1751,
+            "width": 288,
+            "height": 370.671875
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 1,
+        "dayRows": 7,
+        "metricRows": 4,
+        "hourScrollable": true,
+        "overflow": false,
+        "clippedText": []
+      }
+    },
+    {
+      "width": 390,
+      "geometry": {
+        "hourWidth": 324,
+        "legends": [
+          860
+        ],
+        "hourRowOffsets": [
+          860
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 16,
+          "y": 386,
+          "width": 358,
+          "height": 1782.28125
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 16,
+            "y": 386,
+            "width": 358,
+            "height": 402.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 16,
+            "y": 805,
+            "width": 358,
+            "height": 176
+          },
+          {
+            "name": "weather-daily",
+            "x": 16,
+            "y": 997,
+            "width": 358,
+            "height": 380
+          },
+          {
+            "name": "weather-metrics",
+            "x": 16,
+            "y": 1393,
+            "width": 358,
+            "height": 342
+          },
+          {
+            "name": "weather-warnings",
+            "x": 16,
+            "y": 1751,
+            "width": 358,
+            "height": 341.78125
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 1,
+        "dayRows": 7,
+        "metricRows": 4,
+        "hourScrollable": true,
+        "overflow": false,
+        "clippedText": []
+      }
+    },
+    {
+      "width": 1440,
+      "geometry": {
+        "hourWidth": 795,
+        "legends": [
+          363,
+          475,
+          587
+        ],
+        "hourRowOffsets": [
+          363,
+          475,
+          587
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 76,
+          "y": 300,
+          "width": 1287.359375,
+          "height": 1209.78125
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 76,
+            "y": 300,
+            "width": 422.453125,
+            "height": 416
+          },
+          {
+            "name": "weather-hourly",
+            "x": 519,
+            "y": 300,
+            "width": 844.90625,
+            "height": 416
+          },
+          {
+            "name": "weather-daily",
+            "x": 76,
+            "y": 736,
+            "width": 1287.359375,
+            "height": 220
+          },
+          {
+            "name": "weather-metrics",
+            "x": 76,
+            "y": 976,
+            "width": 1287.359375,
+            "height": 118
+          },
+          {
+            "name": "weather-warnings",
+            "x": 76,
+            "y": 1114,
+            "width": 1287.359375,
+            "height": 333.78125
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 3,
+        "dayRows": 1,
+        "metricRows": 1,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      }
+    },
+    {
+      "width": 3840,
+      "geometry": {
+        "hourWidth": 923,
+        "legends": [
+          363,
+          519
+        ],
+        "hourRowOffsets": [
+          363,
+          519
+        ],
+        "readingAlignmentErrors": [],
+        "board": {
+          "x": 1180,
+          "y": 300,
+          "width": 1480,
+          "height": 1186.28125
+        },
+        "sections": [
+          {
+            "name": "weather-current",
+            "x": 1180,
+            "y": 300,
+            "width": 486.65625,
+            "height": 392.5
+          },
+          {
+            "name": "weather-hourly",
+            "x": 1687,
+            "y": 300,
+            "width": 973.34375,
+            "height": 392.5
+          },
+          {
+            "name": "weather-daily",
+            "x": 1180,
+            "y": 713,
+            "width": 1480,
+            "height": 220
+          },
+          {
+            "name": "weather-metrics",
+            "x": 1180,
+            "y": 953,
+            "width": 1480,
+            "height": 118
+          },
+          {
+            "name": "weather-warnings",
+            "x": 1180,
+            "y": 1091,
+            "width": 1480,
+            "height": 333.78125
+          }
+        ],
+        "hours": 24,
+        "days": 7,
+        "hourRows": 2,
+        "dayRows": 1,
+        "metricRows": 1,
+        "hourScrollable": false,
+        "overflow": false,
+        "clippedText": []
+      }
+    }
+  ]
+}

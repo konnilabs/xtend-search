@@ -1,0 +1,79 @@
+{
+  "ok": true,
+  "revision": "0.7.6-r3",
+  "date": "2026-10-25T15:32:11.096922+00:00",
+  "sourceCommit": "2b191e0b7188abe98faee3320a4dc2c33ad3dd23",
+  "frontendImage": "sha256:fb66f765e8d8e2e4fd4be9534e7d87db669402f8f5a8efe9257cd3ab49c162fe",
+  "backendImage": "sha256:d4addc901aedab078c9de675e7c8cb883f7f0b8c3f4d3b4c7ced5c8ab4f6632f",
+  "backendUnchanged": true,
+  "checks": {
+    "strictMaracaAndHtmlSecurity": true,
+    "controlNodeTests": 163,
+    "browserGates": [
+      {
+        "name": "preview-size-browser",
+        "ok": true,
+        "durationMs": 21284
+      },
+      {
+        "name": "image-grid-layout-browser",
+        "ok": true,
+        "durationMs": 15670
+      },
+      {
+        "name": "release-076-browser",
+        "ok": true,
+        "durationMs": 32800
+      },
+      {
+        "name": "release-075-browser",
+        "ok": true,
+        "durationMs": 33081
+      },
+      {
+        "name": "ssr-browser",
+        "ok": true,
+        "durationMs": 15267
+      },
+      {
+        "name": "lightbox-resilience-browser",
+        "ok": true,
+        "durationMs": 18874
+      }
+    ],
+    "previewGeometrySamples": 55,
+    "referenceVersion": "0.7.5",
+    "referenceImage": "sha256:e9815597f17b3a2d194dd21632ab142f55103fc764a384f1f0a7766a8ff56891",
+    "referenceSamples": 55,
+    "widthVariationAcrossImageShapesPx": 0.0,
+    "widthDeltaFrom075Px": {
+      "aside": 0.0,
+      "toolbar": 0.0,
+      "canvas": 0.0
+    }
+  },
+  "localUpgrade": {
+    "health": {
+      "ok": true,
+      "version": "0.7.6",
+      "storage": "ready",
+      "retrieval": "compatible"
+    },
+    "sameEnvironment": true,
+    "sameVolumes": true,
+    "backendContainerUnchanged": true,
+    "dataPreserved": {
+      "policies": true,
+      "guards": true,
+      "quality_rules": true,
+      "quality_pauses": true,
+      "weather_policy": true,
+      "site_content": true,
+      "metadata": true,
+      "weather_budget": true
+    }
+  },
+  "localCssSha256": "8e0579d7f8675e9a473758fcd09f0b9cdf2e927cfb66fb2bf249a6c194790127",
+  "baseline": "Original full 21 browser gates/performance and R2 grid follow-up retain their separate image identities. R3 tests use the actual rebuilt image and a separate actual 0.7.5 dimensional reference.",
+  "scope": "Offline provider fixtures, synthetic landscape/portrait/square/pending images, 320\u20133840px, native preview/lightbox and RMT motion. No live searches, result URLs or credentials retained."
+}
