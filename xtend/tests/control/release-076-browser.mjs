@@ -28,7 +28,7 @@ async function filterShape(p,width,height,native=false){
  await p.locator('#filters>summary').click();await p.locator('#language').waitFor({state:'hidden'});
 }
 try{
- for(const [w,h]of [[320,568],[390,844],[600,600],[700,650],[1122,892],[1440,900],[1920,1080],[3840,2160]])await filterShape(page,w,h);
+ for(const [w,h]of [[320,568],[390,844],[600,600],[700,650],[1122,768],[1122,800],[1122,892],[1440,900],[1920,1080],[3840,2160]])await filterShape(page,w,h);
  const native=await browser.newContext({javaScriptEnabled:false,colorScheme:'dark'}),np=await native.newPage();
  try{for(const [w,h]of [[320,568],[1122,892]])await filterShape(np,w,h,true);}finally{await native.close();}
  checks.push('Centered two-column filter panel, mobile/low-height internal scrolling, no added document overflow, 44px actions and no-JS controls at 320–3840px.');
@@ -73,7 +73,15 @@ try{
  await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].stream?.phase==='partial');
  await page.locator('#search-input').fill('next unsent fixture');await complete();
  assert.equal(await page.locator('#search-input').inputValue(),'next unsent fixture');
- checks.push('Logo navigation clears both submitted text and unsent drafts; the native search clear affordance and subsequent searches remain functional.');
+ // An intentional clear must not discard text entered after the home visit began.
+ let releaseHome;const homeGate=new Promise(resolve=>releaseHome=resolve);
+ await page.route('**/*',async route=>{const req=route.request();if(req.headers()['x-xtend-page']&&new URL(req.url()).pathname==='/')await homeGate;await route.continue();});
+ await page.locator('#search-wordmark').click();await page.waitForFunction(()=>document.querySelector('#search-input').value==='');
+ await page.locator('#search-input').fill('typed during home navigation');releaseHome();
+ await page.waitForFunction(()=>window.XTendPage.page.props['search.data'].view==='home');
+ await page.waitForFunction(()=>document.querySelector('#search-input').value==='typed during home navigation');
+ await page.unroute('**/*');
+ checks.push('Logo navigation clears submitted text and unsent drafts; later input during a held home response and input during XScaler updates survive. Native clear and subsequent searches remain functional.');
  assert.deepEqual(errors,[]);
  await fs.writeFile(new URL(`${VERSION}-shell-motion-browser.json`,out),JSON.stringify({ok:true,checks,geometry,morph,errors,scope:'Isolated Docker fixtures and synthetic local images; no real providers or user data'},null,2)+'\n');
  console.log(JSON.stringify({ok:true,checks}));

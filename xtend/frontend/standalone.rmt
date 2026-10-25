@@ -1368,6 +1368,9 @@ template xtend.search {
  portal search.overlayRoot
     lane visible weight 70 { hydrate search-overlays from selector search.overlays }
   }
+  // Renew only the native field on a home intent; retain the morphing form.
+  state search.inputKey type string initial "search-input"
+
   state search.query type string initial ""
   state search.activity type object preserve { initial {
       busy false
@@ -1585,7 +1588,7 @@ template xtend.search {
                     {
                       "type" "element"
                       "tag" "input"
-                      "properties" { "value" "$model.search.query" }
+                      "key" "$model.search.inputKey"
                       "attributes" {
                         "id" "search-input"
                         "type" "search"
@@ -3443,6 +3446,8 @@ template xtend.search {
 }
 
   action search.home {
+    input key string
+    reduce state.search.inputKey = input.key
     reduce state.search.query = ""
     reduce state.search.data.location = ""
   }
