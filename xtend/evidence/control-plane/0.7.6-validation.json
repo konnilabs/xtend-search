@@ -1,0 +1,154 @@
+{
+  "ok": true,
+  "date": "2026-10-25T15:08:46.097897+00:00",
+  "sourceCommit": "1efd3ebe2a92cd861f4c663c9cacec1b559a81fa",
+  "dependency": {
+    "pullRequest": 33,
+    "commit": "556f615db319974a925c6b9486668070ea9a2155",
+    "mergeRequiredBeforeMain": true
+  },
+  "frontend": {
+    "version": "0.7.6",
+    "image": "sha256:4e7fe05abd7dc5661f59278f387f9946e2fa614b8ded6eda958dee6ea045e3d7",
+    "platform": "linux/amd64"
+  },
+  "backend": {
+    "version": "0.7.5",
+    "image": "sha256:d4addc901aedab078c9de675e7c8cb883f7f0b8c3f4d3b4c7ced5c8ab4f6632f",
+    "unchanged": true
+  },
+  "sdk": {
+    "version": "0.9.0",
+    "commit": "66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3",
+    "artifactSha256": "55ba9f39f183225a26e6eef366a549805f2fb3e3ef40b42ea679a0db55b68264",
+    "unchanged": true
+  },
+  "checks": {
+    "strictMaracaAndHtmlSecurity": true,
+    "controlNodeTests": 163,
+    "legacyNodeTests": 10,
+    "pythonBoundaryTests": 8,
+    "browserGates": 21,
+    "browserGateReport": "0.7.6-browser-gates.json",
+    "motionGeometryReport": "0.7.6-shell-motion-browser.json",
+    "knowledgeFailureReport": "0.7.6-knowledge-web-failure.json"
+  },
+  "performance": {
+    "ok": true,
+    "scope": "Five runs per actual Docker image on the same host, browser and offline fixtures, independent fresh volumes. First means interactive streamed result event, not a browser paint timestamp; heap is a coarse Chromium diagnostic. Cache restoration includes one provider-free epoch roundtrip.",
+    "baseline": {
+      "firstMs": 600.0999999996275,
+      "completeMs": 3205.4000000003725,
+      "jsEncodedBytes": 648252,
+      "jsHeapBytes": 19300000,
+      "restoreMs": 733
+    },
+    "candidate": {
+      "firstMs": 597.9000000003725,
+      "completeMs": 3217.4000000003725,
+      "jsEncodedBytes": 655705,
+      "jsHeapBytes": 23100000,
+      "restoreMs": 730
+    },
+    "firstResultRegressionPercent": -0.36660556561511903,
+    "firstResultLimitPercent": 10,
+    "clsBaseline": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "clsCandidate": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "allRestoresWithoutSearchStream": true
+  },
+  "bundleSizes": {
+    "ok": true,
+    "scope": "Exact built images; gzip each esbuild browser-graph module, CSS and generated Maraca entry separately. This is separate from browser transfer and lazy-load timings.",
+    "versions": {
+      "0.7.5": {
+        "browserGraphGzipBytes": 138144,
+        "moduleCount": 8,
+        "cssGzipBytes": 11948,
+        "maracaEntryGzipBytes": 183947
+      },
+      "0.7.6": {
+        "browserGraphGzipBytes": 139040,
+        "moduleCount": 8,
+        "cssGzipBytes": 12286,
+        "maracaEntryGzipBytes": 191323
+      }
+    },
+    "browserGraphDeltaBytes": 896
+  },
+  "layoutShift": {
+    "metric": "Web Vitals CLS excludes shifts following user input; intended home/header transitions can still move layout.",
+    "runs": [
+      {
+        "width": 320,
+        "cpuThrottled": false,
+        "initialCls": 0,
+        "streamCls": 0,
+        "streamOverflow": false
+      },
+      {
+        "width": 390,
+        "cpuThrottled": false,
+        "initialCls": 0,
+        "streamCls": 0,
+        "streamOverflow": false
+      },
+      {
+        "width": 1440,
+        "cpuThrottled": false,
+        "initialCls": 0,
+        "streamCls": 0,
+        "streamOverflow": false
+      },
+      {
+        "width": 1920,
+        "cpuThrottled": false,
+        "initialCls": 0,
+        "streamCls": 0,
+        "streamOverflow": false
+      },
+      {
+        "width": 3840,
+        "cpuThrottled": false,
+        "initialCls": 0,
+        "streamCls": 0,
+        "streamOverflow": false
+      },
+      {
+        "width": 390,
+        "cpuThrottled": true,
+        "initialCls": 0,
+        "streamCls": 0,
+        "streamOverflow": false
+      }
+    ]
+  },
+  "localUpgrade": {
+    "sameEnvironment": true,
+    "sameVolumes": true,
+    "backendContainerUnchanged": true,
+    "dataPreserved": {
+      "policies": true,
+      "guards": true,
+      "quality_rules": true,
+      "quality_pauses": true,
+      "weather_policy": true,
+      "site_content": true,
+      "metadata": true,
+      "weather_budget": true
+    }
+  },
+  "mcpProof": "0.7.6-mcp.json; Docker knowledge tools are separate from actual pinned SDK/compiler/browser evidence.",
+  "scope": "Isolated offline fixtures and synthetic local images; no live search providers, user queries, result URLs or credentials retained. Local Docker frontend upgraded after a protected offline volume backup; no production deployment, main merge or framework publication."
+}

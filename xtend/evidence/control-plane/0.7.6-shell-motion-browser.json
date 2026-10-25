@@ -1,0 +1,1024 @@
+{
+  "ok": true,
+  "checks": [
+    "Centered two-column filter panel, mobile/low-height internal scrolling, no added document overflow, 44px actions and no-JS controls at 320–3840px.",
+    "Rapid filter toggles settle closed with no invisible focusable controls.",
+    "RMT sidebar enter/exit, real image-content FLIP through the XTend runner, carousel/focus return, rapid actions, Reduced Motion and stale-navigation cleanup.",
+    "Logo navigation clears submitted text and unsent drafts; later input during a held home response and input during XScaler updates survive. Native clear and subsequent searches remain functional."
+  ],
+  "geometry": [
+    {
+      "width": 320,
+      "height": 568,
+      "native": false,
+      "x": 16,
+      "y": 64,
+      "w": 288,
+      "h": 488,
+      "bottom": 552,
+      "formCenter": 160,
+      "fields": [
+        {
+          "x": 35,
+          "y": 104,
+          "width": 250,
+          "height": 44,
+          "top": 104,
+          "right": 285,
+          "bottom": 148,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 181,
+          "width": 250,
+          "height": 44,
+          "top": 181,
+          "right": 285,
+          "bottom": 225,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 258,
+          "width": 250,
+          "height": 44,
+          "top": 258,
+          "right": 285,
+          "bottom": 302,
+          "left": 35
+        }
+      ],
+      "buttons": [
+        {
+          "x": 35,
+          "y": 314,
+          "width": 250,
+          "height": 44,
+          "top": 314,
+          "right": 285,
+          "bottom": 358,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 368,
+          "width": 250,
+          "height": 44,
+          "top": 368,
+          "right": 285,
+          "bottom": 412,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 422,
+          "width": 250,
+          "height": 44,
+          "top": 422,
+          "right": 285,
+          "bottom": 466,
+          "left": 35
+        }
+      ],
+      "viewport": {
+        "w": 320,
+        "h": 568
+      },
+      "pageHeight": 568,
+      "pageWidth": 320
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "native": false,
+      "x": 16,
+      "y": 64,
+      "w": 358,
+      "h": 482.5,
+      "bottom": 546.5,
+      "formCenter": 195,
+      "fields": [
+        {
+          "x": 35,
+          "y": 104,
+          "width": 320,
+          "height": 44,
+          "top": 104,
+          "right": 355,
+          "bottom": 148,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 181,
+          "width": 320,
+          "height": 44,
+          "top": 181,
+          "right": 355,
+          "bottom": 225,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 258,
+          "width": 320,
+          "height": 44,
+          "top": 258,
+          "right": 355,
+          "bottom": 302,
+          "left": 35
+        }
+      ],
+      "buttons": [
+        {
+          "x": 35,
+          "y": 314,
+          "width": 320,
+          "height": 44,
+          "top": 314,
+          "right": 355,
+          "bottom": 358,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 368,
+          "width": 320,
+          "height": 44,
+          "top": 368,
+          "right": 355,
+          "bottom": 412,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 422,
+          "width": 320,
+          "height": 44,
+          "top": 422,
+          "right": 355,
+          "bottom": 466,
+          "left": 35
+        }
+      ],
+      "viewport": {
+        "w": 390,
+        "h": 844
+      },
+      "pageHeight": 844,
+      "pageWidth": 390
+    },
+    {
+      "width": 600,
+      "height": 600,
+      "native": false,
+      "x": 16,
+      "y": 64,
+      "w": 568,
+      "h": 466,
+      "bottom": 530,
+      "formCenter": 300,
+      "fields": [
+        {
+          "x": 35,
+          "y": 104,
+          "width": 530,
+          "height": 44,
+          "top": 104,
+          "right": 565,
+          "bottom": 148,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 181,
+          "width": 530,
+          "height": 44,
+          "top": 181,
+          "right": 565,
+          "bottom": 225,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 258,
+          "width": 530,
+          "height": 44,
+          "top": 258,
+          "right": 565,
+          "bottom": 302,
+          "left": 35
+        }
+      ],
+      "buttons": [
+        {
+          "x": 35,
+          "y": 314,
+          "width": 530,
+          "height": 44,
+          "top": 314,
+          "right": 565,
+          "bottom": 358,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 368,
+          "width": 530,
+          "height": 44,
+          "top": 368,
+          "right": 565,
+          "bottom": 412,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 422,
+          "width": 530,
+          "height": 44,
+          "top": 422,
+          "right": 565,
+          "bottom": 466,
+          "left": 35
+        }
+      ],
+      "viewport": {
+        "w": 600,
+        "h": 600
+      },
+      "pageHeight": 600,
+      "pageWidth": 600
+    },
+    {
+      "width": 700,
+      "height": 650,
+      "native": false,
+      "x": 16,
+      "y": 64,
+      "w": 668,
+      "h": 318,
+      "bottom": 382,
+      "formCenter": 350,
+      "fields": [
+        {
+          "x": 40,
+          "y": 109,
+          "width": 298,
+          "height": 44,
+          "top": 109,
+          "right": 338,
+          "bottom": 153,
+          "left": 40
+        },
+        {
+          "x": 40,
+          "y": 188,
+          "width": 298,
+          "height": 44,
+          "top": 188,
+          "right": 338,
+          "bottom": 232,
+          "left": 40
+        },
+        {
+          "x": 40,
+          "y": 267,
+          "width": 298,
+          "height": 44,
+          "top": 267,
+          "right": 338,
+          "bottom": 311,
+          "left": 40
+        }
+      ],
+      "buttons": [
+        {
+          "x": 362,
+          "y": 109,
+          "width": 298,
+          "height": 44,
+          "top": 109,
+          "right": 660,
+          "bottom": 153,
+          "left": 362
+        },
+        {
+          "x": 362,
+          "y": 188,
+          "width": 298,
+          "height": 44,
+          "top": 188,
+          "right": 660,
+          "bottom": 232,
+          "left": 362
+        },
+        {
+          "x": 362,
+          "y": 267,
+          "width": 298,
+          "height": 44,
+          "top": 267,
+          "right": 660,
+          "bottom": 311,
+          "left": 362
+        }
+      ],
+      "viewport": {
+        "w": 700,
+        "h": 650
+      },
+      "pageHeight": 650,
+      "pageWidth": 700
+    },
+    {
+      "width": 1122,
+      "height": 768,
+      "native": false,
+      "x": 221,
+      "y": 64,
+      "w": 680,
+      "h": 318,
+      "bottom": 382,
+      "formCenter": 561,
+      "fields": [
+        {
+          "x": 245,
+          "y": 109,
+          "width": 304,
+          "height": 44,
+          "top": 109,
+          "right": 549,
+          "bottom": 153,
+          "left": 245
+        },
+        {
+          "x": 245,
+          "y": 188,
+          "width": 304,
+          "height": 44,
+          "top": 188,
+          "right": 549,
+          "bottom": 232,
+          "left": 245
+        },
+        {
+          "x": 245,
+          "y": 267,
+          "width": 304,
+          "height": 44,
+          "top": 267,
+          "right": 549,
+          "bottom": 311,
+          "left": 245
+        }
+      ],
+      "buttons": [
+        {
+          "x": 573,
+          "y": 109,
+          "width": 304,
+          "height": 44,
+          "top": 109,
+          "right": 877,
+          "bottom": 153,
+          "left": 573
+        },
+        {
+          "x": 573,
+          "y": 188,
+          "width": 304,
+          "height": 44,
+          "top": 188,
+          "right": 877,
+          "bottom": 232,
+          "left": 573
+        },
+        {
+          "x": 573,
+          "y": 267,
+          "width": 304,
+          "height": 44,
+          "top": 267,
+          "right": 877,
+          "bottom": 311,
+          "left": 573
+        }
+      ],
+      "viewport": {
+        "w": 1122,
+        "h": 768
+      },
+      "pageHeight": 768,
+      "pageWidth": 1122
+    },
+    {
+      "width": 1122,
+      "height": 800,
+      "native": false,
+      "x": 221,
+      "y": 64,
+      "w": 680,
+      "h": 318,
+      "bottom": 382,
+      "formCenter": 561,
+      "fields": [
+        {
+          "x": 245,
+          "y": 109,
+          "width": 304,
+          "height": 44,
+          "top": 109,
+          "right": 549,
+          "bottom": 153,
+          "left": 245
+        },
+        {
+          "x": 245,
+          "y": 188,
+          "width": 304,
+          "height": 44,
+          "top": 188,
+          "right": 549,
+          "bottom": 232,
+          "left": 245
+        },
+        {
+          "x": 245,
+          "y": 267,
+          "width": 304,
+          "height": 44,
+          "top": 267,
+          "right": 549,
+          "bottom": 311,
+          "left": 245
+        }
+      ],
+      "buttons": [
+        {
+          "x": 573,
+          "y": 109,
+          "width": 304,
+          "height": 44,
+          "top": 109,
+          "right": 877,
+          "bottom": 153,
+          "left": 573
+        },
+        {
+          "x": 573,
+          "y": 188,
+          "width": 304,
+          "height": 44,
+          "top": 188,
+          "right": 877,
+          "bottom": 232,
+          "left": 573
+        },
+        {
+          "x": 573,
+          "y": 267,
+          "width": 304,
+          "height": 44,
+          "top": 267,
+          "right": 877,
+          "bottom": 311,
+          "left": 573
+        }
+      ],
+      "viewport": {
+        "w": 1122,
+        "h": 800
+      },
+      "pageHeight": 800,
+      "pageWidth": 1122
+    },
+    {
+      "width": 1122,
+      "height": 892,
+      "native": false,
+      "x": 221,
+      "y": 465.59375,
+      "w": 680,
+      "h": 318,
+      "bottom": 783.59375,
+      "formCenter": 561,
+      "fields": [
+        {
+          "x": 245,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 549,
+          "bottom": 554.59375,
+          "left": 245
+        },
+        {
+          "x": 245,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 549,
+          "bottom": 633.59375,
+          "left": 245
+        },
+        {
+          "x": 245,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 549,
+          "bottom": 712.59375,
+          "left": 245
+        }
+      ],
+      "buttons": [
+        {
+          "x": 573,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 877,
+          "bottom": 554.59375,
+          "left": 573
+        },
+        {
+          "x": 573,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 877,
+          "bottom": 633.59375,
+          "left": 573
+        },
+        {
+          "x": 573,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 877,
+          "bottom": 712.59375,
+          "left": 573
+        }
+      ],
+      "viewport": {
+        "w": 1122,
+        "h": 892
+      },
+      "pageHeight": 892,
+      "pageWidth": 1122
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "native": false,
+      "x": 380,
+      "y": 465.59375,
+      "w": 680,
+      "h": 318,
+      "bottom": 783.59375,
+      "formCenter": 720,
+      "fields": [
+        {
+          "x": 404,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 708,
+          "bottom": 554.59375,
+          "left": 404
+        },
+        {
+          "x": 404,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 708,
+          "bottom": 633.59375,
+          "left": 404
+        },
+        {
+          "x": 404,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 708,
+          "bottom": 712.59375,
+          "left": 404
+        }
+      ],
+      "buttons": [
+        {
+          "x": 732,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 1036,
+          "bottom": 554.59375,
+          "left": 732
+        },
+        {
+          "x": 732,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 1036,
+          "bottom": 633.59375,
+          "left": 732
+        },
+        {
+          "x": 732,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 1036,
+          "bottom": 712.59375,
+          "left": 732
+        }
+      ],
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "pageHeight": 900,
+      "pageWidth": 1440
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "native": false,
+      "x": 620,
+      "y": 465.59375,
+      "w": 680,
+      "h": 318,
+      "bottom": 783.59375,
+      "formCenter": 960,
+      "fields": [
+        {
+          "x": 644,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 948,
+          "bottom": 554.59375,
+          "left": 644
+        },
+        {
+          "x": 644,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 948,
+          "bottom": 633.59375,
+          "left": 644
+        },
+        {
+          "x": 644,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 948,
+          "bottom": 712.59375,
+          "left": 644
+        }
+      ],
+      "buttons": [
+        {
+          "x": 972,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 1276,
+          "bottom": 554.59375,
+          "left": 972
+        },
+        {
+          "x": 972,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 1276,
+          "bottom": 633.59375,
+          "left": 972
+        },
+        {
+          "x": 972,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 1276,
+          "bottom": 712.59375,
+          "left": 972
+        }
+      ],
+      "viewport": {
+        "w": 1920,
+        "h": 1080
+      },
+      "pageHeight": 1080,
+      "pageWidth": 1920
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "native": false,
+      "x": 1580,
+      "y": 465.59375,
+      "w": 680,
+      "h": 318,
+      "bottom": 783.59375,
+      "formCenter": 1920,
+      "fields": [
+        {
+          "x": 1604,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 1908,
+          "bottom": 554.59375,
+          "left": 1604
+        },
+        {
+          "x": 1604,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 1908,
+          "bottom": 633.59375,
+          "left": 1604
+        },
+        {
+          "x": 1604,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 1908,
+          "bottom": 712.59375,
+          "left": 1604
+        }
+      ],
+      "buttons": [
+        {
+          "x": 1932,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 2236,
+          "bottom": 554.59375,
+          "left": 1932
+        },
+        {
+          "x": 1932,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 2236,
+          "bottom": 633.59375,
+          "left": 1932
+        },
+        {
+          "x": 1932,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 2236,
+          "bottom": 712.59375,
+          "left": 1932
+        }
+      ],
+      "viewport": {
+        "w": 3840,
+        "h": 2160
+      },
+      "pageHeight": 2160,
+      "pageWidth": 3840
+    },
+    {
+      "width": 320,
+      "height": 568,
+      "native": true,
+      "x": 16,
+      "y": 64,
+      "w": 288,
+      "h": 488,
+      "bottom": 552,
+      "formCenter": 160,
+      "fields": [
+        {
+          "x": 35,
+          "y": 104,
+          "width": 250,
+          "height": 44,
+          "top": 104,
+          "right": 285,
+          "bottom": 148,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 181,
+          "width": 250,
+          "height": 44,
+          "top": 181,
+          "right": 285,
+          "bottom": 225,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 258,
+          "width": 250,
+          "height": 44,
+          "top": 258,
+          "right": 285,
+          "bottom": 302,
+          "left": 35
+        }
+      ],
+      "buttons": [
+        {
+          "x": 35,
+          "y": 314,
+          "width": 250,
+          "height": 44,
+          "top": 314,
+          "right": 285,
+          "bottom": 358,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 368,
+          "width": 250,
+          "height": 44,
+          "top": 368,
+          "right": 285,
+          "bottom": 412,
+          "left": 35
+        },
+        {
+          "x": 35,
+          "y": 422,
+          "width": 250,
+          "height": 44,
+          "top": 422,
+          "right": 285,
+          "bottom": 466,
+          "left": 35
+        }
+      ],
+      "viewport": {
+        "w": 320,
+        "h": 568
+      },
+      "pageHeight": 568,
+      "pageWidth": 320
+    },
+    {
+      "width": 1122,
+      "height": 892,
+      "native": true,
+      "x": 221,
+      "y": 465.59375,
+      "w": 680,
+      "h": 318,
+      "bottom": 783.59375,
+      "formCenter": 561,
+      "fields": [
+        {
+          "x": 245,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 549,
+          "bottom": 554.59375,
+          "left": 245
+        },
+        {
+          "x": 245,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 549,
+          "bottom": 633.59375,
+          "left": 245
+        },
+        {
+          "x": 245,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 549,
+          "bottom": 712.59375,
+          "left": 245
+        }
+      ],
+      "buttons": [
+        {
+          "x": 573,
+          "y": 510.59375,
+          "width": 304,
+          "height": 44,
+          "top": 510.59375,
+          "right": 877,
+          "bottom": 554.59375,
+          "left": 573
+        },
+        {
+          "x": 573,
+          "y": 589.59375,
+          "width": 304,
+          "height": 44,
+          "top": 589.59375,
+          "right": 877,
+          "bottom": 633.59375,
+          "left": 573
+        },
+        {
+          "x": 573,
+          "y": 668.59375,
+          "width": 304,
+          "height": 44,
+          "top": 668.59375,
+          "right": 877,
+          "bottom": 712.59375,
+          "left": 573
+        }
+      ],
+      "viewport": {
+        "w": 1122,
+        "h": 892
+      },
+      "pageHeight": 892,
+      "pageWidth": 1122
+    }
+  ],
+  "morph": [
+    {
+      "frames": [
+        {
+          "offset": null,
+          "easing": "linear",
+          "composite": "auto",
+          "transform": "translate(246.156px, 234.281px) scale(0.435884)",
+          "transformOrigin": "50% 50%",
+          "opacity": "1",
+          "computedOffset": 0
+        },
+        {
+          "offset": null,
+          "easing": "linear",
+          "composite": "auto",
+          "transform": "none",
+          "transformOrigin": "50% 50%",
+          "opacity": "1",
+          "computedOffset": 1
+        }
+      ],
+      "timing": {
+        "delay": 0,
+        "direction": "normal",
+        "duration": 320,
+        "easing": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+        "endDelay": 0,
+        "fill": "both",
+        "iterationStart": 0,
+        "iterations": 1,
+        "activeDuration": 320,
+        "currentIteration": 0,
+        "endTime": 320,
+        "localTime": 83.41800000022026,
+        "progress": 0.7819529479222035
+      }
+    }
+  ],
+  "errors": [],
+  "scope": "Isolated Docker fixtures and synthetic local images; no real providers or user data"
+}

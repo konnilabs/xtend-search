@@ -18,3 +18,13 @@ Strict-Maraca prüft Search und Observatory einschließlich App Services, HTML-S
 Das geprüfte Paar ist **Frontend `xtend-search:0.7.6` / Backend `xtend-search-searxng:0.7.5`**. Es gibt keine Datenmigration. Vor einem Upgrade die Datenvolumes und geschützte Env-Datei sichern. Bestehende Volumenamen, SSO-Daten, Freigaben und Schutzfristen übernehmen. Bereits zentral deaktiviertes Bing bleibt durch die persistierte Policy deaktiviert.
 
 Bei einem bestehenden Portainer-Stack `XTEND_SEARCH_IMAGE` auf `xtend-search:0.7.6` ändern; `XTEND_BACKEND_IMAGE` bleibt `xtend-search-searxng:0.7.5`. Anschließend Browser-Tabs neu laden. Rollback verwendet das bisherige Frontend 0.7.5 mit demselben Backend 0.7.5; vorhandene Datenvolumes werden weiterverwendet. Bei zusätzlicher externer Datenänderung gilt der vorab gesicherte Datenstand. Merge und Produktionsdeployment sind getrennte Schritte.
+
+## Abnahme und Performance
+
+Strict-Maraca und HTML-Sicherheitsprüfung, **163 Control-Node-Tests**, **10 Legacy-Node-Tests**, **8 Python-Vertragstests** und **21 Docker-Browsergates** haben bestanden. Der neue Gate deckt 320–3840 Pixel, niedrige Viewports, No-JS, schnelle Aktionen, Reduced Motion, Fokus-Rückgabe, native Bildgeometrie und verspätete Startseiten-/Streamantworten ab.
+
+Identische Offline-Fixtures auf demselben Host, je fünf Durchläufe: Median bis zum ersten interaktiven Ergebnis **600.1 → 597.9 ms** (-0.4 %), Streamabschluss **3205.4 → 3217.4 ms**, Wiederherstellung **733 → 730 ms**. Jede Wiederherstellung erzeugte null Suchstreams und einen providerfreien Epochen-Request. Der erste Wert ist das Ergebnis-Renderereignis, kein exakter Browser-Paint-Zeitstempel; Heap-Werte sind eine grobe Chromium-Diagnose.
+
+CLS beträgt in den geprüften normalen und gedrosselten Browserfixtures **0**. Gewollte Bewegungen nach Nutzereingaben werden vom Web-Vitals-CLS-Maß ausgenommen; die Rohdaten weisen diese separat aus. Der komprimierte Browser-Modulgraph wächst bei gleicher gzip-Methode um **896 Byte**; CSS und das generierte Maraca-Artefakt werden getrennt in `0.7.6-bundle-sizes.json` ausgewiesen.
+
+Der laufende XTend-MCP lieferte Knowledge-Kontext zur AnimationEngine. Diese Dokumentation ist ausdrücklich von den Nachweisen des tatsächlich gepinnten SDKs, des lokalen Compilers und des gebauten Docker-Images getrennt (`0.7.6-mcp.json`). Die lokale Aktualisierung erhielt alle Umgebungswerte, Volumenamen, Freigaben, Schutzfristen und die Backend-Containeridentität; Sicherung und Datenprüfsummen bleiben geschützt außerhalb des Release-Pakets.

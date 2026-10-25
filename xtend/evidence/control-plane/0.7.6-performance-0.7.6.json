@@ -1,0 +1,79 @@
+{
+  "ok": true,
+  "version": "0.7.6",
+  "scope": "Five same-host desktop runs; independent fresh fixture volume, identical offline 100/700/2500ms providers, no live searches. Heap is a coarse Chromium diagnostic, not a retained-memory benchmark.",
+  "runs": [
+    {
+      "first": 606,
+      "complete": 3244.7000000001863,
+      "cls": 0,
+      "resultCount": 10,
+      "jsHeapBytes": 23100000,
+      "jsEncodedBytes": 655705,
+      "restore": {
+        "ms": 730,
+        "searchStreams": 0,
+        "metadataRequests": 1
+      }
+    },
+    {
+      "first": 613,
+      "complete": 3236.2000000001863,
+      "cls": 0,
+      "resultCount": 10,
+      "jsHeapBytes": 23100000,
+      "jsEncodedBytes": 655705,
+      "restore": {
+        "ms": 740,
+        "searchStreams": 0,
+        "metadataRequests": 1
+      }
+    },
+    {
+      "first": 597.9000000003725,
+      "complete": 3189.4000000003725,
+      "cls": 0,
+      "resultCount": 10,
+      "jsHeapBytes": 23100000,
+      "jsEncodedBytes": 655705,
+      "restore": {
+        "ms": 724,
+        "searchStreams": 0,
+        "metadataRequests": 1
+      }
+    },
+    {
+      "first": 593.6000000005588,
+      "complete": 3217.4000000003725,
+      "cls": 0,
+      "resultCount": 10,
+      "jsHeapBytes": 23100000,
+      "jsEncodedBytes": 655705,
+      "restore": {
+        "ms": 758,
+        "searchStreams": 0,
+        "metadataRequests": 1
+      }
+    },
+    {
+      "first": 589.5,
+      "complete": 3203.9000000003725,
+      "cls": 0,
+      "resultCount": 10,
+      "jsHeapBytes": 23100000,
+      "jsEncodedBytes": 655705,
+      "restore": {
+        "ms": 721,
+        "searchStreams": 0,
+        "metadataRequests": 1
+      }
+    }
+  ],
+  "median": {
+    "firstMs": 597.9000000003725,
+    "completeMs": 3217.4000000003725,
+    "jsEncodedBytes": 655705,
+    "jsHeapBytes": 23100000,
+    "restoreMs": 730
+  }
+}
