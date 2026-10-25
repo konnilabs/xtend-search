@@ -286,6 +286,8 @@ html:has(#search-about[open]),html:has(#search-lightbox[open]),html:has(#report-
 .filter-content>.filter-note{grid-column:1/-1}
 .filter-content>.preference-status:empty{display:none}
 .search-shell #filter-slot .filter-panel{max-height:calc(100dvh - 32px)}
+/* The reserved Knowledge lane must not narrow images while the preview is closed. */
+#results[data-category=images]:not([data-preview-open]) .result-layout{grid-template-columns:minmax(0,1fr)}
 #image-preview-slot{display:contents}
 #search-preview-panel:not([hidden]){display:block;position:sticky;top:18px;align-self:start;min-width:0}
 #search-preview-panel .image-preview{position:relative;top:0}
