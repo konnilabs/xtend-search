@@ -29,7 +29,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 24.19.0
+          node-version: 24.22.1
           cache: npm
           cache-dependency-path: xtend/package-lock.json
       - name: Use pinned npm
@@ -63,7 +63,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: 24.19.0
+          node-version: 24.22.1
       - name: Install browser test dependencies
         working-directory: xtend
         run: |
@@ -74,7 +74,7 @@ jobs:
         run: |
           fixture_image="xtend-search:$(node -p "require('./xtend/package.json').version")"
           docker build -f Dockerfile.control -t "$fixture_image" .
-          docker build -f Dockerfile.searxng -t xtend-search-searxng:0.5.1 .
+          docker build -f Dockerfile.searxng -t xtend-search-searxng:0.7.5 .
           echo "FIXTURE_IMAGE=$fixture_image" >> "$GITHUB_ENV"
       - name: Run isolated OAuth, XScaler and responsive UI gates
         env:
@@ -93,6 +93,7 @@ jobs:
           node xtend/tests/control/feedback-readiness-browser.mjs
           node xtend/tests/control/minor-051-browser.mjs
           node xtend/tests/control/release-060-browser.mjs
+          node xtend/tests/control/release-075-browser.mjs
           node xtend/tests/control/availability-feedback-browser.mjs
           node xtend/tests/control/weather-layout-browser.mjs
           node xtend/tests/control/spinner-stream-browser.mjs
@@ -107,6 +108,9 @@ jobs:
           node xtend/tests/control/lightbox-resilience-browser.mjs
           node xtend/tests/control/prerelease-audit-browser.mjs
           node xtend/tests/control/empty-state-browser.mjs
+          # Provider error gates need independent guards; only reset CI fixtures.
+          FIXTURE_DATA_VOLUME=xtend-cp-ci-knowledge sh xtend/tests/control/docker-fixture.sh
+          node xtend/tests/control/knowledge-failure-browser.mjs
       - name: Fixture diagnostics
         if: failure()
         run: |

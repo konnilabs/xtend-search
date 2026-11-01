@@ -134,3 +134,11 @@ body{background:var(--paper);color:var(--ink)}
 .home-points span:before{background:var(--accent)}.site-footer{border-color:var(--line)}
 button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible{outline-color:var(--accent)}
 .skip-link{border-color:var(--accent)}
+
+/* The spinner has a permanent slot, so title and controls never shift. */
+.preview-toolbar{display:grid;grid-template-columns:36px minmax(0,1fr) 20px 36px 36px;gap:10px}
+.preview-position{min-width:0;text-align:center;white-space:nowrap;font-size:clamp(10px,1.4vw,12px)}
+.preview-busy-slot{display:grid;place-items:center;width:20px;height:20px;min-width:20px}
+.preview-busy-slot x-spinner{display:inline-flex;align-items:center;justify-content:center;line-height:1;width:18px;height:18px;color:var(--ink)}
+.preview-busy-slot x-spinner::part(root){box-sizing:border-box;width:18px;height:18px;border-width:2px;border-color:transparent;border-top-color:currentColor}
+@media(max-width:360px){.preview-toolbar{gap:8px;padding-inline:12px}}

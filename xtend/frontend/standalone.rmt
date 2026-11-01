@@ -109,6 +109,7 @@ template xtend.search {
   state search.feedback type object preserve { initial {
     open false
     selected []
+    selectedKeys []
     countLabel "Bitte bis zu fünf Ergebnisse auswählen."
     canSave false
     confirm false
@@ -700,9 +701,8 @@ template xtend.search {
 
   action search.report.selection {
     input value object
-    reduce state.search.feedback = input.value.feedback
-    reduce state.search.data.results = input.value.results
-    reduce state.search.data.knowledgeCards = input.value.cards
+    effect fetch datasource search.report.apply
+    reduce state.search.feedback = result.feedback
 }
 
   state search.presentation type object preserve { initial { view "" } }
@@ -1057,6 +1057,7 @@ template xtend.search {
       tabs []
       countLabel ""
       pageLabel ""
+      webMessage ""
       empty false
       error false
       fixture false
@@ -1077,6 +1078,9 @@ template xtend.search {
       imageUnavailable false
       imageMessage ""
       expandMessage ""
+      imageLoading false
+      expansionLoading false
+      expansionToken ""
       url ""
       imageUrl ""
       snippetText ""
@@ -2152,6 +2156,10 @@ template xtend.search {
                       "key" "result-main"
                       "class" "result-main"
                       "children" [
+ { type "conditional" test { op "path" path "$model.search.data.webMessage" } then {
+  type "element" tag "p" class "web-source-notice" text { op "path" path "$model.search.data.webMessage" } attributes { role "status" }
+ } }
+
                         {
                           "type" "element"
                           "tag" "div"
@@ -2172,7 +2180,7 @@ template xtend.search {
                                     "left" "$item.id"
                                     "right" "$model.search.preview.id"
                                   }
-                                  "data-report-selected" "$item.reportSelected"
+                                  "data-report-selected" { op "includes" value "$model.search.feedback.selectedKeys" search "$item.reportKey" }
                                 }
                                 "children" [
                                   {
@@ -2197,7 +2205,7 @@ template xtend.search {
                                               "aria-label" "Ergebnis auswählen"
                                             }
                                             "properties" {
-                                              "checked" "$item.reportSelected"
+                                              "checked" { op "includes" value "$model.search.feedback.selectedKeys" search "$item.reportKey" }
                                             }
                                           }
                                           {
@@ -2369,7 +2377,7 @@ template xtend.search {
                             "class" "knowledge-card"
                             "attributes" {
                               "aria-label" "$item.title"
-                              "data-report-selected" "$item.reportSelected"
+                              "data-report-selected" { op "includes" value "$model.search.feedback.selectedKeys" search "$item.reportKey" }
                             }
                             "children" [
                               {
@@ -2394,7 +2402,7 @@ template xtend.search {
                                           "aria-label" "Wissenskarte auswählen"
                                         }
                                         "properties" {
-                                          "checked" "$item.reportSelected"
+                                          "checked" { op "includes" value "$model.search.feedback.selectedKeys" search "$item.reportKey" }
                                         }
                                       }
                                       {
@@ -2577,7 +2585,12 @@ template xtend.search {
                                 "aria-live" "polite"
                               }
                             }
-                            {
+                            { type "element" tag "span" class "preview-busy-slot" attributes { role "status" "aria-live" "polite" } children [
+ { type "conditional" test { op "if" test "$model.search.preview.expansionLoading" then true else "$model.search.preview.imageLoading" } then {
+  type "component" component "x-spinner" attributes { "aria-label" "Bildansicht wird geladen" } }
+ }
+] }
+{
                               "type" "element"
                               "tag" "button"
                               "class" "preview-control"
@@ -2971,6 +2984,31 @@ template xtend.search {
                                 "tag" "div"
                                 "class" "weather-hours"
                                 "children" [
+{ type "element" tag "div" class "weather-hour-legend weather-legend-1" attributes { "aria-hidden" true } children [
+ { type "element" tag "span" }
+ { type "element" tag "span" }
+ { type "component" component "x-icon" attributes { pack "search" name "temperature" size "14px" decorative true } }
+ { type "component" component "x-icon" attributes { pack "search" name "rain-probability" size "14px" decorative true } }
+] }
+{ type "element" tag "div" class "weather-hour-legend weather-legend-2" attributes { "aria-hidden" true } children [
+ { type "element" tag "span" }
+ { type "element" tag "span" }
+ { type "component" component "x-icon" attributes { pack "search" name "temperature" size "14px" decorative true } }
+ { type "component" component "x-icon" attributes { pack "search" name "rain-probability" size "14px" decorative true } }
+] }
+{ type "element" tag "div" class "weather-hour-legend weather-legend-3" attributes { "aria-hidden" true } children [
+ { type "element" tag "span" }
+ { type "element" tag "span" }
+ { type "component" component "x-icon" attributes { pack "search" name "temperature" size "14px" decorative true } }
+ { type "component" component "x-icon" attributes { pack "search" name "rain-probability" size "14px" decorative true } }
+] }
+{ type "element" tag "div" class "weather-hour-legend weather-legend-4" attributes { "aria-hidden" true } children [
+ { type "element" tag "span" }
+ { type "element" tag "span" }
+ { type "component" component "x-icon" attributes { pack "search" name "temperature" size "14px" decorative true } }
+ { type "component" component "x-icon" attributes { pack "search" name "rain-probability" size "14px" decorative true } }
+] }
+
                                   {
                                     "type" "repeat"
                                     "source" "$model.search.data.weather.hourly"
@@ -3000,8 +3038,9 @@ template xtend.search {
                                           "type" "element"
                                           "tag" "strong"
                                           "class" "weather-temperature-reading"
+                                          "attributes" { "title" "Temperatur" }
                                           "children" [
-                                            { "type" "element" "tag" "x-icon" "text" "🌡" "attributes" { "pack" "search" "name" "temperature" "size" "14px" "decorative" true "aria-hidden" true } }
+
                                             { "type" "element" "tag" "span" "class" "weather-value" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" "$item.temperatureFahrenheit" "else" "$item.temperatureValue" } }
                                             { "type" "element" "tag" "span" "class" "weather-temperature-unit" "text" { "op" "if" "test" "$model.search.weatherUi.fahrenheit" "then" " °F" "else" " °C" } }
                                           ]
@@ -3012,7 +3051,7 @@ template xtend.search {
                                           "class" "weather-reading weather-rain"
                                           "attributes" { "title" "Niederschlagswahrscheinlichkeit" }
                                           "children" [
-                                            { "type" "element" "tag" "x-icon" "text" "♧" "attributes" { "pack" "search" "name" "rain-probability" "size" "14px" "decorative" true "aria-hidden" true } }
+
                                             { "type" "element" "tag" "span" "class" "weather-sr-label" "text" "Niederschlagswahrscheinlichkeit: " }
                                             { "type" "element" "tag" "span" "class" "weather-value" "text" "$item.rainValue" }
                                             { "type" "element" "tag" "span" "class" "weather-reading-unit" "text" " %" }
@@ -3391,6 +3430,8 @@ template xtend.search {
   action search.preview.close {
     reduce state.search.preview.open = false
     reduce state.search.preview.id = ""
+    reduce state.search.preview.imageLoading = false
+    reduce state.search.preview.expansionLoading = false
 
 }
 
@@ -3439,6 +3480,8 @@ template xtend.search {
     reduce state.search.presentation.view = input.view
     reduce state.search.preview.open = false
     reduce state.search.preview.id = ""
+    reduce state.search.preview.imageLoading = false
+    reduce state.search.preview.expansionLoading = false
     reduce state.search.activity.busy = true
     reduce state.search.activity.message = ""
 
@@ -3550,3 +3593,16 @@ template xtend.search {
 
 
 }
+
+  datasource search.preview.apply from host search.preview.apply { mode invoke
+    contract "xsearch.preview.v1"
+  }
+  action search.preview.update {
+    input value object
+    effect fetch datasource search.preview.apply
+    reduce state.search.preview = result.value
+  }
+
+  datasource search.report.apply from host search.report.apply { mode invoke
+    contract "xsearch.report-ui.v1"
+  }

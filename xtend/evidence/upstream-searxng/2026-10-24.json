@@ -1,0 +1,58 @@
+{
+  "checkedOn": "2026-10-24",
+  "repository": "https://github.com/searxng/searxng",
+  "baseline": "9f042d2f67666f86204d6874488880a23ba81a8f",
+  "candidate": "629368e40c2aa4edffb05636a8bbc23d2eaa5923",
+  "version": "2026.10.23+629368e40",
+  "selection": "Latest published upstream Docker snapshot on review date. Master ef0ec03da02b62d0a977264cb90a0833dfe001ae is newer translations; no need to follow unpublished master.",
+  "commits": [
+    "629368e40c2aa4edffb05636a8bbc23d2eaa5923 [upd] web-client (simple): Bump the minor group (#6880)",
+    "68647d080699a12564b318ee108a66c78c2d6405 [upd] pypi: Bump certifi from 2026.7.22 to 2026.10.19 in the minor group (#6881)",
+    "81371861f67226091d1c4df2e3908a11d3b54eb9 [del] engines: remove andisearch for now - #687",
+    "d47cb96bfb79240d487bdb2336886d0dc59f2f30 [feat] brave: parse JavaScript IIFE to fix engine",
+    "62366b05c051ba9c6028b4433b2e3b7d7ebbee51 [fix] engine -  DDG: ignore zero-click answers without URLs (#6865)",
+    "1c10abe2d3e4ab7ddcc4e9da1a7d07dc7ca7f8f4 [enh] container: nitpicks (#6862)",
+    "3afd9492681cd98eef2db1ce5e1f0a3b7147381a [enh] container: merge dockerfiles (#6861)",
+    "2a6fc07be3760543c7b6d1d1bfe62f5765d5d9d6 [feat] engines: add andisearch (general)",
+    "decdfa6f7d5c0f2e896589c1a57cca30ef27270e [upd] pypi: Bump the minor group with 4 updates (#6852)",
+    "8252c0bf6d5d97e833868099272eed0bb75828b2 [chore] resulthunter: fix broken linter",
+    "47aa11475bbbf8c26b20bdceb13e00320af6c4fe [fix] resulthunter: blocked with access denied",
+    "0ce72dd2ccd6bd06d21e6afd1844455c98719605 [upd] github-actions: Bump actions/upload-artifact from 7.0.1 to 7.0.2 (#6851)",
+    "c6d7fe91d392206506416aeee646398fadd0a1ef [upd] web-client (simple): Bump @types/node (#6849)",
+    "78477678323183b8361a3cc9848ee920b25418f6 [upd] github-actions: Bump actions/download-artifact from 8.0.1 to 8.0.2 (#6848)",
+    "d2209bfbb0c861a87cf73ebcb498b824407f2019 [upd] github-actions: Bump actions/setup-node from 7.0.0 to 7.1.0 (#6847)",
+    "ca8e1582be0624f551c5d2fef91d3a9866cc3898 [build] /static",
+    "243d3a9df23b9908a90cab4730eb514856c7ec42 [fix] image descriptions disappearing on firefox",
+    "ff8f5ddcc9f2c58d8b0276ec030f6a3adfa17525 [fix] yep: send x-csrf-protection header to bypass botdetection",
+    "b00212a8366131936856b726ed4dd9bd281e4d7e [mod] image proxy: /image with the default network (#6816)",
+    "22c64b8d394b680c7ea96be25f36dad14126420a [fix] xprivo: crashes when parsing response",
+    "ad46ebd7d87666edb5f116c5b274b47f689ac6cd [fix] typo in ayo engine - https://search.ayo.de  (#6817)",
+    "f4822b3fc46726bb259d14c6332b702c76b98f82 [upd] web-client (simple): Bump the minor group (#6826)"
+  ],
+  "reviewedChanges": [
+    "Brave embedded-data IIFE parser; bounded parsing of data, not JavaScript execution",
+    "DuckDuckGo ignores zero-click entries without URLs",
+    "ResultHunter access-denied responses and malformed XPrivo responses",
+    "certifi 2026.10.19; simple-client lock fast-uri 3.1.9 audited separately",
+    "Upstream /image route rename remains behind private allowlist; browser still uses signed Search /media",
+    "Provider processors, typed-result copying, auth, health contract, query bounds and attribution remain covered by offline boundary tests",
+    "Node image 24.22.1 with built-in Undici 7.30.1; separate npm Undici 8.12.3. Updating npm alone would not patch global fetch."
+  ],
+  "mergeResolution": [
+    "Keep inherited upstream container/integration workflows deleted; XTend owns build and deployment.",
+    "Use updated upstream simple-client dependencies while preserving the newer already merged Vite 8.3.4."
+  ],
+  "sdkUnchanged": true,
+  "validation": {
+    "offlinePythonBoundaryTests": 8,
+    "network": "none",
+    "npmAudit": {
+      "application": "0 known vulnerabilities at review",
+      "upstreamSimpleClient": "0 known vulnerabilities after transitive fast-uri lock update"
+    }
+  },
+  "limits": [
+    "Offline tests prove contracts and failure isolation, not external provider uptime, absence of captchas, or live search relevance.",
+    "Frontend 0.7.5 requires the paired backend 0.7.5; old 0.7.4 frontend intentionally rejects this backend pin."
+  ]
+}
