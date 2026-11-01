@@ -1,0 +1,59 @@
+{
+  "ok": false,
+  "message": "Closed preview must release the entire result width: {\"width\":1122,\"layout\":{\"x\":59.46875,\"y\":380.390625,\"width\":1003.0625,\"height\":582.5,\"top\":380.390625,\"right\":1062.53125,\"bottom\":962.890625,\"left\":59.46875},\"main\":{\"x\":59.46875,\"y\":380.390625,\"width\":627.0625,\"height\":582.5,\"top\":380.390625,\"right\":686.53125,\"bottom\":962.890625,\"left\":59.46875},\"grid\":{\"x\":59.46875,\"y\":380.390625,\"width\":627.0625,\"height\":474.5,\"top\":380.390625,\"right\":686.53125,\"bottom\":854.890625,\"left\":59.46875},\"preview\":{\"x\":0,\"y\":0,\"width\":0,\"height\":0,\"top\":0,\"right\":0,\"bottom\":0,\"left\":0},\"columns\":\"627.062px 340px\",\"hasCards\":true,\"previewOpen\":null,\"pageWidth\":1122}",
+  "geometry": [
+    {
+      "phase": "ssr.closed",
+      "native": true,
+      "width": 1122,
+      "layout": {
+        "x": 59.46875,
+        "y": 380.390625,
+        "width": 1003.0625,
+        "height": 582.5,
+        "top": 380.390625,
+        "right": 1062.53125,
+        "bottom": 962.890625,
+        "left": 59.46875
+      },
+      "main": {
+        "x": 59.46875,
+        "y": 380.390625,
+        "width": 627.0625,
+        "height": 582.5,
+        "top": 380.390625,
+        "right": 686.53125,
+        "bottom": 962.890625,
+        "left": 59.46875
+      },
+      "grid": {
+        "x": 59.46875,
+        "y": 380.390625,
+        "width": 627.0625,
+        "height": 474.5,
+        "top": 380.390625,
+        "right": 686.53125,
+        "bottom": 854.890625,
+        "left": 59.46875
+      },
+      "preview": {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "top": 0,
+        "right": 0,
+        "bottom": 0,
+        "left": 0
+      },
+      "columns": "627.062px 340px",
+      "hasCards": true,
+      "previewOpen": null,
+      "pageWidth": 1122
+    }
+  ],
+  "errors": [],
+  "expectedFailure": true,
+  "image": "sha256:4e7fe05abd7dc5661f59278f387f9946e2fa614b8ded6eda958dee6ea045e3d7",
+  "scope": "Original R1 image; expected red regression test before the CSS fix, not an R2 gate failure."
+}

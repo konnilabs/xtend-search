@@ -139,6 +139,346 @@ template xtend.search {
     reduce state.search.feedback.includeUrl = input.value
 }
 
+  state search.previewPanel type object preserve {
+    initial {
+      id "search-preview-panel"
+      hidden true
+      viewTemplate { type "element" tag "div" class "preview-surface" children [ { type "conditional" test "$model.search.preview.open" then {
+                      "type" "element"
+                      "tag" "aside"
+                      "key" "image-preview"
+                      "class" "image-preview"
+                      "attributes" {
+                        "id" "image-preview"
+                        "role" "region"
+                        "aria-label" "Bildvorschau"
+                      }
+                      "children" [
+                        {
+                          "type" "element"
+                          "tag" "div"
+                          "class" "preview-toolbar"
+                          "children" [
+                            {
+                              "type" "element"
+                              "tag" "button"
+                              "class" "preview-control"
+                              "text" "×"
+                              "attributes" {
+                                "id" "preview-close"
+                                "type" "button"
+                                "data-preview-action" "close"
+                                "aria-label" "Bildvorschau schließen"
+                                "title" "Schließen (Escape)"
+                              }
+                            }
+                            {
+                              "type" "element"
+                              "tag" "span"
+                              "class" "preview-position"
+                              "text" "$model.search.preview.position"
+                              "attributes" {
+                                "role" "status"
+                                "aria-live" "polite"
+                              }
+                            }
+                            { type "element" tag "span" class "preview-busy-slot" attributes { role "status" "aria-live" "polite" } children [
+ { type "conditional" test { op "if" test "$model.search.preview.expansionLoading" then true else "$model.search.preview.imageLoading" } then {
+  type "component" component "x-spinner" attributes { "aria-label" "Bildansicht wird geladen" } }
+ }
+] }
+{
+                              "type" "element"
+                              "tag" "button"
+                              "class" "preview-control"
+                              "attributes" {
+                                "type" "button"
+                                "data-preview-action" "previous"
+                                "aria-label" "Vorheriges Bild"
+                                "disabled" "$model.search.preview.previousDisabled"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "span"
+                                  "class" "preview-arrow"
+                                  "attributes" {
+                                    "aria-hidden" "true"
+                                  }
+                                }
+                              ]
+                            }
+                            {
+                              "type" "element"
+                              "tag" "button"
+                              "class" "preview-control"
+                              "attributes" {
+                                "type" "button"
+                                "data-preview-action" "next"
+                                "aria-label" "Nächstes Bild"
+                                "disabled" "$model.search.preview.nextDisabled"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "span"
+                                  "class" "preview-arrow"
+                                  "attributes" {
+                                    "aria-hidden" "true"
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.preview.imageSrc"
+                          "then" {
+                            "type" "element"
+                            "tag" "button"
+                            "class" "preview-canvas preview-expand"
+                            "attributes" {
+                              "id" "preview-expand"
+                              "type" "button"
+                              "data-preview-action" "expand"
+                              "aria-label" "Bild in Vollbild öffnen"
+                              "title" "Vollbild öffnen"
+                            }
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "span"
+                                "class" "preview-expand-hint"
+                                "text" "Vollbild öffnen"
+                                "attributes" {
+                                  "aria-hidden" "true"
+                                }
+                              }
+                              {
+                                "type" "element"
+                                "tag" "img"
+                                "key" "$model.search.preview.imageKey"
+                                "attributes" {
+                                  "id" "preview-image"
+                                  "data-image-request" "$model.search.preview.imageKey"
+                                  "src" "$model.search.preview.imageSrc"
+                                  "alt" "$model.search.preview.title"
+                                  "referrerpolicy" "no-referrer"
+                                }
+                              }
+                            ]
+                          }
+                        }
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.preview.imageUnavailable"
+                          "then" {
+                            "type" "element"
+                            "tag" "div"
+                            "class" "preview-canvas preview-placeholder"
+                            "children" [
+                              {
+                                "type" "element"
+                                "tag" "img"
+                                "attributes" {
+                                  "src" "/assets/xtend/image-placeholder.svg"
+                                  "alt" "Bild nicht verfügbar"
+                                  "width" 480
+                                  "height" 320
+                                }
+                              }
+                            ]
+                          }
+                        }
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.preview.imageMessage"
+                          "then" {
+                            "type" "element"
+                            "tag" "p"
+                            "class" "preview-message"
+                            "text" "$model.search.preview.imageMessage"
+                            "attributes" {
+                              "role" "status"
+                            }
+                          }
+                        }
+                        {
+                          "type" "conditional"
+                          "test" "$model.search.preview.expandMessage"
+                          "then" {
+                            "type" "element"
+                            "tag" "p"
+                            "class" "preview-message"
+                            "text" "$model.search.preview.expandMessage"
+                            "attributes" {
+                              "role" "status"
+                            }
+                          }
+                        }
+                        {
+                          "type" "element"
+                          "tag" "div"
+                          "class" "preview-details"
+                          "children" [
+                            {
+                              "type" "element"
+                              "tag" "p"
+                              "class" "preview-domain"
+                              "text" "$model.search.preview.displayUrl"
+                            }
+                            {
+                              "type" "element"
+                              "tag" "h2"
+                              "text" "$model.search.preview.title"
+                            }
+                            {
+                              "type" "element"
+                              "tag" "p"
+                              "class" "preview-description"
+                              "text" "$model.search.preview.snippetText"
+                            }
+                            {
+                              "type" "element"
+                              "tag" "nav"
+                              "class" "preview-links"
+                              "attributes" {
+                                "aria-label" "Bild und Quelle öffnen"
+                              }
+                              "children" [
+                                {
+                                  "type" "element"
+                                  "tag" "a"
+                                  "class" "preview-primary"
+                                  "text" "Seite besuchen ↗"
+                                  "attributes" {
+                                    "href" "$model.search.preview.url"
+                                    "data-xtend-native" ""
+                                    "rel" "noreferrer"
+                                  }
+                                }
+                                {
+                                  "type" "conditional"
+                                  "test" "$model.search.preview.imageUrl"
+                                  "then" {
+                                    "type" "element"
+                                    "tag" "a"
+                                    "text" "Originalbild öffnen ↗"
+                                    "attributes" {
+                                      "href" "$model.search.preview.imageUrl"
+                                      "data-xtend-native" ""
+                                      "rel" "noreferrer"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                            {
+                              "type" "element"
+                              "tag" "dl"
+                              "class" "preview-metadata"
+                              "children" [
+                                {
+                                  "type" "repeat"
+                                  "source" "$model.search.preview.metadata"
+                                  "key" "id"
+                                  "template" {
+                                    "type" "element"
+                                    "tag" "div"
+                                    "children" [
+                                      {
+                                        "type" "element"
+                                        "tag" "dt"
+                                        "text" "$item.label"
+                                      }
+                                      {
+                                        "type" "element"
+                                        "tag" "dd"
+                                        "text" "$item.value"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                            {
+                              "type" "element"
+                              "tag" "nav"
+                              "class" "preview-formats"
+                              "attributes" {
+                                "aria-label" "Weitere Bildformate"
+                              }
+                              "children" [
+                                {
+                                  "type" "repeat"
+                                  "source" "$model.search.preview.formats"
+                                  "key" "id"
+                                  "template" {
+                                    "type" "element"
+                                    "tag" "a"
+                                    "text" "$item.label"
+                                    "attributes" {
+                                      "href" "$item.url"
+                                      "data-xtend-native" ""
+                                      "rel" "noreferrer"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    } } ] }
+    }
+  }
+  state search.previewClosed type object preserve {
+    initial {
+      id "search-preview-closed"
+      hidden false
+      viewTemplate { class "preview-closed" }
+    }
+  }
+  selector search.previewPanel from state search.previewPanel { output SearchView }
+  selector search.previewClosed from state search.previewClosed { output SearchView }
+  animation search.preview.enter {
+    effect slide-left
+    durationMs 220
+    easing "cubic-bezier(.2,.8,.2,1)"
+    reducedMotion instant
+  }
+  animation search.preview.exit {
+    effect slide-right
+    durationMs 180
+    easing "ease-out"
+    reducedMotion instant
+  }
+  animation search.media.expand {
+    effect shared-element
+    durationMs 320
+    easing "cubic-bezier(.2,.8,.2,1)"
+    reducedMotion instant
+  }
+  transition search.preview.open {
+    trigger action search.preview.open
+    from surfaces [search.previewClosed]
+    to surfaces [search.previewPanel]
+    use animation search.preview.enter
+    interrupt replace
+    reducedMotion instant
+    lane transition
+  }
+  transition search.preview.close {
+    trigger action search.preview.close
+    from surfaces [search.previewPanel]
+    to surfaces [search.previewClosed]
+    use animation search.preview.exit
+    interrupt replace
+    reducedMotion instant
+    lane transition
+  }
+
   state search.filterPanel type object preserve {
     initial {
       id "search-filter-panel"
@@ -473,12 +813,7 @@ template xtend.search {
                   ]
                 }
               }
-              {
-                "type" "element"
-                "tag" "p"
-                "text" "Filter gelten für diese Suche. Als Standard speichern übernimmt sie für künftige Besuche in diesem Browser (180 Tage). Links mit eigenen Filtern haben Vorrang."
-                "class" "filter-note"
-              }
+
               {
                 "type" "element"
                 "tag" "div"
@@ -524,6 +859,12 @@ template xtend.search {
                     }
                   }
                 ]
+              }
+{
+                "type" "element"
+                "tag" "p"
+                "text" "Filter gelten für diese Suche. Als Standard speichern übernimmt sie für künftige Besuche in diesem Browser (180 Tage). Links mit eigenen Filtern haben Vorrang."
+                "class" "filter-note"
               }
               {
                 "type" "element"
@@ -1027,6 +1368,9 @@ template xtend.search {
  portal search.overlayRoot
     lane visible weight 70 { hydrate search-overlays from selector search.overlays }
   }
+  // Renew only the native field on a home intent; retain the morphing form.
+  state search.inputKey type string initial "search-input"
+
   state search.query type string initial ""
   state search.activity type object preserve { initial {
       busy false
@@ -1244,6 +1588,7 @@ template xtend.search {
                     {
                       "type" "element"
                       "tag" "input"
+                      "key" "$model.search.inputKey"
                       "attributes" {
                         "id" "search-input"
                         "type" "search"
@@ -2543,298 +2888,7 @@ template xtend.search {
                       ]
                     }
                   }
-                  {
-                    "type" "conditional"
-                    "test" "$model.search.preview.open"
-                    "then" {
-                      "type" "element"
-                      "tag" "aside"
-                      "key" "image-preview"
-                      "class" "image-preview"
-                      "attributes" {
-                        "id" "image-preview"
-                        "role" "region"
-                        "aria-label" "Bildvorschau"
-                      }
-                      "children" [
-                        {
-                          "type" "element"
-                          "tag" "div"
-                          "class" "preview-toolbar"
-                          "children" [
-                            {
-                              "type" "element"
-                              "tag" "button"
-                              "class" "preview-control"
-                              "text" "×"
-                              "attributes" {
-                                "id" "preview-close"
-                                "type" "button"
-                                "data-preview-action" "close"
-                                "aria-label" "Bildvorschau schließen"
-                                "title" "Schließen (Escape)"
-                              }
-                            }
-                            {
-                              "type" "element"
-                              "tag" "span"
-                              "class" "preview-position"
-                              "text" "$model.search.preview.position"
-                              "attributes" {
-                                "role" "status"
-                                "aria-live" "polite"
-                              }
-                            }
-                            { type "element" tag "span" class "preview-busy-slot" attributes { role "status" "aria-live" "polite" } children [
- { type "conditional" test { op "if" test "$model.search.preview.expansionLoading" then true else "$model.search.preview.imageLoading" } then {
-  type "component" component "x-spinner" attributes { "aria-label" "Bildansicht wird geladen" } }
- }
-] }
-{
-                              "type" "element"
-                              "tag" "button"
-                              "class" "preview-control"
-                              "attributes" {
-                                "type" "button"
-                                "data-preview-action" "previous"
-                                "aria-label" "Vorheriges Bild"
-                                "disabled" "$model.search.preview.previousDisabled"
-                              }
-                              "children" [
-                                {
-                                  "type" "element"
-                                  "tag" "span"
-                                  "class" "preview-arrow"
-                                  "attributes" {
-                                    "aria-hidden" "true"
-                                  }
-                                }
-                              ]
-                            }
-                            {
-                              "type" "element"
-                              "tag" "button"
-                              "class" "preview-control"
-                              "attributes" {
-                                "type" "button"
-                                "data-preview-action" "next"
-                                "aria-label" "Nächstes Bild"
-                                "disabled" "$model.search.preview.nextDisabled"
-                              }
-                              "children" [
-                                {
-                                  "type" "element"
-                                  "tag" "span"
-                                  "class" "preview-arrow"
-                                  "attributes" {
-                                    "aria-hidden" "true"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                        {
-                          "type" "conditional"
-                          "test" "$model.search.preview.imageSrc"
-                          "then" {
-                            "type" "element"
-                            "tag" "button"
-                            "class" "preview-canvas preview-expand"
-                            "attributes" {
-                              "id" "preview-expand"
-                              "type" "button"
-                              "data-preview-action" "expand"
-                              "aria-label" "Bild in Vollbild öffnen"
-                              "title" "Vollbild öffnen"
-                            }
-                            "children" [
-                              {
-                                "type" "element"
-                                "tag" "span"
-                                "class" "preview-expand-hint"
-                                "text" "Vollbild öffnen"
-                                "attributes" {
-                                  "aria-hidden" "true"
-                                }
-                              }
-                              {
-                                "type" "element"
-                                "tag" "img"
-                                "key" "$model.search.preview.imageKey"
-                                "attributes" {
-                                  "id" "preview-image"
-                                  "data-image-request" "$model.search.preview.imageKey"
-                                  "src" "$model.search.preview.imageSrc"
-                                  "alt" "$model.search.preview.title"
-                                  "referrerpolicy" "no-referrer"
-                                }
-                              }
-                            ]
-                          }
-                        }
-                        {
-                          "type" "conditional"
-                          "test" "$model.search.preview.imageUnavailable"
-                          "then" {
-                            "type" "element"
-                            "tag" "div"
-                            "class" "preview-canvas preview-placeholder"
-                            "children" [
-                              {
-                                "type" "element"
-                                "tag" "img"
-                                "attributes" {
-                                  "src" "/assets/xtend/image-placeholder.svg"
-                                  "alt" "Bild nicht verfügbar"
-                                  "width" 480
-                                  "height" 320
-                                }
-                              }
-                            ]
-                          }
-                        }
-                        {
-                          "type" "conditional"
-                          "test" "$model.search.preview.imageMessage"
-                          "then" {
-                            "type" "element"
-                            "tag" "p"
-                            "class" "preview-message"
-                            "text" "$model.search.preview.imageMessage"
-                            "attributes" {
-                              "role" "status"
-                            }
-                          }
-                        }
-                        {
-                          "type" "conditional"
-                          "test" "$model.search.preview.expandMessage"
-                          "then" {
-                            "type" "element"
-                            "tag" "p"
-                            "class" "preview-message"
-                            "text" "$model.search.preview.expandMessage"
-                            "attributes" {
-                              "role" "status"
-                            }
-                          }
-                        }
-                        {
-                          "type" "element"
-                          "tag" "div"
-                          "class" "preview-details"
-                          "children" [
-                            {
-                              "type" "element"
-                              "tag" "p"
-                              "class" "preview-domain"
-                              "text" "$model.search.preview.displayUrl"
-                            }
-                            {
-                              "type" "element"
-                              "tag" "h2"
-                              "text" "$model.search.preview.title"
-                            }
-                            {
-                              "type" "element"
-                              "tag" "p"
-                              "class" "preview-description"
-                              "text" "$model.search.preview.snippetText"
-                            }
-                            {
-                              "type" "element"
-                              "tag" "nav"
-                              "class" "preview-links"
-                              "attributes" {
-                                "aria-label" "Bild und Quelle öffnen"
-                              }
-                              "children" [
-                                {
-                                  "type" "element"
-                                  "tag" "a"
-                                  "class" "preview-primary"
-                                  "text" "Seite besuchen ↗"
-                                  "attributes" {
-                                    "href" "$model.search.preview.url"
-                                    "data-xtend-native" ""
-                                    "rel" "noreferrer"
-                                  }
-                                }
-                                {
-                                  "type" "conditional"
-                                  "test" "$model.search.preview.imageUrl"
-                                  "then" {
-                                    "type" "element"
-                                    "tag" "a"
-                                    "text" "Originalbild öffnen ↗"
-                                    "attributes" {
-                                      "href" "$model.search.preview.imageUrl"
-                                      "data-xtend-native" ""
-                                      "rel" "noreferrer"
-                                    }
-                                  }
-                                }
-                              ]
-                            }
-                            {
-                              "type" "element"
-                              "tag" "dl"
-                              "class" "preview-metadata"
-                              "children" [
-                                {
-                                  "type" "repeat"
-                                  "source" "$model.search.preview.metadata"
-                                  "key" "id"
-                                  "template" {
-                                    "type" "element"
-                                    "tag" "div"
-                                    "children" [
-                                      {
-                                        "type" "element"
-                                        "tag" "dt"
-                                        "text" "$item.label"
-                                      }
-                                      {
-                                        "type" "element"
-                                        "tag" "dd"
-                                        "text" "$item.value"
-                                      }
-                                    ]
-                                  }
-                                }
-                              ]
-                            }
-                            {
-                              "type" "element"
-                              "tag" "nav"
-                              "class" "preview-formats"
-                              "attributes" {
-                                "aria-label" "Weitere Bildformate"
-                              }
-                              "children" [
-                                {
-                                  "type" "repeat"
-                                  "source" "$model.search.preview.formats"
-                                  "key" "id"
-                                  "template" {
-                                    "type" "element"
-                                    "tag" "a"
-                                    "text" "$item.label"
-                                    "attributes" {
-                                      "href" "$item.url"
-                                      "data-xtend-native" ""
-                                      "rel" "noreferrer"
-                                    }
-                                  }
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  }
+                  { type "element" tag "div" key "image-preview-slot" attributes { id "image-preview-slot" } }
                 ]
               }
               {
@@ -3391,6 +3445,13 @@ template xtend.search {
   selector search.resultView from state search.resultView { output SearchView
 }
 
+  action search.home {
+    input key string
+    reduce state.search.inputKey = input.key
+    reduce state.search.query = ""
+    reduce state.search.data.location = ""
+  }
+
   action search.edit {
     input value string
     reduce state.search.query = input.value
@@ -3418,8 +3479,15 @@ template xtend.search {
   action search.preview.open {
     input value object
     reduce state.search.preview = input.value
+    reduce state.search.previewPanel.hidden = false
+    reduce state.search.previewClosed.hidden = true
 
 }
+
+  action search.preview.select {
+    input value object
+    reduce state.search.preview = input.value
+  }
 
   action search.preview.expansion {
     input message string
@@ -3429,6 +3497,8 @@ template xtend.search {
 
   action search.preview.close {
     reduce state.search.preview.open = false
+    reduce state.search.previewPanel.hidden = true
+    reduce state.search.previewClosed.hidden = false
     reduce state.search.preview.id = ""
     reduce state.search.preview.imageLoading = false
     reduce state.search.preview.expansionLoading = false
@@ -3479,6 +3549,8 @@ template xtend.search {
     input view string
     reduce state.search.presentation.view = input.view
     reduce state.search.preview.open = false
+    reduce state.search.previewPanel.hidden = true
+    reduce state.search.previewClosed.hidden = false
     reduce state.search.preview.id = ""
     reduce state.search.preview.imageLoading = false
     reduce state.search.preview.expansionLoading = false
@@ -3569,6 +3641,20 @@ template xtend.search {
 
 
 }
+
+  portal search.previewRoot root "#image-preview-slot" layer surface
+  surface search.previewClosed kind view component x-section {
+    source selector search.previewClosed
+    key previewClosed.id
+    portal search.previewRoot
+    lane visible weight 80 { hydrate search-preview-closed from selector search.previewClosed }
+  }
+  surface search.previewPanel kind view component x-section {
+    source selector search.previewPanel
+    key previewPanel.id
+    portal search.previewRoot
+    lane visible weight 80 { hydrate search-preview-panel from selector search.previewPanel }
+  }
 
   portal search.filterRoot root "#filter-slot" layer surface
   surface search.filterClosed kind view component x-section {
