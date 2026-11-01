@@ -1,11 +1,11 @@
 {
   "schema": "xtend.search.searxng-pin.v1",
   "repository": "https://github.com/searxng/searxng",
-  "commit": "9f042d2f67666f86204d6874488880a23ba81a8f",
-  "version": "2026.10.9+9f042d2f6",
+  "commit": "629368e40c2aa4edffb05636a8bbc23d2eaa5923",
+  "version": "2026.10.23+629368e40",
   "backendContract": "engine-json-v1",
   "reviewedIntegratedFiles": {
-    "searx/webapp.py": "07c4dc5a3275974a1726d4ec95acd4412011cd00d0081f99d2a87875f0c7fc72",
+    "searx/webapp.py": "890726edda552c650c696b0927806543c5aa506f51206af4eec1a1bf02385205",
     "searx/webadapter.py": "fa1c9a5d02eabd4f91b715efaa759fc5a3fb33d95c7a92a0e25e1fa7b0c20aa6",
     "searx/webutils.py": "0c193cc553ed8e7db20ddc6b2072f0226e4b2a408fc8e30a5a9e369a9ff14851",
     "searx/results.py": "9b7f246037a66d7cdf91c77f2de105989d95f7f8c93e745998bff51761e05ae8",
@@ -16,14 +16,20 @@
     "searx/result_types/_base.py": "1b0fe4ec19a9229926bf31ce5ead6fc032c7cb992da5cc39ca10a20e82581ece",
     "searx/favicons/cache.py": "5f50eaf799b9a9454913411c6e35bbf0c091b2449a14e283bf3f47d74587ad5f",
     "searx/favicons/resolvers.py": "f4f29482fa2a2318bd727ecffdb2e85085721f27004dd9094c824ec9e06ad79c",
-    "searx/settings.yml": "cd928422d82a83372d27a41bdaba8d21b43bb0db37367b9a00953c6b17952a3a",
+    "searx/settings.yml": "4d1d1619ce82fbe1584dd050988e394e47aff0ed76a43bb99895ce34b94f1b6d",
     "searx/xtend_stream.py": "ebc32d3a262ec34e29b77d7c98e7c2864acc1dc839c7708cce0edcf226b6f00b",
     "searx/xtend_integration.py": "a7f2e35bd2d7a3234a13346acaa2d04061ecf2b61c0dda6a59108973d7136c38",
     "xtend/server/backend.py": "907eaf8b2f5149f7a7f494116f3bc7d549e23a3ab13f65f331226097a518b719",
     "xtend/server/backend-start.py": "683f666347211a7812c5a0b54c97a346621086823f8a859d60997c804cabc673",
     "xtend/server/favicon_backend.py": "a6eb8f8ed511272494a0140ebf9e4882f1dbad3c21048ed626517331d46f4c2d",
     "xtend/server/engine_health.py": "569f36e2c8857bc05da4b448ead3ebd88d011cd99c7433fc07011133441ab2c4",
-    "searx/engines/duckduckgo_definitions.py": "164f273b8e6d1315d504081f7d20bc0248013c9cc37f9201ce34662d4fadec4f"
+    "searx/engines/duckduckgo_definitions.py": "164f273b8e6d1315d504081f7d20bc0248013c9cc37f9201ce34662d4fadec4f",
+    "searx/engines/brave.py": "e571c9f85eac3fa19cd0db28487dc040919b58e347665bf0ddc150ce2fe82688",
+    "searx/engines/duckduckgo.py": "03641292ddfd05c468716b1668f17d73362a59f02f4d48c551415e9dbcc17114",
+    "searx/engines/resulthunter.py": "ec34dae4d943ef41c543fff6079dfdb976ea408778a75dd563a8d5781602f87c",
+    "searx/engines/xprivo.py": "be3b32039e8b8fc0c30831ee85516d2cd17262b27748dd3f78589032990f6984",
+    "searx/network/network.py": "565e6d852ff317827aac82bf5c22b2e74949e056579e40e30666fd135972e1ad",
+    "searx/utils.py": "835fcad23f419df9fa285ce97623f0bf9d5b2b3ff578c83dc39878dbb24c142f"
   },
-  "review": "xtend/docs/RELEASE-0.5.0.md"
+  "review": "xtend/docs/RELEASE-0.7.5.md"
 }

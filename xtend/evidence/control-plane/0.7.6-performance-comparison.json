@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "scope": "Five runs per actual Docker image on the same host, browser and offline fixtures, independent fresh volumes. First means interactive streamed result event, not a browser paint timestamp; heap is a coarse Chromium diagnostic. Cache restoration includes one provider-free epoch roundtrip.",
+  "baseline": {
+    "firstMs": 600.0999999996275,
+    "completeMs": 3205.4000000003725,
+    "jsEncodedBytes": 648252,
+    "jsHeapBytes": 19300000,
+    "restoreMs": 733
+  },
+  "candidate": {
+    "firstMs": 597.9000000003725,
+    "completeMs": 3217.4000000003725,
+    "jsEncodedBytes": 655705,
+    "jsHeapBytes": 23100000,
+    "restoreMs": 730
+  },
+  "firstResultRegressionPercent": -0.36660556561511903,
+  "firstResultLimitPercent": 10,
+  "clsBaseline": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "clsCandidate": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "allRestoresWithoutSearchStream": true
+}

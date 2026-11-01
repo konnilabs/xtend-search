@@ -12,22 +12,23 @@ async function layout(page){return page.evaluate(()=>{
  const readingAlignmentErrors=[];
  for(const [index,cell] of [...hours,...days].entries()){
   const readings=[...cell.querySelectorAll('.weather-temperature-reading,.weather-reading')];
-  const positions=readings.map(row=>{const left=row.getBoundingClientRect().left;return ['x-icon','.weather-value','.weather-temperature-unit,.weather-reading-unit'].map(selector=>row.querySelector(selector)?.getBoundingClientRect().left-left);});
+  const positions=readings.map(row=>{const left=row.getBoundingClientRect().left;return (cell.classList.contains('weather-hour')?['.weather-value','.weather-temperature-unit,.weather-reading-unit']:['x-icon','.weather-value','.weather-temperature-unit,.weather-reading-unit']).map(selector=>row.querySelector(selector)?.getBoundingClientRect().left-left);});
   if(positions.some(p=>p.some(n=>!Number.isFinite(n)))||positions.some(p=>p.some((n,i)=>Math.abs(n-positions[0][i])>.5)))readingAlignmentErrors.push(index);
  }
 
- return {readingAlignmentErrors,board:rect(board),sections:[...board.querySelectorAll(':scope>section')].map(e=>({name:e.className,...rect(e)})),hours:hours.length,days:days.length,hourRows:rows(hours),dayRows:rows(days),metricRows:rows(metrics),hourScrollable:hourStrip.scrollWidth>hourStrip.clientWidth+1,overflow:document.documentElement.scrollWidth>innerWidth+1,clippedText:[...board.querySelectorAll('.weather-day>*,.weather-hour>*,.weather-now>p,.weather-metric>*')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.className||e.tagName)};
+ return {hourWidth:hourStrip.clientWidth,legends:[...hourStrip.querySelectorAll('.weather-hour-legend')].filter(e=>getComputedStyle(e).display!=='none').map(e=>Math.round(e.offsetTop)),hourRowOffsets:[...new Set(hours.map(e=>Math.round(e.offsetTop)))],readingAlignmentErrors,board:rect(board),sections:[...board.querySelectorAll(':scope>section')].map(e=>({name:e.className,...rect(e)})),hours:hours.length,days:days.length,hourRows:rows(hours),dayRows:rows(days),metricRows:rows(metrics),hourScrollable:hourStrip.scrollWidth>hourStrip.clientWidth+1,overflow:document.documentElement.scrollWidth>innerWidth+1,clippedText:[...board.querySelectorAll('.weather-day>*,.weather-hour>*,.weather-now>p,.weather-metric>*')].filter(e=>e.scrollWidth>e.clientWidth+1).map(e=>e.className||e.tagName)};
  });}
 function assertLayout(metrics){
  assert.equal(metrics.overflow,false,'Only the hourly strip may scroll horizontally');
  assert.deepEqual(metrics.clippedText,[],'Weather values and long weekday labels must fit');
  assert.deepEqual(metrics.readingAlignmentErrors,[],'Icons, values and units must use identical column offsets');
  assert.equal(metrics.hours,24);assert.equal(metrics.days,7);
- assert.equal(metrics.hourRows,metrics.board.width>=600?2:1);
+ const expectedRows=metrics.hourWidth>=1680?1:metrics.hourWidth>=860?2:metrics.hourWidth>=580?3:metrics.hourWidth>=440?4:1;
+ assert.equal(metrics.hourRows,expectedRows);assert.equal(metrics.legends.length,expectedRows);assert.deepEqual(metrics.legends,metrics.hourRowOffsets,'Each actual hourly row has exactly one aligned legend');
  assert.equal(metrics.dayRows,metrics.board.width>=900?1:7);
  assert.equal(metrics.metricRows,metrics.board.width>=1100?1:metrics.board.width>=600?2:4);
  if(metrics.board.width>=800)for(const name of ['weather-daily','weather-metrics'])assert(Math.abs(metrics.sections.find(s=>s.name===name).width-metrics.board.width)<1,'Forecast and metrics must use the full board width');
- if(metrics.board.width<600)assert(metrics.hourScrollable,'Mobile hours remain touch-scrollable');
+ if(metrics.hourWidth<440)assert(metrics.hourScrollable,'Mobile hours remain touch-scrollable');else assert.equal(metrics.hourScrollable,false,'Available hourly width chooses rows without clipping');
  if(metrics.board.width>=1400)assert.equal(metrics.hourScrollable,false,'All twelve hourly slots must fit on wide boards');
 }
 async function assertUnits(page){
@@ -57,8 +58,8 @@ async function assertUnits(page){
   await page.waitForFunction(()=>window.XTendPage.getRuntime().model.getState('search.weatherUi').fahrenheit===false&&!document.querySelector('#weather-unit-tools').hasAttribute('data-fahrenheit')&&document.querySelector('.weather-temperature-unit').textContent===' °C');
  }
  assert(Math.min(...contrasts)>=4.5,'Both unit labels must meet 4.5:1 in both palettes and states: '+JSON.stringify(contrasts));
- assert.equal(await page.locator('.weather-temperature-reading x-icon[name=temperature]').count(),24);
- assert.equal(await page.locator('.weather-low x-icon[name=temperature-low]').count(),7);assert.equal(await page.locator('.weather-high x-icon[name=temperature-high]').count(),7);assert.equal(await page.locator('.weather-rain x-icon[name=rain-probability]').count(),31);
+ assert.equal(await page.locator('.weather-temperature-reading x-icon[name=temperature]').count(),0);assert.equal(await page.locator('.weather-hour-legend:visible x-icon[name=temperature]').count(),before.hourRows);
+ assert.equal(await page.locator('.weather-low x-icon[name=temperature-low]').count(),7);assert.equal(await page.locator('.weather-high x-icon[name=temperature-high]').count(),7);assert.equal(await page.locator('.weather-rain x-icon[name=rain-probability]').count(),7);
  // Select Fahrenheit for the subsequent real history/cache round-trip.
  await page.locator('#weather-unit-toggle').click();await page.waitForFunction(()=>window.XTendPage.getRuntime().model.getState('search.weatherUi').fahrenheit===true);
  await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
@@ -71,7 +72,7 @@ async function assertUnits(page){
 }
 const browser=await chromium.launch(),runs=[];
 try{
- for(const width of [320,390,700,900,1000,1024,1440,1920,3840]){
+ for(const width of [320,390,480,520,560,640,700,800,860,900,1000,1024,1034,1186,1440,1920,3840]){
   const context=await browser.newContext({colorScheme:'dark',viewport:{width,height:1000}}),page=await context.newPage();
   await page.addInitScript(()=>{
    window.weatherMetrics={ready:false,cls:0,shifts:[],start:null,end:null};

@@ -1,0 +1,270 @@
+{
+  "ok": true,
+  "checkedOn": "2026-10-24",
+  "scope": "Five sequential runs per release on the same host and Chromium, same offline providers, separate fresh volumes and browser instances. Full paired frontend/backend comparison. Small local sample, no production latency or provider-uptime claim. Heap values are coarse Chromium diagnostics and are not a retained-memory/leak proof.",
+  "baseline": {
+    "ok": true,
+    "version": "0.7.4",
+    "scope": "Five same-host desktop runs; independent fresh fixture volume, identical offline 100/700/2500ms providers, no live searches. Heap is a coarse Chromium diagnostic, not a retained-memory benchmark.",
+    "runs": [
+      {
+        "first": 579.6000000014901,
+        "complete": 3198.10000000149,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 18200000,
+        "jsEncodedBytes": 645715,
+        "restore": {
+          "ms": 710,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      },
+      {
+        "first": 611.6999999992549,
+        "complete": 3216.39999999851,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 18200000,
+        "jsEncodedBytes": 645715,
+        "restore": {
+          "ms": 756,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      },
+      {
+        "first": 594.9000000003725,
+        "complete": 3182,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 18200000,
+        "jsEncodedBytes": 645715,
+        "restore": {
+          "ms": 708,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      },
+      {
+        "first": 628.5999999996275,
+        "complete": 3239.4000000003725,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 18200000,
+        "jsEncodedBytes": 645715,
+        "restore": {
+          "ms": 749,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      },
+      {
+        "first": 616.1999999992549,
+        "complete": 3209.2999999988824,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 18200000,
+        "jsEncodedBytes": 645715,
+        "restore": {
+          "ms": 779,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      }
+    ],
+    "median": {
+      "firstMs": 611.6999999992549,
+      "completeMs": 3209.2999999988824,
+      "jsEncodedBytes": 645715,
+      "jsHeapBytes": 18200000,
+      "restoreMs": 749
+    }
+  },
+  "candidate": {
+    "ok": true,
+    "version": "0.7.5",
+    "scope": "Five same-host desktop runs; independent fresh fixture volume, identical offline 100/700/2500ms providers, no live searches. Heap is a coarse Chromium diagnostic, not a retained-memory benchmark.",
+    "runs": [
+      {
+        "first": 629.7000000011176,
+        "complete": 3238.300000000745,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 19300000,
+        "jsEncodedBytes": 648252,
+        "restore": {
+          "ms": 782,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      },
+      {
+        "first": 638.8000000007451,
+        "complete": 3237.60000000149,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 19300000,
+        "jsEncodedBytes": 648252,
+        "restore": {
+          "ms": 820,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      },
+      {
+        "first": 642.0999999996275,
+        "complete": 3249.699999999255,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 19300000,
+        "jsEncodedBytes": 648252,
+        "restore": {
+          "ms": 802,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      },
+      {
+        "first": 656.7000000011176,
+        "complete": 3247.9000000003725,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 19300000,
+        "jsEncodedBytes": 648252,
+        "restore": {
+          "ms": 784,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      },
+      {
+        "first": 600.0999999996275,
+        "complete": 3200.0999999996275,
+        "cls": 0,
+        "resultCount": 10,
+        "jsHeapBytes": 19300000,
+        "jsEncodedBytes": 648252,
+        "restore": {
+          "ms": 764,
+          "searchStreams": 0,
+          "metadataRequests": 1
+        }
+      }
+    ],
+    "median": {
+      "firstMs": 638.8000000007451,
+      "completeMs": 3238.300000000745,
+      "jsEncodedBytes": 648252,
+      "jsHeapBytes": 19300000,
+      "restoreMs": 784
+    }
+  },
+  "browserGraphs": {
+    "0.7.4": {
+      "image": "sha256:4a1872b8ef36968e085c609252e17a5bcdedc1aedbf9ea5eaad3c986dba158e1",
+      "moduleCount": 8,
+      "bytes": 440577,
+      "gzipBytes": 136759,
+      "files": [
+        {
+          "module": "page.mjs",
+          "bytes": 81480,
+          "gzipBytes": 24684
+        },
+        {
+          "module": "chunks/rmt-resume-runtime-TDYASBDO.mjs",
+          "bytes": 12928,
+          "gzipBytes": 4482
+        },
+        {
+          "module": "chunks/chunk-HDGUSJ7J.mjs",
+          "bytes": 3844,
+          "gzipBytes": 1684
+        },
+        {
+          "module": "chunks/page-client-2BMFVTVB.mjs",
+          "bytes": 277834,
+          "gzipBytes": 82452
+        },
+        {
+          "module": "chunks/chunk-MD4F5YI5.mjs",
+          "bytes": 6507,
+          "gzipBytes": 2610
+        },
+        {
+          "module": "chunks/lightbox-U3GKJBKX.mjs",
+          "bytes": 6690,
+          "gzipBytes": 2923
+        },
+        {
+          "module": "chunks/chunk-F5NFLEOH.mjs",
+          "bytes": 27908,
+          "gzipBytes": 11039
+        },
+        {
+          "module": "chunks/chunk-Q5OUVVO3.mjs",
+          "bytes": 23386,
+          "gzipBytes": 6885
+        }
+      ]
+    },
+    "0.7.5": {
+      "image": "sha256:e9815597f17b3a2d194dd21632ab142f55103fc764a384f1f0a7766a8ff56891",
+      "moduleCount": 8,
+      "bytes": 442645,
+      "gzipBytes": 137368,
+      "files": [
+        {
+          "module": "page.mjs",
+          "bytes": 82058,
+          "gzipBytes": 24901
+        },
+        {
+          "module": "chunks/rmt-resume-runtime-TDYASBDO.mjs",
+          "bytes": 12928,
+          "gzipBytes": 4482
+        },
+        {
+          "module": "chunks/chunk-HDGUSJ7J.mjs",
+          "bytes": 3844,
+          "gzipBytes": 1684
+        },
+        {
+          "module": "chunks/page-client-2BMFVTVB.mjs",
+          "bytes": 277834,
+          "gzipBytes": 82452
+        },
+        {
+          "module": "chunks/chunk-MD4F5YI5.mjs",
+          "bytes": 6507,
+          "gzipBytes": 2610
+        },
+        {
+          "module": "chunks/lightbox-GO6KH6NM.mjs",
+          "bytes": 6690,
+          "gzipBytes": 2923
+        },
+        {
+          "module": "chunks/chunk-PYNA3KWJ.mjs",
+          "bytes": 29398,
+          "gzipBytes": 11431
+        },
+        {
+          "module": "chunks/chunk-Q5OUVVO3.mjs",
+          "bytes": 23386,
+          "gzipBytes": 6885
+        }
+      ]
+    }
+  },
+  "delta": {
+    "firstMs": 27.100000001490116,
+    "completeMs": 29.000000001862645,
+    "jsEncodedBytes": 2537,
+    "jsHeapBytes": 1100000,
+    "restoreMs": 35
+  },
+  "firstPaintChangePercent": 4.430276279470835,
+  "browserGraphGzipDeltaBytes": 609
+}

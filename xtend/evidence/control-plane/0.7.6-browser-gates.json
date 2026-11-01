@@ -1,0 +1,112 @@
+{
+  "ok": true,
+  "image": "xtend-search:0.7.6",
+  "backend": "xtend-search-searxng:0.7.5",
+  "results": [
+    {
+      "name": "v04-browser",
+      "ok": true,
+      "durationMs": 52964
+    },
+    {
+      "name": "feedback-readiness-browser",
+      "ok": true,
+      "durationMs": 4330
+    },
+    {
+      "name": "minor-051-browser",
+      "ok": true,
+      "durationMs": 14474
+    },
+    {
+      "name": "release-060-browser",
+      "ok": true,
+      "durationMs": 27372
+    },
+    {
+      "name": "release-075-browser",
+      "ok": true,
+      "durationMs": 32006
+    },
+    {
+      "name": "release-076-browser",
+      "ok": true,
+      "durationMs": 32041
+    },
+    {
+      "name": "availability-feedback-browser",
+      "ok": true,
+      "durationMs": 62656
+    },
+    {
+      "name": "weather-layout-browser",
+      "ok": true,
+      "durationMs": 121984
+    },
+    {
+      "name": "spinner-stream-browser",
+      "ok": true,
+      "durationMs": 22043
+    },
+    {
+      "name": "cache-browser",
+      "ok": true,
+      "durationMs": 45002
+    },
+    {
+      "name": "cache-stale-projection-browser",
+      "ok": true,
+      "durationMs": 5777
+    },
+    {
+      "name": "preferences-browser",
+      "ok": true,
+      "durationMs": 25204
+    },
+    {
+      "name": "release-0.4.2-browser",
+      "ok": true,
+      "durationMs": 14143
+    },
+    {
+      "name": "home-browser",
+      "ok": true,
+      "durationMs": 17399
+    },
+    {
+      "name": "ssr-browser",
+      "ok": true,
+      "durationMs": 14196
+    },
+    {
+      "name": "about-browser",
+      "ok": true,
+      "durationMs": 13281
+    },
+    {
+      "name": "edge-browser",
+      "ok": true,
+      "durationMs": 8100
+    },
+    {
+      "name": "lightbox-resilience-browser",
+      "ok": true,
+      "durationMs": 16335
+    },
+    {
+      "name": "prerelease-audit-browser",
+      "ok": true,
+      "durationMs": 42402
+    },
+    {
+      "name": "empty-state-browser",
+      "ok": true,
+      "durationMs": 14555
+    },
+    {
+      "name": "knowledge-failure-browser",
+      "ok": true,
+      "scope": "Separate fresh fixture volume; card remains interactive after all web sources fail."
+    }
+  ]
+}

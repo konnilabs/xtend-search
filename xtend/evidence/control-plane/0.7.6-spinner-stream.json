@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "checks": [
+    "Premature/empty stream terminates busy state and replaces the pending heading.",
+    "15-second transport timeout returns to the magnifier, including a centered monochrome XSpinner."
+  ],
+  "errors": []
+}

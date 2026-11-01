@@ -1,0 +1,117 @@
+{
+  "checkedOn": "2026-10-24",
+  "server": {
+    "name": "xtend-hosted-knowledge",
+    "version": "0.1.0"
+  },
+  "transport": "Authenticated local Docker HTTP MCP on loopback; credentials omitted",
+  "calls": [
+    "initialize",
+    "notifications/initialized",
+    "tools/list",
+    "tools/call"
+  ],
+  "tools": [
+    "xtend_knowledge_search",
+    "xtend_knowledge_context"
+  ],
+  "request": {
+    "name": "xtend_knowledge_context",
+    "arguments": {
+      "query": "Maraca Action Model stateRuntime getState atomic action datasource XSpinner SSR capabilities safe component renderer",
+      "locale": "en",
+      "limit": 4,
+      "maxChars": 10000
+    }
+  },
+  "response": {
+    "provenance": {
+      "commit": "7d86ebde8ba3611c3ffdcf49d0c7ec26dad9973c",
+      "repository": "konnilabs/xtend",
+      "ref": "main"
+    },
+    "data": {
+      "schema": "xtend.mcp.knowledge-search.v1",
+      "query": "Maraca Action Model stateRuntime getState atomic action datasource XSpinner SSR capabilities safe component renderer",
+      "locale": "en",
+      "scopes": [
+        "docs",
+        "rmt-kit"
+      ],
+      "limit": 4,
+      "domains": [],
+      "hitCount": 4,
+      "hits": [
+        {
+          "uri": "xtend://docs/en/rmt-node-ssr-adapter",
+          "id": "en:rmt-node-ssr-adapter:9",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "RMT Node SSR Adapter",
+          "heading": "Attribute literals and capability coverage",
+          "score": 17,
+          "excerpt": "### Attribute literals and capability coverage\n\nStrings in `attributes`/`attrs` are literal, including `type: \"search\"` when\nthe model also has a `search` key. Use explicit `$model.path`, `$item.path`,\n`${model.path}` interpolation, or expression records for bindings. This rule\napplies to portable Node/PHP projection and the DOM renderer as well. Bare\nmodel paths in attributes must migrate to explicit bindings. Native and ARIA\nattributes accept finite scalar values; structured values belong in component\nproperties. Existing structured `data-*` serialization remains supported.\nInvalid structured native attributes are omitted with a diagnostic instead of\nserializing model objects into HTML.\n\nComponent SSR capabilities require the registry supplied through `manifest`\nand `sourceTexts` (or a registry). Component metadata existing in a package does\nnot automatically register it in a host. This includes `x-section`.\n\n`getRmtSsrCoverage(result)` reports `xtend.rmt.ssr-coverage.v1`: descriptor\nelement nodes, resume-marked nodes, component nodes, missing-capability nodes,\nand raw HTML fragments. `resumeMarkerCoverage` is resume-marked nodes divided by\ndescriptor element nodes, or null when there are none. It measures emitted\nadoption markers, **not successful browser resumes or fallback frequency**.\nRaw HTML fragments are reported separately because their inner nodes are not\ndescriptor-…",
+          "sourceHash": "d1d449cb36468e9891f0ae20d4e9eb86819e5343a430a87102c2482fb72c04c0",
+          "sourcePath": "docs/en/rmt-node-ssr-adapter.md"
+        },
+        {
+          "uri": "xtend://rmt/kit/reference/operator%3Aaction",
+          "id": "operator:action",
+          "scope": "rmt-kit",
+          "kind": "operator",
+          "locale": "en",
+          "title": "action",
+          "heading": "action",
+          "score": 17,
+          "excerpt": "operator:action\noperator\naction\nDeclares state changes, effects and emitted events.\naction app.save { input value string reduce state.app.form.value = input.value }\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\naction app.save { input value string reduce state.app.status.text = \"Saved\" }\naction app.save { save(value) }\nActions are declarative transitions, not functions.\ntemplate",
+          "sourceHash": "b985591d5be261a0363dbfd9dc089b1af028501d5abbea1f19014147b8d4dd99",
+          "sourcePath": "docs/de/rmt-reference-actions-events.md"
+        },
+        {
+          "uri": "xtend://rmt/kit/reference/operator%3Adatasource",
+          "id": "operator:datasource",
+          "scope": "rmt-kit",
+          "kind": "operator",
+          "locale": "en",
+          "title": "datasource",
+          "heading": "datasource",
+          "score": 17,
+          "excerpt": "operator:datasource\noperator\ndatasource\nDeclares host-owned data access.\ndatasource items from endpoint \"/api/items\" { method GET result list }\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\ndatasource tickets from endpoint \"/api/tickets\" { method GET result list fallback fixture tickets.empty }\ndatasource tickets from fetch(\"/api/tickets\")\nFree function calls are refused.\ntemplate",
+          "sourceHash": "b985591d5be261a0363dbfd9dc089b1af028501d5abbea1f19014147b8d4dd99",
+          "sourcePath": "docs/de/rmt-reference-state-selectors-data.md"
+        },
+        {
+          "uri": "xtend://docs/en/maraca-fastpass-abort-boundary",
+          "id": "en:maraca-fastpass-abort-boundary:4",
+          "scope": "docs",
+          "kind": "concept",
+          "locale": "en",
+          "title": "Maraca FastPass and Abort Boundaries",
+          "heading": "Abort boundaries",
+          "score": 16,
+          "excerpt": "## Abort boundaries\n\nManaged surfaces expose `runtime.getSurfaceBoundary(id)`; omitting the ID returns the root boundary. External renderers can import `createMaracaAbortBoundary({ id, parent })` from `@ccslabs/xtend/maraca/plan-runtime`.\n\nThe contract provides `capture()`, `isCurrent(token)`, `invalidate(reason)`, `dispose()` and the current `signal`. `setActive(false)` also prevents new presentation work; reactivation starts a fresh epoch. `run(work, token)` settles obsolete work as `{ ok: false, status: 'superseded' }`. `commit(work, token)` guards a synchronous mutation. `scheduleCommit(scheduler, work, token, request)` checks again after scheduling and removes pending work on invalidation.\n\n```js\nconst boundary = runtime.getSurfaceBoundary('panel');\nconst token = boundary.capture();\nconst response = await kernel.runtime.requestUiCompute(envelope, {\n  abortBoundary: boundary, presentationToken: token\n});\nif (response.status === 'superseded') return;\nawait boundary.scheduleCommit(kernel.scheduler, () => {\n  renderer.commit(buildCommit(response));\n}, token);\n```\n\nTokens stay on the main thread. They are independent of model versions and worker request generations. Check after a response and immediately before DOM/chart commits, including fallback paths. Supersession must never trigger a synchronous rendering fallback.\n\nManaged boundaries follow successful close, hide, minimiz…",
+          "sourceHash": "cd1bfc0a3895531e03091697bf95cc2facccaae7001a3fa453b252c0e99fbf54",
+          "sourcePath": "docs/en/maraca-fastpass-abort-boundary.md"
+        }
+      ],
+      "maxChars": 10000,
+      "context": "XTEND_KNOWLEDGE_CONTEXT\nQuery: Maraca Action Model stateRuntime getState atomic action datasource XSpinner SSR capabilities safe component renderer\nLocales: en\nScopes: docs, rmt-kit\n\n[K1] RMT Node SSR Adapter — Attribute literals and capability coverage\nResource: xtend://docs/en/rmt-node-ssr-adapter\nSource: docs/en/rmt-node-ssr-adapter.md#sha256:d1d449cb36468e9891f0ae20d4e9eb86819e5343a430a87102c2482fb72c04c0\n### Attribute literals and capability coverage\n\nStrings in `attributes`/`attrs` are literal, including `type: \"search\"` when\nthe model also has a `search` key. Use explicit `$model.path`, `$item.path`,\n`${model.path}` interpolation, or expression records for bindings. This rule\napplies to portable Node/PHP projection and the DOM renderer as well. Bare\nmodel paths in attributes must migrate to explicit bindings. Native and ARIA\nattributes accept finite scalar values; structured values belong in component\nproperties. Existing structured `data-*` serialization remains supported.\nInvalid structured native attributes are omitted with a diagnostic instead of\nserializing model objects into HTML.\n\nComponent SSR capabilities require the registry supplied through `manifest`\nand `sourceTexts` (or a registry). Component metadata existing in a package does\nnot automatically register it in a host. This includes `x-section`.\n\n`getRmtSsrCoverage(result)` reports `xtend.rmt.ssr-coverage.v1`: descriptor\nelement nodes, resume-marked nodes, component nodes, missing-capability nodes,\nand raw HTML fragments. `resumeMarkerCoverage` is resume-marked nodes divided by\ndescriptor element nodes, or null when there are none. It measures emitted\nadoption markers, **not successful browser resumes or fallback frequency**.\nRaw HTML fragments are reported separately because their inner nodes are not\ndescriptor-…\n\n[K2] action\nResource: xtend://rmt/kit/reference/operator%3Aaction\nSource: docs/de/rmt-reference-actions-events.md#sha256:b985591d5be261a0363dbfd9dc089b1af028501d5abbea1f19014147b8d4dd99\noperator:action\noperator\naction\nDeclares state changes, effects and emitted events.\naction app.save { input value string reduce state.app.form.value = input.value }\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\naction app.save { input value string reduce state.app.status.text = \"Saved\" }\naction app.save { save(value) }\nActions are declarative transitions, not functions.\ntemplate\n\n[K3] datasource\nResource: xtend://rmt/kit/reference/operator%3Adatasource\nSource: docs/de/rmt-reference-state-selectors-data.md#sha256:b985591d5be261a0363dbfd9dc089b1af028501d5abbea1f19014147b8d4dd99\noperator:datasource\noperator\ndatasource\nDeclares host-owned data access.\ndatasource items from endpoint \"/api/items\" { method GET result list }\nStatic identifiers, strings, integers, booleans, paths or declarative expressions only.\ndatasource tickets from endpoint \"/api/tickets\" { method GET result list fallback fixture tickets.empty }\ndatasource tickets from fetch(\"/api/tickets\")\nFree function calls are refused.\ntemplate\n\n[K4] Maraca FastPass and Abort Boundaries — Abort boundaries\nResource: xtend://docs/en/maraca-fastpass-abort-boundary\nSource: docs/en/maraca-fastpass-abort-boundary.md#sha256:cd1bfc0a3895531e03091697bf95cc2facccaae7001a3fa453b252c0e99fbf54\n## Abort boundaries\n\nManaged surfaces expose `runtime.getSurfaceBoundary(id)`; omitting the ID returns the root boundary. External renderers can import `createMaracaAbortBoundary({ id, parent })` from `@ccslabs/xtend/maraca/plan-runtime`.\n\nThe contract provides `capture()`, `isCurrent(token)`, `invalidate(reason)`, `dispose()` and the current `signal`. `setActive(false)` also prevents new presentation work; reactivation starts a fresh epoch. `run(work, token)` settles obsolete work as `{ ok: false, status: 'superseded' }`. `commit(work, token)` guards a synchronous mutation. `scheduleCommit(scheduler, work, token, request)` checks again after scheduling and removes pending work on invalidation.\n\n```js\nconst boundary = runtime.getSurfaceBoundary('panel');\nconst token = boundary.capture();\nconst response = await kernel.runtime.requestUiCompute(envelope, {\n  abortBoundary: boundary, presentationToken: token\n});\nif (response.status === 'superseded') return;\nawait boundary.scheduleCommit(kernel.scheduler, () => {\n  renderer.commit(buildCommit(response));\n}, token);\n```\n\nTokens stay on the main thread. They are independent of model versions and worker request generations. Check after a response and immediately before DOM/chart commits, including fallback paths. Supersession must never trigger a synchronous rendering fallback.\n\nManaged boundaries follow successful close, hide, minimiz…\n\nUse only the cited XTend resources. Do not invent APIs or RMT syntax.\n/no_think"
+    }
+  },
+  "decisions": [
+    "Use RMT actions and local App Services for correlated preview loading and report-selection intents; no DOM injection.",
+    "MCP exposes knowledge tools only, no compiler or rendering tools. Build, SSR/resume, HTML-safety and browser proofs are SDK/CLI results.",
+    "MCP knowledge main commit is newer than the unchanged installed SDK. Verify all used APIs against pinned SDK 0.9.0 / 66ffa8fa4423134e99705b3d3dd0d1568a8dbdb3; do not silently migrate."
+  ],
+  "initializeInput": {
+    "protocolVersion": "2025-03-26",
+    "capabilities": {},
+    "clientInfo": {
+      "name": "xtend-search-release-review",
+      "version": "0.7.5"
+    }
+  },
+  "toolsListInput": {},
+  "initializedInput": {}
+}

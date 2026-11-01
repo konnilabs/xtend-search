@@ -1,0 +1,151 @@
+{
+  "ok": true,
+  "checkedOn": "2026-10-24",
+  "runtimeSourceCommit": "e1b5ad741bd7a84406f8653dfca66aed118c24cd",
+  "node": {
+    "version": "24.22.1",
+    "builtInUndici": "7.30.1",
+    "npmUndici": "8.12.3"
+  },
+  "gates": {
+    "controlNode": {
+      "passed": 160,
+      "failed": 0
+    },
+    "legacyNode": {
+      "passed": 10,
+      "failed": 0
+    },
+    "pythonOfflineBackend": {
+      "passed": 8,
+      "failed": 0,
+      "network": "none"
+    },
+    "strictMaraca": true,
+    "composeValidation": true,
+    "npmAuditKnownFindings": 0,
+    "dockerBrowsers": [
+      {
+        "gate": "v04",
+        "ok": true,
+        "seconds": 57.52
+      },
+      {
+        "gate": "feedback-readiness",
+        "ok": true,
+        "seconds": 4.48
+      },
+      {
+        "gate": "minor-051",
+        "ok": true,
+        "seconds": 18.61
+      },
+      {
+        "gate": "release-060",
+        "ok": true,
+        "seconds": 31.84
+      },
+      {
+        "gate": "release-075",
+        "ok": true,
+        "seconds": 22.12
+      },
+      {
+        "gate": "availability-feedback",
+        "ok": true,
+        "seconds": 66.17
+      },
+      {
+        "gate": "weather-layout",
+        "ok": true,
+        "seconds": 134.66
+      },
+      {
+        "gate": "spinner-stream",
+        "ok": true,
+        "seconds": 22.21
+      },
+      {
+        "gate": "cache",
+        "ok": true,
+        "seconds": 46.94
+      },
+      {
+        "gate": "cache-stale-projection",
+        "ok": true,
+        "seconds": 5.93
+      },
+      {
+        "gate": "preferences",
+        "ok": true,
+        "seconds": 25.78
+      },
+      {
+        "gate": "release-0.4.2",
+        "ok": true,
+        "seconds": 14.36
+      },
+      {
+        "gate": "home",
+        "ok": true,
+        "seconds": 17.96
+      },
+      {
+        "gate": "ssr",
+        "ok": true,
+        "seconds": 15.0
+      },
+      {
+        "gate": "about",
+        "ok": true,
+        "seconds": 13.29
+      },
+      {
+        "gate": "edge",
+        "ok": true,
+        "seconds": 8.13
+      },
+      {
+        "gate": "lightbox-resilience",
+        "ok": true,
+        "seconds": 16.85
+      },
+      {
+        "gate": "prerelease-audit",
+        "ok": true,
+        "seconds": 44.06
+      },
+      {
+        "gate": "empty-state",
+        "ok": true,
+        "seconds": 14.8
+      },
+      {
+        "gate": "knowledge-failure",
+        "ok": true
+      }
+    ],
+    "finalImageRegressions": [
+      "release-075 (extended lazy-import timeout and stale selection cases)",
+      "knowledge-failure (stream and no-JS)",
+      "five-run performance candidate"
+    ]
+  },
+  "images": [
+    {
+      "tag": "xtend-search:0.7.5",
+      "id": "sha256:e9815597f17b3a2d194dd21632ab142f55103fc764a384f1f0a7766a8ff56891",
+      "architecture": "linux/amd64"
+    },
+    {
+      "tag": "xtend-search-searxng:0.7.5",
+      "id": "sha256:d4addc901aedab078c9de675e7c8cb883f7f0b8c3f4d3b4c7ced5c8ab4f6632f",
+      "architecture": "linux/amd64"
+    }
+  ],
+  "limits": [
+    "Fixture gates establish runtime behavior and contracts, not real-provider uptime or relevance.",
+    "Existing local deployment on port 8090, its policies, SSO and volumes were not replaced.",
+    "No GitHub merge, registry publishing or production deployment performed."
+  ]
+}

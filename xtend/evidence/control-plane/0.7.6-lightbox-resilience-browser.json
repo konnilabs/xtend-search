@@ -1,0 +1,90 @@
+{
+  "ok": true,
+  "checks": [
+    "Broken thumbnail falls back to the signed original; two broken sources settle on a placeholder without a retry loop.",
+    "A successful side preview repairs the failed grid image through the RMT projection.",
+    "Viewport-sized XSearchLightbox, original/source links, focus containment, keyboard carousel and return focus at 320–3840px.",
+    "Close button, Reduced Motion and navigation dispose the overlay without leaving an inert page."
+  ],
+  "geometry": [
+    {
+      "tag": "x-search-lightbox",
+      "width": 320,
+      "height": 900,
+      "x": 0,
+      "y": 0,
+      "viewport": [
+        320,
+        900
+      ],
+      "imageHeight": 676.9464111328125,
+      "scrollHeight": 11291
+    },
+    {
+      "tag": "x-search-lightbox",
+      "width": 390,
+      "height": 900,
+      "x": 0,
+      "y": 0,
+      "viewport": [
+        390,
+        900
+      ],
+      "imageHeight": 703.4033813476562,
+      "scrollHeight": 12557
+    },
+    {
+      "tag": "x-search-lightbox",
+      "width": 768,
+      "height": 900,
+      "x": 0,
+      "y": 0,
+      "viewport": [
+        768,
+        900
+      ],
+      "imageHeight": 707.4345703125,
+      "scrollHeight": 10329
+    },
+    {
+      "tag": "x-search-lightbox",
+      "width": 1440,
+      "height": 900,
+      "x": 0,
+      "y": 0,
+      "viewport": [
+        1440,
+        900
+      ],
+      "imageHeight": 686.5664672851562,
+      "scrollHeight": 8744
+    },
+    {
+      "tag": "x-search-lightbox",
+      "width": 1920,
+      "height": 900,
+      "x": 0,
+      "y": 0,
+      "viewport": [
+        1920,
+        900
+      ],
+      "imageHeight": 689.4884033203125,
+      "scrollHeight": 9524
+    },
+    {
+      "tag": "x-search-lightbox",
+      "width": 3840,
+      "height": 900,
+      "x": 0,
+      "y": 0,
+      "viewport": [
+        3840,
+        900
+      ],
+      "imageHeight": 686.5574951171875,
+      "scrollHeight": 9524
+    }
+  ],
+  "scope": "Offline image and provider fixtures; 100 gallery items. No live queries or image URLs retained."
+}
