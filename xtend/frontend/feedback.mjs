@@ -9,7 +9,8 @@ export function installFeedback(){
  const registry=createAppServiceRegistry(services,{historyLimit:0});
  let epoch=0,request,saving=false,commits=Promise.resolve(),guard=null,currentUrl=location.href,index=0,suppress=false,submitting=false,requestKey=null;
  const runtime=()=>window.XTendPage?.getRuntime(),model=()=>runtime()?.model.getState('search.feedback')||emptyReport();
- const state=(patch,own=epoch)=>{commits=commits.catch(()=>{}).then(async()=>{if(own!==epoch)return;const previous=model(),data=runtime().model.getState('search.data');const value=await registry.invoke('search.report.reduce',{previous,patch:await (typeof patch==='function'?patch(previous):patch),data});if(own===epoch)return runtime().dispatchCommand('search.report.selection',{value});});return commits;};
+ const state=(patch,own=epoch)=>{commits=commits.catch(()=>{}).then(()=>{if(own===epoch)return runtime().dispatchCommand('search.report.selection',{value:{patch}});});return commits;};
+ const select=(id,checked)=>{const own=epoch;commits=commits.catch(()=>{}).then(()=>{if(own===epoch)return runtime().dispatchCommand('search.report.selection',{value:{selection:{id,checked}}});});return commits;};
  const reset=async toast=>{epoch++;request?.abort();requestKey=null;await state({...emptyReport(),toast:toast||''});};
  const dirty=()=>reportIsDirty(model());
  async function confirm(){if(saving)return false;if(!dirty()){await reset();return true;}if(guard)return false;await runtime().ensureComponent('x-dialog');await state({confirm:true});return new Promise(resolve=>{guard=async ok=>{guard=null;if(ok)await reset();else await state({confirm:false});resolve(ok);};});}
@@ -27,8 +28,7 @@ export function installFeedback(){
   if(!runtime())return;const field=event.target;
   if(field.matches('.report-checkbox')){
    const feedback=model();if(feedback.busy){void state({});return;}
-   const data=runtime().model.getState('search.data');requestKey=crypto.randomUUID();
-   const id=field.value,checked=field.checked;void state(current=>registry.invoke('search.report.select',{feedback:current,data,id,checked}));
+   requestKey=crypto.randomUUID();void select(field.value,field.checked);
   }
   if(field.closest('#feedback-form')){requestKey=crypto.randomUUID();void state(field.name==='reason'?{reason:field.value,error:''}:field.name==='includeUrl'?{includeUrl:field.checked,error:''}:{});}
  },true);

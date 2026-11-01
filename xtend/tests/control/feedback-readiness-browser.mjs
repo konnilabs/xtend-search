@@ -24,7 +24,7 @@ try{
   Object.defineProperty(instrumented,'model',{value:model});
   client.getRuntime=()=>instrumented;
   Object.defineProperty(instrumented,'dispatchCommand',{value:async(name,args,...rest)=>{
-   if(name==='search.report.selection'&&args.value.feedback.reason==='spam'){
+   if(name==='search.report.selection'&&args.value.patch?.reason==='spam'){
     await new Promise(resolve=>{window.releaseFeedbackCommit=resolve;window.feedbackCommitHeld=true;});
     client.getRuntime=getRuntime;
    }

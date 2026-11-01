@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "checks": [
+    "Early RMT report selection survives every stream update, without checkbox/highlight flicker or result-list rollback.",
+    "Image and lightbox loading use a reserved RMT XSpinner slot; title, arrows and details keep identical geometry; native fullscreen remains intact.",
+    "About backdrop follows the neutral warm palette in both schemes.",
+    "Truncated and malformed NDJSON preserve already displayed results, terminate the spinner and forbid cache capture.",
+    "A newer direct search cancels stale frames; all final results belong to the current generation.",
+    "An eight-second lazy-import deadline clears the spinner; image navigation invalidates the old import and cannot reopen a stale fullscreen view."
+  ],
+  "previewCls": 0,
+  "scope": "Built candidate with isolated offline providers; explicit stream fault injection; no live queries or production settings."
+}
