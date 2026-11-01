@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "scope": "Targeted actual-image acceptance after restoring 0.7.5 preview dimensions; the full original 0.7.6 run is recorded separately.",
+  "results": [
+    {
+      "name": "preview-size-browser",
+      "ok": true,
+      "durationMs": 21284
+    },
+    {
+      "name": "image-grid-layout-browser",
+      "ok": true,
+      "durationMs": 15670
+    },
+    {
+      "name": "release-076-browser",
+      "ok": true,
+      "durationMs": 32800
+    },
+    {
+      "name": "release-075-browser",
+      "ok": true,
+      "durationMs": 33081
+    },
+    {
+      "name": "ssr-browser",
+      "ok": true,
+      "durationMs": 15267
+    },
+    {
+      "name": "lightbox-resilience-browser",
+      "ok": true,
+      "durationMs": 18874
+    }
+  ]
+}

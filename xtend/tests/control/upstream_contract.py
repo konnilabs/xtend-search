@@ -49,6 +49,21 @@ for _name, processor in PROCESSORS.items():
 
 
 class UpstreamContract(unittest.TestCase):
+    def test_updated_brave_extracts_iife_data_without_executing_javascript(self):
+        from searx.engines import brave
+        from unittest.mock import patch
+        script = 'data: [(function(a,b){return {"type":"data","url":a,"title":b};})("https://example.org/", "Fixture")];'
+        parsed = brave.extract_json_data(script)
+        self.assertEqual(parsed['data'][0]['url'], 'https://example.org/')
+        self.assertEqual(parsed['data'][0]['title'], 'Fixture')
+        with patch('os.system') as execute:
+            with self.assertRaises(ValueError):
+                brave.extract_json_data('data: [{"type":"data","payload":__import__("os").system("unused")}];')
+            execute.assert_not_called()
+        for script in ['missing marker', 'data: [{"broken":1', 'data: [window.alert(1)]']:
+            with self.assertRaises(ValueError):
+                brave.extract_json_data(script)
+
     def setUp(self):
         CALLS.clear()
         self.form = {'q': 'contract fixture', 'engines': 'fixture fast', 'format': 'json',

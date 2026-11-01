@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "checks": [
+    "Empty web/image streams and cached Back restore show readable fallback text without model references.",
+    "Direct SSR and No-JS empty/error paths resolve the same human-readable messages.",
+    "Successful results replace the empty state; real offline provider failures settle on readable error text and an idle spinner."
+  ],
+  "errors": [],
+  "scope": "Built Docker image, explicit offline SearXNG fixtures; no live query or result URL retained."
+}

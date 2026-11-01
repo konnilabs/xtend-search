@@ -1,0 +1,54 @@
+{
+  "ok": true,
+  "scope": "Built paired images; an offline Knowledge Card arrives first, then three real SearXNG fixture failures; no user queries, URLs or production policies retained.",
+  "audit": {
+    "firstPhase": "partial",
+    "lost": false,
+    "frames": [
+      {
+        "event": "knowledge.updated",
+        "status": "delta",
+        "cards": 1,
+        "results": 0,
+        "error": false
+      },
+      {
+        "event": "source.status",
+        "status": "delta",
+        "cards": 1,
+        "results": 0,
+        "error": false
+      },
+      {
+        "event": "source.status",
+        "status": "delta",
+        "cards": 1,
+        "results": 0,
+        "error": false
+      },
+      {
+        "event": "source.status",
+        "status": "delta",
+        "cards": 1,
+        "results": 0,
+        "error": false
+      },
+      {
+        "event": "search.summary",
+        "status": "complete",
+        "cards": 1,
+        "results": 0,
+        "error": false
+      }
+    ]
+  },
+  "data": {
+    "error": false,
+    "empty": false,
+    "results": 0,
+    "cards": 1,
+    "countLabel": "Informationen zur Suche",
+    "webMessage": "Die Webquellen sind derzeit nicht verfügbar. Die bereits geladenen Zusatzinformationen bleiben erhalten."
+  },
+  "errors": []
+}

@@ -1,0 +1,9 @@
+{
+  "ok": true,
+  "checks": [
+    "Filter drafts drive category URLs; all/en transitions, back/forward and draft edits during real XScaler batches stay consistent without document reload.",
+    "One header form, accessible XIcon links, keyboard reporting and responsive light/dark layouts at 320–3840px; search input remains at least 16px.",
+    "Real XButton login and native no-JS fallback use the same mock Nextcloud OAuth flow; Observatory shares corporate tokens and restrained corners."
+  ],
+  "errors": []
+}

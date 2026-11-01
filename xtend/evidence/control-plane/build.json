@@ -1,11 +1,11 @@
 {
   "ok": true,
-  "node": "v24.19.0",
+  "node": "v24.22.1",
   "summaries": [
     {
       "folder": "standalone",
-      "version": "761e6e55e4269741a3349df2f7580b5ca682b7e387a519253dc3466e49e0db51",
-      "sourceSha256": "fbec52bf1da3501c73e9ca559d0dd6dbe49767764f0afec8e6504fc0e0be7023",
+      "version": "e7342a8a780f93a1401b3823e350ce452db45e87c97496132d1e84ec58fba175",
+      "sourceSha256": "a5253f7fef1764b341ed28ae96baec139f17d9bbe61d86f735f40531c80c7863",
       "services": "planned",
       "htmlSecurity": {
         "schema": "xtend.maraca.html-security-report.v1",
@@ -45,7 +45,7 @@
           },
           {
             "file": "frontend/feedback.mjs",
-            "sha256": "70c7087b9a3c8374dfe9041fff76b444971ca86004aa8ac2527fbae248ef9432"
+            "sha256": "0eac6473c9db77261767d75d4572e5b4038b97a2b308249d0114f148834aee26"
           },
           {
             "file": "frontend/filter-motion.mjs",
@@ -69,7 +69,15 @@
           },
           {
             "file": "frontend/lightbox.mjs",
-            "sha256": "bb6e2fc0c938eb41d373e8a11528216ba508e6e8606d80eb05078b18bac805a6"
+            "sha256": "347c26dcdbd253fa40dc1bf688d98810bb03566c328660760076a6768f1ccedd"
+          },
+          {
+            "file": "frontend/media-motion-core.mjs",
+            "sha256": "cc4ddcd6ff01916b63fabbc25edf031d7b6abd4f0e163e7ac58aef3f30aec8e0"
+          },
+          {
+            "file": "frontend/media-motion.mjs",
+            "sha256": "7f1f21e187df0d5780b8cd126a5375cdd08a368bef215758454247d2b772266b"
           },
           {
             "file": "frontend/motd.mjs",
@@ -92,16 +100,20 @@
             "sha256": "3ed31e1abd9152ea405455b83a469b9c7d7cbe64865d8abe7336e029885bf55e"
           },
           {
+            "file": "frontend/preview-service-core.mjs",
+            "sha256": "42c5cb189cab0defb66ab8a68ab461e6f8c4ce7e4cbfe35b2b07db06a3e26f9b"
+          },
+          {
             "file": "frontend/preview.mjs",
-            "sha256": "70326e9f48fdf6a11565559dbed9d04b0954c4ff7d1e6b0c443905d240e1743d"
+            "sha256": "c4138de3701de55365c4e6c569a23194ec223d73bdafbd273616bafb14d3e7ea"
           },
           {
             "file": "frontend/report-service-core.mjs",
-            "sha256": "f1b2235b62599e9542b930ef0293289d25faec562752b8a348a5ace65d6beecf"
+            "sha256": "1d0d48d8f89056b527c06b906ddce089b0e01146831e6f43bb1451c6ae43a5b7"
           },
           {
             "file": "frontend/report-state.mjs",
-            "sha256": "a5917a4817162577292b2a7acc9d8f91d1c6518ea93d8f5385d8b7d6e10bbfce"
+            "sha256": "bb1c37f595966927968b782e8b11d6b2674948a7e7cb9d960efeb2be02adb770"
           },
           {
             "file": "frontend/result-projection-core.mjs",
@@ -121,11 +133,11 @@
           },
           {
             "file": "frontend/services.ts",
-            "sha256": "db218485a602a889e70fb9b77e5c455d9d5d7d690d68a5e3b75a5ab83cec10a8"
+            "sha256": "547d960b545b7e223be9fb7292d945c69dca089f93add2e38936d8475648b5ec"
           },
           {
             "file": "frontend/standalone-host.mjs",
-            "sha256": "c84cb708fdac903fdf4ed303cbf20e81d32ec11c04c9c1b244d67b125739f130"
+            "sha256": "30f5a31d84af825f27a8f5a0def2753c55fda1d5b5c8fb6357be8126d2d34955"
           },
           {
             "file": "frontend/standalone-streaming.mjs",
@@ -133,7 +145,7 @@
           },
           {
             "file": "frontend/stream-service-core.mjs",
-            "sha256": "bcca799ef7ae6b20137cfab95b0535cce06695aaaf2db4babbcced3af4ce8aba"
+            "sha256": "9b7b8d5c021acab12514e892e1987fa639200a42b8801da43ff7436cb59f384a"
           },
           {
             "file": "frontend/streaming.mjs",
@@ -169,7 +181,7 @@
     },
     {
       "folder": "admin",
-      "version": "58f54787df83f27a3a1dba3b4c2f902e624367c67ce3d0e18447831a77885e17",
+      "version": "35f8e13751c7cc73c33f438e9a10ed3d3365af93df5953416204c10a90b166be",
       "sourceSha256": "427d4316fdc9ee25fde741d59e38c799e1f5708c6a285738957ad2fd41820ec1",
       "services": "planned",
       "htmlSecurity": {
@@ -210,7 +222,7 @@
           },
           {
             "file": "frontend/feedback.mjs",
-            "sha256": "70c7087b9a3c8374dfe9041fff76b444971ca86004aa8ac2527fbae248ef9432"
+            "sha256": "0eac6473c9db77261767d75d4572e5b4038b97a2b308249d0114f148834aee26"
           },
           {
             "file": "frontend/filter-motion.mjs",
@@ -234,7 +246,15 @@
           },
           {
             "file": "frontend/lightbox.mjs",
-            "sha256": "bb6e2fc0c938eb41d373e8a11528216ba508e6e8606d80eb05078b18bac805a6"
+            "sha256": "347c26dcdbd253fa40dc1bf688d98810bb03566c328660760076a6768f1ccedd"
+          },
+          {
+            "file": "frontend/media-motion-core.mjs",
+            "sha256": "cc4ddcd6ff01916b63fabbc25edf031d7b6abd4f0e163e7ac58aef3f30aec8e0"
+          },
+          {
+            "file": "frontend/media-motion.mjs",
+            "sha256": "7f1f21e187df0d5780b8cd126a5375cdd08a368bef215758454247d2b772266b"
           },
           {
             "file": "frontend/motd.mjs",
@@ -257,16 +277,20 @@
             "sha256": "3ed31e1abd9152ea405455b83a469b9c7d7cbe64865d8abe7336e029885bf55e"
           },
           {
+            "file": "frontend/preview-service-core.mjs",
+            "sha256": "42c5cb189cab0defb66ab8a68ab461e6f8c4ce7e4cbfe35b2b07db06a3e26f9b"
+          },
+          {
             "file": "frontend/preview.mjs",
-            "sha256": "70326e9f48fdf6a11565559dbed9d04b0954c4ff7d1e6b0c443905d240e1743d"
+            "sha256": "c4138de3701de55365c4e6c569a23194ec223d73bdafbd273616bafb14d3e7ea"
           },
           {
             "file": "frontend/report-service-core.mjs",
-            "sha256": "f1b2235b62599e9542b930ef0293289d25faec562752b8a348a5ace65d6beecf"
+            "sha256": "1d0d48d8f89056b527c06b906ddce089b0e01146831e6f43bb1451c6ae43a5b7"
           },
           {
             "file": "frontend/report-state.mjs",
-            "sha256": "a5917a4817162577292b2a7acc9d8f91d1c6518ea93d8f5385d8b7d6e10bbfce"
+            "sha256": "bb1c37f595966927968b782e8b11d6b2674948a7e7cb9d960efeb2be02adb770"
           },
           {
             "file": "frontend/result-projection-core.mjs",
@@ -286,11 +310,11 @@
           },
           {
             "file": "frontend/services.ts",
-            "sha256": "db218485a602a889e70fb9b77e5c455d9d5d7d690d68a5e3b75a5ab83cec10a8"
+            "sha256": "547d960b545b7e223be9fb7292d945c69dca089f93add2e38936d8475648b5ec"
           },
           {
             "file": "frontend/standalone-host.mjs",
-            "sha256": "c84cb708fdac903fdf4ed303cbf20e81d32ec11c04c9c1b244d67b125739f130"
+            "sha256": "30f5a31d84af825f27a8f5a0def2753c55fda1d5b5c8fb6357be8126d2d34955"
           },
           {
             "file": "frontend/standalone-streaming.mjs",
@@ -298,7 +322,7 @@
           },
           {
             "file": "frontend/stream-service-core.mjs",
-            "sha256": "bcca799ef7ae6b20137cfab95b0535cce06695aaaf2db4babbcced3af4ce8aba"
+            "sha256": "9b7b8d5c021acab12514e892e1987fa639200a42b8801da43ff7436cb59f384a"
           },
           {
             "file": "frontend/streaming.mjs",

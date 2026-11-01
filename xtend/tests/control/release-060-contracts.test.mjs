@@ -8,7 +8,7 @@ import {ssrCapabilities} from '../../server/ssr-capabilities.mjs';
 test('strict source compiles filter surfaces into interruptible reduced-motion AnimationEngine transitions',()=>{
  const session=createRmtCompilationSession({root:new URL('../../',import.meta.url).pathname});
  try{const result=session.compileSource({text:fs.readFileSync(new URL('../../frontend/standalone.rmt',import.meta.url),'utf8'),filePath:'frontend/standalone.rmt'});
- assert.equal(result.ok,true);const transitions=result.orchestrationArtifacts.animationEngine.transitions;
+ assert.equal(result.ok,true);const transitions=result.orchestrationArtifacts.animationEngine.transitions.filter(t=>t.id.startsWith('search.filters.'));
  assert.deepEqual(transitions.map(t=>[t.id,t.effect,t.durationMs,t.interrupt,t.reducedMotion]),[['search.filters.open','slide-down',180,'replace','instant'],['search.filters.close','fade',140,'replace','instant']]);
  }finally{session.dispose();}
 });

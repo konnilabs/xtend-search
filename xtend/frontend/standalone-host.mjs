@@ -47,6 +47,7 @@ export function installSearchHost(){
   if(event.type==='pending'){
    const own=++presentationGeneration;pending=true;submittedRevision=revision;
    const target=new URL(event.url,location.origin);
+   if(target.pathname==='/'&&!target.searchParams.get('q')?.trim()){draft='';revision++;submittedRevision=revision;await command('search.home',{key:'search-input:'+own});}
    // Commit only presentation immediately; PageClient still owns data/history.
    // Slow page/asset responses must not postpone the intentional header move.
    await activity('search.pending',{view:target.searchParams.get('q')?.trim()?'results':'home'},own);
