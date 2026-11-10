@@ -49,6 +49,36 @@ for _name, processor in PROCESSORS.items():
 
 
 class UpstreamContract(unittest.TestCase):
+    def test_dateutil_timezone_offsets_and_dst_gap(self):
+        from datetime import datetime, time as datetime_time, timedelta
+        from dateutil import tz
+
+        original_path = tz.TZPATH
+        try:
+            # Exercise both normal lookup and the locked tzdata wheel fallback.
+            for search_path in (original_path, ()):
+                tz.reset_tzpath(search_path)
+                tz.gettz.cache_clear()
+                with self.subTest(search_path=search_path):
+                    zone = tz.gettz('Europe/Berlin')
+                    self.assertIsNotNone(zone)
+                    self.assertEqual(datetime(2026, 1, 15, 12, tzinfo=zone).utcoffset(), timedelta(hours=1))
+                    self.assertEqual(datetime(2026, 7, 15, 12, tzinfo=zone).utcoffset(), timedelta(hours=2))
+                    # dateutil 3 follows PEP 495 for nonexistent local times.
+                    gap = datetime(2026, 3, 29, 2, 30, tzinfo=zone)
+                    self.assertFalse(tz.datetime_exists(gap))
+                    self.assertEqual(gap.utcoffset(), timedelta(hours=1))
+                    self.assertEqual(gap.replace(fold=1).utcoffset(), timedelta(hours=2))
+                    self.assertEqual(tz.resolve_imaginary(gap), datetime(2026, 3, 29, 3, 30, tzinfo=zone))
+                    overlap = datetime(2026, 10, 25, 2, 30, tzinfo=zone)
+                    self.assertTrue(tz.datetime_ambiguous(overlap))
+                    self.assertEqual(overlap.utcoffset(), timedelta(hours=2))
+                    self.assertEqual(overlap.replace(fold=1).utcoffset(), timedelta(hours=1))
+                    self.assertEqual(datetime_time(12, tzinfo=tz.gettz('UTC')).isoformat(), '12:00:00+00:00')
+        finally:
+            tz.reset_tzpath(original_path)
+            tz.gettz.cache_clear()
+
     def test_updated_brave_extracts_iife_data_without_executing_javascript(self):
         from searx.engines import brave
         from unittest.mock import patch
