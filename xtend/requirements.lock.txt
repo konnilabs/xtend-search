@@ -21,7 +21,7 @@ pycparser==3.11
 pydantic==2.14.3
 pydantic_core==2.50.4
 Pygments==2.21.0
-python-dateutil==2.9.0.post0
+python-dateutil==3.0.0
 pytz==2026.6
 PyYAML==6.0.3
 rich==15.0.0
@@ -30,7 +30,7 @@ shellingham==1.5.4
 six==1.17.0
 typer==0.29.0
 typing_extensions==4.16.0
-typing-inspection==0.4.5
+tzdata==2026.6
 valkey==6.1.1
 Werkzeug==3.1.9
 whitenoise==6.12.0
