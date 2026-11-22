@@ -14,4 +14,5 @@ docker run --rm --network none --read-only --tmpfs /tmp \
   -e SEARXNG_SECRET=fixture-secret -e XTEND_TEST_FIXTURE=1 \
   -e SEARXNG_SETTINGS_PATH=/app/xtend/config/settings.control.fixture.yml \
   -v "$repo_dir/xtend/tests/control/upstream_contract.py:/app/upstream_contract.py:ro" \
-  --entrypoint python "$image" /app/upstream_contract.py
+  -v "$repo_dir/xtend/tests/control/dependency_contract.py:/app/dependency_contract.py:ro" \
+  --entrypoint sh "$image" -c 'python /app/dependency_contract.py && python /app/upstream_contract.py'
